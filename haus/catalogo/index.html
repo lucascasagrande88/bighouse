@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo — Haus Seleccionados</title>
+  <meta name="description" content="Catálogo de vehículos premium usados. Encontrá tu próximo auto con calidad, transparencia y confianza.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/haus.css">
+  <style>
+    /* Layout específico catálogo */
+    body { padding-top: var(--nav-h); }
+
+    .catalogo-wrap {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      min-height: calc(100vh - var(--nav-h));
+      gap: 0;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      border-right: 1px solid var(--borde);
+      padding: 2rem 1.5rem 2rem 2.5rem;
+      position: sticky;
+      top: var(--nav-h);
+      height: calc(100vh - var(--nav-h));
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: var(--borde) transparent;
+    }
+    .sidebar::-webkit-scrollbar { width: 4px; }
+    .sidebar::-webkit-scrollbar-thumb { background: var(--borde); border-radius: 2px; }
+
+    .sidebar-title {
+      font-size: var(--text-2xl);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: .375rem;
+    }
+    .sidebar-desc {
+      font-size: var(--text-sm);
+      color: var(--blanco-muted);
+      margin-bottom: 2rem;
+      line-height: 1.5;
+    }
+
+    .filtro-group { margin-bottom: 1.5rem; }
+    .filtro-group-title {
+      font-size: .65rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--blanco-muted);
+      margin-bottom: .625rem;
+      display: block;
+    }
+
+    .filtro-doble {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .375rem;
+    }
+
+    .sidebar-actions {
+      padding-top: 1rem;
+      border-top: 1px solid var(--borde);
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+    }
+
+    /* Main */
+    .catalogo-main {
+      padding: 1.75rem 2.5rem 2rem 1.75rem;
+    }
+
+    .catalogo-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: .75rem;
+    }
+    .catalogo-count {
+      font-size: var(--text-sm);
+      color: var(--blanco-muted);
+    }
+    .catalogo-count strong { color: var(--blanco); }
+
+    .catalogo-controls {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+    }
+    .catalogo-sort {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: var(--text-sm);
+      color: var(--blanco-muted);
+    }
+    .catalogo-sort .form-select {
+      width: auto;
+      padding: .375rem 2rem .375rem .75rem;
+      font-size: var(--text-sm);
+    }
+
+    .view-btns {
+      display: flex;
+      gap: .25rem;
+    }
+    .view-btn {
+      width: 34px; height: 34px;
+      border-radius: var(--r-md);
+      border: 1px solid var(--borde);
+      display: grid;
+      place-items: center;
+      color: var(--blanco-muted);
+      cursor: pointer;
+      transition: all var(--dur-fast) var(--ease);
+    }
+    .view-btn:hover, .view-btn.active {
+      border-color: var(--borde-hover);
+      color: var(--blanco);
+      background: rgba(255,255,255,.05);
+    }
+    .view-btn.active { background: var(--grafito-2); }
+    .view-btn svg { width: 15px; height: 15px; }
+
+    /* Grid */
+    .autos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.125rem;
+    }
+    .autos-grid.list-view {
+      grid-template-columns: 1fr;
+    }
+    .autos-grid.list-view .card-auto {
+      flex-direction: row;
+    }
+    .autos-grid.list-view .card-auto-img {
+      width: 260px;
+      flex-shrink: 0;
+      aspect-ratio: auto;
+      height: 180px;
+    }
+    .autos-grid.list-view .card-auto-body {
+      padding: 1.25rem;
+    }
+
+    /* Paginación */
+    .pagination {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .375rem;
+      margin-top: 2.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--borde);
+    }
+    .page-btn {
+      width: 36px; height: 36px;
+      border-radius: var(--r-md);
+      border: 1px solid var(--borde);
+      display: grid;
+      place-items: center;
+      font-size: var(--text-sm);
+      font-weight: 500;
+      color: var(--blanco-muted);
+      cursor: pointer;
+      transition: all var(--dur-fast) var(--ease);
+    }
+    .page-btn:hover { border-color: var(--borde-hover); color: var(--blanco); background: rgba(255,255,255,.04); }
+    .page-btn.active { background: var(--azul); border-color: var(--azul); color: #fff; }
+    .page-btn svg { width: 14px; height: 14px; }
+
+    /* Sin resultados */
+    .empty-state {
+      grid-column: 1/-1;
+      text-align: center;
+      padding: 5rem 2rem;
+      color: var(--blanco-muted);
+    }
+    .empty-state svg { width: 48px; height: 48px; margin: 0 auto 1rem; opacity: .3; }
+    .empty-state h3 { font-size: var(--text-xl); font-weight: 700; color: var(--blanco); margin-bottom: .5rem; }
+
+    @media (max-width: 1024px) {
+      .catalogo-wrap { grid-template-columns: 1fr; }
+      .sidebar {
+        position: static;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--borde);
+        padding: 1.5rem;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 1rem;
+        align-items: start;
+      }
+      .sidebar-title, .sidebar-desc, .sidebar-actions { grid-column: 1/-1; }
+      .catalogo-main { padding: 1.5rem; }
+    }
+    @media (max-width: 640px) {
+      .autos-grid { grid-template-columns: 1fr; }
+      .autos-grid.list-view .card-auto { flex-direction: column; }
+      .autos-grid.list-view .card-auto-img { width: 100%; height: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav scrolled" id="nav">
+    <div class="nav-inner">
+      <a href="../" class="nav-logo">
+        <span class="nav-logo-top">Haus</span>
+        <span class="nav-logo-sub">Seleccionados</span>
+      </a>
+      <div class="nav-links">
+        <a href="../">Inicio</a>
+        <a href="../catalogo/" class="active">Catálogo</a>
+        <a href="../financiacion/">Financiación</a>
+        <a href="../nosotros/">Nosotros</a>
+        <a href="../contacto/">Contacto</a>
+      </div>
+      <a href="../contacto/?valua=1" class="btn-valua">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3a2 2 0 01-2-2V9a2 2 0 012-2h1l2-4h10l2 4h1a2 2 0 012 2v6a2 2 0 01-2 2h-2"/><circle cx="7.5" cy="17.5" r="1.5"/><circle cx="16.5" cy="17.5" r="1.5"/></svg>
+        Valuá tu usado
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menú" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="19" y2="6"/><line x1="3" y1="11" x2="19" y2="11"/><line x1="3" y1="16" x2="19" y2="16"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+  <div class="nav-mobile" id="navMobile">
+    <a href="../">Inicio</a>
+    <a href="../catalogo/">Catálogo</a>
+    <a href="../financiacion/">Financiación</a>
+    <a href="../nosotros/">Nosotros</a>
+    <a href="../contacto/">Contacto</a>
+    <div class="nav-mobile-cta">
+      <a href="../contacto/?valua=1" class="btn btn-secondary btn-full">Valuá tu usado</a>
+      <a href="https://wa.me/5491100000000" class="btn btn-wa btn-full" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+  </div>
+
+  <!-- LAYOUT CATÁLOGO -->
+  <div class="catalogo-wrap">
+
+    <!-- SIDEBAR FILTROS -->
+    <aside class="sidebar" aria-label="Filtros">
+
+      <h1 class="sidebar-title">Catálogo de<br>usados premium</h1>
+      <p class="sidebar-desc">Encontrá tu próximo auto.<br>Calidad. Transparencia. Confianza.</p>
+
+      <!-- Marca -->
+      <div class="filtro-group">
+        <span class="filtro-group-title">Marca</span>
+        <div class="form-select-wrap">
+          <select class="form-select" id="filtroMarca">
+            <option value="">Todas las marcas</option>
+            <option>BMW</option>
+            <option>Audi</option>
+            <option>Mercedes-Benz</option>
+            <option>Volkswagen</option>
+            <option>Toyota</option>
+            <option>Jeep</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Año -->
+      <div class="filtro-group">
+        <span class="filtro-group-title">Año</span>
+        <div class="filtro-doble">
+          <div class="form-select-wrap">
+            <select class="form-select" id="filtroAnioDesde">
+              <option value="">Desde</option>
+              <option>2018</option>
+              <option>2019</option>
+              <option>2020</option>
+              <option>2021</option>
+              <option>2022</option>
+            </select>
+          </div>
+          <div class="form-select-wrap">
+            <select class="form-select" id="filtroAnioHasta">
+              <option value="">Hasta</option>
+              <option>2020</option>
+              <option>2021</option>
+              <option>2022</option>
+              <option>2023</option>
+              <option>2024</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Precio -->
+      <div class="filtro-group">
+        <span class="filtro-group-title">Precio (USD)</span>
+        <div class="filtro-doble">
+          <div class="form-select-wrap">
+            <select class="form-select" id="filtroPrecioMin">
+              <option value="">Mínimo</option>
+              <option value="15000">USD 15.000</option>
+              <option value="20000">USD 20.000</option>
+              <option value="25000">USD 25.000</option>
+              <option value="30000">USD 30.000</option>
+              <option value="40000">USD 40.000</option>
+            </select>
+          </div>
+          <div class="form-select-wrap">
+            <select class="form-select" id="filtroPrecioMax">
+              <option value="">Máximo</option>
+              <option value="30000">USD 30.000</option>
+              <option value="40000">USD 40.000</option>
+              <option value="50000">USD 50.000</option>
+              <option value="70000">USD 70.000</option>
+              <option value="100000">USD 100.000</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kilómetros -->
+      <div class="filtro-group">
+        <span class="filtro-group-title">Kilómetros</span>
+        <div class="filtro-doble">
+          <div class="form-select-wrap">
+            <select class="form-select" id="filtroKmMin">
+              <option value="">Mínimo</option>
+              <option value="0">0 km</option>
+              <option value="20000">20.000 km</option>
+              <option value="40000">40.000 km</option>
+            </select>
+          </div>
+          <div class="form-select-wrap">
+            <select class="form-select" id="filtroKmMax">
+              <option value="">Máximo</option>
+              <option value="30000">30.000 km</option>
+              <option value="50000">50.000 km</option>
+              <option value="80000">80.000 km</option>
+              <option value="120000">120.000 km</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Combustible -->
+      <div class="filtro-group">
+        <span class="filtro-group-title">Combustible</span>
+        <div class="form-select-wrap">
+          <select class="form-select" id="filtroCombustible">
+            <option value="">Todos los combustibles</option>
+            <option>Nafta</option>
+            <option>Diesel</option>
+            <option>Híbrido</option>
+            <option>Eléctrico</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Transmisión -->
+      <div class="filtro-group">
+        <span class="filtro-group-title">Transmisión</span>
+        <div class="form-select-wrap">
+          <select class="form-select" id="filtroTransmision">
+            <option value="">Todas las transmisiones</option>
+            <option>Automática</option>
+            <option>Manual</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="sidebar-actions">
+        <button class="btn btn-primary btn-full" id="btnAplicar">Aplicar filtros</button>
+        <button class="btn btn-ghost btn-full" id="btnLimpiar">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg>
+          Limpiar filtros
+        </button>
+      </div>
+
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="catalogo-main">
+
+      <div class="catalogo-topbar">
+        <p class="catalogo-count">Mostrando <strong id="countShowing">1–12</strong> de <strong id="countTotal">48</strong> vehículos</p>
+        <div class="catalogo-controls">
+          <div class="catalogo-sort">
+            <span>Ordenar por</span>
+            <div class="form-select-wrap">
+              <select class="form-select" id="selectOrden">
+                <option value="destacados">Destacados</option>
+                <option value="precio-asc">Precio: menor a mayor</option>
+                <option value="precio-desc">Precio: mayor a menor</option>
+                <option value="anio-desc">Año: más nuevo</option>
+                <option value="km-asc">Kilómetros: menor</option>
+              </select>
+            </div>
+          </div>
+          <div class="view-btns">
+            <button class="view-btn active" id="btnGrid" aria-label="Vista grilla" title="Vista grilla">
+              <svg viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+            </button>
+            <button class="view-btn" id="btnList" aria-label="Vista lista" title="Vista lista">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- GRID DE AUTOS -->
+      <div class="autos-grid" id="autosGrid">
+
+        <!-- BMW Serie 3 -->
+        <article class="card-auto" data-marca="BMW" data-anio="2019" data-precio="34900" data-km="45000" data-comb="Nafta" data-trans="Automática">
+          <div class="card-auto-img">
+            <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?w=640&q=80" alt="BMW Serie 3 2019" loading="lazy">
+            <span class="card-badge badge-disponible">Disponible</span>
+            <span class="card-360-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3"/></svg>
+              360°
+            </span>
+          </div>
+          <div class="card-auto-body">
+            <h2 class="card-auto-modelo">BMW Serie 3 <span>330i M Sport</span></h2>
+            <div class="card-auto-meta">
+              <span>2019</span>
+              <span>45.000 km</span>
+              <span>2.0L Turbo</span>
+              <span>Automática</span>
+            </div>
+            <div class="card-auto-tags">
+              <span class="card-tag">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 01-9 9"/></svg>
+                360°
+              </span>
+              <span class="card-tag">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/></svg>
+                Financiación
+              </span>
+            </div>
+            <div class="card-auto-footer">
+              <div>
+                <p class="card-auto-precio-label">Precio</p>
+                <p class="card-auto-precio">USD 34.900</p>
+              </div>
+              <a href="../ficha/" class="btn btn-primary btn-sm">Ver ficha</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Audi A4 -->
+        <article class="card-auto" data-marca="Audi" data-anio="2018" data-precio="28900" data-km="62000" data-comb="Nafta" data-trans="Automática">
+          <div class="card-auto-img">
+            <img src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=640&q=80" alt="Audi A4 2018" loading="lazy">
+            <span class="card-badge badge-disponible">Disponible</span>
+            <span class="card-360-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3"/></svg>
+              360°
+            </span>
+          </div>
+          <div class="card-auto-body">
+            <h2 class="card-auto-modelo">Audi A4 <span>2.0 TFSI Sport</span></h2>
+            <div class="card-auto-meta">
+              <span>2018</span>
+              <span>62.000 km</span>
+              <span>2.0L Turbo</span>
+              <span>Automática</span>
+            </div>
+            <div class="card-auto-tags">
+              <span class="card-tag">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 01-9 9"/></svg>
+                360°
+              </span>
+              <span class="card-tag">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/></svg>
+                Financiación
+              </span>
+            </div>
+            <div class="card-auto-footer">
+              <div>
+                <p class="card-auto-precio-label">Precio</p>
+                <p class="card-auto-precio">USD 28.900</p>
+              </div>
+              <a href="../ficha/" class="btn btn-primary btn-sm">Ver ficha</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Audi Q5 -->
+        <article class="card-auto" data-marca="Audi" data-anio="2020" data-precio="42900" data-km="38000" data-comb="Nafta" data-trans="Automática">
+          <div class="card-auto-img">
+            <img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?w=640&q=80" alt="Audi Q5 2020" loading="lazy">
+            <span class="card-badge badge-disponible">Disponible</span>
+            <span class="card-360-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3"/></svg>
+              360°
+            </span>
+          </div>
+          <div class="card-auto-body">
+            <h2 class="card-auto-modelo">Audi Q5 <span>2.0 TFSI Quattro</span></h2>
+            <div class="card-auto-meta">
+              <span>2020</span>
+              <span>38.000 km</span>
+              <span>2.0L Turbo</span>
+              <span>Automática</span>
+            </div>
+            <div class="card-auto-tags">
+              <span class="card-tag">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 01-9 9"/></svg>
+                360°
+              </span>
+              <span class="card-tag">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/></svg>
+                Financiación
+              </span>
+            </div>
+            <div class="card-auto-footer">
+              <div>
+                <p class="card-auto-precio-label">Precio</p>
+                <p class="card-auto-precio">USD 42.900</p>
+              </div>
+              <a href="../ficha/" class="btn btn-primary btn-sm">Ver ficha</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Mercedes C300 -->
+        <article class="card-auto" data-marca="Mercedes-Benz" data-anio="2019" data-precio="33900" data-km="50000" data-comb="Nafta" data-trans="Automática">
+          <div class="card-auto-img">
+            <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=640&q=80" alt="Mercedes C300 2019" loading="lazy">
+            <span class="card-badge badge-disponible">Disponible</span>
+            <span class="card-360-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3"/></svg>
+              360°
+            </span>
+          </div>
+          <div class="card-auto-body">
+            <h2 class="card-auto-modelo">Mercedes-Benz C-Class <span>C300</span></h2>
+            <div class="card-auto-meta">
+              <span>2019</span>
+              <span>50.000 km</span>
+              <span>2.0L Turbo</span>
+              <span>Automática</span>
+            </div>
+            <div class="card-auto-tags">
+              <span class="card-tag">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 01-9 9"/></svg>
+                360°
+              </span>
+              <span class="card-tag">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/></svg>
+                Financiación
+              </span>
+            </div>
+            <div class="card-auto-footer">
+              <div>
+                <p class="card-auto-precio-label">Precio</p>
+                <p class="card-auto-precio">USD 33.900</p>
+              </div>
+              <a href="../ficha/" class="btn btn-primary btn-sm">Ver ficha</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- VW Amarok -->
+        <article class="card-auto" data-marca="Volkswagen" data-anio="2020" data-precio="39900" data-km="55000" data-comb="Diesel" data-trans="Automática">
+          <div class="card-auto-img">
+            <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=640&q=80" alt="VW Amarok 2020" loading="lazy">
+            <span class="card-badge badge-disponible">Disponible</span>
+            <span class="card-360-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3"/></svg>
+              360°
+            </span>
+          </div>
+          <div class="card-auto-body">
+            <h2 class="card-auto-modelo">Volkswagen Amarok <span>V6 Highline</span></h2>
+            <div class="card-auto-meta">
+              <span>2020</span>
+              <span>55.000 km</span>
+              <span>3.0L V6 TDI</span>
+              <span>Automática 4MOTION</span>
+            </div>
+            <div class="card-auto-tags">
+              <span class="card-tag">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 01-9 9"/></svg>
+                360°
+              </span>
+              <span class="card-tag">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/></svg>
+                Financiación
+              </span>
+            </div>
+            <div class="card-auto-footer">
+              <div>
+                <p class="card-auto-precio-label">Precio</p>
+                <p class="card-auto-precio">USD 39.900</p>
+              </div>
+              <a href="../ficha/" class="btn btn-primary btn-sm">Ver ficha</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Toyota Corolla -->
+        <article class="card-auto" data-marca="Toyota" data-anio="2019" data-precio="22900" data-km="71000" data-comb="Nafta" data-trans="Automática">
+          <div class="card-auto-img">
+            <img src="https://images.unsplash.com/photo-1559416523-140ddc3d238c?w=640&q=80" alt="Toyota Corolla 2019" loading="lazy">
+            <span class="card-badge badge-disponible">Disponible</span>
+            <span class="card-360-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3"/></svg>
+              360°
+            </span>
+          </div>
+          <div class="card-auto-body">
+            <h2 class="card-auto-modelo">Toyota Corolla <span>XEI</span></h2>
+            <div class="card-auto-meta">
+              <span>2019</span>
+              <span>71.000 km</span>
+              <span>1.8L Nafta</span>
+              <span>Automática</span>
+            </div>
+            <div class="card-auto-tags">
+              <span class="card-tag">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 01-9 9"/></svg>
+                360°
+              </span>
+              <span class="card-tag">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/></svg>
+                Financiación
+              </span>
+            </div>
+            <div class="card-auto-footer">
+              <div>
+                <p class="card-auto-precio-label">Precio</p>
+                <p class="card-auto-precio">USD 22.900</p>
+              </div>
+              <a href="../ficha/" class="btn btn-primary btn-sm">Ver ficha</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Jeep Compass -->
+        <article class="card-auto" data-marca="Jeep" data-anio="2020" data-precio="29900" data-km="46000" data-comb="Nafta" data-trans="Automática">
+          <div class="card-auto-img">
+            <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=640&q=80" alt="Jeep Compass 2020" loading="lazy">
+            <span class="card-badge badge-disponible">Disponible</span>
+            <span class="card-360-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3"/></svg>
+              360°
+            </span>
+          </div>
+          <div class="card-auto-body">
+            <h2 class="card-auto-modelo">Jeep Compass <span>Limited</span></h2>
+            <div class="card-auto-meta">
+              <span>2020</span>
+              <span>46.000 km</span>
+              <span>2.4L Nafta</span>
+              <span>Automática 4x4</span>
+            </div>
+            <div class="card-auto-tags">
+              <span class="card-tag">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 01-9 9"/></svg>
+                360°
+              </span>
+              <span class="card-tag">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/></svg>
+                Financiación
+              </span>
+            </div>
+            <div class="card-auto-footer">
+              <div>
+                <p class="card-auto-precio-label">Precio</p>
+                <p class="card-auto-precio">USD 29.900</p>
+              </div>
+              <a href="../ficha/" class="btn btn-primary btn-sm">Ver ficha</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- BMW X1 -->
+        <article class="card-auto" data-marca="BMW" data-anio="2018" data-precio="27900" data-km="64000" data-comb="Nafta" data-trans="Automática">
+          <div class="card-auto-img">
+            <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=640&q=80" alt="BMW X1 2018" loading="lazy">
+            <span class="card-badge badge-reservado">Reservado</span>
+            <span class="card-360-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3"/></svg>
+              360°
+            </span>
+          </div>
+          <div class="card-auto-body">
+            <h2 class="card-auto-modelo">BMW X1 <span>sDrive20i</span></h2>
+            <div class="card-auto-meta">
+              <span>2018</span>
+              <span>64.000 km</span>
+              <span>2.0L Turbo</span>
+              <span>Automática</span>
+            </div>
+            <div class="card-auto-tags">
+              <span class="card-tag">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 01-9 9"/></svg>
+                360°
+              </span>
+              <span class="card-tag">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/></svg>
+                Financiación
+              </span>
+            </div>
+            <div class="card-auto-footer">
+              <div>
+                <p class="card-auto-precio-label">Precio</p>
+                <p class="card-auto-precio">USD 27.900</p>
+              </div>
+              <a href="../ficha/" class="btn btn-secondary btn-sm">Ver ficha</a>
+            </div>
+          </div>
+        </article>
+
+      </div><!-- /autos-grid -->
+
+      <!-- PAGINACIÓN -->
+      <nav class="pagination" aria-label="Paginación">
+        <button class="page-btn" aria-label="Anterior">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="page-btn active">1</button>
+        <button class="page-btn">2</button>
+        <button class="page-btn">3</button>
+        <button class="page-btn">4</button>
+        <span style="color:var(--blanco-muted);padding:0 .25rem;">…</span>
+        <button class="page-btn">8</button>
+        <button class="page-btn" aria-label="Siguiente">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </nav>
+
+    </main>
+  </div><!-- /catalogo-wrap -->
+
+  <!-- WA flotante -->
+  <a href="https://wa.me/5491100000000" class="wa-float" aria-label="WhatsApp" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+  </a>
+
+  <script src="../assets/js/haus.js"></script>
+  <script>
+    // Filtros del catálogo
+    (function () {
+      const grid    = document.getElementById('autosGrid');
+      const cards   = () => Array.from(grid.querySelectorAll('.card-auto'));
+      const showing = document.getElementById('countShowing');
+      const total   = document.getElementById('countTotal');
+
+      function aplicar() {
+        const marca  = document.getElementById('filtroMarca').value;
+        const anioD  = +document.getElementById('filtroAnioDesde').value || 0;
+        const anioH  = +document.getElementById('filtroAnioHasta').value || 9999;
+        const precMin= +document.getElementById('filtroPrecioMin').value || 0;
+        const precMax= +document.getElementById('filtroPrecioMax').value || 999999;
+        const kmMin  = +document.getElementById('filtroKmMin').value || 0;
+        const kmMax  = +document.getElementById('filtroKmMax').value || 999999;
+        const comb   = document.getElementById('filtroCombustible').value;
+        const trans  = document.getElementById('filtroTransmision').value;
+
+        let visible = 0;
+        cards().forEach(c => {
+          const ok =
+            (!marca  || c.dataset.marca  === marca)  &&
+            (+c.dataset.anio  >= anioD)  &&
+            (+c.dataset.anio  <= anioH)  &&
+            (+c.dataset.precio >= precMin) &&
+            (+c.dataset.precio <= precMax) &&
+            (+c.dataset.km    >= kmMin)   &&
+            (+c.dataset.km    <= kmMax)   &&
+            (!comb   || c.dataset.comb  === comb)   &&
+            (!trans  || c.dataset.trans === trans);
+
+          c.style.display = ok ? '' : 'none';
+          if (ok) visible++;
+        });
+
+        const end = Math.min(visible, 12);
+        showing.textContent = visible === 0 ? '0' : `1–${end}`;
+        total.textContent   = visible;
+
+        if (visible === 0) {
+          if (!grid.querySelector('.empty-state')) {
+            const em = document.createElement('div');
+            em.className = 'empty-state';
+            em.innerHTML = `
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+              <h3>Sin resultados</h3>
+              <p>Probá con otros filtros o contactanos para buscar el vehículo ideal.</p>`;
+            grid.appendChild(em);
+          }
+        } else {
+          const em = grid.querySelector('.empty-state');
+          if (em) em.remove();
+        }
+      }
+
+      document.getElementById('btnAplicar').addEventListener('click', aplicar);
+      document.getElementById('btnLimpiar').addEventListener('click', () => {
+        document.querySelectorAll('.sidebar select').forEach(s => s.value = '');
+        cards().forEach(c => c.style.display = '');
+        const em = grid.querySelector('.empty-state');
+        if (em) em.remove();
+        showing.textContent = '1–12';
+        total.textContent   = '48';
+      });
+
+      // Vista grilla / lista
+      const btnGrid = document.getElementById('btnGrid');
+      const btnList = document.getElementById('btnList');
+      btnGrid.addEventListener('click', () => {
+        grid.classList.remove('list-view');
+        btnGrid.classList.add('active');
+        btnList.classList.remove('active');
+      });
+      btnList.addEventListener('click', () => {
+        grid.classList.add('list-view');
+        btnList.classList.add('active');
+        btnGrid.classList.remove('active');
+      });
+
+      // Paginación
+      document.querySelectorAll('.page-btn').forEach(btn => {
+        if (!btn.querySelector('svg')) {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('.page-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+          });
+        }
+      });
+    })();
+  </script>
+
+</body>
+</html>
