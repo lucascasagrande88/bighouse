@@ -1063,6 +1063,130 @@
     }
     .chat-send:hover { background: #0d5ae5; }
     .chat-send svg { width: 16px; height: 16px; }
+    .typing { display: inline-flex; gap: 4px; align-items: center; padding: 2px 0; }
+    .typing i { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,.45); animation: typing 1.2s infinite ease-in-out; }
+    .typing i:nth-child(2) { animation-delay: .2s; }
+    .typing i:nth-child(3) { animation-delay: .4s; }
+    @keyframes typing { 0%,60%,100% { transform: translateY(0); opacity: .4; } 30% { transform: translateY(-4px); opacity: 1; } }
+
+    /* ═══════════════════════════════════════════
+       S5 — SIMULADOR DE FINANCIACIÓN
+    ═══════════════════════════════════════════ */
+    .s5fin { flex-direction: row; align-items: stretch; }
+    .s5fin-bg { position: absolute; inset: 0; z-index: 0; }
+    .s5fin-bg img { width: 100%; height: 100%; object-fit: cover; opacity: .12; filter: grayscale(.4); }
+    .s5fin-left, .s5fin-right {
+      position: relative; z-index: 2; flex: 1;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: clamp(2rem, 6vw, 6rem);
+    }
+    .s5fin-left { background: linear-gradient(120deg, rgba(5,5,5,.95), rgba(5,5,5,.6)); }
+    .s5fin-perks { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
+    .s5fin-perk {
+      display: flex; align-items: center; gap: .75rem;
+      font-size: .9rem; color: rgba(255,255,255,.7);
+    }
+    .s5fin-perk svg { width: 22px; height: 22px; color: var(--azul); flex-shrink: 0; }
+
+    .sim-card {
+      background: rgba(15,15,15,.85); backdrop-filter: blur(24px);
+      border: 1px solid rgba(255,255,255,.1); border-radius: 1.5rem;
+      padding: clamp(1.5rem, 3vw, 2.25rem); width: 100%; max-width: 460px;
+      display: flex; flex-direction: column; gap: 1.4rem;
+    }
+    .sim-row { display: flex; flex-direction: column; gap: .65rem; }
+    .sim-label { display: flex; justify-content: space-between; align-items: baseline; font-size: .82rem; color: rgba(255,255,255,.55); }
+    .sim-val { font-weight: 700; color: #fff; font-size: .9rem; }
+    .sim-slider {
+      -webkit-appearance: none; appearance: none; width: 100%; height: 5px;
+      border-radius: 5px; background: rgba(255,255,255,.12); outline: none; cursor: pointer;
+    }
+    .sim-slider::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none; width: 20px; height: 20px;
+      border-radius: 50%; background: var(--azul); cursor: pointer;
+      border: 3px solid #050505; box-shadow: 0 0 0 1px var(--azul), 0 0 12px var(--azul-glow);
+      transition: transform .15s;
+    }
+    .sim-slider::-webkit-slider-thumb:hover { transform: scale(1.15); }
+    .sim-slider::-moz-range-thumb {
+      width: 20px; height: 20px; border-radius: 50%; background: var(--azul);
+      cursor: pointer; border: 3px solid #050505; box-shadow: 0 0 0 1px var(--azul);
+    }
+    .sim-result {
+      background: linear-gradient(135deg, rgba(23,105,255,.14), rgba(23,105,255,.04));
+      border: 1px solid rgba(23,105,255,.25); border-radius: 1rem; padding: 1.25rem;
+    }
+    .sim-result-label { font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; color: rgba(255,255,255,.5); }
+    .sim-result-cuota { font-size: clamp(1.8rem, 4vw, 2.4rem); font-weight: 900; letter-spacing: -.02em; margin: .25rem 0 1rem; color: #fff; }
+    .sim-result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .85rem; }
+    .sim-result-grid > div { display: flex; flex-direction: column; gap: .15rem; }
+    .sim-result-grid span { font-size: .68rem; color: rgba(255,255,255,.45); }
+    .sim-result-grid strong { font-size: .9rem; font-weight: 700; color: #fff; }
+    .sim-disclaimer { font-size: .68rem; color: rgba(255,255,255,.35); text-align: center; }
+
+    /* ═══════════════════════════════════════════
+       WIDGET DE CHAT FLOTANTE
+    ═══════════════════════════════════════════ */
+    .chat-widget {
+      position: fixed; right: 1.5rem; bottom: 1.5rem; z-index: 900;
+      display: flex; flex-direction: column; align-items: flex-end; gap: .75rem;
+    }
+    .chat-fab {
+      width: 56px; height: 56px; border-radius: 50%; border: none; cursor: pointer;
+      background: var(--azul); color: #fff; display: grid; place-items: center;
+      box-shadow: 0 8px 28px rgba(23,105,255,.4); position: relative;
+      transition: transform .2s, background .2s;
+    }
+    .chat-fab:hover { transform: scale(1.08); background: #0d5ae5; }
+    .chat-fab svg { width: 26px; height: 26px; }
+    .chat-fab-badge {
+      position: absolute; top: -3px; right: -3px; width: 20px; height: 20px;
+      border-radius: 50%; background: #ef4444; color: #fff; font-size: .7rem;
+      font-weight: 700; display: grid; place-items: center; border: 2px solid #050505;
+    }
+    .chat-widget.open .chat-fab-badge { display: none; }
+    .chat-widget.open .chat-fab-open { display: none; }
+    .chat-widget.open .chat-fab::before {
+      content: ""; width: 18px; height: 18px;
+      background: currentColor;
+      -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M18 6L6 18M6 6l12 12' stroke='%23000' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat;
+      mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M18 6L6 18M6 6l12 12' stroke='%23000' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat;
+    }
+    .wa-float {
+      width: 52px; height: 52px; border-radius: 50%; background: #25D366;
+      display: grid; place-items: center; box-shadow: 0 6px 22px rgba(37,211,102,.4);
+      transition: transform .2s; order: -1;
+    }
+    .wa-float:hover { transform: scale(1.08); }
+    .wa-float svg { width: 28px; height: 28px; }
+
+    .chat-panel {
+      width: 370px; max-width: calc(100vw - 3rem); height: 540px; max-height: calc(100vh - 7rem);
+      background: rgba(10,10,10,.96); backdrop-filter: blur(28px);
+      border: 1px solid rgba(255,255,255,.1); border-radius: 1.25rem;
+      display: flex; flex-direction: column; padding: 1.1rem;
+      box-shadow: 0 24px 70px rgba(0,0,0,.6);
+      transform: translateY(20px) scale(.96); opacity: 0; pointer-events: none;
+      transform-origin: bottom right; transition: transform .25s ease, opacity .25s ease;
+    }
+    .chat-widget.open .chat-panel { transform: translateY(0) scale(1); opacity: 1; pointer-events: auto; }
+    .chat-panel .chat-box { background: none; border: none; padding: 0; max-height: none; height: 100%; }
+    .chat-close {
+      background: rgba(255,255,255,.06); border: none; color: rgba(255,255,255,.6);
+      width: 32px; height: 32px; border-radius: 50%; cursor: pointer; display: grid; place-items: center;
+      transition: background .2s, color .2s; flex-shrink: 0;
+    }
+    .chat-close:hover { background: rgba(255,255,255,.12); color: #fff; }
+
+    @media (max-width: 600px) {
+      .chat-panel { width: calc(100vw - 2rem); height: calc(100vh - 8rem); }
+      .chat-widget { right: 1rem; bottom: 1rem; }
+    }
+    @media (max-width: 1024px) {
+      .s5fin { flex-direction: column; }
+      .s5fin-left, .s5fin-right { padding: 3rem 1.5rem; }
+      .s5fin-right { align-items: center; }
+    }
   </style>
 </head>
 <body>
@@ -1077,7 +1201,7 @@
       <div class="nav-links">
         <a href="#hero"         class="nav-link active" data-section="0">Inicio</a>
         <a href="#catalogo"     class="nav-link"        data-section="2">Catálogo</a>
-        <a href="ficha/" class="nav-link">Financiación</a>
+        <a href="#financiacion" class="nav-link" data-section="4">Financiación</a>
         <a href="#nosotros"     class="nav-link"        data-section="3">Nosotros</a>
         <a href="#contacto"     class="nav-link"        data-section="5">Contacto</a>
       </div>
@@ -1107,7 +1231,7 @@
     <div class="dot"        data-section="1" data-label="360°"></div>
     <div class="dot"        data-section="2" data-label="Catálogo"></div>
     <div class="dot"        data-section="3" data-label="Nosotros"></div>
-    <div class="dot"        data-section="4" data-label="Asistente IA"></div>
+    <div class="dot"        data-section="4" data-label="Financiación"></div>
     <div class="dot"        data-section="5" data-label="Contacto"></div>
   </div>
 
@@ -1466,62 +1590,59 @@
     <!-- ───────────────────────────────────────────
          S5  ASISTENTE IA
     ─────────────────────────────────────────────── -->
-    <section class="snap-section s5" id="asistente" data-section="4">
-      <div class="s5-bg"><img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?w=1600&q=80" alt="" aria-hidden="true" loading="lazy"></div>
+    <!-- ───────────────────────────────────────────
+         S5  FINANCIACIÓN — simulador interactivo
+    ─────────────────────────────────────────────── -->
+    <section class="snap-section s5fin" id="financiacion" data-section="4">
+      <div class="s5fin-bg"><img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?w=1600&q=80" alt="" aria-hidden="true" loading="lazy"></div>
 
-      <div class="s5-left">
-        <p class="hero-eyebrow">Asistente IA</p>
-        <h2 class="section-title">Tu asesor<br>inteligente 24/7.</h2>
+      <div class="s5fin-left">
+        <p class="hero-eyebrow">Financiación</p>
+        <h2 class="section-title">Simulá tu cuota<br>en segundos.</h2>
         <div class="hero-divider"></div>
-        <p class="section-desc">Nuestro asistente entiende tus necesidades y te guía para encontrar el auto ideal con total confianza.</p>
-        <div class="s5-features">
-          <div class="s5-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg><div><p class="s5-feat-title">Resuelve dudas al instante</p><p class="s5-feat-desc">Respuestas claras sobre vehículos, precios y más.</p></div></div>
-          <div class="s5-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 17H3a2 2 0 01-2-2V9a2 2 0 012-2h1l2-4h10l2 4h1a2 2 0 012 2v6a2 2 0 01-2 2h-2"/><circle cx="7.5" cy="17.5" r="1.5"/><circle cx="16.5" cy="17.5" r="1.5"/></svg><div><p class="s5-feat-title">Sugiere vehículos</p><p class="s5-feat-desc">Recomendaciones personalizadas según lo que buscás.</p></div></div>
-          <div class="s5-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><div><p class="s5-feat-title">Agenda visitas</p><p class="s5-feat-desc">Coordinamos tu visita en el horario que preferirás.</p></div></div>
-        </div>
-        <div class="s5-tech">
-          <div class="s5-tech-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/></svg></div>
-          <div><p class="s5-feat-title">Tecnología que te entiende.</p><p class="s5-feat-desc" style="color:rgba(255,255,255,.4);">Con IA y atención humana cuando lo necesites.</p></div>
+        <p class="section-desc">Ajustá el valor del auto, el anticipo y el plazo. Calculamos tu cuota mensual al instante, sin compromiso.</p>
+        <div class="s5fin-perks">
+          <div class="s5fin-perk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>Aprobación en 24/48hs</div>
+          <div class="s5fin-perk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>Hasta 70% del valor</div>
+          <div class="s5fin-perk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Plazos de 12 a 60 meses</div>
         </div>
       </div>
 
-      <div class="s5-right">
-        <div class="chat-box">
-          <div class="chat-header">
-            <div class="chat-avatar">H</div>
-            <div>
-              <p class="chat-name">Asistente IA · Haus Seleccionados</p>
-              <p class="chat-status"><span class="chat-dot"></span>En línea</p>
+      <div class="s5fin-right">
+        <form id="simulador" class="sim-card">
+          <div class="sim-row">
+            <div class="sim-label"><span>Valor del vehículo</span><span class="sim-val" data-val="valor">USD 52.900</span></div>
+            <input type="range" class="sim-slider" data-sim="valor" min="15000" max="120000" step="1000" value="52900">
+          </div>
+          <div class="sim-row">
+            <div class="sim-label"><span>Anticipo</span><span class="sim-val" data-val="anticipo">USD 15.870 (30%)</span></div>
+            <input type="range" class="sim-slider" data-sim="anticipo" min="10" max="70" step="5" value="30">
+          </div>
+          <div class="sim-row">
+            <div class="sim-label"><span>Plazo</span><span class="sim-val" data-val="plazo">36 meses</span></div>
+            <input type="range" class="sim-slider" data-sim="plazo" min="12" max="60" step="6" value="36">
+          </div>
+
+          <div class="sim-result">
+            <p class="sim-result-label">Cuota mensual estimada</p>
+            <p class="sim-result-cuota" id="simCuota">USD 1.234</p>
+            <div class="sim-result-grid">
+              <div><span>Monto a financiar</span><strong id="simFinanc">USD 37.030</strong></div>
+              <div><span>Tasa anual</span><strong id="simTasa">12.9 %</strong></div>
+              <div><span>Plazo</span><strong id="simPlazo">36 meses</strong></div>
+              <div><span>Total a pagar</span><strong id="simTotal">USD 60.000</strong></div>
             </div>
           </div>
-          <div class="chat-messages">
-            <div class="msg msg-user"><div class="msg-bubble">Busco un SUV usado hasta USD 40.000</div><p class="msg-time">10:30 ✓✓</p></div>
-            <div class="msg msg-bot">
-              <div class="msg-bubble">
-                ¡Perfecto! Tengo varias opciones que se ajustan a tu presupuesto. Te muestro algunas recomendaciones:
-                <div class="car-results">
-                  <div class="car-result"><img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?w=200&q=70" alt="BMW X3"><div class="car-result-name">BMW X3 xDrive30i 2021<br><span class="car-result-meta">38.000 km · Gasolina</span></div><span class="car-result-price">USD 38.900</span></div>
-                  <div class="car-result"><img src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=200&q=70" alt="Audi Q5"><div class="car-result-name">Audi Q5 45 TFSI 2020<br><span class="car-result-meta">42.000 km · Gasolina</span></div><span class="car-result-price">USD 36.500</span></div>
-                </div>
-                ¿Te gustaría ver más detalles de alguno?
-              </div>
-              <p class="msg-time">10:30</p>
-            </div>
-            <div class="msg msg-user"><div class="msg-bubble">¿Este BMW tiene financiación?</div><p class="msg-time">10:31 ✓✓</p></div>
-            <div class="msg msg-bot">
-              <div class="msg-bubble">Sí, podés financiar hasta el <strong>70%</strong> del valor con tasas preferenciales. ¿Calculamos una cuota para vos?
-                <div class="quick-replies"><button class="qr">Quiero agendar una visita</button><button class="qr">Ver financiación</button></div>
-              </div>
-              <p class="msg-time">10:31</p>
-            </div>
-          </div>
-          <div class="chat-input-bar">
-            <input class="chat-input" type="text" placeholder="Escribí tu mensaje…" aria-label="Mensaje">
-            <button class="chat-send" aria-label="Enviar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg></button>
-          </div>
-        </div>
+
+          <button type="button" class="btn btn-wa btn-full btn-lg" id="simWa">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            Solicitar esta financiación
+          </button>
+          <p class="sim-disclaimer">* Cálculo estimativo. Sujeto a aprobación crediticia.</p>
+        </form>
       </div>
     </section>
+
 
     <!-- ───────────────────────────────────────────
          S6  CONTACTO
@@ -1583,10 +1704,46 @@
 
   </div><!-- /snap-container -->
 
-  <!-- WA flotante -->
-  <a href="https://wa.me/5491100000000" class="wa-float" aria-label="WhatsApp" target="_blank" rel="noopener">
-    <svg viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-  </a>
+  <!-- ══ WIDGET DE CHAT FLOTANTE ════════════════════ -->
+  <div class="chat-widget" id="chatWidget">
+    <div class="chat-panel" id="chatPanel" aria-hidden="true">
+      <div class="chat-header">
+        <div class="chat-avatar">H</div>
+        <div style="flex:1;">
+          <p class="chat-name">Asistente Haus</p>
+          <p class="chat-status"><span class="chat-dot"></span>En línea · responde al instante</p>
+        </div>
+        <button class="chat-close" id="chatClose" aria-label="Cerrar chat">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="chat-messages" id="chatMessages">
+        <div class="msg msg-bot">
+          <div class="msg-bubble">¡Hola! 👋 Soy el asistente de Haus Seleccionados. ¿En qué te puedo ayudar hoy?
+            <div class="quick-replies">
+              <button class="qr">Busco un SUV</button>
+              <button class="qr">Ver financiación</button>
+              <button class="qr">Agendar visita</button>
+            </div>
+          </div>
+          <p class="msg-time">Ahora</p>
+        </div>
+      </div>
+      <div class="chat-input-bar">
+        <input class="chat-input" id="chatInput" type="text" placeholder="Escribí tu mensaje…" aria-label="Mensaje">
+        <button class="chat-send" id="chatSend" aria-label="Enviar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg></button>
+      </div>
+    </div>
+
+    <button class="chat-fab" id="chatFab" aria-label="Abrir chat">
+      <svg class="chat-fab-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+      <span class="chat-fab-badge">1</span>
+    </button>
+
+    <a href="https://wa.me/5491100000000" class="wa-float" aria-label="WhatsApp" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    </a>
+  </div>
 
   <script src="assets/js/haus.js"></script>
   <script>
@@ -1716,35 +1873,67 @@
     document.querySelectorAll('[data-target]').forEach(n => numIO.observe(n));
 
     /* ══════════════════════════════════════════════
-       S5 CHAT IA — respuestas simuladas
+       WIDGET DE CHAT FLOTANTE — asistente IA
     ══════════════════════════════════════════════ */
-    const chatMessages = document.querySelector('.chat-messages');
-    const chatInput    = document.querySelector('.chat-input');
-    const chatSend     = document.querySelector('.chat-send');
+    const widget       = document.getElementById('chatWidget');
+    const fab          = document.getElementById('chatFab');
+    const chatClose    = document.getElementById('chatClose');
+    const chatMessages = document.getElementById('chatMessages');
+    const chatInput    = document.getElementById('chatInput');
+    const chatSend     = document.getElementById('chatSend');
+
+    function openChat()  { widget.classList.add('open'); document.getElementById('chatPanel').setAttribute('aria-hidden','false'); setTimeout(() => chatInput?.focus(), 300); }
+    function closeChat() { widget.classList.remove('open'); document.getElementById('chatPanel').setAttribute('aria-hidden','true'); }
+
+    fab?.addEventListener('click', () => widget.classList.contains('open') ? closeChat() : openChat());
+    chatClose?.addEventListener('click', closeChat);
+
+    const WA = 'https://wa.me/5491100000000';
+    const goTo = idx => sections[idx]?.scrollIntoView({ behavior: 'smooth' });
 
     const iaResponses = [
-      { keywords: ['financ','cuota','pago','plazo','credito','crédito'],
-        text: 'Podés financiar hasta el <strong>70%</strong> del valor con cuotas fijas en USD. Las tasas arrancan desde el 12,9% anual. ¿Querés que calcule una cuota para el auto que te interesa?',
-        replies: ['Calcular cuota', 'Agendar visita'] },
-      { keywords: ['precio','cuanto','valor','costo','cuesta'],
-        text: 'Nuestros precios van desde <strong>USD 22.900</strong> (Toyota Corolla 2022) hasta <strong>USD 72.900</strong> (BMW X5 2022). Todos los precios incluyen garantía y documentación. ¿Tenés un presupuesto en mente?',
+      { keywords: ['financ','cuota','pago','plazo','credito','crédito','simul'],
+        text: 'Podés financiar hasta el <strong>70%</strong> del valor con cuotas fijas. Las tasas arrancan en 12,9% anual. Te llevo al simulador para que calcules tu cuota 👇',
+        replies: ['Ir al simulador →', 'Agendar visita'] },
+      { keywords: ['precio','cuanto','valor','costo','cuesta','presupuesto','barato'],
+        text: 'Nuestros precios van desde <strong>USD 22.900</strong> (Toyota Corolla 2022) hasta <strong>USD 72.900</strong> (BMW X5 2022). Todos incluyen garantía y documentación. ¿Querés ver el catálogo?',
+        replies: ['Ver catálogo', 'Hasta USD 35.000'] },
+      { keywords: ['visita','showroom','local','venir','conocer','turno','direccion','dirección','llegar'],
+        text: 'Nuestro showroom está en <strong>Av. del Libertador 1234, CABA</strong>. Atendemos Lun–Vie 9 a 18:30 y Sáb 10 a 14. ¿Coordinamos tu visita por WhatsApp?',
+        replies: ['Reservar por WhatsApp', 'Ver contacto'] },
+      { keywords: ['garantia','garantía','problema','falla','revis','certific'],
+        text: 'Todos nuestros vehículos incluyen <strong>garantía extendida</strong> de 6 meses y pasan una revisión de 120+ puntos antes de la entrega. Comprás con total tranquilidad. 🛡️',
         replies: ['Ver catálogo', 'Hablar con asesor'] },
-      { keywords: ['visita','ver','showroom','local','ir','venir','conocer'],
-        text: 'Nuestro showroom está en Av. del Libertador 1234, CABA. Atendemos lunes a viernes de 9 a 18:30 y sábados de 10 a 14. ¿Querés que te reserve un turno?',
-        replies: ['Reservar turno', 'Cómo llegar'] },
-      { keywords: ['garantia','garantía','problema','falla','seguro'],
-        text: 'Todos nuestros vehículos incluyen <strong>garantía extendida</strong> de 6 meses con cobertura en mecánica y electrónica. Además, revisamos 120+ puntos antes de la entrega.',
-        replies: ['Ver más detalles', 'Hablar con asesor'] },
       { keywords: ['bmw','serie','x3','x5'],
-        text: 'Tenemos varios BMW disponibles: el <strong>X5 xDrive40i 2022</strong> (USD 72.900), el <strong>X3 xDrive20i 2019</strong> y el <strong>Serie 3 330i 2019</strong>. ¿Cuál te interesa explorar?',
-        replies: ['Ver BMW X5', 'Ver Serie 3'] },
+        text: 'Tenemos varios <strong>BMW</strong>: X5 xDrive40i 2022 (USD 72.900), X3 xDrive20i 2019 y Serie 3 330i 2019. ¿Querés ver el catálogo filtrado?',
+        replies: ['Ver BMW', 'Agendar visita'] },
       { keywords: ['audi','q5','a4'],
-        text: 'Contamos con el <strong>Audi Q5 2.0 TFSI Quattro 2020</strong> (USD 42.900) y el <strong>Audi A4 2.0 TFSI Sport 2020</strong> (USD 31.500). ¿Te mando la ficha completa?',
-        replies: ['Ver Audi Q5', 'Ver Audi A4'] },
-      { keywords: ['suv','camioneta','4x4','familiar'],
-        text: 'Para SUV tenemos opciones excelentes: BMW X5, Audi Q5, BMW X3 y Jeep Compass. Todos con tracción inteligente y equipamiento premium. ¿Cuál es tu presupuesto aproximado?',
-        replies: ['Hasta USD 35.000', 'Hasta USD 50.000', 'Sin límite'] },
+        text: 'Contamos con el <strong>Audi Q5 Quattro 2020</strong> (USD 42.900) y el <strong>Audi A4 Sport 2020</strong> (USD 31.500). ¿Te muestro el catálogo?',
+        replies: ['Ver catálogo', 'Calcular cuota'] },
+      { keywords: ['suv','camioneta','4x4','familia','pickup'],
+        text: 'Para <strong>SUV y pickups</strong> tenemos: BMW X5, Audi Q5, BMW X3, Jeep Compass y VW Amarok. Todos con tracción inteligente. ¿Cuál es tu presupuesto?',
+        replies: ['Hasta USD 35.000', 'Hasta USD 50.000', 'Ver catálogo'] },
+      { keywords: ['hola','buenas','buen dia','buen día','que tal','qué tal'],
+        text: '¡Hola! 😊 Bienvenido a Haus Seleccionados. Puedo ayudarte a encontrar tu próximo auto, calcular una cuota o coordinar una visita. ¿Por dónde arrancamos?',
+        replies: ['Busco un SUV', 'Ver financiación', 'Ver catálogo'] },
+      { keywords: ['asesor','humano','persona','contact','telefono','teléfono','llam'],
+        text: 'Te paso con un asesor humano. Escribinos por WhatsApp y te respondemos en minutos. 📲',
+        replies: ['Abrir WhatsApp', 'Ver contacto'] },
     ];
+
+    /* Acciones especiales de algunos quick-replies */
+    const qrActions = {
+      'Ir al simulador →': () => { closeChat(); goTo(4); },
+      'Ver financiación':  () => { closeChat(); goTo(4); },
+      'Calcular cuota':    () => { closeChat(); goTo(4); },
+      'Ver catálogo':      () => { closeChat(); goTo(2); },
+      'Ver BMW':           () => { closeChat(); goTo(2); },
+      'Ver contacto':      () => { closeChat(); goTo(5); },
+      'Agendar visita':    () => { closeChat(); goTo(5); },
+      'Reservar por WhatsApp': () => window.open(WA + '?text=' + encodeURIComponent('Hola! Quiero coordinar una visita al showroom.'), '_blank'),
+      'Abrir WhatsApp':    () => window.open(WA, '_blank'),
+      'Hablar con asesor': () => window.open(WA, '_blank'),
+    };
 
     function getIAResponse(text) {
       const lower = text.toLowerCase();
@@ -1752,57 +1941,82 @@
         if (r.keywords.some(k => lower.includes(k))) return r;
       }
       return {
-        text: 'Entendido. Nuestro equipo puede asesorarte mejor en persona o por WhatsApp. ¿Preferís que te contacte un asesor ahora?',
-        replies: ['Sí, que me contacten', 'Ver catálogo']
+        text: 'Buena pregunta. Un asesor puede darte el detalle exacto. ¿Querés que sigamos por WhatsApp o preferís ver el catálogo?',
+        replies: ['Abrir WhatsApp', 'Ver catálogo']
       };
     }
 
-    function addMsg(html, type, time) {
+    function nowTime(check) {
+      const n = new Date();
+      return `${n.getHours()}:${String(n.getMinutes()).padStart(2,'0')}${check ? ' ✓✓' : ''}`;
+    }
+
+    function addMsg(html, type) {
       const div = document.createElement('div');
       div.className = `msg msg-${type}`;
-      div.innerHTML = `<div class="msg-bubble">${html}</div><p class="msg-time">${time}</p>`;
+      div.innerHTML = `<div class="msg-bubble">${html}</div><p class="msg-time">${nowTime(type === 'user')}</p>`;
       chatMessages.appendChild(div);
       chatMessages.scrollTop = chatMessages.scrollHeight;
       return div;
     }
 
-    function addQR(replies) {
-      const last = chatMessages.querySelector('.msg-bot:last-child .msg-bubble');
-      if (!last) return;
+    function addQR(container, replies) {
+      const bubble = container.querySelector('.msg-bubble');
       const qrDiv = document.createElement('div');
       qrDiv.className = 'quick-replies';
       replies.forEach(r => {
         const btn = document.createElement('button');
         btn.className = 'qr';
         btn.textContent = r;
-        btn.addEventListener('click', () => sendMsg(r));
+        btn.addEventListener('click', () => handleQR(r));
         qrDiv.appendChild(btn);
       });
-      last.appendChild(qrDiv);
+      bubble.appendChild(qrDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function showTyping() {
+      const div = document.createElement('div');
+      div.className = 'msg msg-bot';
+      div.id = 'typing';
+      div.innerHTML = `<div class="msg-bubble"><span class="typing"><i></i><i></i><i></i></span></div>`;
+      chatMessages.appendChild(div);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+    function hideTyping() { document.getElementById('typing')?.remove(); }
+
+    function botReply(text) {
+      showTyping();
+      setTimeout(() => {
+        hideTyping();
+        const res = getIAResponse(text);
+        const div = addMsg(res.text, 'bot');
+        if (res.replies) addQR(div, res.replies);
+      }, 700 + Math.random() * 500);
+    }
+
+    function handleQR(label) {
+      if (qrActions[label]) {
+        addMsg(label, 'user');
+        qrActions[label]();
+        return;
+      }
+      sendMsg(label);
     }
 
     function sendMsg(text) {
       if (!text.trim()) return;
-      const now = new Date();
-      const time = `${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')} ✓✓`;
-      addMsg(text, 'user', time);
+      addMsg(text, 'user');
       if (chatInput) chatInput.value = '';
-
-      setTimeout(() => {
-        const res = getIAResponse(text);
-        const botTime = `${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')}`;
-        addMsg(res.text, 'bot', botTime);
-        if (res.replies) addQR(res.replies);
-      }, 800);
+      botReply(text);
     }
 
-    if (chatSend) chatSend.addEventListener('click', () => sendMsg(chatInput?.value || ''));
-    if (chatInput) chatInput.addEventListener('keydown', e => {
-      if (e.key === 'Enter') sendMsg(chatInput.value);
-    });
+    chatSend?.addEventListener('click', () => sendMsg(chatInput?.value || ''));
+    chatInput?.addEventListener('keydown', e => { if (e.key === 'Enter') sendMsg(chatInput.value); });
 
-    document.querySelectorAll('.qr').forEach(btn =>
-      btn.addEventListener('click', () => sendMsg(btn.textContent.trim()))
+    /* Quick-replies iniciales (los del HTML estático) */
+    document.querySelectorAll('#chatMessages .qr').forEach(btn =>
+      btn.addEventListener('click', () => handleQR(btn.textContent.trim()))
     );
 
     /* ══════════════════════════════════════════════
@@ -1837,6 +2051,20 @@
         el.addEventListener('input', () => el.classList.remove('error'))
       );
     }
+
+    /* ══════════════════════════════════════════════
+       SIMULADOR — botón solicitar financiación
+    ══════════════════════════════════════════════ */
+    document.getElementById('simWa')?.addEventListener('click', () => {
+      const valor = document.querySelector('[data-val="valor"]')?.textContent || '';
+      const antic = document.querySelector('[data-val="anticipo"]')?.textContent || '';
+      const plazo = document.querySelector('[data-val="plazo"]')?.textContent || '';
+      const cuota = document.getElementById('simCuota')?.textContent || '';
+      const msg = `Hola! Simulé una financiación en la web:\n` +
+        `• Vehículo: ${valor}\n• Anticipo: ${antic}\n• Plazo: ${plazo}\n• Cuota estimada: ${cuota}\n` +
+        `Quiero avanzar con esta opción.`;
+      window.open(`https://wa.me/5491100000000?text=${encodeURIComponent(msg)}`, '_blank');
+    });
 
     /* ══════════════════════════════════════════════
        "VALUÁ TU USADO" — abre chat WhatsApp
