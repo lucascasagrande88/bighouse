@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Haus Seleccionados — Autos premium usados</title>
+  <meta name="description" content="Vehículos premium seleccionados con criterio. Cada unidad revisada, certificada y presentada con transparencia total.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/haus.css">
+</head>
+<body>
+
+  <!-- ======================================================
+       NAV
+       ====================================================== -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+
+      <a href="/" class="nav-logo">
+        <span class="nav-logo-top">Haus</span>
+        <span class="nav-logo-sub">Seleccionados</span>
+      </a>
+
+      <div class="nav-links">
+        <a href="/" class="active">Inicio</a>
+        <a href="catalogo/">Catálogo</a>
+        <a href="financiacion/">Financiación</a>
+        <a href="nosotros/">Nosotros</a>
+        <a href="contacto/">Contacto</a>
+      </div>
+
+      <a href="contacto/?valua=1" class="btn-valua">
+        <!-- car icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 17H3a2 2 0 01-2-2V9a2 2 0 012-2h1l2-4h10l2 4h1a2 2 0 012 2v6a2 2 0 01-2 2h-2"/>
+          <circle cx="7.5" cy="17.5" r="1.5"/><circle cx="16.5" cy="17.5" r="1.5"/>
+        </svg>
+        Valuá tu usado
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Menú" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="19" y2="6"/>
+          <line x1="3" y1="11" x2="19" y2="11"/>
+          <line x1="3" y1="16" x2="19" y2="16"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MOBILE NAV -->
+  <div class="nav-mobile" id="navMobile">
+    <a href="/">Inicio</a>
+    <a href="catalogo/">Catálogo</a>
+    <a href="financiacion/">Financiación</a>
+    <a href="nosotros/">Nosotros</a>
+    <a href="contacto/">Contacto</a>
+    <div class="nav-mobile-cta">
+      <a href="contacto/?valua=1" class="btn btn-secondary btn-full">Valuá tu usado</a>
+      <a href="https://wa.me/5491100000000" class="btn btn-wa btn-full" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+  </div>
+
+  <!-- ======================================================
+       HERO — SPLIT LAYOUT
+       ====================================================== -->
+  <section class="hero" aria-label="Hero">
+
+    <!-- Izquierda: copy -->
+    <div class="hero-left">
+      <p class="hero-eyebrow">Autos usados premium</p>
+      <h1 class="hero-title">
+        <span class="hero-line">Autos premium.</span>
+        <span class="hero-line">Confianza real.</span>
+      </h1>
+      <div class="hero-divider"></div>
+      <p class="hero-desc">
+        Seleccionamos los mejores vehículos, revisados en detalle para que compres con total confianza y disfrutes cada kilómetro.
+      </p>
+      <div class="hero-actions">
+        <a href="catalogo/" class="btn btn-primary btn-lg">
+          Ver catálogo
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="contacto/" class="btn btn-secondary btn-lg">
+          Agendar visita
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </a>
+      </div>
+      <div class="hero-trust">
+        <div class="hero-trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <div>
+            <strong>Revisados<br>120+ puntos</strong>
+          </div>
+        </div>
+        <div class="hero-trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <div>
+            <strong>Garantía<br>extendida</strong>
+          </div>
+        </div>
+        <div class="hero-trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          <div>
+            <strong>Asesoramiento<br>personalizado</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Derecha: imagen del showroom -->
+    <div class="hero-right">
+      <img
+        src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1600&q=85"
+        alt="BMW M2 en showroom Haus Seleccionados"
+        loading="eager"
+      >
+      <div class="hero-right-overlay"></div>
+
+      <!-- Panel flotante "Viví la experiencia" -->
+      <div class="hero-exp-panel">
+        <p class="hero-exp-title">Viví la experiencia<br>completa online</p>
+        <div class="hero-exp-items">
+          <div class="hero-exp-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>
+            360 exterior
+          </div>
+          <div class="hero-exp-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 12l4-4 4 4M12 8v8"/></svg>
+            360 interior
+          </div>
+          <div class="hero-exp-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            Fotos &amp; video
+          </div>
+          <div class="hero-exp-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+            Catálogo
+          </div>
+          <div class="hero-exp-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l-2 7H3l6 4-2 7 5-3 5 3-2-7 6-4h-7L12 2z"/></svg>
+            Asistente IA
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Strip inferior de ángulos -->
+    <div class="hero-strip" role="list" aria-label="Ángulos del vehículo">
+      <button class="hero-strip-arrow" aria-label="Anterior">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <div class="hero-strip-item active" role="listitem">
+        <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=400&q=70" alt="Frente 3/4">
+        <span class="hero-strip-label">Frente 3/4</span>
+      </div>
+      <div class="hero-strip-item" role="listitem">
+        <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=400&q=70" alt="Lateral">
+        <span class="hero-strip-label">Lateral</span>
+      </div>
+      <div class="hero-strip-item" role="listitem">
+        <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?w=400&q=70" alt="Trasera 3/4">
+        <span class="hero-strip-label">Trasera 3/4</span>
+      </div>
+      <div class="hero-strip-item" role="listitem">
+        <img src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=400&q=70" alt="Trasera">
+        <span class="hero-strip-label">Trasera</span>
+      </div>
+      <div class="hero-strip-item" role="listitem">
+        <img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?w=400&q=70" alt="Frente 3/4 opuesto">
+        <span class="hero-strip-label">Frente 3/4 opuesto</span>
+      </div>
+      <button class="hero-strip-arrow" aria-label="Siguiente">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+
+  </section>
+
+  <!-- ======================================================
+       SELECTOR 360° DE DESTACADOS
+       ====================================================== -->
+  <section class="selector360" aria-label="Selector 360 de destacados">
+
+    <div class="selector360-left">
+      <p class="section-eyebrow">Experiencia 360°</p>
+      <h2 class="section-title">Selector 360°<br>de destacados</h2>
+      <div class="section-divider"></div>
+      <p class="section-desc">Explorá cada detalle de nuestros autos premium usados con nuestro selector 360°. Girá el vehículo y descubrí su estado real, ángulo por ángulo.</p>
+
+      <div class="selector360-tabs">
+        <button class="selector360-tab active">SUV</button>
+        <button class="selector360-tab">Sedán</button>
+        <button class="selector360-tab">Deportivo</button>
+        <button class="selector360-tab">Pickup</button>
+        <button class="selector360-tab">Usados</button>
+      </div>
+
+      <div class="selector360-card">
+        <div class="selector360-card-header">
+          <span class="selector360-card-nombre">BMW X5 xDrive40i M Sport</span>
+          <span class="badge-destacado">Destacado</span>
+        </div>
+        <div class="selector360-specs">
+          <div class="selector360-spec">
+            <span class="selector360-spec-key">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              Año
+            </span>
+            <span class="selector360-spec-val">2022</span>
+          </div>
+          <div class="selector360-spec">
+            <span class="selector360-spec-key">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Kilómetros
+            </span>
+            <span class="selector360-spec-val">32.500 km</span>
+          </div>
+          <div class="selector360-spec">
+            <span class="selector360-spec-key">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
+              Transmisión
+            </span>
+            <span class="selector360-spec-val">Automática</span>
+          </div>
+          <div class="selector360-spec">
+            <span class="selector360-spec-key">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+              Combustible
+            </span>
+            <span class="selector360-spec-val">Nafta</span>
+          </div>
+        </div>
+        <p class="selector360-precio-label">Precio</p>
+        <p class="selector360-precio">USD 72.900</p>
+        <a href="ficha/" class="btn btn-primary btn-full">
+          Explorar ficha
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="selector360-right">
+      <img
+        src="https://images.unsplash.com/photo-1555215695-3004980ad54e?w=1400&q=85"
+        alt="BMW X5 — vista 360°"
+      >
+      <div class="selector360-indicator">
+        <div class="selector360-ring">
+          <span class="selector360-ring-text">360°</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="selector360-thumbs">
+      <div class="selector360-thumb active">
+        <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?w=400&q=70" alt="Frente 3/4">
+        <span class="selector360-thumb-label">Frente 3/4</span>
+      </div>
+      <div class="selector360-thumb">
+        <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=400&q=70" alt="Lateral">
+        <span class="selector360-thumb-label">Lateral</span>
+      </div>
+      <div class="selector360-thumb">
+        <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=400&q=70" alt="Trasera 3/4">
+        <span class="selector360-thumb-label">Trasera 3/4</span>
+      </div>
+      <div class="selector360-thumb">
+        <img src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=400&q=70" alt="Trasera">
+        <span class="selector360-thumb-label">Trasera</span>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ======================================================
+       NOSOTROS — SPLIT
+       ====================================================== -->
+  <section aria-label="Nosotros">
+    <div class="nosotros-hero" style="padding-top:var(--nav-h);">
+      <div class="nosotros-left">
+        <p class="section-eyebrow">Nosotros</p>
+        <h2 class="section-title">Confianza que se<br>construye con<br>experiencia.</h2>
+        <div class="section-divider"></div>
+        <p class="section-desc">En Haus Seleccionados combinamos trayectoria, transparencia y tecnología para que tu próxima compra sea segura, simple y totalmente confiable.</p>
+      </div>
+      <div class="nosotros-right">
+        <img src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=900&q=85" alt="Audi Q5 en showroom">
+        <div class="nosotros-right-overlay"></div>
+      </div>
+    </div>
+
+    <div class="nosotros-features-grid">
+      <div class="nosotros-feature">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <p class="nosotros-feature-title">Unidades certificadas</p>
+        <p class="nosotros-feature-desc">Revisamos cada vehículo en más de 120 puntos para garantizar calidad y seguridad.</p>
+      </div>
+      <div class="nosotros-feature">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        <p class="nosotros-feature-title">Atención personalizada</p>
+        <p class="nosotros-feature-desc">Te acompañamos en todo el proceso con asesoramiento honesto y cercano.</p>
+      </div>
+      <div class="nosotros-feature">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+        <p class="nosotros-feature-title">Garantía premium</p>
+        <p class="nosotros-feature-desc">Cobertura extendida y respaldo total para tu tranquilidad desde el primer día.</p>
+      </div>
+      <div class="nosotros-feature">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+        <p class="nosotros-feature-title">Financiación a medida</p>
+        <p class="nosotros-feature-desc">Opciones flexibles, tasas competitivas y aprobación rápida.</p>
+      </div>
+      <div class="nosotros-feature">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>
+        <p class="nosotros-feature-title">Tecnología 360°</p>
+        <p class="nosotros-feature-desc">Recorrí, conocé y comprá online con fotos, videos y visitas 360°.</p>
+      </div>
+    </div>
+
+    <div class="nosotros-stats">
+      <div class="wrap">
+        <div class="nosotros-stats-grid">
+          <div class="nosotros-stat">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+            <div>
+              <p class="nosotros-stat-num" data-target="10" data-suffix="+">0</p>
+              <p class="nosotros-stat-label">años de experiencia</p>
+            </div>
+          </div>
+          <div class="nosotros-stat">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+            <div>
+              <p class="nosotros-stat-num" data-target="2500" data-suffix="+">0</p>
+              <p class="nosotros-stat-label">clientes satisfechos</p>
+            </div>
+          </div>
+          <div class="nosotros-stat">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 17H3a2 2 0 01-2-2V9a2 2 0 012-2h1l2-4h10l2 4h1a2 2 0 012 2v6a2 2 0 01-2 2h-2"/><circle cx="7.5" cy="17.5" r="1.5"/><circle cx="16.5" cy="17.5" r="1.5"/></svg>
+            <div>
+              <p class="nosotros-stat-num" data-target="1800" data-suffix="+">0</p>
+              <p class="nosotros-stat-label">vehículos vendidos</p>
+            </div>
+          </div>
+          <div class="nosotros-stat">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <div>
+              <p class="nosotros-stat-num" data-target="3" data-suffix="">0</p>
+              <p class="nosotros-stat-label">sucursales</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       ASISTENTE IA
+       ====================================================== -->
+  <section class="ia-layout" aria-label="Asistente IA">
+
+    <div class="ia-bg" aria-hidden="true">
+      <img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?w=1400&q=80" alt="">
+    </div>
+
+    <div class="ia-left">
+      <p class="section-eyebrow">Asistente IA</p>
+      <h2 class="section-title">Tu asesor<br>inteligente 24/7.</h2>
+      <div class="section-divider"></div>
+      <p class="section-desc">Nuestro asistente virtual entiende tus necesidades y te guía en cada paso para que encuentres el auto ideal, con total confianza.</p>
+
+      <div class="ia-features">
+        <div class="ia-feature">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          <div>
+            <p class="ia-feature-title">Resuelve dudas al instante</p>
+            <p class="ia-feature-desc">Respuestas claras sobre vehículos, precios y más.</p>
+          </div>
+        </div>
+        <div class="ia-feature">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 17H3a2 2 0 01-2-2V9a2 2 0 012-2h1l2-4h10l2 4h1a2 2 0 012 2v6a2 2 0 01-2 2h-2"/><circle cx="7.5" cy="17.5" r="1.5"/><circle cx="16.5" cy="17.5" r="1.5"/></svg>
+          <div>
+            <p class="ia-feature-title">Sugiere vehículos</p>
+            <p class="ia-feature-desc">Recomendaciones personalizadas según lo que buscás.</p>
+          </div>
+        </div>
+        <div class="ia-feature">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+          <div>
+            <p class="ia-feature-title">Explica financiación</p>
+            <p class="ia-feature-desc">Opciones de crédito adaptadas a vos.</p>
+          </div>
+        </div>
+        <div class="ia-feature">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <div>
+            <p class="ia-feature-title">Agenda visitas</p>
+            <p class="ia-feature-desc">Coordinamos tu visita en el horario que preferirás.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="ia-tech-card">
+        <div class="ia-tech-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/><path d="M15.54 8.46a5 5 0 010 7.07M8.46 8.46a5 5 0 000 7.07"/></svg>
+        </div>
+        <div>
+          <p class="ia-tech-title">Tecnología que te entiende.</p>
+          <p class="ia-tech-desc">Con inteligencia artificial y atención humana cuando lo necesites.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chat UI -->
+    <div class="ia-chat">
+      <div class="ia-chat-header">
+        <div class="ia-avatar">H</div>
+        <div>
+          <p class="ia-chat-name">Asistente IA de HAUS SELECCIONADOS</p>
+          <p class="ia-chat-status"><span class="ia-status-dot"></span>En línea</p>
+        </div>
+      </div>
+
+      <div class="ia-messages" id="iaMessages">
+        <!-- User -->
+        <div class="ia-msg ia-msg-user">
+          <div>
+            <div class="ia-msg-bubble">Busco un SUV usado hasta USD 40.000</div>
+            <p class="ia-msg-time">10:30 ✓✓</p>
+          </div>
+        </div>
+
+        <!-- Bot con tarjetas -->
+        <div class="ia-msg ia-msg-bot">
+          <div class="ia-avatar" style="width:28px;height:28px;font-size:.6rem;">H</div>
+          <div>
+            <div class="ia-msg-bubble">
+              ¡Perfecto! Tengo varias opciones que se ajustan a tu presupuesto. Te muestro algunas recomendaciones destacadas:
+              <div class="ia-car-cards">
+                <div class="ia-car-card">
+                  <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?w=200&q=70" alt="BMW X3">
+                  <div class="ia-car-card-info">
+                    <p class="ia-car-card-name">BMW X3 xDrive30i 2021</p>
+                    <p class="ia-car-card-meta">38.000 km · Gasolina</p>
+                  </div>
+                  <p class="ia-car-card-price">USD 38.900</p>
+                </div>
+                <div class="ia-car-card">
+                  <img src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=200&q=70" alt="Audi Q5">
+                  <div class="ia-car-card-info">
+                    <p class="ia-car-card-name">Audi Q5 45 TFSI 2020</p>
+                    <p class="ia-car-card-meta">42.000 km · Gasolina</p>
+                  </div>
+                  <p class="ia-car-card-price">USD 36.500</p>
+                </div>
+                <div class="ia-car-card">
+                  <img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?w=200&q=70" alt="Mercedes GLC">
+                  <div class="ia-car-card-info">
+                    <p class="ia-car-card-name">Mercedes-Benz GLC 300 2020</p>
+                    <p class="ia-car-card-meta">45.000 km · Gasolina</p>
+                  </div>
+                  <p class="ia-car-card-price">USD 39.800</p>
+                </div>
+              </div>
+              ¿Te gustaría ver más detalles de alguno?
+            </div>
+            <p class="ia-msg-time">10:30</p>
+          </div>
+        </div>
+
+        <!-- User -->
+        <div class="ia-msg ia-msg-user">
+          <div>
+            <div class="ia-msg-bubble">¿Este BMW tiene financiación?</div>
+            <p class="ia-msg-time">10:31 ✓✓</p>
+          </div>
+        </div>
+
+        <!-- Bot -->
+        <div class="ia-msg ia-msg-bot">
+          <div class="ia-avatar" style="width:28px;height:28px;font-size:.6rem;">H</div>
+          <div>
+            <div class="ia-msg-bubble">
+              Sí, este BMW cuenta con financiación.<br>
+              Podés financiar hasta el <strong>70%</strong> del valor con tasas preferenciales.<br>
+              ¿Querés que calculemos una cuota estimada para vos?
+            </div>
+            <p class="ia-msg-time">10:31</p>
+          </div>
+        </div>
+
+        <!-- User -->
+        <div class="ia-msg ia-msg-user">
+          <div>
+            <div class="ia-msg-bubble">Quiero agendar una visita</div>
+            <p class="ia-msg-time">10:32 ✓✓</p>
+          </div>
+        </div>
+
+        <!-- Bot con quick replies -->
+        <div class="ia-msg ia-msg-bot">
+          <div class="ia-avatar" style="width:28px;height:28px;font-size:.6rem;">H</div>
+          <div>
+            <div class="ia-msg-bubble">
+              ¡Genial! Agendemos tu visita.<br>
+              ¿Qué día y horario te viene mejor?
+              <div class="ia-quick-replies">
+                <button class="ia-qr">Mañana por la mañana</button>
+                <button class="ia-qr">Mañana por la tarde</button>
+                <button class="ia-qr">El fin de semana</button>
+              </div>
+            </div>
+            <p class="ia-msg-time">10:32</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="ia-input-bar">
+        <button class="btn-icon btn" aria-label="Adjuntar">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"/></svg>
+        </button>
+        <input class="ia-input" type="text" placeholder="Escribí tu mensaje…" aria-label="Mensaje al asistente">
+        <button class="ia-send" aria-label="Enviar">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg>
+        </button>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ======================================================
+       CONTACTO
+       ====================================================== -->
+  <section aria-label="Contacto" style="padding-top:var(--nav-h);">
+    <div class="contacto-hero">
+      <div class="contacto-hero-bg" aria-hidden="true">
+        <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1400&q=80" alt="">
+      </div>
+      <div class="contacto-hero-left" style="position:relative;z-index:2;">
+        <p class="section-eyebrow">10/10 · Contacto</p>
+        <h2 class="section-title">Hablemos.<br>Estamos para<br>ayudarte.</h2>
+        <div class="section-divider"></div>
+        <p class="section-desc">¿Tenés dudas o querés más información? Nuestro equipo está listo para asesorarte y ayudarte a encontrar tu próximo auto.</p>
+        <div class="contacto-trust">
+          <div class="contacto-trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Autos revisados y garantizados
+          </div>
+          <div class="contacto-trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            Asesoramiento personalizado
+          </div>
+          <div class="contacto-trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+            Opciones de financiación
+          </div>
+          <div class="contacto-trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12l2 2 4-4"/><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Compra segura y transparente
+          </div>
+        </div>
+      </div>
+
+      <div class="contacto-form-panel">
+        <p class="contacto-form-title">Envianos tu consulta</p>
+        <p class="contacto-form-sub">Te responderemos a la brevedad.</p>
+        <form style="display:flex;flex-direction:column;gap:.75rem;" data-validate>
+          <div class="form-input-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <input class="form-input" type="text" name="nombre" placeholder="Nombre" required>
+          </div>
+          <div class="form-input-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.9l-.08 2.02z"/></svg>
+            <input class="form-input" type="tel" name="telefono" placeholder="Teléfono / WhatsApp" required>
+          </div>
+          <div class="form-select-wrap">
+            <select class="form-select" name="modelo">
+              <option value="">Modelo de interés</option>
+              <option>BMW X3 2021</option>
+              <option>BMW X5 2022</option>
+              <option>Audi Q5 2021</option>
+              <option>Audi A4 2020</option>
+              <option>Mercedes C200 2019</option>
+              <option>VW Amarok 2020</option>
+              <option>Toyota Corolla 2022</option>
+              <option>Jeep Compass 2020</option>
+            </select>
+          </div>
+          <textarea class="form-textarea" name="mensaje" placeholder="Mensaje" style="min-height:80px;"></textarea>
+          <a href="https://wa.me/5491100000000" class="btn btn-wa btn-full btn-lg" target="_blank" rel="noopener">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            Chat por WhatsApp
+          </a>
+          <div class="contacto-privacy">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+            Tus datos están protegidos.
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="contacto-info-grid">
+      <div class="contacto-info-item">
+        <p class="contacto-info-eyebrow">Showroom</p>
+        <p class="contacto-info-title">HAUS SELECCIONADOS</p>
+        <div class="contacto-info-items">
+          <p class="contacto-info-line">Autos Premium Usados</p>
+        </div>
+      </div>
+      <div class="contacto-info-item">
+        <p class="contacto-info-eyebrow">Horarios</p>
+        <div class="contacto-info-items" style="gap:.625rem;">
+          <div>
+            <p style="font-size:var(--text-xs);color:var(--azul);font-weight:600;margin-bottom:.125rem;">Lunes a Viernes</p>
+            <p class="contacto-info-line">9:00 – 18:30</p>
+          </div>
+          <div>
+            <p style="font-size:var(--text-xs);color:var(--azul);font-weight:600;margin-bottom:.125rem;">Sábados</p>
+            <p class="contacto-info-line">10:00 – 14:00</p>
+          </div>
+        </div>
+      </div>
+      <div class="contacto-info-item">
+        <p class="contacto-info-eyebrow">Ubicación</p>
+        <p class="contacto-info-title">Av. del Libertador 1234</p>
+        <div class="contacto-info-items">
+          <p class="contacto-info-line">Buenos Aires, Argentina</p>
+          <a href="#" class="btn btn-secondary btn-sm" style="margin-top:.5rem;align-self:flex-start;">
+            Cómo llegar
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="contacto-info-item">
+        <p class="contacto-info-eyebrow">Teléfono</p>
+        <p class="contacto-info-title">+54 9 11 0000-0000</p>
+        <div class="contacto-info-items" style="margin-top:.5rem;">
+          <p class="contacto-info-eyebrow">Email</p>
+          <a href="mailto:hola@hausseleccionados.com.ar" class="contacto-info-line" style="color:var(--blanco-muted);">hola@hausseleccionados.com.ar</a>
+        </div>
+      </div>
+      <div class="contacto-info-item">
+        <div class="contacto-map" aria-label="Mapa de ubicación">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       FOOTER
+       ====================================================== -->
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">
+            <span class="footer-logo-top">Haus</span>
+            <span class="footer-logo-sub">Seleccionados</span>
+          </div>
+          <p class="footer-desc">Vehículos premium seleccionados con criterio. Cada unidad es revisada, certificada y presentada con transparencia total.</p>
+          <div class="footer-socials">
+            <a href="#" class="footer-social" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a href="#" class="footer-social" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            </a>
+            <a href="https://wa.me/5491100000000" class="footer-social" aria-label="WhatsApp" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Catálogo</h4>
+          <ul>
+            <li><a href="catalogo/">Todos los vehículos</a></li>
+            <li><a href="catalogo/?tipo=suv">SUVs</a></li>
+            <li><a href="catalogo/?tipo=sedan">Sedanes</a></li>
+            <li><a href="catalogo/?tipo=pickup">Pick-ups</a></li>
+            <li><a href="catalogo/?nuevo=1">Nuevos ingresos</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Servicios</h4>
+          <ul>
+            <li><a href="financiacion/">Financiación</a></li>
+            <li><a href="contacto/?valua=1">Valuá tu usado</a></li>
+            <li><a href="contacto/">Reserva online</a></li>
+            <li><a href="nosotros/">Certificación</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Contacto</h4>
+          <ul>
+            <li><a href="#">Av. del Libertador 1234, CABA</a></li>
+            <li><a href="https://wa.me/5491100000000">+54 9 11 0000-0000</a></li>
+            <li><a href="mailto:hola@hausseleccionados.com.ar">hola@hausseleccionados.com.ar</a></li>
+            <li><a href="#">Lun–Sáb 9:00–19:00</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2025 Haus Seleccionados. Todos los derechos reservados.</p>
+        <nav class="footer-legal" aria-label="Legal">
+          <a href="#">Privacidad</a>
+          <a href="#">Términos</a>
+          <a href="#">Cookies</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WA flotante -->
+  <a href="https://wa.me/5491100000000" class="wa-float" aria-label="Contactar por WhatsApp" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+  </a>
+
+  <script src="assets/js/haus.js"></script>
+</body>
+</html>
