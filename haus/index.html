@@ -983,6 +983,87 @@
       .s6-info-strip { grid-template-columns: 1fr 1fr; }
     }
   </style>
+  <style>
+    /* ── Chat IA (S5) ── */
+    .chat-box {
+      display: flex; flex-direction: column;
+      background: rgba(10,10,10,.9);
+      backdrop-filter: blur(24px);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 1.25rem;
+      padding: 1.25rem;
+      height: 100%;
+      max-height: 480px;
+      overflow: hidden;
+    }
+    .chat-header {
+      display: flex; align-items: center; gap: .875rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      margin-bottom: 1rem;
+      flex-shrink: 0;
+    }
+    .chat-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--azul); display: grid; place-items: center;
+      font-size: .8rem; font-weight: 800; color: #fff; flex-shrink: 0;
+    }
+    .chat-name { font-size: .8rem; font-weight: 700; line-height: 1.2; }
+    .chat-status { display: flex; align-items: center; gap: .375rem; font-size: .7rem; color: #22c55e; }
+    .chat-dot { width: 7px; height: 7px; border-radius: 50%; background: #22c55e; }
+    .chat-messages {
+      flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: .875rem;
+      scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.1) transparent;
+      padding-right: 4px;
+    }
+    .msg { display: flex; flex-direction: column; max-width: 90%; }
+    .msg-user { align-self: flex-end; align-items: flex-end; }
+    .msg-bot  { align-self: flex-start; }
+    .msg-bubble {
+      padding: .7rem 1rem; border-radius: 1.1rem;
+      font-size: .8rem; line-height: 1.5;
+    }
+    .msg-user .msg-bubble { background: var(--azul); border-bottom-right-radius: .25rem; color: #fff; }
+    .msg-bot  .msg-bubble { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.08); border-bottom-left-radius: .25rem; }
+    .msg-time { font-size: .65rem; color: rgba(255,255,255,.3); margin-top: .2rem; }
+    .car-results { display: flex; flex-direction: column; gap: .5rem; margin: .75rem 0 .25rem; }
+    .car-result {
+      display: flex; align-items: center; gap: .625rem;
+      padding: .5rem; background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.1); border-radius: .75rem;
+    }
+    .car-result img { width: 52px; height: 38px; object-fit: cover; border-radius: .375rem; flex-shrink: 0; }
+    .car-result-name { font-size: .72rem; font-weight: 600; flex: 1; }
+    .car-result-meta { font-size: .65rem; color: rgba(255,255,255,.4); font-weight: 400; }
+    .car-result-price { font-size: .75rem; font-weight: 700; white-space: nowrap; }
+    .quick-replies { display: flex; flex-wrap: wrap; gap: .375rem; margin-top: .625rem; }
+    .qr {
+      font-size: .72rem; padding: .3rem .75rem; border-radius: 2rem;
+      border: 1px solid rgba(255,255,255,.15); color: rgba(255,255,255,.65);
+      background: rgba(255,255,255,.05); cursor: pointer;
+      transition: all .2s ease;
+    }
+    .qr:hover { border-color: var(--azul); color: var(--azul); background: rgba(23,105,255,.1); }
+    .chat-input-bar {
+      display: flex; align-items: center; gap: .625rem;
+      padding-top: 1rem; border-top: 1px solid rgba(255,255,255,.06);
+      margin-top: 1rem; flex-shrink: 0;
+    }
+    .chat-input {
+      flex: 1; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+      border-radius: 2rem; padding: .6rem 1.1rem; color: #fff; font-size: .82rem;
+      font-family: inherit; outline: none; transition: border-color .2s;
+    }
+    .chat-input:focus { border-color: var(--azul); }
+    .chat-input::placeholder { color: rgba(255,255,255,.3); }
+    .chat-send {
+      width: 38px; height: 38px; border-radius: 50%; background: var(--azul);
+      border: none; color: #fff; cursor: pointer; display: grid; place-items: center;
+      flex-shrink: 0; transition: background .2s;
+    }
+    .chat-send:hover { background: #0d5ae5; }
+    .chat-send svg { width: 16px; height: 16px; }
+  </style>
 </head>
 <body>
 
@@ -996,7 +1077,7 @@
       <div class="nav-links">
         <a href="#hero"         class="nav-link active" data-section="0">Inicio</a>
         <a href="#catalogo"     class="nav-link"        data-section="2">Catálogo</a>
-        <a href="#financiacion" class="nav-link"        data-section="2">Financiación</a>
+        <a href="ficha/" class="nav-link">Financiación</a>
         <a href="#nosotros"     class="nav-link"        data-section="3">Nosotros</a>
         <a href="#contacto"     class="nav-link"        data-section="5">Contacto</a>
       </div>
@@ -1039,16 +1120,9 @@
     <section class="snap-section" id="hero" data-section="0">
 
       <div class="hero-bg">
-        <!-- REEMPLAZÁ este src con tu imagen de ChatGPT o el video -->
-        <img class="hero-placeholder"
-          src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1920&q=90"
-          alt=""
-          aria-hidden="true">
-        <!--
         <video class="hero-video" autoplay muted loop playsinline>
           <source src="assets/video/showroom-360.mp4" type="video/mp4">
         </video>
-        -->
         <div class="hero-overlay"></div>
       </div>
 
@@ -1218,7 +1292,7 @@
         <span class="chip">Jeep</span>
       </div>
       <div class="s3-grid">
-        <a href="ficha/" class="card-v2">
+        <a href="ficha/" class="card-v2" data-brand="BMW">
           <div class="card-v2-img">
             <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?w=640&q=80" alt="BMW Serie 3" loading="lazy">
             <span class="card-v2-badge badge-ok">Disponible</span>
@@ -1233,7 +1307,7 @@
             </div>
           </div>
         </a>
-        <a href="ficha/" class="card-v2">
+        <a href="ficha/" class="card-v2" data-brand="Audi">
           <div class="card-v2-img">
             <img src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=640&q=80" alt="Audi Q5" loading="lazy">
             <span class="card-v2-badge badge-ok">Disponible</span>
@@ -1248,7 +1322,7 @@
             </div>
           </div>
         </a>
-        <a href="ficha/" class="card-v2">
+        <a href="ficha/" class="card-v2" data-brand="Mercedes">
           <div class="card-v2-img">
             <img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?w=640&q=80" alt="Mercedes C300" loading="lazy">
             <span class="card-v2-badge badge-ok">Disponible</span>
@@ -1263,7 +1337,7 @@
             </div>
           </div>
         </a>
-        <a href="ficha/" class="card-v2">
+        <a href="ficha/" class="card-v2" data-brand="Volkswagen">
           <div class="card-v2-img">
             <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=640&q=80" alt="VW Amarok" loading="lazy">
             <span class="card-v2-badge badge-ok">Disponible</span>
@@ -1278,7 +1352,7 @@
             </div>
           </div>
         </a>
-        <a href="ficha/" class="card-v2">
+        <a href="ficha/" class="card-v2" data-brand="BMW">
           <div class="card-v2-img">
             <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=640&q=80" alt="BMW X3" loading="lazy">
             <span class="card-v2-badge badge-res">Reservado</span>
@@ -1293,7 +1367,7 @@
             </div>
           </div>
         </a>
-        <a href="ficha/" class="card-v2">
+        <a href="ficha/" class="card-v2" data-brand="Jeep">
           <div class="card-v2-img">
             <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=640&q=80" alt="Jeep Compass" loading="lazy">
             <span class="card-v2-badge badge-ok">Disponible</span>
@@ -1308,7 +1382,7 @@
             </div>
           </div>
         </a>
-        <a href="ficha/" class="card-v2">
+        <a href="ficha/" class="card-v2" data-brand="Toyota">
           <div class="card-v2-img">
             <img src="https://images.unsplash.com/photo-1559416523-140ddc3d238c?w=640&q=80" alt="Toyota Corolla" loading="lazy">
             <span class="card-v2-badge badge-ok">Disponible</span>
@@ -1323,7 +1397,7 @@
             </div>
           </div>
         </a>
-        <a href="ficha/" class="card-v2">
+        <a href="ficha/" class="card-v2" data-brand="Audi">
           <div class="card-v2-img">
             <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=640&q=80" alt="Audi A4" loading="lazy">
             <span class="card-v2-badge badge-ok">Disponible</span>
@@ -1497,6 +1571,7 @@
             </select>
           </div>
           <textarea class="form-textarea" name="mensaje" placeholder="Tu mensaje…" style="min-height:70px;"></textarea>
+          <button type="submit" class="btn btn-primary btn-full btn-lg" style="margin-bottom:.5rem;">Enviar consulta →</button>
           <a href="https://wa.me/5491100000000" class="btn btn-wa btn-full btn-lg" target="_blank" rel="noopener">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
             Chat por WhatsApp
@@ -1518,84 +1593,110 @@
   (function () {
     'use strict';
 
-    /* ── Scroll snap: dots + nav activo ── */
+    /* ══════════════════════════════════════════════
+       SCROLL SNAP — dots + nav activo
+    ══════════════════════════════════════════════ */
     const container = document.getElementById('snapContainer');
     const sections  = Array.from(document.querySelectorAll('.snap-section'));
     const dots      = Array.from(document.querySelectorAll('.dot'));
-    const navLinks  = Array.from(document.querySelectorAll('.nav-link'));
+    const navLinks  = Array.from(document.querySelectorAll('.nav-link[data-section]'));
 
     function setActive(idx) {
       dots.forEach((d, i)  => d.classList.toggle('active', i === idx));
       navLinks.forEach(l   => l.classList.toggle('active', +l.dataset.section === idx));
     }
 
-    const io = new IntersectionObserver(entries => {
+    const snapIO = new IntersectionObserver(entries => {
       entries.forEach(e => {
-        if (e.isIntersecting) {
-          setActive(+e.target.dataset.section);
-        }
+        if (e.isIntersecting) setActive(+e.target.dataset.section);
       });
     }, { root: container, threshold: .5 });
+    sections.forEach(s => snapIO.observe(s));
 
-    sections.forEach(s => io.observe(s));
+    dots.forEach(d => d.addEventListener('click', () =>
+      sections[+d.dataset.section]?.scrollIntoView({ behavior: 'smooth' })
+    ));
 
-    /* Dot click → scroll a sección */
-    dots.forEach(d => {
-      d.addEventListener('click', () => {
-        sections[+d.dataset.section]?.scrollIntoView({ behavior: 'smooth' });
-      });
-    });
-
-    /* Botones/links con data-scroll */
-    document.querySelectorAll('[data-scroll]').forEach(el => {
+    document.querySelectorAll('[data-scroll]').forEach(el =>
       el.addEventListener('click', e => {
         e.preventDefault();
         sections[+el.dataset.scroll]?.scrollIntoView({ behavior: 'smooth' });
-      });
-    });
+      })
+    );
 
-    /* Nav links → scroll a sección */
-    navLinks.forEach(l => {
-      l.addEventListener('click', e => {
-        e.preventDefault();
-        sections[+l.dataset.section]?.scrollIntoView({ behavior: 'smooth' });
-      });
-    });
+    navLinks.forEach(l => l.addEventListener('click', e => {
+      e.preventDefault();
+      sections[+l.dataset.section]?.scrollIntoView({ behavior: 'smooth' });
+    }));
 
-    /* ── Strip hero ── */
-    document.querySelectorAll('.strip-item').forEach((item, i, all) => {
+    /* ══════════════════════════════════════════════
+       STRIP HERO — cambio de ángulo
+    ══════════════════════════════════════════════ */
+    document.querySelectorAll('.strip-item').forEach((item, i, all) =>
       item.addEventListener('click', () => {
         all.forEach(s => s.classList.remove('active'));
         item.classList.add('active');
-      });
-    });
+      })
+    );
 
-    /* ── S2 tabs ── */
-    document.querySelectorAll('.s2-tab').forEach((tab, i, all) => {
+    /* ══════════════════════════════════════════════
+       S2 — tabs y thumbs
+    ══════════════════════════════════════════════ */
+    const s2Cars = {
+      SUV:       { name: 'BMW X5 xDrive40i M Sport',    año: '2022', km: '32.500 km', precio: 'USD 72.900' },
+      Sedán:     { name: 'Mercedes-Benz C 300 AMG',     año: '2019', km: '50.000 km', precio: 'USD 33.900' },
+      Deportivo: { name: 'Audi A4 2.0 TFSI Sport',      año: '2020', km: '41.000 km', precio: 'USD 31.500' },
+      Pickup:    { name: 'VW Amarok V6 Highline',        año: '2020', km: '55.000 km', precio: 'USD 39.900' },
+    };
+    const cardName  = document.querySelector('.s2-card-name');
+    const s2Specs   = document.querySelectorAll('.s2-spec-v');
+    const s2Price   = document.querySelector('.s2-price');
+
+    function updateS2Car(label) {
+      const c = s2Cars[label];
+      if (!c) return;
+      if (cardName) cardName.textContent = c.name;
+      if (s2Specs[0]) s2Specs[0].textContent = c.año;
+      if (s2Specs[1]) s2Specs[1].textContent = c.km;
+      if (s2Price)  s2Price.textContent = c.precio;
+    }
+
+    document.querySelectorAll('.s2-tab').forEach((tab, i, all) =>
       tab.addEventListener('click', () => {
         all.forEach(t => t.classList.remove('active'));
         tab.classList.add('active');
-      });
-    });
+        updateS2Car(tab.textContent.trim());
+      })
+    );
 
-    /* ── S2 thumbs ── */
-    document.querySelectorAll('.s2-thumb').forEach((th, i, all) => {
+    document.querySelectorAll('.s2-thumb').forEach((th, i, all) =>
       th.addEventListener('click', () => {
         all.forEach(t => t.classList.remove('active'));
         th.classList.add('active');
-      });
-    });
+      })
+    );
 
-    /* ── Chips catálogo ── */
+    /* ══════════════════════════════════════════════
+       S3 CATÁLOGO — filtro por marca
+    ══════════════════════════════════════════════ */
+    const cards = Array.from(document.querySelectorAll('.card-v2[data-brand]'));
+
     document.querySelectorAll('.chip').forEach((chip, i, all) => {
       chip.addEventListener('click', () => {
         all.forEach(c => c.classList.remove('active'));
         chip.classList.add('active');
+        const brand = chip.textContent.trim();
+        cards.forEach(card => {
+          const show = brand === 'Todos' || card.dataset.brand === brand;
+          card.style.display = show ? '' : 'none';
+        });
       });
     });
 
-    /* ── Números animados ── */
-    const numIo = new IntersectionObserver(entries => {
+    /* ══════════════════════════════════════════════
+       NÚMEROS ANIMADOS
+    ══════════════════════════════════════════════ */
+    const numIO = new IntersectionObserver(entries => {
       entries.forEach(e => {
         if (!e.isIntersecting) return;
         const el     = e.target;
@@ -1609,17 +1710,141 @@
           if (cur < target) requestAnimationFrame(tick);
         };
         tick();
-        numIo.unobserve(el);
+        numIO.unobserve(el);
       });
     }, { threshold: .5 });
-    document.querySelectorAll('[data-target]').forEach(n => numIo.observe(n));
+    document.querySelectorAll('[data-target]').forEach(n => numIO.observe(n));
 
-    /* ── Quick replies IA ── */
-    document.querySelectorAll('.qr').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const input = document.querySelector('.chat-input');
-        if (input) { input.value = btn.textContent; input.focus(); }
+    /* ══════════════════════════════════════════════
+       S5 CHAT IA — respuestas simuladas
+    ══════════════════════════════════════════════ */
+    const chatMessages = document.querySelector('.chat-messages');
+    const chatInput    = document.querySelector('.chat-input');
+    const chatSend     = document.querySelector('.chat-send');
+
+    const iaResponses = [
+      { keywords: ['financ','cuota','pago','plazo','credito','crédito'],
+        text: 'Podés financiar hasta el <strong>70%</strong> del valor con cuotas fijas en USD. Las tasas arrancan desde el 12,9% anual. ¿Querés que calcule una cuota para el auto que te interesa?',
+        replies: ['Calcular cuota', 'Agendar visita'] },
+      { keywords: ['precio','cuanto','valor','costo','cuesta'],
+        text: 'Nuestros precios van desde <strong>USD 22.900</strong> (Toyota Corolla 2022) hasta <strong>USD 72.900</strong> (BMW X5 2022). Todos los precios incluyen garantía y documentación. ¿Tenés un presupuesto en mente?',
+        replies: ['Ver catálogo', 'Hablar con asesor'] },
+      { keywords: ['visita','ver','showroom','local','ir','venir','conocer'],
+        text: 'Nuestro showroom está en Av. del Libertador 1234, CABA. Atendemos lunes a viernes de 9 a 18:30 y sábados de 10 a 14. ¿Querés que te reserve un turno?',
+        replies: ['Reservar turno', 'Cómo llegar'] },
+      { keywords: ['garantia','garantía','problema','falla','seguro'],
+        text: 'Todos nuestros vehículos incluyen <strong>garantía extendida</strong> de 6 meses con cobertura en mecánica y electrónica. Además, revisamos 120+ puntos antes de la entrega.',
+        replies: ['Ver más detalles', 'Hablar con asesor'] },
+      { keywords: ['bmw','serie','x3','x5'],
+        text: 'Tenemos varios BMW disponibles: el <strong>X5 xDrive40i 2022</strong> (USD 72.900), el <strong>X3 xDrive20i 2019</strong> y el <strong>Serie 3 330i 2019</strong>. ¿Cuál te interesa explorar?',
+        replies: ['Ver BMW X5', 'Ver Serie 3'] },
+      { keywords: ['audi','q5','a4'],
+        text: 'Contamos con el <strong>Audi Q5 2.0 TFSI Quattro 2020</strong> (USD 42.900) y el <strong>Audi A4 2.0 TFSI Sport 2020</strong> (USD 31.500). ¿Te mando la ficha completa?',
+        replies: ['Ver Audi Q5', 'Ver Audi A4'] },
+      { keywords: ['suv','camioneta','4x4','familiar'],
+        text: 'Para SUV tenemos opciones excelentes: BMW X5, Audi Q5, BMW X3 y Jeep Compass. Todos con tracción inteligente y equipamiento premium. ¿Cuál es tu presupuesto aproximado?',
+        replies: ['Hasta USD 35.000', 'Hasta USD 50.000', 'Sin límite'] },
+    ];
+
+    function getIAResponse(text) {
+      const lower = text.toLowerCase();
+      for (const r of iaResponses) {
+        if (r.keywords.some(k => lower.includes(k))) return r;
+      }
+      return {
+        text: 'Entendido. Nuestro equipo puede asesorarte mejor en persona o por WhatsApp. ¿Preferís que te contacte un asesor ahora?',
+        replies: ['Sí, que me contacten', 'Ver catálogo']
+      };
+    }
+
+    function addMsg(html, type, time) {
+      const div = document.createElement('div');
+      div.className = `msg msg-${type}`;
+      div.innerHTML = `<div class="msg-bubble">${html}</div><p class="msg-time">${time}</p>`;
+      chatMessages.appendChild(div);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+      return div;
+    }
+
+    function addQR(replies) {
+      const last = chatMessages.querySelector('.msg-bot:last-child .msg-bubble');
+      if (!last) return;
+      const qrDiv = document.createElement('div');
+      qrDiv.className = 'quick-replies';
+      replies.forEach(r => {
+        const btn = document.createElement('button');
+        btn.className = 'qr';
+        btn.textContent = r;
+        btn.addEventListener('click', () => sendMsg(r));
+        qrDiv.appendChild(btn);
       });
+      last.appendChild(qrDiv);
+    }
+
+    function sendMsg(text) {
+      if (!text.trim()) return;
+      const now = new Date();
+      const time = `${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')} ✓✓`;
+      addMsg(text, 'user', time);
+      if (chatInput) chatInput.value = '';
+
+      setTimeout(() => {
+        const res = getIAResponse(text);
+        const botTime = `${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')}`;
+        addMsg(res.text, 'bot', botTime);
+        if (res.replies) addQR(res.replies);
+      }, 800);
+    }
+
+    if (chatSend) chatSend.addEventListener('click', () => sendMsg(chatInput?.value || ''));
+    if (chatInput) chatInput.addEventListener('keydown', e => {
+      if (e.key === 'Enter') sendMsg(chatInput.value);
+    });
+
+    document.querySelectorAll('.qr').forEach(btn =>
+      btn.addEventListener('click', () => sendMsg(btn.textContent.trim()))
+    );
+
+    /* ══════════════════════════════════════════════
+       S6 FORMULARIO — envía por WhatsApp
+    ══════════════════════════════════════════════ */
+    const contactForm = document.querySelector('.form-stack[data-validate]');
+    if (contactForm) {
+      contactForm.addEventListener('submit', e => {
+        e.preventDefault();
+        let ok = true;
+        contactForm.querySelectorAll('[required]').forEach(el => {
+          const blank = !el.value.trim();
+          el.classList.toggle('error', blank);
+          if (blank) ok = false;
+        });
+        if (!ok) return;
+
+        const nombre   = contactForm.querySelector('[name="nombre"]')?.value || '';
+        const telefono = contactForm.querySelector('[name="telefono"]')?.value || '';
+        const modelo   = contactForm.querySelector('[name="modelo"]')?.value || '';
+        const mensaje  = contactForm.querySelector('[name="mensaje"]')?.value || '';
+
+        const wa = `Hola! Soy ${nombre}, me comunico desde la web de Haus Seleccionados.` +
+          (modelo ? ` Me interesa el ${modelo}.` : '') +
+          (mensaje ? ` ${mensaje}` : '') +
+          ` Mi teléfono es ${telefono}.`;
+
+        window.open(`https://wa.me/5491100000000?text=${encodeURIComponent(wa)}`, '_blank');
+      });
+
+      contactForm.querySelectorAll('[required]').forEach(el =>
+        el.addEventListener('input', () => el.classList.remove('error'))
+      );
+    }
+
+    /* ══════════════════════════════════════════════
+       "VALUÁ TU USADO" — abre chat WhatsApp
+    ══════════════════════════════════════════════ */
+    document.querySelector('.btn-valua')?.addEventListener('click', e => {
+      e.preventDefault();
+      const msg = 'Hola! Quiero saber cuánto vale mi auto usado. ¿Me pueden dar una valuación?';
+      window.open(`https://wa.me/5491100000000?text=${encodeURIComponent(msg)}`, '_blank');
     });
 
   })();
