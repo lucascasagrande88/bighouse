@@ -1,0 +1,10 @@
+{
+  "shape": "static-html-css",
+  "approach": "hand-authored",
+  "source": "assets/css/style.css",
+  "bundleDir": "ds-bundle",
+  "readmeHeader": "ds-bundle/README.md",
+  "build": "node .design-sync/build-bundle.mjs",
+  "projectName": "Chimichurri Diseño",
+  "note": "Off-script sync: static HTML/CSS DS, not a React/Storybook package. Bundle is hand-authored @dsCard previews + styles.css. projectId gets pinned here on first successful upload."
+}
