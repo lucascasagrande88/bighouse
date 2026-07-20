@@ -747,6 +747,13 @@
   }
 
   /* ---------- Boot ---------- */
+  // El JS corre: activamos la animación de entrada y cancelamos el failsafe
+  // que revela todo el contenido igual si el script no hubiera cargado.
+  document.documentElement.classList.add("chimi-anim");
+  if (window.__chimiRevealFailsafe) {
+    window.clearTimeout(window.__chimiRevealFailsafe);
+  }
+
   activeSeed = resolveSeed();
   activePack = copyPacks[activeSeed];
   applyCopyPack(activePack);
