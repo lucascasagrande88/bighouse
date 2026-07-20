@@ -1,0 +1,48 @@
+====================================================================
+ CÓMO SABER SI ESTÁS VIENDO EL DEPLOY CORRECTO
+====================================================================
+
+Esta es la landing NUEVA: el funnel de VIDRIERAS DIGITALES de Chimichurri.
+
+>>> PRUEBA DE 1 SEGUNDO <<<
+Abrí la URL y mirá la primera pantalla (el hero):
+
+  ✅ CORRECTO  -> arriba dice "SISTEMAS DE DISEÑO PARA VENDER MÁS"
+                 y el título habla de "VIDRIERAS DIGITALES".
+                 El botón principal dice algo como
+                 "VER QUÉ LE FALTA A MI VIDRIERA".
+
+  ❌ SITIO VIEJO -> si aparece un "Formulario de brief" con campos
+                    de EmailJS, estás viendo el sitio Netlify ANTERIOR.
+                    NO es este funnel.
+
+--------------------------------------------------------------------
+ SI VES EL SITIO VIEJO (Formulario de brief)
+--------------------------------------------------------------------
+1. Entrá a Netlify y confirmá A QUÉ PROYECTO está apuntando el
+   dominio chimichurriformulario.netlify.app.
+2. Ese dominio (o el custom domain) tiene que estar conectado al
+   proyecto donde subís ESTE zip, no al viejo.
+3. Subí este contenido con Netlify Drop (o arrastrá la carpeta) al
+   proyecto correcto y volvé a asignarle el dominio.
+4. Refrescá con caché limpia (Ctrl/Cmd + Shift + R).
+
+--------------------------------------------------------------------
+ CÓMO SUBIRLO
+--------------------------------------------------------------------
+- index.html está en la RAÍZ del zip. Subí el zip tal cual a
+  Netlify Drop (https://app.netlify.com/drop) o conectá la carpeta.
+
+Antes de publicar:
+- config.js -> pegá la URL EMBED de Loom (opcional).
+- config.js -> confirmá el WhatsApp real (whatsappNumber).
+- config.js -> cargá ga4MeasurementId / metaPixelId si vas a pautar.
+- Probá el formulario real en Netlify (Netlify Forms).
+
+--------------------------------------------------------------------
+ PROBAR LOS 5 PACKS DE COPY
+--------------------------------------------------------------------
+Agregá a la URL:  ?copy_seed=0  ... hasta  ?copy_seed=4
+Cada uno cambia titular y CTAs de forma coherente. Sin el parámetro,
+se elige uno al azar en cada carga. El pack usado se registra en el
+lead de Netlify (campos copy_seed / copy_pack) y en el tracking.
