@@ -12,34 +12,36 @@
 
 window.DONATA_THEME = {
   colors: {
-    // ── Base
-    carbon:  '#0B0B0B',   // Negro carbón (fondo principal)
-    carbon2: '#141210',   // Carbón cálido (superficies)
-    carbon3: '#1D1A17',   // Superficie elevada
+    // ── Base (burdeos profundo / casi negro cálido)
+    carbon:  '#120708',   // Fondo principal
+    carbon2: '#1C0B0D',   // Superficies
+    carbon3: '#2A1013',   // Superficie elevada
 
-    // ── Marca
-    // PENDIENTE: confirmar el rojo exacto desde el logo real de Donata.
-    rojo:    '#C1272D',   // Rojo Donata (placeholder desde gráfica de parrilla)
-    rojoDim: '#8E1B20',
-    fuego:   '#F5B700',   // Amarillo fuego (acento cálido / brasa)
-    brasa:   '#FF6A2B',   // Naranja brasa (partículas / detalles de fuego)
+    // ── Marca (parrilla clásica: vino + dorado)
+    // PENDIENTE: confirmar el rojo/dorado exactos desde el logo real.
+    rojo:    '#9E2B25',   // Rojo vino (botones / acentos / activo)
+    rojoDim: '#6E1C18',
+    fuego:   '#C9A24B',   // Dorado Donata (acento elegante principal)
+    brasa:   '#E8702E',   // Naranja brasa (partículas / brillo del fuego)
 
     // ── Neutros cálidos
-    crema:   '#F2E8D5',   // Crema cálido (texto sobre oscuro / fondos claros)
+    crema:   '#EDE3CE',   // Crema cálido (texto sobre oscuro)
     blanco:  '#FFFFFF',
-    humo:    '#77736D',   // Gris humo (texto secundario)
-    borde:   'rgba(242, 232, 213, 0.10)',
+    humo:    '#9C8E7C',   // Gris cálido (texto secundario)
+    borde:   'rgba(237, 227, 206, 0.12)',
   },
 
   fonts: {
-    // Titulares: sans condensada, pesada y expresiva
-    display: "'Anton', 'Barlow Condensed', Impact, sans-serif",
-    // Subtítulos / kickers condensados
-    condensed: "'Barlow Condensed', 'Anton', sans-serif",
-    // Cuerpo y navegación: sans limpia
+    // Titulares: serif inscripcional elegante (estilo parrilla clásica)
+    display: "'Cinzel', 'Playfair Display', Georgia, serif",
+    // Navegación, botones y etiquetas: sans limpia y legible
+    condensed: "'Inter', system-ui, -apple-system, sans-serif",
+    // Acentos serif elegantes (nombres de plato, blurbs)
+    serif: "'Cormorant Garamond', Georgia, serif",
+    // Cuerpo: sans limpia
     body: "'Inter', system-ui, -apple-system, sans-serif",
-    // Detalle manuscrito (solo microdetalles, nunca texto importante)
-    script: "'Caveat', cursive",
+    // Detalle serif itálico
+    script: "'Cormorant Garamond', Georgia, serif",
   },
 
   radius: {
@@ -68,6 +70,7 @@ window.DONATA_THEME = {
   r.setProperty('--borde', c.borde);
   r.setProperty('--f-display', t.fonts.display);
   r.setProperty('--f-condensed', t.fonts.condensed);
+  r.setProperty('--f-serif', t.fonts.serif);
   r.setProperty('--f-body', t.fonts.body);
   r.setProperty('--f-script', t.fonts.script);
   r.setProperty('--r-sm', t.radius.sm);

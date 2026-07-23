@@ -13,10 +13,12 @@ window.DONATA_DATA = {
 
   // ── Identidad ──────────────────────────────────────────────
   name: 'DONATA',
-  tagline: 'Restaurante · Parrilla · Minutas',
-  concept: 'Fuego de barrio',
-  claim: 'ACÁ SE VIENE A COMER DE VERDAD.',
-  heroSubtitle: 'Parrilla encendida, platos abundantes y una mesa lista para compartir en Quilmes.',
+  tagline: 'Parrilla Restaurant · Desde 1996',
+  concept: 'El sabor de siempre',
+  // PENDIENTE: confirmar el año de fundación (tomado de la referencia: 1996).
+  since: '1996',
+  claim: 'EL SABOR DE SIEMPRE.',
+  heroSubtitle: 'Parrilla al carbón, tradición y calidad desde 1996 en el corazón de Quilmes. Bienvenidos a Donata.',
 
   // ── Contacto ───────────────────────────────────────────────
   address: {
@@ -82,9 +84,9 @@ window.DONATA_DATA = {
 
   // ── Textos editoriales (claims / manifiesto) ───────────────
   copy: {
-    featuredTitle: 'LOS QUE NO FALLAN.',
-    manifestoTitle: ['NO HACEMOS PLATOS PARA LA FOTO.', 'HACEMOS PLATOS PARA QUE VUELVAS.'],
-    manifestoBody: 'Donata es ese lugar donde siempre hay algo rico saliendo de la cocina, una mesa que se agranda y una excusa para quedarse un rato más.',
+    featuredTitle: 'NUESTROS CLÁSICOS.',
+    manifestoTitle: ['TRADICIÓN, FUEGO', 'Y MESA SERVIDA.'],
+    manifestoBody: 'Donata es ese lugar donde siempre hay algo rico saliendo de la cocina, una mesa que se agranda y una excusa para quedarse un rato más. Parrilla al carbón y cocina casera en el corazón de Quilmes.',
     fireTitle: 'TODO EMPIEZA EN EL FUEGO.',
     galleryTitle: 'DE LA COCINA AL SALÓN.',
     reviewsTitle: 'LO DICE LA MESA DE AL LADO.',
@@ -95,9 +97,10 @@ window.DONATA_DATA = {
         key: 'comer',
         kicker: '01',
         title: 'Vení a comer',
-        text: 'Salón, familia, amigos y platos para compartir. Vení con hambre.',
+        text: 'Salón cálido, familia, amigos y platos para compartir. Vení con hambre.',
         cta: 'Reservar mesa',
         action: 'reservar',
+        img: 'assets/salon.webp',
       },
       {
         key: 'delivery',
@@ -106,6 +109,7 @@ window.DONATA_DATA = {
         text: 'Delivery o lo retirás por el local. Lo mismo de siempre, en tu mesa.',
         cta: 'Pedir por WhatsApp',
         action: 'pedir',
+        img: 'assets/carne-salsa.webp',
       },
       {
         key: 'eventos',
@@ -114,6 +118,7 @@ window.DONATA_DATA = {
         text: 'Cumpleaños, reuniones, eventos y menús especiales. Nos encargamos nosotros.',
         cta: 'Consultar evento',
         action: 'evento',
+        img: 'assets/bar.webp',
       },
     ],
   },

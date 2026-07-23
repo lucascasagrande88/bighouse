@@ -1,9 +1,10 @@
-# DONATA — Sitio web · *Fuego de barrio*
+# DONATA — Sitio web · *El sabor de siempre*
 
-Sitio oficial de **Donata**, restaurante · parrilla · minutas en Quilmes Oeste.
+Sitio oficial de **Donata**, parrilla restaurant en Quilmes Oeste (desde 1996).
 Construido por **Chimichurri** como sitio modelo reutilizable para restaurantes.
 
-Claim: **“Acá se viene a comer de verdad.”**
+Claim: **“El sabor de siempre.”** · Identidad serif elegante (Cinzel + Cormorant),
+paleta burdeos · dorado · crema.
 
 ---
 
