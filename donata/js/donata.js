@@ -376,7 +376,7 @@
     var cv = q('#fireCanvas');
     if (!cv) return;
     // Desactivar en baja potencia / reduced motion.
-    var lowPower = REDUCED || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4) || window.innerWidth < 480;
+    var lowPower = REDUCED || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2) || window.innerWidth < 480;
     if (lowPower) { cv.style.display = 'none'; return; }
     var ctx = cv.getContext('2d');
     var W, H, parts = [], raf, running = false;
@@ -406,6 +406,26 @@
     } else { loop(); }
   }
 
+  // ---- Spotlight: la luz sigue el mouse ------------------------
+  function initSpotlight() {
+    if (!window.matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+    var sel = '.dish-img,.gitem,.manifesto-media,.contact-map,.hero';
+    var el = null, x = 0, y = 0, ticking = false;
+    function apply() {
+      ticking = false;
+      if (el) { el.style.setProperty('--mx', x + '%'); el.style.setProperty('--my', y + '%'); }
+    }
+    document.addEventListener('pointermove', function (e) {
+      var t = e.target.closest(sel);
+      if (!t) { el = null; return; }
+      var r = t.getBoundingClientRect();
+      el = t;
+      x = ((e.clientX - r.left) / r.width) * 100;
+      y = ((e.clientY - r.top) / r.height) * 100;
+      if (!ticking) { ticking = true; requestAnimationFrame(apply); }
+    }, { passive: true });
+  }
+
   // ---- Init ----------------------------------------------------
   function init() {
     renderMarquee();
@@ -422,6 +442,7 @@
     initReveal();
     initManifesto();
     initFire();
+    initSpotlight();
     track('page_view', { page: 'donata_home' });
   }
 
