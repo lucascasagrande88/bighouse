@@ -307,12 +307,15 @@
   function initPreloader() {
     var pre = q('#preloader');
     if (!pre) return;
-    if (REDUCED || sessionStorage.getItem('donata_seen')) { pre.parentNode.removeChild(pre); return; }
+    // sessionStorage puede lanzar en iframes con almacenamiento bloqueado.
+    var seen = false;
+    try { seen = !!sessionStorage.getItem('donata_seen'); } catch (e) {}
+    if (REDUCED || seen) { pre.parentNode.removeChild(pre); return; }
     document.body.style.overflow = 'hidden';
     setTimeout(function () {
       pre.classList.add('done');
       document.body.style.overflow = '';
-      sessionStorage.setItem('donata_seen', '1');
+      try { sessionStorage.setItem('donata_seen', '1'); } catch (e) {}
       setTimeout(function () { if (pre.parentNode) pre.parentNode.removeChild(pre); }, 650);
     }, 1500);
   }
