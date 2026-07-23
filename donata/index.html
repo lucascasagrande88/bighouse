@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0B0B0B">
+
+  <!-- ── SEO local ── -->
+  <title>Donata · Restaurante y Parrilla en Quilmes Oeste | Minutas, Delivery y Eventos</title>
+  <meta name="description" content="Donata, restaurante y parrilla de barrio en Av. Calchaquí 2539, Quilmes Oeste. Parrilla, minutas, pastas y platos abundantes para compartir. Reservas, delivery y eventos. Acá se viene a comer de verdad.">
+  <link rel="canonical" href="https://donataquilmes.com/">
+  <meta name="robots" content="index, follow">
+  <meta name="geo.region" content="AR-B">
+  <meta name="geo.placename" content="Quilmes Oeste, Buenos Aires">
+
+  <!-- ── Open Graph / redes ── -->
+  <meta property="og:type" content="restaurant">
+  <meta property="og:locale" content="es_AR">
+  <meta property="og:site_name" content="Donata">
+  <meta property="og:title" content="Donata · Restaurante y Parrilla en Quilmes Oeste">
+  <meta property="og:description" content="Parrilla encendida, platos abundantes y una mesa lista para compartir en Quilmes. Reservas, delivery y eventos.">
+  <meta property="og:url" content="https://donataquilmes.com/">
+  <!-- PENDIENTE: subir imagen social real (1200×630) a /donata/assets/og.jpg -->
+  <meta property="og:image" content="https://donataquilmes.com/donata/assets/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- ── Fuentes ── -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230B0B0B'/%3E%3Cpath d='M16 5c1.6 5.5 6 6.8 6 12a6 6 0 0 1-12 0c0-1.6.8-3 1.6-3.8C13 11.5 13 8.5 16 5Z' fill='%23C1272D'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/donata.css">
+
+  <!-- ── Datos estructurados: Restaurant ── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "Donata",
+    "servesCuisine": ["Parrilla", "Argentina", "Minutas"],
+    "description": "Restaurante y parrilla de barrio en Quilmes Oeste. Parrilla, minutas, pastas y platos abundantes para compartir.",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Av. Calchaquí 2539",
+      "addressLocality": "Quilmes Oeste",
+      "addressRegion": "Buenos Aires",
+      "addressCountry": "AR"
+    },
+    "telephone": ["+541121135677", "+541154967268"],
+    "url": "https://donataquilmes.com/",
+    "sameAs": ["https://www.instagram.com/donataquilmes/"],
+    "acceptsReservations": true,
+    "priceRange": "$$",
+    "hasMenu": "https://donataquilmes.com/#menu"
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ══════════ PRELOADER ══════════ -->
+  <div id="preloader" aria-hidden="true">
+    <div class="pre-logo">DONATA<span class="ember-line"></span></div>
+    <div class="pre-sub">Fuego de barrio</div>
+  </div>
+
+  <!-- ══════════ NAV ══════════ -->
+  <header class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#top" class="brand" aria-label="Donata inicio"><span class="flame"></span>DONATA</a>
+      <nav class="nav-links" aria-label="Principal">
+        <a href="#menu">Menú</a>
+        <a href="#experiencias">Experiencias</a>
+        <a href="#galeria">Galería</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <a class="btn btn-sm btn-primary nav-cta" data-wa="reservar">Reservar</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-controls="mobileMenu">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Menú mobile fullscreen -->
+  <div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Menú de navegación" aria-modal="true">
+    <span class="ember-glow"></span>
+    <button class="mm-close" id="mmClose" aria-label="Cerrar menú">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <a href="#menu">Menú</a>
+    <a href="#experiencias">Experiencias</a>
+    <a href="#fuego">El fuego</a>
+    <a href="#galeria">Galería</a>
+    <a href="#contacto">Contacto</a>
+    <div class="mm-actions">
+      <a class="btn btn-primary" data-wa="reservar">Reservar</a>
+      <a class="btn btn-wa" data-wa="pedir">Pedir</a>
+    </div>
+  </div>
+
+  <main id="top">
+
+    <!-- ══════════ HERO ══════════ -->
+    <section class="hero grain" id="hero">
+      <div class="hero-media">
+        <!-- PENDIENTE: reemplazar por <video> real (loop, mudo, con poster).
+             Mientras tanto, fondo cinematográfico generado por CSS. -->
+        <div class="hero-placeholder"></div>
+      </div>
+      <div class="hero-scrim"></div>
+      <div class="wrap hero-content">
+        <div class="eyebrow hero-kicker">Donata · Restaurante · Parrilla · Minutas</div>
+        <h1 class="display">Acá se viene<br>a comer <span class="tint-rojo">de verdad.</span></h1>
+        <p class="lead">Parrilla encendida, platos abundantes y una mesa lista para compartir en Quilmes.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" data-wa="reservar">Reservar mesa</a>
+          <a class="btn btn-ghost" href="#menu">Ver el menú</a>
+        </div>
+        <a class="hero-wa-link" data-wa="pedir">Pedir por WhatsApp</a>
+      </div>
+      <div class="scroll-cue"><span>Scroll</span><span class="line"></span></div>
+    </section>
+
+    <!-- ══════════ INFOBAR / MARQUEE ══════════ -->
+    <div class="infobar" aria-hidden="true">
+      <div class="marquee" id="marqueeTrack"></div>
+    </div>
+
+    <!-- ══════════ QUICK INFO ══════════ -->
+    <section class="quickinfo">
+      <div class="wrap">
+        <div class="qi-addr">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span id="qiAddress">Av. Calchaquí 2539, Quilmes Oeste</span>
+        </div>
+        <div class="qi-status" id="qiStatus"><span class="dot"></span><span class="qi-txt">Consultá horarios</span></div>
+        <div class="qi-actions">
+          <a class="btn btn-sm btn-ghost" data-maps>Cómo llegar</a>
+          <a class="btn btn-sm btn-fuego" data-tel>Llamar</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ DESTACADOS ══════════ -->
+    <section class="section" id="destacados">
+      <div class="wrap">
+        <div class="rail-head reveal">
+          <div>
+            <div class="eyebrow">Platos destacados</div>
+            <h2 class="display" style="margin-top:12px">Los que <span class="tint-fuego">no fallan.</span></h2>
+          </div>
+          <a class="btn btn-sm btn-ghost" href="#menu">Ver menú completo</a>
+        </div>
+      </div>
+      <div class="wrap">
+        <div class="rail" id="featuredRail" role="list"></div>
+        <div class="rail-dots" id="railDots" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- ══════════ MANIFIESTO ══════════ -->
+    <section class="section manifesto grain">
+      <span class="ember-glow"></span>
+      <div class="wrap">
+        <div class="manifesto-grid">
+          <div class="manifesto-media reveal">
+            <div class="photo-slot">
+              <span class="ps-ico"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c1 4 4 5 4 9a4 4 0 0 1-8 0c0-1 .5-2 1-2.5C9 10 9 8 12 2Z"/></svg></span>
+              <span class="ps-label">La cocina / el equipo</span>
+              <span class="ps-tag">Foto real de Donata</span>
+            </div>
+          </div>
+          <div>
+            <div class="eyebrow reveal">El lugar</div>
+            <h2 class="display reveal d1" style="margin:16px 0 22px">No hacemos platos para la foto.<br><span class="tint-rojo">Hacemos platos para que vuelvas.</span></h2>
+            <p class="lead reveal d2" id="manifestoText">Donata es ese lugar donde siempre hay algo rico saliendo de la cocina, una mesa que se agranda y una excusa para quedarse un rato más.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ MENÚ ══════════ -->
+    <section class="section menu-sec" id="menu">
+      <div class="wrap">
+        <div class="reveal">
+          <div class="eyebrow">El menú</div>
+          <h2 class="display" style="margin:12px 0 6px">Elegí y <span class="tint-fuego">sentate.</span></h2>
+          <p class="menu-note" id="menuNote"></p>
+        </div>
+        <div class="menu-tabs reveal d1" id="menuTabs" role="tablist" aria-label="Categorías del menú"></div>
+        <div id="menuPanels" class="reveal d1"></div>
+        <div class="menu-foot">
+          <a class="btn btn-primary" data-wa="pedir">Hacer un pedido</a>
+          <a class="btn btn-ghost" id="menuPdf" target="_blank" rel="noopener">Descargar la carta (PDF)</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ EXPERIENCIAS ══════════ -->
+    <section class="section" id="experiencias">
+      <div class="wrap">
+        <div class="reveal">
+          <div class="eyebrow">Experiencias Donata</div>
+          <h2 class="display" style="margin-top:12px">Tres formas de <span class="tint-rojo">disfrutarla.</span></h2>
+        </div>
+        <div class="exp-grid reveal d1" id="expGrid"></div>
+      </div>
+    </section>
+
+    <!-- ══════════ FUEGO ══════════ -->
+    <section class="fire" id="fuego">
+      <div class="photo-slot cover" aria-hidden="true">
+        <span class="ps-corner">Video / secuencia de la parrilla · material real de Donata</span>
+      </div>
+      <canvas class="fire-canvas" id="fireCanvas" aria-hidden="true"></canvas>
+      <div class="fire-scrim"></div>
+      <div class="fire-content reveal">
+        <div class="eyebrow">La cocina de la casa</div>
+        <h2 class="display">Todo empieza<br>en el <span class="tint-fuego">fuego.</span></h2>
+      </div>
+    </section>
+
+    <!-- ══════════ GALERÍA ══════════ -->
+    <section class="section" id="galeria">
+      <div class="wrap">
+        <div class="reveal">
+          <div class="eyebrow">Galería</div>
+          <h2 class="display" style="margin-top:12px">De la cocina <span class="tint-rojo">al salón.</span></h2>
+        </div>
+        <div class="gallery-grid reveal d1" id="galleryGrid"></div>
+      </div>
+    </section>
+
+    <!-- ══════════ RESEÑAS ══════════ -->
+    <section class="section reviews-sec" id="resenas">
+      <div class="wrap">
+        <div class="reveal">
+          <div class="eyebrow">Lo que dicen</div>
+          <h2 class="display" style="margin-top:12px">Lo dice la <span class="tint-fuego">mesa de al lado.</span></h2>
+        </div>
+        <div class="reveal d1" id="reviewsHost"></div>
+      </div>
+    </section>
+
+    <!-- ══════════ UBICACIÓN / CONTACTO ══════════ -->
+    <section class="section contact-sec" id="contacto">
+      <div class="wrap">
+        <div class="reveal">
+          <div class="eyebrow">Ubicación y contacto</div>
+          <h2 class="display" style="margin-top:12px">Estamos <span class="tint-rojo">acá nomás.</span></h2>
+        </div>
+        <div class="contact-grid">
+          <a class="contact-map reveal d1" data-maps aria-label="Abrir ubicación en Google Maps">
+            <div class="map-placeholder">
+              <svg class="map-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              <div style="font-family:var(--f-condensed);text-transform:uppercase;letter-spacing:.08em;color:var(--crema)">Av. Calchaquí 2539<br>Quilmes Oeste</div>
+              <span class="btn btn-sm btn-fuego">Abrir en Google Maps</span>
+            </div>
+          </a>
+          <div>
+            <div class="contact-info reveal d2" id="contactInfo"></div>
+            <div class="contact-actions">
+              <a class="btn btn-primary" data-wa="reservar">Reservar mesa</a>
+              <a class="btn btn-wa" data-wa="pedir">Pedir por WhatsApp</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ CIERRE ══════════ -->
+    <section class="closing grain">
+      <div class="photo-slot cover" aria-hidden="true">
+        <span class="ps-corner">Fachada / salón / mesa completa · foto real de Donata</span>
+      </div>
+      <div class="closing-content reveal">
+        <div class="eyebrow" style="justify-content:center">Te esperamos</div>
+        <h2 class="display" style="margin-top:16px">La mesa <span class="tint-fuego">está lista.</span></h2>
+        <div class="closing-actions">
+          <a class="btn btn-primary" data-wa="reservar">Reservar</a>
+          <a class="btn btn-wa" data-wa="pedir">Pedir por WhatsApp</a>
+          <a class="btn btn-ghost" data-maps>Cómo llegar</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ══════════ FOOTER ══════════ -->
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="#top" class="brand"><span class="flame"></span>DONATA</a>
+          <p>Restaurante, parrilla y minutas en Quilmes Oeste. Acá se viene a comer de verdad.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Donata</h5>
+          <a href="#menu">Menú</a>
+          <a href="#experiencias">Experiencias</a>
+          <a href="#galeria">Galería</a>
+          <a href="#contacto">Contacto</a>
+        </div>
+        <div class="footer-col">
+          <h5>Contacto</h5>
+          <span id="footAddress">Av. Calchaquí 2539, Quilmes Oeste</span>
+          <span id="footPhones"></span>
+          <a data-ig>@donataquilmes</a>
+          <a data-wa="reservar">WhatsApp</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© <span id="footYear">2026</span> Donata. Todos los derechos reservados.</p>
+        <p class="footer-credit" id="footCredit">Diseño y desarrollo por Chimichurri.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Barra de acción fija (mobile) -->
+  <div class="action-bar" id="actionBar">
+    <a class="btn btn-primary" data-wa="reservar">Reservar</a>
+    <a class="btn btn-wa" data-wa="pedir">Pedir</a>
+  </div>
+
+  <!-- Lightbox galería -->
+  <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Imagen ampliada">
+    <button class="lb-close" id="lbClose" aria-label="Cerrar">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <div class="lightbox-inner">
+      <div id="lbBody"></div>
+      <div class="lb-cap" id="lbCap"></div>
+    </div>
+  </div>
+
+  <!-- ── Datos (editables) ── -->
+  <script src="config/theme.js"></script>
+  <script src="data/restaurant.js"></script>
+  <script src="data/menu.js"></script>
+  <script src="data/gallery.js"></script>
+  <!-- ── App ── -->
+  <script src="js/donata.js"></script>
+</body>
+</html>

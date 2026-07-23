@@ -1,0 +1,6 @@
+# Donata — robots.txt
+# PENDIENTE: al usar dominio propio, mover este archivo a la raíz del dominio.
+User-agent: *
+Allow: /
+
+Sitemap: https://donataquilmes.com/sitemap.xml
