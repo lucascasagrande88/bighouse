@@ -113,8 +113,8 @@
     var rail = q('#featuredRail');
     if (!rail) return;
     var items = GALLERY.featured || [];
-    rail.innerHTML = items.map(function (it) {
-      return '<article class="dish">' +
+    rail.innerHTML = items.map(function (it, i) {
+      return '<article class="dish reveal" style="transition-delay:' + (i * 0.06) + 's">' +
         '<div class="dish-img">' + photoSlot(it.label, 'Foto de plato', it.src) + '</div>' +
         '<div class="dish-body">' +
         '<div class="dish-cat">' + (it.category || '') + '</div>' +
@@ -210,8 +210,8 @@
   function renderExperiences() {
     var host = q('#expGrid');
     if (!host || !(D.copy && D.copy.experiences)) return;
-    host.innerHTML = D.copy.experiences.map(function (x) {
-      return '<article class="exp-card">' +
+    host.innerHTML = D.copy.experiences.map(function (x, i) {
+      return '<article class="exp-card reveal" style="transition-delay:' + (i * 0.1) + 's">' +
         photoCover('Foto / video real de Donata', x.img || '') +
         '<div class="exp-kicker">' + x.kicker + '</div>' +
         '<h3>' + x.title + '</h3>' +
@@ -227,7 +227,7 @@
     if (!host) return;
     host.innerHTML = (GALLERY.items || []).map(function (g, i) {
       var badge = g.kind === 'reel' ? '<span class="reel-badge">' + ICON.play + '</span>' : '';
-      return '<figure class="gitem ' + (g.span || 'sq') + '" data-i="' + i + '" tabindex="0" role="button" aria-label="Ver: ' + g.label + '">' +
+      return '<figure class="gitem reveal ' + (g.span || 'sq') + '" data-i="' + i + '" style="transition-delay:' + ((i % 4) * 0.07) + 's" tabindex="0" role="button" aria-label="Ver: ' + g.label + '">' +
         badge +
         photoSlot(g.label, g.kind === 'reel' ? 'Reel vertical' : 'Foto real', g.src) +
         '<figcaption class="g-cap">' + g.label + '</figcaption>' +
@@ -346,9 +346,10 @@
   function initReveal() {
     var els = qa('.reveal');
     if (REDUCED || !('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('in'); }); return; }
+    // Bidireccional: entra al aparecer, sale al abandonar el viewport (ease-in-out).
     var io = new IntersectionObserver(function (ents) {
-      ents.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
-    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+      ents.forEach(function (en) { en.target.classList.toggle('in', en.isIntersecting); });
+    }, { threshold: 0.06, rootMargin: '-6% 0px -12% 0px' });
     els.forEach(function (e) { io.observe(e); });
   }
 
@@ -406,6 +407,24 @@
     } else { loop(); }
   }
 
+  // ---- Parallax del hero (imagen + contenido) -----------------
+  function initParallax() {
+    if (REDUCED) return;
+    var media = q('.hero-media'), content = q('.hero-content'), hero = q('#hero');
+    if (!media || !hero) return;
+    var ticking = false;
+    function upd() {
+      ticking = false;
+      var y = window.scrollY;
+      if (y > window.innerHeight) return; // solo mientras el hero es visible
+      media.style.transform = 'translateY(' + (y * 0.28) + 'px)';
+      if (content) { content.style.transform = 'translateY(' + (y * 0.14) + 'px)'; content.style.opacity = String(Math.max(0, 1 - y / (window.innerHeight * 0.8))); }
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(upd); }
+    }, { passive: true });
+  }
+
   // ---- Spotlight: la luz sigue el mouse ------------------------
   function initSpotlight() {
     if (!window.matchMedia('(hover:hover) and (pointer:fine)').matches) return;
@@ -443,6 +462,7 @@
     initManifesto();
     initFire();
     initSpotlight();
+    initParallax();
     track('page_view', { page: 'donata_home' });
   }
 
