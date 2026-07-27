@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Finanzas · Chimichurri</title>
+<style>
+:root{
+  --ink:#0B211B; --panel:#12332A; --panel2:#16382D; --edge:#2A5546;
+  --green:#2E8B62; --gold:#E8B44A; --red:#D9694F;
+  --tx:#EAF2ED; --tx2:#9FB6AA; --tx3:#6E8B7D;
+  --shadow:0 10px 30px rgba(0,0,0,.35);
+  --serif:Georgia,"Times New Roman",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+html[data-theme="light"]{
+  --ink:#F3F6F3; --panel:#FFFFFF; --panel2:#F0F4F1; --edge:#D9E3DC;
+  --green:#1B5E43; --gold:#B8862B; --red:#C4553D;
+  --tx:#0E2A22; --tx2:#5C7168; --tx3:#8AA093;
+  --shadow:0 6px 20px rgba(14,42,34,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--ink);color:var(--tx);font-family:var(--sans);font-size:15px;line-height:1.5;
+  -webkit-font-smoothing:antialiased;padding-bottom:60px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 20px}
+a{color:var(--gold)}
+
+/* ---------- top ---------- */
+.top{padding:34px 0 22px;display:flex;flex-wrap:wrap;gap:18px;align-items:flex-end;justify-content:space-between}
+.kick{font-size:11px;font-weight:700;letter-spacing:.18em;color:var(--gold);text-transform:uppercase}
+h1{font-family:var(--serif);font-size:clamp(28px,4vw,42px);font-weight:700;letter-spacing:-.01em;margin-top:6px}
+.sub{color:var(--tx2);font-size:14px;margin-top:4px}
+.tools{display:flex;flex-wrap:wrap;gap:8px}
+button,.btn{font-family:inherit;font-size:13px;font-weight:600;color:var(--tx);background:var(--panel);
+  border:1px solid var(--edge);border-radius:9px;padding:9px 13px;cursor:pointer;transition:.15s}
+button:hover,.btn:hover{border-color:var(--green);color:var(--gold)}
+button.primary{background:var(--green);border-color:var(--green);color:#fff}
+button.primary:hover{filter:brightness(1.12);color:#fff}
+button.ghost{background:transparent}
+button.mini{padding:4px 8px;font-size:12px;border-radius:7px}
+button.del{color:var(--tx3);border-color:transparent;background:transparent;padding:4px 7px;font-size:15px;line-height:1}
+button.del:hover{color:var(--red);border-color:transparent}
+
+/* ---------- kpi ---------- */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:14px;margin-bottom:26px}
+.kpi{background:var(--panel);border:1px solid var(--edge);border-radius:14px;padding:18px 20px;box-shadow:var(--shadow)}
+.kpi .lb{font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--tx2);text-transform:uppercase}
+.kpi .v{font-family:var(--serif);font-size:29px;font-weight:700;color:var(--gold);margin-top:8px;letter-spacing:-.01em}
+.kpi .h{font-size:11.5px;color:var(--tx3);margin-top:5px;line-height:1.35}
+.kpi.hi{background:var(--green);border-color:var(--green)}
+.kpi.hi .lb{color:#C7E3D4}.kpi.hi .v{color:#fff}.kpi.hi .h{color:#B6D6C4}
+
+/* ---------- sections ---------- */
+section{margin-bottom:26px}
+.sechead{display:flex;flex-wrap:wrap;align-items:baseline;gap:12px;margin-bottom:13px}
+.sechead h2{font-family:var(--serif);font-size:21px;font-weight:700}
+.sechead .note{font-size:12.5px;color:var(--tx3)}
+.sechead .sp{flex:1}
+.card{background:var(--panel);border:1px solid var(--edge);border-radius:14px;box-shadow:var(--shadow)}
+
+/* ---------- scenarios ---------- */
+.scen{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+.sw{position:relative;display:flex;gap:12px;align-items:flex-start;background:var(--panel);
+  border:1px solid var(--edge);border-radius:12px;padding:14px 16px;cursor:pointer;transition:.15s}
+.sw:hover{border-color:var(--green)}
+.sw.on{border-color:var(--gold);background:var(--panel2)}
+.sw input{position:absolute;top:0;left:0;width:1px;height:1px;opacity:0;pointer-events:none}
+.track{flex:none;width:36px;height:21px;border-radius:11px;background:var(--edge);position:relative;margin-top:2px;transition:.18s}
+.track::after{content:"";position:absolute;top:3px;left:3px;width:15px;height:15px;border-radius:50%;
+  background:var(--tx2);transition:.18s}
+.sw.on .track{background:var(--gold)}
+.sw.on .track::after{left:18px;background:#0B211B}
+.sw .t{display:block;font-size:13.5px;font-weight:600;line-height:1.3}
+.sw .d{display:block;font-size:11.5px;color:var(--tx3);margin-top:4px;line-height:1.35}
+
+/* ---------- charts ---------- */
+.charts{display:grid;grid-template-columns:1.75fr 1fr;gap:16px}
+@media(max-width:880px){.charts{grid-template-columns:1fr}}
+.chartbox{padding:18px 20px 14px}
+.chartbox h3{font-size:12px;font-weight:700;letter-spacing:.1em;color:var(--tx2);text-transform:uppercase;margin-bottom:12px}
+svg{display:block;width:100%;height:auto;overflow:visible}
+.leg{display:flex;flex-wrap:wrap;gap:14px;margin-top:12px;font-size:12px;color:var(--tx2)}
+.leg i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:middle}
+
+/* ---------- tables ---------- */
+.tablewrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:700px}
+th{font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--tx2);text-transform:uppercase;
+  text-align:left;padding:13px 12px;border-bottom:1px solid var(--edge)}
+th.r,td.r{text-align:right}
+td{padding:5px 12px;border-bottom:1px solid var(--edge);font-size:14px;vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tbody tr:hover{background:rgba(255,255,255,.02)}
+html[data-theme="light"] tbody tr:hover{background:rgba(14,42,34,.02)}
+tfoot td{border-top:1px solid var(--edge);border-bottom:none;font-weight:700;padding-top:12px;padding-bottom:14px}
+.warn td{color:var(--red)}
+.tcap{padding:12px 16px;font-size:12px;color:var(--tx3);border-top:1px solid var(--edge)}
+
+/* ---------- inputs ---------- */
+input,select{font-family:inherit;font-size:14px;color:var(--tx);background:transparent;
+  border:1px solid transparent;border-radius:7px;padding:6px 8px;width:100%;transition:.13s}
+input:hover,select:hover{border-color:var(--edge)}
+input:focus,select:focus{outline:none;border-color:var(--gold);background:var(--ink)}
+html[data-theme="light"] input:focus,html[data-theme="light"] select:focus{background:#fff}
+input.num{text-align:right;font-variant-numeric:tabular-nums}
+select{cursor:pointer;font-size:13px;color:var(--tx2)}
+select option{background:var(--panel);color:var(--tx)}
+.tag{font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 7px;
+  border-radius:5px;background:var(--panel2);color:var(--tx2);border:1px solid var(--edge);white-space:nowrap}
+.tag.anim{color:var(--gold);border-color:var(--gold)}
+.tag.esc{color:var(--gold);border-color:transparent;background:transparent;padding-left:0}
+
+/* ---------- months ---------- */
+.months{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(370px,100%),1fr));gap:16px}
+.m{display:flex;flex-direction:column}
+.mhead{display:flex;align-items:center;gap:8px;padding:14px 16px 12px;border-bottom:1px solid var(--edge)}
+.mhead input{font-family:var(--serif);font-size:19px;font-weight:700;padding:4px 7px}
+.mbody{padding:6px 16px 0;flex:1}
+.mgrp{padding:11px 0 4px}
+.mgrp h4{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
+.mgrp.in h4{color:var(--green)}
+.mgrp.out h4{color:var(--red)}
+html[data-theme="dark"] .mgrp.in h4{color:#6FCF9B}
+.ln{display:flex;align-items:center;gap:6px;padding:1px 0}
+.ln .nm{flex:1;min-width:0}
+.ln .am{width:104px;flex:none}
+.ln .am input{text-align:right}
+.ln .fx{width:104px;flex:none;text-align:right;font-size:14px;font-variant-numeric:tabular-nums;
+  padding:6px 8px;color:var(--tx2)}
+.ln select.tp{width:76px;flex:none;font-size:11.5px;padding:5px 3px}
+@media(max-width:460px){
+  .ln .am,.ln .fx{width:96px}
+  .ln select.tp{width:72px;font-size:11px}
+  .mbody{padding:6px 12px 0}
+}
+.ln.auto .nm{padding:6px 8px;font-size:14px;color:var(--tx2)}
+.ln .neg{color:var(--red)}
+.sumln{display:flex;justify-content:space-between;align-items:baseline;padding:9px 8px 4px;margin-top:6px;
+  border-top:1px solid var(--edge);font-size:13px;font-weight:600}
+.sumln b{font-family:var(--serif);font-size:17px;font-weight:700}
+.msaldo{margin:14px 16px 16px;background:var(--ink);border:1px solid var(--edge);border-radius:11px;
+  padding:13px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+html[data-theme="light"] .msaldo{background:var(--panel2)}
+.msaldo .l{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--tx2)}
+.msaldo .l small{display:block;font-size:11px;font-weight:400;letter-spacing:0;text-transform:none;
+  color:var(--tx3);margin-top:3px}
+.msaldo .v{font-family:var(--serif);font-size:26px;font-weight:700;color:var(--gold);white-space:nowrap}
+.msaldo .v.neg{color:var(--red)}
+.addln{margin:4px 0 2px}
+
+/* ---------- misc ---------- */
+.foot{font-size:12.5px;color:var(--tx3);line-height:1.65;border-top:1px solid var(--edge);padding-top:18px}
+.foot b{color:var(--tx2)}
+.foot ol{margin:8px 0 0 18px}
+.foot li{margin-bottom:4px}
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,14px);background:var(--green);color:#fff;
+  font-size:13.5px;font-weight:600;padding:11px 20px;border-radius:10px;box-shadow:var(--shadow);
+  opacity:0;pointer-events:none;transition:.22s;z-index:50}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.priv{font-size:12px;color:var(--tx3);background:var(--panel);border:1px solid var(--edge);
+  border-radius:10px;padding:11px 15px;margin-bottom:22px}
+.priv b{color:var(--gold)}
+
+@media print{
+  body{background:#fff;color:#111;padding:0}
+  .tools,.priv,.addln,button,.toast{display:none!important}
+  .card,.kpi,.sw{box-shadow:none;border-color:#ccc;background:#fff}
+  .months{grid-template-columns:1fr 1fr}
+  input,select{border-color:transparent!important;background:transparent!important;color:#111}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <div>
+      <div class="kick">Chimichurri · Finanzas</div>
+      <h1>Dashboard de finanzas</h1>
+      <div class="sub">Todo es editable. Cambiá cualquier número y el resto se recalcula solo.</div>
+    </div>
+    <div class="tools">
+      <button onclick="toggleTheme()" title="Cambiar tema">◐ Tema</button>
+      <button onclick="doExport()">↓ Exportar</button>
+      <button onclick="els.file.click()">↑ Importar</button>
+      <button onclick="window.print()">⎙ Imprimir</button>
+      <button onclick="doReset()">↺ Valores originales</button>
+      <input type="file" id="file" accept="application/json" style="display:none">
+    </div>
+  </div>
+
+  <div class="priv">
+    <b>Ojo:</b> esta página es pública para cualquiera que tenga el link, y los datos se guardan solo en
+    este navegador (no viajan a ningún servidor). Usá <b>Exportar</b> para tener una copia del archivo.
+  </div>
+
+  <div class="kpis" id="kpis"></div>
+
+  <section>
+    <div class="sechead">
+      <h2>Escenarios</h2>
+      <span class="note">Prendé y apagá para ver qué pasa. No pisan lo que cargaste: se suman como líneas aparte.</span>
+    </div>
+    <div class="scen" id="scen"></div>
+  </section>
+
+  <section>
+    <div class="charts">
+      <div class="card chartbox">
+        <h3>Mes a mes</h3>
+        <div id="bars"></div>
+        <div class="leg">
+          <span><i style="background:var(--green)"></i>Entra</span>
+          <span><i style="background:var(--red)"></i>Sale</span>
+          <span><i style="background:var(--gold)"></i>Queda</span>
+        </div>
+      </div>
+      <div class="card chartbox">
+        <h3>De dónde viene la plata</h3>
+        <div id="donut"></div>
+        <div class="leg" id="donutleg"></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sechead">
+      <h2>Clientes recurrentes</h2>
+      <span class="note">Los que pagan todos los meses. Definen el piso y cuánto cobra Mariela.</span>
+      <span class="sp"></span>
+      <button class="mini" onclick="addClient()">+ Agregar cliente</button>
+    </div>
+    <div class="card">
+      <div class="tablewrap">
+      <table>
+        <thead><tr>
+          <th style="width:26%">Cliente</th>
+          <th class="r" style="width:13%">Cobra</th>
+          <th style="width:15%">Desde</th>
+          <th style="width:15%">Hasta</th>
+          <th class="r" style="width:11%">Mariela</th>
+          <th class="r" style="width:12%">Queda</th>
+          <th class="r" style="width:8%">Margen</th>
+          <th style="width:40px"></th>
+        </tr></thead>
+        <tbody id="clients"></tbody>
+        <tfoot id="clientsFoot"></tfoot>
+      </table>
+      </div>
+      <div class="tcap">
+        Mariela cobra <input class="num" id="mrate" style="width:92px;display:inline-block;
+        border-color:var(--edge)" inputmode="numeric"> por cada cliente recurrente activo en el mes.
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sechead">
+      <h2>Mes a mes</h2>
+      <span class="note">Los recurrentes y Mariela se calculan solos. Acá cargás lo puntual y los gastos.</span>
+      <span class="sp"></span>
+      <button class="mini" onclick="addMonth(false)">+ Mes vacío</button>
+      <button class="mini" onclick="addMonth(true)">+ Copiar último mes</button>
+    </div>
+    <div class="months" id="months"></div>
+  </section>
+
+  <div class="foot" id="foot"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+"use strict";
+const KEY = "chimichurri-finanzas-v1";
+const nf = new Intl.NumberFormat("es-AR");
+const money = n => (n < 0 ? "-" : "") + nf.format(Math.abs(Math.round(n)));
+const ars = n => "ARS " + money(n);
+const uid = () => Math.random().toString(36).slice(2, 9);
+
+/* ============================ datos base ============================ */
+function seed() {
+  const m = [
+    { id: "ago", name: "Agosto 2026" },
+    { id: "sep", name: "Septiembre 2026" },
+    { id: "oct", name: "Octubre 2026" },
+  ];
+  return {
+    marielaRate: 50000,
+    months: m,
+    clients: [
+      { id: uid(), name: "Cementera",            amount: 500000, from: "ago", to: null },
+      { id: uid(), name: "Macellaio Carnes",     amount: 300000, from: "ago", to: null },
+      { id: uid(), name: "Muñoz",                amount: 200000, from: "ago", to: null },
+      { id: uid(), name: "Flipar",               amount: 200000, from: "ago", to: null },
+      { id: uid(), name: "RIFI Burger",          amount: 200000, from: "ago", to: null },
+      { id: uid(), name: "RIFI comida árabe",    amount: 200000, from: "ago", to: null },
+      { id: uid(), name: "Polcher social media", amount: 100000, from: "ago", to: null },
+      { id: uid(), name: "Fiat MP",              amount: 300000, from: "ago", to: "ago" },
+    ],
+    income: [
+      { id: uid(), month: "ago", name: "San Pugliese Studio",         amount: 300000,  kind: "puntual"   },
+      { id: uid(), month: "ago", name: "Psicólogos branding",         amount: 100000,  kind: "puntual"   },
+      { id: uid(), month: "ago", name: "Animación · 15/08",           amount: 800000,  kind: "animacion" },
+      { id: uid(), month: "ago", name: "Animación · 31/08",           amount: 800000,  kind: "animacion" },
+      { id: uid(), month: "sep", name: "Santander / Landia",          amount: 400000,  kind: "puntual"   },
+      { id: uid(), month: "sep", name: "Animación Lucas Casagrande",  amount: 1600000, kind: "animacion" },
+    ],
+    expenses: [
+      { id: uid(), month: "ago", name: "Financista",          amount: 1600000 },
+      { id: uid(), month: "ago", name: "Tarjeta de tu vieja", amount: 1000000 },
+      { id: uid(), month: "ago", name: "Multa",               amount: 350000  },
+    ],
+    scen: { anim: false, tarjeta: false, santander: false },
+  };
+}
+
+const SCENARIOS = [
+  { k: "anim",      t: "La animación sigue después de septiembre",
+    d: "Suma ARS 1.600.000 a cada mes posterior al último que ya la tiene cargada." },
+  { k: "tarjeta",   t: "La tarjeta de 1.000.000 es todos los meses",
+    d: "La suma como gasto fijo en todos los meses menos el primero, donde ya está." },
+  { k: "santander", t: "Santander / Landia queda como recurrente",
+    d: "Lo pasa de puntual a cliente fijo desde su mes. Suma un cliente más a Mariela." },
+];
+
+let S = load();
+
+function load() {
+  try {
+    const raw = localStorage.getItem(KEY);
+    if (!raw) return seed();
+    const d = JSON.parse(raw);
+    if (!d || !Array.isArray(d.months) || !d.months.length) return seed();
+    d.scen = Object.assign({ anim: false, tarjeta: false, santander: false }, d.scen || {});
+    return d;
+  } catch (e) { return seed(); }
+}
+function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+
+/* ============================ cálculo ============================ */
+const mIdx = id => S.months.findIndex(m => m.id === id);
+
+function compute() {
+  const rate = S.marielaRate || 0;
+
+  // cliente virtual del escenario Santander
+  const virtualClients = [];
+  let santanderLine = null;
+  if (S.scen.santander) {
+    santanderLine = S.income.find(i => /santander/i.test(i.name));
+    if (santanderLine) virtualClients.push({
+      id: "_scen_sant", name: santanderLine.name + " (escenario)",
+      amount: santanderLine.amount, from: santanderLine.month, to: null, virtual: true,
+    });
+  }
+  const clients = S.clients.concat(virtualClients);
+
+  // último mes con animación cargada a mano
+  const animMonths = S.income.filter(i => i.kind === "animacion").map(i => mIdx(i.month));
+  const lastAnim = animMonths.length ? Math.max(...animMonths) : -1;
+  const animAmount = (() => {
+    if (lastAnim < 0) return 0;
+    const id = S.months[lastAnim].id;
+    return S.income.filter(i => i.kind === "animacion" && i.month === id)
+                   .reduce((a, i) => a + (i.amount || 0), 0);
+  })();
+
+  let acum = 0;
+  const months = S.months.map((m, i) => {
+    const act = clients.filter(c => {
+      const f = mIdx(c.from); const t = c.to === null ? Infinity : mIdx(c.to);
+      return f > -1 && i >= f && i <= t;
+    });
+    const recurrentes = act.reduce((a, c) => a + (c.amount || 0), 0);
+    const mariela = act.length * rate;
+
+    const extras = S.income
+      .filter(x => x.month === m.id)
+      .filter(x => !(S.scen.santander && santanderLine && x.id === santanderLine.id))
+      .map(x => ({ ...x, real: true }));
+    if (S.scen.anim && i > lastAnim && lastAnim > -1 && animAmount > 0)
+      extras.push({ id: "_scen_anim_" + m.id, name: "Animación (escenario)",
+                    amount: animAmount, kind: "animacion", scen: true });
+
+    const gastos = S.expenses.filter(x => x.month === m.id).map(x => ({ ...x, real: true }));
+    if (S.scen.tarjeta && i > 0)
+      gastos.push({ id: "_scen_tj_" + m.id, name: "Tarjeta (escenario mensual)",
+                    amount: 1000000, scen: true });
+
+    const entra = recurrentes + extras.reduce((a, x) => a + (x.amount || 0), 0);
+    const sale  = mariela + gastos.reduce((a, x) => a + (x.amount || 0), 0);
+    const queda = entra - sale;
+    acum += queda;
+
+    return { ...m, act, recurrentes, mariela, extras, gastos, entra, sale, queda, acum,
+             animacion: extras.filter(x => x.kind === "animacion").reduce((a, x) => a + (x.amount || 0), 0),
+             puntual:   extras.filter(x => x.kind !== "animacion").reduce((a, x) => a + (x.amount || 0), 0) };
+  });
+
+  // piso estructural: clientes sin fecha de fin
+  const perm = clients.filter(c => c.to === null);
+  const pisoBruto = perm.reduce((a, c) => a + (c.amount || 0), 0);
+  const piso = pisoBruto - perm.length * rate;
+
+  const totIn = months.reduce((a, m) => a + m.entra, 0);
+  const totAnim = months.reduce((a, m) => a + m.animacion, 0);
+  const totRec = months.reduce((a, m) => a + m.recurrentes, 0);
+  const totPun = months.reduce((a, m) => a + m.puntual, 0);
+
+  return { rate, months, clients, piso, pisoBruto, permCount: perm.length,
+           acumulado: acum, totIn, totAnim, totRec, totPun,
+           animPct: totIn ? totAnim / totIn * 100 : 0 };
+}
+
+/* ============================ helpers DOM ============================ */
+const els = {};
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;" }[c]));
+const parseNum = v => { const n = Number(String(v).replace(/[^\d-]/g, "")); return isNaN(n) ? 0 : n; };
+
+function toast(msg) {
+  els.toast.textContent = msg; els.toast.classList.add("show");
+  clearTimeout(toast._t); toast._t = setTimeout(() => els.toast.classList.remove("show"), 1900);
+}
+
+/* ============================ render ============================ */
+function render() {
+  const c = compute();
+  renderScen();
+  renderClients(c);
+  renderMonths(c);
+  paint();
+}
+
+function renderScen() {
+  els.scen.innerHTML = SCENARIOS.map(s => `
+    <label class="sw ${S.scen[s.k] ? "on" : ""}" data-scen="${s.k}">
+      <input type="checkbox" ${S.scen[s.k] ? "checked" : ""}>
+      <span class="track"></span>
+      <span><span class="t">${esc(s.t)}</span><span class="d">${esc(s.d)}</span></span>
+    </label>`).join("");
+}
+
+function monthOpts(sel, allowNull) {
+  let o = allowNull ? `<option value="">siempre</option>` : "";
+  o += S.months.map(m => `<option value="${m.id}" ${m.id === sel ? "selected" : ""}>${esc(m.name)}</option>`).join("");
+  return o;
+}
+
+function renderClients(c) {
+  els.clients.innerHTML = S.clients.map(cl => {
+    const neto = (cl.amount || 0) - c.rate;
+    const pct = cl.amount ? Math.round(neto / cl.amount * 100) : 0;
+    return `<tr data-cl="${cl.id}" class="${pct < 70 ? "warn" : ""}">
+      <td><input value="${esc(cl.name)}" data-f="name"></td>
+      <td><input class="num" inputmode="numeric" value="${money(cl.amount)}" data-f="amount"></td>
+      <td><select data-f="from">${monthOpts(cl.from, false)}</select></td>
+      <td><select data-f="to">${monthOpts(cl.to, true)}</select></td>
+      <td class="r" style="color:var(--tx3)">-${money(c.rate)}</td>
+      <td class="r" data-o="neto"><b>${money(neto)}</b></td>
+      <td class="r" data-o="pct">${pct}%</td>
+      <td><button class="del" title="Borrar" data-del-cl="${cl.id}">×</button></td>
+    </tr>`;
+  }).join("") || `<tr><td colspan="8" style="color:var(--tx3);padding:18px 12px">
+      No hay clientes recurrentes cargados.</td></tr>`;
+}
+
+function lineRow(x, kind, monthId) {
+  const isInc = kind === "income";
+  if (x.scen) return `<div class="ln">
+      <div class="nm" style="padding:6px 8px;font-size:14px;color:var(--tx2)">
+        ${esc(x.name)} <span class="tag esc">escenario</span></div>
+      <div class="fx ${isInc ? "" : "neg"}">${isInc ? "" : "-"}${money(x.amount)}</div>
+      <div style="width:29px"></div></div>`;
+  return `<div class="ln" data-line="${x.id}" data-kind="${kind}">
+      <div class="nm"><input value="${esc(x.name)}" data-f="name"></div>
+      ${isInc ? `<select class="tp" data-f="kind">
+          <option value="puntual"   ${x.kind !== "animacion" ? "selected" : ""}>puntual</option>
+          <option value="animacion" ${x.kind === "animacion" ? "selected" : ""}>animación</option>
+        </select>` : ""}
+      <div class="am"><input class="num" inputmode="numeric" value="${money(x.amount)}" data-f="amount"></div>
+      <button class="del" data-del-line="${x.id}" data-kind="${kind}" title="Borrar">×</button>
+    </div>`;
+}
+
+function renderMonths(c) {
+  els.months.innerHTML = c.months.map((m, i) => `
+    <div class="card m" data-m="${m.id}">
+      <div class="mhead">
+        <input value="${esc(m.name)}" data-f="mname">
+        ${S.months.length > 1 ? `<button class="del" data-del-m="${m.id}" title="Borrar mes">×</button>` : ""}
+      </div>
+      <div class="mbody">
+        <div class="mgrp in">
+          <h4>Entra</h4>
+          <div class="ln auto">
+            <div class="nm">Recurrentes <span class="tag" data-o="ccount">${m.act.length}</span></div>
+            <div class="fx" data-o="rec">${money(m.recurrentes)}</div>
+            <div style="width:29px"></div>
+          </div>
+          ${m.extras.map(x => lineRow(x, "income", m.id)).join("")}
+          <div class="addln"><button class="mini ghost" data-add="income" data-m="${m.id}">+ ingreso</button></div>
+          <div class="sumln"><span>Total entra</span>
+            <b style="color:var(--green)" data-o="entra">${ars(m.entra)}</b></div>
+        </div>
+        <div class="mgrp out">
+          <h4>Sale</h4>
+          <div class="ln auto">
+            <div class="nm">Mariela <span class="tag" data-o="mcount">${m.act.length} × ${money(c.rate)}</span></div>
+            <div class="fx neg" data-o="mar">-${money(m.mariela)}</div>
+            <div style="width:29px"></div>
+          </div>
+          ${m.gastos.map(x => lineRow(x, "expense", m.id)).join("")}
+          <div class="addln"><button class="mini ghost" data-add="expense" data-m="${m.id}">+ gasto</button></div>
+          <div class="sumln"><span>Total sale</span>
+            <b style="color:var(--red)" data-o="sale">-${ars(m.sale)}</b></div>
+        </div>
+      </div>
+      <div class="msaldo">
+        <div class="l">Queda<small data-o="acum">Acumulado: ${ars(m.acum)}</small></div>
+        <div class="v ${m.queda < 0 ? "neg" : ""}" data-o="queda">${ars(m.queda)}</div>
+      </div>
+    </div>`).join("");
+}
+
+/* ---------- paint: sólo valores calculados, sin tocar inputs ---------- */
+function paint() {
+  const c = compute();
+
+  els.kpis.innerHTML = [
+    { cls: "hi", lb: "Piso mensual neto", v: ars(c.piso),
+      h: `${c.permCount} clientes fijos menos Mariela. Entra todos los meses.` },
+    { lb: "Saldo acumulado", v: ars(c.acumulado),
+      h: `Suma de los ${c.months.length} meses cargados.` },
+    { lb: "Depende de la animación", v: c.animPct.toFixed(0) + "%",
+      h: `${ars(c.totAnim)} de ${ars(c.totIn)} que entran en el período.` },
+    { lb: "Bruto recurrente", v: ars(c.pisoBruto),
+      h: `Antes de Mariela (${ars(c.permCount * c.rate)} por mes).` },
+  ].map(k => `<div class="kpi ${k.cls || ""}">
+      <div class="lb">${k.lb}</div><div class="v">${k.v}</div><div class="h">${k.h}</div></div>`).join("");
+
+  // tabla de clientes
+  const totBruto = S.clients.reduce((a, x) => a + (x.amount || 0), 0);
+  S.clients.forEach(cl => {
+    const tr = els.clients.querySelector(`[data-cl="${cl.id}"]`); if (!tr) return;
+    const neto = (cl.amount || 0) - c.rate;
+    const pct = cl.amount ? Math.round(neto / cl.amount * 100) : 0;
+    tr.querySelector('[data-o="neto"]').innerHTML = `<b>${money(neto)}</b>`;
+    tr.querySelector('[data-o="pct"]').textContent = pct + "%";
+    tr.classList.toggle("warn", pct < 70);
+  });
+  els.clientsFoot.innerHTML = S.clients.length ? `<tr>
+      <td>Total de la tabla <span style="color:var(--tx3);font-weight:400">(${S.clients.length}
+        ${S.clients.length === 1 ? "cliente" : "clientes"}, con fecha de fin incluidos)</span></td>
+      <td class="r">${money(totBruto)}</td><td></td><td></td>
+      <td class="r" style="color:var(--tx3)">-${money(S.clients.length * c.rate)}</td>
+      <td class="r" style="color:var(--gold)">${money(totBruto - S.clients.length * c.rate)}</td>
+      <td class="r">${totBruto ? Math.round((totBruto - S.clients.length * c.rate) / totBruto * 100) : 0}%</td>
+      <td></td></tr>` : "";
+
+  // meses
+  c.months.forEach(m => {
+    const el = els.months.querySelector(`[data-m="${m.id}"]`); if (!el) return;
+    const set = (k, v) => { const n = el.querySelector(`[data-o="${k}"]`); if (n) n.textContent = v; };
+    set("ccount", m.act.length);
+    set("rec", money(m.recurrentes));
+    set("mcount", `${m.act.length} × ${money(c.rate)}`);
+    set("mar", "-" + money(m.mariela));
+    set("entra", ars(m.entra));
+    set("sale", "-" + ars(m.sale));
+    set("acum", "Acumulado: " + ars(m.acum));
+    set("queda", ars(m.queda));
+    el.querySelector('[data-o="queda"]').classList.toggle("neg", m.queda < 0);
+  });
+
+  drawBars(c); drawDonut(c); drawFoot(c);
+}
+
+/* ============================ gráficos ============================ */
+function drawBars(c) {
+  const W = 760, H = 300, padL = 8, padB = 46, padT = 14;
+  const n = c.months.length || 1;
+  const max = Math.max(1, ...c.months.map(m => Math.max(m.entra, m.sale, Math.abs(m.queda))));
+  const gw = (W - padL * 2) / n, bw = Math.min(46, gw / 4.2), gap = bw * 0.28;
+  const y0 = H - padB, hgt = y0 - padT;
+  const cols = [["entra", "var(--green)"], ["sale", "var(--red)"], ["queda", "var(--gold)"]];
+
+  let g = "";
+  for (let i = 0; i <= 4; i++) {
+    const y = padT + hgt * i / 4;
+    g += `<line x1="${padL}" y1="${y}" x2="${W - padL}" y2="${y}" stroke="var(--edge)" stroke-width="1"/>
+          <text x="${padL}" y="${y - 5}" fill="var(--tx3)" font-size="10.5"
+            font-family="var(--sans)">${(max * (1 - i / 4) / 1e6).toFixed(1)}M</text>`;
+  }
+  c.months.forEach((m, i) => {
+    const cx = padL + gw * i + gw / 2;
+    const x0 = cx - (bw * 3 + gap * 2) / 2;
+    cols.forEach(([k, col], j) => {
+      const val = Math.abs(m[k]);
+      const h = Math.max(2, val / max * hgt);
+      const x = x0 + j * (bw + gap);
+      g += `<rect x="${x}" y="${y0 - h}" width="${bw}" height="${h}" rx="4" fill="${col}"
+              ${m[k] < 0 && k === "queda" ? 'opacity=".55"' : ""}/>
+            <text x="${x + bw / 2}" y="${y0 - h - 7}" text-anchor="middle" fill="var(--tx2)"
+              font-size="10.5" font-family="var(--sans)">${(m[k] / 1e6).toFixed(1)}M</text>`;
+    });
+    g += `<text x="${cx}" y="${y0 + 20}" text-anchor="middle" fill="var(--tx)" font-size="12.5"
+            font-family="var(--sans)" font-weight="600">${esc(m.name.split(" ")[0])}</text>
+          <text x="${cx}" y="${y0 + 36}" text-anchor="middle" fill="var(--tx3)" font-size="10.5"
+            font-family="var(--sans)">acum. ${(m.acum / 1e6).toFixed(1)}M</text>`;
+  });
+  els.bars.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Ingresos, egresos y saldo por mes">${g}</svg>`;
+}
+
+function drawDonut(c) {
+  const parts = [
+    { l: "Recurrentes", v: c.totRec, col: "var(--green)" },
+    { l: "Animación",   v: c.totAnim, col: "var(--gold)" },
+    { l: "Puntuales",   v: c.totPun, col: "var(--tx3)" },
+  ].filter(p => p.v > 0);
+  const tot = parts.reduce((a, p) => a + p.v, 0) || 1;
+  const R = 76, r = 46, cx = 100, cy = 100;
+  let a0 = -Math.PI / 2, g = "";
+  parts.forEach(p => {
+    const a1 = a0 + p.v / tot * Math.PI * 2;
+    const big = a1 - a0 > Math.PI ? 1 : 0;
+    const P = (rad, ang) => `${cx + rad * Math.cos(ang)} ${cy + rad * Math.sin(ang)}`;
+    g += `<path d="M ${P(R, a0)} A ${R} ${R} 0 ${big} 1 ${P(R, a1)} L ${P(r, a1)}
+            A ${r} ${r} 0 ${big} 0 ${P(r, a0)} Z" fill="${p.col}"/>`;
+    a0 = a1;
+  });
+  const top = parts.slice().sort((x, y) => y.v - x.v)[0];
+  g += `<text x="${cx}" y="${cy - 4}" text-anchor="middle" fill="var(--tx)" font-size="26"
+          font-family="var(--serif)" font-weight="700">${top ? Math.round(top.v / tot * 100) : 0}%</text>
+        <text x="${cx}" y="${cy + 15}" text-anchor="middle" fill="var(--tx3)" font-size="11"
+          font-family="var(--sans)">${top ? esc(top.l.toLowerCase()) : ""}</text>`;
+  els.donut.innerHTML = `<svg viewBox="0 0 200 200" style="max-width:230px;margin:0 auto"
+      role="img" aria-label="Composición de los ingresos">${g}</svg>`;
+  els.donutleg.innerHTML = parts.map(p =>
+    `<span><i style="background:${p.col}"></i>${esc(p.l)} · ${Math.round(p.v / tot * 100)}%</span>`).join("");
+}
+
+function drawFoot(c) {
+  const worst = S.clients.filter(x => x.amount > 0)
+    .sort((a, b) => (a.amount - c.rate) / a.amount - (b.amount - c.rate) / b.amount)[0];
+  const big = S.clients.filter(x => x.to === null).sort((a, b) => b.amount - a.amount)[0];
+  const pctBig = big && c.pisoBruto ? Math.round(big.amount / c.pisoBruto * 100) : 0;
+  els.foot.innerHTML = `
+    <b>Cómo lee este tablero</b>
+    <ol>
+      <li>El <b>piso mensual</b> son los clientes sin fecha de fin, menos lo de Mariela. Es lo que entra
+          aunque no aparezca ningún trabajo nuevo: hoy ${ars(c.piso)}.</li>
+      <li>Mariela se calcula sola: ${money(c.rate)} × la cantidad de clientes recurrentes activos en cada
+          mes. Si a un cliente le ponés fecha de fin, deja de contar al mes siguiente.</li>
+      ${worst ? `<li><b>${esc(worst.name)}</b> es el de peor margen:
+          deja ${money(worst.amount - c.rate)} de ${money(worst.amount)}
+          (${Math.round((worst.amount - c.rate) / worst.amount * 100)}%).</li>` : ""}
+      ${big ? `<li><b>${esc(big.name)}</b> es el ${pctBig}% de todo lo recurrente. Es el cliente que más
+          duele perder.</li>` : ""}
+      <li>Los gastos personales no están cargados. Mientras no los sumes, el saldo dice cuánto deja el
+          negocio, no cuánto te queda a vos.</li>
+    </ol>`;
+}
+
+/* ============================ acciones ============================ */
+function addClient() {
+  S.clients.push({ id: uid(), name: "Cliente nuevo", amount: 200000, from: S.months[0].id, to: null });
+  save(); render(); toast("Cliente agregado");
+}
+function addMonth(copy) {
+  const last = S.months[S.months.length - 1];
+  const id = uid();
+  S.months.push({ id, name: nextName(last ? last.name : "") });
+  if (copy && last) {
+    S.income.filter(x => x.month === last.id).forEach(x =>
+      S.income.push({ ...x, id: uid(), month: id }));
+    S.expenses.filter(x => x.month === last.id).forEach(x =>
+      S.expenses.push({ ...x, id: uid(), month: id }));
+  }
+  save(); render(); toast(copy ? "Mes copiado" : "Mes agregado");
+}
+const MESES = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto",
+               "Septiembre","Octubre","Noviembre","Diciembre"];
+function nextName(prev) {
+  const m = String(prev).match(/^(\p{L}+)\s*(\d{4})?/u);
+  if (m) {
+    const i = MESES.findIndex(x => x.toLowerCase() === m[1].toLowerCase());
+    if (i > -1) {
+      const y = Number(m[2] || new Date().getFullYear());
+      return MESES[(i + 1) % 12] + " " + (i === 11 ? y + 1 : y);
+    }
+  }
+  return "Mes " + (S.months.length);
+}
+function delMonth(id) {
+  if (S.months.length < 2) return;
+  if (!confirm("¿Borrar este mes con todo lo que tiene cargado?")) return;
+  const i = mIdx(id);
+  S.months = S.months.filter(m => m.id !== id);
+  S.income = S.income.filter(x => x.month !== id);
+  S.expenses = S.expenses.filter(x => x.month !== id);
+  const first = S.months[0].id;
+  const prev = S.months[Math.max(0, i - 1)].id;
+  S.clients.forEach(c => { if (c.from === id) c.from = first; if (c.to === id) c.to = prev; });
+  save(); render(); toast("Mes borrado");
+}
+function doExport() {
+  const blob = new Blob([JSON.stringify(S, null, 2)], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "finanzas-chimichurri-" + new Date().toISOString().slice(0, 10) + ".json";
+  a.click(); URL.revokeObjectURL(a.href); toast("Archivo descargado");
+}
+function doImport(file) {
+  const r = new FileReader();
+  r.onload = () => {
+    try {
+      const d = JSON.parse(r.result);
+      if (!d.months || !Array.isArray(d.months)) throw 0;
+      S = d; S.scen = Object.assign({ anim:false, tarjeta:false, santander:false }, S.scen || {});
+      save(); boot(); toast("Datos importados");
+    } catch (e) { toast("Ese archivo no se pudo leer"); }
+  };
+  r.readAsText(file);
+}
+function doReset() {
+  if (!confirm("Vuelve a los números originales de agosto y septiembre. Se pierde lo que hayas cambiado.")) return;
+  S = seed(); save(); boot(); toast("Valores originales restaurados");
+}
+function toggleTheme() {
+  const t = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+  document.documentElement.dataset.theme = t;
+  try { localStorage.setItem(KEY + "-theme", t); } catch (e) {}
+  paint();
+}
+
+/* ============================ eventos ============================ */
+function findLine(kind, id) {
+  return (kind === "income" ? S.income : S.expenses).find(x => x.id === id);
+}
+
+document.addEventListener("input", e => {
+  const t = e.target;
+  if (!t.dataset.f && t.id !== "mrate") return;
+
+  if (t.id === "mrate") { S.marielaRate = parseNum(t.value); save(); paint(); return; }
+
+  const trCl = t.closest("[data-cl]");
+  if (trCl) {
+    const cl = S.clients.find(x => x.id === trCl.dataset.cl); if (!cl) return;
+    if (t.dataset.f === "name") cl.name = t.value;
+    if (t.dataset.f === "amount") cl.amount = parseNum(t.value);
+    save(); paint(); return;
+  }
+  const ln = t.closest("[data-line]");
+  if (ln) {
+    const x = findLine(ln.dataset.kind, ln.dataset.line); if (!x) return;
+    if (t.dataset.f === "name") x.name = t.value;
+    if (t.dataset.f === "amount") x.amount = parseNum(t.value);
+    save(); paint(); return;
+  }
+  if (t.dataset.f === "mname") {
+    const m = S.months.find(y => y.id === t.closest("[data-m]").dataset.m);
+    if (m) { m.name = t.value; save(); paint(); }
+  }
+});
+
+document.addEventListener("change", e => {
+  const t = e.target;
+  const sw = t.closest("[data-scen]");
+  if (sw) { S.scen[sw.dataset.scen] = t.checked; sw.classList.toggle("on", t.checked);
+            save(); render(); return; }
+
+  const trCl = t.closest("[data-cl]");
+  if (trCl && t.dataset.f) {
+    const cl = S.clients.find(x => x.id === trCl.dataset.cl); if (!cl) return;
+    if (t.dataset.f === "from") cl.from = t.value;
+    if (t.dataset.f === "to") cl.to = t.value || null;
+    save(); paint(); return;
+  }
+  const ln = t.closest("[data-line]");
+  if (ln && t.dataset.f === "kind") {
+    const x = findLine(ln.dataset.kind, ln.dataset.line);
+    if (x) { x.kind = t.value; save(); paint(); }
+  }
+});
+
+document.addEventListener("blur", e => {
+  const t = e.target;
+  if (t.classList && t.classList.contains("num")) t.value = money(parseNum(t.value));
+}, true);
+
+document.addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+
+  if (b.dataset.add) {
+    const mid = b.dataset.m;
+    if (b.dataset.add === "income")
+      S.income.push({ id: uid(), month: mid, name: "Nuevo ingreso", amount: 0, kind: "puntual" });
+    else
+      S.expenses.push({ id: uid(), month: mid, name: "Nuevo gasto", amount: 0 });
+    save(); render();
+    const rows = els.months.querySelectorAll(`[data-m="${mid}"] [data-line]`);
+    const last = rows[rows.length - 1]; if (last) last.querySelector("input").select();
+    return;
+  }
+  if (b.dataset.delLine) {
+    const k = b.dataset.kind;
+    if (k === "income") S.income = S.income.filter(x => x.id !== b.dataset.delLine);
+    else S.expenses = S.expenses.filter(x => x.id !== b.dataset.delLine);
+    save(); render(); return;
+  }
+  if (b.dataset.delCl) {
+    S.clients = S.clients.filter(x => x.id !== b.dataset.delCl);
+    save(); render(); toast("Cliente borrado"); return;
+  }
+  if (b.dataset.delM) { delMonth(b.dataset.delM); return; }
+});
+
+/* ============================ boot ============================ */
+function boot() {
+  els.kpis = $("#kpis"); els.scen = $("#scen"); els.clients = $("#clients");
+  els.clientsFoot = $("#clientsFoot"); els.months = $("#months"); els.bars = $("#bars");
+  els.donut = $("#donut"); els.donutleg = $("#donutleg"); els.foot = $("#foot");
+  els.toast = $("#toast"); els.file = $("#file");
+  $("#mrate").value = money(S.marielaRate);
+  els.file.onchange = ev => { if (ev.target.files[0]) doImport(ev.target.files[0]); ev.target.value = ""; };
+  render();
+}
+try {
+  const t = localStorage.getItem(KEY + "-theme");
+  if (t) document.documentElement.dataset.theme = t;
+} catch (e) {}
+boot();
+</script>
+</body>
+</html>
