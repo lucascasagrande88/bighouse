@@ -1,0 +1,13 @@
+# Config del sitio "finanzas-dashboard-chimichurri".
+#
+# Se usa SOLO si en Netlify el sitio tiene Base directory = finanzas-dashboard.
+# A propósito no hay netlify.toml en la raíz del repo: pondría este publish
+# directory sobre cualquier otro sitio que buildee desde bighouse (por ejemplo
+# la web de Chimichurri) y le rompería el deploy.
+#
+# Alternativa sin base directory: dejar Base vacío y poner
+# Publish directory = finanzas-dashboard en la UI de Netlify.
+
+[build]
+  publish = "."
+  command = ""
