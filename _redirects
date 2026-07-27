@@ -1,3 +1,9 @@
 # Netlify redirects
-/home        /     301
-/inicio      /     301
+/home        /            301
+/inicio      /            301
+
+# Botonera / link-in-bio — atajos hacia /botonera
+/links       /botonera    301
+/link        /botonera    301
+/bio         /botonera    301
+/botones     /botonera    301
