@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000" role="img"
+     aria-label="Noike — Azul, vista espalda">
+  <defs>
+    <filter id="grano"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3"/>
+      <feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope="0.05"/></feComponentTransfer></filter>
+    <linearGradient id="luz" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.14"/>
+      <stop offset="0.55" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0.12"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="1000" fill="#EFECE3"/>
+  <text x="400" y="620" text-anchor="middle" font-family="Archivo Black, Arial Black, sans-serif"
+        font-size="240" fill="#0A0A0A" opacity="0.045" letter-spacing="-8">GARZEZ</text>
+  <g opacity="0.5">
+    <rect x="0" y="0" width="800" height="4" fill="#FFC700"/>
+    <rect x="0" y="996" width="800" height="4" fill="#E02B1D"/>
+  </g>
+
+  <g transform="translate(400 512) scale(1.24) translate(-300 -350)">
+    <path d="
+    M242 98 Q300 142 358 98 L446 126 L512 174 L476 254 L434 210
+    L444 602 L156 602 L166 210 L124 254 L88 174 L154 126 Z" fill="#12358F"/>
+    <path d="
+    M242 98 Q300 142 358 98 L446 126 L512 174 L476 254 L434 210
+    L444 602 L156 602 L166 210 L124 254 L88 174 L154 126 Z" fill="url(#luz)"/>
+    <path d="M242 98 Q300 142 358 98 Q300 126 242 98" fill="#0a1f53" opacity="0.85"/>
+              <path d="M162 566 L438 566" stroke="#0a1f53" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.32"/>
+              <path d="M476 254 L434 210 M124 254 L166 210" stroke="#0a1f53" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.28"/>
+    <g><text x="300" y="310" text-anchor="middle" font-family="Space Mono, monospace"
+             font-size="13" fill="#F4F1EA" opacity="0.7" letter-spacing="6">GARZEZ · CARACAS</text>
+       <text x="300" y="354" text-anchor="middle" font-family="Archivo Black, Arial Black, sans-serif"
+             font-size="44" fill="#F4F1EA" letter-spacing="-1">NO ES</text>
+       <g transform="translate(249, 380)">
+         <rect width="34" height="9" fill="#FFC700"/><rect x="34" width="34" height="9" fill="#0B3CC1"/><rect x="68" width="34" height="9" fill="#E02B1D"/>
+       </g></g>
+  </g>
+
+  <rect width="800" height="1000" filter="url(#grano)" opacity="0.55"/>
+  <text x="34" y="52" font-family="Space Mono, monospace" font-size="15" fill="#0A0A0A" opacity="0.55" letter-spacing="3">GZ-002</text>
+  <text x="766" y="52" text-anchor="end" font-family="Space Mono, monospace" font-size="15" fill="#0A0A0A" opacity="0.55" letter-spacing="3">ESPALDA</text>
+  <text x="34" y="962" font-family="Space Mono, monospace" font-size="15" fill="#0A0A0A" opacity="0.55" letter-spacing="3">AZUL</text>
+  <text x="766" y="962" text-anchor="end" font-family="Space Mono, monospace" font-size="15" fill="#0A0A0A" opacity="0.55" letter-spacing="3">BRANDALISMO</text>
+</svg>

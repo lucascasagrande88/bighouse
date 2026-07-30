@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000" role="img"
+     aria-label="Cerro Arriba — Amarillo, vista espalda">
+  <defs>
+    <filter id="grano"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3"/>
+      <feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope="0.05"/></feComponentTransfer></filter>
+    <linearGradient id="luz" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.14"/>
+      <stop offset="0.55" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0.12"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="1000" fill="#E2DED1"/>
+  <text x="400" y="620" text-anchor="middle" font-family="Archivo Black, Arial Black, sans-serif"
+        font-size="240" fill="#0A0A0A" opacity="0.045" letter-spacing="-8">GARZEZ</text>
+  <g opacity="0.5">
+    <rect x="0" y="0" width="800" height="4" fill="#FFC700"/>
+    <rect x="0" y="996" width="800" height="4" fill="#E02B1D"/>
+  </g>
+
+  <g transform="translate(400 512) scale(1.14) translate(-300 -350)">
+    <path d="
+    M238 106 Q300 152 362 106 L450 134 L532 218 L560 400 L500 416 L448 222
+    L448 594 L152 594 L152 222 L100 416 L40 400 L68 218 L150 134 Z" fill="#F5C518"/>
+    <path d="
+    M238 106 Q300 152 362 106 L450 134 L532 218 L560 400 L500 416 L448 222
+    L448 594 L152 594 L152 222 L100 416 L40 400 L68 218 L150 134 Z" fill="url(#luz)"/>
+    <path d="M238 106 Q300 152 362 106 Q300 130 238 106" fill="#c49e13" opacity="0.85"/>
+              <rect x="152" y="558" width="296" height="36" fill="#c49e13" opacity="0.26"/>
+              <path d="M500 416 L560 400 M100 416 L40 400" stroke="#c49e13" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.35"/>
+    <g><text x="300" y="310" text-anchor="middle" font-family="Space Mono, monospace"
+             font-size="13" fill="#0A0A0A" opacity="0.7" letter-spacing="6">GARZEZ · CARACAS</text>
+       <text x="300" y="354" text-anchor="middle" font-family="Archivo Black, Arial Black, sans-serif"
+             font-size="44" fill="#0A0A0A" letter-spacing="-1">ARRIBA</text>
+       <g transform="translate(249, 380)">
+         <rect width="34" height="9" fill="#FFC700"/><rect x="34" width="34" height="9" fill="#0B3CC1"/><rect x="68" width="34" height="9" fill="#E02B1D"/>
+       </g></g>
+  </g>
+
+  <rect width="800" height="1000" filter="url(#grano)" opacity="0.55"/>
+  <text x="34" y="52" font-family="Space Mono, monospace" font-size="15" fill="#0A0A0A" opacity="0.55" letter-spacing="3">GZ-005</text>
+  <text x="766" y="52" text-anchor="end" font-family="Space Mono, monospace" font-size="15" fill="#0A0A0A" opacity="0.55" letter-spacing="3">ESPALDA</text>
+  <text x="34" y="962" font-family="Space Mono, monospace" font-size="15" fill="#0A0A0A" opacity="0.55" letter-spacing="3">AMARILLO</text>
+  <text x="766" y="962" text-anchor="end" font-family="Space Mono, monospace" font-size="15" fill="#0A0A0A" opacity="0.55" letter-spacing="3">TUKI</text>
+</svg>

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000" role="img"
+     aria-label="Tuki Tuki — Azul eléctrico, vista frente">
+  <defs>
+    <filter id="grano"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3"/>
+      <feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope="0.05"/></feComponentTransfer></filter>
+    <linearGradient id="luz" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.14"/>
+      <stop offset="0.55" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0.12"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="1000" fill="#EFECE3"/>
+  <text x="400" y="620" text-anchor="middle" font-family="Archivo Black, Arial Black, sans-serif"
+        font-size="240" fill="#0A0A0A" opacity="0.045" letter-spacing="-8">GARZEZ</text>
+  <g opacity="0.5">
+    <rect x="0" y="0" width="800" height="4" fill="#FFC700"/>
+    <rect x="0" y="996" width="800" height="4" fill="#E02B1D"/>
+  </g>
+
+  <g transform="translate(400 512) scale(1.16) translate(-300 -350)">
+    <path d="
+    M242 98 Q300 142 358 98 L446 126 L528 210 L556 396 L496 412 L434 216
+    L444 602 L156 602 L166 216 L104 412 L44 396 L72 210 L154 126 Z" fill="#1B4BD8"/>
+    <path d="
+    M242 98 Q300 142 358 98 L446 126 L528 210 L556 396 L496 412 L434 216
+    L444 602 L156 602 L166 216 L104 412 L44 396 L72 210 L154 126 Z" fill="url(#luz)"/>
+    <path d="M242 98 Q300 142 358 98 Q300 126 242 98" fill="#102c7d" opacity="0.85"/>
+              <path d="M496 412 L556 396 M104 412 L44 396" stroke="#102c7d" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.35"/>
+              <path d="M162 566 L438 566" stroke="#102c7d" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.32"/>
+    <g><text x="300" y="340" text-anchor="middle" font-family="Archivo Black, Arial Black, sans-serif"
+             font-size="58" fill="#F4F1EA" letter-spacing="-1">TUKI</text>
+       <text x="300" y="366" text-anchor="middle" font-family="Space Mono, monospace"
+             font-size="13" fill="#F4F1EA" opacity="0.75" letter-spacing="4">TUKI</text></g>
+  </g>
+
+  <rect width="800" height="1000" filter="url(#grano)" opacity="0.55"/>
+  <text x="34" y="52" font-family="Space Mono, monospace" font-size="15" fill="#0A0A0A" opacity="0.55" letter-spacing="3">GZ-003</text>
+  <text x="766" y="52" text-anchor="end" font-family="Space Mono, monospace" font-size="15" fill="#0A0A0A" opacity="0.55" letter-spacing="3">FRENTE</text>
+  <text x="34" y="962" font-family="Space Mono, monospace" font-size="15" fill="#0A0A0A" opacity="0.55" letter-spacing="3">AZUL ELÉCTRICO</text>
+  <text x="766" y="962" text-anchor="end" font-family="Space Mono, monospace" font-size="15" fill="#0A0A0A" opacity="0.55" letter-spacing="3">TUKI</text>
+</svg>

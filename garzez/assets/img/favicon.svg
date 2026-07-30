@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect width="64" height="64" fill="#0A0A0A"/>
+  <text x="32" y="43" text-anchor="middle" font-family="Archivo Black, Arial Black, Arial, sans-serif"
+        font-weight="900" font-size="34" fill="#FFC700" letter-spacing="-1">GZ</text>
+  <rect y="58" width="21.3" height="6" fill="#FFC700"/>
+  <rect x="21.3" y="58" width="21.3" height="6" fill="#0B3CC1"/>
+  <rect x="42.6" y="58" width="21.4" height="6" fill="#E02B1D"/>
+</svg>

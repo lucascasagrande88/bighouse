@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000" role="img" aria-label="BRANDALISMO">
+  <defs>
+    <filter id="g2"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3"/>
+      <feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope="0.06"/></feComponentTransfer></filter>
+    <linearGradient id="c2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f5bf77"/><stop offset="1" stop-color="#b47a2d"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="1000" fill="url(#c2)"/>
+  <circle cx="592" cy="200" r="136" fill="#FFC700" opacity="0.9"/>
+  <!-- edificios: geometría del boom del 50 -->
+  <g fill="#0A0A0A" opacity="0.88">
+    <rect x="48" y="420" width="160" height="580"/>
+    <rect x="240" y="300" width="128" height="700"/>
+    <rect x="400" y="500" width="176" height="500"/>
+    <rect x="608" y="380" width="144" height="620"/>
+  </g>
+  <g fill="#f8d6a7" opacity="0.5">
+    <rect x="64" y="530" width="36" height="26"/><rect x="256" y="530" width="36" height="26"/><rect x="416" y="530" width="36" height="26"/><rect x="624" y="530" width="36" height="26"/><rect x="64" y="580.0000000000001" width="36" height="26"/><rect x="256" y="580.0000000000001" width="36" height="26"/><rect x="416" y="580.0000000000001" width="36" height="26"/><rect x="624" y="580.0000000000001" width="36" height="26"/><rect x="64" y="630" width="36" height="26"/><rect x="256" y="630" width="36" height="26"/><rect x="416" y="630" width="36" height="26"/><rect x="624" y="630" width="36" height="26"/><rect x="64" y="680" width="36" height="26"/><rect x="256" y="680" width="36" height="26"/><rect x="416" y="680" width="36" height="26"/><rect x="624" y="680" width="36" height="26"/><rect x="64" y="730" width="36" height="26"/><rect x="256" y="730" width="36" height="26"/><rect x="416" y="730" width="36" height="26"/><rect x="624" y="730" width="36" height="26"/><rect x="64" y="780" width="36" height="26"/><rect x="256" y="780" width="36" height="26"/><rect x="416" y="780" width="36" height="26"/><rect x="624" y="780" width="36" height="26"/><rect x="64" y="830.0000000000001" width="36" height="26"/><rect x="256" y="830.0000000000001" width="36" height="26"/><rect x="416" y="830.0000000000001" width="36" height="26"/><rect x="624" y="830.0000000000001" width="36" height="26"/><rect x="64" y="880.0000000000001" width="36" height="26"/><rect x="256" y="880.0000000000001" width="36" height="26"/><rect x="416" y="880.0000000000001" width="36" height="26"/><rect x="624" y="880.0000000000001" width="36" height="26"/><rect x="64" y="930" width="36" height="26"/><rect x="256" y="930" width="36" height="26"/><rect x="416" y="930" width="36" height="26"/><rect x="624" y="930" width="36" height="26"/><rect x="64" y="980" width="36" height="26"/><rect x="256" y="980" width="36" height="26"/><rect x="416" y="980" width="36" height="26"/><rect x="624" y="980" width="36" height="26"/>
+  </g>
+  <g transform="translate(48, 100)">
+    <rect width="80" height="10" fill="#E02B1D"/>
+    <text y="78" font-family="Archivo Black, Arial Black, sans-serif" font-size="60" fill="#0A0A0A" letter-spacing="-2">BRANDALISMO</text>
+    <text y="114" font-family="Space Mono, monospace" font-size="17" fill="#0A0A0A" opacity="0.7" letter-spacing="5">ARCHIVO / 2017-2025</text>
+  </g>
+  <rect width="800" height="1000" filter="url(#g2)" opacity="0.6"/>
+</svg>

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 620" width="800" height="620" role="img" aria-label="EL CERRO">
+  <defs>
+    <filter id="g4"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3"/>
+      <feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope="0.06"/></feComponentTransfer></filter>
+    <linearGradient id="c4" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d69ae9"/><stop offset="1" stop-color="#9353a8"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="620" fill="url(#c4)"/>
+  <circle cx="592" cy="124" r="136" fill="#FFC700" opacity="0.9"/>
+  <!-- edificios: geometría del boom del 50 -->
+  <g fill="#0A0A0A" opacity="0.88">
+    <rect x="48" y="260.4" width="160" height="359.59999999999997"/>
+    <rect x="240" y="186" width="128" height="434"/>
+    <rect x="400" y="310" width="176" height="310"/>
+    <rect x="608" y="235.6" width="144" height="384.4"/>
+  </g>
+  <g fill="#e4bef1" opacity="0.5">
+    <rect x="64" y="328.6" width="36" height="16.12"/><rect x="256" y="328.6" width="36" height="16.12"/><rect x="416" y="328.6" width="36" height="16.12"/><rect x="624" y="328.6" width="36" height="16.12"/><rect x="64" y="359.6" width="36" height="16.12"/><rect x="256" y="359.6" width="36" height="16.12"/><rect x="416" y="359.6" width="36" height="16.12"/><rect x="624" y="359.6" width="36" height="16.12"/><rect x="64" y="390.6" width="36" height="16.12"/><rect x="256" y="390.6" width="36" height="16.12"/><rect x="416" y="390.6" width="36" height="16.12"/><rect x="624" y="390.6" width="36" height="16.12"/><rect x="64" y="421.6" width="36" height="16.12"/><rect x="256" y="421.6" width="36" height="16.12"/><rect x="416" y="421.6" width="36" height="16.12"/><rect x="624" y="421.6" width="36" height="16.12"/><rect x="64" y="452.59999999999997" width="36" height="16.12"/><rect x="256" y="452.59999999999997" width="36" height="16.12"/><rect x="416" y="452.59999999999997" width="36" height="16.12"/><rect x="624" y="452.59999999999997" width="36" height="16.12"/><rect x="64" y="483.6" width="36" height="16.12"/><rect x="256" y="483.6" width="36" height="16.12"/><rect x="416" y="483.6" width="36" height="16.12"/><rect x="624" y="483.6" width="36" height="16.12"/><rect x="64" y="514.6" width="36" height="16.12"/><rect x="256" y="514.6" width="36" height="16.12"/><rect x="416" y="514.6" width="36" height="16.12"/><rect x="624" y="514.6" width="36" height="16.12"/><rect x="64" y="545.6" width="36" height="16.12"/><rect x="256" y="545.6" width="36" height="16.12"/><rect x="416" y="545.6" width="36" height="16.12"/><rect x="624" y="545.6" width="36" height="16.12"/><rect x="64" y="576.6" width="36" height="16.12"/><rect x="256" y="576.6" width="36" height="16.12"/><rect x="416" y="576.6" width="36" height="16.12"/><rect x="624" y="576.6" width="36" height="16.12"/><rect x="64" y="607.6" width="36" height="16.12"/><rect x="256" y="607.6" width="36" height="16.12"/><rect x="416" y="607.6" width="36" height="16.12"/><rect x="624" y="607.6" width="36" height="16.12"/>
+  </g>
+  <g transform="translate(48, 62)">
+    <rect width="80" height="10" fill="#E02B1D"/>
+    <text y="78" font-family="Archivo Black, Arial Black, sans-serif" font-size="60" fill="#0A0A0A" letter-spacing="-2">EL CERRO</text>
+    <text y="114" font-family="Space Mono, monospace" font-size="17" fill="#0A0A0A" opacity="0.7" letter-spacing="5">COLOR SOBRE COLOR</text>
+  </g>
+  <rect width="800" height="620" filter="url(#g4)" opacity="0.6"/>
+</svg>

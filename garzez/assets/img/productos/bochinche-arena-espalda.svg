@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000" role="img"
+     aria-label="Bochinche — Arena, vista espalda">
+  <defs>
+    <filter id="grano"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3"/>
+      <feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope="0.05"/></feComponentTransfer></filter>
+    <linearGradient id="luz" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.14"/>
+      <stop offset="0.55" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0.12"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="1000" fill="#E2DED1"/>
+  <text x="400" y="620" text-anchor="middle" font-family="Archivo Black, Arial Black, sans-serif"
+        font-size="240" fill="#0A0A0A" opacity="0.045" letter-spacing="-8">GARZEZ</text>
+  <g opacity="0.5">
+    <rect x="0" y="0" width="800" height="4" fill="#FFC700"/>
+    <rect x="0" y="996" width="800" height="4" fill="#E02B1D"/>
+  </g>
+
+  <g transform="translate(400 512) scale(1.24) translate(-300 -351)">
+    <path d="
+    M172 92 L428 92 L444 178 L416 610 L318 610 L300 300 L282 610 L184 610 L156 178 Z" fill="#B9A88A"/>
+    <path d="
+    M172 92 L428 92 L444 178 L416 610 L318 610 L300 300 L282 610 L184 610 L156 178 Z" fill="url(#luz)"/>
+    <path d="M172 92 L428 92" stroke="#94866e" stroke-width="14" opacity="0.4" fill="none"/>
+              <path d="M300 120 L300 300" stroke="#94866e" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.4"/>
+              <path d="M186 300 L214 300 M386 300 L414 300" stroke="#94866e" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.3"/>
+              <rect x="176" y="300" width="72" height="80" fill="none" stroke="#94866e" stroke-width="3" opacity="0.4"/>
+              <rect x="352" y="300" width="72" height="80" fill="none" stroke="#94866e" stroke-width="3" opacity="0.4"/>
+    <g><text x="300" y="440" text-anchor="middle" font-family="Space Mono, monospace"
+             font-size="13" fill="#0A0A0A" opacity="0.7" letter-spacing="6">GARZEZ · CARACAS</text>
+       <text x="300" y="484" text-anchor="middle" font-family="Archivo Black, Arial Black, sans-serif"
+             font-size="16" fill="#0A0A0A" letter-spacing="-1">BOCHINCHE</text>
+       <g transform="translate(249, 510)">
+         <rect width="34" height="9" fill="#FFC700"/><rect x="34" width="34" height="9" fill="#0B3CC1"/><rect x="68" width="34" height="9" fill="#E02B1D"/>
+       </g></g>
+  </g>
+
+  <rect width="800" height="1000" filter="url(#grano)" opacity="0.55"/>
+  <text x="34" y="52" font-family="Space Mono, monospace" font-size="15" fill="#0A0A0A" opacity="0.55" letter-spacing="3">GZ-009</text>
+  <text x="766" y="52" text-anchor="end" font-family="Space Mono, monospace" font-size="15" fill="#0A0A0A" opacity="0.55" letter-spacing="3">ESPALDA</text>
+  <text x="34" y="962" font-family="Space Mono, monospace" font-size="15" fill="#0A0A0A" opacity="0.55" letter-spacing="3">ARENA</text>
+  <text x="766" y="962" text-anchor="end" font-family="Space Mono, monospace" font-size="15" fill="#0A0A0A" opacity="0.55" letter-spacing="3">DROP 04</text>
+</svg>
