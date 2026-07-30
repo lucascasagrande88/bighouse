@@ -1,3 +1,7 @@
 # Netlify redirects
 /home        /     301
 /inicio      /     301
+
+# Tienda Garzez — se sirve desde /garzez pero la URL pública es /tienda-ropa-online
+/tienda-ropa-online       /garzez/         200
+/tienda-ropa-online/*     /garzez/:splat   200
