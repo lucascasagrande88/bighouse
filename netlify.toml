@@ -1,0 +1,28 @@
+[build]
+  publish = "."
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+# El shell de la Factory se bloquea en el edge; los datos se bloquean
+# igual en cada función, así que el gate no es la única defensa.
+[[edge_functions]]
+  path = "/content-factory"
+  function = "gate"
+
+[[edge_functions]]
+  path = "/content-factory/*"
+  function = "gate"
+
+[[headers]]
+  for = "/content-factory/*"
+  [headers.values]
+    Cache-Control = "no-store"
+    X-Robots-Tag = "noindex, nofollow"
+    Referrer-Policy = "same-origin"
+
+[[headers]]
+  for = "/engine/*"
+  [headers.values]
+    Cache-Control = "no-cache"

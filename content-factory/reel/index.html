@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Reel Rebuilder · Chimichurri</title>
+  <link rel="stylesheet" href="../assets/factory.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand"><i></i>Chimichurri factory</div>
+    <div class="crumbs"><a href="/content-factory/factories.html">Fábricas</a> <span>/</span> <span>01 Reel Rebuilder</span></div>
+    <div class="spacer"></div>
+    <div class="top-actions">
+      <span class="dim" id="who" style="font-size:0.78rem"></span>
+      <button class="btn btn-sm btn-ghost" id="logout">Salir</button>
+    </div>
+  </header>
+
+  <main class="shell">
+    <div class="page-head">
+      <div>
+        <div class="eyebrow">Fábrica 01</div>
+        <h1>Reel Rebuilder</h1>
+        <p>No copia un reel: le extrae la lógica comunicacional y de edición para
+          construir una pieza nueva. Subís la referencia, sale un reel propio.</p>
+      </div>
+      <button class="btn btn-primary" id="newBtn">+ Nuevo reel</button>
+    </div>
+
+    <div id="alert" class="notice notice-error hide" style="margin-bottom:20px"></div>
+    <div id="list"><div class="empty"><div class="spinner" style="margin:0 auto 14px"></div><p>Cargando proyectos…</p></div></div>
+  </main>
+
+  <div class="toast-host" id="toasts"></div>
+
+  <!-- Modal de nuevo proyecto -->
+  <div class="modal-back hide" id="modal">
+    <div class="modal">
+      <h2>Nuevo reel</h2>
+      <p>Los datos del brief condicionan todo lo que viene después: el guion, las
+        escenas y el CTA salen de acá.</p>
+
+      <form class="modal-form" id="newForm">
+        <div class="field">
+          <label for="name">Nombre del proyecto</label>
+          <input type="text" id="name" required maxlength="80" placeholder="Ej: Publicar todos los días no es vender">
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label for="brand">Marca</label>
+            <select id="brand">
+              <option value="chimichurri">Chimichurri</option>
+              <option value="lucas">Lucas</option>
+              <option value="cliente">Cliente</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="objective">Objetivo</label>
+            <select id="objective">
+              <option value="vender">Vender</option>
+              <option value="educar">Educar</option>
+              <option value="entretener">Entretener</option>
+              <option value="posicionar">Posicionar</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="cta">CTA</label>
+          <input type="text" id="cta" maxlength="60" value="Escribinos por WhatsApp">
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label for="duration">Duración objetivo <span class="dim" id="durVal">30s</span></label>
+            <input type="range" id="duration" min="8" max="90" step="1" value="30">
+            <span class="help">Es una referencia con 15% de elasticidad, no un molde exacto.</span>
+          </div>
+          <div class="field">
+            <label for="intensity">Intensidad visual <span class="dim" id="intVal">0.6</span></label>
+            <input type="range" id="intensity" min="0" max="1" step="0.05" value="0.6">
+            <span class="help">0 sobrio · 1 agresivo. Cuánto se mueve todo.</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="source">Crear reel desde</label>
+          <select id="source">
+            <option value="upload">Subir un video .mp4</option>
+            <option value="audio">Subir sólo audio</option>
+            <option value="transcript">Pegar una transcripción</option>
+            <option value="idea">Escribir una idea</option>
+          </select>
+          <span class="help">El archivo se sube en el paso siguiente. No hay descargador de Instagram: bajás el reel y lo cargás.</span>
+        </div>
+
+        <div class="field">
+          <label for="notes">Indicaciones (opcional)</label>
+          <textarea id="notes" maxlength="1200" placeholder="Rubro del cliente, qué no decir, oferta puntual, ejemplos que sí funcionan…"></textarea>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn btn-ghost" id="cancel">Cancelar</button>
+          <button type="submit" class="btn btn-primary" id="create">Crear proyecto</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="../assets/js/dashboard.js"></script>
+</body>
+</html>

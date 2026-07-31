@@ -1,0 +1,22 @@
+{
+  "name": "chimi-reel-worker",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Worker de ingesta y render de la Chimi Content Factory",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "verify": "node scripts/verify-stage.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "//playwright": "Versión EXACTA a propósito. Cada versión de Playwright trae su propia revisión de Chromium, y la imagen del Dockerfile (mcr.microsoft.com/playwright:v1.47.0-jammy) trae la que corresponde a 1.47.0. Con un rango ^ npm instala una versión más nueva que busca un Chromium que la imagen no tiene y el worker no arranca. Si actualizás esto, actualizá el tag del Dockerfile en el mismo commit.",
+  "dependencies": {
+    "express": "^4.19.2",
+    "multer": "^2.0.2",
+    "playwright": "1.47.0"
+  }
+}

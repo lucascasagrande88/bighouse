@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Preparar reel · Chimichurri</title>
+  <link rel="stylesheet" href="../assets/factory.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand"><i></i>Chimichurri factory</div>
+    <div class="crumbs">
+      <a href="/content-factory/reel/">Reel Rebuilder</a> <span>/</span>
+      <span id="crumbName">…</span>
+    </div>
+    <div class="spacer"></div>
+    <div class="top-actions">
+      <a class="btn btn-sm btn-ghost hide" id="toEditor">Ir al editor →</a>
+      <button class="btn btn-sm btn-ghost" id="logout">Salir</button>
+    </div>
+  </header>
+
+  <main class="shell">
+    <div class="page-head">
+      <div>
+        <div class="eyebrow">Preparación</div>
+        <h1 id="title">…</h1>
+        <p id="brief" class="dim"></p>
+      </div>
+    </div>
+
+    <div id="alert" class="notice notice-error hide" style="margin-bottom:20px"></div>
+
+    <div class="steps" style="margin-bottom:28px">
+      <div class="step" id="step1">
+        <div class="n">1</div>
+        <div class="body"><strong>Cargar la referencia</strong><span id="s1sub">Video, audio, transcripción o idea escrita.</span></div>
+        <span class="tag" id="s1tag">Pendiente</span>
+      </div>
+      <div class="step" id="step2">
+        <div class="n">2</div>
+        <div class="body"><strong>Analizar el reel</strong><span id="s2sub">Mensaje, estructura, timing, lenguaje visual y audio.</span></div>
+        <span class="tag" id="s2tag">Pendiente</span>
+      </div>
+      <div class="step" id="step3">
+        <div class="n">3</div>
+        <div class="body"><strong>Adaptar a la marca</strong><span id="s3sub">Idea original, aplicación y guion nuevo.</span></div>
+        <span class="tag" id="s3tag">Pendiente</span>
+      </div>
+      <div class="step" id="step4">
+        <div class="n">4</div>
+        <div class="body"><strong>Dirigir las escenas</strong><span id="s4sub">Hasta 10 escenas configurando componentes del motor.</span></div>
+        <span class="tag" id="s4tag">Pendiente</span>
+      </div>
+    </div>
+
+    <!-- 1 · Referencia -->
+    <section class="modal" style="max-width:none;margin-bottom:20px" id="secSource">
+      <h2>1 · Referencia</h2>
+      <p id="sourceHelp">Bajá el reel que te gusta y subí el archivo.</p>
+
+      <div id="uploadBox">
+        <label class="drop" id="drop">
+          <strong>Arrastrá el archivo o hacé click</strong>
+          <span id="dropHint">.mp4 hasta 220 MB · vertical o horizontal, se normaliza a 9:16</span>
+          <input type="file" id="file" accept="video/*,audio/*">
+        </label>
+        <div class="bar hide" id="upBar" style="margin-top:12px"><i></i></div>
+        <p class="dim" id="upStatus" style="font-size:0.76rem;margin-top:8px"></p>
+      </div>
+
+      <div id="textBox" class="hide">
+        <div class="field">
+          <label for="manualText" id="manualLabel">Transcripción</label>
+          <textarea id="manualText" rows="7" placeholder="Pegá acá el texto del reel de referencia…"></textarea>
+          <span class="help" id="manualHelp">Sin fotogramas el análisis pierde la capa visual: se hace igual, pero con menos información.</span>
+        </div>
+        <div class="row" style="margin-top:14px">
+          <div class="field">
+            <label for="manualDuration">Duración del original (segundos)</label>
+            <input type="number" id="manualDuration" min="5" max="180" step="0.5" value="30">
+          </div>
+          <div style="display:flex;align-items:flex-end">
+            <button class="btn btn-primary btn-block" id="useText">Usar este texto</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="ingestSummary" class="hide" style="margin-top:16px"></div>
+    </section>
+
+    <!-- 2 · Análisis -->
+    <section class="modal hide" style="max-width:none;margin-bottom:20px" id="secAnalysis">
+      <h2>2 · Análisis</h2>
+      <p>Lo que hace funcionar al original. Los mecanismos, no el tema.</p>
+      <div id="analysisOut"></div>
+      <div class="modal-actions">
+        <button class="btn" id="reAnalyze">Volver a analizar</button>
+        <button class="btn btn-primary" id="doAnalyze">Analizar reel</button>
+      </div>
+    </section>
+
+    <!-- 3 · Adaptación -->
+    <section class="modal hide" style="max-width:none;margin-bottom:20px" id="secAdapt">
+      <h2>3 · Adaptación</h2>
+      <p>Tres niveles: qué dice el original, cómo se aplica a la marca, y el guion nuevo.</p>
+      <div id="adaptOut"></div>
+      <div class="modal-actions">
+        <button class="btn" id="reAdapt">Regenerar guion</button>
+        <button class="btn btn-primary" id="doAdapt">Generar guion</button>
+      </div>
+    </section>
+
+    <!-- 4 · Dirección -->
+    <section class="modal hide" style="max-width:none" id="secDirect">
+      <h2>4 · Dirección de escenas</h2>
+      <p>El guion se divide en escenas y cada escena elige un componente del motor.
+        Vos podés corregir el guion antes: lo que está en el cuadro es lo que se dirige.</p>
+      <div class="field">
+        <label for="scriptEdit">Guion final</label>
+        <textarea id="scriptEdit" rows="8"></textarea>
+        <span class="help" id="scriptMeta"></span>
+      </div>
+      <div class="modal-actions">
+        <button class="btn" id="saveScript">Guardar guion</button>
+        <button class="btn btn-primary" id="doDirect">Dirigir escenas</button>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast-host" id="toasts"></div>
+  <script type="module" src="../assets/js/pipeline.js"></script>
+</body>
+</html>

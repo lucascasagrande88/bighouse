@@ -1,0 +1,24 @@
+node_modules/
+.netlify/
+.env
+.env.*
+!.env.example
+
+# Área de trabajo del worker: archivos temporales de render.
+worker/work/
+worker/fonts/*.ttf
+worker/fonts/*.otf
+worker/fonts/*.woff2
+
+# Salidas de render
+*.mp4
+*.webm
+*.mov
+!engine/demo/*.mp4
+
+# Banco de sonidos: los archivos de audio no van al historial de git.
+assets/sfx/*.mp3
+assets/sfx/*.wav
+
+.DS_Store
+Thumbs.db

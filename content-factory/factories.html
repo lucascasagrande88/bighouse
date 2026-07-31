@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Content Factories · Chimichurri</title>
+  <link rel="stylesheet" href="assets/factory.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand"><i></i>Chimichurri factory</div>
+    <div class="spacer"></div>
+    <div class="top-actions">
+      <span class="dim" id="who" style="font-size:0.78rem"></span>
+      <button class="btn btn-sm btn-ghost" id="logout">Salir</button>
+    </div>
+  </header>
+
+  <main class="shell">
+    <div class="page-head">
+      <div>
+        <div class="eyebrow">Content Factories</div>
+        <h1>Fábricas de contenido</h1>
+        <p>Cada fábrica toma una entrada y devuelve piezas terminadas. La primera
+          es la de reels; las otras vienen después.</p>
+      </div>
+    </div>
+
+    <div id="env" class="notice notice-warn hide" style="margin-bottom:20px"></div>
+
+    <div class="factories">
+      <a class="factory factory-open" href="/content-factory/reel/">
+        <div class="num">01</div>
+        <div class="body">
+          <h3>Reel Rebuilder</h3>
+          <p>Un reel de referencia entra. Sale un reel nuevo de Chimichurri: guion, escenas, animación y export.</p>
+        </div>
+        <span class="tag tag-accent">Disponible</span>
+        <div class="arrow">→</div>
+      </a>
+
+      <div class="factory factory-soon">
+        <div class="num">02</div>
+        <div class="body">
+          <h3>Carrusel Factory</h3>
+          <p>De una idea a un carrusel de 10 placas con la estructura de lectura resuelta.</p>
+        </div>
+        <span class="tag">Próximamente</span>
+        <div class="arrow">→</div>
+      </div>
+
+      <div class="factory factory-soon">
+        <div class="num">03</div>
+        <div class="body">
+          <h3>Campaign Factory</h3>
+          <p>Una campaña completa: piezas, calendario y variantes por canal.</p>
+        </div>
+        <span class="tag">Próximamente</span>
+        <div class="arrow">→</div>
+      </div>
+
+      <div class="factory factory-soon">
+        <div class="num">04</div>
+        <div class="body">
+          <h3>Case Study Factory</h3>
+          <p>De los archivos de un trabajo entregado a un caso presentable.</p>
+        </div>
+        <span class="tag">Próximamente</span>
+        <div class="arrow">→</div>
+      </div>
+    </div>
+  </main>
+
+  <script type="module">
+    import { api } from './assets/js/api.js';
+
+    const session = await api.session().catch(() => null);
+    if (!session) location.replace('/content-factory/');
+    else {
+      document.getElementById('who').textContent = session.email;
+
+      // Si falta configuración del entorno, mejor decirlo acá que dejar que
+      // el usuario descubra un botón que falla a mitad del flujo.
+      const missing = [];
+      if (!session.features.ai) missing.push('OPENAI_API_KEY (análisis, guion y dirección)');
+      if (!session.features.worker) missing.push('WORKER_URL + WORKER_SECRET (ingesta y render)');
+      if (missing.length) {
+        const env = document.getElementById('env');
+        env.className = 'notice notice-warn';
+        env.innerHTML = `<div><strong>Falta configurar el entorno.</strong><br>Sin esto la fábrica abre pero no procesa: ${missing.join(' · ')}.</div>`;
+      }
+    }
+
+    document.getElementById('logout').addEventListener('click', async () => {
+      await api.logout().catch(() => {});
+      location.replace('/content-factory/');
+    });
+  </script>
+</body>
+</html>

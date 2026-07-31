@@ -1,0 +1,173 @@
+{
+  "name": "reel_storyboard",
+  "description": "Storyboard completo: hasta 10 escenas configurando componentes maestros del motor. El modelo NUNCA devuelve HTML ni CSS: elige un scene_type y lo configura.",
+  "schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["script", "estimated_duration", "scenes", "director_notes"],
+    "properties": {
+      "script": {
+        "type": "string",
+        "description": "El guion completo de locución, corrido, tal como se va a grabar."
+      },
+      "estimated_duration": {
+        "type": "number",
+        "description": "Duración estimada de la locución en segundos."
+      },
+      "director_notes": {
+        "type": "string",
+        "description": "Decisiones de dirección: por qué esta estructura visual y no otra."
+      },
+      "scenes": {
+        "type": "array",
+        "description": "Máximo 10 escenas, contiguas y en orden.",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "voiceover",
+            "visual_message",
+            "scene_type",
+            "visual_text",
+            "keywords",
+            "items",
+            "stat",
+            "comparison",
+            "asset",
+            "animation",
+            "sfx",
+            "transition_out"
+          ],
+          "properties": {
+            "voiceover": {
+              "type": "string",
+              "description": "Lo que se escucha en esta escena. Fragmento exacto del guion."
+            },
+            "visual_message": {
+              "type": "string",
+              "description": "Qué tiene que entender el que mira, aunque esté sin sonido."
+            },
+            "scene_type": {
+              "type": "string",
+              "description": "Componente maestro que ejecuta la escena.",
+              "enum": [
+                "kinetic_hook",
+                "camera_words",
+                "impact_word",
+                "animated_list",
+                "comparison",
+                "stat_number",
+                "concept_image",
+                "cta_end"
+              ]
+            },
+            "visual_text": {
+              "type": "array",
+              "description": "Líneas en pantalla. NO es la locución completa: es lo que hay que leer. Máximo 4 líneas, máximo 5 palabras por línea.",
+              "items": { "type": "string" }
+            },
+            "keywords": {
+              "type": "array",
+              "description": "Palabras dentro de visual_text que se pintan con el color de la marca. 1 o 2 por escena.",
+              "items": { "type": "string" }
+            },
+            "items": {
+              "type": "array",
+              "description": "Sólo para animated_list. Máximo 5. Vacío en el resto.",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["text", "icon"],
+                "properties": {
+                  "text": { "type": "string" },
+                  "icon": {
+                    "type": "string",
+                    "enum": [
+                      "check", "cross", "arrow", "arrowUp", "arrowDown", "bolt", "target", "eye",
+                      "cart", "money", "chat", "phone", "clock", "chart", "trend", "star",
+                      "fire", "lock", "users", "store", "camera", "warning", "question", "dot"
+                    ]
+                  }
+                }
+              }
+            },
+            "stat": {
+              "type": ["object", "null"],
+              "description": "Sólo para stat_number. null en el resto.",
+              "additionalProperties": false,
+              "required": ["value", "prefix", "suffix", "label"],
+              "properties": {
+                "value": { "type": "string", "description": "La cifra. Ej: 80, 3, 24, 2.5" },
+                "prefix": { "type": ["string", "null"], "description": "Ej: $, +" },
+                "suffix": { "type": ["string", "null"], "description": "Ej: %, h, x" },
+                "label": { "type": "string", "description": "Qué mide la cifra." }
+              }
+            },
+            "comparison": {
+              "type": ["object", "null"],
+              "description": "Sólo para comparison. null en el resto.",
+              "additionalProperties": false,
+              "required": ["left_label", "left_items", "right_label", "right_items"],
+              "properties": {
+                "left_label": { "type": "string", "description": "El lado que pierde. Ej: Antes" },
+                "left_items": { "type": "array", "items": { "type": "string" } },
+                "right_label": { "type": "string", "description": "El lado que gana. Ej: Después" },
+                "right_items": { "type": "array", "items": { "type": "string" } }
+              }
+            },
+            "asset": {
+              "type": ["object", "null"],
+              "description": "Recurso visual de la escena. null si no necesita ninguno.",
+              "additionalProperties": false,
+              "required": ["kind", "concept", "prompt"],
+              "properties": {
+                "kind": {
+                  "type": "string",
+                  "enum": ["none", "image", "background", "screenshot", "diagram"]
+                },
+                "concept": {
+                  "type": "string",
+                  "description": "Qué se ve, en una frase, en criollo."
+                },
+                "prompt": {
+                  "type": "string",
+                  "description": "Prompt de generación completo: sujeto, acción, expresión, lugar, encuadre, iluminación, estética, formato vertical 9:16, espacio negativo para el texto, restricciones."
+                }
+              }
+            },
+            "animation": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["speed", "intensity"],
+              "properties": {
+                "speed": {
+                  "type": "number",
+                  "description": "Multiplicador de velocidad de las entradas. 1 = normal. 1.3 = nervioso. 0.8 = calmo."
+                },
+                "intensity": {
+                  "type": "number",
+                  "description": "0 a 1. Cuánto se mueve todo en esta escena."
+                }
+              }
+            },
+            "sfx": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["in", "accent", "out"],
+              "properties": {
+                "in": { "type": "string", "enum": ["hook", "impact_low", "impact_hard", "appear", "disappear", "transition", "list_tick", "pop", "click", "whoosh", "shimmer", "glitch", "success", "cta", "close", "none"] },
+                "accent": { "type": "string", "enum": ["hook", "impact_low", "impact_hard", "appear", "disappear", "transition", "list_tick", "pop", "click", "whoosh", "shimmer", "glitch", "success", "cta", "close", "none"] },
+                "out": { "type": "string", "enum": ["hook", "impact_low", "impact_hard", "appear", "disappear", "transition", "list_tick", "pop", "click", "whoosh", "shimmer", "glitch", "success", "cta", "close", "none"] }
+              }
+            },
+            "transition_out": {
+              "type": "string",
+              "description": "Cómo pasa a la escena siguiente.",
+              "enum": ["cut", "fast_wipe", "flash", "dip_black", "zoom_punch", "slide_up", "glitch"]
+            }
+          }
+        }
+      }
+    }
+  }
+}

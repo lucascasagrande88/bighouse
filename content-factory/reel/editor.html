@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Editor · Chimichurri</title>
+  <link rel="stylesheet" href="../assets/factory.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand"><i></i>Chimichurri factory</div>
+    <div class="crumbs">
+      <a href="/content-factory/reel/">Reel Rebuilder</a> <span>/</span>
+      <span id="crumbName">…</span>
+    </div>
+    <div class="spacer"></div>
+    <div class="top-actions">
+      <span class="dim" id="saveState" style="font-size:0.74rem"></span>
+      <button class="btn btn-sm" id="safeBtn" title="Guías de encuadre">Guías</button>
+      <a class="btn btn-sm btn-ghost" id="backPipeline">Preparación</a>
+      <button class="btn btn-sm btn-primary" id="exportBtn">Exportar</button>
+    </div>
+  </header>
+
+  <div class="editor">
+    <!-- ─── escenas ─── -->
+    <aside class="panel">
+      <div class="panel-head">
+        <h3>Escenas</h3>
+        <span class="dim mono" id="sceneCount" style="font-size:0.7rem"></span>
+      </div>
+      <div class="panel-body">
+        <div id="warnings"></div>
+        <div class="scene-list" id="sceneList"></div>
+        <button class="btn btn-sm btn-block" id="addScene" style="margin-top:10px">+ Agregar escena</button>
+      </div>
+    </aside>
+
+    <!-- ─── preview ─── -->
+    <section class="stage-col">
+      <div class="stage-wrap">
+        <div class="stage-frame">
+          <iframe id="stage" src="/engine/stage.html" title="Preview del reel"></iframe>
+        </div>
+      </div>
+      <div class="transport">
+        <button class="play" id="play" aria-label="Reproducir">▶</button>
+        <span class="time mono" id="time">0.0s / 0.0s</span>
+        <input type="range" class="scrub" id="scrub" min="0" max="100" step="0.1" value="0">
+        <span class="dim mono" id="sceneNow" style="font-size:0.72rem;min-width:74px;text-align:right"></span>
+      </div>
+    </section>
+
+    <!-- ─── propiedades ─── -->
+    <aside class="panel">
+      <div class="panel-head">
+        <h3 id="propTitle">Propiedades</h3>
+        <button class="btn btn-sm btn-ghost" id="globalBtn">Globales</button>
+      </div>
+      <div class="panel-body" id="props"></div>
+    </aside>
+
+    <!-- ─── timeline ─── -->
+    <div class="timeline" id="timeline"></div>
+  </div>
+
+  <!-- Modal de exportación -->
+  <div class="modal-back hide" id="exportModal">
+    <div class="modal">
+      <h2>Exportar</h2>
+      <p>Dos salidas distintas: el reel completo, y el overlay con transparencia
+        para montarlo en After Effects sobre tu propio video.</p>
+
+      <div class="modal-form">
+        <div class="field">
+          <label>Salidas</label>
+          <div class="chips" id="outputs">
+            <button type="button" class="chip on" data-out="mp4">Reel completo · MP4</button>
+            <button type="button" class="chip on" data-out="alpha_png">Overlay · PNG con alfa</button>
+            <button type="button" class="chip" data-out="alpha_webm">Overlay · WebM con alfa</button>
+            <button type="button" class="chip" data-out="prores">Overlay · ProRes 4444</button>
+          </div>
+          <span class="help">La secuencia PNG es la salida segura para After Effects.
+            ProRes da la mejor calidad y archivos enormes.</span>
+        </div>
+
+        <div class="field">
+          <label for="fps">Frames por segundo</label>
+          <select id="fps">
+            <option value="25">25 fps</option>
+            <option value="30" selected>30 fps</option>
+            <option value="50">50 fps</option>
+          </select>
+          <span class="help">Más fps es más tiempo de render, proporcional y sin vueltas.</span>
+        </div>
+
+        <div id="renderStatus" class="hide"></div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn btn-ghost" id="closeExport">Cerrar</button>
+          <button type="button" class="btn btn-primary" id="startRender">Renderizar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-host" id="toasts"></div>
+  <script type="module" src="../assets/js/editor.js"></script>
+</body>
+</html>

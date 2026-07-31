@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stage · Chimi Content Factory</title>
+  <!--
+    Superficie de render. Se usa en dos contextos:
+      1. dentro de un <iframe> en el editor (preview en vivo)
+      2. en Playwright dentro del worker, con viewport 1080x1920
+
+    Parámetros de query:
+      ?alpha=1   fondo transparente, sólo tipografía/íconos/gráficos
+      ?fit=0     no escalar (el worker lo usa: quiere 1:1)
+      ?safe=1    mostrar guías de encuadre
+  -->
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Syne:wght@700;800&display=block" rel="stylesheet">
+  <link rel="stylesheet" href="stage.css">
+</head>
+<body>
+  <div id="fit">
+    <div class="stage" id="stage">
+      <video class="stage-base" id="stageBase" muted playsinline preload="auto"></video>
+      <div class="stage-scenes"></div>
+      <div class="stage-fx"></div>
+      <div class="stage-safe"></div>
+    </div>
+  </div>
+  <script type="module" src="src/stage.js"></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+{
+  "name": "reel_adaptation",
+  "description": "Traducción creativa del reel de referencia al mundo de la marca. Tres niveles: idea original, aplicación y guion nuevo. No es reemplazar palabras: cambia público, problema, ejemplos, tono, oferta, remate y CTA.",
+  "schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["original_idea", "brand_application", "script", "shifts", "hook_options", "estimated_duration", "risk_notes"],
+    "properties": {
+      "original_idea": {
+        "type": "string",
+        "description": "Qué dice el reel original, en una frase, sin la marca de nadie."
+      },
+      "brand_application": {
+        "type": "string",
+        "description": "Cómo se traduce esa idea al negocio de la marca. Qué muestra, a quién, para qué."
+      },
+      "script": {
+        "type": "string",
+        "description": "El guion nuevo completo, listo para locutar. Español rioplatense, voseo, sin palabras de relleno."
+      },
+      "shifts": {
+        "type": "object",
+        "description": "Qué se movió respecto del original. Si algo no se movió, decirlo.",
+        "additionalProperties": false,
+        "required": ["audience", "problem", "examples", "tone", "offer", "punchline", "cta"],
+        "properties": {
+          "audience": { "type": "string" },
+          "problem": { "type": "string" },
+          "examples": { "type": "string" },
+          "tone": { "type": "string" },
+          "offer": { "type": "string" },
+          "punchline": { "type": "string" },
+          "cta": { "type": "string" }
+        }
+      },
+      "hook_options": {
+        "type": "array",
+        "description": "Tres primeras frases alternativas para probar. La primera es la que va en el guion.",
+        "items": { "type": "string" }
+      },
+      "estimated_duration": {
+        "type": "number",
+        "description": "Duración estimada de la locución en segundos, a ritmo cómodo."
+      },
+      "risk_notes": {
+        "type": "string",
+        "description": "Qué puede fallar de esta adaptación: promesas que no se pueden sostener, ejemplos que no aplican, tono que no cierra."
+      }
+    }
+  }
+}

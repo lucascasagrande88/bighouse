@@ -1,0 +1,267 @@
+/* Superficie de render: 1080 x 1920 exactos.
+   Todas las medidas son px absolutos sobre ese lienzo, así el preview del
+   editor y el frame del worker son el mismo dibujo a distinta escala. */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 100%; height: 100%;
+  background: #000;
+  overflow: hidden;
+}
+
+/* El modo alfa tiene que limpiar el fondo del elemento RAÍZ, no sólo del body:
+   omitBackground de Playwright respeta cualquier fondo opaco que encuentre, y
+   un <html> negro produce un PNG sin transparencia aunque todo lo demás esté
+   bien. La clase se aplica a los dos desde stage.js. */
+html.alpha-page, body.alpha-page { background: transparent; }
+
+#fit {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.stage {
+  --accent: #D4FF00;
+  --accent2: #FF7A3D;
+  --bg: #080808;
+  --surface: #0f0f0f;
+  --surface2: #161616;
+  --text: #f2f2f2;
+  --muted: #6e6e6e;
+  --display: 'Syne', system-ui, sans-serif;
+  --body: 'Inter', system-ui, sans-serif;
+  --tracking: -0.03em;
+  --on-accent: #000;
+
+  --pad: 96px;
+  --safe-bottom: 200px;
+
+  position: relative;
+  width: 1080px; height: 1920px;
+  flex: 0 0 auto;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--body);
+  overflow: hidden;
+  transform-origin: center center;
+  -webkit-font-smoothing: antialiased;
+}
+.stage.alpha { background: transparent; }
+
+.stage-base {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.stage-scenes { position: absolute; inset: 0; z-index: 1; will-change: transform; }
+.stage-fx {
+  position: absolute; inset: 0; z-index: 3;
+  opacity: 0; pointer-events: none;
+  transform-origin: left center;
+}
+
+.scene { position: absolute; inset: 0; }
+/* Escenas que dejan ver el video base no pintan fondo. */
+.scene { background: var(--bg); }
+.scene.sc-transparent, .stage.alpha .scene { background: transparent; }
+
+/* En export con alfa sólo salen tipografía, íconos y gráficos. */
+.stage.alpha .stage-base,
+.stage.alpha .sc-glow,
+.stage.alpha .sc-img-holder,
+.stage.alpha .sc-img-scrim { display: none !important; }
+
+/* Guías de encuadre: sólo editor, nunca en el render. */
+.stage-safe { position: absolute; inset: 0; z-index: 4; pointer-events: none; display: none; }
+.stage.show-safe .stage-safe { display: block; }
+.stage-safe::before {
+  content: ''; position: absolute;
+  left: var(--pad); right: var(--pad); top: 220px; bottom: var(--safe-bottom);
+  border: 2px dashed rgba(212,255,0,0.28); border-radius: 8px;
+}
+
+/* ─── primitivas compartidas ─── */
+
+.kw { font-style: normal; color: var(--accent); }
+
+.sc-glow {
+  position: absolute; top: -12%; right: -18%;
+  width: 90%; height: 55%;
+  background: radial-gradient(ellipse at center, color-mix(in srgb, var(--accent) 16%, transparent) 0%, transparent 68%);
+  pointer-events: none;
+}
+.sc-glow-bottom { top: auto; bottom: -14%; right: -10%; left: -10%; width: auto; height: 60%; }
+
+.sc-stack {
+  position: absolute;
+  left: var(--pad); right: var(--pad);
+  top: 50%; transform: translateY(-50%);
+  display: flex; flex-direction: column; gap: 6px;
+}
+
+/* ─── 01 hook tipográfico ─── */
+.sc-hook .sc-line { overflow: hidden; }
+.sc-hook .sc-line-inner {
+  display: block;
+  font-family: var(--display); font-weight: 800;
+  font-size: 132px; line-height: 1.02; letter-spacing: var(--tracking);
+  text-transform: uppercase;
+}
+
+/* ─── 02 cámara + palabras ─── */
+.sc-lower {
+  position: absolute; left: var(--pad); right: var(--pad);
+  bottom: var(--safe-bottom);
+  display: flex; align-items: flex-start; gap: 28px;
+}
+.sc-lower-bar {
+  width: 12px; align-self: stretch; min-height: 120px;
+  background: var(--accent); border-radius: 6px;
+  transform-origin: bottom center; flex: 0 0 auto;
+}
+.sc-lower-box { display: flex; flex-direction: column; gap: 10px; }
+.sc-lower-line {
+  font-family: var(--display); font-weight: 800;
+  font-size: 84px; line-height: 1.06; letter-spacing: var(--tracking);
+  text-shadow: 0 6px 40px rgba(0,0,0,0.65);
+}
+
+/* ─── 03 palabra impacto ─── */
+.sc-impact-block {
+  position: absolute; left: 0; right: 0;
+  top: 50%; height: 320px; margin-top: -160px;
+  background: var(--accent); transform-origin: center center;
+}
+.sc-impact {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  padding: 0 60px;
+}
+.sc-impact-word {
+  font-family: var(--display); font-weight: 800;
+  font-size: 170px; line-height: 1; letter-spacing: -0.045em;
+  color: var(--on-accent); text-align: center; word-break: break-word;
+}
+
+/* ─── 04 lista animada ─── */
+.sc-list-wrap {
+  position: absolute; left: var(--pad); right: var(--pad);
+  top: 50%; transform: translateY(-50%);
+}
+.sc-list-title {
+  font-family: var(--display); font-weight: 800;
+  font-size: 82px; line-height: 1.06; letter-spacing: var(--tracking);
+  margin-bottom: 56px; text-transform: uppercase;
+}
+.sc-list { display: flex; flex-direction: column; gap: 26px; }
+.sc-list-row {
+  display: flex; align-items: center; gap: 28px;
+  background: var(--surface); border: 2px solid rgba(255,255,255,0.08);
+  border-radius: 24px; padding: 28px 34px;
+}
+.sc-list-icon {
+  flex: 0 0 auto; width: 76px; height: 76px; border-radius: 20px;
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  color: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+}
+.sc-list-icon svg { width: 42px; height: 42px; }
+.sc-list-text { font-size: 52px; font-weight: 600; line-height: 1.15; }
+
+/* ─── 05 comparación ─── */
+.sc-cmp {
+  position: absolute; left: var(--pad); right: var(--pad);
+  top: 50%; transform: translateY(-50%);
+  display: flex; flex-direction: column; gap: 40px;
+}
+.sc-cmp-col { display: flex; flex-direction: column; gap: 22px; }
+.sc-cmp-label {
+  font-family: var(--display); font-weight: 800;
+  font-size: 44px; letter-spacing: 0.06em; text-transform: uppercase;
+}
+.sc-cmp-left .sc-cmp-label { color: var(--muted); }
+.sc-cmp-right .sc-cmp-label { color: var(--accent); }
+.sc-cmp-items { display: flex; flex-direction: column; gap: 16px; }
+.sc-cmp-row { display: flex; align-items: flex-start; gap: 20px; font-size: 46px; line-height: 1.2; font-weight: 500; }
+.sc-cmp-ico { flex: 0 0 auto; width: 46px; height: 46px; }
+.sc-cmp-ico svg { width: 46px; height: 46px; }
+.sc-cmp-left .sc-cmp-ico { color: #4a4a4a; }
+.sc-cmp-right .sc-cmp-ico { color: var(--accent); }
+.sc-cmp-divider { height: 3px; background: rgba(255,255,255,0.1); transform-origin: left center; }
+
+/* ─── 06 número / estadística ─── */
+.sc-stat {
+  position: absolute; left: var(--pad); right: var(--pad);
+  top: 50%; transform: translateY(-50%);
+  text-align: center;
+}
+.sc-stat-row {
+  display: flex; align-items: baseline; justify-content: center; gap: 8px;
+  font-family: var(--display); font-weight: 800; letter-spacing: -0.05em;
+  color: var(--accent);
+}
+.sc-stat-n { font-size: 300px; line-height: 0.9; font-variant-numeric: tabular-nums; }
+.sc-stat-fix { font-size: 130px; line-height: 1; }
+.sc-stat-label {
+  font-size: 56px; font-weight: 600; line-height: 1.18;
+  margin-top: 32px; color: var(--text);
+}
+.sc-stat-bar {
+  height: 8px; background: var(--accent); border-radius: 4px;
+  margin: 48px auto 0; width: 60%;
+  transform-origin: center center;
+}
+
+/* ─── 07 imagen conceptual ─── */
+.sc-img-holder { position: absolute; inset: 0; overflow: hidden; }
+.sc-img { width: 100%; height: 100%; object-fit: cover; }
+.sc-img-empty {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  padding: 120px;
+  background: repeating-linear-gradient(45deg, #131313 0 40px, #0d0d0d 40px 80px);
+  border: 4px dashed rgba(212,255,0,0.2);
+}
+.sc-img-empty span {
+  font-size: 40px; line-height: 1.4; color: var(--muted);
+  text-align: center; max-width: 700px;
+}
+.sc-img-scrim {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.35) 42%, rgba(0,0,0,0) 70%);
+}
+.sc-img-text {
+  position: absolute; left: var(--pad); right: var(--pad);
+  bottom: var(--safe-bottom);
+  display: flex; flex-direction: column; gap: 12px;
+}
+.sc-img-line {
+  font-family: var(--display); font-weight: 800;
+  font-size: 96px; line-height: 1.05; letter-spacing: var(--tracking);
+  text-transform: uppercase;
+}
+
+/* ─── 08 remate / CTA ─── */
+.sc-cta {
+  position: absolute; left: var(--pad); right: var(--pad);
+  top: 50%; transform: translateY(-50%);
+  display: flex; flex-direction: column; align-items: flex-start; gap: 56px;
+}
+.sc-cta-box { display: flex; flex-direction: column; gap: 8px; }
+.sc-cta-line {
+  font-family: var(--display); font-weight: 800;
+  font-size: 118px; line-height: 1.03; letter-spacing: var(--tracking);
+  text-transform: uppercase;
+}
+.sc-cta-btn {
+  display: inline-flex; align-items: center; gap: 20px;
+  background: var(--accent); color: var(--on-accent);
+  font-size: 52px; font-weight: 800;
+  padding: 30px 56px; border-radius: 100px;
+  transform-origin: left center;
+}
+.sc-cta-dot { width: 22px; height: 22px; border-radius: 50%; background: var(--on-accent); }
+.sc-cta-brand { font-size: 42px; font-weight: 600; color: var(--muted); letter-spacing: 0.02em; }

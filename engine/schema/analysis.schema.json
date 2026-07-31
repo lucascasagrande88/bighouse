@@ -1,0 +1,125 @@
+{
+  "name": "reel_analysis",
+  "description": "Desarmado del reel de referencia en sus cinco capas. No se copia el reel: se extrae su lógica comunicacional y de edición.",
+  "schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["message", "structure", "timing", "visual_language", "audio", "takeaways"],
+    "properties": {
+      "message": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["topic", "thesis", "audience", "promise", "objective"],
+        "properties": {
+          "topic": { "type": "string", "description": "De qué habla, en una frase." },
+          "thesis": { "type": "string", "description": "Qué afirma. La idea que sostiene todo el reel." },
+          "audience": { "type": "string", "description": "A quién le habla." },
+          "promise": { "type": "string", "description": "Qué le promete al que mira." },
+          "objective": {
+            "type": "string",
+            "enum": ["vender", "educar", "entretener", "posicionar", "mixto"]
+          }
+        }
+      },
+      "structure": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["hook_type", "pattern", "beats", "cta_present", "cta_text"],
+        "properties": {
+          "hook_type": {
+            "type": "string",
+            "enum": [
+              "pregunta_provocadora",
+              "afirmacion_polemica",
+              "error_comun",
+              "dato_duro",
+              "promesa_directa",
+              "historia_personal",
+              "enumeracion",
+              "otro"
+            ]
+          },
+          "pattern": {
+            "type": "string",
+            "description": "La estructura en flecha. Ej: problema → lista → solución → CTA"
+          },
+          "beats": {
+            "type": "array",
+            "description": "Los tramos narrativos del original, en orden.",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["label", "role", "start", "end", "summary"],
+              "properties": {
+                "label": { "type": "string" },
+                "role": {
+                  "type": "string",
+                  "enum": ["hook", "contexto", "problema", "enumeracion", "desarrollo", "prueba", "solucion", "remate", "cta"]
+                },
+                "start": { "type": "number" },
+                "end": { "type": "number" },
+                "summary": { "type": "string" }
+              }
+            }
+          },
+          "cta_present": { "type": "boolean" },
+          "cta_text": { "type": ["string", "null"] }
+        }
+      },
+      "timing": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["duration", "words", "wpm", "pace", "longest_pause", "cut_count"],
+        "properties": {
+          "duration": { "type": "number" },
+          "words": { "type": "integer" },
+          "wpm": { "type": "integer", "description": "Palabras por minuto del original." },
+          "pace": { "type": "string", "enum": ["lento", "medio", "rapido", "muy_rapido"] },
+          "longest_pause": { "type": "number", "description": "Silencio más largo, en segundos." },
+          "cut_count": { "type": "integer", "description": "Cortes visuales detectados." }
+        }
+      },
+      "visual_language": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["camera_presence", "text_style", "resources", "composition_notes", "avg_shot_duration"],
+        "properties": {
+          "camera_presence": {
+            "type": "string",
+            "enum": ["habla_a_camara", "voz_en_off", "mixto", "sin_persona"]
+          },
+          "text_style": {
+            "type": "string",
+            "description": "Cómo usa la tipografía: tamaño, ubicación, si repite la locución o la resume."
+          },
+          "resources": {
+            "type": "array",
+            "description": "Recursos visuales que efectivamente usa.",
+            "items": {
+              "type": "string",
+              "enum": ["camara", "texto_grande", "lista", "grafico", "numero", "imagen", "captura", "diagrama", "iconos", "b_roll"]
+            }
+          },
+          "composition_notes": { "type": "string" },
+          "avg_shot_duration": { "type": "number" }
+        }
+      },
+      "audio": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["voice_energy", "music", "silences", "sfx_density"],
+        "properties": {
+          "voice_energy": { "type": "string", "enum": ["baja", "media", "alta"] },
+          "music": { "type": "string", "enum": ["sin_musica", "de_fondo", "protagonista"] },
+          "silences": { "type": "string", "enum": ["sin_silencios", "pausas_marcadas", "respiracion_natural"] },
+          "sfx_density": { "type": "string", "enum": ["ninguno", "puntual", "constante"] }
+        }
+      },
+      "takeaways": {
+        "type": "array",
+        "description": "Qué hace bien este reel y conviene replicar. Mecanismos, no contenido.",
+        "items": { "type": "string" }
+      }
+    }
+  }
+}
