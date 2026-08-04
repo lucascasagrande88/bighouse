@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es-AR" class="no-js">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <title>Pölcher — Beer bar, burgers y birra en Quilmes</title>
+  <meta name="description" content="Pölcher es la esquina más cervecera de Quilmes. Beer bar, burgers, birra de barril y buena música. Punto de encuentro de amigos. Nos vemos en Pölcher." />
+  <meta name="theme-color" content="#124D2F" />
+  <meta name="color-scheme" content="dark" />
+  <!-- ⚠️ REEMPLAZÁ por el dominio real cuando lo tengas (afecta canonical, OG y SEO) -->
+  <link rel="canonical" href="https://polcher.com.ar/" />
+
+  <!-- Favicon (isotipo / monograma) -->
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+  <link rel="apple-touch-icon" href="assets/img/logo-verde.png" />
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="restaurant.restaurant" />
+  <meta property="og:site_name" content="Pölcher" />
+  <meta property="og:title" content="Pölcher — Beer bar, burgers y birra en Quilmes" />
+  <meta property="og:description" content="La esquina más cervecera de Quilmes. Birra, burger y barrio. Nos vemos en Pölcher." />
+  <meta property="og:image" content="assets/img/og.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="es_AR" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Pölcher — Beer bar, burgers y birra en Quilmes" />
+  <meta name="twitter:description" content="La esquina más cervecera de Quilmes. Birra, burger y barrio." />
+  <meta name="twitter:image" content="assets/img/og.jpg" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,500&display=swap" rel="stylesheet" />
+
+  <link rel="preload" as="image" href="assets/img/hero-amigos.webp" imagesrcset="assets/img/hero-amigos-sm.webp 720w, assets/img/hero-amigos.webp 1280w" imagesizes="100vw" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+  <!-- Set .js as early as possible so no-JS users still see all content -->
+  <script>document.documentElement.className = document.documentElement.className.replace('no-js','js');</script>
+
+  <!-- Structured data: Bar + FAQ (mejora la indexación en Google) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BarOrPub",
+    "name": "Pölcher",
+    "description": "Beer bar, burgers, birra de barril y buena música. Punto de encuentro de amigos en Quilmes, Buenos Aires.",
+    "image": "assets/img/og.jpg",
+    "servesCuisine": ["Hamburguesas", "Cerveza artesanal", "Bar"],
+    "priceRange": "$$",
+    "areaServed": "Quilmes, Buenos Aires, Argentina",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Quilmes",
+      "addressRegion": "Buenos Aires",
+      "addressCountry": "AR"
+    },
+    "sameAs": ["https://www.instagram.com/polcher"],
+    "slogan": "Nos vemos en Pölcher."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "¿Dónde queda Pölcher?", "acceptedAnswer": { "@type": "Answer", "text": "Estamos en Quilmes, provincia de Buenos Aires. La dirección exacta y el mapa los tenés en nuestro Instagram." } },
+      { "@type": "Question", "name": "¿Qué es Pölcher?", "acceptedAnswer": { "@type": "Answer", "text": "Un beer bar de barrio: birra, burgers y buena música. Punto de encuentro de amigos y la esquina más cervecera de Quilmes." } },
+      { "@type": "Question", "name": "¿Tienen birra de barril?", "acceptedAnswer": { "@type": "Answer", "text": "Trabajamos con una buena selección de cervezas, con barril rotativo y botellas. Preguntá qué hay tirado el día que venís." } },
+      { "@type": "Question", "name": "¿Tienen opciones veggie?", "acceptedAnswer": { "@type": "Answer", "text": "Sí, tenemos opción veggie en la carta. Consultá las variantes del día por Instagram." } },
+      { "@type": "Question", "name": "¿Se puede ir con grupos grandes?", "acceptedAnswer": { "@type": "Answer", "text": "Obvio. Pölcher es punto de encuentro: venite con la banda. Escribinos por Instagram para coordinar mesas para grupos." } },
+      { "@type": "Question", "name": "¿Qué días y horarios abren?", "acceptedAnswer": { "@type": "Answer", "text": "Consultá los días y horarios actualizados en nuestro Instagram, así siempre tenés la info del momento." } }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+<a class="skip-link" href="#carta">Saltar a la carta</a>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <div class="nav-inner wrap">
+    <a class="nav-logo" href="#inicio" aria-label="Pölcher — inicio">
+      <img src="assets/img/logo-blanco.png" alt="Pölcher" width="120" height="99" />
+    </a>
+
+    <nav class="nav-menu" id="navMenu" aria-label="Navegación principal">
+      <a href="#nosotros" data-nav>Nosotros</a>
+      <a href="#carta" data-nav>Carta</a>
+      <a href="#faq" data-nav>Preguntas</a>
+      <a href="#contacto" data-nav>Contacto</a>
+      <!-- ⚠️ REEMPLAZÁ por el usuario real de Instagram de Pölcher -->
+      <a class="btn btn-ig nav-ig" href="https://www.instagram.com/polcher" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.43.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s0 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.43.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58 0-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.43-.36-1.06-.41-2.23C2.2 15.58 2.2 15.2 2.2 12s0-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.43-.16 1.06-.36 2.23-.41C8.42 2.2 8.8 2.2 12 2.2Zm0 3.05A6.75 6.75 0 1 0 18.75 12 6.75 6.75 0 0 0 12 5.25Zm0 11.13A4.38 4.38 0 1 1 16.38 12 4.38 4.38 0 0 1 12 16.38Zm6.96-11.4a1.58 1.58 0 1 0 1.58 1.57 1.58 1.58 0 0 0-1.58-1.57Z"/></svg>
+        Instagram
+      </a>
+    </nav>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="navMenu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ HERO / LANDING ============ -->
+<section class="hero" id="inicio">
+  <picture class="hero-bg">
+    <source media="(max-width: 700px)" srcset="assets/img/hero-amigos-sm.webp" />
+    <img src="assets/img/hero-amigos.webp" alt="Amigos brindando con birra en Pölcher" fetchpriority="high" />
+  </picture>
+  <div class="hero-scrim"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <div class="wrap hero-inner">
+    <p class="hero-eyebrow reveal">
+      <span class="pin">Quilmes · Buenos Aires</span>
+      <span class="sep">·</span> Beer bar
+    </p>
+
+    <!-- El titular se elige al azar en cada visita (ver app.js) -->
+    <h1 class="hero-title" id="heroTitle" aria-live="polite"></h1>
+
+    <p class="hero-sub" id="heroSub"></p>
+
+    <div class="hero-actions reveal">
+      <!-- ⚠️ REEMPLAZÁ por el usuario real de Instagram -->
+      <a class="btn btn-ig btn-lg" href="https://www.instagram.com/polcher" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.43.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s0 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.43.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58 0-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.43-.36-1.06-.41-2.23C2.2 15.58 2.2 15.2 2.2 12s0-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.43-.16 1.06-.36 2.23-.41C8.42 2.2 8.8 2.2 12 2.2Zm0 3.05A6.75 6.75 0 1 0 18.75 12 6.75 6.75 0 0 0 12 5.25Zm0 11.13A4.38 4.38 0 1 1 16.38 12 4.38 4.38 0 0 1 12 16.38Zm6.96-11.4a1.58 1.58 0 1 0 1.58 1.57 1.58 1.58 0 0 0-1.58-1.57Z"/></svg>
+        Seguinos en Instagram
+      </a>
+      <a class="btn btn-ghost btn-lg" href="#carta">Ver la carta</a>
+    </div>
+  </div>
+
+  <a href="#nosotros" class="hero-scroll reveal" aria-label="Bajar">
+    <span>Bajá</span>
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+  </a>
+</section>
+
+<!-- ============ MARQUEE ============ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Birra</span><i>✦</i><span>Burger</span><i>✦</i><span>Barrio</span><i>✦</i><span>Cultura cervecera</span><i>✦</i><span>Punto de encuentro</span><i>✦</i>
+    <span>Birra</span><i>✦</i><span>Burger</span><i>✦</i><span>Barrio</span><i>✦</i><span>Cultura cervecera</span><i>✦</i><span>Punto de encuentro</span><i>✦</i>
+  </div>
+</div>
+
+<!-- ============ NOSOTROS ============ -->
+<section class="section about" id="nosotros">
+  <div class="wrap about-grid">
+    <div class="about-copy">
+      <p class="eyebrow reveal">Nosotros</p>
+      <h2 class="reveal">Un lugar real.<br><span class="hl">Una marca con futuro.</span></h2>
+      <p class="lead reveal">Pölcher es más que un bar. Beer bar, burgers y buena música, nacido en el barrio y hecho a pura cultura cervecera. Hoy es el punto de encuentro de amigos de Quilmes.</p>
+      <ul class="traits">
+        <li class="reveal">Birra que nos representa</li>
+        <li class="reveal">Burger con actitud</li>
+        <li class="reveal">Barrio que nos identifica</li>
+        <li class="reveal">Buena selección de cervezas</li>
+        <li class="reveal">Real y sin pose</li>
+        <li class="reveal">Punto de encuentro</li>
+      </ul>
+    </div>
+    <figure class="about-photo reveal">
+      <img src="assets/img/burger-birra.webp" alt="Burger con papas y una pinta de birra en Pölcher" loading="lazy" width="1122" height="1402" />
+      <figcaption>Birra, burger y barrio.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ CARTA ============ -->
+<section class="section menu" id="carta">
+  <div class="wrap">
+    <div class="menu-head">
+      <p class="eyebrow reveal">Nuestra carta</p>
+      <h2 class="reveal">La mejor burger<br>y la mejor birra.</h2>
+    </div>
+
+    <div class="menu-tabs reveal" role="tablist" aria-label="Elegí la carta">
+      <button class="menu-tab is-active" id="tab-burgers" role="tab" aria-selected="true" aria-controls="panel-burgers" data-tab="burgers">🍔 Burgers</button>
+      <button class="menu-tab" id="tab-birras" role="tab" aria-selected="false" aria-controls="panel-birras" data-tab="birras">🍺 Birras</button>
+    </div>
+
+    <div class="menu-panels">
+      <div class="menu-panel is-active" id="panel-burgers" role="tabpanel" aria-labelledby="tab-burgers" tabindex="0"></div>
+      <div class="menu-panel" id="panel-birras" role="tabpanel" aria-labelledby="tab-birras" tabindex="0" hidden></div>
+    </div>
+
+    <p class="menu-note reveal">Carta sujeta a disponibilidad. Precios y variedades actualizados en el local y en nuestro Instagram.</p>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="section faq" id="faq">
+  <div class="wrap faq-grid">
+    <div class="faq-intro">
+      <p class="eyebrow reveal">Preguntas frecuentes</p>
+      <h2 class="reveal">Lo que todos<br>nos preguntan.</h2>
+      <p class="lead reveal">¿Algo que no está acá? Escribinos por Instagram y te contestamos.</p>
+    </div>
+    <div class="faq-list reveal" id="faqList"></div>
+  </div>
+</section>
+
+<!-- ============ CONTACTO ============ -->
+<section class="section contact" id="contacto">
+  <div class="grain" aria-hidden="true"></div>
+  <div class="wrap contact-inner">
+    <p class="eyebrow reveal">Contacto</p>
+    <h2 class="reveal">Ya sabés:<br><span class="hl-mustard">nos vemos en Pölcher.</span></h2>
+
+    <div class="contact-cards">
+      <a class="c-card reveal" href="https://www.instagram.com/polcher" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.43.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s0 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.43.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58 0-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.43-.36-1.06-.41-2.23C2.2 15.58 2.2 15.2 2.2 12s0-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.43-.16 1.06-.36 2.23-.41C8.42 2.2 8.8 2.2 12 2.2Zm0 3.05A6.75 6.75 0 1 0 18.75 12 6.75 6.75 0 0 0 12 5.25Zm0 11.13A4.38 4.38 0 1 1 16.38 12 4.38 4.38 0 0 1 12 16.38Zm6.96-11.4a1.58 1.58 0 1 0 1.58 1.57 1.58 1.58 0 0 0-1.58-1.57Z"/></svg>
+        <span class="c-label">Instagram</span>
+        <span class="c-value">@polcher</span>
+        <span class="c-cta">Seguinos →</span>
+      </a>
+
+      <!-- ⚠️ REEMPLAZÁ el número por el WhatsApp real: wa.me/549XXXXXXXXXX -->
+      <a class="c-card reveal" href="https://wa.me/5491100000000" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.47-2.4-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.44-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.18-1.41-.08-.13-.27-.2-.57-.35M12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26C2.16 6.5 6.6 2.06 12.05 2.06c2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 0 1 2.89 6.99c0 5.45-4.43 9.85-9.88 9.85M20.46 3.5A11.82 11.82 0 0 0 12.05.06C5.5.06.16 5.4.16 11.95c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.89-5.34 11.89-11.9a11.82 11.82 0 0 0-3.49-8.4"/></svg>
+        <span class="c-label">WhatsApp</span>
+        <span class="c-value">Escribinos</span>
+        <span class="c-cta">Consultas y reservas →</span>
+      </a>
+
+      <div class="c-card c-card--static reveal">
+        <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span class="c-label">Dónde estamos</span>
+        <span class="c-value">Quilmes, Bs. As.</span>
+        <span class="c-cta">Mapa y dirección en Instagram</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <img src="assets/img/logo-blanco.png" alt="Pölcher" width="120" height="99" />
+      <p class="footer-tag">Nos vemos en Pölcher.</p>
+    </div>
+    <nav class="footer-nav" aria-label="Pie">
+      <a href="#nosotros">Nosotros</a>
+      <a href="#carta">Carta</a>
+      <a href="#faq">Preguntas</a>
+      <a href="#contacto">Contacto</a>
+      <a href="https://www.instagram.com/polcher" target="_blank" rel="noopener">Instagram</a>
+    </nav>
+  </div>
+  <div class="wrap footer-bottom">
+    <p>© <span id="year"></span> Pölcher · Beer bar · Quilmes, Buenos Aires</p>
+    <p class="footer-legal">Beber con moderación. Prohibida su venta a menores de 18 años.</p>
+  </div>
+</footer>
+
+<!-- GSAP para animaciones de scroll (mejora progresiva; el sitio funciona sin esto) -->
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script defer src="assets/js/app.js"></script>
+</body>
+</html>

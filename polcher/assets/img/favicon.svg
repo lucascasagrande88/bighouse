@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="12" fill="#124D2F"/>
+  <g fill="none" stroke="#F7F7F2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <!-- open hexagon -->
+    <path d="M32 9 L52 20 L52 33 M52 44 L32 55 L12 44 L12 20 L32 9" opacity="0.9"/>
+  </g>
+  <text x="32" y="41" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-weight="700" font-size="30" fill="#F7F7F2" text-anchor="middle">P</text>
+</svg>
