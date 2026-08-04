@@ -1,62 +1,75 @@
-# Pölcher — Sitio web
+# Pölcher — Web + App de pedidos
 
-Landing de una sola página para **Pölcher**, beer bar de Quilmes.
-Hecho con HTML + CSS + JS vanilla y animaciones con GSAP (mejora progresiva).
-Sin build, sin dependencias que instalar: se sube tal cual (estático).
+Dos productos para **Pölcher**, beer bar de Quilmes, que comparten identidad y datos:
+
+1. **La web** (`index.html`) — landing con hero, carta, cultura cervecera, FAQ y contacto.
+2. **La app de pedidos** (`pedidos/`) — el cliente arma su pedido y lo cierra por **WhatsApp**.
+
+Todo es estático (HTML + CSS + JS, sin build). Se sube tal cual a Netlify o cualquier hosting.
 
 ## Estructura
 
 ```
 polcher/
-├── index.html            ← la página completa
+├── index.html              ← la web
+├── pedidos/
+│   ├── index.html          ← la app de pedidos
+│   ├── pedidos.css
+│   └── pedidos.js          ← carrito + armado del mensaje de WhatsApp
 ├── assets/
-│   ├── css/style.css     ← estilos (paleta y tipografía del Brand OS)
-│   ├── js/app.js         ← titular rotativo, tabs de carta, FAQ, animaciones
-│   └── img/              ← fotos (WebP optimizado), logos y OG
+│   ├── css/fonts.css       ← fuentes (compartidas)
+│   ├── css/style.css       ← estilos de la web
+│   ├── js/menu-data.js     ← ⭐ LA CARTA (fuente única: la usan la web y la app)
+│   ├── js/app.js           ← lógica de la web
+│   ├── fonts/              ← Bebas Neue + Montserrat (auto-hospedadas)
+│   ├── img/                ← fotos, logos, OG
+│   │   └── menu/           ← (creá esta carpeta) fotos de cada producto
+│   └── video/              ← (creá esta carpeta) video de fondo del hero
 └── README.md
 ```
 
-## Cómo verlo localmente
-
-Cualquier servidor estático sirve. Por ejemplo:
+## Verlo local
 
 ```bash
 cd polcher
 python3 -m http.server 8000
-# abrí http://localhost:8000
+# web:      http://localhost:8000
+# pedidos:  http://localhost:8000/pedidos/
 ```
 
-## Qué tenés que reemplazar (placeholders)
+## ⭐ Editar la carta (un solo lugar)
 
-Según el **Brand OS de Pölcher**, la marca no publica datos inventados. Dejé lugares
-listos para que completes con la info real. Buscá el emoji ⚠️ en el código:
+Todo lo de la carta vive en **`assets/js/menu-data.js`**. Ahí cambiás nombres,
+descripciones, **precios**, y de cada birra: estilo, **IBU**, **amargor**, cuerpo,
+graduación y maridaje. La web y la app se actualizan solas.
+
+- `price`: número en pesos (los actuales son **de ejemplo**, cambialos).
+- `img`: ruta a la foto (ej. `"assets/img/menu/la-doble.webp"`) o `null` para el
+  placeholder de marca. Poné las fotos en `assets/img/menu/`.
+
+## Otros placeholders a completar (buscá ⚠️ en el código)
 
 | Dónde | Qué cambiar |
 |---|---|
-| `index.html` (varios) y `app.js` | **Usuario de Instagram** real (hoy `instagram.com/polcher`) |
-| Sección contacto en `index.html` | **Número de WhatsApp** real (`wa.me/549XXXXXXXXXX`) |
-| `<head>` de `index.html` | **Dominio** real (canonical + Open Graph) |
-| `app.js` → objeto `MENU` | **Carta real**: nombres, descripciones y (si querés) precios de burgers y birras |
-| `app.js` → objeto `FAQ` **y** el `FAQPage` JSON-LD del `<head>` | Respuestas de dirección, días y horarios cuando estén confirmados. *Mantené ambos iguales para que el SEO coincida.* |
+| `pedidos/pedidos.js` (constante `WHATSAPP`) | **Número de WhatsApp** del local (formato `5491155554444`) |
+| `index.html` (Instagram) | **Usuario real de Instagram** |
+| `index.html` (`<head>`) | **Dominio** real (canonical + Open Graph) |
+| FAQ en `app.js` + JSON-LD del `<head>` | Dirección, días y horarios cuando estén confirmados |
 
-> La carta que viene cargada es **de ejemplo** (estilos genéricos, sin precios ni IBU),
-> pensada para que la reemplaces por la real.
+## Video de fondo del hero
 
-## Secciones
+Cuando tengas el video, ponelo en `assets/video/` (ideal: `.mp4` H.264 **y** `.webm`,
+mudo, en loop, liviano) y **descomentá** el bloque `<video>` en `index.html` (está
+señalado). Mientras no exista, se ve la foto (que es el *poster*).
 
-1. **Inicio / Hero** — titular que rota al azar en cada visita (frases del copy aprobado) + CTA a Instagram.
-2. **Nosotros** — manifiesto y rasgos de marca.
-3. **Carta** — pestañas Burgers / Birras.
-4. **Preguntas** — acordeón con datos estructurados `FAQPage` (mejor indexación en Google).
-5. **Contacto** — Instagram, WhatsApp y ubicación.
-6. **Footer** — legal (venta responsable de alcohol) y navegación.
+## Detalles
 
-## Detalles técnicos
+- **Responsive** web + app, menú mobile a pantalla completa, carrito como bottom-sheet.
+- **SEO**: Open Graph, Twitter Card, JSON-LD `BarOrPub` + `FAQPage`. La app va `noindex`.
+- **Fuentes auto-hospedadas** (sin depender de Google Fonts en runtime).
+- **GSAP** aporta el parallax del hero; si el CDN no carga, la web funciona igual.
 
-- **Responsive** real mobile / desktop, con menú hamburguesa a pantalla completa.
-- **Accesibilidad**: `skip link`, foco visible, `aria-*`, y respeto de `prefers-reduced-motion`.
-- **Performance**: imágenes en WebP, `preload` del hero, JS diferido.
-- **SEO**: `title`/`description`, canonical, Open Graph + Twitter Card, JSON-LD `BarOrPub` + `FAQPage`.
-- **GSAP** aporta el parallax; si el CDN no carga, la página funciona igual (las revelaciones usan `IntersectionObserver`).
+> Según el Brand OS de Pölcher no se inventan precios, IBU ni variedades: los datos
+> cargados son de ejemplo, reemplazalos por los reales antes de publicar.
 
 _Diseño y desarrollo: Chimichurri Diseño._
