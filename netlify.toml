@@ -1,0 +1,4 @@
+# Deploy config para el sitio de Pölcher (branch claude/pulcher-bar-website-qyyk19)
+# Publica la carpeta /polcher/ en la raíz del sitio.
+[build]
+  publish = "polcher"
