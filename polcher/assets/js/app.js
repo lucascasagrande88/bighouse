@@ -107,46 +107,61 @@
      ingredientes exactos, IBU, graduación ni variedades: reemplazá
      estos ítems por la carta real antes de publicar definitivamente.
      ============================================================ */
-  var MENU = {
-    burgers: [
-      { name: "La Clásica",   tag: "La de siempre",   desc: "La que nunca falla. Simple, directa, al punto." },
-      { name: "La Doble",     tag: "Doble medallón",  desc: "Doble motivo para venir. Para el hambre en serio." },
-      { name: "La del Barrio",tag: "La especial",     desc: "Nuestra especial de la casa. La que te hace volver." },
-      { name: "La Veggie",    tag: "Sin carne",       desc: "Sin carne y con toda la actitud Pölcher." },
-      { name: "Smash",        tag: "Bien crocante",   desc: "Medallón smasheado, bordes crocantes, puro sabor." },
-      { name: "Sides & Papas",tag: "Para compartir",  desc: "Papas y para picar, ideales para bajar la birra." }
-    ],
-    birras: [
-      { name: "Rubia / Golden", tag: "Fácil",       desc: "Fresca y suave. La puerta de entrada a la birra." },
-      { name: "Roja / Amber",   tag: "Maltosa",     desc: "Con cuerpo y carácter. Para la sobremesa." },
-      { name: "IPA",            tag: "Lupulada",    desc: "Aromática e intensa. Para los que buscan más." },
-      { name: "Negra / Stout",  tag: "Tostada",     desc: "Profunda y cremosa, de las que abrazan." },
-      { name: "Trigo / Weiss",  tag: "Refrescante", desc: "Suave y frutada. Siempre cae bien." },
-      { name: "Barril rotativo",tag: "Del día",     desc: "Preguntá qué hay tirado hoy. Siempre cambia." }
-    ]
-  };
+  var MENU = window.POLCHER_MENU || { burgers: [], birras: [] };
+  var money = new Intl.NumberFormat("es-AR", { style: "currency", currency: "ARS", maximumFractionDigits: 0 });
+  function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];}); }
+  function priceTag(p){ return p == null ? '' : '<span class="mi-price">' + money.format(p) + '</span>'; }
+  var hexPh = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"><path d="M12 2 21 7v10l-9 5-9-5V7z"/></svg>';
+  function media(it){
+    return it.img
+      ? '<img src="'+esc(it.img)+'" alt="'+esc(it.name)+'" loading="lazy" />'
+      : '<div class="mi-ph">'+hexPh+'</div>';
+  }
 
   function renderMenu(key, panel) {
     if (!panel) return;
-    var html = '<div class="menu-items">';
-    MENU[key].forEach(function (it) {
-      html +=
-        '<article class="menu-item">' +
-          '<div class="mi-top">' +
-            "<h3>" + it.name + "</h3>" +
-            '<span class="mi-tag">' + it.tag + "</span>" +
-          "</div>" +
-          "<p>" + it.desc + "</p>" +
-        "</article>";
-    });
-    html += "</div>";
-    panel.innerHTML = html;
+    panel.innerHTML = '<div class="menu-items">' + (MENU[key] || []).map(function (it) {
+      return '<article class="menu-item">' +
+        '<div class="mi-media">' + media(it) + (it.tag ? '<span class="mi-tag">'+esc(it.tag)+'</span>' : '') + '</div>' +
+        '<div class="mi-body">' +
+          '<div class="mi-top"><h3>'+esc(it.name)+'</h3>'+priceTag(it.price)+'</div>' +
+          '<p>'+esc(it.desc || it.notes || '')+'</p>' +
+        '</div>' +
+      '</article>';
+    }).join('') + '</div>';
   }
 
   var panelBurgers = document.getElementById("panel-burgers");
   var panelBirras = document.getElementById("panel-birras");
   renderMenu("burgers", panelBurgers);
   renderMenu("birras", panelBirras);
+
+  /* ---------- Cultura cervecera: cards con IBU, amargor y cuerpo ---------- */
+  function meter(val, label) {
+    var v = val || 0, dots = "";
+    for (var i = 1; i <= 5; i++) dots += '<i class="' + (i <= v ? "on" : "") + '"></i>';
+    return '<div class="beer-meter"><span>' + label + '</span><div class="dots" role="img" aria-label="' + label + ' ' + v + ' de 5">' + dots + "</div></div>";
+  }
+  (function renderBeers() {
+    var grid = document.getElementById("beersGrid");
+    if (!grid) return;
+    grid.innerHTML = (MENU.birras || []).map(function (b) {
+      var specs = [];
+      if (b.style) specs.push('<div class="bs"><b>' + esc(b.style) + '</b><span>estilo</span></div>');
+      if (b.abv != null) specs.push('<div class="bs"><b>' + b.abv + '%</b><span>alcohol</span></div>');
+      if (b.ibu != null) specs.push('<div class="bs"><b>' + b.ibu + '</b><span>IBU</span></div>');
+      return '<article class="beer">' +
+        '<div class="beer-media">' + media(b) + "</div>" +
+        '<div class="beer-body">' +
+          '<div class="beer-head"><h3>' + esc(b.name) + "</h3>" + (b.price != null ? '<span class="beer-price">' + money.format(b.price) + " <small>pinta</small></span>" : "") + "</div>" +
+          '<p class="beer-notes">' + esc(b.notes || "") + "</p>" +
+          (specs.length ? '<div class="beer-specs">' + specs.join("") + "</div>" : "") +
+          '<div class="beer-meters">' + meter(b.bitter, "Amargor") + meter(b.body, "Cuerpo") + "</div>" +
+          (b.pairing ? '<p class="beer-pair"><span>Marida con</span> ' + esc(b.pairing) + "</p>" : "") +
+        "</div>" +
+      "</article>";
+    }).join("");
+  })();
 
   var tabs = Array.prototype.slice.call(document.querySelectorAll(".menu-tab"));
   tabs.forEach(function (tab) {
@@ -264,7 +279,7 @@
     var gsap = window.gsap;
     if (window.ScrollTrigger) gsap.registerPlugin(window.ScrollTrigger);
 
-    var heroImg = document.querySelector(".hero-bg img");
+    var heroImg = document.querySelector(".hero-bg video, .hero-bg img");
     if (heroImg && window.ScrollTrigger) {
       gsap.to(heroImg, {
         yPercent: 16, scale: 1.08, ease: "none",

@@ -1,99 +1,4 @@
 /* ============================================================
-   FUENTES AUTO-HOSPEDADAS (Bebas Neue + Montserrat, subsets latin)
-   Descargadas de Google Fonts para no depender de CDN en runtime.
-   ============================================================ */
-/* latin-ext */
-@font-face {
-  font-family: 'Bebas Neue';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(../fonts/bebas-neue-400-normal-latin-ext.woff2) format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Bebas Neue';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(../fonts/bebas-neue-400-normal-latin.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(../fonts/montserrat-400-normal-latin-ext.woff2) format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(../fonts/montserrat-400-normal-latin.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url(../fonts/montserrat-500-normal-latin-ext.woff2) format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url(../fonts/montserrat-500-normal-latin.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url(../fonts/montserrat-600-normal-latin-ext.woff2) format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url(../fonts/montserrat-600-normal-latin.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url(../fonts/montserrat-700-normal-latin-ext.woff2) format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url(../fonts/montserrat-700-normal-latin.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-/* ============================================================
    PÖLCHER — Beer bar · Quilmes
    Paleta y tipografía según Pölcher Brand OS
    ============================================================ */
@@ -122,6 +27,7 @@
 }
 
 *,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
 html{scroll-behavior:smooth}
 @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
 
@@ -356,25 +262,29 @@ h1,h2{font-family:var(--f-head);font-weight:400;line-height:.92;letter-spacing:.
 .menu-panel{animation:fadeUp .5s var(--ease) both}
 .menu-panel[hidden]{display:none}
 .menu-items{
-  display:grid;grid-template-columns:1fr 1fr;gap:2px;
-  background:rgba(167,195,166,.12);border:1px solid rgba(167,195,166,.14);
-  border-radius:16px;overflow:hidden;
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;
 }
 .menu-item{
-  background:var(--green-800);padding:22px 24px;display:flex;flex-direction:column;gap:6px;
-  transition:background .3s var(--ease);position:relative;
+  background:var(--green-800);border:1px solid rgba(167,195,166,.14);border-radius:16px;overflow:hidden;
+  display:flex;flex-direction:column;transition:border-color .3s var(--ease), transform .3s var(--ease);
 }
-.menu-item:hover{background:var(--green-deep)}
-.menu-item .mi-top{display:flex;align-items:baseline;justify-content:space-between;gap:14px}
-.menu-item h3{
-  font-family:var(--f-head);font-weight:400;font-size:1.7rem;letter-spacing:.6px;text-transform:uppercase;color:var(--bone);
+.menu-item:hover{border-color:rgba(201,162,68,.4);transform:translateY(-3px)}
+.mi-media{position:relative;aspect-ratio:16/10;overflow:hidden;background:linear-gradient(135deg,var(--green),var(--green-800))}
+.mi-media img{width:100%;height:100%;object-fit:cover}
+.mi-ph{position:absolute;inset:0;display:grid;place-items:center;color:rgba(167,195,166,.35)}
+.mi-ph svg{width:56px;height:56px}
+.mi-tag{
+  position:absolute;top:10px;left:10px;
+  font-family:var(--f-body);font-size:.64rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--mustard);background:rgba(9,20,14,.78);border:1px solid rgba(201,162,68,.45);padding:4px 9px;border-radius:999px;white-space:nowrap;
 }
-.menu-item .mi-tag{
-  font-family:var(--f-body);font-size:.66rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--mustard);border:1px solid rgba(201,162,68,.5);padding:3px 8px;border-radius:999px;white-space:nowrap;
-}
-.menu-item p{margin:0;font-size:.92rem;color:var(--bone-60);line-height:1.5}
-.menu-note{text-align:center;margin:26px auto 0;font-size:.82rem;color:var(--bone-40);max-width:44ch}
+.mi-body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:6px;flex:1}
+.mi-top{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.menu-item h3{font-family:var(--f-head);font-weight:400;font-size:1.6rem;letter-spacing:.6px;text-transform:uppercase;color:var(--bone)}
+.mi-price{font-family:var(--f-head);font-size:1.5rem;letter-spacing:.5px;color:var(--soft);white-space:nowrap}
+.menu-item p{margin:0;font-size:.9rem;color:var(--bone-60);line-height:1.5}
+.menu-cta{display:flex;justify-content:center;margin-top:34px}
+.menu-note{text-align:center;margin:20px auto 0;font-size:.82rem;color:var(--bone-40);max-width:44ch}
 
 /* ============================================================
    FAQ
@@ -503,4 +413,52 @@ a.c-card:hover{transform:translateY(-4px);border-color:rgba(201,162,68,.55);back
 @media (max-width: 420px){
   .menu-tab{padding:10px 18px;font-size:.92rem}
   .hero-eyebrow{flex-wrap:wrap}
+}
+
+/* ============================================================
+   AÑADIDOS — Pedí online, video de fondo, cultura cervecera
+   ============================================================ */
+.btn-order{background:var(--mustard);color:var(--black);box-shadow:0 8px 30px -10px rgba(201,162,68,.4)}
+.btn-order:hover{transform:translateY(-2px);box-shadow:0 14px 40px -12px rgba(201,162,68,.55);background:#d8b155}
+.nav-order{padding:9px 18px;font-size:.86rem}
+
+/* Video de fondo del hero (se activa al descomentar el <video> en index.html) */
+.hero-bg picture,.hero-bg video{position:absolute;inset:0}
+.hero-video{width:100%;height:100%;object-fit:cover;object-position:center 38%;z-index:1}
+
+/* ---------- Cultura cervecera ---------- */
+.beers{background:linear-gradient(180deg,var(--green-800),var(--ink));position:relative;overflow:hidden}
+.beers .grain{opacity:.05}
+.beers-head{max-width:640px;margin:0 0 40px}
+.beers-head h2{font-size:clamp(2.4rem,6vw,4.4rem);margin:0 0 16px}
+.beers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+.beer{display:flex;flex-direction:column;background:var(--green-800);border:1px solid rgba(167,195,166,.14);border-radius:18px;overflow:hidden;transition:border-color .3s var(--ease),transform .3s var(--ease)}
+.beer:hover{border-color:rgba(201,162,68,.4);transform:translateY(-3px)}
+.beer-media{position:relative;aspect-ratio:4/3;overflow:hidden;background:linear-gradient(135deg,var(--green),var(--green-800))}
+.beer-media img{width:100%;height:100%;object-fit:cover}
+.beer-media .mi-ph{position:absolute;inset:0;display:grid;place-items:center;color:rgba(167,195,166,.3)}
+.beer-media .mi-ph svg{width:60px;height:60px}
+.beer-body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:12px;flex:1}
+.beer-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.beer-head h3{font-size:1.9rem;color:var(--bone)}
+.beer-price{font-family:var(--f-head);font-size:1.5rem;color:var(--soft);white-space:nowrap}
+.beer-price small{font-family:var(--f-body);font-size:.6rem;color:var(--bone-40);font-weight:500}
+.beer-notes{margin:0;font-size:.9rem;color:var(--bone-60);line-height:1.5}
+.beer-specs{display:flex;gap:8px;flex-wrap:wrap}
+.bs{flex:1;min-width:72px;background:rgba(0,0,0,.25);border:1px solid rgba(167,195,166,.14);border-radius:10px;padding:8px 10px;text-align:center}
+.bs b{display:block;font-family:var(--f-head);font-size:1.25rem;letter-spacing:.5px;color:var(--bone);font-weight:400}
+.bs span{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--bone-40)}
+.beer-meters{display:flex;flex-direction:column;gap:8px;margin-top:2px}
+.beer-meter{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.beer-meter>span{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--bone-60)}
+.beer-meter .dots{display:flex;gap:5px}
+.beer-meter .dots i{width:16px;height:8px;border-radius:3px;background:rgba(167,195,166,.2)}
+.beer-meter .dots i.on{background:var(--mustard)}
+.beer-pair{margin:2px 0 0;font-size:.82rem;color:var(--bone-60)}
+.beer-pair span{color:var(--mustard);font-weight:600}
+.beers-note{text-align:center;margin:30px auto 0;font-size:.82rem;color:var(--bone-40);max-width:52ch}
+
+@media (max-width: 760px){
+  .nav-order{margin-top:14px;font-size:1rem;padding:13px 22px}
+  .beers-grid{grid-template-columns:1fr}
 }

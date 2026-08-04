@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es-AR" class="no-js">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Pedí online — Pölcher</title>
+  <meta name="description" content="Pedí tus burgers y birras de Pölcher online. Armá tu pedido y lo cerrás por WhatsApp." />
+  <meta name="theme-color" content="#124D2F" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="robots" content="noindex" />
+
+  <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg" />
+  <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/bebas-neue-400-normal-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/montserrat-600-normal-latin.woff2" crossorigin />
+  <link rel="stylesheet" href="../assets/css/fonts.css" />
+  <link rel="stylesheet" href="pedidos.css" />
+  <script>document.documentElement.className = document.documentElement.className.replace('no-js','js');</script>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="app-head" id="appHead">
+  <div class="app-head-inner">
+    <a class="app-logo" href="../" aria-label="Volver a la web de Pölcher">
+      <img src="../assets/img/logo-blanco.png" alt="Pölcher" width="108" height="89" />
+    </a>
+    <div class="app-head-right">
+      <a class="app-back" href="../">← Volver a la web</a>
+      <button class="cart-btn" id="cartBtn" aria-label="Ver mi pedido">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h2.2l2.2 12.4a1.6 1.6 0 0 0 1.6 1.3h8.6a1.6 1.6 0 0 0 1.6-1.3L21 7H5.5"/></svg>
+        <span class="cart-count" id="cartCount" hidden>0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="app-main">
+  <div class="app-intro">
+    <p class="eyebrow">Pedí online</p>
+    <h1>Armá tu pedido.<br><span class="hl">Lo cerrás por WhatsApp.</span></h1>
+    <p class="app-lead">Elegí tus burgers y birras, sumalas al pedido y te lo enviamos derecho a WhatsApp para confirmarlo. Fácil y sin vueltas.</p>
+  </div>
+
+  <div class="cat-tabs" role="tablist" aria-label="Categorías">
+    <button class="cat-tab is-active" role="tab" aria-selected="true" data-cat="burgers">🍔 Burgers</button>
+    <button class="cat-tab" role="tab" aria-selected="false" data-cat="birras">🍺 Birras</button>
+  </div>
+
+  <section class="prod-grid" id="prodGrid" aria-live="polite"></section>
+
+  <p class="app-note">⚠️ Precios de ejemplo — reemplazá por los reales en <code>assets/js/menu-data.js</code>. Carta sujeta a disponibilidad.</p>
+</main>
+
+<!-- ============ CART BUTTON (mobile floating) ============ -->
+<button class="cart-fab" id="cartFab" hidden>
+  <span class="cart-fab-left">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h2.2l2.2 12.4a1.6 1.6 0 0 0 1.6 1.3h8.6a1.6 1.6 0 0 0 1.6-1.3L21 7H5.5"/></svg>
+    <span id="fabCount">0</span> en el pedido
+  </span>
+  <span class="cart-fab-total" id="fabTotal">$0</span>
+</button>
+
+<!-- ============ CART DRAWER ============ -->
+<div class="cart-overlay" id="cartOverlay" hidden></div>
+<aside class="cart" id="cart" aria-hidden="true" aria-label="Mi pedido">
+  <div class="cart-header">
+    <h2>Mi pedido</h2>
+    <button class="cart-close" id="cartClose" aria-label="Cerrar">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+
+  <div class="cart-body" id="cartBody"><!-- items o estado vacío --></div>
+
+  <form class="cart-checkout" id="checkoutForm" hidden>
+    <div class="field">
+      <label for="fName">Tu nombre</label>
+      <input id="fName" name="name" type="text" autocomplete="name" placeholder="Cómo te anotamos" required />
+    </div>
+
+    <div class="field">
+      <span class="field-label">¿Cómo lo querés?</span>
+      <div class="seg" role="radiogroup" aria-label="Tipo de entrega">
+        <label class="seg-opt"><input type="radio" name="mode" value="Retiro en el local" checked /> <span>Retiro en el local</span></label>
+        <label class="seg-opt"><input type="radio" name="mode" value="Delivery" /> <span>Delivery</span></label>
+      </div>
+    </div>
+
+    <div class="field" id="addrField" hidden>
+      <label for="fAddr">Dirección de entrega</label>
+      <input id="fAddr" name="address" type="text" autocomplete="street-address" placeholder="Calle, número, piso/depto" />
+    </div>
+
+    <div class="field">
+      <label for="fNotes">Aclaraciones <span class="opt">(opcional)</span></label>
+      <textarea id="fNotes" name="notes" rows="2" placeholder="Sin cebolla, punto de cocción, etc."></textarea>
+    </div>
+
+    <div class="cart-total">
+      <span>Total</span>
+      <strong id="cartTotal">$0</strong>
+    </div>
+
+    <button type="submit" class="btn-wa" id="sendBtn">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.47-2.4-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.44-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.18-1.41-.08-.13-.27-.2-.57-.35M12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26C2.16 6.5 6.6 2.06 12.05 2.06c2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 0 1 2.89 6.99c0 5.45-4.43 9.85-9.88 9.85M20.46 3.5A11.82 11.82 0 0 0 12.05.06C5.5.06.16 5.4.16 11.95c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.89-5.34 11.89-11.9a11.82 11.82 0 0 0-3.49-8.4"/></svg>
+      Enviar pedido por WhatsApp
+    </button>
+    <p class="cart-legal">Te abre WhatsApp con el pedido listo. Confirmás precio final y tiempo con el local. Beber con moderación · +18.</p>
+  </form>
+</aside>
+
+<script src="../assets/js/menu-data.js"></script>
+<script src="pedidos.js"></script>
+</body>
+</html>
