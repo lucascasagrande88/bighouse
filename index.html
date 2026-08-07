@@ -109,6 +109,10 @@ nav.stuck{padding:12px var(--gut);background:rgba(8,8,8,.93);backdrop-filter:blu
 .hl:nth-child(2) span{color:var(--white);animation-delay:.44s}
 .hl:nth-child(3) span{color:var(--lime);font-family:var(--play);font-style:italic;font-weight:400;font-size:.81em;animation-delay:.58s}
 @keyframes rev{to{transform:translateY(0);opacity:1}}
+.hstate{position:relative;z-index:2;margin-top:22px;max-width:640px;font-family:var(--syne);font-size:clamp(16px,2vw,24px);font-weight:500;line-height:1.4;color:var(--white);opacity:0;animation:up .7s .72s forwards}
+.hstate b{color:var(--lime);font-weight:700}
+.hstate em{font-family:var(--play);font-style:italic;font-weight:400;color:var(--lime)}
+@media(max-width:768px){.hstate{font-size:15px;margin-top:16px}}
 .hfoot{position:relative;z-index:2;padding:20px var(--gut) 34px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
 .hdesc{font-family:var(--syne);font-size:14px;color:var(--muted2);max-width:360px;line-height:1.8;opacity:0;animation:up .7s .92s forwards}
 .hdesc strong{color:var(--white);font-weight:600}
@@ -443,15 +447,16 @@ footer{padding:18px var(--gut);border-top:1px solid var(--border);display:flex;a
   <div class="hbg"><img src="https://framerusercontent.com/images/YrJyTlynlK9JahFSr5rX0OWxnQ.jpg" alt="" id="hbg"></div>
   <div class="hgrid"></div>
   <div class="hmain">
-    <div class="htag">Art Direction &middot; Motion Design &middot; AI-Integrated</div>
+    <div class="htag">Creative Director &middot; Motion &amp; 3D &middot; Visual Storytelling</div>
     <h1 class="htitle">
       <span class="hl"><span>LUCAS</span></span>
       <span class="hl"><span>CASA-</span></span>
       <span class="hl"><span>grande</span></span>
     </h1>
+    <p class="hstate"><b>Creative Director &amp; Motion Designer.</b> I turn brands, music and ideas into <em>moving images</em> — across CGI, 3D and live stage visuals.</p>
   </div>
   <div class="hfoot">
-    <p class="hdesc">Creative Director &amp; Motion Designer with <strong>15+ years</strong> crafting visual worlds across CGI, 3D animation and AI-driven storytelling.</p>
+    <p class="hdesc"><strong>15+ years</strong> directing motion and 3D for global brands and the world's biggest stages — from MPC and Ogilvy to the main stage at Creamfields.</p>
     <div class="hbtns">
       <a href="#work" class="btn btnf">See Work &rarr;</a>
       <a href="#contact" class="btn btno">Let&apos;s Talk</a>
@@ -471,7 +476,7 @@ footer{padding:18px var(--gut);border-top:1px solid var(--border);display:flex;a
   <div class="slabel">Selected Projects</div>
   <div class="srow">
     <div class="stitle">FEATURED<br><em>Works</em></div>
-    <div class="saside">End-to-end visual production.<br>Concept to final render.</div>
+    <div class="saside">End-to-end visual production.<br>Concept to final render.<br><a href="/work/" style="color:var(--lime);border-bottom:1px solid var(--borderL);text-decoration:none">See all 24 →</a></div>
   </div>
 </div>
 
@@ -515,15 +520,15 @@ footer{padding:18px var(--gut);border-top:1px solid var(--border);display:flex;a
     <div>
       <p class="apull r" id="apull"></p>
       <div class="abody r" style="transition-delay:.1s">
-        <p><strong>Lucas Casagrande</strong> is a Creative Director and Motion Designer with over 15 years of experience in visual design, animation, and audiovisual storytelling.</p>
-        <p>Throughout his career he has developed <strong>branding systems, motion graphics, digital content and visual experiences</strong> for agencies, brands and international platforms, combining creative direction with a strong technical background in audiovisual production.</p>
-        <p>His work spans <strong>2D/3D animation, cinematic visualization, visual system design</strong> and immersive experiences — with pieces exhibited in <strong>Shanghai, Australia and Germany</strong>.</p>
-        <p>In recent years he has increasingly focused on the <strong>intersection between creativity and emerging technologies</strong>, integrating artificial intelligence into his production workflows. He has given talks at <strong>UBA, UAI and private industry events</strong>, and developed <strong>4 courses on Domestika</strong> focused on AI within creative industries.</p>
+        <p><strong>Lucas Casagrande</strong> is a Creative Director and Motion Designer with more than 15 years turning ideas into moving images. His work lives where <strong>art direction, 3D and storytelling</strong> meet — from photo-real CGI to the raw energy of a live show.</p>
+        <p>He has directed motion and CGI for global names like <strong>Toyota, Pandora, Gillette and Snapdragon</strong>, working with studios and agencies including <strong>MPC Shanghai, Ogilvy Bahrain and Superunion</strong> — pieces that have been exhibited across <strong>three continents</strong>.</p>
+        <p>For three years he was the <strong>visual director of the entire stage production at Creamfields</strong>, running the live visuals behind some of the biggest DJs in the world — thousands of people, one screen, zero second takes.</p>
+        <p>Beyond client work, Lucas has <strong>lectured at the UBA and the UAI</strong> and exhibited at the <strong>Centro Cultural Recoleta (now El Recoleta)</strong> as part of <strong>Ciudad Emergente</strong>. Lately he's been pushing the <strong>intersection of creativity and emerging technology</strong>, folding AI into his production pipeline and teaching it through his courses on <strong>Domestika</strong>.</p>
       </div>
       <div class="stats">
-        <div class="stat r" style="transition-delay:.05s"><div class="statn">15+</div><div class="statl">Years active</div></div>
-        <div class="stat r" style="transition-delay:.1s"><div class="statn">100+</div><div class="statl">Projects</div></div>
-        <div class="stat r" style="transition-delay:.15s"><div class="statn">4</div><div class="statl">Domestika courses</div></div>
+        <div class="stat r" style="transition-delay:.05s"><div class="statn">15+</div><div class="statl">Years directing</div></div>
+        <div class="stat r" style="transition-delay:.1s"><div class="statn">100+</div><div class="statl">Projects delivered</div></div>
+        <div class="stat r" style="transition-delay:.15s"><div class="statn">3</div><div class="statl">Yrs · Creamfields visuals</div></div>
         <div class="stat r" style="transition-delay:.2s"><div class="statn">3</div><div class="statl">Continents exhibited</div></div>
       </div>
       <a href="https://www.linkedin.com/in/lucascasagrande" target="_blank" rel="noopener" class="cv-btn r" style="transition-delay:.26s">
@@ -637,7 +642,7 @@ footer{padding:18px var(--gut);border-top:1px solid var(--border);display:flex;a
 
 <footer>
   <div class="flogo">Lucas<b>.</b>Casagrande</div>
-  <div class="fcopy">&copy; 2026 &mdash; All rights reserved</div>
+  <div class="fcopy">&copy; <span id="yr">2026</span> &mdash; All rights reserved</div>
   <div class="flinks">
     <a href="https://www.linkedin.com/in/lucascasagrande" target="_blank" rel="noopener">LinkedIn</a>
     <a href="https://www.behance.net/lucascasagrande" target="_blank" rel="noopener">Behance</a>
@@ -719,10 +724,16 @@ const VIMEO_PROFILE="https://vimeo.com/lucascasagrande";
 const VIDS={
   0:"850730171"   // REEL 2026  ·  add the rest here, e.g.  1:"123456789",
 };
+/* Slugs MUST stay in the same order as PJ. Source of truth for the
+   dedicated pages is scripts/generate.mjs — keep both in sync. */
+const SLUGS=["reel-2026","noorus-fill","lamicell-v22","pandora","youtopia-vitacura","toyota","viva-one","claro-cgi","gillette-j20","lamicell","stc-film","snapdragon-pro","cctv-esports","viva-fiber","creepshow","stc-invest","cctv9","caterpillar","f1-2022","viva-network","crystal-light","stc-card","saint-bodhi","f1-2019"];
 PJ.forEach((p,i)=>{
   p.vid=VIDS[i]||null;
   p.link=p.vid?("https://vimeo.com/"+p.vid):VIMEO_PROFILE;
+  p.slug=SLUGS[i];
+  p.url="/work/"+p.slug+"/";
 });
+(function(){var y=document.getElementById("yr");if(y)y.textContent=new Date().getFullYear();})();
 
 /* Fan gallery uses indexes 15-24 (the ones not on main grid) */
 const GALLERY_DATA=PJ.slice(15);
@@ -775,7 +786,7 @@ if(window.innerWidth>768){
   document.querySelectorAll(".p").forEach(c=>{
     c.addEventListener("mousemove",e=>{const r=c.getBoundingClientRect();const x=((e.clientX-r.left)/r.width-.5)*5;const y=((e.clientY-r.top)/r.height-.5)*5;c.style.cssText=`transform:perspective(900px) rotateX(${-y}deg) rotateY(${x}deg) scale(1.012);z-index:10;transition:transform .08s ease`});
     c.addEventListener("mouseleave",()=>{c.style.cssText="transition:transform .6s cubic-bezier(.25,.46,.45,.94)"});
-    c.addEventListener("click",()=>openModal(parseInt(c.dataset.proj)));
+    c.addEventListener("click",()=>{location.href=PJ[parseInt(c.dataset.proj)].url});
   });
 }
 
@@ -847,7 +858,7 @@ mbox.addEventListener("touchend",e=>{if(e.changedTouches[0].clientY-mY>80&&mbox.
   stage.addEventListener("touchstart",e=>{sx=e.touches[0].clientX;drag=true;dx=0},{passive:true});
   stage.addEventListener("touchmove",e=>{if(!drag)return;dx=e.touches[0].clientX-sx;if(Math.abs(dx)<8)return;e.preventDefault();const rot=dx*.06,sc=1-Math.min(Math.abs(dx)/800,.05);cards[active].style.transform=`translateX(${dx}px) rotate(${rot}deg) scale(${sc})`;cards[active].style.transition="none"},{passive:false});
   stage.addEventListener("touchend",()=>{if(!drag)return;drag=false;const thr=stage.offsetWidth*.27;if(dx<-thr&&active<DECK_PJ.length-1){cards[active].style.transition="transform .4s cubic-bezier(.25,.46,.45,.94),opacity .3s";cards[active].style.transform="translateX(-120%) rotate(-12deg) scale(.9)";cards[active].style.opacity="0";setTimeout(()=>{active++;layout();sndCard()},55)}else if(dx>thr&&active>0){active--;layout();sndCard()}else{cards[active].style.transition="transform .5s cubic-bezier(.16,1,.3,1)";cards[active].style.transform="translateX(0) rotate(0deg) scale(1)"}});
-  stage.addEventListener("click",e=>{if(Math.abs(dx)>10)return;openModal(active)});
+  stage.addEventListener("click",e=>{if(Math.abs(dx)>10)return;location.href=DECK_PJ[active].url});
 })();
 
 /* ══ FAN CARD STACK — More Work ══
@@ -869,7 +880,7 @@ mbox.addEventListener("touchend",e=>{if(e.changedTouches[0].clientY-mY>80&&mbox.
     c.className="fan-card";
     c.innerHTML=`<img src="${d.img}" alt="${d.title}" loading="lazy"><div class="fan-card-overlay"></div><div class="fan-card-info"><div class="fan-card-num">${d.num}</div><div class="fan-card-name">${d.title}</div><div class="fan-card-tag">${d.tags.join(" · ")}</div></div>`;
     c.addEventListener("click",()=>{
-      if(i===active){openModal(15+i)}
+      if(i===active){location.href=GALLERY_DATA[i].url}
       else{setActive(i)}
     });
     stage.appendChild(c);
