@@ -422,6 +422,60 @@ footer{padding:18px var(--gut);border-top:1px solid var(--border);display:flex;a
 .rs.on{opacity:1;transform:scale(1)}
 @keyframes up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeIn{to{opacity:1}}
+
+/* ══ HERO STYLEFRAME SLIDER ══ */
+.hbg .fr{position:absolute;inset:0;opacity:0;transition:opacity 1.8s ease;will-change:opacity}
+.hbg .fr.on{opacity:.2}
+.hbg .fr img{width:100%;height:100%;object-fit:cover;filter:grayscale(18%) contrast(1.06);transform:scale(1.1);animation:kb 14s ease-in-out infinite alternate}
+.hbg .fr:nth-child(even) img{animation-direction:alternate-reverse}
+@keyframes kb{from{transform:scale(1.06) translate(0,0)}to{transform:scale(1.2) translate(-2.5%,-1.5%)}}
+@media(prefers-reduced-motion:reduce){.hbg .fr img{animation:none;transform:scale(1.08)}}
+
+/* ══ CAREER — THE SHORT VERSION ══ */
+.cr{position:relative;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--bg2);overflow:hidden}
+.cr-in{padding:clamp(60px,9vw,120px) var(--gut) clamp(40px,6vw,70px);max-width:1200px}
+.cr .slabel{margin-bottom:18px}
+.cr-head{font-family:var(--syne);font-size:clamp(28px,4.6vw,64px);font-weight:800;line-height:1.02;letter-spacing:-.02em;max-width:15em;text-transform:uppercase}
+.cr-head b{color:var(--lime)}
+.cr-head em{font-family:var(--play);font-style:italic;font-weight:400;text-transform:none;color:var(--lime)}
+.cr-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(14px,2.5vw,30px);margin:clamp(38px,5vw,64px) 0 clamp(28px,4vw,44px)}
+@media(max-width:680px){.cr-grid{grid-template-columns:repeat(2,1fr);gap:24px}}
+.cr-cell{border-left:1px solid var(--borderL);padding-left:16px}
+.cr-n{font-family:var(--syne);font-size:clamp(38px,6vw,78px);font-weight:800;color:var(--lime);line-height:.9;letter-spacing:-.03em}
+.cr-l{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted2);margin-top:9px;line-height:1.5}
+.cr-line{font-family:var(--syne);font-size:clamp(14px,1.7vw,18px);color:var(--muted2);line-height:1.85;max-width:760px}
+.cr-line b{color:var(--white);font-weight:600}
+.cr-places{border-top:1px solid var(--border);overflow:hidden;padding:14px 0;background:var(--bg)}
+.cr-places-track{display:inline-flex;white-space:nowrap;will-change:transform;animation:mqx 32s linear infinite}
+.cr-places:hover .cr-places-track{animation-play-state:paused}
+@keyframes mqx{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.cr-places-track span{font-family:var(--syne);font-size:clamp(22px,3.2vw,44px);font-weight:800;text-transform:uppercase;letter-spacing:-.01em;color:var(--muted);padding:0 26px}
+.cr-places-track span b{color:var(--lime);font-weight:800}
+.cr-places-track span i{color:var(--card);-webkit-text-stroke:1px var(--muted);font-style:normal}
+
+/* ══ EDITORIAL INDEX — More Work ══ */
+.ix{padding:clamp(60px,8vw,110px) var(--gut) clamp(60px,9vw,120px);position:relative}
+.ix-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-bottom:20px;border-bottom:1px solid var(--border)}
+.ix-all{color:var(--lime);text-decoration:none;border-bottom:1px solid var(--borderL);transition:border-color .2s}
+.ix-all:hover{border-color:var(--lime)}
+.ix-list{margin-top:8px}
+.ix-row{position:relative;display:flex;align-items:center;gap:20px;padding:clamp(18px,2.4vw,30px) 4px;border-bottom:1px solid var(--border);text-decoration:none;color:var(--white);transition:padding-left .35s cubic-bezier(.16,1,.3,1),color .25s;overflow:hidden}
+.ix-row:hover{padding-left:22px;color:var(--lime)}
+.ix-row::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--lime);transform:scaleY(0);transform-origin:bottom;transition:transform .35s cubic-bezier(.16,1,.3,1)}
+.ix-row:hover::before{transform:scaleY(1)}
+.ix-num{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--muted);min-width:34px}
+.ix-row:hover .ix-num{color:var(--lime)}
+.ix-name{font-family:var(--syne);font-size:clamp(22px,3.6vw,46px);font-weight:800;text-transform:uppercase;letter-spacing:-.02em;line-height:1;flex:1}
+.ix-tag{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted2);text-align:right;display:none}
+@media(min-width:900px){.ix-tag{display:block}}
+.ix-thumb{width:56px;height:40px;object-fit:cover;flex-shrink:0;filter:grayscale(40%);border:1px solid var(--border)}
+@media(min-width:900px){.ix-thumb{display:none}}
+.ix-arrow{font-family:var(--mono);font-size:16px;color:var(--muted);opacity:0;transform:translateX(-6px);transition:opacity .3s,transform .3s}
+.ix-row:hover .ix-arrow{opacity:1;transform:translateX(0);color:var(--lime)}
+.ix-hover{position:fixed;top:0;left:0;width:300px;height:200px;pointer-events:none;z-index:400;opacity:0;transform:translate(-50%,-50%) scale(.9);transition:opacity .3s,transform .3s;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.7)}
+.ix-hover.on{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.ix-hover img{width:100%;height:100%;object-fit:cover}
+@media(max-width:899px){.ix-hover{display:none}}
 </style>
 </head>
 <body>
@@ -444,7 +498,7 @@ footer{padding:18px var(--gut);border-top:1px solid var(--border);display:flex;a
 </nav>
 
 <section class="hero" id="top">
-  <div class="hbg"><img src="https://framerusercontent.com/images/YrJyTlynlK9JahFSr5rX0OWxnQ.jpg" alt="" id="hbg"></div>
+  <div class="hbg" id="hbg"></div>
   <div class="hgrid"></div>
   <div class="hmain">
     <div class="htag">Creative Director &middot; Motion &amp; 3D &middot; Visual Storytelling</div>
@@ -470,6 +524,22 @@ footer{padding:18px var(--gut);border-top:1px solid var(--border);display:flex;a
     <span class="ti"><i></i>Art Direction</span><span class="ti"><i></i>CGI</span><span class="ti hi"><i></i>MPC Shanghai</span><span class="ti"><i></i>Ogilvy Bahrain</span><span class="ti"><i></i>Superunion</span><span class="ti hi"><i></i>Toyota</span><span class="ti"><i></i>Pandora</span><span class="ti"><i></i>Gillette</span><span class="ti hi"><i></i>Snapdragon</span><span class="ti"><i></i>F1 Campaign</span><span class="ti"><i></i>JL Design China</span><span class="ti hi"><i></i>15+ Years</span><span class="ti"><i></i>Cinema 4D</span><span class="ti"><i></i>After Effects</span><span class="ti hi"><i></i>Buenos Aires</span><span class="ti"><i></i>Midjourney</span><span class="ti hi"><i></i>Runway ML</span><span class="ti"><i></i>3D Motion</span><span class="ti hi"><i></i>AI Workflows</span><span class="ti"><i></i>Art Direction</span><span class="ti"><i></i>CGI</span><span class="ti hi"><i></i>MPC Shanghai</span><span class="ti"><i></i>Ogilvy Bahrain</span><span class="ti"><i></i>Superunion</span><span class="ti hi"><i></i>Toyota</span><span class="ti"><i></i>Pandora</span><span class="ti"><i></i>Gillette</span><span class="ti hi"><i></i>Snapdragon</span><span class="ti"><i></i>F1 Campaign</span><span class="ti hi"><i></i>15+ Years</span><span class="ti"><i></i>Cinema 4D</span><span class="ti hi"><i></i>AI Workflows</span>
   </div>
 </div>
+
+<!-- CAREER — THE SHORT VERSION -->
+<section class="cr" id="story">
+  <div class="cr-in">
+    <div class="slabel r">The short version</div>
+    <h2 class="cr-head r">I picked up my first brief at <b>19</b>. I'm <b>38</b> now — that's nearly <em>two decades</em> making things move.</h2>
+    <div class="cr-grid">
+      <div class="cr-cell r"><div class="cr-n">19</div><div class="cr-l">Age I started</div></div>
+      <div class="cr-cell r" style="transition-delay:.06s"><div class="cr-n">~20</div><div class="cr-l">Years in motion</div></div>
+      <div class="cr-cell r" style="transition-delay:.12s"><div class="cr-n">3</div><div class="cr-l">Continents lived &amp; shown</div></div>
+      <div class="cr-cell r" style="transition-delay:.18s"><div class="cr-n">100+</div><div class="cr-l">Projects shipped</div></div>
+    </div>
+    <p class="cr-line r">From Buenos Aires to the studios of <b>Bahrain</b> and <b>Shanghai</b> — directing for MPC, Ogilvy and Superunion, running the main-stage visuals at Creamfields, and teaching the craft along the way.</p>
+  </div>
+  <div class="cr-places"><div class="cr-places-track" id="crPlaces"></div></div>
+</section>
 
 <!-- WORK -->
 <div class="sh r" id="work">
@@ -601,28 +671,18 @@ footer{padding:18px var(--gut);border-top:1px solid var(--border);display:flex;a
   <div class="svc r" style="transition-delay:.12s"><div class="svcn">04</div><div class="svcname">BRAND VISUALS</div><div class="svcdesc">Scalable visual identity systems, motion stills and design languages that elevate brand perception across all touchpoints — crafted for longevity and impact.</div><div class="svcarr">&nearr;</div></div>
 </div>
 
-<!-- MORE WORK — FAN CARD STACK -->
-<div class="fanwrap" id="morework">
-  <div class="fan-hdr r">
+<!-- MORE WORK — EDITORIAL INDEX -->
+<section class="ix" id="morework">
+  <div class="ix-head r">
     <div>
       <div class="slabel">Visual Archive</div>
       <div class="stitle">MORE<br><em>Work</em></div>
     </div>
-    <div class="fan-nav">
-      <button class="fan-btn" id="fanPrev" aria-label="Previous">
-        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-      </button>
-      <button class="fan-btn" id="fanNext" aria-label="Next">
-        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-      </button>
-    </div>
+    <div class="saside">More selected pieces.<br>Hover to preview, click to open.<br><a href="/work/" class="ix-all">Full archive &rarr;</a></div>
   </div>
-  <div class="fan-stage" id="fanStage"></div>
-  <div class="fan-foot">
-    <div class="fan-counter"><b id="fanCurr">1</b> / <span id="fanTotal">10</span></div>
-    <div class="fan-dots" id="fanDots"></div>
-  </div>
-</div>
+  <div class="ix-list" id="ixList"></div>
+  <div class="ix-hover" id="ixHover" aria-hidden="true"><img alt=""></div>
+</section>
 
 <!-- CONTACT -->
 <section class="contact" id="contact">
@@ -740,8 +800,8 @@ const GALLERY_DATA=PJ.slice(15);
 
 /* ══ AUDIO ══ */
 let actx;
-function iA(){if(!actx)try{actx=new(window.AudioContext||window.webkitAudioContext)()}catch(e){}}
-function tone(f,d,t="sine",v=.06){if(!actx)return;try{const o=actx.createOscillator(),g=actx.createGain();o.connect(g);g.connect(actx.destination);o.type=t;o.frequency.value=f;g.gain.setValueAtTime(0,actx.currentTime);g.gain.linearRampToValueAtTime(v,actx.currentTime+.01);g.gain.exponentialRampToValueAtTime(.0001,actx.currentTime+d);o.start();o.stop(actx.currentTime+d+.05)}catch(e){}}
+function iA(){/* audio disabled */}
+function tone(){/* audio disabled */}
 const sndNav=()=>{iA();tone(880,.08,"sine",.05);setTimeout(()=>tone(1100,.06,"sine",.038),46)};
 const sndClick=()=>{iA();tone(660,.1,"triangle",.058)};
 const sndOpen=()=>{iA();tone(440,.09,"sine",.06);setTimeout(()=>tone(554,.12,"sine",.048),72);setTimeout(()=>tone(660,.18,"sine",.038),142)};
@@ -869,6 +929,7 @@ mbox.addEventListener("touchend",e=>{if(e.changedTouches[0].clientY-mY>80&&mbox.
 (()=>{
   const DATA=GALLERY_DATA;
   const stage=document.getElementById("fanStage");
+  if(!stage)return;
   const dotsEl=document.getElementById("fanDots");
   const currEl=document.getElementById("fanCurr");
   document.getElementById("fanTotal").textContent=DATA.length;
@@ -955,6 +1016,53 @@ mbox.addEventListener("touchend",e=>{if(e.changedTouches[0].clientY-mY>80&&mbox.
 
   layout();
   resetAuto();
+})();
+
+/* ══ HERO STYLEFRAME SLIDER ══
+   Fluid cross-fade of styleframes behind the hero.
+   To use your OWN artworks: drop files into /assets/artworks/ and
+   list their paths here (or set window.HERO_FRAMES before this runs). */
+(function(){
+  var host=document.getElementById("hbg");if(!host)return;
+  var FR=window.HERO_FRAMES||[
+    "https://framerusercontent.com/images/YrJyTlynlK9JahFSr5rX0OWxnQ.jpg",
+    "https://framerusercontent.com/images/9HJsvaIulWgfdnHvFmG4RvQNZI.jpg",
+    "https://framerusercontent.com/images/1rLQcl5Mfu1YcJ1ZyVRHPR0qr8Q.jpg",
+    "https://framerusercontent.com/images/os4ky1HUKF9CSl8xvuPr0tPf5YE.jpeg",
+    "https://framerusercontent.com/images/kkU08YO6FBR4dUxIr2ZKwM4vSRQ.jpeg",
+    "https://framerusercontent.com/images/MUaXdygxW6taz5Ja6x86VYZcQes.png",
+    "https://framerusercontent.com/images/nujs4JabOQ7y4zy4wtqaJtDmmc.png",
+    "https://framerusercontent.com/images/f2k0CKpZ0lXBPluW681cmq8H2CI.png"
+  ];
+  var els=FR.map(function(u){var d=document.createElement("div");d.className="fr";var im=new Image();im.src=u;im.alt="";d.appendChild(im);host.appendChild(d);return d;});
+  if(!els.length)return;
+  var i=0;els[0].classList.add("on");
+  if(els.length>1)setInterval(function(){els[i].classList.remove("on");i=(i+1)%els.length;els[i].classList.add("on");},4200);
+})();
+
+/* ══ CAREER PLACES MARQUEE ══ */
+(function(){
+  var t=document.getElementById("crPlaces");if(!t)return;
+  var items=["Buenos Aires","<b>Bahrain</b>","Shanghai","<b>MPC</b>","Ogilvy","<b>Superunion</b>","Creamfields","<b>F1</b>","Universal Music","<b>Toyota</b>","Pandora","<b>Snapdragon</b>"];
+  var html=items.map(function(x){return "<span>"+x+" <i>&#10035;</i></span>";}).join("");
+  t.innerHTML=html+html;
+})();
+
+/* ══ EDITORIAL INDEX — More Work ══ */
+(function(){
+  var list=document.getElementById("ixList");if(!list)return;
+  var hover=document.getElementById("ixHover"),himg=hover?hover.querySelector("img"):null;
+  GALLERY_DATA.forEach(function(d){
+    var a=document.createElement("a");
+    a.className="ix-row";a.href=d.url;
+    a.innerHTML='<span class="ix-num">'+d.num+'</span><img class="ix-thumb" src="'+d.img+'" alt="" loading="lazy"><span class="ix-name">'+d.title+'</span><span class="ix-tag">'+d.tags.join(" · ")+'</span><span class="ix-arrow">&#8599;</span>';
+    if(himg){
+      a.addEventListener("mouseenter",function(){himg.src=d.img;hover.classList.add("on")});
+      a.addEventListener("mouseleave",function(){hover.classList.remove("on")});
+    }
+    list.appendChild(a);
+  });
+  if(hover){window.addEventListener("mousemove",function(e){hover.style.left=e.clientX+"px";hover.style.top=e.clientY+"px";},{passive:true});}
 })();
 
 /* ══ SMOOTH SCROLL ══ */
