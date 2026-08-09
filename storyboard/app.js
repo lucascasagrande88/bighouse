@@ -1209,6 +1209,207 @@ async function exportAfterEffects() {
   return blob;
 }
 
+// ─── Exportar como video (MP4/WebM) ───────────────────────────
+
+function loadImageEl(src) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = () => reject(new Error('No se pudo cargar una imagen'));
+    img.src = src;
+  });
+}
+
+function pickVideoMime() {
+  if (typeof MediaRecorder === 'undefined' || !MediaRecorder.isTypeSupported) return '';
+  const candidates = [
+    'video/mp4;codecs=avc1.42E01E',
+    'video/mp4',
+    'video/webm;codecs=vp9',
+    'video/webm;codecs=vp8',
+    'video/webm',
+  ];
+  for (const c of candidates) {
+    if (MediaRecorder.isTypeSupported(c)) return c;
+  }
+  return '';
+}
+
+function wrapCanvasText(ctx, text, maxWidth) {
+  const words = text.split(/\s+/);
+  const lines = [];
+  let current = '';
+  for (const w of words) {
+    const test = current ? current + ' ' + w : w;
+    if (current && ctx.measureText(test).width > maxWidth) {
+      lines.push(current);
+      current = w;
+    } else {
+      current = test;
+    }
+  }
+  if (current) lines.push(current);
+  return lines.slice(0, 3);
+}
+
+function setProgressToast(text, onCancel) {
+  const toast = $('sbToast');
+  toast.innerHTML = '';
+  const span = document.createElement('span');
+  span.textContent = text;
+  toast.appendChild(span);
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.textContent = 'Cancelar';
+  btn.addEventListener('click', onCancel);
+  toast.appendChild(btn);
+  toast.classList.add('show');
+  clearTimeout(toastTimer); // que no se autoesconda mientras graba
+}
+
+async function exportVideo() {
+  if (!state.frames.length) return null;
+  const mimeType = pickVideoMime();
+  if (typeof MediaRecorder === 'undefined' || !mimeType) {
+    showToast('Tu navegador no puede grabar video acá. Probá con Chrome o Edge actualizados.');
+    return null;
+  }
+
+  let cancelled = false;
+  setProgressToast('Cargando imágenes…', () => { cancelled = true; });
+
+  let images;
+  try {
+    images = await Promise.all(state.frames.map(f => loadImageEl(f.blobUrl)));
+  } catch (err) {
+    showToast('No pude cargar alguna imagen para armar el video.');
+    return null;
+  }
+  if (cancelled) { showToast('Cancelado.'); return null; }
+
+  const FADE_S = 0.42; // igual al fade del reproductor
+  const FPS = 30;
+  const MAX_DIM = 1280;
+  const first = images[0];
+  const aspect = first.naturalWidth / first.naturalHeight || 16 / 9;
+  const canvasW = aspect >= 1 ? MAX_DIM : Math.round(MAX_DIM * aspect);
+  const canvasH = aspect >= 1 ? Math.round(MAX_DIM / aspect) : MAX_DIM;
+
+  const canvas = document.createElement('canvas');
+  canvas.width = canvasW;
+  canvas.height = canvasH;
+  const ctx = canvas.getContext('2d');
+
+  function drawContain(img) {
+    const scale = Math.min(canvasW / img.naturalWidth, canvasH / img.naturalHeight);
+    const w = img.naturalWidth * scale, h = img.naturalHeight * scale;
+    ctx.drawImage(img, (canvasW - w) / 2, (canvasH - h) / 2, w, h);
+  }
+
+  function drawCaption(text) {
+    if (!text) return;
+    const gradH = canvasH * 0.3;
+    const grad = ctx.createLinearGradient(0, canvasH - gradH, 0, canvasH);
+    grad.addColorStop(0, 'rgba(0,0,0,0)');
+    grad.addColorStop(1, 'rgba(0,0,0,0.78)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, canvasH - gradH, canvasW, gradH);
+
+    const fontSize = Math.max(16, Math.round(canvasH * 0.042));
+    ctx.font = '600 ' + fontSize + 'px -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif';
+    ctx.fillStyle = '#fff';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'alphabetic';
+    const lines = wrapCanvasText(ctx, text, canvasW * 0.86);
+    const lineHeight = fontSize * 1.32;
+    const bottomPad = canvasH * 0.07;
+    const startY = canvasH - bottomPad - (lines.length - 1) * lineHeight;
+    for (let li = 0; li < lines.length; li++) {
+      ctx.fillText(lines[li], canvasW / 2, startY + li * lineHeight);
+    }
+  }
+
+  function drawFrame(idx, alpha) {
+    if (alpha <= 0) return;
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    drawContain(images[idx]);
+    drawCaption(state.frames[idx].desc);
+    ctx.restore();
+  }
+
+  function renderComposite(elapsed) {
+    ctx.fillStyle = '#000';
+    ctx.fillRect(0, 0, canvasW, canvasH);
+    let acc = 0, idx = 0;
+    for (; idx < state.frames.length; idx++) {
+      const d = state.frames[idx].duration || DEFAULT_DURATION;
+      if (elapsed < acc + d || idx === state.frames.length - 1) break;
+      acc += d;
+    }
+    const within = elapsed - acc;
+    if (idx > 0 && within < FADE_S) {
+      const p = within / FADE_S;
+      drawFrame(idx - 1, 1 - p);
+      drawFrame(idx, p);
+    } else {
+      drawFrame(idx, 1);
+    }
+  }
+
+  const totalDuration = state.frames.reduce((s, f) => s + (f.duration || DEFAULT_DURATION), 0);
+  // captureStream(0) = sin muestreo automático: pedimos cada frame a mano justo después de
+  // dibujarlo. Es más robusto que un frameRate fijo, que en algunos navegadores/entornos no
+  // termina de engancharse con canvas que se redibuja desde un loop de rAF.
+  const stream = canvas.captureStream(0);
+  const videoTrack = stream.getVideoTracks()[0];
+  const requestFrame = () => { if (videoTrack && videoTrack.requestFrame) videoTrack.requestFrame(); };
+
+  let recorder;
+  try {
+    recorder = new MediaRecorder(stream, { mimeType, videoBitsPerSecond: 4000000 });
+  } catch (err) {
+    showToast('No pude iniciar la grabación de video en este navegador.');
+    return null;
+  }
+  const chunks = [];
+  recorder.ondataavailable = (e) => { if (e.data && e.data.size) chunks.push(e.data); };
+
+  const resultBlob = await new Promise((resolve) => {
+    recorder.onstop = () => {
+      if (cancelled) { resolve(null); return; }
+      resolve(new Blob(chunks, { type: recorder.mimeType || mimeType }));
+    };
+    renderComposite(0);
+    requestFrame();
+    recorder.start(250);
+    const startTs = performance.now();
+    const TICK_MS = 1000 / FPS;
+
+    // setTimeout en vez de requestAnimationFrame: rAF se frena mucho (o directamente no
+    // corre) en pestañas en segundo plano o sin compositor visible, y esto es un render
+    // fuera de pantalla — no depende en nada de que la página esté siendo pintada.
+    function tick() {
+      if (cancelled) { if (recorder.state !== 'inactive') recorder.stop(); return; }
+      const elapsed = (performance.now() - startTs) / 1000;
+      if (elapsed >= totalDuration) {
+        renderComposite(totalDuration - 0.001);
+        requestFrame();
+        recorder.stop();
+        return;
+      }
+      renderComposite(elapsed);
+      requestFrame();
+      const pct = Math.min(99, Math.round((elapsed / totalDuration) * 100));
+      setProgressToast('Grabando video… ' + pct + '%', () => { cancelled = true; });
+      setTimeout(tick, TICK_MS);
+    }
+    setTimeout(tick, TICK_MS);
+  });
+
+  return resultBlob;
+}
+
 // ─── Wiring ───────────────────────────────────────────────────
 
 const dropEl = $('sbDrop');
@@ -1301,6 +1502,22 @@ $('sbExportAeBtn').addEventListener('click', async () => {
   showToast('Armando el paquete para After Effects…', { duration: 1800 });
   await exportAfterEffects();
   showToast('Listo ✓ Descomprimí el ZIP y corré el script .jsx desde After Effects.');
+});
+
+$('sbExportVideoBtn').addEventListener('click', async () => {
+  $('sbExportMenu').hidden = true;
+  const blob = await exportVideo();
+  if (!blob) return;
+  const ext = (blob.type.split(';')[0].split('/')[1]) || 'webm';
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = slugify(state.projectName || 'Storyboard') + '.' + ext;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+  showToast('Listo ✓ Video descargado (' + ext.toUpperCase() + ').');
 });
 
 $('sbShareBtn').addEventListener('click', async () => {
