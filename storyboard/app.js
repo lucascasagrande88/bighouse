@@ -1008,6 +1008,207 @@ async function exportHtml() {
   return blob;
 }
 
+// ─── Exportar para After Effects ──────────────────────────────
+
+function frameExt(frame) {
+  const m = (frame.name || '').match(/\.([a-z0-9]{2,5})$/i);
+  return m ? m[1].toLowerCase() : (frame.blobUrl && frame.blobUrl.startsWith('data:image/svg+xml') ? 'svg' : 'jpg');
+}
+
+async function getFrameBlob(frame) {
+  if (frame.blob) return frame.blob;
+  if (frame.blobUrl) {
+    const res = await fetch(frame.blobUrl);
+    return res.blob();
+  }
+  return null;
+}
+
+// El script lee manifest.txt en vez de traer los datos hardcodeados adentro: así el .jsx
+// queda genérico y ExtendScript no tiene que parsear JSON (poco confiable entre versiones).
+const AE_JSX_SCRIPT = `// Importar storyboard — Chimichurri Diseño
+// Archivo > Scripts > Ejecutar archivo de script... y elegí este archivo.
+// Necesita "Allow Scripts to Write Files and Access Network" habilitado
+// (Preferencias > Scripting & Expressions) para poder leer manifest.txt.
+
+(function () {
+  app.beginUndoGroup("Importar storyboard");
+  try {
+    var scriptFile = new File($.fileName);
+    var rootFolder = scriptFile.parent;
+    var framesFolder = new Folder(rootFolder.fsName + "/frames");
+    var manifestFile = new File(rootFolder.fsName + "/manifest.txt");
+
+    if (!framesFolder.exists || !manifestFile.exists) {
+      var picked = Folder.selectDialog("Elegí la carpeta del storyboard exportado (la que tiene 'frames' y 'manifest.txt')");
+      if (!picked) { alert("Cancelado."); app.endUndoGroup(); return; }
+      rootFolder = picked;
+      framesFolder = new Folder(rootFolder.fsName + "/frames");
+      manifestFile = new File(rootFolder.fsName + "/manifest.txt");
+    }
+    if (!framesFolder.exists) { alert("No encontré la carpeta 'frames' en " + rootFolder.fsName); app.endUndoGroup(); return; }
+    if (!manifestFile.exists) { alert("No encontré manifest.txt en " + rootFolder.fsName); app.endUndoGroup(); return; }
+
+    manifestFile.open("r");
+    var lines = [];
+    while (!manifestFile.eof) {
+      var line = manifestFile.readln();
+      if (line !== "") lines.push(line);
+    }
+    manifestFile.close();
+
+    var frames = [];
+    for (var i = 0; i < lines.length; i++) {
+      var parts = lines[i].split("|");
+      if (parts.length < 3) continue;
+      frames.push({
+        filename: parts[0],
+        duration: parseFloat(parts[1]) || 4,
+        desc: parts.slice(2).join("|")
+      });
+    }
+    if (!frames.length) { alert("manifest.txt no tiene cuadros legibles."); app.endUndoGroup(); return; }
+
+    var CROSSFADE = 0.5;   // segundos de solapamiento entre cuadros
+    var FRAME_RATE = 25;
+
+    var firstFile = new File(framesFolder.fsName + "/" + frames[0].filename);
+    if (!firstFile.exists) { alert("No encontré la imagen: " + firstFile.fsName); app.endUndoGroup(); return; }
+    var firstFootage = app.project.importFile(new ImportOptions(firstFile));
+
+    var totalDuration = CROSSFADE;
+    for (var d = 0; d < frames.length; d++) totalDuration += frames[d].duration;
+
+    var comp = app.project.items.addComp(
+      "Storyboard", firstFootage.width, firstFootage.height,
+      firstFootage.pixelAspect || 1, totalDuration, FRAME_RATE
+    );
+
+    var t = 0;
+    for (var i = 0; i < frames.length; i++) {
+      var f = frames[i];
+      var footage;
+      if (i === 0) {
+        footage = firstFootage;
+      } else {
+        var imgFile = new File(framesFolder.fsName + "/" + f.filename);
+        if (!imgFile.exists) { continue; }
+        footage = app.project.importFile(new ImportOptions(imgFile));
+      }
+
+      var layer = comp.layers.add(footage);
+      layer.name = (i + 1 < 10 ? "0" : "") + (i + 1) + (f.desc ? " — " + f.desc : "");
+      layer.startTime = t;
+
+      // Encaja la imagen dentro del cuadro de comp (equivalente a object-fit: contain) y la centra,
+      // por si el storyboard mezcla imágenes de distinta resolución.
+      var scale = Math.min((comp.width / footage.width) * 100, (comp.height / footage.height) * 100);
+      var transform = layer.property("Transform");
+      transform.property("Anchor Point").setValue([footage.width / 2, footage.height / 2]);
+      transform.property("Position").setValue([comp.width / 2, comp.height / 2]);
+      transform.property("Scale").setValue([scale, scale]);
+
+      var fadeIn = (i > 0) ? CROSSFADE : 0;
+      var fadeOut = (i < frames.length - 1) ? CROSSFADE : 0;
+      var opacity = transform.property("Opacity");
+      if (fadeIn > 0) {
+        opacity.setValueAtTime(t, 0);
+        opacity.setValueAtTime(t + fadeIn, 100);
+      } else {
+        opacity.setValueAtTime(t, 100);
+      }
+      if (fadeOut > 0) {
+        opacity.setValueAtTime(t + f.duration, 100);
+        opacity.setValueAtTime(t + f.duration + fadeOut, 0);
+      }
+      layer.outPoint = t + f.duration + fadeOut;
+
+      if (f.desc) {
+        var textLayer = comp.layers.addText(f.desc);
+        textLayer.name = "Texto " + (i + 1 < 10 ? "0" : "") + (i + 1);
+        textLayer.startTime = t;
+        textLayer.outPoint = t + f.duration + fadeOut;
+        var textProp = textLayer.property("Source Text");
+        var textDocument = textProp.value;
+        textDocument.fontSize = Math.round(comp.height * 0.035);
+        textDocument.fillColor = [1, 1, 1];
+        textDocument.font = "ArialMT";
+        textDocument.justification = ParagraphJustification.CENTER_JUSTIFY;
+        textProp.setValue(textDocument);
+        var textTransform = textLayer.property("Transform");
+        textTransform.property("Position").setValue([comp.width / 2, comp.height - comp.height * 0.08]);
+      }
+
+      t += f.duration + fadeOut;
+    }
+
+    alert("Listo — se creó la composición 'Storyboard' con " + frames.length + " cuadros.");
+  } catch (err) {
+    alert("Error al importar el storyboard: " + err.toString());
+  }
+  app.endUndoGroup();
+})();
+`;
+
+function buildAeReadme(title) {
+  return `STORYBOARD PARA AFTER EFFECTS — ${title}
+Armado con Storyboard · Chimichurri Diseño
+
+CÓMO USARLO
+1. Descomprimí este ZIP entero en una carpeta. Mantené "frames/",
+   "manifest.txt" y el script juntos, en el mismo lugar (el script los
+   busca al lado suyo).
+2. Abrí After Effects.
+3. Archivo > Scripts > Ejecutar archivo de script... y elegí
+   "Importar en After Effects.jsx".
+   Si nunca corriste scripts en este After Effects, puede pedirte
+   habilitar Preferencias > Scripting & Expressions >
+   "Allow Scripts to Write Files and Access Network".
+4. El script arma una composición "Storyboard" con cada cuadro en su
+   lugar según la duración configurada, con un crossfade de 0.5s entre
+   cuadros. La descripción de cada cuadro queda como una capa de texto
+   aparte, editable.
+
+Esto es un punto de partida para animar — no el video final. Las
+imágenes son las del storyboard (referencias/bocetos), pensado para
+que el equipo de motion arranque a trabajar ya con la estructura y los
+tiempos definidos.
+`;
+}
+
+async function exportAfterEffects() {
+  if (!state.frames.length) return null;
+  const zip = new JSZip();
+  const framesFolder = zip.folder('frames');
+  const manifestLines = [];
+
+  for (let i = 0; i < state.frames.length; i++) {
+    const f = state.frames[i];
+    const ext = frameExt(f);
+    const filename = String(i + 1).padStart(2, '0') + '.' + ext;
+    const blob = await getFrameBlob(f);
+    if (blob) framesFolder.file(filename, blob);
+    const cleanDesc = (f.desc || '').replace(/\|/g, '/').replace(/[\r\n]+/g, ' ').trim();
+    manifestLines.push(`${filename}|${f.duration || DEFAULT_DURATION}|${cleanDesc}`);
+  }
+
+  zip.file('manifest.txt', manifestLines.join('\n') + '\n');
+  zip.file('Importar en After Effects.jsx', AE_JSX_SCRIPT);
+  const title = state.projectName || 'Storyboard';
+  zip.file('LEEME.txt', buildAeReadme(title));
+
+  const blob = await zip.generateAsync({ type: 'blob' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = slugify(title) + '-after-effects.zip';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+  return blob;
+}
+
 // ─── Wiring ───────────────────────────────────────────────────
 
 const dropEl = $('sbDrop');
@@ -1077,10 +1278,29 @@ $('tlTitle').addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.pre
 $('sbPresentBtn').addEventListener('click', () => openPlayer({ startIndex: 0, autoplay: true }));
 $('sbResetBtn').addEventListener('click', resetBoard);
 
-$('sbExportBtn').addEventListener('click', async () => {
+$('sbExportBtn').addEventListener('click', (e) => {
+  e.stopPropagation();
+  $('sbExportMenu').hidden = !$('sbExportMenu').hidden;
+});
+document.addEventListener('click', (e) => {
+  if (!$('sbExportMenu').hidden && !e.target.closest('.tl-menu-wrap')) $('sbExportMenu').hidden = true;
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && !$('sbExportMenu').hidden) $('sbExportMenu').hidden = true;
+});
+
+$('sbExportHtmlBtn').addEventListener('click', async () => {
+  $('sbExportMenu').hidden = true;
   showToast('Generando el archivo…', { duration: 1500 });
   await exportHtml();
   showToast('Listo ✓ Descargaste el storyboard. Ya lo podés enviar por WhatsApp, mail o Drive.');
+});
+
+$('sbExportAeBtn').addEventListener('click', async () => {
+  $('sbExportMenu').hidden = true;
+  showToast('Armando el paquete para After Effects…', { duration: 1800 });
+  await exportAfterEffects();
+  showToast('Listo ✓ Descomprimí el ZIP y corré el script .jsx desde After Effects.');
 });
 
 $('sbShareBtn').addEventListener('click', async () => {

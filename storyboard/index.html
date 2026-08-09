@@ -60,6 +60,21 @@
     }
     .tl-btn.primary:hover { background: color-mix(in srgb, var(--accent) 85%, black); }
 
+    .tl-menu-wrap { position: relative; }
+    .tl-menu {
+      position: absolute; top: calc(100% + 8px); right: 0; min-width: 250px;
+      background: color-mix(in srgb, var(--surface) 92%, transparent); backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid var(--line); border-radius: 12px; padding: 6px; box-shadow: 0 12px 32px rgba(0,0,0,.18);
+      z-index: 70; display: flex; flex-direction: column; gap: 2px;
+    }
+    .tl-menu button {
+      display: flex; flex-direction: column; align-items: flex-start; gap: 1px; text-align: left;
+      padding: 8px 10px; border-radius: 8px; border: none; background: none; cursor: pointer; width: 100%;
+    }
+    .tl-menu button:hover { background: var(--surface2); }
+    .tl-menu-title { font-size: 12.5px; font-weight: 600; color: var(--ink); }
+    .tl-menu-sub { font-size: 11px; color: var(--muted); }
+
     /* ─── Dropzone (estado vacío) ─── */
     .drop-wrap { flex: 1; display: flex; align-items: center; justify-content: center; padding: 24px; }
     .drop {
@@ -248,7 +263,19 @@
       <div class="tl-actions" id="tlActions" hidden>
         <button type="button" class="tl-btn" id="sbResetBtn" title="Empezar de nuevo" aria-label="Empezar de nuevo">＋</button>
         <button type="button" class="tl-btn" id="sbShareBtn" title="Compartir" aria-label="Compartir">⇪</button>
-        <button type="button" class="tl-btn" id="sbExportBtn" title="Descargar" aria-label="Descargar">⇩</button>
+        <div class="tl-menu-wrap">
+          <button type="button" class="tl-btn" id="sbExportBtn" title="Descargar" aria-label="Descargar" aria-haspopup="true">⇩</button>
+          <div class="tl-menu" id="sbExportMenu" hidden>
+            <button type="button" id="sbExportHtmlBtn">
+              <span class="tl-menu-title">HTML para compartir</span>
+              <span class="tl-menu-sub">Abre directo en modo presentación</span>
+            </button>
+            <button type="button" id="sbExportAeBtn">
+              <span class="tl-menu-title">Paquete para After Effects</span>
+              <span class="tl-menu-sub">Cuadros + script .jsx con los tiempos ya armados</span>
+            </button>
+          </div>
+        </div>
         <button type="button" class="tl-btn primary" id="sbPresentBtn" title="Presentar">▶ Presentar</button>
       </div>
     </div>
