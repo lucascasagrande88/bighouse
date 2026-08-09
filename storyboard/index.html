@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Storyboard Builder — Chimichurri Diseño</title>
-  <meta name="description" content="Subí un ZIP con las imágenes de tu storyboard y armamos automáticamente un display prolijo, cuadro por cuadro, listo para compartir. 100% en tu navegador.">
+  <meta name="description" content="Subí un ZIP con las imágenes de tu storyboard y armamos una presentación cinematográfica automática, con fade entre cuadros, lista para mostrarle al cliente o compartir.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800&display=swap" rel="stylesheet">
@@ -43,13 +43,14 @@
     .sb-spinner { width: 36px; height: 36px; border-radius: 50%; border: 3px solid var(--border); border-top-color: var(--accent); animation: sbspin 0.8s linear infinite; }
     @keyframes sbspin { to { transform: rotate(360deg); } }
 
-    .sb-toolbar {
+    /* ─── Editor (revisión rápida antes de presentar) ─── */
+    .sb-editor-bar {
       position: sticky; top: var(--nav-h); z-index: 50;
       background: rgba(8,8,8,0.94); backdrop-filter: blur(16px) saturate(180%);
       border-bottom: 1px solid var(--border); border-top: 1px solid var(--border);
       padding: 14px 0;
     }
-    .sb-toolbar-inner { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .sb-editor-bar-inner { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
     .sb-input {
       background: var(--surface2); border: 1px solid var(--border); color: var(--text);
       border-radius: 10px; padding: 10px 14px; font-size: 0.85rem; font-family: inherit; min-width: 0;
@@ -57,112 +58,143 @@
     .sb-input:focus { outline: none; border-color: var(--accent-border); }
     .sb-input-project { flex: 1 1 200px; font-weight: 700; }
     .sb-input-client { flex: 1 1 150px; }
-    .sb-toolbar-spacer { flex: 1 1 auto; }
-    .sb-toolbar-actions { display: flex; gap: 8px; flex-wrap: wrap; }
-    .sb-view-toggle { display: flex; background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 3px; }
-    .sb-view-toggle button {
-      background: none; border: none; color: var(--text-muted); padding: 7px 12px;
-      border-radius: 7px; font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: all var(--ease); font-family: inherit;
+    .sb-editor-bar-spacer { flex: 1 1 auto; }
+    .sb-editor-bar-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .sb-present-btn { display: inline-flex; align-items: center; gap: 8px; }
+
+    .sb-editor-wrap { padding: 32px 0 100px; }
+    .sb-editor-count { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 16px; }
+    .sb-editor-list { display: flex; flex-direction: column; gap: 10px; max-width: 760px; margin: 0 auto; }
+
+    .sb-row {
+      display: flex; gap: 14px; padding: 12px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: var(--radius-lg);
+      transition: border-color var(--ease);
     }
-    .sb-view-toggle button.active { background: var(--accent); color: #000; }
+    .sb-row:hover { border-color: var(--accent-border); }
+    .sb-row.dragging { opacity: .4; }
+    .sb-row.drag-over { outline: 2px dashed var(--accent); outline-offset: -2px; }
 
-    .sb-board-wrap { padding: 36px 0 110px; }
-    .sb-board-count { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 20px; }
-    .sb-board { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 22px; }
-    .sb-board.view-strip { grid-template-columns: 1fr; max-width: 680px; margin: 0 auto; }
-
-    .sb-frame {
-      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
-      overflow: hidden; position: relative; display: flex; flex-direction: column;
-      transition: border-color var(--ease), transform var(--ease);
+    .sb-row-thumb {
+      position: relative; flex-shrink: 0; width: 108px; aspect-ratio: 16/9; border-radius: 10px;
+      overflow: hidden; background: #000; cursor: zoom-in; display: flex; align-items: center; justify-content: center;
     }
-    .sb-frame:hover { border-color: var(--accent-border); }
-    .sb-frame.dragging { opacity: 0.35; }
-    .sb-frame.drag-over { outline: 2px dashed var(--accent); outline-offset: -2px; }
-
-    .sb-frame-media { position: relative; aspect-ratio: 16/9; background: #000; display: flex; align-items: center; justify-content: center; cursor: zoom-in; }
-    .sb-frame-media img { width: 100%; height: 100%; object-fit: contain; }
-    .sb-frame-media.empty { color: var(--text-muted); font-size: 0.8rem; flex-direction: column; gap: 8px; cursor: pointer; }
-    .sb-frame-media.empty:hover { color: var(--accent); }
-
-    .sb-frame-num {
-      position: absolute; top: 10px; left: 10px; background: var(--accent); color: #000;
-      font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.82rem; line-height: 1;
-      padding: 6px 10px; border-radius: 8px; z-index: 2;
+    .sb-row-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .sb-row-thumb.empty { color: var(--text-muted); font-size: 1.3rem; cursor: pointer; }
+    .sb-row-num {
+      position: absolute; top: 5px; left: 5px; background: var(--accent); color: #000;
+      font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.68rem; line-height: 1;
+      padding: 3px 6px; border-radius: 5px;
     }
-    .sb-frame-controls { position: absolute; top: 8px; right: 8px; display: flex; gap: 4px; opacity: 0; transition: opacity var(--ease); z-index: 2; }
-    .sb-frame:hover .sb-frame-controls, .sb-frame:focus-within .sb-frame-controls { opacity: 1; }
-    .sb-frame-btn {
-      width: 26px; height: 26px; border-radius: 7px; border: none; background: rgba(0,0,0,0.6);
-      color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer;
-      font-size: 0.78rem; backdrop-filter: blur(4px); transition: background var(--ease);
-    }
-    .sb-frame-btn:hover { background: rgba(0,0,0,0.88); }
-    .sb-frame-btn.danger:hover { background: #c0392b; }
-    .sb-frame-drag { cursor: grab; }
 
-    .sb-frame-body { padding: 16px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
-    .sb-frame-desc {
+    .sb-row-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+    .sb-row-desc {
       background: none; border: none; color: var(--text); font-family: inherit; font-size: 0.88rem;
-      line-height: 1.5; resize: none; min-height: 44px; padding: 0; width: 100%;
+      line-height: 1.45; resize: none; min-height: 22px; padding: 0; width: 100%;
     }
-    .sb-frame-desc:focus { outline: none; }
-    .sb-frame-desc::placeholder { color: var(--text-muted); }
-    .sb-frame-note {
-      background: none; border: none; border-top: 1px solid var(--border); color: var(--text-muted);
-      font-family: inherit; font-size: 0.76rem; padding-top: 8px; margin-top: 2px; width: 100%;
-    }
-    .sb-frame-note:focus { outline: none; color: var(--text); }
-    .sb-frame-note::placeholder { color: rgba(255,255,255,0.25); }
+    .sb-row-desc:focus { outline: none; }
+    .sb-row-desc::placeholder { color: var(--text-muted); }
 
-    .sb-board.view-strip .sb-frame { flex-direction: row; }
-    .sb-board.view-strip .sb-frame-media { width: 260px; aspect-ratio: unset; flex-shrink: 0; }
-    .sb-board.view-strip .sb-frame-body { flex: 1; }
-    @media (max-width: 720px) {
-      .sb-board.view-strip .sb-frame { flex-direction: column; }
-      .sb-board.view-strip .sb-frame-media { width: 100%; aspect-ratio: 16/9; }
+    .sb-row-meta { display: flex; align-items: center; gap: 10px; }
+    .sb-row-duration { display: flex; align-items: center; gap: 6px; font-size: 0.76rem; color: var(--text-muted); }
+    .sb-row-duration input {
+      width: 46px; background: var(--surface2); border: 1px solid var(--border); color: var(--text);
+      border-radius: 7px; padding: 4px 6px; font-family: inherit; font-size: 0.78rem; text-align: center;
     }
+    .sb-row-meta-spacer { flex: 1 1 auto; }
+    .sb-row-controls { display: flex; gap: 4px; }
+    .sb-row-btn {
+      width: 24px; height: 24px; border-radius: 6px; border: none; background: var(--surface2);
+      color: var(--text-muted); display: flex; align-items: center; justify-content: center; cursor: pointer;
+      font-size: 0.72rem; transition: all var(--ease);
+    }
+    .sb-row-btn:hover { background: rgba(255,255,255,0.12); color: var(--text); }
+    .sb-row-btn.danger:hover { background: #c0392b; color: #fff; }
+    .sb-row-drag { cursor: grab; }
 
-    .sb-frame-add {
+    .sb-row-add {
       border: 2px dashed var(--border); border-radius: var(--radius-lg); background: transparent;
-      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
-      min-height: 220px; color: var(--text-muted); cursor: pointer; transition: all var(--ease); font-family: inherit; font-size: 0.85rem;
+      padding: 16px; display: flex; align-items: center; justify-content: center; gap: 8px;
+      color: var(--text-muted); cursor: pointer; transition: all var(--ease); font-family: inherit; font-size: 0.85rem;
+      max-width: 760px; margin: 4px auto 0; width: 100%;
     }
-    .sb-frame-add:hover { border-color: var(--accent); color: var(--accent); }
-    .sb-frame-add span { font-size: 1.6rem; }
+    .sb-row-add:hover { border-color: var(--accent); color: var(--accent); }
 
-    .sb-lightbox {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 300;
-      display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; gap: 16px;
+    /* ─── Player (presentación cinematográfica) ─── */
+    .sb-player {
+      position: fixed; inset: 0; z-index: 500; background: #050505;
+      display: flex; flex-direction: column;
     }
-    .sb-lightbox img { max-width: min(90vw, 1000px); max-height: 68vh; object-fit: contain; border-radius: 12px; }
-    .sb-lightbox p { color: var(--text); max-width: 600px; text-align: center; font-size: 0.95rem; }
-    .sb-lightbox-close { position: absolute; top: 22px; right: 26px; background: none; border: none; color: #fff; font-size: 2rem; cursor: pointer; line-height: 1; }
+    .sb-player-progress { display: flex; gap: 6px; padding: 14px 16px 0; }
+    .sb-player-seg { flex: 1; height: 3px; background: rgba(255,255,255,0.22); border-radius: 2px; overflow: hidden; }
+    .sb-player-seg-fill { display: block; height: 100%; width: 0%; background: #fff; border-radius: 2px; }
+    .sb-player-seg.done .sb-player-seg-fill { width: 100%; }
+    .sb-player-seg.active .sb-player-seg-fill { animation-name: sbSegFill; animation-timing-function: linear; animation-fill-mode: forwards; }
+    .sb-player.paused .sb-player-seg.active .sb-player-seg-fill { animation-play-state: paused; }
+    @keyframes sbSegFill { from { width: 0%; } to { width: 100%; } }
 
-    .sb-toast {
-      position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(20px);
-      background: var(--text); color: #000; padding: 13px 22px; border-radius: 100px; font-size: 0.85rem; font-weight: 600;
-      z-index: 400; opacity: 0; pointer-events: none; transition: all 0.25s ease; box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-      display: flex; align-items: center; gap: 10px; max-width: 90vw;
+    .sb-player-top { display: flex; align-items: flex-start; justify-content: space-between; padding: 10px 16px 0; }
+    .sb-player-meta { font-size: 0.78rem; color: rgba(255,255,255,0.6); line-height: 1.4; }
+    .sb-player-meta b { color: #fff; font-weight: 700; display: block; font-size: 0.85rem; }
+    .sb-player-topbtns { display: flex; gap: 8px; }
+    .sb-player-iconbtn {
+      width: 34px; height: 34px; border-radius: 50%; border: none; background: rgba(255,255,255,0.12);
+      color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer;
+      font-size: 1rem; backdrop-filter: blur(6px); transition: background var(--ease); flex-shrink: 0;
     }
-    .sb-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
-    .sb-toast button { background: none; border: none; color: #000; font-weight: 800; text-decoration: underline; cursor: pointer; font-size: 0.85rem; font-family: inherit; }
+    .sb-player-iconbtn:hover { background: rgba(255,255,255,0.24); }
+
+    .sb-player-stage {
+      flex: 1; min-height: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 22px; padding: 14px 28px 6px; transition: opacity .38s ease; cursor: pointer;
+    }
+    .sb-player-stage.fade { opacity: 0; }
+    .sb-player-img-wrap { flex: 1; min-height: 0; width: 100%; display: flex; align-items: center; justify-content: center; }
+    .sb-player-img-wrap img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 16px; box-shadow: 0 24px 70px rgba(0,0,0,.55); }
+    .sb-player-caption {
+      max-width: 680px; text-align: center; color: #fff; font-size: clamp(1rem, 2.2vw, 1.3rem);
+      font-weight: 600; line-height: 1.55; flex-shrink: 0; min-height: 1.6em; cursor: default;
+    }
+    .sb-player-caption:empty { opacity: .35; font-weight: 400; font-style: italic; font-size: .95rem; }
+    .sb-player-caption:empty::before { content: 'Sin descripción'; }
+
+    .sb-player-bigplay {
+      position: absolute; inset: 0; margin: auto; width: 84px; height: 84px; border-radius: 50%;
+      background: var(--accent); border: none; color: #000; font-size: 1.7rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 40px rgba(0,0,0,.5);
+      transition: transform var(--ease);
+    }
+    .sb-player-bigplay:hover { transform: scale(1.06); }
+
+    .sb-player-controls { display: flex; align-items: center; justify-content: center; gap: 18px; padding: 6px 20px 26px; flex-shrink: 0; }
+    .sb-player-btn {
+      width: 44px; height: 44px; border-radius: 50%; border: none; background: rgba(255,255,255,0.12);
+      color: #fff; font-size: 1rem; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; backdrop-filter: blur(6px); transition: background var(--ease);
+    }
+    .sb-player-btn:hover { background: rgba(255,255,255,0.24); }
+    .sb-player-btn.primary { width: 56px; height: 56px; background: var(--accent); color: #000; font-size: 1.2rem; }
+    .sb-player-btn.primary:hover { opacity: .88; background: var(--accent); }
+    .sb-player-btn:disabled { opacity: .3; cursor: default; }
+
+    .sb-player-end {
+      position: absolute; inset: 0; background: rgba(5,5,5,0.88); backdrop-filter: blur(6px);
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px;
+      text-align: center; padding: 24px; opacity: 0; pointer-events: none; transition: opacity .4s ease;
+    }
+    .sb-player-end.show { opacity: 1; pointer-events: auto; }
+    .sb-player-end h3 { font-family: 'Syne', sans-serif; font-size: clamp(1.3rem, 4vw, 2rem); color: #fff; }
+    .sb-player-end p { color: rgba(255,255,255,0.65); max-width: 380px; font-size: 0.92rem; }
+    .sb-player-end-actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 4px; }
+
+    @media (max-width: 640px) {
+      .sb-player-stage { padding: 10px 18px 4px; gap: 16px; }
+      .sb-player-bigplay { width: 68px; height: 68px; font-size: 1.4rem; }
+      .sb-row-thumb { width: 84px; }
+      .sb-row-meta { flex-wrap: wrap; row-gap: 6px; }
+    }
 
     [hidden] { display: none !important; }
-
-    @media print {
-      .nav, .sb-hero, .sb-drop-section, .sb-toolbar, .wa-fab, .footer, .sb-frame-controls, .sb-frame-add, .sb-lightbox, .sb-toast, .sb-board-count { display: none !important; }
-      body { background: #fff; color: #000; }
-      .sb-board-wrap { padding: 0; }
-      .sb-board, .sb-board.view-strip { display: grid !important; grid-template-columns: 1fr 1fr; gap: 16px; max-width: none; }
-      .sb-frame { background: #fff; border: 1px solid #ccc; break-inside: avoid; }
-      .sb-frame-media { background: #fff; aspect-ratio: 16/9; }
-      .sb-frame-num { background: #000; color: #fff; }
-      .sb-frame-body { background: #fff; }
-      .sb-frame-desc, .sb-frame-note { background: #fff; color: #000; }
-      .sb-frame-note { border-top-color: #ccc; }
-      .sb-frame-desc::placeholder, .sb-frame-note::placeholder { color: #999; }
-    }
   </style>
 </head>
 <body class="diseno">
@@ -195,12 +227,12 @@
     <div class="sb-hero-glow"></div>
     <div class="wrap">
       <div class="label">Herramienta interna</div>
-      <h1>Armá tu storyboard.<br><em>Compartilo en segundos.</em></h1>
-      <p>Soltá el ZIP con los cuadros de tu storyboard y armamos automáticamente un display prolijo — numerado, con la descripción de qué pasa en cada cuadro debajo de la imagen. Todo corre en tu navegador: ninguna imagen se sube a ningún servidor.</p>
+      <h1>Armá tu storyboard.<br><em>Presentalo como un video.</em></h1>
+      <p>Soltá el ZIP con los cuadros de tu storyboard y armamos una presentación automática con fade entre cuadro y cuadro, tipo stories — para que el cliente entienda de qué va el video en 30 segundos. Todo corre en tu navegador: ninguna imagen se sube a ningún servidor.</p>
       <div class="sb-badges">
+        <span>🎬 Fade automático entre cuadros</span>
+        <span>▶ Play / pause + avance manual</span>
         <span>🔒 100% local, sin subir archivos</span>
-        <span>✎ Descripciones editables</span>
-        <span>↕ Reordenar cuadros</span>
         <span>⇩ Exportar y compartir en 1 click</span>
       </div>
     </div>
@@ -239,38 +271,63 @@
     <p id="sbLoadingText">Leyendo el ZIP…</p>
   </div>
 
-  <!-- TOOLBAR -->
-  <div class="sb-toolbar" id="sbToolbar" hidden>
-    <div class="wrap sb-toolbar-inner">
-      <input type="text" class="sb-input sb-input-project" id="sbProjectName" placeholder="Nombre del proyecto" maxlength="80">
-      <input type="text" class="sb-input sb-input-client" id="sbClientName" placeholder="Cliente (opcional)" maxlength="60">
-      <div class="sb-toolbar-spacer"></div>
-      <div class="sb-view-toggle">
-        <button type="button" id="sbViewGridBtn" class="active">Grid</button>
-        <button type="button" id="sbViewStripBtn">Filmina</button>
-      </div>
-      <div class="sb-toolbar-actions">
-        <button type="button" class="btn btn-ghost btn-sm" id="sbPrintBtn">Imprimir / PDF</button>
-        <button type="button" class="btn btn-wa btn-sm" id="sbShareBtn">Compartir</button>
-        <button type="button" class="btn btn-primary btn-sm" id="sbExportBtn">Descargar HTML</button>
-        <button type="button" class="btn btn-ghost btn-sm" id="sbResetBtn">Empezar de nuevo</button>
+  <!-- EDITOR -->
+  <div id="sbEditor" hidden>
+    <div class="sb-editor-bar">
+      <div class="wrap sb-editor-bar-inner">
+        <input type="text" class="sb-input sb-input-project" id="sbProjectName" placeholder="Nombre del proyecto" maxlength="80">
+        <input type="text" class="sb-input sb-input-client" id="sbClientName" placeholder="Cliente (opcional)" maxlength="60">
+        <div class="sb-editor-bar-spacer"></div>
+        <div class="sb-editor-bar-actions">
+          <button type="button" class="btn btn-ghost btn-sm" id="sbResetBtn">Empezar de nuevo</button>
+          <button type="button" class="btn btn-wa btn-sm" id="sbShareBtn">Compartir</button>
+          <button type="button" class="btn btn-ghost btn-sm" id="sbExportBtn">Descargar HTML</button>
+          <button type="button" class="btn btn-primary btn-sm sb-present-btn" id="sbPresentBtn">▶ Presentar</button>
+        </div>
       </div>
     </div>
+    <section class="sb-editor-wrap">
+      <div class="wrap">
+        <div class="sb-editor-count" id="sbEditorCount"></div>
+        <div class="sb-editor-list" id="sbEditorList"></div>
+      </div>
+    </section>
   </div>
 
-  <!-- BOARD -->
-  <section class="sb-board-wrap">
-    <div class="wrap">
-      <div class="sb-board-count" id="sbBoardCount" hidden></div>
-      <div class="sb-board" id="sbBoard" hidden></div>
+  <!-- PLAYER -->
+  <div class="sb-player paused" id="sbPlayer" hidden>
+    <div class="sb-player-progress" id="sbPlayerProgress"></div>
+    <div class="sb-player-top">
+      <div class="sb-player-meta">
+        <b id="sbPlayerProjectName">Storyboard</b>
+        <span id="sbPlayerClientName"></span>
+      </div>
+      <div class="sb-player-topbtns">
+        <button type="button" class="sb-player-iconbtn" id="sbPlayerFsBtn" title="Pantalla completa" aria-label="Pantalla completa">⛶</button>
+        <button type="button" class="sb-player-iconbtn" id="sbPlayerEditBtn" title="Editar guion" aria-label="Editar guion">✎</button>
+        <button type="button" class="sb-player-iconbtn" id="sbPlayerCloseBtn" title="Cerrar" aria-label="Cerrar">✕</button>
+      </div>
     </div>
-  </section>
-
-  <!-- LIGHTBOX -->
-  <div class="sb-lightbox" id="sbLightbox" hidden>
-    <button class="sb-lightbox-close" id="sbLightboxClose" aria-label="Cerrar">×</button>
-    <img id="sbLightboxImg" alt="">
-    <p id="sbLightboxCaption"></p>
+    <div class="sb-player-stage" id="sbPlayerStage">
+      <div class="sb-player-img-wrap">
+        <img id="sbPlayerImg" alt="">
+      </div>
+      <p class="sb-player-caption" id="sbPlayerCaption"></p>
+      <button type="button" class="sb-player-bigplay" id="sbPlayerBigPlay" aria-label="Reproducir presentación">▶</button>
+    </div>
+    <div class="sb-player-controls">
+      <button type="button" class="sb-player-btn" id="sbPlayerPrevBtn" aria-label="Cuadro anterior">◀</button>
+      <button type="button" class="sb-player-btn primary" id="sbPlayerPlayBtn" aria-label="Reproducir / pausar">▶</button>
+      <button type="button" class="sb-player-btn" id="sbPlayerNextBtn" aria-label="Cuadro siguiente">▶</button>
+    </div>
+    <div class="sb-player-end" id="sbPlayerEnd">
+      <h3>Fin del storyboard</h3>
+      <p id="sbPlayerEndSub">Así se va a ver el video, cuadro por cuadro.</p>
+      <div class="sb-player-end-actions">
+        <button type="button" class="btn btn-primary" id="sbPlayerReplayBtn">↺ Ver de nuevo</button>
+        <a href="https://wa.me/5491100000000" class="btn btn-wa" target="_blank" rel="noopener">¿Te copó? Escribinos</a>
+      </div>
+    </div>
   </div>
 
   <!-- TOAST -->

@@ -225,7 +225,11 @@ function lookupManifestDesc(manifest, filename, orderNum, positionIdx) {
 
 // ─── Estado ────────────────────────────────────────────────────
 
-const state = { frames: [], projectName: '', clientName: '', view: 'grid' };
+const DEFAULT_DURATION = 4; // segundos por cuadro en la presentación
+const FADE_MS = 380; // debe coincidir con la transition de .sb-player-stage en el CSS
+
+const state = { frames: [], projectName: '', clientName: '' };
+const playerState = { index: 0, playing: false, everStarted: false };
 let pendingAddTargetId = null;
 let dragId = null;
 let lastDeleted = null;
@@ -275,7 +279,7 @@ async function processZip(file) {
       const parsed = parseFrameName(base);
       let desc = sidecarMap.get(base.toLowerCase());
       if (!desc) desc = lookupManifestDesc(manifest, filename, parsed.order, i + 1) || parsed.desc || '';
-      frames.push({ id: makeId(), blob, blobUrl, name: filename, desc, note: '' });
+      frames.push({ id: makeId(), blob, blobUrl, name: filename, desc, duration: DEFAULT_DURATION });
     }
 
     state.frames = frames;
@@ -283,7 +287,8 @@ async function processZip(file) {
       state.projectName = file.name.replace(/\.zip$/i, '').replace(/[_-]+/g, ' ').trim();
     }
     hideLoading();
-    enterBoard();
+    enterEditor();
+    openPlayer({ startIndex: 0, autoplay: false });
   } catch (err) {
     console.error(err);
     hideLoading();
@@ -306,7 +311,7 @@ function buildDemoFrames() {
     blobUrl: svgPlaceholder(d.color, d.emoji, i + 1),
     name: `demo-${i + 1}.svg`,
     desc: d.desc,
-    note: '',
+    duration: DEFAULT_DURATION,
   }));
 }
 
@@ -320,68 +325,91 @@ function svgPlaceholder(color, emoji, n) {
   return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
 }
 
-// ─── Render ──────────────────────────────────────────────────
+// ─── Editor (revisión rápida) ────────────────────────────────
 
-function enterBoard() {
+function enterEditor() {
   $('sbDropSection').hidden = true;
-  $('sbToolbar').hidden = false;
-  $('sbBoard').hidden = false;
-  $('sbBoardCount').hidden = false;
+  $('sbEditor').hidden = false;
   $('sbProjectName').value = state.projectName || '';
   $('sbClientName').value = state.clientName || '';
   document.title = (state.projectName ? state.projectName + ' — ' : '') + 'Storyboard · Chimichurri Diseño';
-  renderBoard();
-  requestAnimationFrame(() => {
-    $('sbToolbar').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
+  renderEditorList();
 }
 
-function renderBoard() {
-  const board = $('sbBoard');
-  board.innerHTML = '';
-  board.className = 'sb-board' + (state.view === 'strip' ? ' view-strip' : '');
-  state.frames.forEach((frame, idx) => board.appendChild(buildFrameEl(frame, idx)));
-  board.appendChild(buildAddFrameEl());
-  const count = $('sbBoardCount');
-  count.textContent = `${state.frames.length} cuadro${state.frames.length === 1 ? '' : 's'}`;
+function renderEditorList() {
+  const list = $('sbEditorList');
+  list.innerHTML = '';
+  state.frames.forEach((frame, idx) => list.appendChild(buildEditorRow(frame, idx)));
+  list.appendChild(buildEditorAddRow());
+  $('sbEditorCount').textContent = `${state.frames.length} cuadro${state.frames.length === 1 ? '' : 's'}`;
 }
 
-function buildFrameEl(frame, idx) {
+function buildEditorRow(frame, idx) {
   const el = document.createElement('div');
-  el.className = 'sb-frame';
+  el.className = 'sb-row';
   el.draggable = true;
   el.dataset.id = frame.id;
 
-  const media = document.createElement('div');
-  media.className = 'sb-frame-media';
+  const thumb = document.createElement('div');
+  thumb.className = 'sb-row-thumb';
   if (frame.blobUrl) {
     const img = document.createElement('img');
     img.src = frame.blobUrl;
     img.alt = `Cuadro ${idx + 1}`;
     img.loading = 'lazy';
-    media.appendChild(img);
-    media.addEventListener('click', () => openLightbox(frame, idx));
+    thumb.appendChild(img);
   } else {
-    media.classList.add('empty');
-    media.innerHTML = '<span>🖼️</span><span>Sin imagen — click para subir</span>';
-    media.addEventListener('click', () => {
-      pendingAddTargetId = frame.id;
-      $('sbAddFrameInput').click();
-    });
+    thumb.classList.add('empty');
+    thumb.textContent = '🖼️';
   }
-
+  thumb.addEventListener('click', () => {
+    if (frame.blobUrl) openPlayer({ startIndex: idx, autoplay: false });
+    else { pendingAddTargetId = frame.id; $('sbAddFrameInput').click(); }
+  });
   const num = document.createElement('div');
-  num.className = 'sb-frame-num';
+  num.className = 'sb-row-num';
   num.textContent = String(idx + 1).padStart(2, '0');
-  media.appendChild(num);
+  thumb.appendChild(num);
+
+  const body = document.createElement('div');
+  body.className = 'sb-row-body';
+
+  const desc = document.createElement('textarea');
+  desc.className = 'sb-row-desc';
+  desc.placeholder = '¿Qué pasa en este cuadro?';
+  desc.rows = 1;
+  desc.value = frame.desc;
+  desc.addEventListener('input', () => { frame.desc = desc.value; autoGrow(desc); });
+
+  const meta = document.createElement('div');
+  meta.className = 'sb-row-meta';
+
+  const duration = document.createElement('label');
+  duration.className = 'sb-row-duration';
+  const durInput = document.createElement('input');
+  durInput.type = 'number';
+  durInput.min = '1';
+  durInput.max = '20';
+  durInput.step = '0.5';
+  durInput.value = frame.duration;
+  durInput.addEventListener('change', () => {
+    const v = parseFloat(durInput.value);
+    frame.duration = Number.isFinite(v) && v > 0 ? Math.max(1, v) : DEFAULT_DURATION;
+    durInput.value = frame.duration;
+  });
+  duration.appendChild(durInput);
+  duration.appendChild(document.createTextNode('seg'));
+
+  const spacer = document.createElement('div');
+  spacer.className = 'sb-row-meta-spacer';
 
   const controls = document.createElement('div');
-  controls.className = 'sb-frame-controls';
+  controls.className = 'sb-row-controls';
   controls.innerHTML =
-    '<button type="button" class="sb-frame-btn sb-frame-drag" title="Arrastrar para reordenar">⠿</button>' +
-    '<button type="button" class="sb-frame-btn" data-act="up" title="Mover antes">↑</button>' +
-    '<button type="button" class="sb-frame-btn" data-act="down" title="Mover después">↓</button>' +
-    '<button type="button" class="sb-frame-btn danger" data-act="del" title="Eliminar cuadro">✕</button>';
+    '<button type="button" class="sb-row-btn sb-row-drag" title="Arrastrar para reordenar">⠿</button>' +
+    '<button type="button" class="sb-row-btn" data-act="up" title="Mover antes">↑</button>' +
+    '<button type="button" class="sb-row-btn" data-act="down" title="Mover después">↓</button>' +
+    '<button type="button" class="sb-row-btn danger" data-act="del" title="Eliminar cuadro">✕</button>';
   controls.addEventListener('click', (e) => {
     e.stopPropagation();
     const btn = e.target.closest('button');
@@ -391,29 +419,15 @@ function buildFrameEl(frame, idx) {
     if (act === 'down') moveFrame(frame.id, 1);
     if (act === 'del') deleteFrame(frame.id);
   });
-  media.appendChild(controls);
 
-  const body = document.createElement('div');
-  body.className = 'sb-frame-body';
-
-  const desc = document.createElement('textarea');
-  desc.className = 'sb-frame-desc';
-  desc.placeholder = '¿Qué pasa en este cuadro?';
-  desc.rows = 2;
-  desc.value = frame.desc;
-  desc.addEventListener('input', () => { frame.desc = desc.value; autoGrow(desc); });
-
-  const note = document.createElement('input');
-  note.type = 'text';
-  note.className = 'sb-frame-note';
-  note.placeholder = 'Nota / duración (opcional)';
-  note.value = frame.note;
-  note.addEventListener('input', () => { frame.note = note.value; });
+  meta.appendChild(duration);
+  meta.appendChild(spacer);
+  meta.appendChild(controls);
 
   body.appendChild(desc);
-  body.appendChild(note);
+  body.appendChild(meta);
 
-  el.appendChild(media);
+  el.appendChild(thumb);
   el.appendChild(body);
 
   attachDragHandlers(el, frame.id);
@@ -422,19 +436,17 @@ function buildFrameEl(frame, idx) {
   return el;
 }
 
-function buildAddFrameEl() {
+function buildEditorAddRow() {
   const el = document.createElement('button');
   el.type = 'button';
-  el.className = 'sb-frame-add';
-  el.innerHTML = '<span>+</span><span>Agregar cuadro</span>';
+  el.className = 'sb-row-add';
+  el.textContent = '+ Agregar cuadro';
   el.addEventListener('click', () => {
     pendingAddTargetId = null;
     $('sbAddFrameInput').click();
   });
   return el;
 }
-
-// ─── Interacciones ───────────────────────────────────────────
 
 function moveFrame(id, delta) {
   const i = state.frames.findIndex(f => f.id === id);
@@ -443,7 +455,7 @@ function moveFrame(id, delta) {
   if (j < 0 || j >= state.frames.length) return;
   const [f] = state.frames.splice(i, 1);
   state.frames.splice(j, 0, f);
-  renderBoard();
+  renderEditorList();
 }
 
 function deleteFrame(id) {
@@ -451,7 +463,7 @@ function deleteFrame(id) {
   if (i === -1) return;
   const [f] = state.frames.splice(i, 1);
   lastDeleted = { frame: f, index: i };
-  renderBoard();
+  renderEditorList();
   showToast('Cuadro eliminado.', { actionLabel: 'Deshacer', onAction: undoDelete });
 }
 
@@ -459,7 +471,7 @@ function undoDelete() {
   if (!lastDeleted) return;
   state.frames.splice(lastDeleted.index, 0, lastDeleted.frame);
   lastDeleted = null;
-  renderBoard();
+  renderEditorList();
 }
 
 function attachDragHandlers(el, id) {
@@ -469,7 +481,7 @@ function attachDragHandlers(el, id) {
   });
   el.addEventListener('dragend', () => {
     el.classList.remove('dragging');
-    document.querySelectorAll('.sb-frame.drag-over').forEach(n => n.classList.remove('drag-over'));
+    document.querySelectorAll('.sb-row.drag-over').forEach(n => n.classList.remove('drag-over'));
   });
   el.addEventListener('dragover', (e) => {
     e.preventDefault();
@@ -486,17 +498,9 @@ function attachDragHandlers(el, id) {
     if (from === -1 || to === -1) return;
     const [f] = state.frames.splice(from, 1);
     state.frames.splice(to, 0, f);
-    renderBoard();
+    renderEditorList();
   });
 }
-
-function openLightbox(frame, idx) {
-  $('sbLightboxImg').src = frame.blobUrl;
-  $('sbLightboxImg').alt = `Cuadro ${idx + 1}`;
-  $('sbLightboxCaption').textContent = `Cuadro ${String(idx + 1).padStart(2, '0')}` + (frame.desc ? ' — ' + frame.desc : '');
-  $('sbLightbox').hidden = false;
-}
-function closeLightbox() { $('sbLightbox').hidden = true; }
 
 function showLoading(text) {
   $('sbDropSection').hidden = true;
@@ -529,14 +533,150 @@ function resetBoard() {
   state.frames = [];
   state.projectName = '';
   state.clientName = '';
-  $('sbToolbar').hidden = true;
-  $('sbBoard').hidden = true;
-  $('sbBoardCount').hidden = true;
-  $('sbBoard').innerHTML = '';
+  closePlayer({ silent: true });
+  $('sbEditor').hidden = true;
+  $('sbEditorList').innerHTML = '';
   $('sbDropSection').hidden = false;
   $('sbFileInput').value = '';
   document.title = 'Storyboard Builder — Chimichurri Diseño';
   window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ─── Player (presentación cinematográfica) ───────────────────
+
+function buildSegments() {
+  const wrap = $('sbPlayerProgress');
+  wrap.innerHTML = '';
+  state.frames.forEach(() => {
+    const seg = document.createElement('div');
+    seg.className = 'sb-player-seg';
+    const fill = document.createElement('span');
+    fill.className = 'sb-player-seg-fill';
+    seg.appendChild(fill);
+    wrap.appendChild(seg);
+  });
+}
+
+function updateSegments() {
+  const segs = [...$('sbPlayerProgress').children];
+  segs.forEach((seg, i) => {
+    const fill = seg.firstElementChild;
+    seg.classList.remove('done', 'active');
+    fill.style.animation = 'none';
+    if (i < playerState.index) {
+      seg.classList.add('done');
+    } else if (i === playerState.index) {
+      seg.classList.add('active');
+      const dur = state.frames[i] ? state.frames[i].duration || DEFAULT_DURATION : DEFAULT_DURATION;
+      void fill.offsetWidth; // fuerza reflow para poder reiniciar la animación
+      fill.style.animationDuration = dur + 's';
+      fill.style.animation = 'sbSegFill linear forwards';
+      fill.style.animationDuration = dur + 's';
+    }
+  });
+}
+
+function markAllSegmentsDone() {
+  [...$('sbPlayerProgress').children].forEach(seg => {
+    seg.classList.remove('active');
+    seg.classList.add('done');
+    seg.firstElementChild.style.animation = 'none';
+  });
+}
+
+function playerShowFrame(newIdx, opts = {}) {
+  const frames = state.frames;
+  if (!frames.length) return;
+  newIdx = Math.max(0, Math.min(newIdx, frames.length - 1));
+  playerState.index = newIdx;
+  updateSegments();
+
+  const doSwap = () => {
+    const f = frames[newIdx];
+    $('sbPlayerImg').src = f.blobUrl || '';
+    $('sbPlayerImg').alt = `Cuadro ${newIdx + 1}`;
+    $('sbPlayerCaption').textContent = f.desc || '';
+    stage.classList.remove('fade');
+  };
+
+  const stage = $('sbPlayerStage');
+  if (opts.instant) {
+    doSwap();
+    return;
+  }
+  stage.classList.add('fade');
+  // setTimeout en vez de 'transitionend': ese evento puede no dispararse nunca
+  // (reduced-motion, pestaña en segundo plano) y dejaría la presentación colgada a mitad del fade.
+  setTimeout(doSwap, FADE_MS);
+}
+
+function playerNext() {
+  if (playerState.index >= state.frames.length - 1) {
+    playerShowEnd();
+    return;
+  }
+  playerShowFrame(playerState.index + 1);
+}
+
+function playerPrev() {
+  if (playerState.index <= 0) return;
+  $('sbPlayerEnd').classList.remove('show');
+  playerShowFrame(playerState.index - 1);
+}
+
+function playerShowEnd() {
+  playerState.playing = false;
+  $('sbPlayer').classList.add('paused');
+  $('sbPlayerPlayBtn').textContent = '▶';
+  markAllSegmentsDone();
+  $('sbPlayerEnd').classList.add('show');
+}
+
+function playerReplay() {
+  $('sbPlayerEnd').classList.remove('show');
+  playerShowFrame(0, { instant: true });
+  playerTogglePlay(true);
+}
+
+function playerTogglePlay(forcePlay) {
+  const playerEl = $('sbPlayer');
+  const shouldPlay = forcePlay != null ? forcePlay : !playerState.playing;
+  playerState.playing = shouldPlay;
+  playerEl.classList.toggle('paused', !shouldPlay);
+  $('sbPlayerPlayBtn').textContent = shouldPlay ? '❚❚' : '▶';
+  if (shouldPlay) {
+    playerState.everStarted = true;
+    $('sbPlayerBigPlay').hidden = true;
+    // si el segmento activo ya estaba con la animación en "none" (recién mostrado), reiniciarla
+    updateSegments();
+  }
+}
+
+function openPlayer({ startIndex = 0, autoplay = false } = {}) {
+  if (!state.frames.length) return;
+  $('sbEditor').hidden = true;
+  $('sbDropSection').hidden = true;
+  $('sbPlayer').hidden = false;
+  $('sbPlayerProjectName').textContent = state.projectName || 'Storyboard';
+  $('sbPlayerClientName').textContent = state.clientName || '';
+  $('sbPlayerClientName').hidden = !state.clientName;
+  buildSegments();
+  $('sbPlayerEnd').classList.remove('show');
+  playerState.everStarted = false;
+  playerShowFrame(startIndex, { instant: true });
+  if (autoplay) {
+    $('sbPlayerBigPlay').hidden = true;
+    playerTogglePlay(true);
+  } else {
+    $('sbPlayerBigPlay').hidden = false;
+    playerTogglePlay(false);
+  }
+}
+
+function closePlayer(opts = {}) {
+  playerTogglePlay(false);
+  $('sbPlayer').hidden = true;
+  if (!opts.silent) $('sbEditor').hidden = false;
 }
 
 // ─── Exportar / compartir ────────────────────────────────────
@@ -554,12 +694,8 @@ function frameToDataURL(frame) {
   });
 }
 
-function buildStandaloneHtml(title, client, frameCount, framesHtml) {
-  const date = new Date().toLocaleDateString('es-AR', { day: '2-digit', month: 'long', year: 'numeric' });
-  const metaBits = [];
-  if (client) metaBits.push(escapeHtml(client));
-  metaBits.push(`${frameCount} cuadro${frameCount === 1 ? '' : 's'}`);
-  metaBits.push(`Generado el ${date}`);
+function buildStandaloneHtml(title, client, framesData) {
+  const framesJson = JSON.stringify(framesData).replace(/</g, '\\u003c');
   return `<!DOCTYPE html>
 <html lang="es">
 <head>
@@ -567,67 +703,212 @@ function buildStandaloneHtml(title, client, frameCount, framesHtml) {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>${escapeHtml(title)} — Storyboard</title>
 <style>
-  :root { --bg:#080808; --surface:#0f0f0f; --accent:#D4FF00; --text:#f2f2f2; --muted:#8a8a8a; --border:rgba(255,255,255,0.08); }
+  :root { --bg:#050505; --accent:#D4FF00; }
   * { box-sizing:border-box; }
-  body { background:var(--bg); color:var(--text); font-family:-apple-system,'Segoe UI',Inter,sans-serif; margin:0; padding:48px 24px 80px; }
-  .wrap { max-width:1080px; margin:0 auto; }
-  header { margin-bottom:40px; }
-  .label { font-size:0.72rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); margin-bottom:10px; }
-  h1 { font-size:clamp(1.8rem,4vw,2.6rem); margin:0 0 8px; letter-spacing:-0.02em; }
-  .meta { color:var(--muted); font-size:0.9rem; }
-  .board { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:20px; }
-  .frame { background:var(--surface); border:1px solid var(--border); border-radius:16px; overflow:hidden; }
-  .frame-media { position:relative; aspect-ratio:16/9; background:#000; display:flex; align-items:center; justify-content:center; }
-  .frame-media img { width:100%; height:100%; object-fit:contain; display:block; }
-  .frame-empty { color:var(--muted); font-size:0.8rem; }
-  .frame-num { position:absolute; top:10px; left:10px; background:var(--accent); color:#000; font-weight:800; font-size:0.8rem; padding:5px 9px; border-radius:7px; }
-  .frame-body { padding:16px; }
-  .frame-desc { margin:0; font-size:0.9rem; line-height:1.5; }
-  .frame-desc .muted { color:var(--muted); font-style:italic; }
-  .frame-note { margin:10px 0 0; padding-top:8px; border-top:1px solid var(--border); font-size:0.78rem; color:var(--muted); }
-  footer { margin-top:56px; padding-top:24px; border-top:1px solid var(--border); color:var(--muted); font-size:0.8rem; display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; }
-  footer a { color:var(--accent); text-decoration:none; }
-  @media print { body{background:#fff;color:#000;} .frame{border-color:#ccc;break-inside:avoid;} .frame-media{background:#fff;} }
+  html,body { height:100%; }
+  body { margin:0; background:var(--bg); font-family:-apple-system,'Segoe UI',Inter,sans-serif; overflow:hidden; }
+  .p { position:fixed; inset:0; display:flex; flex-direction:column; }
+  .prog { display:flex; gap:6px; padding:14px 16px 0; }
+  .seg { flex:1; height:3px; background:rgba(255,255,255,.22); border-radius:2px; overflow:hidden; }
+  .seg-fill { display:block; height:100%; width:0%; background:#fff; border-radius:2px; }
+  .seg.done .seg-fill { width:100%; }
+  .seg.active .seg-fill { animation-name:fillseg; animation-timing-function:linear; animation-fill-mode:forwards; }
+  .p.paused .seg.active .seg-fill { animation-play-state:paused; }
+  @keyframes fillseg { from{width:0%} to{width:100%} }
+  .top { display:flex; justify-content:space-between; align-items:flex-start; padding:10px 16px 0; }
+  .meta { font-size:.78rem; color:rgba(255,255,255,.6); }
+  .meta b { color:#fff; font-weight:700; display:block; font-size:.85rem; }
+  .iconbtn { width:34px; height:34px; border-radius:50%; border:none; background:rgba(255,255,255,.12); color:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:1rem; }
+  .iconbtn:hover { background:rgba(255,255,255,.24); }
+  .stage { flex:1; min-height:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:22px; padding:14px 28px 6px; transition:opacity .38s ease; cursor:pointer; position:relative; }
+  .stage.fade { opacity:0; }
+  .imgwrap { flex:1; min-height:0; width:100%; display:flex; align-items:center; justify-content:center; }
+  .imgwrap img { max-width:100%; max-height:100%; object-fit:contain; border-radius:16px; box-shadow:0 24px 70px rgba(0,0,0,.55); }
+  .cap { max-width:680px; text-align:center; color:#fff; font-size:clamp(1rem,2.2vw,1.3rem); font-weight:600; line-height:1.55; min-height:1.6em; }
+  .bigplay { position:absolute; inset:0; margin:auto; width:84px; height:84px; border-radius:50%; background:var(--accent); border:none; color:#000; font-size:1.7rem; cursor:pointer; box-shadow:0 10px 40px rgba(0,0,0,.5); }
+  .controls { display:flex; align-items:center; justify-content:center; gap:18px; padding:6px 20px 26px; flex-shrink:0; }
+  .btn { width:44px; height:44px; border-radius:50%; border:none; background:rgba(255,255,255,.12); color:#fff; font-size:1rem; cursor:pointer; }
+  .btn:hover { background:rgba(255,255,255,.24); }
+  .btn.primary { width:56px; height:56px; background:var(--accent); color:#000; font-size:1.2rem; }
+  .end { position:absolute; inset:0; background:rgba(5,5,5,.88); backdrop-filter:blur(6px); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px; text-align:center; padding:24px; opacity:0; pointer-events:none; transition:opacity .4s ease; }
+  .end.show { opacity:1; pointer-events:auto; }
+  .end h3 { color:#fff; font-size:clamp(1.3rem,4vw,2rem); margin:0; }
+  .end p { color:rgba(255,255,255,.65); max-width:380px; font-size:.9rem; margin:0; }
+  .end-actions { display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-top:6px; }
+  .a-btn { display:inline-flex; align-items:center; gap:8px; padding:12px 22px; border-radius:100px; font-weight:700; font-size:.88rem; text-decoration:none; border:none; cursor:pointer; }
+  .a-btn.primary { background:var(--accent); color:#000; }
+  .a-btn.wa { background:#25D366; color:#000; }
+  [hidden] { display:none !important; }
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <div class="label">Storyboard</div>
-      <h1>${escapeHtml(title)}</h1>
-      <div class="meta">${metaBits.join(' · ')}</div>
-    </header>
-    <div class="board">${framesHtml}</div>
-    <footer>
-      <span>Armado con Storyboard Builder de Chimichurri Diseño</span>
-      <a href="https://wa.me/5491100000000">wa.me/5491100000000</a>
-    </footer>
+  <div class="p paused" id="p">
+    <div class="prog" id="prog"></div>
+    <div class="top">
+      <div class="meta"><b id="pname"></b><span id="cname"></span></div>
+      <div><button class="iconbtn" id="fsBtn" title="Pantalla completa">⛶</button></div>
+    </div>
+    <div class="stage" id="stage">
+      <div class="imgwrap"><img id="img" alt=""></div>
+      <p class="cap" id="cap"></p>
+      <button class="bigplay" id="bigplay" aria-label="Reproducir">▶</button>
+    </div>
+    <div class="controls">
+      <button class="btn" id="prevBtn">◀</button>
+      <button class="btn primary" id="playBtn">▶</button>
+      <button class="btn" id="nextBtn">▶</button>
+    </div>
+    <div class="end" id="end">
+      <h3>Fin del storyboard</h3>
+      <p>Así se va a ver el video, cuadro por cuadro.</p>
+      <div class="end-actions">
+        <button class="a-btn primary" id="replayBtn">↺ Ver de nuevo</button>
+        <a class="a-btn wa" href="https://wa.me/5491100000000" target="_blank" rel="noopener">¿Te copó? Escribinos</a>
+      </div>
+    </div>
   </div>
+<script>
+(function(){
+  var FRAMES = ${framesJson};
+  var CLIENT = ${JSON.stringify(client || '')};
+  var TITLE = ${JSON.stringify(title)};
+  document.getElementById('pname').textContent = TITLE;
+  var cnameEl = document.getElementById('cname');
+  if (CLIENT) { cnameEl.textContent = CLIENT; } else { cnameEl.hidden = true; }
+
+  var st = { index: 0, playing: false, started: false };
+  var p = document.getElementById('p');
+  var prog = document.getElementById('prog');
+  var stage = document.getElementById('stage');
+  var img = document.getElementById('img');
+  var cap = document.getElementById('cap');
+  var bigplay = document.getElementById('bigplay');
+  var playBtn = document.getElementById('playBtn');
+  var end = document.getElementById('end');
+
+  FRAMES.forEach(function () {
+    var seg = document.createElement('div'); seg.className = 'seg';
+    var fill = document.createElement('span'); fill.className = 'seg-fill';
+    seg.appendChild(fill); prog.appendChild(seg);
+  });
+
+  function updateSegments() {
+    var segs = prog.children;
+    for (var i = 0; i < segs.length; i++) {
+      var seg = segs[i], fill = seg.firstElementChild;
+      seg.className = 'seg';
+      fill.style.animation = 'none';
+      if (i < st.index) { seg.className = 'seg done'; }
+      else if (i === st.index) {
+        seg.className = 'seg active';
+        var dur = (FRAMES[i] && FRAMES[i].duration) || 4;
+        void fill.offsetWidth;
+        fill.style.animationDuration = dur + 's';
+        fill.style.animation = 'fillseg linear forwards';
+        fill.style.animationDuration = dur + 's';
+      }
+    }
+  }
+
+  function markAllDone() {
+    var segs = prog.children;
+    for (var i = 0; i < segs.length; i++) {
+      segs[i].className = 'seg done';
+      segs[i].firstElementChild.style.animation = 'none';
+    }
+  }
+
+  function showFrame(idx, instant) {
+    idx = Math.max(0, Math.min(idx, FRAMES.length - 1));
+    st.index = idx;
+    updateSegments();
+    var swap = function () {
+      var f = FRAMES[idx];
+      img.src = f.src || '';
+      cap.textContent = f.desc || '';
+      stage.classList.remove('fade');
+    };
+    if (instant) { swap(); return; }
+    stage.classList.add('fade');
+    setTimeout(swap, 380);
+  }
+
+  function next() {
+    if (st.index >= FRAMES.length - 1) { showEnd(); return; }
+    showFrame(st.index + 1);
+  }
+  function prev() {
+    if (st.index <= 0) return;
+    end.classList.remove('show');
+    showFrame(st.index - 1);
+  }
+  function showEnd() {
+    st.playing = false;
+    p.classList.add('paused');
+    playBtn.textContent = '▶';
+    markAllDone();
+    end.classList.add('show');
+  }
+  function togglePlay(force) {
+    var should = force != null ? force : !st.playing;
+    st.playing = should;
+    p.classList.toggle('paused', !should);
+    playBtn.textContent = should ? '❚❚' : '▶';
+    if (should) { st.started = true; bigplay.hidden = true; updateSegments(); }
+  }
+
+  prog.addEventListener('animationend', function (e) {
+    if (!e.target.classList.contains('seg-fill')) return;
+    if (!st.playing) return;
+    next();
+  });
+  bigplay.addEventListener('click', function () { togglePlay(true); });
+  playBtn.addEventListener('click', function () { togglePlay(); });
+  document.getElementById('prevBtn').addEventListener('click', prev);
+  document.getElementById('nextBtn').addEventListener('click', next);
+  document.getElementById('replayBtn').addEventListener('click', function () {
+    end.classList.remove('show');
+    showFrame(0, true);
+    togglePlay(true);
+  });
+  document.getElementById('fsBtn').addEventListener('click', function () {
+    if (!document.fullscreenElement) { p.requestFullscreen && p.requestFullscreen().catch(function(){}); }
+    else { document.exitFullscreen && document.exitFullscreen(); }
+  });
+  stage.addEventListener('click', function (e) {
+    if (!st.started) return;
+    var r = stage.getBoundingClientRect();
+    var x = e.clientX - r.left;
+    if (x < r.width * 0.35) prev(); else next();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === ' ') { e.preventDefault(); togglePlay(); }
+    if (e.key === 'ArrowRight') next();
+    if (e.key === 'ArrowLeft') prev();
+  });
+
+  showFrame(0, true);
+  bigplay.hidden = false;
+})();
+</script>
 </body>
 </html>`;
 }
 
+async function collectFramesData() {
+  const out = [];
+  for (const f of state.frames) {
+    const src = await frameToDataURL(f);
+    out.push({ src, desc: f.desc || '', duration: f.duration || DEFAULT_DURATION });
+  }
+  return out;
+}
+
 async function exportHtml() {
   if (!state.frames.length) return null;
-  const framesHtml = [];
-  for (let i = 0; i < state.frames.length; i++) {
-    const f = state.frames[i];
-    const dataUrl = await frameToDataURL(f);
-    framesHtml.push(
-      '<div class="frame">' +
-        '<div class="frame-media">' +
-          (dataUrl ? `<img src="${dataUrl}" alt="Cuadro ${i + 1}">` : '<div class="frame-empty">Sin imagen</div>') +
-          `<div class="frame-num">${String(i + 1).padStart(2, '0')}</div>` +
-        '</div>' +
-        '<div class="frame-body">' +
-          `<p class="frame-desc">${f.desc ? escapeHtml(f.desc) : '<span class="muted">Sin descripción</span>'}</p>` +
-          (f.note ? `<p class="frame-note">${escapeHtml(f.note)}</p>` : '') +
-        '</div>' +
-      '</div>'
-    );
-  }
+  const framesData = await collectFramesData();
   const title = state.projectName || 'Storyboard';
-  const html = buildStandaloneHtml(title, state.clientName, state.frames.length, framesHtml.join(''));
+  const html = buildStandaloneHtml(title, state.clientName, framesData);
   const blob = new Blob([html], { type: 'text/html' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -673,7 +954,8 @@ $('sbDemoBtn').addEventListener('click', () => {
   state.frames = buildDemoFrames();
   state.projectName = 'Ejemplo — Reel de producto';
   state.clientName = '';
-  enterBoard();
+  enterEditor();
+  openPlayer({ startIndex: 0, autoplay: false });
   showToast('Este es un ejemplo con imágenes de muestra. Subí tu ZIP cuando quieras reemplazarlo.');
 });
 
@@ -694,10 +976,10 @@ $('sbAddFrameInput').addEventListener('change', async (e) => {
       if (!f.desc) f.desc = parsed.desc;
     }
   } else {
-    state.frames.push({ id: makeId(), blob: file, blobUrl, name: file.name, desc: parsed.desc, note: '' });
+    state.frames.push({ id: makeId(), blob: file, blobUrl, name: file.name, desc: parsed.desc, duration: DEFAULT_DURATION });
   }
   pendingAddTargetId = null;
-  renderBoard();
+  renderEditorList();
 });
 
 $('sbProjectName').addEventListener('input', (e) => {
@@ -706,16 +988,8 @@ $('sbProjectName').addEventListener('input', (e) => {
 });
 $('sbClientName').addEventListener('input', (e) => { state.clientName = e.target.value; });
 
-$('sbViewGridBtn').addEventListener('click', () => setView('grid'));
-$('sbViewStripBtn').addEventListener('click', () => setView('strip'));
-function setView(v) {
-  state.view = v;
-  $('sbViewGridBtn').classList.toggle('active', v === 'grid');
-  $('sbViewStripBtn').classList.toggle('active', v === 'strip');
-  renderBoard();
-}
-
-$('sbPrintBtn').addEventListener('click', () => window.print());
+$('sbPresentBtn').addEventListener('click', () => openPlayer({ startIndex: 0, autoplay: true }));
+$('sbResetBtn').addEventListener('click', resetBoard);
 
 $('sbExportBtn').addEventListener('click', async () => {
   showToast('Generando el archivo…', { duration: 1500 });
@@ -730,11 +1004,42 @@ $('sbShareBtn').addEventListener('click', async () => {
   window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank', 'noopener');
 });
 
-$('sbResetBtn').addEventListener('click', resetBoard);
+$('sbPlayerBigPlay').addEventListener('click', () => playerTogglePlay(true));
+$('sbPlayerPlayBtn').addEventListener('click', () => playerTogglePlay());
+$('sbPlayerPrevBtn').addEventListener('click', playerPrev);
+$('sbPlayerNextBtn').addEventListener('click', playerNext);
+$('sbPlayerReplayBtn').addEventListener('click', playerReplay);
+$('sbPlayerEditBtn').addEventListener('click', () => closePlayer());
+$('sbPlayerCloseBtn').addEventListener('click', () => closePlayer());
+$('sbPlayerFsBtn').addEventListener('click', () => {
+  if (!document.fullscreenElement) {
+    $('sbPlayer').requestFullscreen && $('sbPlayer').requestFullscreen().catch(() => {});
+  } else {
+    document.exitFullscreen && document.exitFullscreen();
+  }
+});
+$('sbPlayerStage').addEventListener('click', (e) => {
+  if (e.target.closest('.sb-player-bigplay')) return;
+  if (!playerState.everStarted) return;
+  const rect = $('sbPlayerStage').getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  if (x < rect.width * 0.35) playerPrev();
+  else playerNext();
+});
+$('sbPlayerProgress').addEventListener('animationend', (e) => {
+  if (!e.target.classList.contains('sb-player-seg-fill')) return;
+  if (!playerState.playing) return;
+  playerNext();
+});
 
-$('sbLightboxClose').addEventListener('click', closeLightbox);
-$('sbLightbox').addEventListener('click', (e) => { if (e.target.id === 'sbLightbox') closeLightbox(); });
-document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+document.addEventListener('keydown', (e) => {
+  if ($('sbPlayer').hidden) return;
+  if (e.key === 'Escape') { closePlayer(); return; }
+  if (!playerState.everStarted) return;
+  if (e.key === ' ') { e.preventDefault(); playerTogglePlay(); }
+  if (e.key === 'ArrowRight') playerNext();
+  if (e.key === 'ArrowLeft') playerPrev();
+});
 
 window.addEventListener('beforeunload', (e) => {
   if (state.frames.length) { e.preventDefault(); e.returnValue = ''; }
