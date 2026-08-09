@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Storyboard Builder — Chimichurri Diseño</title>
+  <meta name="description" content="Subí un ZIP con las imágenes de tu storyboard y armamos automáticamente un display prolijo, cuadro por cuadro, listo para compartir. 100% en tu navegador.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    /* ─── Storyboard tool (page-specific) ─── */
+    .sb-hero { padding-top: calc(var(--nav-h) + 64px); padding-bottom: 48px; position: relative; overflow: hidden; border-bottom: 1px solid var(--border); }
+    .sb-hero-glow { position:absolute; top:-25%; right:-10%; width:55vw; height:60vh; background:radial-gradient(ellipse, rgba(212,255,0,0.07) 0%, transparent 65%); pointer-events:none; }
+    .sb-hero h1 { font-size: clamp(2.2rem, 6vw, 4.4rem); margin-bottom: 18px; }
+    .sb-hero h1 em { font-style: normal; color: var(--accent); }
+    .sb-hero p { max-width: 560px; font-size: clamp(1rem, 2vw, 1.1rem); line-height: 1.75; }
+    .sb-badges { display:flex; gap:8px; flex-wrap:wrap; margin-top:26px; }
+    .sb-badges span { font-size:0.74rem; padding:6px 14px; border-radius:100px; background:var(--surface2); border:1px solid var(--border); color:var(--text-muted); }
+
+    .sb-drop-section { padding: 56px 0; }
+    .sb-drop {
+      border: 2px dashed var(--border); border-radius: var(--radius-xl);
+      padding: 60px 32px; text-align: center; cursor: pointer;
+      transition: all var(--ease); background: var(--surface);
+    }
+    .sb-drop:hover, .sb-drop.dragover { border-color: var(--accent); background: var(--accent-dim); }
+    .sb-drop-icon { font-size: 2.6rem; margin-bottom: 16px; }
+    .sb-drop h3 { margin-bottom: 8px; }
+    .sb-drop p { font-size: 0.88rem; max-width: 420px; margin: 0 auto; }
+    .sb-drop-sub { margin-top: 24px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+    .sb-drop-sub .btn { position: relative; z-index: 2; }
+
+    .sb-formats { margin-top: 32px; }
+    .sb-formats-title { font-size: 0.7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
+    .sb-format-list { display: flex; flex-direction: column; gap: 12px; }
+    .sb-format-item { display: flex; gap: 12px; align-items: flex-start; font-size: 0.85rem; color: var(--text-muted); }
+    .sb-format-item b { color: var(--text); font-weight: 600; }
+    .sb-format-item code { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 2px 8px; font-family: ui-monospace, 'SFMono-Regular', Menlo, monospace; font-size: 0.78rem; color: var(--accent); white-space: nowrap; flex-shrink: 0; }
+
+    .sb-loading { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 90px 0; color: var(--text-muted); font-size: 0.9rem; }
+    .sb-spinner { width: 36px; height: 36px; border-radius: 50%; border: 3px solid var(--border); border-top-color: var(--accent); animation: sbspin 0.8s linear infinite; }
+    @keyframes sbspin { to { transform: rotate(360deg); } }
+
+    .sb-toolbar {
+      position: sticky; top: var(--nav-h); z-index: 50;
+      background: rgba(8,8,8,0.94); backdrop-filter: blur(16px) saturate(180%);
+      border-bottom: 1px solid var(--border); border-top: 1px solid var(--border);
+      padding: 14px 0;
+    }
+    .sb-toolbar-inner { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .sb-input {
+      background: var(--surface2); border: 1px solid var(--border); color: var(--text);
+      border-radius: 10px; padding: 10px 14px; font-size: 0.85rem; font-family: inherit; min-width: 0;
+    }
+    .sb-input:focus { outline: none; border-color: var(--accent-border); }
+    .sb-input-project { flex: 1 1 200px; font-weight: 700; }
+    .sb-input-client { flex: 1 1 150px; }
+    .sb-toolbar-spacer { flex: 1 1 auto; }
+    .sb-toolbar-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .sb-view-toggle { display: flex; background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 3px; }
+    .sb-view-toggle button {
+      background: none; border: none; color: var(--text-muted); padding: 7px 12px;
+      border-radius: 7px; font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: all var(--ease); font-family: inherit;
+    }
+    .sb-view-toggle button.active { background: var(--accent); color: #000; }
+
+    .sb-board-wrap { padding: 36px 0 110px; }
+    .sb-board-count { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 20px; }
+    .sb-board { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 22px; }
+    .sb-board.view-strip { grid-template-columns: 1fr; max-width: 680px; margin: 0 auto; }
+
+    .sb-frame {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
+      overflow: hidden; position: relative; display: flex; flex-direction: column;
+      transition: border-color var(--ease), transform var(--ease);
+    }
+    .sb-frame:hover { border-color: var(--accent-border); }
+    .sb-frame.dragging { opacity: 0.35; }
+    .sb-frame.drag-over { outline: 2px dashed var(--accent); outline-offset: -2px; }
+
+    .sb-frame-media { position: relative; aspect-ratio: 16/9; background: #000; display: flex; align-items: center; justify-content: center; cursor: zoom-in; }
+    .sb-frame-media img { width: 100%; height: 100%; object-fit: contain; }
+    .sb-frame-media.empty { color: var(--text-muted); font-size: 0.8rem; flex-direction: column; gap: 8px; cursor: pointer; }
+    .sb-frame-media.empty:hover { color: var(--accent); }
+
+    .sb-frame-num {
+      position: absolute; top: 10px; left: 10px; background: var(--accent); color: #000;
+      font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.82rem; line-height: 1;
+      padding: 6px 10px; border-radius: 8px; z-index: 2;
+    }
+    .sb-frame-controls { position: absolute; top: 8px; right: 8px; display: flex; gap: 4px; opacity: 0; transition: opacity var(--ease); z-index: 2; }
+    .sb-frame:hover .sb-frame-controls, .sb-frame:focus-within .sb-frame-controls { opacity: 1; }
+    .sb-frame-btn {
+      width: 26px; height: 26px; border-radius: 7px; border: none; background: rgba(0,0,0,0.6);
+      color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer;
+      font-size: 0.78rem; backdrop-filter: blur(4px); transition: background var(--ease);
+    }
+    .sb-frame-btn:hover { background: rgba(0,0,0,0.88); }
+    .sb-frame-btn.danger:hover { background: #c0392b; }
+    .sb-frame-drag { cursor: grab; }
+
+    .sb-frame-body { padding: 16px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+    .sb-frame-desc {
+      background: none; border: none; color: var(--text); font-family: inherit; font-size: 0.88rem;
+      line-height: 1.5; resize: none; min-height: 44px; padding: 0; width: 100%;
+    }
+    .sb-frame-desc:focus { outline: none; }
+    .sb-frame-desc::placeholder { color: var(--text-muted); }
+    .sb-frame-note {
+      background: none; border: none; border-top: 1px solid var(--border); color: var(--text-muted);
+      font-family: inherit; font-size: 0.76rem; padding-top: 8px; margin-top: 2px; width: 100%;
+    }
+    .sb-frame-note:focus { outline: none; color: var(--text); }
+    .sb-frame-note::placeholder { color: rgba(255,255,255,0.25); }
+
+    .sb-board.view-strip .sb-frame { flex-direction: row; }
+    .sb-board.view-strip .sb-frame-media { width: 260px; aspect-ratio: unset; flex-shrink: 0; }
+    .sb-board.view-strip .sb-frame-body { flex: 1; }
+    @media (max-width: 720px) {
+      .sb-board.view-strip .sb-frame { flex-direction: column; }
+      .sb-board.view-strip .sb-frame-media { width: 100%; aspect-ratio: 16/9; }
+    }
+
+    .sb-frame-add {
+      border: 2px dashed var(--border); border-radius: var(--radius-lg); background: transparent;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+      min-height: 220px; color: var(--text-muted); cursor: pointer; transition: all var(--ease); font-family: inherit; font-size: 0.85rem;
+    }
+    .sb-frame-add:hover { border-color: var(--accent); color: var(--accent); }
+    .sb-frame-add span { font-size: 1.6rem; }
+
+    .sb-lightbox {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 300;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; gap: 16px;
+    }
+    .sb-lightbox img { max-width: min(90vw, 1000px); max-height: 68vh; object-fit: contain; border-radius: 12px; }
+    .sb-lightbox p { color: var(--text); max-width: 600px; text-align: center; font-size: 0.95rem; }
+    .sb-lightbox-close { position: absolute; top: 22px; right: 26px; background: none; border: none; color: #fff; font-size: 2rem; cursor: pointer; line-height: 1; }
+
+    .sb-toast {
+      position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(20px);
+      background: var(--text); color: #000; padding: 13px 22px; border-radius: 100px; font-size: 0.85rem; font-weight: 600;
+      z-index: 400; opacity: 0; pointer-events: none; transition: all 0.25s ease; box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      display: flex; align-items: center; gap: 10px; max-width: 90vw;
+    }
+    .sb-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
+    .sb-toast button { background: none; border: none; color: #000; font-weight: 800; text-decoration: underline; cursor: pointer; font-size: 0.85rem; font-family: inherit; }
+
+    [hidden] { display: none !important; }
+
+    @media print {
+      .nav, .sb-hero, .sb-drop-section, .sb-toolbar, .wa-fab, .footer, .sb-frame-controls, .sb-frame-add, .sb-lightbox, .sb-toast, .sb-board-count { display: none !important; }
+      body { background: #fff; color: #000; }
+      .sb-board-wrap { padding: 0; }
+      .sb-board, .sb-board.view-strip { display: grid !important; grid-template-columns: 1fr 1fr; gap: 16px; max-width: none; }
+      .sb-frame { background: #fff; border: 1px solid #ccc; break-inside: avoid; }
+      .sb-frame-media { background: #fff; aspect-ratio: 16/9; }
+      .sb-frame-num { background: #000; color: #fff; }
+      .sb-frame-body { background: #fff; }
+      .sb-frame-desc, .sb-frame-note { background: #fff; color: #000; }
+      .sb-frame-note { border-top-color: #ccc; }
+      .sb-frame-desc::placeholder, .sb-frame-note::placeholder { color: #999; }
+    }
+  </style>
+</head>
+<body class="diseno">
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/" class="logo">
+        <span class="logo-dot"></span>
+        Chimichurri<span style="color:var(--text-muted);font-weight:400"> diseño</span>
+      </a>
+      <div class="nav-menu" id="navMenu">
+        <a href="/catalogo-diseno">Diseño</a>
+        <a href="/catalogo-fisico">Físico</a>
+        <a href="/catalogo-experiencias">Experiencias</a>
+        <a href="/storyboard" class="active">Storyboard</a>
+        <a href="/portal-clientes">Portal</a>
+        <a href="https://wa.me/5491100000000" class="nav-wa" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Menú">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="19" y2="6"/><line x1="3" y1="11" x2="19" y2="11"/><line x1="3" y1="16" x2="19" y2="16"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="sb-hero">
+    <div class="sb-hero-glow"></div>
+    <div class="wrap">
+      <div class="label">Herramienta interna</div>
+      <h1>Armá tu storyboard.<br><em>Compartilo en segundos.</em></h1>
+      <p>Soltá el ZIP con los cuadros de tu storyboard y armamos automáticamente un display prolijo — numerado, con la descripción de qué pasa en cada cuadro debajo de la imagen. Todo corre en tu navegador: ninguna imagen se sube a ningún servidor.</p>
+      <div class="sb-badges">
+        <span>🔒 100% local, sin subir archivos</span>
+        <span>✎ Descripciones editables</span>
+        <span>↕ Reordenar cuadros</span>
+        <span>⇩ Exportar y compartir en 1 click</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- DROPZONE -->
+  <section class="sb-drop-section" id="sbDropSection">
+    <div class="wrap">
+      <div class="sb-drop" id="sbDrop" tabindex="0" role="button" aria-label="Subir ZIP con las imágenes del storyboard">
+        <div class="sb-drop-icon">🎬</div>
+        <h3>Arrastrá tu ZIP acá</h3>
+        <p>O hacé click para elegirlo desde tu computadora. Tiene que contener las imágenes de cada cuadro del storyboard.</p>
+        <div class="sb-drop-sub">
+          <button type="button" class="btn btn-primary" id="sbBrowseBtn">Elegir archivo ZIP</button>
+          <button type="button" class="btn btn-ghost" id="sbDemoBtn">Ver un ejemplo</button>
+        </div>
+      </div>
+      <input type="file" id="sbFileInput" accept=".zip,application/zip,application/x-zip-compressed" hidden>
+      <input type="file" id="sbAddFrameInput" accept="image/*" hidden>
+
+      <div class="sb-formats">
+        <div class="sb-formats-title">Cómo detectamos la descripción de cada cuadro</div>
+        <div class="sb-format-list">
+          <div class="sb-format-item"><code>01 - Cámara abre en el local.jpg</code> <span><b>Nombre del archivo:</b> número + descripción separados por guion, guion bajo o punto.</span></div>
+          <div class="sb-format-item"><code>01.jpg + 01.txt</code> <span><b>Archivo de texto con el mismo nombre:</b> el .txt de cada imagen se usa como descripción.</span></div>
+          <div class="sb-format-item"><code>guion.txt</code> <span><b>Guion general:</b> un archivo con líneas <code>01: descripción</code> (o guion.csv / guion.json) describe todos los cuadros de una.</span></div>
+          <div class="sb-format-item"><code>frame_01.png</code> <span><b>Sin info:</b> si no encontramos nada, el cuadro queda numerado y listo para que escribas la descripción vos, en el momento.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOADING -->
+  <div class="sb-loading" id="sbLoading" hidden>
+    <div class="sb-spinner"></div>
+    <p id="sbLoadingText">Leyendo el ZIP…</p>
+  </div>
+
+  <!-- TOOLBAR -->
+  <div class="sb-toolbar" id="sbToolbar" hidden>
+    <div class="wrap sb-toolbar-inner">
+      <input type="text" class="sb-input sb-input-project" id="sbProjectName" placeholder="Nombre del proyecto" maxlength="80">
+      <input type="text" class="sb-input sb-input-client" id="sbClientName" placeholder="Cliente (opcional)" maxlength="60">
+      <div class="sb-toolbar-spacer"></div>
+      <div class="sb-view-toggle">
+        <button type="button" id="sbViewGridBtn" class="active">Grid</button>
+        <button type="button" id="sbViewStripBtn">Filmina</button>
+      </div>
+      <div class="sb-toolbar-actions">
+        <button type="button" class="btn btn-ghost btn-sm" id="sbPrintBtn">Imprimir / PDF</button>
+        <button type="button" class="btn btn-wa btn-sm" id="sbShareBtn">Compartir</button>
+        <button type="button" class="btn btn-primary btn-sm" id="sbExportBtn">Descargar HTML</button>
+        <button type="button" class="btn btn-ghost btn-sm" id="sbResetBtn">Empezar de nuevo</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOARD -->
+  <section class="sb-board-wrap">
+    <div class="wrap">
+      <div class="sb-board-count" id="sbBoardCount" hidden></div>
+      <div class="sb-board" id="sbBoard" hidden></div>
+    </div>
+  </section>
+
+  <!-- LIGHTBOX -->
+  <div class="sb-lightbox" id="sbLightbox" hidden>
+    <button class="sb-lightbox-close" id="sbLightboxClose" aria-label="Cerrar">×</button>
+    <img id="sbLightboxImg" alt="">
+    <p id="sbLightboxCaption"></p>
+  </div>
+
+  <!-- TOAST -->
+  <div class="sb-toast" id="sbToast"></div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <a href="/" class="logo">
+            <span class="logo-dot"></span>
+            Chimichurri<span style="color:var(--text-muted);font-weight:400"> diseño</span>
+          </a>
+          <p>Studio de diseño y comunicación visual. Diseño que vende.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Catálogos</h5>
+          <ul>
+            <li><a href="/catalogo-diseno">Diseño gráfico</a></li>
+            <li><a href="/catalogo-fisico">Físico e imprenta</a></li>
+            <li><a href="/catalogo-experiencias">Experiencias</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Herramientas</h5>
+          <ul>
+            <li><a href="/storyboard">Storyboard builder</a></li>
+            <li><a href="/portal-clientes">Portal clientes</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Contacto</h5>
+          <ul>
+            <li><a href="https://wa.me/5491100000000" target="_blank" rel="noopener">WhatsApp directo</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Chimichurri Diseño. Todos los derechos reservados.</p>
+        <p>chimichurridiseno.com/storyboard</p>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/5491100000000" class="wa-fab" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24" fill="#000"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+  </a>
+
+  <script>
+    const toggle = document.getElementById('navToggle');
+    const menu = document.getElementById('navMenu');
+    toggle.addEventListener('click', () => menu.classList.toggle('open'));
+    document.querySelectorAll('#navMenu a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+  </script>
+  <script src="../assets/js/jszip.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
