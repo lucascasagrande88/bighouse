@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" font-family="'Helvetica Neue',Arial,sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b0b0b"/>
+      <stop offset="1" stop-color="#050505"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.82" cy="0.15" r="0.7">
+      <stop offset="0" stop-color="#e3b778" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#e3b778" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <!-- architectural rule lines -->
+  <g stroke="#ffffff" stroke-opacity="0.06">
+    <line x1="80" y1="120" x2="80" y2="510"/>
+    <line x1="80" y1="510" x2="1120" y2="510"/>
+  </g>
+  <g transform="translate(80,150)">
+    <circle cx="8" cy="-4" r="7" fill="#e3b778"/>
+    <text x="26" y="2" font-size="24" font-weight="700" letter-spacing="1" fill="#f2f2f2">Chimichurri</text>
+    <text x="176" y="2" font-size="24" font-weight="400" fill="#6e6e6e">· diseño</text>
+  </g>
+  <text x="78" y="330" font-size="132" font-weight="800" letter-spacing="-4" fill="#f5f5f5">REAL ESTATE</text>
+  <text x="82" y="410" font-size="34" font-weight="500" fill="#c9c9c9">Una propiedad no debería verse como una publicación.</text>
+  <text x="82" y="454" font-size="34" font-weight="500" fill="#e3b778">Debería sentirse como una experiencia.</text>
+  <g transform="translate(82,556)" fill="#8a8a8a" font-size="20" font-weight="600" letter-spacing="1">
+    <text x="0" y="0">WEB · REELS · PROPERTY MEDIA · 360° · RECORRIDO INTERACTIVO</text>
+  </g>
+</svg>

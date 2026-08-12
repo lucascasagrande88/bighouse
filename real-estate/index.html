@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Real Estate — Chimichurri</title>
+  <meta name="description" content="Web, contenido, recorridos, 360° y experiencias interactivas para inmobiliarias y desarrollos. Chimichurri transforma cómo se presenta, se explora y se vende una propiedad.">
+  <link rel="canonical" href="https://chimichurridiseno.com/real-estate">
+  <meta name="theme-color" content="#070706">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Chimichurri Diseño">
+  <meta property="og:title" content="Real Estate — Chimichurri">
+  <meta property="og:description" content="Una propiedad no debería verse como una publicación. Debería sentirse como una experiencia. Web, Reels, 360° y recorridos interactivos para inmobiliarias.">
+  <meta property="og:url" content="https://chimichurridiseno.com/real-estate">
+  <meta property="og:image" content="https://chimichurridiseno.com/real-estate/assets/og-cover.svg">
+  <meta property="og:image:type" content="image/svg+xml">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="es_AR">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Real Estate — Chimichurri">
+  <meta name="twitter:description" content="Web, Reels, Property Media, 360° y recorridos interactivos para inmobiliarias y desarrollos.">
+  <meta name="twitter:image" content="https://chimichurridiseno.com/real-estate/assets/og-cover.svg">
+
+  <!-- Fonts + estilos -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- three.js se resuelve por import map, pero SOLO se descarga cuando el
+       visitante entra al recorrido interactivo (import dinámico en app.js). -->
+  <script type="importmap">
+  { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
+  </script>
+
+  <!-- Schema.org (responsable, sin datos inventados) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Chimichurri — Real Estate",
+    "url": "https://chimichurridiseno.com/real-estate",
+    "image": "https://chimichurridiseno.com/real-estate/assets/og-cover.svg",
+    "description": "Web, contenido, recorridos, 360° y experiencias interactivas para inmobiliarias y desarrollos.",
+    "parentOrganization": { "@type": "Organization", "name": "Chimichurri Diseño", "url": "https://chimichurridiseno.com" },
+    "areaServed": "AR",
+    "serviceType": ["Marketing inmobiliario", "Desarrollo web", "Producción de contenido audiovisual", "Tours virtuales 360°", "Experiencias interactivas"]
+  }
+  </script>
+</head>
+<body class="realestate">
+
+  <div class="re-progress" id="reProgress" aria-hidden="true"></div>
+
+  <!-- ── NAV ─────────────────────────────────────────────────────────────── -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/" class="logo">
+        <span class="logo-dot"></span>
+        Chimichurri<span style="color:var(--text-muted);font-weight:400"> diseño</span>
+      </a>
+      <div class="nav-menu" id="navMenu">
+        <a href="/real-estate" class="active">Real Estate</a>
+        <a href="/catalogo-diseno">Diseño</a>
+        <a href="/catalogo-fisico">Físico</a>
+        <a href="/catalogo-experiencias">Experiencias</a>
+        <a href="/storyboard">Storyboard</a>
+        <a href="/portal-clientes">Portal</a>
+        <a href="#re-contacto" class="nav-wa">Hablemos</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Menú">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="19" y2="6"/><line x1="3" y1="11" x2="19" y2="11"/><line x1="3" y1="16" x2="19" y2="16"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ══ 01 · HERO ═══════════════════════════════════════════════════════ -->
+  <header class="re-hero" id="top">
+    <div class="re-hero-stage" aria-hidden="true">
+      <canvas id="reHeroCanvas"></canvas>
+    </div>
+    <div class="re-hero-veil" aria-hidden="true"></div>
+    <div class="re-hero-grain" aria-hidden="true"></div>
+
+    <div class="wrap re-hero-inner">
+      <div class="re-hero-top">
+        <span class="re-kicker" style="margin:0">Chimichurri · Real Estate</span>
+        <span class="re-note">Experiencia interactiva</span>
+      </div>
+      <h1>Real<br>Estate</h1>
+      <p class="re-hero-sub">Una propiedad no debería verse como una publicación.<br><em>Debería sentirse como una experiencia.</em></p>
+      <div class="re-hero-actions">
+        <a href="#re-web" class="re-btn re-btn-primary" data-ev="cta_real_estate">Ver lo que hacemos</a>
+        <a href="#re-contacto" class="re-btn re-btn-ghost">Quiero mejorar cómo muestro mis propiedades</a>
+      </div>
+      <div class="re-hero-meta">
+        <span><b>Web</b> · CRM-ready</span>
+        <span><b>Reels</b> · contenido</span>
+        <span><b>Property Media</b> · 360°</span>
+        <span><b>Recorrido</b> interactivo</span>
+      </div>
+    </div>
+    <div class="re-scrollcue" aria-hidden="true">Scroll<i></i></div>
+  </header>
+
+  <main>
+
+  <!-- ══ 02 · PROBLEMA ═══════════════════════════════════════════════════ -->
+  <section class="re-sec tight" id="re-problema" aria-labelledby="re-problema-h">
+    <div class="wrap">
+      <div class="re-reveal">
+        <span class="re-kicker">El problema</span>
+        <h2 class="re-h" id="re-problema-h">La mayoría de las propiedades se<br>siguen mostrando igual que <em>hace diez años.</em></h2>
+        <p class="re-lead">El problema no es la falta de propiedades. Es que casi todos los sistemas de presentación hacen que propiedades excelentes se vean intercambiables.</p>
+      </div>
+
+      <div class="re-problem-split re-reveal">
+        <div class="re-side old">
+          <h3>Cómo se muestra hoy</h3>
+          <ul>
+            <li><svg class="m" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg>Grillas rígidas de fichas</li>
+            <li><svg class="m" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg>Fotos mediocres y desparejas</li>
+            <li><svg class="m" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg>Botón de WhatsApp suelto</li>
+            <li><svg class="m" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg>Portales genéricos, todo igual</li>
+            <li><svg class="m" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg>Galerías que nadie recorre</li>
+          </ul>
+        </div>
+        <div class="re-side new">
+          <h3>Cómo puede mostrarse</h3>
+          <ul>
+            <li><svg class="m" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="4 12 10 18 20 6"/></svg>Media inmersiva y editorial</li>
+            <li><svg class="m" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="4 12 10 18 20 6"/></svg>Exploración interactiva real</li>
+            <li><svg class="m" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="4 12 10 18 20 6"/></svg>Web inteligente y rápida</li>
+            <li><svg class="m" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="4 12 10 18 20 6"/></svg>Inventario conectado al CRM</li>
+            <li><svg class="m" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="4 12 10 18 20 6"/></svg>Conversión directa a consulta</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 03 · WEB / CRM ══════════════════════════════════════════════════ -->
+  <section class="re-sec" id="re-web" aria-labelledby="re-web-h">
+    <div class="wrap">
+      <div class="re-web-head re-reveal">
+        <div>
+          <span class="re-kicker">Plataforma web</span>
+          <h2 class="re-h" id="re-web-h">Tu inmobiliaria,<br><em>versión 2026.</em></h2>
+        </div>
+        <p class="re-claim">La web se adapta al CRM. <b>El negocio no tiene que adaptarse a la web.</b></p>
+      </div>
+
+      <!-- Demo de navegador interactivo -->
+      <div class="re-browser re-reveal" role="group" aria-label="Demostración interactiva de sitio inmobiliario">
+        <div class="re-browser-bar">
+          <div class="re-dots" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="re-url">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <span>tu-inmobiliaria.com/propiedades</span>
+          </div>
+          <span class="re-browser-tag">Demo · datos de ejemplo</span>
+        </div>
+        <div class="re-browser-body">
+          <div class="re-filters" id="reFilters">
+            <div class="re-filter"><select id="fOp" aria-label="Operación"><option value="">Operación</option><option>Venta</option><option>Alquiler</option></select></div>
+            <div class="re-filter"><select id="fTipo" aria-label="Tipo"><option value="">Tipo</option><option>Departamento</option><option>PH</option><option>Casa</option><option>Dúplex</option><option>Oficina</option></select></div>
+            <div class="re-filter"><select id="fAmb" aria-label="Ambientes"><option value="">Ambientes</option><option value="1">1+</option><option value="2">2+</option><option value="3">3+</option><option value="4">4+</option></select></div>
+            <div class="re-filter range"><label for="fPrecio">Hasta</label><input type="range" id="fPrecio" min="100000" max="350000" step="5000" value="350000"><output id="fPrecioOut">USD 350.000</output></div>
+            <span class="re-count" id="reCount"></span>
+          </div>
+
+          <div class="re-props" id="reProps" aria-live="polite"><!-- inyectado por app.js --></div>
+
+          <div class="re-cmpbar" id="reCmpBar" hidden>
+            <span class="t">Comparar: <b id="reCmpCount">0</b> / 2 seleccionadas</span>
+            <div class="chips" id="reCmpChips"></div>
+            <span class="sp"></span>
+            <button class="re-btn re-btn-ghost" id="reCmpClear" style="padding:9px 16px;font-size:.82rem">Limpiar</button>
+            <button class="re-btn re-btn-primary" id="reCmpGo" style="padding:9px 18px;font-size:.85rem" disabled>Comparar →</button>
+          </div>
+
+          <!-- Sub-módulos: asistente, reseñas, CRM, SEO -->
+          <div class="re-web-grid">
+            <div class="re-panel-card re-reveal">
+              <h4>Asistente / chatbot</h4>
+              <p class="sub">Responde y deriva la consulta al equipo.</p>
+              <div class="re-chat" id="reChat" aria-label="Ejemplo de conversación con el asistente"></div>
+            </div>
+
+            <div class="re-panel-card re-reveal">
+              <h4>Reseñas de Google</h4>
+              <p class="sub">Se conectan con tu perfil real. No inventamos reseñas.</p>
+              <div class="re-reviews-slot">
+                <svg class="re-glogo" viewBox="0 0 24 24" aria-hidden="true"><path fill="#e3b778" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5a5.6 5.6 0 0 1-2.4 3.7v3h3.9c2.3-2.1 3.5-5.2 3.5-8.9z" opacity=".9"/><path fill="#c9c9c9" d="M12 24c3.2 0 6-1.1 8-2.9l-3.9-3c-1.1.7-2.5 1.2-4.1 1.2-3.1 0-5.8-2.1-6.7-5H1.2v3.1A12 12 0 0 0 12 24z"/><path fill="#8b8781" d="M5.3 14.3a7.2 7.2 0 0 1 0-4.6V6.6H1.2a12 12 0 0 0 0 10.8l4.1-3.1z"/><path fill="#dcdcdc" d="M12 4.8c1.8 0 3.3.6 4.6 1.8l3.4-3.4A12 12 0 0 0 1.2 6.6l4.1 3.1c1-2.9 3.6-4.9 6.7-4.9z"/></svg>
+                <div class="txt">
+                  <div class="re-stars" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polygon points="12 2 15 9 22 9.3 16.5 14 18.5 21 12 17 5.5 21 7.5 14 2 9.3 9 9"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polygon points="12 2 15 9 22 9.3 16.5 14 18.5 21 12 17 5.5 21 7.5 14 2 9.3 9 9"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polygon points="12 2 15 9 22 9.3 16.5 14 18.5 21 12 17 5.5 21 7.5 14 2 9.3 9 9"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polygon points="12 2 15 9 22 9.3 16.5 14 18.5 21 12 17 5.5 21 7.5 14 2 9.3 9 9"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polygon points="12 2 15 9 22 9.3 16.5 14 18.5 21 12 17 5.5 21 7.5 14 2 9.3 9 9"/></svg></div>
+                  <b>Tus reseñas reales</b>, sincronizadas desde tu Google Business Profile.
+                </div>
+              </div>
+            </div>
+
+            <div class="re-panel-card re-reveal">
+              <h4>Arquitectura CRM-ready</h4>
+              <p class="sub">Compatible con tu flujo de propiedades actual.</p>
+              <div class="re-crm-chips" id="reCrmChips"></div>
+              <p class="re-crm-note">Integramos con el CRM o inventario que ya usás mediante los mecanismos que ese sistema exponga. No prometemos una compatibilidad universal mágica: conectamos con lo que tu proveedor permite.</p>
+            </div>
+
+            <div class="re-panel-card re-reveal">
+              <h4>SEO + GEO</h4>
+              <p class="sub">Pensado para buscadores y descubrimiento asistido por IA.</p>
+              <ul class="re-seo-list">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="4 12 10 18 20 6"/></svg>HTML semántico</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="4 12 10 18 20 6"/></svg>Metadata + OpenGraph</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="4 12 10 18 20 6"/></svg>Schema.org de propiedades</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="4 12 10 18 20 6"/></svg>Búsqueda local</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="4 12 10 18 20 6"/></svg>Datos estructurados</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="4 12 10 18 20 6"/></svg>Accesibilidad base</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 04 · REELS ══════════════════════════════════════════════════════ -->
+  <section class="re-sec tight" id="re-reels" aria-labelledby="re-reels-h">
+    <div class="wrap">
+      <div class="re-reveal">
+        <span class="re-kicker">Contenido · Reels</span>
+        <h2 class="re-h" id="re-reels-h">Tu equipo <em>también vende.</em></h2>
+        <p class="re-lead">Transformamos conocimiento, propiedades y oportunidades en contenido que la gente realmente quiere mirar. Grabamos, editamos, adaptamos y publicamos. No son posteos: es un sistema de comunicación.</p>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="re-reels-rail re-reveal" id="reReels" role="list" aria-label="Reels de demostración"><!-- inyectado por app.js --></div>
+      <p class="re-reels-hint" aria-hidden="true">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        Deslizá para ver los formatos · tocá un reel para abrirlo
+      </p>
+    </div>
+  </section>
+
+  <!-- ══ 05 · PROPERTY MEDIA ═════════════════════════════════════════════ -->
+  <section class="re-sec" id="re-media" aria-labelledby="re-media-h">
+    <div class="wrap">
+      <div class="re-reveal">
+        <span class="re-kicker">Property Media</span>
+        <h2 class="re-h" id="re-media-h">Todo lo que una propiedad necesita<br>para verse como <em>realmente merece.</em></h2>
+      </div>
+
+      <div class="re-toolkit re-reveal" id="reToolkit"><!-- inyectado por app.js --></div>
+
+      <!-- Antes / Después -->
+      <div class="re-media-block re-reveal">
+        <div class="re-media-grid">
+          <div class="re-media-copy">
+            <h3>Mejoramos la imagen.<br><em>No inventamos la propiedad.</em></h3>
+            <p>Color, exposición, balance de blancos, perspectiva y limpieza de la presentación. Arrastrá para comparar.</p>
+            <div class="re-truth"><b>Retocamos la presentación, no los metros cuadrados.</b> La arquitectura, las medidas y todo lo que le importa a un comprador se mantienen exactamente igual.</div>
+          </div>
+          <div class="re-ba" id="reBA" role="slider" tabindex="0" aria-label="Comparar original y optimizada" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+            <div class="re-ba-layer re-ba-after" id="reBAafter"></div>
+            <div class="re-ba-layer re-ba-before" id="reBAbefore"></div>
+            <span class="re-ba-badge b">Original</span>
+            <span class="re-ba-badge a">Optimizada</span>
+            <span class="re-ba-demo">Demostración</span>
+            <div class="re-ba-handle" id="reBAhandle"><div class="re-ba-grip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="15 18 9 12 15 6"/><polyline points="9 6 15 12 9 18" transform="translate(0)"/></svg></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Declutter / Privacidad -->
+      <div class="re-media-block re-reveal">
+        <div class="re-media-grid flip">
+          <div class="re-media-copy">
+            <h3>Cuando el espacio importa más<br>que <em>lo que hay adentro.</em></h3>
+            <p>Vaciar visualmente un ambiente ayuda a entender la arquitectura y las proporciones. Y protege la privacidad del propietario.</p>
+            <div class="re-usecases">
+              <div class="re-usecase">
+                <h5><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21V8l9-5 9 5v13"/><path d="M9 21v-6h6v6"/></svg>Presentación</h5>
+                <p>Sin objetos temporales, se leen mejor las dimensiones reales.</p>
+              </div>
+              <div class="re-usecase">
+                <h5><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Privacidad</h5>
+                <p>Sacamos fotos familiares, documentos y objetos identificables.</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="re-declutter" id="reDeclutter" aria-label="Ejemplo de vaciado y privacidad (demostración)"></div>
+            <div class="re-seg" role="group" aria-label="Ver con objetos o vacío">
+              <button data-declutter="full" class="on">Con objetos</button>
+              <button data-declutter="clean">Vacío · privacidad</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Video tour -->
+      <div class="re-media-block re-reveal">
+        <div class="re-media-grid">
+          <div class="re-media-copy">
+            <h3>Una propiedad que se puede<br><em>recorrer antes de visitarla.</em></h3>
+            <p>Con material existente o nuevo, producimos una presentación audiovisual profesional lista para web, portales, redes y comunicación de ventas.</p>
+          </div>
+          <div class="re-video" id="reVideo" aria-label="Reproductor de video tour (demostración)">
+            <div class="re-video-poster" id="reVideoPoster">
+              <button class="re-video-play" id="reVideoPlay" aria-label="Reproducir video tour">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+            </div>
+            <div class="re-video-demo">
+              <span class="re-note">Demostración</span>
+              <p style="color:#d7d4ce;font-size:.9rem;max-width:280px">Acá se carga el video tour final de la propiedad. El reproductor y los controles ya están listos.</p>
+            </div>
+            <div class="re-video-ctrl" id="reVideoCtrl">
+              <button id="reVideoToggle" aria-label="Reproducir o pausar"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+              <div class="re-video-track" id="reVideoTrack"><div class="re-video-fill" id="reVideoFill"></div></div>
+              <span class="re-video-time" id="reVideoTime">0:00 / 0:00</span>
+              <button id="reVideoMute" aria-label="Silenciar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor" stroke="none"/><path d="M15 9a3 3 0 0 1 0 6"/></svg></button>
+              <button id="reVideoFs" aria-label="Pantalla completa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 360 -->
+      <div class="re-media-block re-reveal">
+        <div class="re-media-grid flip">
+          <div class="re-media-copy">
+            <h3>Mirá alrededor.<br><em>360° sin salir del teléfono.</em></h3>
+            <p>Arrastrá para girar la vista. Cuando cargamos el panorama real de la propiedad, se explora exactamente así.</p>
+          </div>
+          <div class="re-360" id="re360" aria-label="Vista panorámica 360° de demostración">
+            <canvas id="re360Canvas"></canvas>
+            <span class="re-360-badge">Demo 360°</span>
+            <button class="re-360-full" id="re360Full" aria-label="Pantalla completa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg></button>
+            <div class="re-360-hint"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 12l4-4M3 12l4 4M21 12l-4-4M21 12l-4 4"/></svg>Arrastrá para mirar</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 06 · INTERACTIVE (crown jewel) ══════════════════════════════════ -->
+  <section class="re-sec re-cj" id="re-interactive" aria-labelledby="re-cj-h">
+    <div class="wrap">
+      <div class="re-cj-head re-reveal">
+        <span class="re-kicker">Propiedad interactiva</span>
+        <h2 class="re-h" id="re-cj-h">No mires la propiedad. <em>Entrá.</em></h2>
+        <p class="re-lead" style="margin-left:auto;margin-right:auto">Un plano se convierte en un espacio que se camina — desde el teléfono o el navegador. <b style="color:var(--re-ink)">De plano a experiencia.</b></p>
+      </div>
+
+      <div class="re-stage-wrap re-reveal">
+        <div class="re-stage" id="reStage">
+          <!-- Plano (intro) -->
+          <div class="re-plan" id="rePlan">
+            <div class="re-plan-inner">
+              <svg viewBox="0 0 340 210" fill="none" aria-hidden="true">
+                <g stroke="rgba(227,183,120,0.75)" stroke-width="2" stroke-linejoin="round">
+                  <rect x="20" y="20" width="300" height="170"/>
+                  <line x1="140" y1="20" x2="140" y2="120"/>
+                  <line x1="20" y1="120" x2="140" y2="120"/>
+                  <line x1="220" y1="120" x2="320" y2="120"/>
+                  <line x1="220" y1="120" x2="220" y2="190"/>
+                </g>
+                <g stroke="#0a0a0a" stroke-width="4">
+                  <line x1="140" y1="60" x2="140" y2="90"/>
+                  <line x1="80" y1="120" x2="110" y2="120"/>
+                  <line x1="220" y1="150" x2="220" y2="178"/>
+                </g>
+                <g fill="rgba(227,183,120,0.14)" stroke="rgba(227,183,120,0.4)" stroke-width="1">
+                  <rect x="35" y="35" width="70" height="34" rx="3"/>
+                  <rect x="240" y="35" width="60" height="40" rx="3"/>
+                  <rect x="40" y="140" width="50" height="34" rx="3"/>
+                </g>
+                <text x="170" y="70" fill="#6e6e6e" font-size="9" font-family="Inter" text-anchor="middle" letter-spacing="1">LIVING</text>
+                <text x="270" y="100" fill="#6e6e6e" font-size="9" font-family="Inter" text-anchor="middle" letter-spacing="1">COCINA</text>
+                <text x="80" y="165" fill="#6e6e6e" font-size="9" font-family="Inter" text-anchor="middle" letter-spacing="1">DORM.</text>
+              </svg>
+              <h4>De plano a experiencia</h4>
+              <p>3 ambientes · demostración interactiva</p>
+              <button class="re-enter" id="reEnter">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                Entrar a la propiedad
+              </button>
+            </div>
+          </div>
+
+          <!-- Loader -->
+          <div class="re-loader" id="reLoader">
+            <div class="lbl">Preparando propiedad…</div>
+            <div class="re-loader-bar"><div class="re-loader-fill"></div></div>
+          </div>
+
+          <!-- HUD -->
+          <div class="re-hud" id="reHud">
+            <div class="re-hud-top">
+              <span class="re-hud-chip">3 ambientes · demo</span>
+              <button class="re-exit" id="reExit"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Salir</button>
+            </div>
+            <div class="re-help" id="reHelp">
+              <div class="ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="10" r="3"/><path d="M12 2v3M12 15v7M5 10H2M22 10h-3"/></svg></div>
+              <p>Mové el joystick para recorrer</p>
+            </div>
+            <div class="re-keys" aria-hidden="true"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd><kbd>arrastrar = mirar</kbd></div>
+          </div>
+
+          <!-- Joystick -->
+          <div class="re-joy" id="reJoy" aria-hidden="true">
+            <div class="re-joy-base"></div>
+            <div class="re-joy-ring"></div>
+            <div class="re-joy-thumb" id="reJoyThumb"></div>
+          </div>
+
+          <!-- Fallback sin WebGL -->
+          <div class="re-fallback" id="reFallback">
+            <span class="badge">Recorrido 3D</span>
+            <p>Tu dispositivo o navegador no puede mostrar el recorrido 3D en este momento. El plano de arriba muestra la propiedad; la experiencia completa funciona en la mayoría de los equipos actuales.</p>
+            <a href="#re-contacto" class="re-btn re-btn-ghost">Pedir una demo</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 07 · SYSTEM MAP ═════════════════════════════════════════════════ -->
+  <section class="re-sec" id="re-sistema" aria-labelledby="re-sistema-h">
+    <div class="wrap">
+      <div class="re-reveal">
+        <span class="re-kicker">Un solo sistema</span>
+        <h2 class="re-h" id="re-sistema-h">No son servicios separados. Es una<br><em>nueva forma de mostrar propiedades.</em></h2>
+      </div>
+      <div class="re-sys re-reveal">
+        <div class="re-flow" id="reFlow">
+          <div class="re-node"><div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/></svg></div><div class="txt"><h4>Web</h4><p>La base conectada al inventario.</p></div></div>
+          <div class="re-node"><div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div><div class="txt"><h4>Property Media</h4><p>Foto, video y retoque profesional.</p></div></div>
+          <div class="re-node"><div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="7" y="3" width="10" height="18" rx="2"/><line x1="11" y1="18" x2="13" y2="18"/></svg></div><div class="txt"><h4>Reels</h4><p>Contenido que trae la atención.</p></div></div>
+          <div class="re-node"><div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg></div><div class="txt"><h4>360°</h4><p>Explorar sin moverse del teléfono.</p></div></div>
+          <div class="re-node"><div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20l4-1 9-9-3-3-9 9-1 4z"/><path d="M14 6l3 3"/></svg></div><div class="txt"><h4>Recorrido interactivo</h4><p>Entrar y caminar la propiedad.</p></div></div>
+          <div class="re-node"><div class="dot"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1s-.5-.1-.7.2-.7.9-.9 1.1-.3.2-.6.1a8 8 0 0 1-2.4-1.5 9 9 0 0 1-1.6-2c-.2-.3 0-.5.1-.6l.5-.5.3-.5c0-.2 0-.4-.1-.5L9 6.8c-.2-.6-.5-.5-.7-.5H7.8c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3 2.1 3.2 5 4.5c1.9.8 2.6.9 3.5.7.6-.1 1.7-.7 2-1.4s.3-1.3.2-1.4z"/></svg></div><div class="txt"><h4>WhatsApp / Lead</h4><p>La atención se convierte en consulta.</p></div></div>
+        </div>
+        <div class="re-stages">
+          <div class="re-stagecard"><div class="k">Atraer</div><h4>Reels y contenido</h4><p>Formatos que la gente elige mirar.</p></div>
+          <div class="re-stagecard"><div class="k">Presentar</div><h4>Foto, video y ficha</h4><p>La propiedad se ve como merece.</p></div>
+          <div class="re-stagecard"><div class="k">Explorar</div><h4>360° + recorrido</h4><p>Se camina antes de la visita.</p></div>
+          <div class="re-stagecard"><div class="k">Comparar</div><h4>Plataforma web</h4><p>Dos propiedades, lado a lado.</p></div>
+          <div class="re-stagecard" style="grid-column:1/-1"><div class="k">Convertir</div><h4>Asistente + WhatsApp</h4><p>De la atención a la conversación, sin fricción.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 08 · CTA ════════════════════════════════════════════════════════ -->
+  <section class="re-sec re-cta" id="re-contacto" aria-labelledby="re-cta-h">
+    <div class="re-cta-glow" aria-hidden="true"></div>
+    <div class="wrap re-cta-inner re-reveal">
+      <span class="re-kicker" style="justify-content:center">Hablemos</span>
+      <h2 id="re-cta-h">Tu próxima propiedad<br>puede <em>mostrarse así.</em></h2>
+      <p>Y tu inmobiliaria también.</p>
+      <div class="re-cta-actions">
+        <a id="reWaCta" href="#" class="re-btn re-btn-primary" data-ev="whatsapp_real_estate" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1s-.5-.1-.7.2-.7.9-.9 1.1-.3.2-.6.1a8 8 0 0 1-2.4-1.5 9 9 0 0 1-1.6-2c-.2-.3 0-.5.1-.6l.5-.5.3-.5c0-.2 0-.4-.1-.5L9 6.8c-.2-.6-.5-.5-.7-.5H7.8c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3 2.1 3.2 5 4.5c1.9.8 2.6.9 3.5.7.6-.1 1.7-.7 2-1.4s.3-1.3.2-1.4z"/></svg>
+          Quiero llevar esto a mi inmobiliaria
+        </a>
+        <a href="/catalogo-diseno" class="re-btn re-btn-ghost">Ver otros catálogos</a>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- ── FOOTER ──────────────────────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <a href="/" class="logo"><span class="logo-dot"></span>Chimichurri<span style="color:var(--text-muted);font-weight:400"> diseño</span></a>
+          <p>Real Estate. Transformamos cómo se presenta, se explora y se vende una propiedad digitalmente.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Real Estate</h5>
+          <ul>
+            <li><a href="#re-web">Plataforma web</a></li>
+            <li><a href="#re-reels">Reels</a></li>
+            <li><a href="#re-media">Property Media</a></li>
+            <li><a href="#re-interactive">Recorrido interactivo</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Catálogos</h5>
+          <ul>
+            <li><a href="/catalogo-diseno">Diseño gráfico</a></li>
+            <li><a href="/catalogo-fisico">Físico e imprenta</a></li>
+            <li><a href="/catalogo-experiencias">Experiencias</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Contacto</h5>
+          <ul>
+            <li><a id="reWaFooter" href="#" target="_blank" rel="noopener">WhatsApp directo</a></li>
+            <li><a href="/portal-clientes">Portal clientes</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Chimichurri Diseño. Todos los derechos reservados.</p>
+        <p>chimichurridiseno.com</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WA float -->
+  <a id="reWaFab" href="#" class="wa-fab" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24" fill="#000"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+  </a>
+
+  <!-- Reel lightbox -->
+  <div class="re-reel-modal" id="reReelModal" role="dialog" aria-modal="true" aria-label="Reel">
+    <div class="re-reel-stage" id="reReelStage">
+      <button class="re-reel-close" id="reReelClose" aria-label="Cerrar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      <button class="re-reel-nav prev" id="reReelPrev" aria-label="Anterior"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <button class="re-reel-nav next" id="reReelNext" aria-label="Siguiente"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="9 18 15 12 9 6"/></svg></button>
+    </div>
+  </div>
+
+  <!-- Modal comparación -->
+  <div class="re-modal" id="reCmpModal" role="dialog" aria-modal="true" aria-label="Comparación de propiedades">
+    <div class="re-modal-card">
+      <button class="re-modal-close" id="reCmpClose" aria-label="Cerrar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      <span class="re-kicker" style="margin-bottom:6px">Comparar</span>
+      <h3 style="font-family:'Syne',sans-serif;font-size:1.5rem;color:var(--re-ink)">Propiedad A vs. B</h3>
+      <div id="reCmpTableWrap"></div>
+      <p style="font-size:.76rem;color:var(--re-muted);margin-top:18px">Datos de ejemplo para demostrar el comparador.</p>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js" defer></script>
+</body>
+</html>
