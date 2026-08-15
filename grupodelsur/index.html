@@ -605,8 +605,15 @@ const WA_NUMBER    = "5491150271178";
 /* Link directo para editar el archivo de precios en GitHub */
 const GITHUB_EDIT_URL = "https://github.com/" + REPO + "/edit/" + RAMA + "/" + ARCHIVO_JSON;
 
+/* Version EN VIVO del archivo de precios (para actualizacion instantanea) */
+const REMOTE_URL = "https://raw.githubusercontent.com/" + REPO + "/" + RAMA + "/" + ARCHIVO_JSON;
+
+/* Si el zip fuerza una lista (may/min) se pone aca; si es null, se detecta sola */
+const TIER_FORZADO = null;
+
 /* ---- Deteccion de lista: mayorista o minorista ---- */
 function detectarTier(){
+  if(TIER_FORZADO==='may'||TIER_FORZADO==='min') return TIER_FORZADO;
   const q = (new URLSearchParams(location.search).get('tier')||'').toLowerCase();
   if(q==='may'||q==='min') return q;
   const h = location.hostname.toLowerCase();
@@ -1395,30 +1402,49 @@ async function init(){
   const pin=document.getElementById('pinInput');
   if(pin) pin.addEventListener('keydown',e=>{if(e.key==='Enter')verificarPin();});
 
-  /* Carga la fuente de verdad: precios.json (con respaldo) */
-  try{
-    const r = await fetch('precios.json?_=' + Date.now(), {cache:'no-store'});
-    if(!r.ok) throw new Error('HTTP ' + r.status);
-    const j = await r.json();
-    PRODUCTOS = (j.productos)||[];
-    ACTUALIZADO = j.actualizado||'';
-  }catch(e){
-    console.warn('No se pudo cargar precios.json, uso respaldo interno:', e);
-    PRODUCTOS = FALLBACK.productos||[];
-    ACTUALIZADO = FALLBACK.actualizado||'';
-  }
-  construirDatos();
+  /* Carga en DOS FASES para que SIEMPRE muestre algo al instante y ademas
+     se actualice en vivo cuando se edita precios.json en el repo:
+       Fase 1: pinta ya con la copia local del deploy (o la embebida).
+       Fase 2: trae la version EN VIVO del repo y refresca si cambio. */
+  const aplicar = (j)=>{
+    if(!j || !Array.isArray(j.productos) || !j.productos.length) return false;
+    PRODUCTOS = j.productos; ACTUALIZADO = j.actualizado || ACTUALIZADO;
+    construirDatos();
+    const f = fechaLegible(ACTUALIZADO);
+    set('fechaTag','Precios: ' + f); set('fechaCta', f);
+    set('listaTitulo', CFG[TIER].lista + ' \u2014 ' + f);
+    return true;
+  };
 
-  const fechaTxt = fechaLegible(ACTUALIZADO);
-  set('fechaTag','Precios: ' + fechaTxt);
-  set('fechaCta', fechaTxt);
-  set('listaTitulo', CFG[TIER].lista + ' \u2014 ' + fechaTxt);
+  /* Fase 1 (rapida, no se cuelga) */
+  let j = null;
+  try{ j = await traer('precios.json', 4000); }catch(_){ j = FALLBACK; }
+  aplicar(j);
 
   if(new URLSearchParams(location.search).get('admin')==='1'){
     document.getElementById('overlay').classList.add('visible');
     setTimeout(()=>{const p=document.getElementById('pinInput'); if(p)p.focus();},100);
   }
   buildChips(); render();
+
+  /* Fase 2 (en vivo, en segundo plano, con timeout) */
+  traer(REMOTE_URL, 6000).then(jr=>{
+    if(esAdmin) return;                 /* no piso lo que esta editando el dueno */
+    if(aplicar(jr)){ buildChips(); render(); }
+  }).catch(()=>{});
+}
+
+/* fetch con timeout, valida que traiga productos */
+async function traer(url, ms){
+  const ctrl = new AbortController();
+  const t = setTimeout(()=>ctrl.abort(), ms||5000);
+  try{
+    const r = await fetch(url + '?_=' + Date.now(), {cache:'no-store', signal:ctrl.signal});
+    if(!r.ok) throw new Error('HTTP ' + r.status);
+    const j = await r.json();
+    if(!j || !Array.isArray(j.productos) || !j.productos.length) throw new Error('vacio');
+    return j;
+  } finally { clearTimeout(t); }
 }
 
 function buildChips(){

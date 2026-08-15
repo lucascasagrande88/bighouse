@@ -58,6 +58,29 @@ grupodelsur/
 
 ---
 
+## Opción rápida: subir por ZIP (arrastrar y soltar)
+
+En `deploy-zips/` hay dos zips listos:
+
+- `grupodelsur-minorista.zip` → sitio **minorista** (naranja).
+- `grupodelsur-mayorista.zip` → sitio **mayorista** (verde).
+
+Cada zip trae el `index.html` con la lista ya forzada + un `precios.json` de
+respaldo. Para publicar: Netlify → el sitio → pestaña **Deploys** → arrastrá el
+zip al recuadro *"drag and drop"*. Listo, queda online con su mismo dominio.
+
+**Lo bueno:** el `index.html` de estos zips lee los precios **en vivo** desde
+`precios.json` del repo (`raw.githubusercontent.com`). Así, aunque el sitio se
+haya subido a mano, **editar `precios.json` en GitHub actualiza las dos webs sin
+volver a subir el zip** (carga en 2 fases: pinta al instante con la copia local
+y refresca con la versión en vivo). Para regenerar los zips: `./hacer-zips.sh`.
+
+> Requiere que el repo sea público (lo es) para el fetch en vivo. Si algún día
+> se hace privado, hay que linkear Netlify al repo (siguiente sección) para que
+> los precios sigan actualizándose solos.
+
+---
+
 ## Conectar los sitios de Netlify al repositorio (una sola vez)
 
 Hoy las webs se suben a mano. Para que se actualicen solas hay que linkearlas al
