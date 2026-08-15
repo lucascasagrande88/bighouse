@@ -1,21 +1,20 @@
 # Grupo Cementera del Sur — Catálogos con precios dinámicos
 
 Guía técnica (para Lucas). El manual simple para el dueño está en
-**`TUTORIAL-PRECIOS.pdf`**.
+**`TUTORIAL-PRECIOS.pdf`**. El setup del backend está en **`SUPABASE-SETUP.md`**.
 
 ---
 
-## Qué se resolvió
+## Qué hace
 
-**El problema:** las versiones anteriores guardaban los precios editados en
-`localStorage`, que es **local al navegador del dueño**. Es decir: el dueño
-cambiaba un precio en su celular y solo lo veía él. Los clientes seguían viendo
-los precios viejos. Por eso "no andaba".
+El dueño entra con `?admin=1` + PIN, cambia precios y toca **Guardar**. Se
+guardan en **Supabase** y se actualizan al instante en las **dos** webs
+(mayorista y minorista), para todos los clientes. **Sin GitHub, sin
+copiar/pegar, sin re-subir nada.**
 
-**La solución:** ahora los precios viven en un único archivo **`precios.json`**
-dentro del repositorio. Las dos webs lo leen de ahí. El dueño edita ese archivo
-(desde la web o desde GitHub) y, al guardarlo, **Netlify actualiza las dos webs
-automáticamente para todos los clientes** en ~1 minuto. Sin mover HTMLs a mano.
+> Antes se usaba `localStorage`, que era local al navegador del dueño (por eso
+> "no andaba": el cliente nunca veía los cambios). Ahora la fuente de verdad es
+> una base de datos compartida (Supabase).
 
 ---
 
@@ -23,122 +22,65 @@ automáticamente para todos los clientes** en ~1 minuto. Sin mover HTMLs a mano.
 
 ```
 grupodelsur/
-├── index.html            ← UNA sola página que sirve las dos webs
-│                            (detecta mayorista/minorista sola)
-├── precios.json          ← LA fuente de verdad (lo que edita el dueño)
-├── TUTORIAL-PRECIOS.pdf  ← manual simple para el dueño
-├── tutorial.html         ← fuente del PDF (por si hay que regenerarlo)
-└── LEEME-TECNICO.md      ← este archivo
+├── index.html            ← una sola página sirve las dos webs (detecta el tier)
+├── supabase.sql          ← se pega en Supabase: crea tablas, seguridad y carga los 80 productos
+├── precios.json          ← SEMILLA + respaldo (si Supabase no responde, la web muestra esto)
+├── SUPABASE-SETUP.md      ← setup del backend, paso a paso (~5 min)
+├── TUTORIAL-PRECIOS.pdf   ← manual del dueño (PIN → editar → Guardar)
+├── tutorial.html          ← fuente del PDF
+├── deploy-zips/           ← zips para subir a Netlify a mano (arrastrar y soltar)
+├── hacer-zips.sh          ← regenera los zips desde index.html
+└── LEEME-TECNICO.md       ← este archivo
 ```
 
-### `precios.json`
-```json
-{
-  "negocio": "Grupo Cementera del Sur",
-  "actualizado": "2026-08-15",
-  "productos": [
-    { "id": "001", "cat": "Cementos y Bases", "cod": "36892",
-      "nom": "Cemento Loma Negra", "sub": "Bolsa x 50kg",
-      "min": 6943, "may": 5950 }
-  ]
-}
-```
-- `min` = precio minorista · `may` = precio mayorista.
-- Un precio puede ser un número (`6943`) o el texto `"Consultá"`.
-- `actualizado` en formato `AAAA-MM-DD` (se muestra como "15 de agosto de 2026").
+## Cómo funciona (arquitectura)
 
-### `index.html`
-- Detecta la lista por el **dominio**: si el hostname contiene `mayor` → mayorista
-  (acento verde); si contiene `minor` → minorista (acento naranja). Se puede
-  forzar con `?tier=may` o `?tier=min`.
-- Al cargar hace `fetch('precios.json')`. Si por algún motivo falla, usa una
-  **copia de respaldo embebida** dentro del propio HTML, así la web **nunca**
-  queda en blanco.
-- Modo admin: `?admin=1` + PIN. Genera el `precios.json` completo listo para pegar.
+- **Fuente de verdad:** tabla `precios_config` en Supabase (una fila, `data`
+  jsonb con todo el catálogo: `{negocio, actualizado, productos:[{id,cat,cod,
+  nom,sub,min,may}]}`).
+- **Lectura:** `index.html` hace `GET .../rest/v1/precios_config` con la
+  `anon key`. Carga en **2 fases**: pinta al instante con la copia local/
+  embebida y refresca con lo que hay en Supabase. Nunca queda en blanco.
+- **Guardar:** llama a la función `actualizar_precios(p_pin, p_data)` por RPC.
+  La función **valida el PIN en el servidor** y actualiza la fila. RLS impide
+  escribir la tabla directamente. El PIN no está en la página.
+- **Tier:** una sola página; detecta mayorista/minorista por el dominio
+  (`?tier=may|min` para forzar; los zips ya vienen forzados con `TIER_FORZADO`).
 
----
-
-## Opción rápida: subir por ZIP (arrastrar y soltar)
-
-En `deploy-zips/` hay dos zips listos:
-
-- `grupodelsur-minorista.zip` → sitio **minorista** (naranja).
-- `grupodelsur-mayorista.zip` → sitio **mayorista** (verde).
-
-Cada zip trae el `index.html` con la lista ya forzada + un `precios.json` de
-respaldo. Para publicar: Netlify → el sitio → pestaña **Deploys** → arrastrá el
-zip al recuadro *"drag and drop"*. Listo, queda online con su mismo dominio.
-
-**Lo bueno:** el `index.html` de estos zips lee los precios **en vivo** desde
-`precios.json` del repo (`raw.githubusercontent.com`). Así, aunque el sitio se
-haya subido a mano, **editar `precios.json` en GitHub actualiza las dos webs sin
-volver a subir el zip** (carga en 2 fases: pinta al instante con la copia local
-y refresca con la versión en vivo). Para regenerar los zips: `./hacer-zips.sh`.
-
-> Requiere que el repo sea público (lo es) para el fetch en vivo. Si algún día
-> se hace privado, hay que linkear Netlify al repo (siguiente sección) para que
-> los precios sigan actualizándose solos.
-
----
-
-## Conectar los sitios de Netlify al repositorio (una sola vez)
-
-Hoy las webs se suben a mano. Para que se actualicen solas hay que linkearlas al
-repo. Para **cada** sitio (`grupodelsurcementera-minorista` y
-`grupodelsurcementera-mayorista`):
-
-1. Netlify → el sitio → **Site configuration → Build & deploy → Link repository**
-   (o "Import an existing project" si lo creás de cero) → GitHub →
-   repo **`lucascasagrande88/bighouse`**.
-2. **Branch to deploy:** `claude/dynamic-pricing-setup-xfh64e`
-   (o la rama a la que lo mergees).
-3. **Base directory / Publish directory:** `grupodelsur`  ← IMPORTANTE.
-   (No dejar la raíz: la raíz es el sitio de Chimichurri, no el catálogo.)
-4. Build command: **vacío** (es HTML estático). Deploy.
-
-Las dos webs publican **la misma carpeta `grupodelsur`**; cada una se muestra
-como mayorista o minorista sola, según su dominio. Como los nombres ya contienen
-"mayorista"/"minorista", funciona sin configurar nada más.
-
-> Si algún día usás un dominio propio **sin** esas palabras, agregá `?tier=may`
-> / `?tier=min` a la URL, o hardcodeá el tier en `detectarTier()`.
-
-Al quedar linkeado: cada vez que se commitea `precios.json`, Netlify redeploya
-las dos webs solo.
-
----
-
-## Que el dueño pueda editar
-
-El dueño necesita poder commitear `precios.json`. Opciones:
-
-- **Colaborador (recomendado):** GitHub → repo → **Settings → Collaborators →
-  Add people** con el usuario del dueño. Con eso puede usar el botón
-  "Abrir GitHub" del modo admin y confirmar cambios.
-- **Sin cuenta del dueño:** que use el editor visual, toque *Copiar* y te mande
-  el texto por WhatsApp; vos lo pegás y commiteás.
-
----
-
-## Configuración (arriba de todo en `index.html`)
+## Config (arriba de `index.html`)
 
 ```js
-const REPO         = "lucascasagrande88/bighouse";
-const RAMA         = "claude/dynamic-pricing-setup-xfh64e"; // = rama que deploya Netlify
-const ARCHIVO_JSON = "grupodelsur/precios.json";
-const ADMIN_PIN    = "1234";     // cambialo por uno propio
-const WA_NUMBER    = "5491150271178";
+const SUPABASE_URL = "https://xxxx.supabase.co";  // Project URL
+const SUPABASE_KEY = "eyJ...";                      // anon key (pública, OK)
 ```
-- `RAMA` se usa para el botón **"Abrir GitHub"**. Debe coincidir con la rama que
-  deploya Netlify. Si mergeás a otra rama, actualizá este valor.
-- Para cambiar el PIN, editá `ADMIN_PIN` (y avisale al dueño).
+Mientras estén en `PEGAR_...`, la web muestra precios del respaldo y el botón
+Guardar avisa que falta configurar. Ver `SUPABASE-SETUP.md`.
+
+> La `anon key` es pública por diseño (va en clientes web). **Nunca** commitees
+> la `service_role` key.
 
 ---
 
-## Upgrade futuro (opcional)
+## Deploy en Netlify (una vez)
 
-Si querés que el dueño edite sin ver nada de GitHub, se puede sumar
-**Decap CMS** (ex Netlify CMS) con Netlify Identity + Git Gateway: login con
-email y un formulario que commitea `precios.json` por atrás. Es más setup y más
-piezas que pueden fallar; el sistema actual ya cumple "el dueño cambia el precio
-y se actualiza para todos".
+Los dos sitios (`grupodelsurcementera-minorista` y `-mayorista`) publican la
+**misma carpeta `grupodelsur`** y cada uno se muestra según su dominio.
+
+**Opción A — Link al repo (recomendado):** en cada sitio, Netlify → link al
+repo `lucascasagrande88/bighouse`, rama de deploy, **Publish directory =
+`grupodelsur`**, sin build command. Cada commit redeploya solo.
+
+**Opción B — Zip (arrastrar y soltar):** corré `./hacer-zips.sh` (después de
+pegar las credenciales de Supabase) y arrastrá cada zip de `deploy-zips/` a la
+pestaña **Deploys** del sitio que corresponda.
+
+## Actualizar precios sin app aparte
+
+Como los precios están en Supabase, editar en `index.html` o en `precios.json`
+**no** cambia los precios en vivo (esos son solo respaldo/semilla). Los precios
+en vivo se cambian desde el botón **Guardar** de la web (o desde el Table
+Editor de Supabase, tabla `precios_config`).
+
+## Cambiar el PIN
+
+Supabase → Table Editor → tabla `ajustes` → fila `pin` → editar `valor`.

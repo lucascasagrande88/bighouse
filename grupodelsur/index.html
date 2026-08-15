@@ -489,27 +489,9 @@ body.mayorista .sec-hdr .cnt{ color:#4CAF9A; }
 <div class="admin-bar" id="adminBar">
   <div class="admin-bar-t" id="adminBarT">⚙ Admin — Precios</div>
   <div class="admin-acts">
-    <button class="btn primary" onclick="generar()">📤 Generar / Publicar</button>
+    <button class="btn primary" id="btnGuardar" onclick="guardar()">💾 Guardar</button>
     <button class="btn" onclick="descartar()">↩ Descartar</button>
     <button class="btn" onclick="salir()">Salir</button>
-  </div>
-</div>
-
-<!-- PANEL PUBLICAR -->
-<div class="io-panel" id="pubPanel">
-  <h3>📤 Publicar precios nuevos</h3>
-  <p style="font-size:12.5px;color:var(--muted);line-height:1.6;margin-bottom:12px">
-    <strong style="color:var(--white)">1.</strong> Tocá <strong style="color:var(--orange)">Copiar</strong>. &nbsp;
-    <strong style="color:var(--white)">2.</strong> Tocá <strong style="color:var(--orange)">Abrir GitHub</strong>. &nbsp;
-    <strong style="color:var(--white)">3.</strong> En GitHub borrá todo lo que hay y pegá esto. &nbsp;
-    <strong style="color:var(--white)">4.</strong> Botón verde <strong style="color:var(--orange)">Commit changes</strong>.
-    <br><span style="opacity:.85">Listo. En ~1 minuto los precios se actualizan en la web para todos los clientes.</span>
-  </p>
-  <textarea class="io-ta" id="pubTa" readonly placeholder="Tocá Generar / Publicar para crear el archivo…"></textarea>
-  <div class="io-row">
-    <button class="btn primary" onclick="copiarPub()">📋 Copiar</button>
-    <button class="btn primary" onclick="abrirGitHub()">🔗 Abrir GitHub</button>
-    <button class="btn" onclick="document.getElementById('pubPanel').classList.remove('visible')">Cerrar</button>
   </div>
 </div>
 
@@ -595,18 +577,28 @@ body.mayorista .sec-hdr .cnt{ color:#4CAF9A; }
    automaticamente la web en ~1 minuto, para TODOS los clientes.
    ================================================================== */
 
-/* ---- CONFIGURACION (cambiar solo si cambia el repo o la rama) ---- */
+/* =================================================================
+   CONFIGURACION DE SUPABASE  (pegar los 2 valores de tu proyecto)
+   Los sacas de Supabase -> Project Settings -> API:
+     - Project URL           -> SUPABASE_URL
+     - Project API keys: anon -> SUPABASE_KEY   (es publica, va aca)
+   Mientras esten en "PEGAR_...", la web funciona igual mostrando los
+   ultimos precios (respaldo), pero el boton Guardar todavia no publica.
+   ================================================================= */
+const SUPABASE_URL = "PEGAR_URL_DE_SUPABASE";   // ej: https://abcxyz.supabase.co
+const SUPABASE_KEY = "PEGAR_ANON_KEY";          // ej: eyJhbGciOi...
+
+const SB_OK = /^https:\/\/[a-z0-9-]+\.supabase\.co\/?$/i.test(SUPABASE_URL) && SUPABASE_KEY.length > 30;
+const SB_REST = SUPABASE_URL.replace(/\/$/,'') + '/rest/v1';
+const SB_HEAD = { apikey: SUPABASE_KEY, Authorization: 'Bearer ' + SUPABASE_KEY };
+
+/* ---- Respaldo: repo en GitHub (solo lectura, por si Supabase no responde) ---- */
 const REPO         = "lucascasagrande88/bighouse";
 const RAMA         = "claude/dynamic-pricing-setup-xfh64e";
 const ARCHIVO_JSON = "grupodelsur/precios.json";
-const ADMIN_PIN    = "1234";
+const ADMIN_PIN    = "1234";   /* solo para vista previa si Supabase no esta configurado */
 const WA_NUMBER    = "5491150271178";
-
-/* Link directo para editar el archivo de precios en GitHub */
-const GITHUB_EDIT_URL = "https://github.com/" + REPO + "/edit/" + RAMA + "/" + ARCHIVO_JSON;
-
-/* Version EN VIVO del archivo de precios (para actualizacion instantanea) */
-const REMOTE_URL = "https://raw.githubusercontent.com/" + REPO + "/" + RAMA + "/" + ARCHIVO_JSON;
+const REMOTE_URL   = "https://raw.githubusercontent.com/" + REPO + "/" + RAMA + "/" + ARCHIVO_JSON;
 
 /* Si el zip fuerza una lista (may/min) se pone aca; si es null, se detecta sola */
 const TIER_FORZADO = null;
@@ -1363,8 +1355,10 @@ const CAT_ICO = {"Cementos y Bases":"\uD83C\uDFD7\uFE0F","Pegamentos":"\uD83D\uD
 
 let PRODUCTOS = [];     /* catalogo completo con min y may */
 let ACTUALIZADO = "";
+let NEGOCIO = "Grupo Cementera del Sur";
 let datos = [];         /* filas del tier actual: {..., precio} */
 let catActiva = 'Todas', esAdmin = false;
+let pinIngresado = "";  /* PIN que tipeo el dueno (se usa al guardar) */
 
 /* ---- Formato de precio para mostrar ---- */
 function fmt(v){
@@ -1402,13 +1396,14 @@ async function init(){
   const pin=document.getElementById('pinInput');
   if(pin) pin.addEventListener('keydown',e=>{if(e.key==='Enter')verificarPin();});
 
-  /* Carga en DOS FASES para que SIEMPRE muestre algo al instante y ademas
-     se actualice en vivo cuando se edita precios.json en el repo:
-       Fase 1: pinta ya con la copia local del deploy (o la embebida).
-       Fase 2: trae la version EN VIVO del repo y refresca si cambio. */
+  /* Carga en DOS FASES: pinta al instante y luego trae la version viva.
+       Fase 1: copia local del deploy (o la embebida) -> pinta ya.
+       Fase 2: Supabase (fuente de verdad) o, si no esta configurado,
+               el repo en GitHub. Refresca si hay datos nuevos. */
   const aplicar = (j)=>{
     if(!j || !Array.isArray(j.productos) || !j.productos.length) return false;
     PRODUCTOS = j.productos; ACTUALIZADO = j.actualizado || ACTUALIZADO;
+    if(j.negocio) NEGOCIO = j.negocio;
     construirDatos();
     const f = fechaLegible(ACTUALIZADO);
     set('fechaTag','Precios: ' + f); set('fechaCta', f);
@@ -1427,8 +1422,9 @@ async function init(){
   }
   buildChips(); render();
 
-  /* Fase 2 (en vivo, en segundo plano, con timeout) */
-  traer(REMOTE_URL, 6000).then(jr=>{
+  /* Fase 2 (en vivo, en segundo plano) */
+  const vivo = SB_OK ? leerSupabase(6000) : traer(REMOTE_URL, 6000);
+  vivo.then(jr=>{
     if(esAdmin) return;                 /* no piso lo que esta editando el dueno */
     if(aplicar(jr)){ buildChips(); render(); }
   }).catch(()=>{});
@@ -1445,6 +1441,45 @@ async function traer(url, ms){
     if(!j || !Array.isArray(j.productos) || !j.productos.length) throw new Error('vacio');
     return j;
   } finally { clearTimeout(t); }
+}
+
+/* ---- SUPABASE: leer precios (tabla precios_config, fila id=1) ---- */
+async function leerSupabase(ms){
+  const ctrl = new AbortController();
+  const t = setTimeout(()=>ctrl.abort(), ms||6000);
+  try{
+    const r = await fetch(SB_REST + '/precios_config?id=eq.1&select=data', {headers: SB_HEAD, signal: ctrl.signal});
+    if(!r.ok) throw new Error('HTTP ' + r.status);
+    const rows = await r.json();
+    if(!rows.length || !rows[0].data || !Array.isArray(rows[0].data.productos)) throw new Error('vacio');
+    return rows[0].data;
+  } finally { clearTimeout(t); }
+}
+
+/* ---- SUPABASE: guardar (RPC con PIN validado en el servidor) ---- */
+async function guardarSupabase(pin, data){
+  const r = await fetch(SB_REST + '/rpc/actualizar_precios', {
+    method:'POST',
+    headers: Object.assign({'Content-Type':'application/json'}, SB_HEAD),
+    body: JSON.stringify({ p_pin: pin, p_data: data })
+  });
+  if(!r.ok){
+    let msg = 'HTTP ' + r.status;
+    try{ const e = await r.json(); msg = (e && (e.message||e.hint||e.details)) || msg; }catch(_){}
+    throw new Error(msg);
+  }
+  return r.json().catch(()=>null);
+}
+
+/* ---- SUPABASE: verificar PIN (RPC) ---- */
+async function verificarPinSupabase(pin){
+  const r = await fetch(SB_REST + '/rpc/verificar_pin', {
+    method:'POST',
+    headers: Object.assign({'Content-Type':'application/json'}, SB_HEAD),
+    body: JSON.stringify({ p_pin: pin })
+  });
+  if(!r.ok) throw new Error('HTTP ' + r.status);
+  return r.json();   /* true / false */
 }
 
 function buildChips(){
@@ -1485,51 +1520,70 @@ function itemHTML(p){
 }
 
 /* ---- ADMIN ---- */
-function verificarPin(){
+async function verificarPin(){
   const pin=document.getElementById('pinInput').value;
-  if(pin===ADMIN_PIN){
+  const errEl=document.getElementById('pinErr');
+  const btn=document.querySelector('#overlay .btn.primary');
+  let ok=false;
+  if(SB_OK){
+    if(btn){btn.disabled=true;btn.textContent='Verificando\u2026';}
+    try{ ok = (await verificarPinSupabase(pin))===true; }
+    catch(e){ ok=false; }
+    if(btn){btn.disabled=false;btn.textContent='Entrar';}
+  }else{
+    ok = (pin===ADMIN_PIN);   /* solo vista previa si Supabase no esta configurado */
+  }
+  if(ok){
+    pinIngresado = pin;
     document.getElementById('overlay').classList.remove('visible');
     document.getElementById('adminBar').classList.add('visible');
     document.getElementById('pinInput').value='';
-    document.getElementById('pinErr').style.display='none';
+    errEl.style.display='none';
     esAdmin=true; render();
   }else{
-    document.getElementById('pinErr').style.display='block';
+    errEl.style.display='block';
     document.getElementById('pinInput').value='';
     document.getElementById('pinInput').focus();
   }
 }
 function cerrarOverlay(){document.getElementById('overlay').classList.remove('visible');document.getElementById('pinInput').value='';document.getElementById('pinErr').style.display='none';}
-function salir(){esAdmin=false;document.getElementById('adminBar').classList.remove('visible');document.getElementById('pubPanel').classList.remove('visible');render();}
+function salir(){esAdmin=false;pinIngresado='';document.getElementById('adminBar').classList.remove('visible');render();}
 function descartar(){construirDatos();render();toast('Cambios descartados');}
 
-/* Genera el precios.json completo (ambas listas) listo para pegar en GitHub */
-function generar(){
+/* Lee los inputs y arma el catalogo completo (ambas listas) */
+function armarDatos(){
   const editados={};
   datos.forEach(p=>{const el=document.getElementById('inp_'+p.id); if(el) editados[p.id]=parsePrecio(el.value);});
   const nuevos=PRODUCTOS.map(p=>{const c=Object.assign({},p); if(editados.hasOwnProperty(p.id)) c[TIER]=editados[p.id]; return c;});
-  const hoy=isoHoy();
-  const salida={ negocio:(FALLBACK.negocio||'Grupo Cementera del Sur'), actualizado:hoy, productos:nuevos };
-  const json=JSON.stringify(salida,null,2);
-  document.getElementById('pubTa').value=json;
-  document.getElementById('pubPanel').classList.add('visible');
-  /* actualiza en memoria para previsualizar */
-  PRODUCTOS=nuevos; ACTUALIZADO=hoy; construirDatos();
-  const leg=fechaLegible(hoy);
-  document.getElementById('fechaTag').textContent='Precios: '+leg;
-  document.getElementById('fechaCta').textContent=leg;
-  document.getElementById('listaTitulo').textContent=CFG[TIER].lista+' \u2014 '+leg;
-  render();
-  document.getElementById('pubPanel').scrollIntoView({behavior:'smooth',block:'center'});
-  toast('\uD83D\uDCCB Archivo generado \u2014 copialo y pegalo en GitHub');
+  return { negocio:NEGOCIO, actualizado:isoHoy(), productos:nuevos };
 }
-function copiarPub(){
-  const ta=document.getElementById('pubTa'); ta.focus(); ta.select();
-  const ok=()=>toast('\u2705 Copiado \u2014 ahora abri GitHub y pegalo');
-  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(ta.value).then(ok).catch(()=>{document.execCommand('copy');ok();});}
-  else{document.execCommand('copy');ok();}
+
+/* GUARDAR: escribe en Supabase y queda actualizado para todos al instante */
+async function guardar(){
+  const btn=document.getElementById('btnGuardar');
+  if(!SB_OK){
+    toast('\u26A0 Falta configurar Supabase (ver SUPABASE-SETUP)');
+    return;
+  }
+  const data=armarDatos();
+  if(btn){btn.disabled=true;btn.textContent='Guardando\u2026';}
+  try{
+    await guardarSupabase(pinIngresado, data);
+    PRODUCTOS=data.productos; ACTUALIZADO=data.actualizado; construirDatos();
+    const leg=fechaLegible(ACTUALIZADO);
+    document.getElementById('fechaTag').textContent='Precios: '+leg;
+    document.getElementById('fechaCta').textContent=leg;
+    document.getElementById('listaTitulo').textContent=CFG[TIER].lista+' \u2014 '+leg;
+    render();
+    toast('\u2705 Guardado \u2014 actualizado para todos los clientes');
+  }catch(e){
+    const m=String(e&&e.message||e);
+    toast('\u274C '+(/PIN/i.test(m)?'PIN incorrecto':'No se pudo guardar'));
+    console.error('guardar:', e);
+  }finally{
+    if(btn){btn.disabled=false;btn.textContent='\uD83D\uDCBE Guardar';}
+  }
 }
-function abrirGitHub(){window.open(GITHUB_EDIT_URL,'_blank','noopener');}
 
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('visible');setTimeout(()=>t.classList.remove('visible'),3200);}
 
