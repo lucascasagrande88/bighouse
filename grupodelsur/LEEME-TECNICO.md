@@ -1,86 +1,61 @@
 # Grupo Cementera del Sur — Catálogos con precios dinámicos
 
-Guía técnica (para Lucas). El manual simple para el dueño está en
-**`TUTORIAL-PRECIOS.pdf`**. El setup del backend está en **`SUPABASE-SETUP.md`**.
-
----
+Guía técnica (para Lucas). El manual simple del dueño está en
+**`TUTORIAL-PRECIOS.pdf`**.
 
 ## Qué hace
-
 El dueño entra con `?admin=1` + PIN, cambia precios y toca **Guardar**. Se
-guardan en **Supabase** y se actualizan al instante en las **dos** webs
-(mayorista y minorista), para todos los clientes. **Sin GitHub, sin
-copiar/pegar, sin re-subir nada.**
-
-> Antes se usaba `localStorage`, que era local al navegador del dueño (por eso
-> "no andaba": el cliente nunca veía los cambios). Ahora la fuente de verdad es
-> una base de datos compartida (Supabase).
-
----
+guarda en el backend (**Netlify Functions + Netlify Blobs**, dentro de tu
+propia cuenta de Netlify) y queda actualizado al instante para todos. **Sin
+GitHub para el dueño, sin copiar/pegar, sin cuentas externas, sin Supabase.**
 
 ## Estructura
-
 ```
 grupodelsur/
-├── index.html            ← una sola página sirve las dos webs (detecta el tier)
-├── supabase.sql          ← se pega en Supabase: crea tablas, seguridad y carga los 80 productos
-├── precios.json          ← SEMILLA + respaldo (si Supabase no responde, la web muestra esto)
-├── SUPABASE-SETUP.md      ← setup del backend, paso a paso (~5 min)
-├── TUTORIAL-PRECIOS.pdf   ← manual del dueño (PIN → editar → Guardar)
-├── tutorial.html          ← fuente del PDF
-├── deploy-zips/           ← zips para subir a Netlify a mano (arrastrar y soltar)
-├── hacer-zips.sh          ← regenera los zips desde index.html
-└── LEEME-TECNICO.md       ← este archivo
+├── index.html                    ← una sola web sirve las dos listas (detecta por dominio)
+├── netlify.toml                  ← config de build (publish + functions)
+├── netlify/functions/precios.mjs ← BACKEND: GET lee, POST guarda (valida PIN), usa Blobs
+├── precios.json                  ← semilla + respaldo de lectura
+├── deploy-zips/                  ← zips listos para arrastrar a Netlify (con la función)
+├── hacer-zips.sh                 ← regenera los zips
+├── TUTORIAL-PRECIOS.pdf / tutorial.html
+└── LEEME-TECNICO.md
 ```
 
-## Cómo funciona (arquitectura)
+## Cómo funciona
+- **Backend:** función en `/api/precios`.
+  - `GET` → devuelve el catálogo (de Netlify Blobs; si está vacío, la semilla).
+  - `POST {accion:'verificar', pin}` → valida el PIN (server-side).
+  - `POST {accion:'guardar', pin, data}` → si el PIN es correcto, escribe en Blobs.
+- **PIN:** `process.env.PRECIOS_PIN` (si no está, usa `1234`). Cambialo con una
+  env var en Netlify (Site configuration → Environment variables).
+- **Front:** `index.html` lee de `/api/precios` (con respaldo a `precios.json` y
+  a una copia embebida, en 2 fases: pinta al instante y refresca). Guarda por
+  POST. Detecta mayorista/minorista por el dominio (`?tier=may|min` para forzar;
+  los zips ya vienen forzados con `TIER_FORZADO`).
+- **Blobs:** cada sitio tiene su propio store (no hace falta compartir: el dueño
+  edita la lista de cada web por separado, que es como trabaja).
 
-- **Fuente de verdad:** tabla `precios_config` en Supabase (una fila, `data`
-  jsonb con todo el catálogo: `{negocio, actualizado, productos:[{id,cat,cod,
-  nom,sub,min,may}]}`).
-- **Lectura:** `index.html` hace `GET .../rest/v1/precios_config` con la
-  `anon key`. Carga en **2 fases**: pinta al instante con la copia local/
-  embebida y refresca con lo que hay en Supabase. Nunca queda en blanco.
-- **Guardar:** llama a la función `actualizar_precios(p_pin, p_data)` por RPC.
-  La función **valida el PIN en el servidor** y actualiza la fila. RLS impide
-  escribir la tabla directamente. El PIN no está en la página.
-- **Tier:** una sola página; detecta mayorista/minorista por el dominio
-  (`?tier=may|min` para forzar; los zips ya vienen forzados con `TIER_FORZADO`).
+## Deploy (elegí una)
 
-## Config (arriba de `index.html`)
+**A) Git-link (recomendado, 100% confiable para la función):**
+En cada sitio de Netlify → link al repo `lucascasagrande88/bighouse`,
+**Base directory = `grupodelsur`**, rama de deploy la que quieras. Netlify
+buildea y bundlea la función sola. Cada commit redeploya.
 
-```js
-const SUPABASE_URL = "https://xxxx.supabase.co";  // Project URL
-const SUPABASE_KEY = "eyJ...";                      // anon key (pública, OK)
-```
-Mientras estén en `PEGAR_...`, la web muestra precios del respaldo y el botón
-Guardar avisa que falta configurar. Ver `SUPABASE-SETUP.md`.
+**B) Zip (arrastrar y soltar):**
+`deploy-zips/grupodelsur-minorista.zip` → sitio **minorista**;
+`grupodelsur-mayorista.zip` → sitio **mayorista**. Netlify → sitio → pestaña
+**Deploys** → arrastrás el zip. El zip incluye `netlify.toml` + la función.
 
-> La `anon key` es pública por diseño (va en clientes web). **Nunca** commitees
-> la `service_role` key.
+> Nota: el deploy automático desde este entorno está **bloqueado por la política
+> de egress** (el host de subida de Netlify no está permitido acá), por eso el
+> deploy lo hacés vos con A o B. Toda la app y el backend ya están listos.
 
----
-
-## Deploy en Netlify (una vez)
-
-Los dos sitios (`grupodelsurcementera-minorista` y `-mayorista`) publican la
-**misma carpeta `grupodelsur`** y cada uno se muestra según su dominio.
-
-**Opción A — Link al repo (recomendado):** en cada sitio, Netlify → link al
-repo `lucascasagrande88/bighouse`, rama de deploy, **Publish directory =
-`grupodelsur`**, sin build command. Cada commit redeploya solo.
-
-**Opción B — Zip (arrastrar y soltar):** corré `./hacer-zips.sh` (después de
-pegar las credenciales de Supabase) y arrastrá cada zip de `deploy-zips/` a la
-pestaña **Deploys** del sitio que corresponda.
-
-## Actualizar precios sin app aparte
-
-Como los precios están en Supabase, editar en `index.html` o en `precios.json`
-**no** cambia los precios en vivo (esos son solo respaldo/semilla). Los precios
-en vivo se cambian desde el botón **Guardar** de la web (o desde el Table
-Editor de Supabase, tabla `precios_config`).
+## Probar
+Entrá a la web (o `?admin=1`), PIN `1234`, cambiá un número, **Guardar**.
+Recargá: el precio quedó. Para verificar el backend a mano:
+`GET https://<tu-sitio>.netlify.app/api/precios` debe devolver el JSON.
 
 ## Cambiar el PIN
-
-Supabase → Table Editor → tabla `ajustes` → fila `pin` → editar `valor`.
+Netlify → sitio → Environment variables → `PRECIOS_PIN` = tu nuevo PIN. Redeploy.

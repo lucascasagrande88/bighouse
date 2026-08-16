@@ -578,25 +578,18 @@ body.mayorista .sec-hdr .cnt{ color:#4CAF9A; }
    ================================================================== */
 
 /* =================================================================
-   CONFIGURACION DE SUPABASE  (pegar los 2 valores de tu proyecto)
-   Los sacas de Supabase -> Project Settings -> API:
-     - Project URL           -> SUPABASE_URL
-     - Project API keys: anon -> SUPABASE_KEY   (es publica, va aca)
-   Mientras esten en "PEGAR_...", la web funciona igual mostrando los
-   ultimos precios (respaldo), pero el boton Guardar todavia no publica.
+   BACKEND: funcion de Netlify (guarda en Netlify Blobs).
+   No hay nada que configurar: cuando el sitio esta publicado en
+   Netlify, la funcion vive en /api/precios (mismo dominio) y el
+   boton Guardar escribe ahi. El PIN se valida en el servidor.
    ================================================================= */
-const SUPABASE_URL = "PEGAR_URL_DE_SUPABASE";   // ej: https://abcxyz.supabase.co
-const SUPABASE_KEY = "PEGAR_ANON_KEY";          // ej: eyJhbGciOi...
+const API = "/api/precios";
 
-const SB_OK = /^https:\/\/[a-z0-9-]+\.supabase\.co\/?$/i.test(SUPABASE_URL) && SUPABASE_KEY.length > 30;
-const SB_REST = SUPABASE_URL.replace(/\/$/,'') + '/rest/v1';
-const SB_HEAD = { apikey: SUPABASE_KEY, Authorization: 'Bearer ' + SUPABASE_KEY };
-
-/* ---- Respaldo: repo en GitHub (solo lectura, por si Supabase no responde) ---- */
+/* ---- Respaldo de lectura: repo en GitHub (solo por si la funcion no responde) ---- */
 const REPO         = "lucascasagrande88/bighouse";
 const RAMA         = "claude/dynamic-pricing-setup-xfh64e";
 const ARCHIVO_JSON = "grupodelsur/precios.json";
-const ADMIN_PIN    = "1234";   /* solo para vista previa si Supabase no esta configurado */
+const ADMIN_PIN    = "1234";   /* solo vista previa local si no hay backend (ej: abrir el HTML sin publicar) */
 const WA_NUMBER    = "5491150271178";
 const REMOTE_URL   = "https://raw.githubusercontent.com/" + REPO + "/" + RAMA + "/" + ARCHIVO_JSON;
 
@@ -1422,12 +1415,13 @@ async function init(){
   }
   buildChips(); render();
 
-  /* Fase 2 (en vivo, en segundo plano) */
-  const vivo = SB_OK ? leerSupabase(6000) : traer(REMOTE_URL, 6000);
-  vivo.then(jr=>{
-    if(esAdmin) return;                 /* no piso lo que esta editando el dueno */
-    if(aplicar(jr)){ buildChips(); render(); }
-  }).catch(()=>{});
+  /* Fase 2 (en vivo, en segundo plano): backend Netlify; si no hay, GitHub */
+  leerBackend(6000)
+    .catch(()=>traer(REMOTE_URL, 6000))
+    .then(jr=>{
+      if(esAdmin) return;               /* no piso lo que esta editando el dueno */
+      if(aplicar(jr)){ buildChips(); render(); }
+    }).catch(()=>{});
 }
 
 /* fetch con timeout, valida que traiga productos */
@@ -1443,40 +1437,40 @@ async function traer(url, ms){
   } finally { clearTimeout(t); }
 }
 
-/* ---- SUPABASE: leer precios (tabla precios_config, fila id=1) ---- */
-async function leerSupabase(ms){
+/* ---- BACKEND: leer precios (funcion Netlify + Blobs) ---- */
+async function leerBackend(ms){
   const ctrl = new AbortController();
   const t = setTimeout(()=>ctrl.abort(), ms||6000);
   try{
-    const r = await fetch(SB_REST + '/precios_config?id=eq.1&select=data', {headers: SB_HEAD, signal: ctrl.signal});
+    const r = await fetch(API + '?_=' + Date.now(), {cache:'no-store', signal: ctrl.signal});
     if(!r.ok) throw new Error('HTTP ' + r.status);
-    const rows = await r.json();
-    if(!rows.length || !rows[0].data || !Array.isArray(rows[0].data.productos)) throw new Error('vacio');
-    return rows[0].data;
+    const j = await r.json();
+    if(!j || !Array.isArray(j.productos)) throw new Error('vacio');
+    return j;
   } finally { clearTimeout(t); }
 }
 
-/* ---- SUPABASE: guardar (RPC con PIN validado en el servidor) ---- */
-async function guardarSupabase(pin, data){
-  const r = await fetch(SB_REST + '/rpc/actualizar_precios', {
+/* ---- BACKEND: guardar (PIN validado en el servidor) ---- */
+async function guardarBackend(pin, data){
+  const r = await fetch(API, {
     method:'POST',
-    headers: Object.assign({'Content-Type':'application/json'}, SB_HEAD),
-    body: JSON.stringify({ p_pin: pin, p_data: data })
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({ accion:'guardar', pin: pin, data: data })
   });
   if(!r.ok){
     let msg = 'HTTP ' + r.status;
-    try{ const e = await r.json(); msg = (e && (e.message||e.hint||e.details)) || msg; }catch(_){}
+    try{ const e = await r.json(); msg = (e && e.error) || msg; }catch(_){}
     throw new Error(msg);
   }
   return r.json().catch(()=>null);
 }
 
-/* ---- SUPABASE: verificar PIN (RPC) ---- */
-async function verificarPinSupabase(pin){
-  const r = await fetch(SB_REST + '/rpc/verificar_pin', {
+/* ---- BACKEND: verificar PIN ---- */
+async function verificarPinBackend(pin){
+  const r = await fetch(API, {
     method:'POST',
-    headers: Object.assign({'Content-Type':'application/json'}, SB_HEAD),
-    body: JSON.stringify({ p_pin: pin })
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({ accion:'verificar', pin: pin })
   });
   if(!r.ok) throw new Error('HTTP ' + r.status);
   return r.json();   /* true / false */
@@ -1525,14 +1519,10 @@ async function verificarPin(){
   const errEl=document.getElementById('pinErr');
   const btn=document.querySelector('#overlay .btn.primary');
   let ok=false;
-  if(SB_OK){
-    if(btn){btn.disabled=true;btn.textContent='Verificando\u2026';}
-    try{ ok = (await verificarPinSupabase(pin))===true; }
-    catch(e){ ok=false; }
-    if(btn){btn.disabled=false;btn.textContent='Entrar';}
-  }else{
-    ok = (pin===ADMIN_PIN);   /* solo vista previa si Supabase no esta configurado */
-  }
+  if(btn){btn.disabled=true;btn.textContent='Verificando\u2026';}
+  try{ ok = (await verificarPinBackend(pin))===true; }
+  catch(e){ ok = (pin===ADMIN_PIN); }   /* si no hay backend (preview local), usa PIN local */
+  if(btn){btn.disabled=false;btn.textContent='Entrar';}
   if(ok){
     pinIngresado = pin;
     document.getElementById('overlay').classList.remove('visible');
@@ -1558,17 +1548,13 @@ function armarDatos(){
   return { negocio:NEGOCIO, actualizado:isoHoy(), productos:nuevos };
 }
 
-/* GUARDAR: escribe en Supabase y queda actualizado para todos al instante */
+/* GUARDAR: escribe en el backend y queda actualizado para todos al instante */
 async function guardar(){
   const btn=document.getElementById('btnGuardar');
-  if(!SB_OK){
-    toast('\u26A0 Falta configurar Supabase (ver SUPABASE-SETUP)');
-    return;
-  }
   const data=armarDatos();
   if(btn){btn.disabled=true;btn.textContent='Guardando\u2026';}
   try{
-    await guardarSupabase(pinIngresado, data);
+    await guardarBackend(pinIngresado, data);
     PRODUCTOS=data.productos; ACTUALIZADO=data.actualizado; construirDatos();
     const leg=fechaLegible(ACTUALIZADO);
     document.getElementById('fechaTag').textContent='Precios: '+leg;

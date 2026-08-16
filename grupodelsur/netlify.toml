@@ -1,0 +1,8 @@
+# Config para deploy en Netlify (git-link con base directory = grupodelsur,
+# o al arrastrar esta carpeta a Netlify Drop).
+[build]
+  publish = "."
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
