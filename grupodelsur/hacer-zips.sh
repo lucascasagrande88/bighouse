@@ -11,7 +11,7 @@ build () {
   mkdir -p "$dir/public" "$dir/netlify/functions"
   sed "s/const TIER_FORZADO = null;/const TIER_FORZADO = \"$tier\";/" index.html > "$dir/public/index.html"
   cp precios.json "$dir/public/precios.json"
-  cp netlify/functions/precios.mjs "$dir/netlify/functions/precios.mjs"
+  cp netlify/functions/*.mjs "$dir/netlify/functions/"
   cat > "$dir/netlify.toml" <<TOML
 [build]
   publish = "public"

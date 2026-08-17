@@ -463,6 +463,54 @@ footer::before {
   to{opacity:1;transform:translate(-50%,0)}
 }
 
+/* ── FOTOS + EDICION ────────────────────────────────────── */
+.item-foto{
+  width:52px;height:52px;flex-shrink:0;border-radius:7px;object-fit:cover;
+  background:var(--bg3);border:1px solid var(--border2);margin-right:2px;
+}
+.item-foto.ph{display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--muted)}
+
+/* fila editable (admin) */
+.edit-row{
+  display:flex;gap:10px;align-items:flex-start;
+  padding:10px 12px;border-bottom:1px solid var(--border);
+}
+.foto-btn{
+  width:58px;height:58px;flex-shrink:0;border-radius:8px;
+  border:1.5px dashed var(--border2);background:var(--bg3) center/cover no-repeat;
+  color:var(--muted);font-size:20px;cursor:pointer;position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+.foto-btn.has::after{content:'';position:absolute;inset:0;box-shadow:inset 0 0 0 2px var(--orange);border-radius:8px}
+.foto-btn .fx{position:absolute;top:-6px;right:-6px;background:#E85252;color:#fff;border-radius:50%;
+  width:20px;height:20px;font-size:12px;line-height:20px;text-align:center;border:2px solid var(--bg2);display:none}
+.foto-btn.has .fx{display:block}
+.edit-flds{flex:1;display:flex;flex-direction:column;gap:6px;min-width:0}
+.edit-flds input, .edit-flds select{
+  width:100%;padding:7px 9px;background:var(--bg3);border:1px solid var(--border2);
+  border-radius:5px;color:var(--white);font-family:'Barlow',sans-serif;font-size:14px;outline:none;
+}
+.edit-flds input:focus, .edit-flds select:focus{border-color:var(--orange)}
+.edit-flds .ed-nom{font-weight:600}
+.edit-2{display:flex;gap:6px}
+.edit-2 > *{flex:1;min-width:0}
+.edit-precio{max-width:130px}
+.del-btn{
+  flex-shrink:0;width:34px;height:34px;border-radius:7px;border:1px solid var(--border2);
+  background:transparent;color:#E85252;font-size:15px;cursor:pointer;
+}
+.del-btn:hover{background:rgba(232,82,82,.12);border-color:#E85252}
+.add-wrap{padding:12px 12px 4px}
+.btn-add{
+  width:100%;padding:12px;border-radius:8px;border:1.5px dashed var(--orange);
+  background:rgba(232,82,10,.08);color:var(--orange);font-family:'Barlow Condensed',sans-serif;
+  font-weight:800;letter-spacing:1px;text-transform:uppercase;font-size:14px;cursor:pointer;
+}
+.btn-add:hover{background:rgba(232,82,10,.16)}
+.subiendo{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:400;display:none;
+  align-items:center;justify-content:center;color:#fff;font-size:15px;font-family:'Barlow Condensed',sans-serif;letter-spacing:1px}
+.subiendo.visible{display:flex}
+
 /* ── OVERRIDE MAYORISTA (acento verde teal) ─────────────── */
 body.mayorista{ --acc:#4CAF9A; }
 body.mayorista .item-precio{ color:#4CAF9A; }
@@ -494,6 +542,11 @@ body.mayorista .sec-hdr .cnt{ color:#4CAF9A; }
     <button class="btn" onclick="salir()">Salir</button>
   </div>
 </div>
+
+<!-- soporte de fotos / categorias -->
+<input type="file" id="fotoInput" accept="image/*" style="display:none">
+<datalist id="catsList"></datalist>
+<div class="subiendo" id="subiendo">⏳ Subiendo foto…</div>
 
 <!-- HEADER -->
 <header class="hdr">
@@ -579,11 +632,12 @@ body.mayorista .sec-hdr .cnt{ color:#4CAF9A; }
 
 /* =================================================================
    BACKEND: funcion de Netlify (guarda en Netlify Blobs).
-   No hay nada que configurar: cuando el sitio esta publicado en
-   Netlify, la funcion vive en /api/precios (mismo dominio) y el
-   boton Guardar escribe ahi. El PIN se valida en el servidor.
+   Las DOS webs comparten UNA sola lista + fotos: el sitio minorista
+   es el que guarda; el mayorista le pega a esa misma API. Cada web
+   muestra su propio precio. El PIN se valida en el servidor.
    ================================================================= */
-const API = "/api/precios";
+/* Dominio del sitio minorista (donde vive el backend compartido) */
+const MINORISTA_URL = "https://grupodelsurcementera-minorista.netlify.app";
 
 /* ---- Respaldo de lectura: repo en GitHub (solo por si la funcion no responde) ---- */
 const REPO         = "lucascasagrande88/bighouse";
@@ -607,6 +661,11 @@ function detectarTier(){
   return 'min'; /* por defecto: minorista */
 }
 const TIER = detectarTier();
+
+/* La mayorista usa el backend de la minorista (lista y fotos compartidas) */
+const API_BASE = (TIER === 'may') ? MINORISTA_URL : '';
+const API      = API_BASE + '/api/precios';
+const API_FOTO = API_BASE + '/api/foto';
 
 const CFG = {
   min:{ pill:'\uD83D\uDD34 Minorista', lista:'Lista Minorista', admin:'Precios Minoristas', wa:'minoristas' },
@@ -1375,7 +1434,14 @@ function parsePrecio(v){
 }
 
 function construirDatos(){
-  datos = PRODUCTOS.map(p=>({ id:p.id, cat:p.cat, cod:p.cod, nom:p.nom, sub:p.sub, precio:p[TIER] }));
+  datos = PRODUCTOS.map(p=>({ id:p.id, cat:p.cat, cod:p.cod, nom:p.nom, sub:p.sub, precio:p[TIER], foto:p.foto, fotoV:p.fotoV }));
+}
+function escAttr(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function fotoURL(p){return API_FOTO+'?id='+encodeURIComponent(p.id)+'&v='+(p.fotoV||0);}
+function actualizarCats(){
+  const dl=document.getElementById('catsList'); if(!dl) return;
+  const cats=Array.from(new Set(PRODUCTOS.map(p=>p.cat).filter(Boolean)));
+  dl.innerHTML=cats.map(c=>'<option value="'+escAttr(c)+'">').join('');
 }
 
 async function init(){
@@ -1388,6 +1454,8 @@ async function init(){
   ['waH','waCta','waF'].forEach(id=>{const el=document.getElementById(id); if(el) el.href=WA_URL;});
   const pin=document.getElementById('pinInput');
   if(pin) pin.addEventListener('keydown',e=>{if(e.key==='Enter')verificarPin();});
+  const fi=document.getElementById('fotoInput');
+  if(fi) fi.addEventListener('change', onFotoElegida);
 
   /* Carga en DOS FASES: pinta al instante y luego trae la version viva.
        Fase 1: copia local del deploy (o la embebida) -> pinta ya.
@@ -1478,8 +1546,9 @@ async function verificarPinBackend(pin){
 
 function buildChips(){
   const row=document.getElementById('chipsRow');
-  const cats=['Todas'].concat(Array.from(new Set(datos.map(p=>p.cat))));
+  const cats=['Todas'].concat(Array.from(new Set(datos.map(p=>p.cat).filter(Boolean))));
   row.innerHTML=cats.map(c=>'<button class="chip '+(c===catActiva?'activo':'')+'" onclick="setCat(\''+c.replace(/'/g,"\\'")+'\')">'+(c==='Todas'?'\uD83D\uDD34 Todas':c)+'</button>').join('');
+  actualizarCats();
 }
 function setCat(c){catActiva=c;buildChips();render();}
 
@@ -1488,9 +1557,19 @@ function render(){
   const ord=document.getElementById('sortSel').value;
   const wrap=document.getElementById('wrap');
   const sinR=document.getElementById('sinRes');
-  let lista=datos.filter(p=>(catActiva==='Todas'||p.cat===catActiva)&&(!q||p.nom.toLowerCase().indexOf(q)>-1||p.cat.toLowerCase().indexOf(q)>-1||(p.sub&&p.sub.toLowerCase().indexOf(q)>-1)));
-  if(ord==='nom')lista.sort((a,b)=>a.nom.localeCompare(b.nom));
-  else lista.sort((a,b)=>a.cat.localeCompare(b.cat)||a.nom.localeCompare(b.nom));
+  let lista=datos.filter(p=>(catActiva==='Todas'||p.cat===catActiva)&&(!q||(p.nom||'').toLowerCase().indexOf(q)>-1||(p.cat||'').toLowerCase().indexOf(q)>-1||(p.sub&&p.sub.toLowerCase().indexOf(q)>-1)));
+
+  /* ---- MODO EDICION: lista plana editable + boton agregar ---- */
+  if(esAdmin){
+    document.getElementById('count').textContent=PRODUCTOS.length;
+    sinR.style.display='none';
+    wrap.innerHTML='<div class="add-wrap"><button class="btn-add" onclick="agregarProducto()">\u2795 Agregar producto</button></div>'+
+      '<div class="seccion">'+lista.map(itemHTML).join('')+'</div>';
+    return;
+  }
+
+  if(ord==='nom')lista.sort((a,b)=>(a.nom||'').localeCompare(b.nom||''));
+  else lista.sort((a,b)=>(a.cat||'').localeCompare(b.cat||'')||(a.nom||'').localeCompare(b.nom||''));
   document.getElementById('count').textContent=lista.length;
   if(!lista.length){wrap.innerHTML='';sinR.style.display='block';return;}
   sinR.style.display='none';
@@ -1504,13 +1583,111 @@ function render(){
 }
 
 function itemHTML(p){
-  const disp=fmt(p.precio);
-  const nd=disp==='\u2014';
+  /* ---- fila editable (admin) ---- */
   if(esAdmin){
     const val=(typeof p.precio==='number')?p.precio:(p.precio==null?'':p.precio);
-    return '<div class="item"><div class="item-cod">'+p.cod+'</div><div class="item-nom">'+p.nom+(p.sub?'<small>'+p.sub+'</small>':'')+'</div><input class="precio-inp" id="inp_'+p.id+'" type="text" value="'+val+'" inputmode="decimal"></div>';
+    const bg=p.foto?' style="background-image:url(\''+fotoURL(p)+'\')"':'';
+    return '<div class="edit-row" data-id="'+p.id+'">'+
+      '<button class="foto-btn '+(p.foto?'has':'')+'"'+bg+' onclick="elegirFoto(\''+p.id+'\')" title="Foto">'+
+        (p.foto?'':'\uD83D\uDCF7')+'<span class="fx" onclick="event.stopPropagation();quitarFoto(\''+p.id+'\')">\u2715</span></button>'+
+      '<div class="edit-flds">'+
+        '<input class="ed-nom" value="'+escAttr(p.nom)+'" placeholder="Nombre del producto">'+
+        '<div class="edit-2"><input class="ed-cat" value="'+escAttr(p.cat)+'" placeholder="Categor\u00eda" list="catsList">'+
+        '<input class="ed-sub" value="'+escAttr(p.sub)+'" placeholder="Detalle (x 50kg\u2026)"></div>'+
+        '<input class="ed-precio" inputmode="decimal" value="'+escAttr(val)+'" placeholder="Precio '+(TIER==='may'?'mayorista':'minorista')+'">'+
+      '</div>'+
+      '<button class="del-btn" onclick="borrarProd(\''+p.id+'\')" title="Quitar">\uD83D\uDDD1</button>'+
+    '</div>';
   }
-  return '<div class="item"><div class="item-cod">'+p.cod+'</div><div class="item-nom">'+p.nom+(p.sub?'<small>'+p.sub+'</small>':'')+'</div><div class="item-precio '+(nd?'nd':'')+'">'+disp+'</div></div>';
+  /* ---- fila normal (cliente) ---- */
+  const disp=fmt(p.precio);
+  const nd=disp==='\u2014';
+  const thumb=p.foto?'<img class="item-foto" src="'+fotoURL(p)+'" alt="" loading="lazy">':'';
+  return '<div class="item">'+thumb+'<div class="item-cod">'+(p.cod||'')+'</div><div class="item-nom">'+(p.nom||'')+(p.sub?'<small>'+p.sub+'</small>':'')+'</div><div class="item-precio '+(nd?'nd':'')+'">'+disp+'</div></div>';
+}
+
+/* ---- captura las ediciones visibles a PRODUCTOS (sin perder nada) ---- */
+function capturar(){
+  document.querySelectorAll('.edit-row').forEach(row=>{
+    const id=row.getAttribute('data-id');
+    const p=PRODUCTOS.find(x=>x.id===id); if(!p) return;
+    const g=s=>row.querySelector(s);
+    if(g('.ed-nom')) p.nom=g('.ed-nom').value.trim();
+    if(g('.ed-cat')) p.cat=g('.ed-cat').value.trim();
+    if(g('.ed-sub')) p.sub=g('.ed-sub').value.trim();
+    if(g('.ed-precio')) p[TIER]=parsePrecio(g('.ed-precio').value);
+  });
+  construirDatos();
+}
+function nuevoId(){let m=0;PRODUCTOS.forEach(p=>{const n=parseInt(p.id,10);if(!isNaN(n)&&n>m)m=n;});return String(m+1).padStart(3,'0');}
+function agregarProducto(){
+  capturar();
+  const id=nuevoId();
+  const nuevo={id:id,cat:(catActiva!=='Todas'?catActiva:''),cod:'',nom:'',sub:'',min:'',may:''};
+  PRODUCTOS.push(nuevo);
+  catActiva='Todas';const b=document.getElementById('buscador');if(b)b.value='';
+  construirDatos();buildChips();render();
+  const row=document.querySelector('.edit-row[data-id="'+id+'"]');
+  if(row){row.scrollIntoView({behavior:'smooth',block:'center'});const n=row.querySelector('.ed-nom');if(n)n.focus();}
+  toast('Producto nuevo \u2014 complet\u00e1 y tocá Guardar');
+}
+function borrarProd(id){
+  const p=PRODUCTOS.find(x=>x.id===id);
+  if(!confirm('\u00bfQuitar "'+((p&&p.nom)||'este producto')+'"?')) return;
+  capturar();
+  PRODUCTOS=PRODUCTOS.filter(x=>x.id!==id);
+  construirDatos();buildChips();render();
+  toast('Producto quitado \u2014 acordate de Guardar');
+}
+
+/* ---- FOTOS ---- */
+var fotoTargetId=null;
+function elegirFoto(id){
+  if(!pinIngresado){toast('Entr\u00e1 con el PIN primero');return;}
+  fotoTargetId=id;const inp=document.getElementById('fotoInput');inp.value='';inp.click();
+}
+async function onFotoElegida(e){
+  const file=e.target.files&&e.target.files[0];
+  if(!file||!fotoTargetId){return;}
+  const id=fotoTargetId;fotoTargetId=null;
+  try{
+    mostrarSubiendo(true);
+    const dataUrl=await redimensionar(file,1000,0.82);
+    capturar();
+    const r=await fetch(API_FOTO,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({pin:pinIngresado,id:id,data:dataUrl})});
+    if(!r.ok){const er=await r.json().catch(()=>({}));throw new Error(er.error||('HTTP '+r.status));}
+    const j=await r.json();
+    const srv=(j&&j.data&&j.data.productos)?j.data.productos.find(x=>x.id===id):null;
+    const p=PRODUCTOS.find(x=>x.id===id);
+    if(p){p.foto=true;p.fotoV=(srv&&srv.fotoV)||Date.now();}
+    construirDatos();render();
+    toast('\u2705 Foto subida');
+  }catch(err){console.error('foto:',err);toast('\u274C '+(/PIN/i.test(String(err.message))?'PIN incorrecto':'No se pudo subir la foto'));}
+  finally{mostrarSubiendo(false);}
+}
+function quitarFoto(id){
+  if(!confirm('\u00bfQuitar la foto?'))return;
+  capturar();mostrarSubiendo(true);
+  fetch(API_FOTO,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({pin:pinIngresado,id:id,borrar:true})})
+    .then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
+    .then(j=>{const p=PRODUCTOS.find(x=>x.id===id);if(p){p.foto=false;p.fotoV=Date.now();}construirDatos();render();toast('Foto quitada');})
+    .catch(err=>{console.error(err);toast('\u274C No se pudo quitar');})
+    .finally(()=>mostrarSubiendo(false));
+}
+function mostrarSubiendo(v){const e=document.getElementById('subiendo');if(e)e.classList.toggle('visible',!!v);}
+function redimensionar(file,maxLado,calidad){
+  return new Promise((res,rej)=>{
+    const img=new Image();
+    img.onload=()=>{try{
+      let w=img.naturalWidth,h=img.naturalHeight;
+      const s=Math.min(1,maxLado/Math.max(w,h));w=Math.round(w*s);h=Math.round(h*s);
+      const c=document.createElement('canvas');c.width=w;c.height=h;
+      c.getContext('2d').drawImage(img,0,0,w,h);
+      res(c.toDataURL('image/jpeg',calidad||0.82));
+    }catch(err){rej(err);}};
+    img.onerror=rej;
+    const fr=new FileReader();fr.onload=()=>{img.src=fr.result;};fr.onerror=rej;fr.readAsDataURL(file);
+  });
 }
 
 /* ---- ADMIN ---- */
@@ -1538,14 +1715,12 @@ async function verificarPin(){
 }
 function cerrarOverlay(){document.getElementById('overlay').classList.remove('visible');document.getElementById('pinInput').value='';document.getElementById('pinErr').style.display='none';}
 function salir(){esAdmin=false;pinIngresado='';document.getElementById('adminBar').classList.remove('visible');render();}
-function descartar(){construirDatos();render();toast('Cambios descartados');}
+function descartar(){leerBackend(4000).catch(()=>traer(REMOTE_URL,4000)).catch(()=>null).then(j=>{if(j&&Array.isArray(j.productos)){PRODUCTOS=j.productos;ACTUALIZADO=j.actualizado||ACTUALIZADO;}construirDatos();buildChips();render();toast('Cambios descartados');});}
 
-/* Lee los inputs y arma el catalogo completo (ambas listas) */
+/* Arma el catalogo completo (con altas, bajas, ediciones y fotos) para guardar */
 function armarDatos(){
-  const editados={};
-  datos.forEach(p=>{const el=document.getElementById('inp_'+p.id); if(el) editados[p.id]=parsePrecio(el.value);});
-  const nuevos=PRODUCTOS.map(p=>{const c=Object.assign({},p); if(editados.hasOwnProperty(p.id)) c[TIER]=editados[p.id]; return c;});
-  return { negocio:NEGOCIO, actualizado:isoHoy(), productos:nuevos };
+  capturar();
+  return { negocio:NEGOCIO, actualizado:isoHoy(), productos: PRODUCTOS.map(p=>Object.assign({}, p)) };
 }
 
 /* GUARDAR: escribe en el backend y queda actualizado para todos al instante */

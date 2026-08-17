@@ -1,6 +1,6 @@
 import { getStore } from '@netlify/blobs';
 
-// Precios iniciales (semilla). La verdad viva se guarda en Netlify Blobs.
+// Semilla inicial. La verdad viva se guarda en Netlify Blobs (store "precios").
 const SEED = {
   "negocio": "Grupo Cementera del Sur",
   "actualizado": "2026-08-15",
@@ -727,21 +727,22 @@ const SEED = {
     }
   ]
 };
-
 const getPin = () => process.env.PRECIOS_PIN || '1234';
 
+const CORS = {
+  'access-control-allow-origin': '*',
+  'access-control-allow-methods': 'GET,POST,OPTIONS',
+  'access-control-allow-headers': 'content-type'
+};
 function json(obj, status = 200) {
   return new Response(JSON.stringify(obj), {
     status,
-    headers: {
-      'content-type': 'application/json',
-      'cache-control': 'no-store',
-      'access-control-allow-origin': '*'
-    }
+    headers: { 'content-type': 'application/json', 'cache-control': 'no-store', ...CORS }
   });
 }
 
 export default async (req) => {
+  if (req.method === 'OPTIONS') return new Response(null, { status: 204, headers: CORS });
   try {
     const store = getStore('precios');
     if (req.method === 'GET') {

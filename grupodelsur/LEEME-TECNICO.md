@@ -23,18 +23,29 @@ grupodelsur/
 ```
 
 ## Cómo funciona
-- **Backend:** función en `/api/precios`.
-  - `GET` → devuelve el catálogo (de Netlify Blobs; si está vacío, la semilla).
-  - `POST {accion:'verificar', pin}` → valida el PIN (server-side).
-  - `POST {accion:'guardar', pin, data}` → si el PIN es correcto, escribe en Blobs.
+- **Backend (2 funciones):**
+  - `/api/precios` → `GET` devuelve el catálogo (Netlify Blobs `precios`; si está
+    vacío, la semilla). `POST {accion:'verificar',pin}` valida PIN.
+    `POST {accion:'guardar',pin,data}` guarda toda la lista (con altas, bajas,
+    ediciones y flags de foto).
+  - `/api/foto` → `GET ?id=` devuelve la imagen (Blobs `fotos`).
+    `POST {pin,id,data}` sube (data = dataURL jpeg, ya redimensionada en el
+    navegador ~1000px). `POST {pin,id,borrar:true}` la elimina. También marca
+    `foto`/`fotoV` en el producto.
+- **UNA lista + fotos para las DOS webs:** el sitio **minorista** es el backend;
+  el **mayorista** le pega a esa misma API (constante `MINORISTA_URL` +
+  `API_BASE`). Así, agregar/quitar/editar/foto se ve en las dos, y cada web
+  muestra su propio precio (`min`/`may`). CORS habilitado en las funciones.
 - **PIN:** `process.env.PRECIOS_PIN` (si no está, usa `1234`). Cambialo con una
   env var en Netlify (Site configuration → Environment variables).
-- **Front:** `index.html` lee de `/api/precios` (con respaldo a `precios.json` y
-  a una copia embebida, en 2 fases: pinta al instante y refresca). Guarda por
-  POST. Detecta mayorista/minorista por el dominio (`?tier=may|min` para forzar;
-  los zips ya vienen forzados con `TIER_FORZADO`).
-- **Blobs:** cada sitio tiene su propio store (no hace falta compartir: el dueño
-  edita la lista de cada web por separado, que es como trabaja).
+- **Front:** `index.html` lee de `/api/precios` (respaldo a `precios.json` y a una
+  copia embebida, en 2 fases). En admin: cada fila es editable (nombre,
+  categoría, detalle, precio) + foto (📷 / ✕) + borrar (🗑) + botón **Agregar
+  producto**. Detecta tier por dominio (`?tier=` para forzar; los zips vienen
+  forzados con `TIER_FORZADO`).
+
+> Importante: si cambiás el nombre del sitio minorista, actualizá `MINORISTA_URL`
+> en `index.html` (es de donde la mayorista lee la lista y las fotos).
 
 ## Deploy (elegí una)
 
