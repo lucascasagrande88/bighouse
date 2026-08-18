@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Big House · Plataforma de rutinas</title>
+<meta name="description" content="Accedé a tu rutina de entrenamiento. Cada ejercicio con series, repeticiones y fotos del movimiento.">
+<meta name="theme-color" content="#080808">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ══════════ TOP BAR (oculta en landing/login) ══════════ -->
+<header class="topbar hidden" id="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="#" id="brandHome">
+      <span class="brand-mark" id="brandMark">B</span>
+      <span><span id="brandName">BIG HOUSE</span><small id="brandTag">Training Club</small></span>
+    </a>
+    <div class="topbar-right">
+      <span class="whoami" id="whoami"></span>
+      <button class="linkbtn" id="logoutBtn">Salir</button>
+    </div>
+  </div>
+</header>
+
+<main id="app">
+
+  <!-- ══════════ LANDING (linktree) ══════════ -->
+  <section class="screen active" id="screen-landing">
+    <div class="land">
+      <div class="land-logo" id="landLogo">B</div>
+      <div class="placeholder">◆ Nombre provisional · placeholder ◆</div>
+      <h1 id="landTitle">BIG<br>HOUSE</h1>
+      <p class="land-sub">Tu entrenamiento, sin vueltas. Entrá y mirá exactamente qué toca hoy: series, repes y el movimiento de cada ejercicio.</p>
+      <div class="land-links" id="landLinks">
+        <a class="linkrow primary" id="goAlumno">
+          <span class="linkrow-ic">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 6.5h11M6.5 17.5h11M4 9v6M20 9v6M2 10.5v3M22 10.5v3"/><rect x="6" y="8" width="12" height="8" rx="1"/></svg>
+          </span>
+          <span class="linkrow-tx"><b>Acceder a tu rutina</b><span>Soy alumno · entrá con tu código</span></span>
+          <span class="linkrow-go"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></span>
+        </a>
+        <a class="linkrow" id="goProfe">
+          <span class="linkrow-ic">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 4.5-3 7.5-8 9-5-1.5-8-4.5-8-9V7l8-4z"/><path d="M9 12l2 2 4-4"/></svg>
+          </span>
+          <span class="linkrow-tx"><b>Panel del profesor</b><span>Armá y asigná las rutinas</span></span>
+          <span class="linkrow-go"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></span>
+        </a>
+        <a class="linkrow" id="landWa" target="_blank" rel="noopener">
+          <span class="linkrow-ic">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347M12.05 21.785h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg>
+          </span>
+          <span class="linkrow-tx"><b>WhatsApp</b><span>Escribinos para sumarte</span></span>
+          <span class="linkrow-go"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg></span>
+        </a>
+        <a class="linkrow" id="landIg" target="_blank" rel="noopener">
+          <span class="linkrow-ic">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </span>
+          <span class="linkrow-tx"><b>Instagram</b><span id="landIgUser">@tugimnasio</span></span>
+          <span class="linkrow-go"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg></span>
+        </a>
+        <a class="linkrow" id="landMap" target="_blank" rel="noopener">
+          <span class="linkrow-ic">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-5.5 7-11a7 7 0 10-14 0c0 5.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          </span>
+          <span class="linkrow-tx"><b>Nuestra sucursal</b><span id="landAddr">Dirección del gimnasio</span></span>
+          <span class="linkrow-go"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg></span>
+        </a>
+      </div>
+    </div>
+    <div class="land-foot">
+      Demo funcional · <a href="/" >Chimichurri Diseño</a> · reemplazá nombre, logo, links y datos por los reales
+    </div>
+  </section>
+
+  <!-- ══════════ LOGIN (código) ══════════ -->
+  <section class="screen" id="screen-login">
+    <div class="login-card">
+      <a class="back-link" id="loginBack"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg> Volver</a>
+      <div class="kicker" id="loginKicker">Acceso alumno</div>
+      <h2 id="loginTitle">Entrá a tu rutina</h2>
+      <p id="loginSub">Ingresá el código que te dio el profe. Queda recordado en este dispositivo — sin contraseña.</p>
+      <form id="loginForm" autocomplete="off">
+        <input class="code-input" id="codeInput" placeholder="tu código" autocapitalize="characters" autocomplete="off" spellcheck="false" maxlength="16">
+        <div class="login-err" id="loginErr"></div>
+        <button type="submit" class="btn btn-primary btn-lg btn-block">Entrar</button>
+      </form>
+      <div class="demo-hint" id="demoHint">
+        <b>◆ Códigos de demo — tocá para probar</b>
+        <div class="codes" id="demoCodes"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ ALUMNO: rutina ══════════ -->
+  <section class="screen" id="screen-rutina">
+    <div class="ticker"><div class="ticker-in" id="ticker"></div></div>
+    <div class="wrap page">
+      <div class="page-head">
+        <div class="lead">
+          <div class="kicker" id="rutKicker">Tu plan</div>
+          <h1 id="rutName">—</h1>
+          <p id="rutMeta"></p>
+        </div>
+      </div>
+      <div class="stats" id="rutStats"></div>
+      <div class="daybar" id="dayBar"></div>
+      <div class="ex-list" id="exList"></div>
+    </div>
+  </section>
+
+  <!-- ══════════ PROFE: panel ══════════ -->
+  <section class="screen" id="screen-profe">
+    <div class="wrap page">
+      <div class="page-head">
+        <div class="lead">
+          <div class="kicker">Panel del profesor</div>
+          <h1>CRM de rutinas</h1>
+          <p>Gestioná alumnos, armá planes y explorá la biblioteca de ejercicios.</p>
+        </div>
+        <div class="segmented" id="profeTabs">
+          <button data-tab="alumnos" class="on">Alumnos</button>
+          <button data-tab="biblioteca">Biblioteca</button>
+        </div>
+      </div>
+      <div class="stats" id="profeStats"></div>
+
+      <!-- tab: alumnos -->
+      <div id="tab-alumnos">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:18px">
+          <h2 style="font-size:1.5rem">Alumnos</h2>
+          <button class="btn btn-primary btn-sm" id="addStudentBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg> Nuevo alumno
+          </button>
+        </div>
+        <div class="grid-2" id="studentGrid"></div>
+      </div>
+
+      <!-- tab: biblioteca -->
+      <div id="tab-biblioteca" class="hidden">
+        <div class="searchbar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4" stroke-linecap="round"/></svg>
+          <input id="libSearch" placeholder="Buscar ejercicio…">
+        </div>
+        <div class="filters" id="libFilters"></div>
+        <div class="lib-grid" id="libGrid"></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ══════════ MODALES ══════════ -->
+<div class="modal-bg" id="modalBg">
+  <div class="modal" id="modal"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="data/exercises.js"></script>
+<script src="data/seed.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
