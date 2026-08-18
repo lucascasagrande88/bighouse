@@ -52,11 +52,38 @@
     const t = $('#toast'); t.textContent = msg; t.classList.add('show');
     clearTimeout(t._t); t._t = setTimeout(() => t.classList.remove('show'), 2200);
   }
+  // Placeholder SVG (se ve intencional aunque no haya internet)
+  function placeholderSVG(nombre, ab) {
+    const label = ab === 'A' ? 'INICIO' : 'FIN';
+    const nm = String(nombre || 'Ejercicio').toUpperCase().slice(0, 26);
+    const svg =
+      '<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">' +
+      '<rect width="400" height="400" fill="#181818"/>' +
+      '<rect width="400" height="400" fill="url(#g)"/>' +
+      '<defs><radialGradient id="g" cx="70%" cy="10%" r="90%">' +
+      '<stop offset="0" stop-color="#D4FF00" stop-opacity="0.10"/>' +
+      '<stop offset="1" stop-color="#181818" stop-opacity="0"/></radialGradient></defs>' +
+      '<g transform="translate(200 168)" fill="none" stroke="#D4FF00" stroke-width="9" ' +
+      'stroke-linecap="round" opacity="0.85">' +
+      '<path d="M-70 0h140M-70-22v44M70-22v44M-92-13v26M92-13v26"/></g>' +
+      '<text x="200" y="250" fill="#f4f4f4" font-family="Oswald,Arial,sans-serif" ' +
+      'font-size="26" font-weight="700" text-anchor="middle" letter-spacing="1">' + esc(nm) + '</text>' +
+      '<text x="200" y="284" fill="#8a8a8a" font-family="Oswald,Arial,sans-serif" ' +
+      'font-size="15" font-weight="600" text-anchor="middle" letter-spacing="4">FOTO ' +
+      (ab || 'A') + ' · ' + label + '</text></svg>';
+    return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+  }
   function fallbackImg(el, exId, ab) {
-    // si el CDN falla, probar GitHub raw
-    const ex = EX_BY_ID[exId]; if (!ex) return;
-    const alt = ab === 'A' ? ex.fotoAalt : ex.fotoBalt;
-    if (alt && el.src !== alt) { el.onerror = null; el.src = alt; }
+    // 1º CDN falla → probar GitHub raw; 2º raw falla → placeholder local (sin internet)
+    const ex = EX_BY_ID[exId];
+    const step = +(el.dataset.fb || 0);
+    if (step === 0 && ex) {
+      const alt = ab === 'A' ? ex.fotoAalt : ex.fotoBalt;
+      if (alt) { el.dataset.fb = '1'; el.src = alt; return; }
+    }
+    el.onerror = null;
+    el.dataset.fb = '2';
+    el.src = placeholderSVG(ex ? ex.nombre : '', ab);
   }
   window._imgErr = fallbackImg;
 
