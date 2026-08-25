@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto — flota.studio</title>
+  <meta name="description" content="Contá tu proyecto a flota.studio. Escribinos por mail, WhatsApp o completá el formulario.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..500;1,9..144,300..500&family=Space+Grotesk:wght@400;500;700&family=Space+Mono:ital@0;1&display=swap" rel="stylesheet">
+  <script>document.documentElement.className += ' js';</script>
+  <link rel="stylesheet" href="../assets/css/flota.css">
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-in">
+      <a href="../" class="brand">flota<span class="dot"></span><small>studio</small></a>
+      <div class="nav-menu" id="navMenu">
+        <a href="../servicios/">Servicios</a>
+        <a href="../trabajos/">Trabajos</a>
+        <a href="../sobre/">Estudio</a>
+        <a href="./" class="nav-cta" aria-current="page">Trabajemos</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="3" y1="8" x2="21" y2="8"/><line x1="3" y1="16" x2="21" y2="16"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+    <header class="page-hero">
+      <div class="wrap">
+        <div class="eyebrow reveal">04 / Contacto</div>
+        <h1 class="display reveal" style="margin-top:1rem">Hagamos algo<br>que <em>flote.</em></h1>
+        <p class="lead reveal">Contanos qué necesitás. Te respondemos con una primera devolución honesta: si podemos ayudarte, cómo lo encararíamos y qué sigue.</p>
+      </div>
+    </header>
+
+    <section class="section" style="padding-top:clamp(2rem,5vh,4rem)">
+      <div class="wrap">
+        <div class="contact-grid">
+
+          <!-- FORM -->
+          <div class="reveal">
+            <div class="eyebrow" style="margin-bottom:1.6rem">Contanos tu proyecto</div>
+            <!-- Formulario Netlify: funciona al deployar en Netlify. Si usás otro backend, cambiá action/method. -->
+            <form name="contacto-flota" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="?ok=1">
+              <input type="hidden" name="form-name" value="contacto-flota">
+              <p style="display:none"><label>No llenar: <input name="bot-field"></label></p>
+
+              <div class="field">
+                <label for="nombre">Nombre</label>
+                <input id="nombre" name="nombre" type="text" required placeholder="Tu nombre / tu marca">
+              </div>
+              <div class="field">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" required placeholder="hola@tumarca.com">
+              </div>
+              <div class="field">
+                <label for="servicio">¿Qué necesitás?</label>
+                <select id="servicio" name="servicio">
+                  <option>Identidad &amp; Branding</option>
+                  <option>Diseño Web &amp; Producto</option>
+                  <option>Dirección de Arte</option>
+                  <option>Editorial &amp; Packaging</option>
+                  <option>Todavía no sé / varias cosas</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="mensaje">Contanos un poco más</label>
+                <textarea id="mensaje" name="mensaje" required placeholder="¿Qué hace tu marca? ¿Qué querés lograr? ¿Para cuándo?"></textarea>
+              </div>
+              <button type="submit" class="btn btn-fill btn-lg">Enviar mensaje <span class="arw">↗</span></button>
+            </form>
+          </div>
+
+          <!-- DIRECTO -->
+          <div class="reveal">
+            <div class="eyebrow" style="margin-bottom:1.6rem">O directo</div>
+            <div class="contact-big">
+              <a href="mailto:hola@flota.studio" class="ul">hola@flota.studio</a>
+            </div>
+
+            <div class="contact-list">
+              <div class="row">
+                <span class="mono">WA</span>
+                <div><a href="https://wa.me/5491100000000" target="_blank" rel="noopener" class="ul">WhatsApp directo</a><br><span class="mono" style="color:var(--ink-35)">↳ Reemplazá por tu número</span></div>
+              </div>
+              <div class="row">
+                <span class="mono">IG</span>
+                <div><a href="https://instagram.com/flota.studio" target="_blank" rel="noopener" class="ul">@flota.studio</a></div>
+              </div>
+              <div class="row">
+                <span class="mono">Base</span>
+                <div>Buenos Aires, Argentina<br><span class="mono" style="color:var(--ink-55)">Trabajamos en remoto</span></div>
+              </div>
+              <div class="row">
+                <span class="mono">Hs</span>
+                <div>Respuesta en ~24 h hábiles</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- STATEMENT -->
+    <section class="statement">
+      <div class="wrap">
+        <p class="reveal">Sin compromiso.<br>Charlamos y <em>vemos.</em></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap-wide">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="../" class="brand">flota<span class="dot"></span></a>
+          <p>Estudio de diseño. Identidad, producto digital y dirección de arte para marcas que quieren pesar distinto.</p>
+        </div>
+        <div>
+          <h5>Navegación</h5>
+          <ul>
+            <li><a href="../servicios/" class="ul">Servicios</a></li>
+            <li><a href="../trabajos/" class="ul">Trabajos</a></li>
+            <li><a href="../sobre/" class="ul">El estudio</a></li>
+            <li><a href="./" class="ul">Contacto</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Contacto</h5>
+          <ul>
+            <li><a href="mailto:hola@flota.studio" class="ul">hola@flota.studio</a></li>
+            <li><a href="https://instagram.com/flota.studio" target="_blank" rel="noopener" class="ul">@flota.studio</a></li>
+            <li><a href="./" class="ul">Formulario</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-word">flota<span class="dot">.</span></div>
+      <div class="footer-bottom">
+        <span>© <span data-year>2025</span> flota.studio</span>
+        <span>Buenos Aires, Argentina</span>
+        <span>Diseño con criterio</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/flota.js"></script>
+</body>
+</html>
