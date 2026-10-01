@@ -1,0 +1,10 @@
+{% extends layout %}
+{% block main %}
+<section class="simple-page shell">
+  <p class="crumbs"><a href="{{ home_url }}">{{ ui.back }}</a></p>
+  <div class="prose">
+    <h1 class="simple-title">{{ page.title }}</h1>
+    {{ page.body | safe }}
+  </div>
+</section>
+{% endblock %}

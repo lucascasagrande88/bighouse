@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="{{ lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ meta.title }}</title>
+  <meta name="description" content="{{ meta.description }}">
+  <meta name="theme-color" content="{{ site.theme_color }}">
+  <meta name="robots" content="{{ meta.robots | default('index,follow,max-image-preview:large') }}">
+  <link rel="canonical" href="{{ canonical }}">
+  {%- for alt in alternates %}
+  <link rel="alternate" hreflang="{{ alt.lang }}" href="{{ alt.url }}">
+  {%- endfor %}
+  {%- if alternates %}
+  <link rel="alternate" hreflang="x-default" href="{{ alternates[0].url }}">
+  {%- endif %}
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  {%- for font in site.preload_fonts %}
+  <link rel="preload" href="/fonts/{{ font }}" as="font" type="font/woff2" crossorigin>
+  {%- endfor %}
+  {%- block preload %}{% endblock %}
+  <meta property="og:type" content="{{ meta.og_type | default('website') }}">
+  <meta property="og:locale" content="{{ og_locale }}">
+  <meta property="og:site_name" content="{{ site.name }}">
+  <meta property="og:title" content="{{ meta.og_title | default(meta.title) }}">
+  <meta property="og:description" content="{{ meta.description }}">
+  <meta property="og:url" content="{{ canonical }}">
+  <meta property="og:image" content="{{ site.url }}/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="{{ site.og_alt }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/fonts.css">
+  <link rel="stylesheet" href="/styles.css?v={{ version }}">
+  {%- if jsonld %}
+  <script type="application/ld+json">{{ jsonld }}</script>
+  {%- endif %}
+</head>
+<body class="{% block body_class %}{% endblock %}">
+  <a class="skip-link" href="#contenido">{{ ui.skip }}</a>
+
+  <header class="site-header">
+    <a class="brand" href="{{ home_url }}" aria-label="{{ site.name }} — {{ ui.home }}">
+      {% block brand %}{% endblock %}
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
+      <span aria-hidden="true"></span><span aria-hidden="true"></span><span class="sr-only">{{ ui.menu }}</span>
+    </button>
+    <nav class="site-nav" id="site-nav" aria-label="{{ ui.nav_label }}" data-nav data-open="false">
+      {%- for item in nav %}
+      <a href="{{ item.href }}">{{ item.label }}</a>
+      {%- endfor %}
+      {%- if languages | length > 1 %}
+      <span class="lang-switch" aria-label="{{ ui.language }}">
+        {%- for l in languages %}
+        {%- if l.code == lang %}<span aria-current="true">{{ l.code | upper }}</span>{% else %}<a href="{{ l.url }}" hreflang="{{ l.code }}" lang="{{ l.code }}" title="{{ l.name }}">{{ l.code | upper }}</a>{% endif %}
+        {%- endfor %}
+      </span>
+      {%- endif %}
+      <a class="nav-cta" href="{{ cta.href }}">{{ cta.label }}</a>
+    </nav>
+  </header>
+
+  <main id="contenido">
+    {% block main %}{% endblock %}
+  </main>
+
+  {% block footer %}{% endblock %}
+
+  {%- if dock %}
+  <div class="dock" data-dock>
+    <a class="dock-main" href="{{ dock.href }}" {% if dock.get('external') %}target="_blank" rel="noopener"{% endif %} data-track="{{ dock.get('track', 'dock') }}">{{ dock.label }}</a>
+    {%- if dock.get('secondary') %}
+    <a class="dock-alt" href="{{ dock.secondary.href }}">{{ dock.secondary.label }}</a>
+    {%- endif %}
+  </div>
+  {%- endif %}
+
+  <aside class="consent" data-consent hidden aria-label="{{ ui.consent_label }}">
+    <p>{{ ui.consent_text }} <a href="{{ privacy_url }}">{{ ui.consent_more }}</a></p>
+    <div><button type="button" data-consent-reject>{{ ui.consent_reject }}</button><button type="button" data-consent-accept>{{ ui.consent_accept }}</button></div>
+  </aside>
+
+  <script src="/config.js"></script>
+  <script src="/app.js?v={{ version }}" defer></script>
+</body>
+</html>

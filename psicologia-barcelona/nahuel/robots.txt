@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nahuel-psicologia-barcelona.netlify.app/sitemap.xml

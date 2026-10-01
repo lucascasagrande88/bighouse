@@ -1,0 +1,22 @@
+{% extends layout %}
+{% block main %}
+<article class="article">
+  <header class="page-hero shell">
+    <p class="crumbs"><a href="/">Inicio</a> / <a href="/blog/">Blog</a> / {{ post.tag }}</p>
+    <p class="eyebrow">{{ post.tag }}</p>
+    <h1>{{ post.title }}</h1>
+    <p class="lead">{{ post.description }}</p>
+    <p class="article-meta"><span>Psicoanálisis en Barcelona</span><time datetime="{{ post.date }}">{{ post.date_label }}</time><span>{{ post.minutes }} min de lectura</span></p>
+  </header>
+  <div class="shell">
+    <div class="prose">{{ post.body | safe }}</div>
+    <aside class="article-cta">
+      <svg class="brand-mark cta-mark" viewBox="0 0 48 48" aria-hidden="true"><path d="M6 42V22a12 12 0 0 1 24 0v20"/><path d="M18 42V26a12 12 0 0 1 24 0v16"/></svg>
+      <h2>¿Quieres hablarlo con alguien?</h2>
+      <p>Atendemos en Barcelona (Gràcia y Sants) y online, en español, inglés y portugués.</p>
+      <a class="btn btn-solid" href="/#contacto">Pedir una primera consulta <span aria-hidden="true">→</span></a>
+    </aside>
+    <p class="article-disclaimer">Este artículo tiene un fin informativo y no sustituye una consulta profesional. Si estás en una situación de crisis o de riesgo, llama al 112 o a la línea de atención a la conducta suicida 024.</p>
+  </div>
+</article>
+{% endblock %}

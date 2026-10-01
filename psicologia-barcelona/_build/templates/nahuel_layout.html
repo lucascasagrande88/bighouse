@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block body_class %}nahuel{% endblock %}
+{% block brand %}
+<span class="monogram" aria-hidden="true">N</span>
+<span class="brand-text"><strong>Nahuel Ponce</strong><small>{{ c.footer.role }}</small></span>
+{% endblock %}
+{% block footer %}
+<footer class="site-footer">
+  <div class="shell footer-inner">
+    <div class="footer-brand"><span class="monogram" aria-hidden="true">N</span><p><strong>Nahuel Ponce</strong><br>{{ c.footer.role }}</p></div>
+    <ul class="footer-links">
+      <li><a href="{{ c.contact.wa }}" target="_blank" rel="noopener" data-track="whatsapp-footer">WhatsApp · {{ c.contact.phone }}</a></li>
+      <li><a href="{{ c.contact.mail }}" data-track="email-footer">{{ c.contact.email }}</a></li>
+      <li><a href="{{ privacy_url }}">{{ ui.privacy }}</a></li>
+    </ul>
+    <p class="footer-team">{{ c.footer.team }} <a href="{{ c.team_url }}">Psicoanálisis en Barcelona ↗</a><br><span>{{ c.footer.legal }} © <span data-year>2026</span></span></p>
+  </div>
+</footer>
+{% endblock %}

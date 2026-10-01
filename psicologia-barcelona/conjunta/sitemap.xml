@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://psicoanalisis-en-barcelona.netlify.app/</loc>
+    <lastmod>2026-10-01</lastmod>
+    <xhtml:link rel="alternate" hreflang="es" href="https://psicoanalisis-en-barcelona.netlify.app/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://psicoanalisis-en-barcelona.netlify.app/en/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://psicoanalisis-en-barcelona.netlify.app/pt/"/>
+  </url>
+  <url>
+    <loc>https://psicoanalisis-en-barcelona.netlify.app/en/</loc>
+    <lastmod>2026-10-01</lastmod>
+    <xhtml:link rel="alternate" hreflang="es" href="https://psicoanalisis-en-barcelona.netlify.app/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://psicoanalisis-en-barcelona.netlify.app/en/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://psicoanalisis-en-barcelona.netlify.app/pt/"/>
+  </url>
+  <url>
+    <loc>https://psicoanalisis-en-barcelona.netlify.app/pt/</loc>
+    <lastmod>2026-10-01</lastmod>
+    <xhtml:link rel="alternate" hreflang="es" href="https://psicoanalisis-en-barcelona.netlify.app/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://psicoanalisis-en-barcelona.netlify.app/en/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://psicoanalisis-en-barcelona.netlify.app/pt/"/>
+  </url>
+  <url>
+    <loc>https://psicoanalisis-en-barcelona.netlify.app/blog/</loc>
+    <lastmod>2026-10-01</lastmod>
+  </url>
+  <url>
+    <loc>https://psicoanalisis-en-barcelona.netlify.app/blog/que-es-la-psicoterapia-psicoanalitica/</loc>
+    <lastmod>2026-10-01</lastmod>
+  </url>
+  <url>
+    <loc>https://psicoanalisis-en-barcelona.netlify.app/blog/empezar-de-nuevo-en-otro-pais/</loc>
+    <lastmod>2026-10-01</lastmod>
+  </url>
+  <url>
+    <loc>https://psicoanalisis-en-barcelona.netlify.app/blog/como-es-la-primera-consulta/</loc>
+    <lastmod>2026-10-01</lastmod>
+  </url>
+</urlset>

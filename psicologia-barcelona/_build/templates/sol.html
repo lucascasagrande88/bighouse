@@ -1,0 +1,190 @@
+{% extends "sol_layout.html" %}
+{% block preload %}
+  <link rel="preload" as="image" href="/assets/retrato-sm.webp" type="image/webp" media="(max-width: 760px)">
+  <link rel="preload" as="image" href="/assets/retrato-lg.webp" type="image/webp" media="(min-width: 761px)">
+{% endblock %}
+{% block main %}
+{% set h = c.hero %}
+<section class="hero" data-hero>
+  <div class="hero-copy">
+    <p class="eyebrow"><span class="dot" aria-hidden="true"></span>{{ h.eyebrow }}</p>
+    <h1>{{ h.h1 | safe }}</h1>
+    <p class="hero-rotate" data-rotate>
+      <span class="rotate-intro">{{ h.rotate_intro }}</span>
+      <span class="rotate-track" aria-live="polite">
+        {%- for r in h.rotate %}<span data-rotate-item {% if loop.first %}class="is-active"{% endif %}>{{ r }}</span>{% endfor -%}
+      </span>
+    </p>
+    <p class="hero-lead">{{ h.lead }}</p>
+    <div class="hero-actions">
+      <a class="btn btn-solid" href="{{ c.wa }}" target="_blank" rel="noopener" data-track="whatsapp-hero">{{ h.primary }} <span aria-hidden="true">↗</span></a>
+      <a class="btn btn-ghost" href="#sobre-mi">{{ h.secondary }}</a>
+    </div>
+    <ul class="hero-facts">{% for f in h.facts %}<li>{{ f }}</li>{% endfor %}</ul>
+  </div>
+  <figure class="hero-visual">
+    <div class="sun" aria-hidden="true"></div>
+    <div class="portrait" data-float="10">
+      <picture>
+        <source srcset="/assets/retrato-sm.webp" media="(max-width: 760px)">
+        <img src="/assets/retrato-lg.webp" width="960" height="1200" alt="{{ h.img_alt }}" fetchpriority="high">
+      </picture>
+    </div>
+    <figcaption class="badge"><strong>7</strong><span>{{ h.badge }}</span></figcaption>
+  </figure>
+</section>
+
+{% set a = c.about %}
+<section class="about shell" id="sobre-mi">
+  <figure class="about-photo" data-reveal>
+    <picture>
+      <source srcset="/assets/consulta-sm.webp" media="(max-width: 760px)">
+      <img src="/assets/consulta-lg.webp" width="836" height="1045" alt="{{ a.img_alt }}" loading="lazy">
+    </picture>
+    <figcaption>“{{ a.quote }}”</figcaption>
+  </figure>
+  <div class="about-copy" data-reveal>
+    <p class="kicker">{{ a.kicker }}</p>
+    <h2>{{ a.title | safe }}</h2>
+    {%- for p in a.paras %}<p>{{ p }}</p>{% endfor %}
+    <p class="signature" aria-hidden="true">{{ a.sign }}</p>
+  </div>
+</section>
+
+{% set t = c.topics %}
+<section class="topics" id="temas">
+  <div class="shell">
+    <div class="topics-head" data-reveal>
+      <p class="kicker">{{ t.kicker }}</p>
+      <h2>{{ t.title }}</h2>
+      <p>{{ t.lead }}</p>
+    </div>
+    <ul class="pills" data-reveal>
+      {%- for item in t['items'] %}<li>{{ item }}</li>{% endfor %}
+    </ul>
+  </div>
+</section>
+
+{% set ap = c.approach %}
+<section class="approach" id="enfoque">
+  <div class="approach-copy" data-reveal>
+    <p class="kicker">{{ ap.kicker }}</p>
+    <h2>{{ ap.title | safe }}</h2>
+    {%- for p in ap.paras %}<p>{{ p }}</p>{% endfor %}
+    <ul class="checks">{% for p in ap.points %}<li>{{ p }}</li>{% endfor %}</ul>
+  </div>
+  <figure class="approach-photo">
+    <picture>
+      <source srcset="/assets/espacio-sm.webp" media="(max-width: 760px)">
+      <img src="/assets/espacio-lg.webp" width="1200" height="1500" alt="{{ ap.img_alt }}" loading="lazy">
+    </picture>
+  </figure>
+</section>
+
+{% set sf = c.safe %}
+<section class="safe shell">
+  <div class="safe-card" data-reveal>
+    <div class="safe-art" aria-hidden="true"><span></span><span></span><span></span></div>
+    <div>
+      <p class="kicker">{{ sf.kicker }}</p>
+      <h2>{{ sf.title }}</h2>
+      {%- for p in sf.paras %}<p>{{ p }}</p>{% endfor %}
+      <ul class="lang-badges">{% for l in sf.langs %}<li><strong>{{ l.k }}</strong><span>{{ l.v }}</span></li>{% endfor %}</ul>
+    </div>
+  </div>
+</section>
+
+{% set s = c.services %}
+<section class="services shell" id="servicios">
+  <div class="services-head" data-reveal>
+    <p class="kicker">{{ s.kicker }}</p>
+    <h2>{{ s.title }}</h2>
+  </div>
+  <div class="services-grid">
+    {%- for item in s['items'] %}
+    <article class="service{% if item.get('featured') %} is-featured{% endif %}" data-reveal>
+      <span class="service-num">{{ '%02d' % loop.index }}</span>
+      <h3>{{ item.name }}</h3>
+      <p>{{ item.text }}</p>
+      <ul>{% for m in item.meta %}<li>{{ m }}</li>{% endfor %}</ul>
+    </article>
+    {%- endfor %}
+  </div>
+  <a class="btn btn-solid services-cta" href="{{ c.wa }}" target="_blank" rel="noopener" data-track="whatsapp-services">{{ s.cta }} <span aria-hidden="true">↗</span></a>
+</section>
+
+{% set cr = c.career %}
+<section class="career" id="trayectoria">
+  <div class="shell">
+    <div class="career-head" data-reveal>
+      <p class="kicker">{{ cr.kicker }}</p>
+      <h2>{{ cr.title | safe }}</h2>
+      <p>{{ cr.intro }}</p>
+    </div>
+    <div class="career-grid">
+      {%- for g in cr.groups %}
+      <div class="timeline" data-reveal>
+        <h3>{{ g.title }}</h3>
+        <ol>
+          {%- for i in g['items'] %}<li><span class="when">{{ i.when }}</span><strong>{{ i.what }}</strong><span class="where">{{ i.where }}</span></li>{% endfor %}
+        </ol>
+      </div>
+      {%- endfor %}
+    </div>
+    <aside class="research" data-reveal>
+      <p class="kicker">{{ cr.research_kicker }}</p>
+      <p class="research-q">{{ cr.research }}</p>
+      <p>{{ cr.research_note }}</p>
+    </aside>
+  </div>
+</section>
+
+{% set pl = c.places %}
+<section class="places shell" id="consultorios">
+  <div class="places-copy" data-reveal>
+    <p class="kicker">{{ pl.kicker }}</p>
+    <h2>{{ pl.title }}</h2>
+    <div class="places-list">
+      {%- for p in places %}
+      <article><span class="zone">{{ p.zone }}</span><h3>{{ p.street }}</h3><p>{{ p.detail }}</p><a href="{{ p.map }}" target="_blank" rel="noopener">{{ ui.map }} ↗</a></article>
+      {%- endfor %}
+      <article><span class="zone">{{ pl.online_zone }}</span><h3>{{ pl.online_title }}</h3><p>{{ pl.online_detail }}</p></article>
+    </div>
+  </div>
+  <div class="places-photos" data-reveal>
+    <picture class="pp-a"><source srcset="/assets/sofa-sm.webp" media="(max-width: 760px)"><img src="/assets/sofa-lg.webp" width="1500" height="1200" alt="{{ pl.img_alt }}" loading="lazy"></picture>
+    <picture class="pp-b"><source srcset="/assets/rincon-sm.webp" media="(max-width: 760px)"><img src="/assets/rincon-lg.webp" width="1200" height="1500" alt="" loading="lazy"></picture>
+  </div>
+</section>
+
+{% set q = c.faq %}
+<section class="faq shell" id="preguntas">
+  <div class="faq-head" data-reveal>
+    <p class="kicker">{{ q.kicker }}</p>
+    <h2>{{ q.title }}</h2>
+    <figure class="faq-photo">
+      <img src="/assets/cercana-sm.webp" width="820" height="1025" alt="" loading="lazy">
+    </figure>
+  </div>
+  <div class="faq-list" data-reveal>
+    {%- for item in q['items'] %}
+    <details {% if loop.first %}open{% endif %}><summary>{{ item.q }}</summary><p>{{ item.a }}</p></details>
+    {%- endfor %}
+  </div>
+</section>
+
+{% set ct = c.contact %}
+<section class="contact" id="contacto">
+  <div class="contact-sun" aria-hidden="true"></div>
+  <div class="shell contact-inner" data-reveal>
+    <p class="kicker">{{ ct.kicker }}</p>
+    <h2>{{ ct.title }}</h2>
+    <p class="contact-lead">{{ ct.lead }}</p>
+    <div class="contact-actions">
+      <a class="btn btn-light" href="{{ ct.wa }}" target="_blank" rel="noopener" data-track="whatsapp-contact">{{ ct.wa_label }} <span aria-hidden="true">↗</span></a>
+      <a class="btn btn-outline-light" href="{{ ct.mail }}" data-track="email-contact">{{ ct.email }}</a>
+    </div>
+    <a class="contact-ig" href="https://www.instagram.com/lic.solgaliana/" target="_blank" rel="noopener" data-track="instagram">{{ ct.ig_label }} ↗</a>
+  </div>
+</section>
+{% endblock %}

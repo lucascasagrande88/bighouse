@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block brand %}
+<svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true"><path d="M6 42V22a12 12 0 0 1 24 0v20"/><path d="M18 42V26a12 12 0 0 1 24 0v16"/></svg>
+<span class="brand-text"><strong>Psicoanálisis</strong><small>en Barcelona</small></span>
+{% endblock %}
+{% block footer %}
+<footer class="site-footer">
+  <div class="shell footer-inner">
+    <div class="footer-brand">
+      <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true"><path d="M6 42V22a12 12 0 0 1 24 0v20"/><path d="M18 42V26a12 12 0 0 1 24 0v16"/></svg>
+      <p><strong>Psicoanálisis en Barcelona</strong><br>{{ c.footer.tagline }}</p>
+    </div>
+    <ul class="footer-links">
+      <li><a href="{{ urls.sol }}">Sol Galiana ↗</a></li>
+      <li><a href="{{ urls.nahuel }}">Nahuel Ponce ↗</a></li>
+      <li><a href="/blog/">Blog</a></li>
+      <li><a href="{{ privacy_url }}">{{ ui.privacy }}</a></li>
+    </ul>
+    <p class="footer-legal">{{ c.footer.legal }} © <span data-year>2026</span></p>
+  </div>
+</footer>
+{% endblock %}

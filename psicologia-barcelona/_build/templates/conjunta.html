@@ -1,0 +1,247 @@
+{% extends "conjunta_layout.html" %}
+{% block preload %}
+  <link rel="preload" as="image" href="/assets/aquiyahora-sm.webp" type="image/webp" media="(max-width: 760px)">
+  <link rel="preload" as="image" href="/assets/aquiyahora-lg.webp" type="image/webp" media="(min-width: 761px)">
+{% endblock %}
+
+{% block main %}
+{% set h = c.hero %}
+<section class="hero" data-hero>
+  <div class="hero-copy">
+    <p class="eyebrow">{{ h.eyebrow }}</p>
+    <h1>{{ h.h1 | safe }}</h1>
+    <p class="hero-rotate" data-rotate>
+      <span class="rotate-intro">{{ h.rotate_intro }}</span>
+      <span class="rotate-track" aria-live="polite">
+        {%- for r in h.rotate %}<span data-rotate-item {% if loop.first %}class="is-active"{% endif %}>{{ r }}</span>{% endfor -%}
+      </span>
+    </p>
+    <p class="hero-lead">{{ h.lead }}</p>
+    <div class="hero-actions">
+      <a class="btn btn-solid" href="#contacto">{{ h.primary }} <span aria-hidden="true">→</span></a>
+      <a class="btn btn-line" href="#equipo">{{ h.secondary }}</a>
+    </div>
+  </div>
+  <figure class="hero-visual" data-float="14">
+    <div class="arch">
+      <picture>
+        <source srcset="/assets/aquiyahora-sm.webp" media="(max-width: 760px)">
+        <img src="/assets/aquiyahora-lg.webp" width="720" height="900" alt="{{ h.img_alt }}" fetchpriority="high">
+      </picture>
+    </div>
+    <figcaption><i aria-hidden="true"></i>{{ h.caption }}</figcaption>
+  </figure>
+  <ul class="hero-facts">
+    {%- for f in h.facts %}<li><strong>{{ f.k }}</strong><span>{{ f.v }}</span></li>{% endfor %}
+  </ul>
+</section>
+
+{% set a = c.approach %}
+<section class="approach shell" id="enfoque">
+  <div class="approach-head" data-reveal>
+    <p class="kicker"><span>01</span>{{ a.kicker }}</p>
+    <h2>{{ a.title }}</h2>
+  </div>
+  <div class="approach-body" data-reveal>
+    <p class="lead">{{ a.lead }}</p>
+    {%- for p in a.paras %}<p>{{ p }}</p>{% endfor %}
+  </div>
+  <ol class="pillars" data-reveal>
+    {%- for p in a.pillars %}<li><h3>{{ p.t }}</h3><p>{{ p.d }}</p></li>{% endfor %}
+  </ol>
+</section>
+
+{% set r = c.reasons %}
+<section class="reasons" id="motivos">
+  <div class="shell reasons-inner">
+    <div class="reasons-head" data-reveal>
+      <p class="kicker"><span>02</span>{{ r.kicker }}</p>
+      <h2>{{ r.title | safe }}</h2>
+      <p>{{ r.lead }}</p>
+    </div>
+    <ol class="reasons-list" data-reveal>
+      {%- for item in r['items'] %}<li><span>{{ '%02d' % loop.index }}</span>{{ item }}</li>{% endfor %}
+    </ol>
+  </div>
+</section>
+
+{% set m = c.migration %}
+<section class="migration shell">
+  <div class="migration-art" data-reveal aria-hidden="true">
+    <svg viewBox="0 0 420 420"><path class="m-line" d="M30 330 C 120 330, 120 120, 210 120 S 300 330, 390 330"/><circle cx="30" cy="330" r="6"/><circle cx="210" cy="120" r="6"/><circle cx="390" cy="330" r="6"/></svg>
+    <span class="w1">{{ m.words[0] }}</span><span class="w2">{{ m.words[1] }}</span><span class="w3">{{ m.words[2] }}</span>
+  </div>
+  <div class="migration-copy" data-reveal>
+    <p class="kicker"><span>03</span>{{ m.kicker }}</p>
+    <h2>{{ m.title }}</h2>
+    {%- for p in m.paras %}<p>{{ p }}</p>{% endfor %}
+    <blockquote>{{ m.quote }}</blockquote>
+  </div>
+</section>
+
+{% set t = c.team %}
+<section class="team shell" id="equipo">
+  <div class="team-head" data-reveal>
+    <p class="kicker"><span>04</span>{{ t.kicker }}</p>
+    <h2>{{ t.title | safe }}</h2>
+    <p>{{ t.lead }}</p>
+  </div>
+  <div class="team-grid">
+    {%- for p in t.people %}
+    <article class="person person-{{ p.key }}" data-reveal>
+      <a class="person-photo" href="{{ p.url }}" aria-label="{{ t.web }} — {{ p.name }}">
+        <picture>
+          <source srcset="/assets/{{ p.img }}-sm.webp" media="(max-width: 760px)">
+          <img src="/assets/{{ p.img }}-lg.webp" width="1200" height="1500" alt="{{ p.img_alt }}" loading="lazy">
+        </picture>
+      </a>
+      <div class="person-copy">
+        <p class="person-role">{{ p.role }}</p>
+        <h3>{{ p.name }}</h3>
+        <p>{{ p.text }}</p>
+        <ul class="tags">{% for l in p.langs %}<li>{{ l }}</li>{% endfor %}</ul>
+        <div class="person-actions">
+          <a class="btn btn-solid btn-sm" href="{{ p.url }}">{{ t.web }} <span aria-hidden="true">↗</span></a>
+          <a class="btn btn-line btn-sm" href="{{ p.wa }}" target="_blank" rel="noopener" data-track="whatsapp-{{ p.key }}">{{ t.write }}</a>
+        </div>
+      </div>
+    </article>
+    {%- endfor %}
+  </div>
+</section>
+
+{% set s = c.services %}
+<section class="services" id="servicios">
+  <div class="shell">
+    <div class="services-head" data-reveal>
+      <p class="kicker"><span>05</span>{{ s.kicker }}</p>
+      <h2>{{ s.title | safe }}</h2>
+    </div>
+    <div class="services-list">
+      {%- for item in s['items'] %}
+      <article data-reveal>
+        <span class="num">{{ '%02d' % loop.index }}</span>
+        <h3>{{ item.name }}</h3>
+        <p class="meta">{{ item.meta }}</p>
+        <p>{{ item.text }}</p>
+      </article>
+      {%- endfor %}
+    </div>
+    <p class="services-note" data-reveal>{{ s.note }}</p>
+  </div>
+</section>
+
+{% set f = c.first %}
+<section class="first shell" id="primera-consulta">
+  <figure class="first-photo" data-reveal data-float="10">
+    <div class="arch arch-soft">
+      <picture>
+        <source srcset="/assets/sol-escucha-sm.webp" media="(max-width: 760px)">
+        <img src="/assets/sol-escucha-lg.webp" width="819" height="1024" alt="{{ f.img_alt }}" loading="lazy">
+      </picture>
+    </div>
+  </figure>
+  <div class="first-copy" data-reveal>
+    <p class="kicker"><span>06</span>{{ f.kicker }}</p>
+    <h2>{{ f.title }}</h2>
+    {%- for p in f.paras %}<p>{{ p }}</p>{% endfor %}
+    <ol class="steps">
+      {%- for st in f.steps %}<li><strong>{{ st.t }}</strong><span>{{ st.d }}</span></li>{% endfor %}
+    </ol>
+    <a class="btn btn-solid" href="#contacto">{{ f.cta }} <span aria-hidden="true">→</span></a>
+  </div>
+</section>
+
+{% set pl = c.places %}
+<section class="places shell" id="consultorios">
+  <div class="places-head" data-reveal>
+    <p class="kicker"><span>07</span>{{ pl.kicker }}</p>
+    <h2>{{ pl.title }}</h2>
+  </div>
+  <div class="places-grid">
+    <figure class="places-photo" data-reveal>
+      <picture>
+        <source srcset="/assets/sofa-sm.webp" media="(max-width: 760px)">
+        <img src="/assets/sofa-lg.webp" width="1500" height="1200" alt="{{ pl.img_alt }}" loading="lazy">
+      </picture>
+    </figure>
+    <div class="places-list" data-reveal>
+      {%- for p in places %}
+      <article>
+        <span class="zone">{{ p.zone }}</span>
+        <h3>{{ p.street }}</h3>
+        <p>{{ p.detail }}</p>
+        <a href="{{ p.map }}" target="_blank" rel="noopener">{{ ui.map }} <span aria-hidden="true">↗</span></a>
+      </article>
+      {%- endfor %}
+      <article class="online">
+        <span class="zone">{{ pl.online_zone }}</span>
+        <h3>{{ pl.online_title }}</h3>
+        <p>{{ pl.online_detail }}</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+{% if posts %}
+{% set b = c.blog %}
+<section class="blog-teaser shell" id="blog">
+  <div class="blog-head" data-reveal>
+    <p class="kicker"><span>08</span>{{ b.kicker }}</p>
+    <h2>{{ b.title }}</h2>
+    {% if b.note %}<p class="muted">{{ b.note }}</p>{% endif %}
+  </div>
+  <div class="post-grid">
+    {%- for post in posts %}
+    <a class="post-card" href="/blog/{{ post.slug }}/" data-reveal lang="es">
+      <span class="post-tag">{{ post.tag }}</span>
+      <h3>{{ post.title }}</h3>
+      <p>{{ post.excerpt }}</p>
+      <span class="post-more">{{ b.read }} <span aria-hidden="true">→</span></span>
+    </a>
+    {%- endfor %}
+  </div>
+  <a class="arrow-link" href="/blog/">{{ b.more }} <span aria-hidden="true">→</span></a>
+</section>
+{% endif %}
+
+{% set q = c.faq %}
+<section class="faq shell" id="preguntas">
+  <div class="faq-head" data-reveal>
+    <p class="kicker"><span>09</span>{{ q.kicker }}</p>
+    <h2>{{ q.title }}</h2>
+  </div>
+  <div class="faq-list" data-reveal>
+    {%- for item in q['items'] %}
+    <details {% if loop.first %}open{% endif %}>
+      <summary>{{ item.q }}</summary>
+      <p>{{ item.a }}</p>
+    </details>
+    {%- endfor %}
+  </div>
+</section>
+
+{% set ct = c.contact %}
+<section class="contact" id="contacto">
+  <svg class="contact-arcs" viewBox="0 0 600 600" aria-hidden="true"><path d="M60 600V300a240 240 0 0 1 480 0v300"/><path d="M150 600V320a150 150 0 0 1 300 0v280"/></svg>
+  <div class="shell contact-inner">
+    <div class="contact-head" data-reveal>
+      <p class="kicker">{{ ct.kicker }}</p>
+      <h2>{{ ct.title }}</h2>
+      <p>{{ ct.lead }}</p>
+    </div>
+    <div class="contact-grid">
+      {%- for p in ct.people %}
+      <article data-reveal>
+        <p class="langs">{{ p.langs }}</p>
+        <h3>{{ p.name }}</h3>
+        <a class="contact-wa" href="{{ p.wa }}" target="_blank" rel="noopener" data-track="whatsapp-{{ p.track }}">{{ p.wa_label }} <span aria-hidden="true">↗</span></a>
+        <a class="contact-mail" href="{{ p.mail }}" data-track="email-{{ p.track }}">{{ p.email }} <span aria-hidden="true">↗</span></a>
+      </article>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+
