@@ -7,6 +7,7 @@ _WA_ES = wa(SOL['phone'], 'Hola Sol, vi tu web y me gustaría consultar por una 
 _WA_EN = wa(SOL['phone'], 'Hi Sol, I saw your website and I’d like to ask about a first session.')
 
 ES = {
+    'scene': {'label': 'Llegar, extrañar, pertenecer, quedarse', 'kicker': 'Empezar en otro lugar', 'words': ['Llegar.', 'Extrañar.', 'Pertenecer.', 'Quedarse.'], 'sub': 'Cada etapa de una mudanza mueve algo distinto. La terapia puede acompañarlas todas.'},
     'meta': {
         'title': 'Sol Galiana | Psicóloga en Barcelona y online · Terapia para expatriados',
         'description': 'Psicóloga clínica con orientación psicoanalítica en Barcelona (Gràcia y Sants) y online. Terapia en español e inglés para adultos, jóvenes y personas expatriadas. Espacio LGBTQ+ friendly.',
@@ -148,6 +149,7 @@ ES = {
 }
 
 EN = {
+    'scene': {'label': 'Arriving, missing, belonging, staying', 'kicker': 'Starting somewhere new', 'words': ['Arriving.', 'Missing.', 'Belonging.', 'Staying.'], 'sub': 'Every stage of a move stirs something different. Therapy can be there for all of them.'},
     'meta': {
         'title': 'Sol Galiana | English-speaking psychologist in Barcelona & online · Therapy for expats',
         'description': 'Clinical psychologist with a psychoanalytic approach in Barcelona (Gràcia and Sants) and online. Therapy in English and Spanish for adults, young people and expats. LGBTQ+ affirming.',

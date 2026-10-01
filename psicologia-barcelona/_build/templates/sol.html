@@ -34,9 +34,25 @@
   </figure>
 </section>
 
+{% set sc = c.scene %}
+<section class="scene" data-pin data-steps="4" aria-label="{{ sc.label }}">
+  <div class="scene-sticky">
+    <div class="scene-sun" aria-hidden="true"></div>
+    <figure class="scene-photo"><img src="/assets/espacio-lg.webp" width="1200" height="1500" alt="" loading="lazy"></figure>
+    <div class="scene-text">
+      <p class="scene-kicker">{{ sc.kicker }}</p>
+      <div class="scene-words">
+        {%- for w in sc.words %}<h2 class="t{{ loop.index0 }}">{{ w }}</h2>{% endfor %}
+      </div>
+      <p class="scene-sub">{{ sc.sub }}</p>
+    </div>
+    <ol class="scene-dots" aria-hidden="true">{% for w in sc.words %}<li></li>{% endfor %}</ol>
+  </div>
+</section>
+
 {% set a = c.about %}
 <section class="about shell" id="sobre-mi">
-  <figure class="about-photo" data-reveal>
+  <figure class="about-photo" data-scroll data-start="1" data-span=".9">
     <picture>
       <source srcset="/assets/consulta-sm.webp" media="(max-width: 760px)">
       <img src="/assets/consulta-lg.webp" width="836" height="1045" alt="{{ a.img_alt }}" loading="lazy">
@@ -59,6 +75,7 @@
       <h2>{{ t.title }}</h2>
       <p>{{ t.lead }}</p>
     </div>
+    <div class="marquee" data-scroll data-start="1" data-span="2" aria-hidden="true"><p>{% for i in range(3) %}{% for w in c.topics["items"] %}<span>{{ w }}</span>{% endfor %}{% endfor %}</p></div>
     <ul class="pills" data-reveal>
       {%- for item in t['items'] %}<li>{{ item }}</li>{% endfor %}
     </ul>
@@ -73,7 +90,7 @@
     {%- for p in ap.paras %}<p>{{ p }}</p>{% endfor %}
     <ul class="checks">{% for p in ap.points %}<li>{{ p }}</li>{% endfor %}</ul>
   </div>
-  <figure class="approach-photo">
+  <figure class="approach-photo" data-scroll data-start="1" data-span="1">
     <picture>
       <source srcset="/assets/espacio-sm.webp" media="(max-width: 760px)">
       <img src="/assets/espacio-lg.webp" width="1200" height="1500" alt="{{ ap.img_alt }}" loading="lazy">
@@ -133,7 +150,7 @@
     </div>
     <aside class="research" data-reveal>
       <p class="kicker">{{ cr.research_kicker }}</p>
-      <p class="research-q">{{ cr.research }}</p>
+      <p class="research-q" data-words data-scroll data-start=".95" data-span=".7">{{ cr.research }}</p>
       <p>{{ cr.research_note }}</p>
     </aside>
   </div>
@@ -151,7 +168,7 @@
       <article><span class="zone">{{ pl.online_zone }}</span><h3>{{ pl.online_title }}</h3><p>{{ pl.online_detail }}</p></article>
     </div>
   </div>
-  <div class="places-photos" data-reveal>
+  <div class="places-photos" data-scroll data-start="1" data-span=".9">
     <picture class="pp-a"><source srcset="/assets/sofa-sm.webp" media="(max-width: 760px)"><img src="/assets/sofa-lg.webp" width="1500" height="1200" alt="{{ pl.img_alt }}" loading="lazy"></picture>
     <picture class="pp-b"><source srcset="/assets/rincon-sm.webp" media="(max-width: 760px)"><img src="/assets/rincon-lg.webp" width="1200" height="1500" alt="" loading="lazy"></picture>
   </div>
@@ -174,7 +191,7 @@
 </section>
 
 {% set ct = c.contact %}
-<section class="contact" id="contacto">
+<section class="contact" id="contacto" data-scroll data-start="1" data-span="1.1">
   <div class="contact-sun" aria-hidden="true"></div>
   <div class="shell contact-inner" data-reveal>
     <p class="kicker">{{ ct.kicker }}</p>

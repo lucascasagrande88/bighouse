@@ -81,26 +81,100 @@ document.querySelectorAll('[data-rotate]').forEach((holder) => {
   });
 });
 
-/* Parallax suave en imágenes marcadas */
-const floats = [...document.querySelectorAll('[data-float]')];
-if (!reduceMotion && floats.length) {
-  let ticking = false;
-  const update = () => {
-    const vh = window.innerHeight;
-    floats.forEach((node) => {
-      const rect = node.getBoundingClientRect();
-      if (rect.bottom < -100 || rect.top > vh + 100) return;
-      const center = rect.top + rect.height / 2 - vh / 2;
-      const amount = Number(node.dataset.float || 8);
-      node.style.setProperty('--float', `${(-center / vh * amount).toFixed(2)}px`);
+/* Texto que se enciende palabra por palabra: [data-words] */
+document.querySelectorAll('[data-words]').forEach((node) => {
+  const words = node.textContent.trim().split(/\s+/);
+  node.setAttribute('aria-label', node.textContent.trim());
+  node.textContent = '';
+  words.forEach((word, i) => {
+    const span = document.createElement('span');
+    span.className = 'w';
+    span.setAttribute('aria-hidden', 'true');
+    span.style.setProperty('--i', i);
+    span.textContent = word;
+    node.append(span, ' ');
+  });
+  node.style.setProperty('--n', words.length);
+});
+
+/* Motor de scroll: escribe --p (0→1) en cada elemento animado.
+   [data-scroll]  progreso mientras el elemento cruza la pantalla
+   [data-pin]     progreso dentro de una sección alta con contenido sticky (+ data-step)
+   [data-float]   parallax en px */
+(() => {
+  const root = document.documentElement;
+  const scrolls = [...document.querySelectorAll('[data-scroll]')];
+  const pins = [...document.querySelectorAll('[data-pin]')];
+  const floats = [...document.querySelectorAll('[data-float]')];
+  const clamp = (v) => Math.min(1, Math.max(0, v));
+
+  if (reduceMotion) {
+    [...scrolls, ...pins].forEach((n) => { n.style.setProperty('--p', 1); n.dataset.step = (n.dataset.steps || 1) - 1; });
+    root.classList.add('scroll-static');
+    return;
+  }
+  root.classList.add('scroll-live');
+  if (!scrolls.length && !pins.length && !floats.length) return;
+
+  let vh = window.innerHeight;
+  let current = window.scrollY;
+  let target = current;
+  let running = false;
+  let geometry = [];
+
+  function measure() {
+    vh = window.innerHeight;
+    geometry = [];
+    const y = window.scrollY;
+    scrolls.forEach((n) => { const r = n.getBoundingClientRect(); geometry.push({ n, type: 's', top: r.top + y, h: r.height }); });
+    pins.forEach((n) => { const r = n.getBoundingClientRect(); geometry.push({ n, type: 'p', top: r.top + y, h: n.offsetHeight }); });
+    floats.forEach((n) => { const r = n.getBoundingClientRect(); geometry.push({ n, type: 'f', top: r.top + y, h: r.height }); });
+  }
+
+  function paint(y) {
+    root.style.setProperty('--page', clamp(y / Math.max(1, document.documentElement.scrollHeight - vh)).toFixed(4));
+    geometry.forEach((g) => {
+      if (g.type === 'p') {
+        const p = clamp((y - g.top) / Math.max(1, g.h - vh));
+        g.n.style.setProperty('--p', p.toFixed(4));
+        const steps = Number(g.n.dataset.steps || 0);
+        if (steps) {
+          const step = String(Math.min(steps - 1, Math.floor(p * steps)));
+          if (g.n.dataset.step !== step) g.n.dataset.step = step;
+        }
+        return;
+      }
+      if (g.top - y > vh * 1.4 || g.top + g.h - y < -vh * .4) return;
+      if (g.type === 's') {
+        const start = Number(g.n.dataset.start || 1);   /* fracción de pantalla donde empieza */
+        const span = Number(g.n.dataset.span || .8);    /* cuánto recorrido dura */
+        const p = clamp((y + vh * start - g.top) / (vh * span));
+        g.n.style.setProperty('--p', p.toFixed(4));
+      } else {
+        const center = g.top + g.h / 2 - y - vh / 2;
+        g.n.style.setProperty('--float', `${(-center / vh * Number(g.n.dataset.float || 8)).toFixed(2)}px`);
+      }
     });
-    ticking = false;
-  };
-  window.addEventListener('scroll', () => {
-    if (!ticking) { ticking = true; requestAnimationFrame(update); }
-  }, { passive: true });
-  update();
-}
+  }
+
+  function loop() {
+    current += (target - current) * .14;
+    if (Math.abs(target - current) < .3) current = target;
+    paint(current);
+    if (current !== target) requestAnimationFrame(loop); else running = false;
+  }
+  function kick() {
+    target = window.scrollY;
+    if (!running) { running = true; requestAnimationFrame(loop); }
+  }
+
+  measure();
+  paint(current);
+  window.addEventListener('scroll', kick, { passive: true });
+  window.addEventListener('resize', () => { measure(); kick(); }, { passive: true });
+  window.addEventListener('load', () => { measure(); kick(); });
+  if ('ResizeObserver' in window) new ResizeObserver(() => { measure(); kick(); }).observe(document.body);
+})();
 
 document.querySelectorAll('[data-year]').forEach((node) => { node.textContent = new Date().getFullYear(); });
 

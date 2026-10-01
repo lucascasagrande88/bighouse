@@ -4,6 +4,8 @@ from .common import SOL, NAHUEL, URLS, wa, mail
 LANGS = ['es', 'en', 'pt']
 
 ES = {
+    'scene': {'label': 'Dos recorridos, una escucha compartida', 'lines': ['Dos recorridos.', 'Una escucha <em>compartida.</em>', 'Un lugar <em>para empezar.</em>'], 'sub': 'Sol Galiana · Nahuel Ponce'},
+    'marquee': ['Escucha', 'Singularidad', 'Profundidad', 'Gràcia', 'Sants', 'Online', 'Español', 'English', 'Português'],
     'meta': {
         'title': 'Psicoterapia psicoanalítica en Barcelona y online | Psicoanálisis en Barcelona',
         'description': 'Psicólogos en Barcelona (Gràcia y Sants) y online, con orientación psicoanalítica. Ansiedad, vínculos, duelo, identidad y procesos migratorios. Atención en español, inglés y portugués.',
@@ -180,6 +182,8 @@ ES = {
 }
 
 EN = {
+    'scene': {'label': 'Two paths, one shared way of listening', 'lines': ['Two paths.', 'One shared <em>way of listening.</em>', 'A place <em>to begin.</em>'], 'sub': 'Sol Galiana · Nahuel Ponce'},
+    'marquee': ['Listening', 'Singularity', 'Depth', 'Gràcia', 'Sants', 'Online', 'English', 'Español', 'Português'],
     'meta': {
         'title': 'Psychoanalytic psychotherapy in Barcelona and online | Psicoanálisis en Barcelona',
         'description': 'English-speaking psychologists in Barcelona (Gràcia and Sants) and online, with a psychoanalytic approach. Anxiety, relationships, grief, identity and life abroad. Sessions in English, Spanish and Portuguese.',
@@ -356,6 +360,8 @@ EN = {
 }
 
 PT = {
+    'scene': {'label': 'Dois percursos, uma escuta compartilhada', 'lines': ['Dois percursos.', 'Uma escuta <em>compartilhada.</em>', 'Um lugar <em>para começar.</em>'], 'sub': 'Nahuel Ponce · Sol Galiana'},
+    'marquee': ['Escuta', 'Singularidade', 'Profundidade', 'Gràcia', 'Sants', 'Online', 'Português', 'Español', 'English'],
     'meta': {
         'title': 'Psicoterapia psicanalítica em Barcelona e online | Psicoanálisis en Barcelona',
         'description': 'Psicólogos em Barcelona (Gràcia e Sants) e online, com orientação psicanalítica. Ansiedade, relações, luto, identidade e processos migratórios. Atendimento em português, espanhol e inglês.',

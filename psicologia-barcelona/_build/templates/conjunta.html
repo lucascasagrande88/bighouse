@@ -36,6 +36,31 @@
   </ul>
 </section>
 
+{% set sc = c.scene %}
+<section class="scene" data-pin data-steps="3" aria-label="{{ sc.label }}">
+  <div class="scene-sticky">
+    <svg class="scene-geo" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <path pathLength="1" d="M120 1000V520a380 380 0 0 1 760 0v480"/>
+      <path pathLength="1" d="M240 1000V560a260 260 0 0 1 520 0v440"/>
+      <path pathLength="1" d="M360 1000V600a140 140 0 0 1 280 0v400"/>
+    </svg>
+    <figure class="scene-a"><img src="/assets/sol-sm.webp" width="820" height="1025" alt="" loading="lazy"></figure>
+    <figure class="scene-b"><img src="/assets/nahuel-sm.webp" width="656" height="820" alt="" loading="lazy"></figure>
+    <figure class="scene-c"><img src="/assets/espacio-lg.webp" width="1200" height="1500" alt="" loading="lazy"></figure>
+    <div class="scene-text">
+      {%- for line in sc.lines %}
+      <h2 class="t{{ loop.index0 }}">{{ line | safe }}</h2>
+      {%- endfor %}
+      <p class="scene-sub">{{ sc.sub }}</p>
+    </div>
+    <div class="scene-bar" aria-hidden="true"><span></span></div>
+  </div>
+</section>
+
+<div class="marquee" data-scroll data-start="1" data-span="2.2" aria-hidden="true">
+  <p>{% for i in range(3) %}{% for w in c.marquee %}<span>{{ w }}</span>{% endfor %}{% endfor %}</p>
+</div>
+
 {% set a = c.approach %}
 <section class="approach shell" id="enfoque">
   <div class="approach-head" data-reveal>
@@ -43,7 +68,7 @@
     <h2>{{ a.title }}</h2>
   </div>
   <div class="approach-body" data-reveal>
-    <p class="lead">{{ a.lead }}</p>
+    <p class="lead" data-words data-scroll data-start=".95" data-span=".75">{{ a.lead }}</p>
     {%- for p in a.paras %}<p>{{ p }}</p>{% endfor %}
   </div>
   <ol class="pillars" data-reveal>
@@ -89,7 +114,7 @@
   <div class="team-grid">
     {%- for p in t.people %}
     <article class="person person-{{ p.key }}" data-reveal>
-      <a class="person-photo" href="{{ p.url }}" aria-label="{{ t.web }} — {{ p.name }}">
+      <a class="person-photo" data-scroll data-start="1" data-span=".9" href="{{ p.url }}" aria-label="{{ t.web }} — {{ p.name }}">
         <picture>
           <source srcset="/assets/{{ p.img }}-sm.webp" media="(max-width: 760px)">
           <img src="/assets/{{ p.img }}-lg.webp" width="1200" height="1500" alt="{{ p.img_alt }}" loading="lazy">
@@ -133,7 +158,7 @@
 
 {% set f = c.first %}
 <section class="first shell" id="primera-consulta">
-  <figure class="first-photo" data-reveal data-float="10">
+  <figure class="first-photo" data-scroll data-start="1" data-span=".9">
     <div class="arch arch-soft">
       <picture>
         <source srcset="/assets/sol-escucha-sm.webp" media="(max-width: 760px)">
@@ -159,7 +184,7 @@
     <h2>{{ pl.title }}</h2>
   </div>
   <div class="places-grid">
-    <figure class="places-photo" data-reveal>
+    <figure class="places-photo" data-scroll data-start="1" data-span=".9">
       <picture>
         <source srcset="/assets/sofa-sm.webp" media="(max-width: 760px)">
         <img src="/assets/sofa-lg.webp" width="1500" height="1200" alt="{{ pl.img_alt }}" loading="lazy">
@@ -222,7 +247,7 @@
 </section>
 
 {% set ct = c.contact %}
-<section class="contact" id="contacto">
+<section class="contact" id="contacto" data-scroll data-start="1" data-span="1.1">
   <svg class="contact-arcs" viewBox="0 0 600 600" aria-hidden="true"><path d="M60 600V300a240 240 0 0 1 480 0v300"/><path d="M150 600V320a150 150 0 0 1 300 0v280"/></svg>
   <div class="shell contact-inner">
     <div class="contact-head" data-reveal>

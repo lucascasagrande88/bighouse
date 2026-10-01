@@ -308,3 +308,54 @@ details p { max-width: 60ch; padding-bottom: 24px; margin: 0; color: rgba(236, 2
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
   .rotate-track > span.is-active { clip-path: none; }
 }
+
+/* =========================================================
+   Scroll coreografiado — ventana ojival que se abre
+   ========================================================= */
+.scene { position: relative; height: 340vh; background: var(--black); --a: clamp(0, calc(var(--p, 1) * 1.5), 1); --b: clamp(0, calc((var(--p, 1) - .6) * 2.5), 1); }
+.scene-sticky { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; display: grid; place-items: center; }
+.scene-lines { position: absolute; inset: 0; display: flex; justify-content: space-evenly; pointer-events: none; }
+.scene-lines i { width: 1px; height: 100%; background: var(--line-d); transform-origin: top; transform: scaleY(clamp(0, calc(var(--p, 1) * 3 - var(--k, 0) * .12), 1)); }
+.scene-lines i:nth-child(2) { --k: 1; } .scene-lines i:nth-child(3) { --k: 2; } .scene-lines i:nth-child(4) { --k: 3; } .scene-lines i:nth-child(5) { --k: 4; }
+.scene-lines i:nth-child(6) { --k: 3; } .scene-lines i:nth-child(7) { --k: 2; } .scene-lines i:nth-child(8) { --k: 1; }
+.scene-window { position: absolute; inset: 0; margin: 0;
+  --hw: calc(5% + var(--a) * 50%); --top: calc(24% - var(--a) * 40%); --ah: calc(20% + var(--a) * 8%);
+  clip-path: polygon(calc(50% - var(--hw)) 100%, calc(50% - var(--hw)) calc(var(--top) + var(--ah)), calc(50% - var(--hw) * .8) calc(var(--top) + var(--ah) * .45), calc(50% - var(--hw) * .45) calc(var(--top) + var(--ah) * .13), 50% var(--top), calc(50% + var(--hw) * .45) calc(var(--top) + var(--ah) * .13), calc(50% + var(--hw) * .8) calc(var(--top) + var(--ah) * .45), calc(50% + var(--hw)) calc(var(--top) + var(--ah)), calc(50% + var(--hw)) 100%); }
+.scene-window img { width: 100%; height: 100%; object-fit: cover; transform: scale(calc(1.4 - var(--a) * .4)); filter: brightness(calc(.5 - var(--b) * .18)); }
+.scene-text { position: relative; z-index: 2; display: grid; justify-items: center; width: min(92vw, 1100px); text-align: center; color: var(--bone); text-shadow: 0 2px 30px rgba(0, 0, 0, .6); }
+.scene-text h2 { font-size: clamp(50px, 9vw, 150px); line-height: .92; font-weight: 300; transition: opacity .8s var(--ease), transform .9s var(--ease), letter-spacing 1s var(--ease); }
+.scene-text h2 em { color: inherit; }
+.scene-text .t0 { grid-area: 1 / 1; }
+.scene-text .t1 { grid-area: 2 / 1; font-family: var(--gothic); font-size: clamp(64px, 12vw, 200px); line-height: 1; opacity: 0; transform: translateY(.3em); letter-spacing: .2em; }
+.scene-text .t1 em { font-style: normal; }
+.scene-text .t2 { grid-area: 1 / 1 / 3 / 1; align-self: center; opacity: 0; transform: translateY(.4em); }
+.scene[data-step='1'] .t1 { opacity: 1; transform: none; letter-spacing: 0; }
+.scene[data-step='2'] .t0, .scene[data-step='2'] .t1 { opacity: 0; transform: translateY(-.4em); }
+.scene[data-step='2'] .t2 { opacity: 1; transform: none; }
+.scene-count { position: absolute; z-index: 3; left: var(--gutter); bottom: 30px; display: flex; gap: 14px; margin: 0; font: italic 400 20px/1 var(--serif); color: var(--ash); }
+.scene-count span { transition: color .4s; }
+.scene[data-step='0'] .c0, .scene[data-step='1'] .c1, .scene[data-step='2'] .c2 { color: var(--bone); border-bottom: 1px solid var(--bone); }
+.scroll-static .scene { height: auto; }
+.scroll-static .scene-sticky { position: relative; height: 80vh; }
+
+/* Banda de seminarios */
+.marquee { overflow: hidden; margin: 60px calc(50% - 50vw) 0; padding: 18px 0; border-block: 1px solid var(--line-d); }
+.marquee p { display: flex; width: max-content; margin: 0; font: italic 300 clamp(30px, 4vw, 56px)/1.1 var(--serif); white-space: nowrap; transform: translateX(calc(var(--p, 0) * -40%)); }
+.marquee span { display: inline-flex; align-items: center; gap: .6em; padding-right: .6em; }
+.marquee span::after { content: '✠'; font-style: normal; font-size: .5em; color: var(--ash); }
+
+/* Palabras que se encienden */
+[data-words] .w { opacity: clamp(.18, calc(var(--p, 1) * (var(--n) + 5) - var(--i)), 1); }
+
+/* Máscaras: persianas y ventanas */
+.approach-photo img { clip-path: inset(0 calc((1 - var(--p, 1)) * 50%) 0 calc((1 - var(--p, 1)) * 50%)); transform: scale(calc(1.2 - var(--p, 1) * .2)); }
+.approach-photo::before { transform: translate(calc((1 - var(--p, 1)) * -20px), calc((1 - var(--p, 1)) * 20px)); opacity: var(--p, 1); }
+.about-photo img { clip-path: inset(calc((1 - var(--p, 1)) * 55%) 0 0 0); transform: scale(calc(1.15 - var(--p, 1) * .15)); }
+.banner picture { clip-path: inset(calc((1 - var(--p, 1)) * 18%) calc((1 - var(--p, 1)) * 22%)); }
+.banner img { transform: scale(calc(1.3 - var(--p, 1) * .3)); }
+.contact-mark { transform: translateY(calc(-52% + (1 - var(--p, 1)) * 18%)) rotate(calc((1 - var(--p, 1)) * -6deg)); opacity: var(--p, 1); }
+
+@media (max-width: 760px) {
+  .scene { height: 280vh; }
+  .scene-lines i:nth-child(n + 6) { display: none; }
+}

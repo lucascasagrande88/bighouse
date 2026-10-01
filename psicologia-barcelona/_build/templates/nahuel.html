@@ -39,14 +39,26 @@
   <div class="shell intro-inner" data-reveal>
     <p class="kicker"><span>I</span>{{ i.kicker }}</p>
     <h2 class="intro-title"><span class="initial" aria-hidden="true">{{ i.title[0] }}</span><span class="sr-only">{{ i.title[0] }}</span>{{ i.title[1:] }}</h2>
-    <p>{{ i.text }}</p>
+    <p data-words data-scroll data-start=".95" data-span=".6">{{ i.text }}</p>
+  </div>
+</section>
+
+{% set sc = c.scene %}
+<section class="scene" data-pin data-steps="3" aria-label="{{ sc.label }}">
+  <div class="scene-sticky">
+    <div class="scene-lines" aria-hidden="true">{% for i in range(9) %}<i></i>{% endfor %}</div>
+    <figure class="scene-window"><img src="/assets/noche-lg.webp" width="1125" height="1500" alt="" loading="lazy"></figure>
+    <div class="scene-text">
+      {%- for line in sc.lines %}<h2 class="t{{ loop.index0 }}">{{ line | safe }}</h2>{% endfor %}
+    </div>
+    <p class="scene-count" aria-hidden="true"><span class="c0">I</span><span class="c1">II</span><span class="c2">III</span></p>
   </div>
 </section>
 
 {% set a = c.approach %}
 <section class="approach" id="enfoque">
   <div class="shell approach-inner">
-    <figure class="approach-photo" data-reveal data-float="12">
+    <figure class="approach-photo" data-scroll data-start="1" data-span=".9">
       <picture>
         <source srcset="/assets/lectura-sm.webp" media="(max-width: 760px)">
         <img src="/assets/lectura-lg.webp" width="1200" height="1500" alt="{{ a.img_alt }}" loading="lazy">
@@ -85,7 +97,7 @@
       <h2>{{ ab.title | safe }}</h2>
       {%- for p in ab.paras %}<p>{{ p }}</p>{% endfor %}
     </div>
-    <figure class="about-photo" data-reveal>
+    <figure class="about-photo" data-scroll data-start="1" data-span=".9">
       <picture>
         <source srcset="/assets/ciudad-sm.webp" media="(max-width: 760px)">
         <img src="/assets/ciudad-lg.webp" width="1200" height="1500" alt="{{ ab.img_alt }}" loading="lazy">
@@ -106,6 +118,7 @@
       </div>
       {%- endfor %}
     </div>
+    <div class="marquee" data-scroll data-start="1" data-span="2" aria-hidden="true"><p>{% for i in range(2) %}{% for e in cr.extra %}<span>{{ e }}</span>{% endfor %}{% endfor %}</p></div>
     <div class="seminars" data-reveal>
       <h3>{{ cr.extra_title }}</h3>
       <ul>{% for e in cr.extra %}<li>{{ e }}</li>{% endfor %}</ul>
@@ -114,7 +127,7 @@
 </section>
 
 {% set bn = c.banner %}
-<section class="banner">
+<section class="banner" data-scroll data-start="1" data-span="1.4">
   <picture>
     <source srcset="/assets/calle-sm.webp" media="(max-width: 760px)">
     <img src="/assets/calle-lg.webp" width="1500" height="844" alt="{{ bn.img_alt }}" loading="lazy">
@@ -178,7 +191,7 @@
 </section>
 
 {% set ct = c.contact %}
-<section class="contact" id="contacto">
+<section class="contact" id="contacto" data-scroll data-start="1" data-span="1.2">
   <span class="contact-mark" aria-hidden="true">N</span>
   <div class="shell contact-inner">
     <div class="contact-head" data-reveal>

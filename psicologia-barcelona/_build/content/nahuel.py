@@ -7,6 +7,7 @@ _WA_ES = wa(NAHUEL['phone'], 'Hola Nahuel, vi tu web y me gustaría consultar po
 _WA_PT = wa(NAHUEL['phone'], 'Olá Nahuel, vi seu site e gostaria de marcar uma primeira sessão.')
 
 ES = {
+    'scene': {'label': 'Lo que no se dice, insiste', 'lines': ['Lo que no se dice', '<em>insiste.</em>', 'Escucharlo <em>es empezar.</em>']},
     'meta': {
         'title': 'Nahuel Ponce | Psicólogo en Barcelona y online · Orientación psicoanalítica',
         'description': 'Psicólogo General Sanitario con orientación psicoanalítica en Barcelona (Gràcia y Sants) y online. Ansiedad, angustia, duelo, apego, trauma y procesos migratorios. Sesiones en español y portugués.',
@@ -158,6 +159,7 @@ ES = {
 }
 
 PT = {
+    'scene': {'label': 'O que não se diz, insiste', 'lines': ['O que não se diz', '<em>insiste.</em>', 'Escutar <em>é começar.</em>']},
     'meta': {
         'title': 'Nahuel Ponce | Psicólogo em português em Barcelona e online · Psicanálise',
         'description': 'Psicólogo com orientação psicanalítica em Barcelona (Gràcia e Sants) e online, com atendimento em português. Ansiedade, angústia, luto, apego, trauma e processos migratórios.',

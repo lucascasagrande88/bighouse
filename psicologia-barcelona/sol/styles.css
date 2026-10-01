@@ -310,3 +310,49 @@ details p { max-width: 62ch; padding-bottom: 22px; margin: 0; color: var(--ink-2
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
 }
+
+/* =========================================================
+   Scroll coreografiado — el sol sale y revela el consultorio
+   ========================================================= */
+.scene { position: relative; height: 360vh; background: var(--cream); --a: clamp(0, calc(var(--p, 1) * 1.6), 1); --b: clamp(0, calc((var(--p, 1) - .35) * 1.7), 1); }
+.scene-sticky { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; display: grid; place-items: center; }
+.scene-sun { position: absolute; left: 50%; top: 50%; width: 70vmax; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 50% 42%, var(--sun) 0, var(--blush) 50%, rgba(239, 205, 185, 0) 70%); transform: translate(-50%, calc(-50% + (1 - var(--a)) * 62vh)) scale(calc(.45 + var(--a) * .9)); }
+.scene-photo { position: absolute; inset: 0; margin: 0; clip-path: circle(calc(var(--b) * 75%) at 50% calc(60% - var(--b) * 10%)); }
+.scene-photo img { width: 100%; height: 100%; object-fit: cover; transform: scale(calc(1.35 - var(--b) * .35)); filter: brightness(.7) saturate(.95); }
+.scene-text { position: relative; z-index: 2; display: grid; justify-items: center; gap: 18px; width: min(92vw, 1000px); text-align: center; }
+.scene-kicker { margin: 0; color: var(--terra); font-size: 13px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; transition: color .5s; }
+.scene-words { display: grid; }
+.scene-words h2 { grid-area: 1 / 1; font-size: clamp(56px, 11vw, 170px); line-height: .95; font-style: italic; font-weight: 300; letter-spacing: -.04em; opacity: 0; transform: translateY(.3em) scale(.96); filter: blur(10px); transition: opacity .7s var(--ease), transform .8s var(--ease), filter .7s, color .5s; }
+.scene[data-step='0'] .t0, .scene[data-step='1'] .t1, .scene[data-step='2'] .t2, .scene[data-step='3'] .t3 { opacity: 1; transform: none; filter: none; }
+.scene-sub { max-width: 44ch; margin: 0; color: var(--ink-2); font-size: 17px; transition: color .5s; }
+.scene[data-step='2'] .scene-words h2, .scene[data-step='3'] .scene-words h2, .scene[data-step='2'] .scene-sub, .scene[data-step='3'] .scene-sub { color: var(--cream); }
+.scene[data-step='2'] .scene-kicker, .scene[data-step='3'] .scene-kicker { color: var(--blush); }
+.scene-dots { position: absolute; z-index: 3; bottom: 34px; left: 50%; display: flex; gap: 10px; transform: translateX(-50%); }
+.scene-dots li { width: 9px; height: 9px; border-radius: 50%; background: rgba(43, 38, 34, .2); transition: background .4s, transform .4s var(--ease); }
+.scene[data-step='0'] li:nth-child(1), .scene[data-step='1'] li:nth-child(-n + 2), .scene[data-step='2'] li:nth-child(-n + 3), .scene[data-step='3'] li { background: var(--terra); transform: scale(1.2); }
+.scroll-static .scene { height: auto; }
+.scroll-static .scene-sticky { position: relative; height: 80vh; }
+
+/* Banda de temas en movimiento */
+.marquee { overflow: hidden; margin: 0 calc(50% - 50vw) 40px; padding: 8px 0; }
+.marquee p { display: flex; width: max-content; margin: 0; font: italic 300 clamp(40px, 6vw, 88px)/1.1 var(--serif); white-space: nowrap; transform: translateX(calc(var(--p, 0) * -30%)); }
+.marquee span { display: inline-flex; align-items: center; gap: .45em; padding-right: .45em; }
+.marquee span::after { content: ''; width: .32em; height: .32em; border-radius: 50%; background: var(--sun); }
+.marquee span:nth-child(odd) { color: var(--terra); }
+
+/* Palabras que se encienden */
+[data-words] .w { opacity: clamp(.22, calc(var(--p, 1) * (var(--n) + 5) - var(--i)), 1); }
+
+/* Máscaras orgánicas */
+.about-photo img { clip-path: circle(calc(30% + var(--p, 1) * 60%) at 50% 60%); transform: scale(calc(1.15 - var(--p, 1) * .15)); }
+.about-photo figcaption { opacity: clamp(0, calc(var(--p, 1) * 2 - 1), 1); transform: translateY(calc((1 - var(--p, 1)) * 30px)); }
+.approach-photo { overflow: hidden; }
+.approach-photo img { clip-path: ellipse(calc(30% + var(--p, 1) * 60%) calc(25% + var(--p, 1) * 65%) at 50% 100%); transform: scale(calc(1.2 - var(--p, 1) * .2)); }
+.places-photos .pp-a img { clip-path: inset(calc((1 - var(--p, 1)) * 40%) 0 0 0 round var(--radius)); }
+.places-photos .pp-b img { clip-path: circle(calc(20% + var(--p, 1) * 70%) at 50% 0%); }
+.contact-sun { transform: translate(-50%, calc((1 - var(--p, 1)) * 30%)) scale(calc(.7 + var(--p, 1) * .3)); }
+
+@media (max-width: 760px) {
+  .scene { height: 300vh; }
+  .scene-sun { width: 120vmax; }
+}

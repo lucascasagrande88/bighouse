@@ -390,3 +390,70 @@ details p { max-width: 62ch; padding: 0 0 24px; margin: 0; color: var(--ink-2); 
 .prose h2 + p, .prose h3 + p { margin-top: 0; }
 .prose h3 { margin: 1.6em 0 .4em; font: 400 26px/1.2 var(--serif); }
 .prose a { color: var(--wine); text-underline-offset: 3px; }
+
+/* =========================================================
+   Scroll coreografiado — geometría, máscaras y texto
+   --p (0→1) lo escribe app.js. Sin JS o con reduced-motion, --p = 1.
+   ========================================================= */
+
+/* Escena fija: dos arcos que convergen */
+.scene { position: relative; height: 340vh; background: var(--paper); }
+.scene-sticky { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; display: grid; place-items: center; }
+.scene { --a: clamp(0, calc(var(--p, 1) * 2.1), 1); --b: clamp(0, calc((var(--p, 1) - .5) * 3.4), 1); }
+.scene-geo { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; stroke: var(--clay); stroke-width: 1.2; vector-effect: non-scaling-stroke; }
+.scene-geo path { stroke-dasharray: 1; stroke-dashoffset: calc(1 - var(--a)); opacity: calc(.25 + var(--a) * .5); }
+.scene-geo path:nth-child(2) { stroke-dashoffset: calc(1 - clamp(0, calc(var(--a) * 1.3 - .2), 1)); }
+.scene-geo path:nth-child(3) { stroke: var(--wine); stroke-dashoffset: calc(1 - clamp(0, calc(var(--a) * 1.6 - .5), 1)); }
+.scene-a, .scene-b { position: absolute; z-index: 2; top: 50%; left: 50%; width: clamp(150px, 19vw, 290px); margin: 0; overflow: hidden; border-radius: 999px 999px 6px 6px; box-shadow: 0 40px 80px -40px rgba(29, 26, 23, .55); }
+.scene-a img, .scene-b img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; transform: scale(calc(1.25 - var(--a) * .25)); }
+.scene-a { transform: translate(calc(-50% - (1 - var(--a)) * 46vw - 32%), calc(-50% + 13vh + (1 - var(--a)) * 20vh)) rotate(calc((1 - var(--a)) * -8deg)); }
+.scene-b { z-index: 1; transform: translate(calc(-50% + (1 - var(--a)) * 46vw + 32%), calc(-50% + 13vh - (1 - var(--a)) * 10vh)) rotate(calc((1 - var(--a)) * 8deg)); }
+.scene-a, .scene-b { opacity: calc(1 - var(--b) * .85); }
+.scene-c { position: absolute; z-index: 3; inset: 0; margin: 0; clip-path: inset(calc((1 - var(--b)) * 50%) calc((1 - var(--b)) * 50%) calc((1 - var(--b)) * 50%) calc((1 - var(--b)) * 50%) round calc(50vw * (1 - var(--b) * .7)) calc(50vw * (1 - var(--b) * .7)) 0 0); }
+.scene-c img { width: 100%; height: 100%; object-fit: cover; transform: scale(calc(1.3 - var(--b) * .3)); filter: brightness(.62); }
+.scene-text { position: absolute; z-index: 4; top: 15vh; left: 50%; transform: translateX(-50%); display: grid; place-items: center; width: min(92vw, 1100px); transition: top .8s var(--ease); text-align: center; pointer-events: none; }
+.scene[data-step='2'] .scene-text { top: 38vh; }
+.scene-text h2 { grid-area: 1 / 1; font-size: clamp(42px, 6.2vw, 104px); line-height: .95; letter-spacing: -.03em; opacity: 0; transform: translateY(30px); filter: blur(8px); transition: opacity .7s var(--ease), transform .7s var(--ease), filter .7s; }
+.scene[data-step='0'] .t0, .scene[data-step='1'] .t1, .scene[data-step='2'] .t2 { opacity: 1; transform: none; filter: none; }
+.scene-text .t2 { color: var(--paper); }
+.scene-text .t2 em { color: var(--wine-soft); }
+.scene-sub { grid-area: 2 / 1; margin-top: 22px; color: var(--muted); font-size: 13px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; transition: color .5s; }
+.scene[data-step='2'] .scene-sub { color: rgba(243, 238, 230, .8); }
+.scene-bar { position: absolute; z-index: 5; left: 50%; bottom: 34px; width: 120px; height: 2px; background: rgba(29, 26, 23, .15); transform: translateX(-50%); }
+.scene-bar span { display: block; height: 100%; background: var(--wine); transform-origin: left; transform: scaleX(var(--p, 1)); }
+.scene[data-step='2'] .scene-bar { background: rgba(243, 238, 230, .25); }
+.scene[data-step='2'] .scene-bar span { background: var(--paper); }
+.scroll-static .scene { height: auto; }
+.scroll-static .scene-sticky { position: relative; height: 80vh; }
+
+/* Banda de texto que se desplaza con el scroll */
+.marquee { overflow: hidden; padding: 26px 0; border-block: 1px solid var(--line-strong); }
+.marquee p { display: flex; width: max-content; margin: 0; font: italic 400 clamp(36px, 5vw, 72px)/1 var(--serif); white-space: nowrap; transform: translateX(calc(var(--p, 0) * -33%)); }
+.marquee span { display: inline-flex; align-items: center; gap: .55em; padding-right: .55em; }
+.marquee span::after { content: ''; width: .42em; height: .5em; border: 1.5px solid var(--wine); border-bottom: 0; border-radius: 999px 999px 0 0; }
+.marquee span:nth-child(3n + 2) { color: var(--wine); }
+
+/* Palabras que se encienden */
+[data-words] .w { opacity: clamp(.16, calc(var(--p, 1) * (var(--n) + 6) - var(--i)), 1); transition: opacity .2s linear; }
+
+/* Máscaras geométricas sobre fotos */
+.person-photo { clip-path: inset(calc((1 - var(--p, 1)) * 42%) 0 0 0 round 999px 999px 4px 4px); }
+.person-photo img { transform: scale(calc(1.18 - var(--p, 1) * .18)); }
+.person-photo:hover img { transform: scale(1.035); }
+.places-photo { clip-path: circle(calc(18% + var(--p, 1) * 72%) at 50% 100%); }
+.places-photo img { transform: scale(calc(1.2 - var(--p, 1) * .2)); }
+.first-photo .arch { clip-path: inset(calc((1 - var(--p, 1)) * 60%) calc((1 - var(--p, 1)) * 18%) 0 calc((1 - var(--p, 1)) * 18%) round 300px 300px 6px 6px); }
+.first-photo img { transform: scale(calc(1.2 - var(--p, 1) * .2)) translateY(calc((1 - var(--p, 1)) * 30px)); }
+.contact-arcs path { stroke-dasharray: 1600; stroke-dashoffset: calc((1 - var(--p, 1)) * 1600); }
+
+/* Encabezados de sección: la línea del kicker se dibuja */
+.js .kicker span { transition: border-radius .6s var(--ease); }
+
+@media (max-width: 760px) {
+  .scene { height: 280vh; }
+  .scene-a, .scene-b { width: 40vw; }
+  .scene-a { transform: translate(calc(-50% - (1 - var(--a)) * 60vw - 30%), calc(-50% + 14vh + (1 - var(--a)) * 10vh)); }
+  .scene-b { transform: translate(calc(-50% + (1 - var(--a)) * 60vw + 30%), calc(-50% + 14vh - (1 - var(--a)) * 10vh)); }
+  .scene-text { top: 14vh; }
+  .scene-text h2 { font-size: clamp(40px, 12vw, 60px); }
+}
