@@ -658,3 +658,19 @@ button.link-flecha { border: 0; background: none; padding: 0; cursor: pointer; f
 .faq details.cerrando summary::after { transform: none; background: transparent; color: var(--verde); border-color: var(--linea); }
 .footer__rubros { margin-top: 40px; padding-top: 22px; border-top: 1px solid rgba(255, 255, 255, .12); display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 13.5px; }
 .footer__rubros a { color: #BFD3C5; }
+
+/* mapa 3D + pines */
+.mapa { position: relative; max-width: 440px; }
+.mapa img { width: 100%; height: auto; display: block; filter: drop-shadow(0 30px 40px rgba(0, 0, 0, .55)); }
+.mapa svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.mapa .ruta { stroke: #fff; stroke-width: 4; stroke-dasharray: 12 12; opacity: .85; filter: drop-shadow(0 1px 2px rgba(0,0,0,.6)); }
+@keyframes ruta { to { stroke-dashoffset: -48; } }
+.mapa .loc { fill: #fff; stroke: var(--verde-3); stroke-width: 4; }
+.mapa .pin circle { fill: #fff; stroke: var(--verde-3); stroke-width: 5; }
+.mapa .pin.base circle { fill: #8FE0A8; }
+.mapa .pin .onda { fill: none; stroke: #fff; stroke-width: 4; }
+.mapa text { fill: #fff; font-size: 42px; font-weight: 800; paint-order: stroke; stroke: rgba(0, 38, 18, .85); stroke-width: 8px; stroke-linejoin: round; }
+.mapa text.sub { font-size: 25px; font-weight: 500; fill: #DCE9DF; letter-spacing: .06em; }
+.mapa .etiqueta rect { fill: rgba(0, 38, 18, .88); stroke: rgba(143, 224, 168, .6); stroke-width: 2; }
+.mapa .etiqueta text { stroke: none; }
+.mapa .etiqueta text.sub { fill: #8FE0A8; }

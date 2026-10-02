@@ -70,28 +70,27 @@
     $("#zonas").innerHTML = z.map(function (s, i) { return '<li' + (i === 0 ? ' class="base"' : '') + '>' + esc(s) + '</li>'; }).join("");
   }
 
-  // Contorno simplificado de la provincia de San Luis (lon, lat).
-  var PROV = [[-67.12,-32.35],[-66.9,-32.02],[-66.4,-31.95],[-66.0,-32.05],[-65.62,-32.0],[-65.25,-32.1],[-64.98,-32.25],[-65.02,-32.55],[-64.95,-32.9],[-65.0,-33.3],[-64.98,-33.7],[-65.05,-34.1],[-65.1,-34.5],[-65.15,-34.9],[-65.25,-35.4],[-65.4,-35.98],[-66.62,-35.98],[-66.6,-35.4],[-66.75,-34.9],[-66.9,-34.4],[-67.05,-33.9],[-67.25,-33.4],[-67.3,-32.9]];
-  var VM = [-65.46, -33.67], SL = [-66.34, -33.30];
-  var OTRAS = [[-65.01,-32.35],[-65.24,-32.56],[-65.62,-33.05],[-65.18,-33.86],[-65.25,-34.76],[-65.8,-32.23],[-65.98,-35.15],[-65.37,-32.92]];
-  function xy(p) { return [((p[0] + 67.5) * 150 * 0.83 + 20).toFixed(1), ((-31.85 - p[1]) * 150 + 20).toFixed(1)]; }
+  // Mapa: render 3D de la provincia (assets/img/mapa-san-luis.webp) + pines en SVG encima.
+  // Coordenadas en el sistema del render original (1086×1448), calibradas contra
+  // el mapa político de la provincia (bordes a la misma latitud).
+  var BASE = [827, 603], CAPITAL = [541, 501];
+  var LOCALIDADES = [[756, 400], [840, 259], [839, 187], [853, 959], [507, 268]]; // La Toma, Concarán, Sta. Rosa del Conlara, Buena Esperanza, Va. Gral. Roca
   function mapa() {
-    var d = "M" + PROV.map(function (p) { return xy(p).join(","); }).join("L") + "Z";
-    var v = xy(VM), s = xy(SL);
-    var rutas = [SL].concat(OTRAS).map(function (p) {
-      var q = xy(p), mx = (Number(v[0]) + Number(q[0])) / 2, my = (Number(v[1]) + Number(q[1])) / 2 - 30;
-      return '<path class="ruta" d="M' + v.join(",") + 'Q' + mx + "," + my + " " + q.join(",") + '"/>';
+    var rutas = [CAPITAL].concat(LOCALIDADES).map(function (q) {
+      var mx = (BASE[0] + q[0]) / 2 + (q[1] < BASE[1] ? -40 : 40), my = (BASE[1] + q[1]) / 2;
+      return '<path class="ruta" d="M' + BASE.join(",") + "Q" + mx + "," + my + " " + q.join(",") + '"/>';
     }).join("");
-    var otras = OTRAS.map(function (p) { var q = xy(p); return '<circle cx="' + q[0] + '" cy="' + q[1] + '" r="3.5" fill="rgba(255,255,255,.7)"/>'; }).join("");
+    var puntos = LOCALIDADES.map(function (q) { return '<circle class="loc" cx="' + q[0] + '" cy="' + q[1] + '" r="9"/>'; }).join("");
     $("#mapa").innerHTML =
-      '<svg viewBox="0 0 340 670" role="img"><title>Mapa de la provincia de San Luis</title>' +
-      '<path class="prov" d="' + d + '"/>' + rutas + otras +
-      '<g class="pin"><circle class="onda" cx="' + s[0] + '" cy="' + s[1] + '" r="9"/><circle cx="' + s[0] + '" cy="' + s[1] + '" r="6"/></g>' +
-      '<text x="' + (s[0] - 12) + '" y="' + (s[1] - 14) + '" text-anchor="end">San Luis</text>' +
-      '<text class="sub" x="' + (s[0] - 12) + '" y="' + (Number(s[1]) - 1) + '" text-anchor="end">CAPITAL</text>' +
-      '<g class="pin base"><circle class="onda" cx="' + v[0] + '" cy="' + v[1] + '" r="11"/><circle cx="' + v[0] + '" cy="' + v[1] + '" r="8"/></g>' +
-      '<text x="' + (Number(v[0]) + 16) + '" y="' + (Number(v[1]) + 4) + '">Villa Mercedes</text>' +
-      '<text class="sub" x="' + (Number(v[0]) + 16) + '" y="' + (Number(v[1]) + 19) + '">BASE · EDISON 666</text>' +
+      '<img src="assets/img/mapa-san-luis.webp" alt="Mapa en relieve de la provincia de San Luis" loading="lazy" width="900" height="1200">' +
+      '<svg viewBox="0 0 1086 1448" aria-hidden="true">' + rutas + puntos +
+      '<g class="pin"><circle class="onda" cx="' + CAPITAL[0] + '" cy="' + CAPITAL[1] + '" r="16"/><circle cx="' + CAPITAL[0] + '" cy="' + CAPITAL[1] + '" r="13"/></g>' +
+      '<text x="' + (CAPITAL[0] - 26) + '" y="' + (CAPITAL[1] - 8) + '" text-anchor="end">San Luis</text>' +
+      '<text class="sub" x="' + (CAPITAL[0] - 26) + '" y="' + (CAPITAL[1] + 30) + '" text-anchor="end">CAPITAL</text>' +
+      '<g class="pin base"><circle class="onda" cx="' + BASE[0] + '" cy="' + BASE[1] + '" r="20"/><circle cx="' + BASE[0] + '" cy="' + BASE[1] + '" r="17"/></g>' +
+      '<g class="etiqueta"><rect x="' + (BASE[0] - 300) + '" y="' + (BASE[1] + 34) + '" width="360" height="100" rx="16"/>' +
+      '<text x="' + (BASE[0] - 278) + '" y="' + (BASE[1] + 80) + '">Villa Mercedes</text>' +
+      '<text class="sub" x="' + (BASE[0] - 278) + '" y="' + (BASE[1] + 116) + '">BASE · EDISON 666</text></g>' +
       '</svg>';
   }
 
