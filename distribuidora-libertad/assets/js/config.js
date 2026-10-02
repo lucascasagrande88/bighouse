@@ -68,7 +68,7 @@ window.LIB_ASSETS = {
   rubros: true,       // assets/img/rubros/rubro-<id>.webp (los 13)
   covers: false,      // assets/img/rubros/cover-<id>.webp
   historia: true,     // assets/img/historia-1..3.webp
-  clientes: false,    // assets/img/cliente-*.webp
+  clientes: true,     // assets/img/cliente-*.webp
   cobertura: true,    // assets/img/cobertura-ruta.webp
   contacto: false,    // assets/img/contacto.webp
   sinfoto: false      // assets/img/sin-foto.webp

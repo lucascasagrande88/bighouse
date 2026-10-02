@@ -674,3 +674,5 @@ button.link-flecha { border: 0; background: none; padding: 0; cursor: pointer; f
 .mapa .etiqueta rect { fill: rgba(0, 38, 18, .88); stroke: rgba(143, 224, 168, .6); stroke-width: 2; }
 .mapa .etiqueta text { stroke: none; }
 .mapa .etiqueta text.sub { fill: #8FE0A8; }
+.cliente img { object-position: 50% 15%; }
+@media (max-width: 900px) { .cliente { min-height: 340px; } }
