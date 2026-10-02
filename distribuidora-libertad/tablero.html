@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tablero · Distribuidora Libertad</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#003D1D">
+<link rel="icon" href="assets/img/icon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/img/icon-180.png">
+<link rel="preload" href="assets/fonts/archivo-wdth.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/tablero.css">
+</head>
+<body class="tb">
+
+<!-- ============ LOGIN ============ -->
+<section class="login" id="v-login" hidden>
+  <div class="login__caja">
+    <img src="assets/img/logo.webp" alt="Distribuidora Libertad" class="login__logo">
+    <h1>Tablero</h1>
+    <p class="login__sub">Editá precios, productos, destacados y datos de la web.</p>
+    <div class="alerta" id="login-cfg" hidden>La base de datos todavía no está conectada. Completá <code>assets/js/config.js</code> con la URL y la clave del proyecto Supabase.</div>
+    <form id="f-login" class="campos">
+      <div class="campo"><label for="l-email">Email</label><input id="l-email" type="email" autocomplete="username" required></div>
+      <div class="campo"><label for="l-pass">Contraseña</label><input id="l-pass" type="password" autocomplete="current-password" required></div>
+      <p class="error" id="login-err" hidden></p>
+      <button class="btn btn--verde" type="submit">Entrar</button>
+      <button class="quitar" type="button" id="btn-olvide" style="justify-self:center">Olvidé mi contraseña</button>
+    </form>
+    <a class="link-flecha" href="./" style="margin-top:18px">Ir a la web</a>
+  </div>
+</section>
+
+<!-- ============ APP ============ -->
+<div class="app" id="v-app" hidden>
+  <aside class="lado">
+    <img src="assets/img/logo-blanco.webp" alt="Distribuidora Libertad" class="lado__logo">
+    <nav class="lado__nav" id="nav">
+      <button type="button" data-tab="resumen" aria-current="page"><i data-ic="todo"></i>Resumen</button>
+      <button type="button" data-tab="productos"><i data-ic="caja"></i>Productos</button>
+      <button type="button" data-tab="precios"><i data-ic="lista"></i>Actualizar precios</button>
+      <button type="button" data-tab="destacados"><i data-ic="check"></i>Destacados</button>
+      <button type="button" data-tab="pedidos"><i data-ic="carrito"></i>Pedidos <span class="badge" id="badge-pedidos" hidden></span></button>
+      <button type="button" data-tab="sitio"><i data-ic="tienda"></i>Datos del sitio</button>
+    </nav>
+    <div class="lado__pie">
+      <a href="./" target="_blank" rel="noopener">Ver la web ↗</a>
+      <span id="usuario" class="mono"></span>
+      <button type="button" id="btn-salir">Cerrar sesión</button>
+    </div>
+  </aside>
+
+  <main class="panel">
+    <!-- RESUMEN -->
+    <section data-vista="resumen">
+      <header class="panel__cab"><div><span class="kicker">Tablero</span><h1>Hola 👋</h1><p>Lo que ves acá se refleja en la web al instante.</p></div></header>
+      <div class="kpis" id="kpis"></div>
+      <div class="dos">
+        <div class="tarjeta"><h2>Últimos pedidos</h2><div id="res-pedidos"></div><button class="link-flecha" type="button" data-ir="pedidos">Ver todos</button></div>
+        <div class="tarjeta"><h2>Accesos rápidos</h2>
+          <div class="rapidos">
+            <button type="button" data-ir="precios"><i data-ic="lista"></i><b>Subir lista de precios</b><span>Excel o CSV con código y precio</span></button>
+            <button type="button" data-ir="productos" data-nuevo><i data-ic="mas"></i><b>Cargar producto nuevo</b><span>Con foto, precio y rubro</span></button>
+            <button type="button" data-ir="destacados"><i data-ic="check"></i><b>Elegir destacados</b><span>Los que aparecen en la portada</span></button>
+            <button type="button" data-ir="sitio"><i data-ic="tienda"></i><b>Teléfonos y aviso</b><span>WhatsApp, horarios, banner</span></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUCTOS -->
+    <section data-vista="productos" hidden>
+      <header class="panel__cab">
+        <div><span class="kicker">Catálogo</span><h1>Productos</h1><p id="p-n"></p></div>
+        <button class="btn btn--verde" type="button" id="btn-nuevo"><i data-ic="mas"></i>Nuevo producto</button>
+      </header>
+      <div class="barra">
+        <input type="search" id="p-q" placeholder="Buscar por nombre o código…" class="inp">
+        <select id="p-rubro" class="inp"></select>
+        <select id="p-estado" class="inp">
+          <option value="">Todos</option>
+          <option value="activos">Visibles</option>
+          <option value="ocultos">Ocultos</option>
+          <option value="sinprecio">Sin precio</option>
+          <option value="sinfoto">Sin foto</option>
+          <option value="dest">Destacados</option>
+        </select>
+      </div>
+      <p class="ayuda">Tip: tocá el precio para editarlo y apretá Enter. El ojo muestra u oculta el producto en la web.</p>
+      <div class="tabla-wrap"><table class="tabla" id="t-prod">
+        <thead><tr><th style="width:56px"></th><th>Código</th><th>Artículo</th><th>Rubro</th><th style="width:150px">Precio</th><th style="width:150px"></th></tr></thead>
+        <tbody></tbody>
+      </table></div>
+      <div class="mas"><button class="btn btn--linea btn--chico" type="button" id="p-mas" hidden>Ver más</button></div>
+    </section>
+
+    <!-- PRECIOS -->
+    <section data-vista="precios" hidden>
+      <header class="panel__cab"><div><span class="kicker">Lista de precios</span><h1>Actualizar precios</h1><p>Subí la lista del proveedor y actualizamos todo de una vez.</p></div></header>
+      <div class="dos">
+        <div class="tarjeta">
+          <h2>1 · Subir archivo</h2>
+          <p class="ayuda">Excel (.xlsx / .xls) o CSV. Tiene que tener una columna con el <b>código</b> y otra con el <b>precio</b>. Si trae <b>descripción</b> y querés, también suma los artículos nuevos.</p>
+          <label class="drop" id="drop">
+            <input type="file" id="f-lista" accept=".xlsx,.xls,.csv" hidden>
+            <i data-ic="enviar"></i><b>Elegí o arrastrá el archivo</b><span id="drop-nom">.xlsx · .xls · .csv</span>
+          </label>
+          <div id="map-cols" hidden class="campos" style="margin-top:16px">
+            <div class="fila">
+              <div class="campo"><label>Columna código</label><select id="c-cod" class="inp"></select></div>
+              <div class="campo"><label>Columna precio</label><select id="c-pre" class="inp"></select></div>
+            </div>
+            <div class="fila">
+              <div class="campo"><label>Columna descripción (opcional)</label><select id="c-nom" class="inp"></select></div>
+              <div class="campo"><label>Rubro para los nuevos</label><select id="c-rub" class="inp"></select></div>
+            </div>
+            <button class="btn btn--linea" type="button" id="btn-analizar">Analizar cambios</button>
+          </div>
+        </div>
+        <div class="tarjeta">
+          <h2>Aumento general por porcentaje</h2>
+          <p class="ayuda">Para subir (o bajar) todos los precios de un rubro, o de todo el catálogo, en un porcentaje.</p>
+          <div class="campos">
+            <div class="fila">
+              <div class="campo"><label for="aum-rubro">Rubro</label><select id="aum-rubro" class="inp"></select></div>
+              <div class="campo"><label for="aum-pct">Porcentaje</label><input id="aum-pct" type="number" step="0.1" class="inp" placeholder="Ej: 8.5"></div>
+            </div>
+            <label class="check"><input type="checkbox" id="aum-redondeo" checked> Redondear al peso</label>
+            <button class="btn btn--linea" type="button" id="btn-aum-prev">Ver cómo queda</button>
+          </div>
+        </div>
+      </div>
+      <div class="tarjeta" id="prev" hidden style="margin-top:18px">
+        <h2 id="prev-tit">2 · Revisá y confirmá</h2>
+        <div class="kpis kpis--chicos" id="prev-kpis"></div>
+        <div class="tabla-wrap" style="max-height:420px"><table class="tabla"><thead><tr><th>Código</th><th>Artículo</th><th style="text-align:right">Antes</th><th style="text-align:right">Ahora</th><th style="text-align:right">Var.</th></tr></thead><tbody id="prev-body"></tbody></table></div>
+        <div class="campos" style="margin-top:16px">
+          <label class="check" id="lbl-nuevos"><input type="checkbox" id="chk-nuevos"> Agregar también los <b id="n-nuevos">0</b> artículos nuevos</label>
+          <div class="fila"><div class="campo"><label for="lista-nom">Nombre de la lista (se muestra en la web)</label><input id="lista-nom" class="inp" placeholder="Ej: Octubre 2026"></div><div></div></div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn btn--verde" type="button" id="btn-aplicar">Aplicar cambios</button><button class="btn btn--linea" type="button" id="btn-cancelar-prev">Cancelar</button></div>
+          <div class="progreso" id="prog" hidden><div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DESTACADOS -->
+    <section data-vista="destacados" hidden>
+      <header class="panel__cab"><div><span class="kicker">Portada</span><h1>Destacados</h1><p>Aparecen en la portada, en este orden. Ideal: 8 a 16 productos con foto.</p></div></header>
+      <div class="dos dos--asim">
+        <div class="tarjeta"><h2>En portada</h2><ol class="dest-lista" id="dest-lista"></ol></div>
+        <div class="tarjeta"><h2>Agregar</h2><input type="search" class="inp" id="dest-q" placeholder="Buscar producto…"><ul class="dest-busca" id="dest-res"></ul></div>
+      </div>
+    </section>
+
+    <!-- PEDIDOS -->
+    <section data-vista="pedidos" hidden>
+      <header class="panel__cab"><div><span class="kicker">Ventas</span><h1>Pedidos web</h1><p>Copia de cada pedido enviado por WhatsApp desde la web.</p></div>
+        <select id="ped-estado" class="inp" style="max-width:200px"><option value="">Todos</option><option value="nuevo">Nuevos</option><option value="confirmado">Confirmados</option><option value="entregado">Entregados</option><option value="cancelado">Cancelados</option></select>
+      </header>
+      <div id="ped-lista" class="pedidos"></div>
+    </section>
+
+    <!-- SITIO -->
+    <section data-vista="sitio" hidden>
+      <header class="panel__cab"><div><span class="kicker">Configuración</span><h1>Datos del sitio</h1><p>Contacto, textos de portada y aviso destacado.</p></div></header>
+      <form id="f-sitio" class="tarjeta campos campos--sitio"></form>
+    </section>
+  </main>
+</div>
+
+<!-- modal producto -->
+<div class="modal" id="m-prod" role="dialog" aria-modal="true" aria-labelledby="mp-tit">
+  <div class="velo on" data-cerrar style="position:absolute"></div>
+  <form class="modal__caja modal__caja--form" id="f-prod">
+    <button class="x" type="button" data-cerrar aria-label="Cerrar">×</button>
+    <div class="mp-foto">
+      <div class="mp-foto__img" id="mp-img"></div>
+      <label class="btn btn--linea btn--chico"><input type="file" id="mp-file" accept="image/*" hidden>Subir foto</label>
+      <button class="quitar" type="button" id="mp-sinfoto">Quitar foto</button>
+      <p class="ayuda" style="text-align:center">Se optimiza sola. Ideal fondo blanco, cuadrada.</p>
+    </div>
+    <div class="campos" style="padding:28px">
+      <h2 id="mp-tit" style="margin:0;font-size:22px">Producto</h2>
+      <div class="fila">
+        <div class="campo"><label for="mp-art">Código *</label><input id="mp-art" required class="inp"></div>
+        <div class="campo"><label for="mp-precio">Precio ($)</label><input id="mp-precio" type="number" step="0.01" min="0" class="inp" placeholder="Vacío = Consultar"></div>
+      </div>
+      <div class="campo"><label for="mp-nombre">Nombre *</label><input id="mp-nombre" required class="inp"></div>
+      <div class="campo"><label for="mp-cat">Rubro</label><select id="mp-cat" class="inp"></select></div>
+      <div class="campo"><label for="mp-nota">Descripción corta (opcional)</label><textarea id="mp-nota" rows="2" class="inp"></textarea></div>
+      <div style="display:flex;gap:20px;flex-wrap:wrap">
+        <label class="check"><input type="checkbox" id="mp-activo" checked> Visible en la web</label>
+        <label class="check"><input type="checkbox" id="mp-dest"> Destacado en portada</label>
+      </div>
+      <p class="error" id="mp-err" hidden></p>
+      <div style="display:flex;gap:10px;justify-content:space-between;flex-wrap:wrap;margin-top:6px">
+        <button class="btn btn--verde" type="submit">Guardar</button>
+        <button class="btn btn--linea btn--chico" type="button" id="mp-borrar" style="color:var(--rojo)">Eliminar</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script src="assets/vendor/supabase.min.js" defer></script>
+<script src="assets/vendor/xlsx.mini.min.js" defer></script>
+<script src="assets/js/config.js" defer></script>
+<script src="assets/js/iconos.js" defer></script>
+<script src="assets/js/tablero.js" defer></script>
+</body>
+</html>

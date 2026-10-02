@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Catálogo y lista de precios · Distribuidora Libertad</title>
+<meta name="description" content="Catálogo completo de Distribuidora Libertad: más de 6.500 artículos de ferretería con precios mayoristas. Buscá por nombre o código y armá tu pedido por WhatsApp.">
+<meta name="theme-color" content="#003D1D">
+<meta property="og:title" content="Catálogo y lista de precios · Distribuidora Libertad">
+<meta property="og:description" content="Más de 6.500 artículos de ferretería. Armá tu pedido y envialo por WhatsApp.">
+<meta property="og:image" content="https://distribuidora-libertad.netlify.app/assets/img/og-share.jpg">
+<link rel="icon" href="assets/img/icon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/img/icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preload" href="assets/fonts/archivo-wdth.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<a class="sr" href="#main">Saltar al contenido</a>
+<div class="aviso" id="aviso" hidden></div>
+
+<div class="topbar">
+  <div class="wrap">
+    <span class="topbar__lista mono">LISTA VIGENTE · <span data-aj="lista_nombre">Agosto 2026</span> · <span data-total-art>6.528</span> ARTÍCULOS</span>
+    <span class="topbar__datos">
+      <a data-tel href="#"><span data-aj="telefono">02657 435525</span></a>
+      <a data-wa href="#">WhatsApp <span data-aj="whatsapp_visible">2657 55-7780</span></a>
+    </span>
+  </div>
+</div>
+
+<header class="header">
+  <div class="wrap">
+    <a class="header__logo" href="./" aria-label="Distribuidora Libertad, inicio"><img src="assets/img/logo.webp" alt="Distribuidora Libertad" width="720" height="240"></a>
+    <nav class="nav" aria-label="Principal">
+      <a href="./#rubros">Rubros</a>
+      <a href="catalogo.html" aria-current="page">Catálogo y precios</a>
+      <a href="./#como-pedir">Cómo pedir</a>
+      <a href="./#nosotros">Nosotros</a>
+      <a href="./#contacto">Contacto</a>
+    </nav>
+    <div class="header__acciones">
+      <button class="btn btn--verde btn-pedido" id="btn-pedido" type="button" data-pedido-abrir aria-label="Ver pedido">
+        <i data-ic="carrito"></i><span class="txt">Pedido</span><span class="btn-pedido__n" data-pedido-n>0</span>
+      </button>
+      <button class="btn-menu" type="button" data-menu-abrir aria-label="Abrir menú"><i data-ic="menu"></i></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu-movil" id="menu-movil" role="dialog" aria-label="Menú">
+  <div class="menu-movil__top">
+    <img src="assets/img/logo.webp" alt="Distribuidora Libertad" style="height:36px;width:auto">
+    <button class="x" type="button" data-menu-cerrar aria-label="Cerrar menú">×</button>
+  </div>
+  <nav>
+    <a href="./">Inicio</a>
+    <a href="./#rubros">Rubros</a>
+    <a href="catalogo.html">Catálogo y precios</a>
+    <a href="./#como-pedir">Cómo pedir</a>
+    <a href="./#nosotros">Nosotros</a>
+    <a href="./#contacto">Contacto</a>
+  </nav>
+  <a class="btn btn--wa" data-wa href="#"><i data-ic="wa"></i>Escribinos por WhatsApp</a>
+</div>
+
+<main id="main">
+  <section class="cat-cab">
+    <div class="cat-cab__bg" id="cat-bg"><img src="assets/img/hero-desktop-1200.webp" alt=""></div>
+    <div class="wrap">
+      <nav class="migas" aria-label="Ubicación"><a href="./">Inicio</a><span>/</span><span>Catálogo</span><span id="miga-rubro" hidden></span></nav>
+      <h1 class="h2" id="cat-titulo">Catálogo y lista de precios</h1>
+      <p id="cat-bajada">Lista <span data-aj="lista_nombre">Agosto 2026</span> · <span data-total-art>6.528</span> artículos. Sumá lo que necesitás y envianos el pedido por WhatsApp.</p>
+      <form class="buscador" id="f-buscar" role="search">
+        <label class="sr" for="q">Buscar</label>
+        <input id="q" name="q" type="search" placeholder="Buscá por nombre o código…" autocomplete="off">
+        <button type="submit"><i data-ic="buscar"></i><span>Buscar</span></button>
+      </form>
+    </div>
+  </section>
+
+  <div class="wrap cat">
+    <aside class="filtros" aria-label="Filtros">
+      <h3>Rubros</h3>
+      <ul class="filtro-rubros" id="f-rubros"></ul>
+      <div class="filtros__extra">
+        <label class="check"><input type="checkbox" id="f-precio"> Solo con precio</label>
+        <label class="check"><input type="checkbox" id="f-foto"> Solo con foto</label>
+      </div>
+    </aside>
+
+    <section aria-live="polite">
+      <div class="chips" id="chips"></div>
+      <div class="cat-barra">
+        <span class="cat-barra__n" id="n-res">Cargando catálogo…</span>
+        <div style="display:flex;gap:10px;align-items:center">
+          <label class="sr" for="orden">Ordenar</label>
+          <select id="orden">
+            <option value="rel">Más relevantes</option>
+            <option value="az">Nombre A–Z</option>
+            <option value="pa">Precio: menor a mayor</option>
+            <option value="pd">Precio: mayor a menor</option>
+          </select>
+          <div class="vista" role="group" aria-label="Vista">
+            <button type="button" data-vista="lista" aria-pressed="true" aria-label="Vista lista"><i data-ic="filas"></i></button>
+            <button type="button" data-vista="grilla" aria-pressed="false" aria-label="Vista grilla"><i data-ic="grilla"></i></button>
+          </div>
+        </div>
+      </div>
+      <div id="resultados"></div>
+      <div class="mas"><button class="btn btn--linea" type="button" id="btn-mas" hidden>Ver más artículos</button></div>
+      <p class="nota-precios" data-aj="nota_precios"></p>
+    </section>
+  </div>
+</main>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="m-nom">
+  <div class="velo on" data-cerrar-modal style="position:absolute"></div>
+  <div class="modal__caja">
+    <button class="x" type="button" data-cerrar-modal aria-label="Cerrar">×</button>
+    <div class="modal__img" id="m-img"></div>
+    <div class="modal__info">
+      <span class="kicker" id="m-rubro"></span>
+      <h2 class="h3" id="m-nom" style="font-size:24px"></h2>
+      <span class="mono" style="font-size:13px;color:var(--gris)">Código <b id="m-cod"></b></span>
+      <p id="m-nota" style="margin:0;color:var(--tinta-2)"></p>
+      <div id="m-precio" style="font-size:30px;font-weight:850;letter-spacing:-.01em"></div>
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+        <div class="cant"><button type="button" id="m-menos" aria-label="Restar">−</button><input type="number" id="m-q" value="1" min="1" aria-label="Cantidad"><button type="button" id="m-mas" aria-label="Sumar">+</button></div>
+        <button class="btn btn--verde" type="button" id="m-add"><i data-ic="carrito"></i>Agregar al pedido</button>
+      </div>
+      <a class="link-flecha" id="m-wa" target="_blank" rel="noopener" href="#">Consultar este artículo por WhatsApp</a>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div class="footer__marca">
+        <img src="assets/img/logo-blanco.webp" alt="Distribuidora Libertad" width="720" height="240">
+        <p style="max-width:34ch;margin-top:16px">Empresa familiar de Villa Mercedes, San Luis. Más de 24 años distribuyendo productos de ferretería.</p>
+      </div>
+      <div><h4>Sitio</h4><ul><li><a href="./">Inicio</a></li><li><a href="./#rubros">Rubros</a></li><li><a href="./#como-pedir">Cómo pedir</a></li><li><a href="./#nosotros">Nosotros</a></li></ul></div>
+      <div><h4>Contacto</h4><ul><li><a data-wa href="#">WhatsApp</a></li><li><a data-tel href="#" data-aj="telefono">02657 435525</a></li><li><a data-mail href="#">Email</a></li></ul></div>
+      <div><h4>Dónde estamos</h4><ul><li><span data-aj="direccion">Edison 666</span></li><li data-aj="localidad">Villa Mercedes (5732), San Luis</li></ul></div>
+    </div>
+    <div class="footer__base">
+      <span>© 2026 Distribuidora Libertad. Todos los derechos reservados.</span>
+      <span>Lista de precios <span data-aj="lista_nombre">Agosto 2026</span></span>
+    </div>
+  </div>
+</footer>
+
+<a class="wa-flot" data-wa href="#" aria-label="Escribinos por WhatsApp"><i data-ic="wa"></i></a>
+
+<script src="assets/vendor/supabase.min.js" defer></script>
+<script src="assets/js/config.js" defer></script>
+<script src="assets/js/iconos.js" defer></script>
+<script src="assets/js/db.js" defer></script>
+<script src="assets/js/comun.js" defer></script>
+<script src="assets/js/catalogo.js" defer></script>
+</body>
+</html>

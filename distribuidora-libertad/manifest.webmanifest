@@ -1,0 +1,12 @@
+{
+  "name": "Distribuidora Libertad",
+  "short_name": "Libertad",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F5F3EE",
+  "theme_color": "#003D1D",
+  "icons": [
+    { "src": "assets/img/icon-180.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "assets/img/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

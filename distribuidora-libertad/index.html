@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Distribuidora Libertad · Ferretería mayorista en Villa Mercedes, San Luis</title>
+<meta name="description" content="Empresa familiar con más de 24 años distribuyendo productos de ferretería en Villa Mercedes, San Luis Capital y toda la provincia. Catálogo con más de 6.500 artículos y pedidos por WhatsApp.">
+<meta name="theme-color" content="#003D1D">
+<link rel="canonical" href="https://distribuidora-libertad.netlify.app/">
+<meta property="og:url" content="https://distribuidora-libertad.netlify.app/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Distribuidora Libertad · Ferretería mayorista">
+<meta property="og:description" content="24 años abasteciendo ferreterías, comercios y profesionales de San Luis. Catálogo online y pedidos por WhatsApp.">
+<meta property="og:image" content="https://distribuidora-libertad.netlify.app/assets/img/og-share.jpg">
+<meta property="og:locale" content="es_AR">
+<link rel="icon" href="assets/img/icon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/img/icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preload" href="assets/fonts/archivo-wdth.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"HardwareStore","name":"Distribuidora Libertad","description":"Distribuidora mayorista de productos de ferretería. Empresa familiar con más de 24 años de trayectoria.","address":{"@type":"PostalAddress","streetAddress":"Edison 666","addressLocality":"Villa Mercedes","postalCode":"5732","addressRegion":"San Luis","addressCountry":"AR"},"telephone":"+54 2657 435525","email":"ventas@distrilibertad.com.ar","areaServed":"Provincia de San Luis"}
+</script>
+</head>
+<body>
+<a class="sr" href="#main">Saltar al contenido</a>
+<div class="aviso" id="aviso" hidden></div>
+
+<div class="topbar">
+  <div class="wrap">
+    <span class="topbar__lista mono">LISTA VIGENTE · <span data-aj="lista_nombre">Agosto 2026</span> · <span data-total-art>6.528</span> ARTÍCULOS</span>
+    <span class="topbar__datos">
+      <a data-tel href="#"><span data-aj="telefono">02657 435525</span></a>
+      <a data-wa href="#">WhatsApp <span data-aj="whatsapp_visible">2657 55-7780</span></a>
+    </span>
+  </div>
+</div>
+
+<header class="header">
+  <div class="wrap">
+    <a class="header__logo" href="./" aria-label="Distribuidora Libertad, inicio"><img src="assets/img/logo.webp" alt="Distribuidora Libertad" width="720" height="240"></a>
+    <nav class="nav" aria-label="Principal">
+      <a href="#rubros">Rubros</a>
+      <a href="catalogo.html">Catálogo y precios</a>
+      <a href="#como-pedir">Cómo pedir</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#cobertura">Cobertura</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <div class="header__acciones">
+      <button class="btn btn--verde btn-pedido" id="btn-pedido" type="button" data-pedido-abrir aria-label="Ver pedido">
+        <i data-ic="carrito"></i><span class="txt">Pedido</span><span class="btn-pedido__n" data-pedido-n>0</span>
+      </button>
+      <button class="btn-menu" type="button" data-menu-abrir aria-label="Abrir menú"><i data-ic="menu"></i></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu-movil" id="menu-movil" role="dialog" aria-label="Menú">
+  <div class="menu-movil__top">
+    <img src="assets/img/logo.webp" alt="Distribuidora Libertad" style="height:36px;width:auto">
+    <button class="x" type="button" data-menu-cerrar aria-label="Cerrar menú">×</button>
+  </div>
+  <nav>
+    <a href="#rubros">Rubros</a>
+    <a href="catalogo.html">Catálogo y precios</a>
+    <a href="#como-pedir">Cómo pedir</a>
+    <a href="#nosotros">Nosotros</a>
+    <a href="#cobertura">Cobertura</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+  <a class="btn btn--wa" data-wa href="#"><i data-ic="wa"></i>Escribinos por WhatsApp</a>
+</div>
+
+<main id="main">
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <picture class="hero__img foto" id="hero-img">
+    <source media="(max-width: 760px)" srcset="assets/img/hero-mobile.webp">
+    <img src="assets/img/hero-desktop.webp" srcset="assets/img/hero-desktop-1200.webp 1200w, assets/img/hero-desktop.webp 1672w" sizes="100vw" alt="Depósito de mercadería de ferretería" fetchpriority="high">
+  </picture>
+  <div class="wrap">
+    <div>
+      <span class="kicker">Distribuidora mayorista · Villa Mercedes, San Luis</span>
+      <h1 class="display" id="hero-titulo">Ferretería por mayor, <em>con palabra.</em></h1>
+      <p class="lead" data-aj="hero_bajada">Hace 24 años abastecemos ferreterías, comercios y profesionales de toda la provincia de San Luis desde Villa Mercedes.</p>
+      <form class="buscador" action="catalogo.html" role="search">
+        <label class="sr" for="q-hero">Buscar en el catálogo</label>
+        <input id="q-hero" name="q" type="search" placeholder="Buscá por nombre o código…" autocomplete="off">
+        <button type="submit"><i data-ic="buscar"></i><span>Buscar</span></button>
+      </form>
+      <div class="hero__ctas">
+        <a class="btn btn--verde" href="catalogo.html">Ver catálogo y precios</a>
+        <a class="btn btn--linea" data-wa="Hola Distribuidora Libertad, quería hacer un pedido." href="#"><i data-ic="wa"></i>Pedir por WhatsApp</a>
+      </div>
+    </div>
+    <aside class="remito rv" aria-label="Nuestro compromiso">
+      <div class="remito__cab">
+        <img src="assets/img/logo.webp" alt="">
+        <div class="remito__num">REMITO Nº 0024<br>VILLA MERCEDES · S.L.</div>
+      </div>
+      <ul>
+        <li><span>Atención personalizada</span><span>✓</span></li>
+        <li><span>Lista de precios al día</span><span>✓</span></li>
+        <li><span>Entrega en tiempo y forma</span><span>✓</span></li>
+        <li><span>Toda la provincia</span><span>✓</span></li>
+      </ul>
+      <div class="remito__pie">
+        <span class="firma">Conforme: el cliente</span>
+        <span class="sello">Cumplido</span>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section class="cinta" aria-label="Datos de la empresa">
+  <div class="wrap">
+    <div class="cinta__item"><div class="cinta__num"><span data-aj="anios">24</span> años</div><div class="cinta__txt">de trayectoria familiar</div></div>
+    <div class="cinta__item"><div class="cinta__num" data-total-art>6.528</div><div class="cinta__txt">artículos en catálogo</div></div>
+    <div class="cinta__item"><div class="cinta__num">13</div><div class="cinta__txt">rubros de ferretería</div></div>
+    <div class="cinta__item"><div class="cinta__num">San Luis</div><div class="cinta__txt">Capital, Mercedes y el interior</div></div>
+  </div>
+</section>
+
+<!-- ============ RUBROS ============ -->
+<section class="seccion" id="rubros">
+  <div class="wrap">
+    <div class="seccion__cab rv">
+      <div>
+        <span class="kicker">01 · Rubros</span>
+        <h2 class="h2">Todo lo que tu ferretería necesita, en un solo proveedor.</h2>
+      </div>
+      <a class="link-flecha" href="catalogo.html">Ver catálogo completo</a>
+    </div>
+    <div class="rubros" id="grid-rubros"></div>
+  </div>
+</section>
+
+<!-- ============ DESTACADOS ============ -->
+<section class="seccion seccion--blanca" id="destacados">
+  <div class="wrap">
+    <div class="seccion__cab rv">
+      <div>
+        <span class="kicker">02 · Destacados</span>
+        <h2 class="h2">Lo que más sale este mes.</h2>
+      </div>
+      <div class="carrusel-nav">
+        <button type="button" data-carr="-1" aria-label="Anterior">←</button>
+        <button type="button" data-carr="1" aria-label="Siguiente">→</button>
+      </div>
+    </div>
+    <div class="carrusel" id="carr-dest"></div>
+    <p class="nota-precios" data-aj="nota_precios"></p>
+  </div>
+</section>
+
+<!-- ============ CÓMO PEDIR ============ -->
+<section class="seccion" id="como-pedir">
+  <div class="wrap">
+    <div class="seccion__cab rv">
+      <div>
+        <span class="kicker">03 · Cómo pedir</span>
+        <h2 class="h2">Tu pedido, en cuatro pasos.</h2>
+      </div>
+      <a class="btn btn--linea" href="catalogo.html">Empezar ahora</a>
+    </div>
+    <div class="pasos rv">
+      <div class="paso"><span class="paso__n">PASO 01</span><i data-ic="buscar" class="paso__ic"></i><h3 class="h3">Buscá</h3><p>Recorré el catálogo por rubro o buscá por nombre o código.</p></div>
+      <div class="paso"><span class="paso__n">PASO 02</span><i data-ic="lista" class="paso__ic"></i><h3 class="h3">Armá tu pedido</h3><p>Sumá artículos y cantidades. Ves el total estimado al instante.</p></div>
+      <div class="paso"><span class="paso__n">PASO 03</span><i data-ic="enviar" class="paso__ic"></i><h3 class="h3">Envialo por WhatsApp</h3><p>Nos llega el detalle completo y te confirmamos stock y precio.</p></div>
+      <div class="paso"><span class="paso__n">PASO 04</span><i data-ic="camion" class="paso__ic"></i><h3 class="h3">Recibilo</h3><p>Coordinamos la entrega y cumplimos con lo que acordamos.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NOSOTROS ============ -->
+<section class="seccion seccion--blanca" id="nosotros">
+  <div class="wrap">
+    <div class="nosotros">
+      <div class="nosotros__texto rv">
+        <span class="kicker">04 · Nosotros</span>
+        <h2 class="h2" style="margin:14px 0 30px">Una empresa familiar con trayectoria y compromiso.</h2>
+        <div class="anios"><b data-aj="anios">24</b><span>años cumpliendo nuestra palabra</span></div>
+        <p>Somos una empresa familiar de Villa Mercedes, San Luis, dedicada a la distribución de productos de ferretería.</p>
+        <p>Construimos nuestro camino sobre valores que consideramos fundamentales: la confianza, el respeto, la responsabilidad y el cumplimiento de nuestra palabra. Cada cliente y cada vínculo comercial son parte de nuestra historia y de nuestro crecimiento.</p>
+        <p>Como empresa familiar, valoramos el trato cercano y humano. Detrás de cada pedido hay una necesidad que merece ser atendida con seriedad, dedicación y eficiencia.</p>
+        <p>Nuestro compromiso está puesto en seguir creciendo, mejorar cada día y continuar construyendo relaciones basadas en la confianza.</p>
+      </div>
+      <div class="collage rv" id="collage">
+        <figure><div class="ph">historia-1</div></figure>
+        <figure><div class="ph">historia-2</div></figure>
+        <figure><div class="ph">historia-3</div></figure>
+      </div>
+    </div>
+    <div class="valores rv">
+      <div class="valor"><i data-ic="confianza"></i><h3>Confianza</h3><p>Relaciones comerciales sólidas y duraderas, pedido tras pedido.</p></div>
+      <div class="valor"><i data-ic="respeto"></i><h3>Respeto</h3><p>Trato cercano y humano con cada cliente, grande o chico.</p></div>
+      <div class="valor"><i data-ic="responsabilidad"></i><h3>Responsabilidad</h3><p>Seriedad, dedicación y eficiencia en cada etapa.</p></div>
+      <div class="valor"><i data-ic="palabra"></i><h3>Palabra cumplida</h3><p>Lo que acordamos, lo entregamos. Así hace 24 años.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLIENTES ============ -->
+<section class="seccion" id="clientes">
+  <div class="wrap">
+    <div class="seccion__cab rv">
+      <div>
+        <span class="kicker">05 · A quién atendemos</span>
+        <h2 class="h2">Acompañamos a quienes abastecen a toda la provincia.</h2>
+      </div>
+    </div>
+    <div class="clientes" id="clientes-grid">
+      <article class="cliente rv" data-img="cliente-ferreterias"><i data-ic="tienda" class="ph-ic"></i><div class="cliente__txt"><span class="mono">01</span><h3>Ferreterías</h3><p>Reposición ágil con más de 6.500 artículos y lista de precios actualizada.</p></div></article>
+      <article class="cliente rv" data-img="cliente-comercios"><i data-ic="caja" class="ph-ic"></i><div class="cliente__txt"><span class="mono">02</span><h3>Comercios</h3><p>Corralones, almacenes de campo y comercios del interior que suman ferretería.</p></div></article>
+      <article class="cliente rv" data-img="cliente-profesionales"><i data-ic="casco" class="ph-ic"></i><div class="cliente__txt"><span class="mono">03</span><h3>Profesionales</h3><p>Electricistas, plomeros, constructores e instaladores que necesitan cumplir.</p></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COBERTURA ============ -->
+<section class="seccion cobertura" id="cobertura">
+  <div class="cobertura__bg" id="cobertura-bg"></div>
+  <div class="wrap">
+    <div class="rv">
+      <span class="kicker">06 · Cobertura</span>
+      <h2 class="h2" style="margin-top:14px">Desde Villa Mercedes a toda la provincia.</h2>
+      <p class="lead" style="margin-top:18px">Trabajamos en Villa Mercedes, San Luis Capital y diferentes localidades y zonas de la provincia, adaptándonos a las necesidades de cada cliente.</p>
+      <ul class="zonas" id="zonas"></ul>
+      <a class="btn btn--blanco" style="margin-top:30px" data-wa="Hola, quería saber si llegan con entregas a mi localidad: " href="#">Consultar por mi localidad</a>
+    </div>
+    <div class="mapa rv" id="mapa" aria-hidden="true"></div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="cta">
+  <img class="cta__iso" src="assets/img/isotipo.png" alt="">
+  <div class="wrap">
+    <div>
+      <h2 class="h2">¿Tenés un comercio y querés trabajar con nosotros?</h2>
+      <p>Escribinos y te pasamos condiciones, lista de precios y formas de entrega.</p>
+    </div>
+    <a class="btn btn--blanco" data-wa="Hola Distribuidora Libertad, tengo un comercio y quería empezar a trabajar con ustedes." href="#"><i data-ic="wa"></i>Quiero ser cliente</a>
+  </div>
+</section>
+
+<!-- ============ CONTACTO ============ -->
+<section class="seccion seccion--blanca" id="contacto">
+  <div class="wrap contacto">
+    <div class="rv">
+      <span class="kicker">07 · Contacto</span>
+      <h2 class="h2" style="margin-top:14px">Estamos en Villa Mercedes.</h2>
+      <ul class="datos">
+        <li><i data-ic="pin"></i><div><div class="lbl">Dirección</div><a class="val" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Edison+666+Villa+Mercedes+San+Luis"><span data-aj="direccion">Edison 666</span>, <span data-aj="localidad">Villa Mercedes (5732), San Luis</span></a></div></li>
+        <li><i data-ic="wa"></i><div><div class="lbl">WhatsApp pedidos</div><a class="val" data-wa href="#" data-aj="whatsapp_visible">2657 55-7780</a></div></li>
+        <li><i data-ic="tel"></i><div><div class="lbl">Teléfono</div><a class="val" data-tel href="#" data-aj="telefono">02657 435525</a></div></li>
+        <li><i data-ic="mail"></i><div><div class="lbl">Email</div><a class="val" data-mail href="#" data-aj="email">ventas@distrilibertad.com.ar</a></div></li>
+        <li data-aj-if="horario" hidden><i data-ic="reloj"></i><div><div class="lbl">Horario</div><span class="val" data-aj="horario"></span></div></li>
+      </ul>
+    </div>
+    <div class="mapa-g rv">
+      <iframe title="Mapa: Edison 666, Villa Mercedes" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        src="https://maps.google.com/maps?q=Edison%20666%2C%20Villa%20Mercedes%2C%20San%20Luis%2C%20Argentina&z=15&output=embed"></iframe>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div class="footer__marca">
+        <img src="assets/img/logo-blanco.webp" alt="Distribuidora Libertad" width="720" height="240">
+        <p style="max-width:34ch;margin-top:16px">Empresa familiar de Villa Mercedes, San Luis. Más de 24 años distribuyendo productos de ferretería.</p>
+      </div>
+      <div><h4>Sitio</h4><ul><li><a href="#rubros">Rubros</a></li><li><a href="catalogo.html">Catálogo y precios</a></li><li><a href="#como-pedir">Cómo pedir</a></li><li><a href="#nosotros">Nosotros</a></li></ul></div>
+      <div><h4>Contacto</h4><ul><li><a data-wa href="#">WhatsApp</a></li><li><a data-tel href="#" data-aj="telefono">02657 435525</a></li><li><a data-mail href="#">Email</a></li><li data-aj-if="instagram" hidden><a data-ig href="#" target="_blank" rel="noopener">Instagram</a></li><li data-aj-if="facebook" hidden><a data-fb href="#" target="_blank" rel="noopener">Facebook</a></li></ul></div>
+      <div><h4>Dónde estamos</h4><ul><li><span data-aj="direccion">Edison 666</span></li><li data-aj="localidad">Villa Mercedes (5732), San Luis</li></ul></div>
+    </div>
+    <div class="footer__base">
+      <span>© <span id="anio">2026</span> Distribuidora Libertad. Todos los derechos reservados.</span>
+      <span>Lista de precios <span data-aj="lista_nombre">Agosto 2026</span></span>
+    </div>
+  </div>
+</footer>
+
+<a class="wa-flot" data-wa href="#" aria-label="Escribinos por WhatsApp"><i data-ic="wa"></i></a>
+
+<script src="assets/vendor/supabase.min.js" defer></script>
+<script src="assets/js/config.js" defer></script>
+<script src="assets/js/iconos.js" defer></script>
+<script src="assets/js/db.js" defer></script>
+<script src="assets/js/comun.js" defer></script>
+<script src="assets/js/home.js" defer></script>
+</body>
+</html>
