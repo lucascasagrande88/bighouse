@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="es" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Bevacqua — Look & More</title>
+  <meta name="description" content="Bevacqua Look & More. Estudio de estilismo, imagen, cortes, color y experiencias entre Buenos Aires y Bariloche. Reservá tu turno con Esteban.">
+  <meta name="theme-color" content="#080808">
+  <meta property="og:title" content="Bevacqua — Look & More">
+  <meta property="og:description" content="Estilismo, imagen y experiencia. Buenos Aires / Patagonia.">
+  <meta property="og:image" content="/media/v6.jpg">
+  <link rel="icon" href="/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/site.css">
+  <script>document.documentElement.classList.replace('no-js','js')</script>
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor" aria-hidden="true"><span>PLAY</span></div>
+
+  <!-- LOADER -->
+  <div class="loader" aria-hidden="true">
+    <div class="loader-word"><span>B</span><span>V</span><span>C</span><span>Q</span></div>
+    <div class="loader-bar"><i></i></div>
+  </div>
+
+  <!-- NAV -->
+  <header class="nav">
+    <a href="#top" class="nav-logo" aria-label="Bevacqua inicio">
+      <span class="ring-mini" data-ring="mini"></span>
+      <span>BVCQ</span>
+    </a>
+    <div class="nav-right">
+      <nav class="nav-links" aria-label="Principal">
+        <a href="#experiencia">Experiencia</a>
+        <a href="#calendario">Calendario</a>
+        <a href="#turnos">Turnos</a>
+        <a href="#profesionales">Profesionales</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <button class="nav-burger" aria-label="Menú" id="burger"><i></i><i></i></button>
+    </div>
+  </header>
+  <a href="#turnos" class="nav-cta">Reservar</a>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#experiencia"><small>01</small>Experiencia</a>
+    <a href="#calendario"><small>02</small>Calendario</a>
+    <a href="#turnos"><small>03</small>Turnos</a>
+    <a href="#profesionales"><small>04</small>Profesionales</a>
+    <a href="#contacto"><small>05</small>Contacto</a>
+  </div>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <div class="hero-media">
+        <video src="/media/v6.mp4" poster="/media/v6.jpg" autoplay muted loop playsinline preload="auto"></video>
+      </div>
+      <div class="hero-inner">
+        <div class="hero-top">
+          <div class="hero-kicker" data-bind="brand.heroKicker">Estudio de estilismo · Buenos Aires — Patagonia</div>
+          <p class="hero-sub" data-bind="brand.heroSub">Imagen, corte, color y experiencia. Un estudio que se mueve entre la ciudad y la montaña.</p>
+        </div>
+        <h1 class="hero-title" aria-label="Bevacqua Look and More">
+          <span>B</span><span>e</span><span>v</span><span>a</span><span>c</span><span>q</span><span>u</span><span>a</span>
+        </h1>
+      </div>
+      <a href="#turnos" class="hero-badge" aria-label="Reservar turno">
+        <svg viewBox="0 0 200 200" aria-hidden="true">
+          <defs><path id="badgePath" d="M100,100 m-82,0 a82,82 0 1,1 164,0 a82,82 0 1,1 -164,0"/></defs>
+          <text fill="#fff" font-size="13.5" font-weight="500" letter-spacing="3.5" font-family="Jost, sans-serif"><textPath href="#badgePath" textLength="512" lengthAdjust="spacing">LOOK &amp; MORE • RESERVÁ TU TURNO • BEVACQUA •</textPath></text>
+        </svg>
+        <b>TURNOS</b>
+      </a>
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track" id="marquee">
+        <span>Estilismo</span><span class="serif">imagen</span><span>Corte</span><span>Color</span><span class="serif">experiencia</span><span>Buenos Aires</span><span>Bariloche</span><span class="serif">vanguardia</span>
+      </div>
+    </div>
+
+    <!-- MANIFESTO -->
+    <section class="section" id="manifiesto">
+      <div class="wrap">
+        <div class="label" data-reveal>Manifiesto</div>
+        <p class="manifesto" id="manifesto" style="margin-top:32px">No somos una peluquería. Somos un <span class="serif">estudio de imagen</span>: cortes, color y asesoramiento pensados como una pieza editorial. Cada cliente es una historia, cada look es un <span class="serif">escenario propio.</span></p>
+        <div class="manifesto-foot">
+          <p data-reveal data-bind="brand.about">Esteban Bevacqua trabaja entre Buenos Aires y Bariloche, llevando el estudio a donde está la gente. Estilismo, imagen y comunicación en un mismo lugar.</p>
+          <span data-ring="mid" style="width:150px;height:150px;display:block" data-reveal></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 QUESTIONS -->
+    <section class="section" style="padding-top:0">
+      <div class="wrap questions-wrap">
+        <div class="label" data-reveal style="margin-bottom:28px">En 4 preguntas</div>
+        <div class="questions">
+          <a class="q-row" href="#experiencia" data-reveal>
+            <span class="q-num">01</span><span class="q-q">¿Qué hace Bevacqua?</span>
+            <span class="q-a">Estilismo, imagen, cortes, color y experiencias.</span>
+            <span class="q-arrow"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+          </a>
+          <a class="q-row" href="#calendario" data-reveal>
+            <span class="q-num">02</span><span class="q-q">¿Dónde está?</span>
+            <span class="q-a" id="qWhere">Buenos Aires / Bariloche / otros destinos.</span>
+            <span class="q-arrow"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+          </a>
+          <a class="q-row" href="#turnos" data-reveal>
+            <span class="q-num">03</span><span class="q-q">¿Cuándo puedo reservar?</span>
+            <span class="q-a" id="qWhen">Calendario actualizado, turnos en tiempo real.</span>
+            <span class="q-arrow"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+          </a>
+          <a class="q-row" href="#profesionales" data-reveal>
+            <span class="q-num">04</span><span class="q-q">¿Puedo trabajar en el estudio?</span>
+            <span class="q-a">Sí. 3 puestos para profesionales del estilismo.</span>
+            <span class="q-arrow"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCIA: REEL -->
+    <section id="experiencia">
+      <div class="reel" id="reel">
+        <div class="reel-track" id="reelTrack">
+          <div class="reel-intro">
+            <div class="label">Bevacqua Content</div>
+            <h2 class="sec-title">Experiencia<br><span class="serif">& vanguardia</span></h2>
+            <p>Cortes, transformaciones, backstage y producciones dentro y fuera del estudio. Contenido propio, con estética editorial.</p>
+          </div>
+          <!-- cards injected -->
+        </div>
+        <div class="reel-progress"><i id="reelBar"></i></div>
+      </div>
+
+      <div class="section" style="padding-top:clamp(40px,6vw,80px)">
+        <div class="wrap">
+          <div class="sec-head">
+            <div>
+              <div class="label" data-reveal>Archivo</div>
+              <h2 class="sec-title" data-reveal>Todo el <span class="serif">contenido</span></h2>
+            </div>
+            <p class="sec-lead" data-reveal>Fotos, videos, cortes y trabajos. Se actualiza desde el estudio, desde la ruta, desde donde estemos.</p>
+          </div>
+          <div class="filters" id="filters"></div>
+          <div class="grid" id="grid"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CALENDARIO ESTEBAN -->
+    <section class="section" id="calendario" style="border-top:1px solid var(--line)">
+      <div class="wrap">
+        <div class="sec-head">
+          <div>
+            <div class="label" data-reveal>Calendario de Esteban</div>
+            <h2 class="sec-title" data-reveal>¿Dónde<br><span class="serif">estoy?</span></h2>
+          </div>
+          <p class="sec-lead" data-reveal>Dónde estoy → qué días estoy → qué horarios tengo → reservar. Tocá un día para ver la disponibilidad.</p>
+        </div>
+
+        <div class="now-card" data-reveal id="nowCard">
+          <span class="pulse"></span>
+          <div><h3 id="nowText">Cargando agenda…</h3><p id="nowSub"></p></div>
+          <a href="#turnos" class="btn btn-green" id="nowBtn">Reservar</a>
+        </div>
+
+        <div class="cal-layout">
+          <div>
+            <div class="cal" id="estebanCal" data-reveal></div>
+            <div class="legend" id="legend"></div>
+            <div class="day-panel" id="dayPanel"></div>
+          </div>
+          <div class="stops" data-reveal>
+            <h4>Próximas paradas</h4>
+            <div id="stops"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TURNOS -->
+    <section class="section" id="turnos" style="border-top:1px solid var(--line)">
+      <div class="wrap">
+        <div class="sec-head">
+          <div>
+            <div class="label" data-reveal>Turnos clientes</div>
+            <h2 class="sec-title" data-reveal>Reservá<br><span class="serif">con Esteban</span></h2>
+          </div>
+          <p class="sec-lead" data-reveal>Ubicación, servicio, fecha y horario. Los turnos se organizan según la disponibilidad real de Esteban.</p>
+        </div>
+
+        <div class="booking" data-reveal>
+          <ol class="steps" id="bSteps">
+            <li data-step="0"><div><b>Ubicación</b><em></em></div></li>
+            <li data-step="1"><div><b>Servicio</b><em></em></div></li>
+            <li data-step="2"><div><b>Fecha</b><em></em></div></li>
+            <li data-step="3"><div><b>Horario</b><em></em></div></li>
+            <li data-step="4"><div><b>Tus datos</b><em></em></div></li>
+          </ol>
+          <div>
+            <div class="step-pane" data-pane="0">
+              <h3>¿Dónde <span class="serif">te encontrás?</span></h3>
+              <div class="opt-grid" id="bLocs"></div>
+            </div>
+            <div class="step-pane" data-pane="1">
+              <h3>Elegí el <span class="serif">servicio</span></h3>
+              <div class="opt-grid" id="bServices"></div>
+              <div class="step-actions"><button class="btn" data-back>← Volver</button></div>
+            </div>
+            <div class="step-pane" data-pane="2">
+              <h3>¿Qué <span class="serif">día?</span></h3>
+              <div class="cal" id="bCal"></div>
+              <div class="step-actions"><button class="btn" data-back>← Volver</button></div>
+            </div>
+            <div class="step-pane" data-pane="3">
+              <h3>Horarios <span class="serif">disponibles</span></h3>
+              <div class="slots" id="bSlots"></div>
+              <div class="step-actions"><button class="btn" data-back>← Volver</button></div>
+            </div>
+            <div class="step-pane" data-pane="4">
+              <h3>Último <span class="serif">paso</span></h3>
+              <div class="summary" id="bSummary"></div>
+              <form id="bForm" class="form-grid" autocomplete="on">
+                <div class="field"><label for="bName">Nombre y apellido</label><input id="bName" name="name" required autocomplete="name"></div>
+                <div class="field"><label for="bPhone">WhatsApp</label><input id="bPhone" name="phone" type="tel" required autocomplete="tel" placeholder="+54 9 11 …"></div>
+                <div class="field full"><label for="bEmail">Email (opcional)</label><input id="bEmail" name="email" type="email" autocomplete="email"></div>
+                <div class="field full"><label for="bNotes">¿Algo que debamos saber? (opcional)</label><textarea id="bNotes" name="notes" placeholder="Referencias, tipo de pelo, idea de look…"></textarea></div>
+                <div class="full step-actions" style="margin-top:12px">
+                  <button type="button" class="btn" data-back>← Volver</button>
+                  <button type="submit" class="btn btn-green">Confirmar turno</button>
+                </div>
+                <div class="full err" id="bErr"></div>
+              </form>
+            </div>
+            <div class="step-pane" data-pane="5" id="bDone"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROFESIONALES -->
+    <section class="section light" id="profesionales">
+      <div class="wrap">
+        <div class="pro-hero">
+          <div>
+            <div class="label" data-reveal>Espacio para profesionales</div>
+            <h2 class="sec-title" data-reveal>Trabajá<br><span class="serif">en el estudio</span></h2>
+            <div style="margin-top:40px" data-reveal>
+              <div class="pro-big" id="proStations">3</div>
+              <p>Puestos de trabajo para profesionales del estilismo</p>
+              <p class="sec-lead" style="justify-self:start;margin:0">Un estudio equipado, con estética propia y comunidad. Alquilá por día, semana o mes y sumate al circuito Bevacqua.</p>
+              <ul class="perks" id="perks"></ul>
+            </div>
+          </div>
+          <div class="pro-media" data-reveal><video src="/media/v5.mp4" poster="/media/v5.jpg" autoplay muted loop playsinline data-parallax></video></div>
+        </div>
+
+        <div class="label" data-reveal style="margin-bottom:20px">Tipo de alquiler</div>
+        <div class="prices" id="prices" data-reveal></div>
+
+        <div class="booking" data-reveal id="proBooking">
+          <ol class="steps" id="pSteps">
+            <li data-step="0"><div><b>Alquiler</b><em></em></div></li>
+            <li data-step="1"><div><b>Fecha</b><em></em></div></li>
+            <li data-step="2"><div><b>Puesto</b><em></em></div></li>
+            <li data-step="3"><div><b>Tus datos</b><em></em></div></li>
+          </ol>
+          <div>
+            <div class="step-pane" data-pane="0">
+              <h3>Elegí el tipo <span class="serif">de alquiler</span></h3>
+              <div class="opt-grid" id="pTypes"></div>
+            </div>
+            <div class="step-pane" data-pane="1">
+              <h3 id="pDateTitle">¿Desde <span class="serif">qué día?</span></h3>
+              <div class="cal" id="pCal"></div>
+              <div class="legend"><span><i style="background:var(--green);border-radius:50%"></i>Puesto libre</span><span><i style="background:rgba(0,0,0,.18);border-radius:50%"></i>Ocupado</span></div>
+              <div class="step-actions"><button class="btn" data-back>← Volver</button></div>
+            </div>
+            <div class="step-pane" data-pane="2">
+              <h3>Puestos <span class="serif">disponibles</span></h3>
+              <p id="pRange" style="margin:-12px 0 24px;color:var(--muted)"></p>
+              <div class="stations" id="pStations"></div>
+              <div class="step-actions"><button class="btn" data-back>← Volver</button></div>
+            </div>
+            <div class="step-pane" data-pane="3">
+              <h3>Solicitá <span class="serif">tu lugar</span></h3>
+              <div class="summary" id="pSummary"></div>
+              <form id="pForm" class="form-grid">
+                <div class="field"><label for="pName">Nombre y apellido</label><input id="pName" required autocomplete="name"></div>
+                <div class="field"><label for="pPhone">WhatsApp</label><input id="pPhone" type="tel" required autocomplete="tel"></div>
+                <div class="field"><label for="pSpec">Especialidad</label><input id="pSpec" placeholder="Colorista, barbero, estilista…"></div>
+                <div class="field"><label for="pIg">Instagram / portfolio</label><input id="pIg" placeholder="@usuario"></div>
+                <div class="field full"><label for="pEmail">Email</label><input id="pEmail" type="email" autocomplete="email"></div>
+                <div class="field full"><label for="pNotes">Comentarios</label><textarea id="pNotes"></textarea></div>
+                <div class="full step-actions" style="margin-top:12px">
+                  <button type="button" class="btn" data-back>← Volver</button>
+                  <button type="submit" class="btn btn-dark">Enviar solicitud</button>
+                </div>
+                <div class="full err" id="pErr"></div>
+              </form>
+            </div>
+            <div class="step-pane" data-pane="4" id="pDone"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section class="section" id="contacto">
+      <div class="wrap">
+        <div class="label" data-reveal>Contacto</div>
+        <h2 class="contact-big"><span class="line-mask"><span>Hablemos</span></span><span class="line-mask"><span class="serif">de tu look.</span></span></h2>
+        <div class="contact-grid">
+          <div class="contact-links" data-reveal>
+            <a id="cWa" href="#" target="_blank" rel="noopener">WhatsApp <small>Respuesta rápida →</small></a>
+            <a id="cIg" href="#" target="_blank" rel="noopener">Instagram <small id="cIgUser">@bevacqua</small></a>
+            <a id="cMail" href="#">Email <small id="cMailTxt">hola@</small></a>
+            <a href="#turnos">Reservar turno <small>Online, 24/7 →</small></a>
+          </div>
+          <form id="cForm" class="form-grid" data-reveal>
+            <div class="field"><label for="cName">Nombre</label><input id="cName" required></div>
+            <div class="field"><label for="cContact">Email o teléfono</label><input id="cContact"></div>
+            <div class="field full"><label for="cMsg">Mensaje</label><textarea id="cMsg" required></textarea></div>
+            <div class="full"><button class="btn btn-green" type="submit">Enviar mensaje</button></div>
+            <div class="full err" id="cErr"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-row">
+        <span>Bevacqua Look & More</span>
+        <span>Buenos Aires — Bariloche</span>
+        <a href="/admin">Admin</a>
+      </div>
+    </div>
+    <div class="footer-word" id="footerWord">BEVACQUA</div>
+    <div class="wrap footer-row">
+      <span>© <span id="year"></span> BVCQ · Estilismo · Imagen · Experiencia</span>
+      <a href="#top">Volver arriba ↑</a>
+    </div>
+  </footer>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+    <button class="lightbox-close" id="lbClose">Cerrar ✕</button>
+    <div class="lightbox-inner">
+      <div class="lightbox-media" id="lbMedia"></div>
+      <div class="lightbox-text">
+        <div class="label" id="lbTag"></div>
+        <h3 id="lbTitle"></h3>
+        <p id="lbText"></p>
+        <p id="lbPlace" style="font-size:12px;letter-spacing:.25em;text-transform:uppercase;color:var(--green)"></p>
+        <a href="#turnos" class="btn btn-green" id="lbBook" style="margin-top:16px">Quiero este look</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="/js/vendor/gsap.min.js"></script>
+  <script src="/js/vendor/ScrollTrigger.min.js"></script>
+  <script src="/js/vendor/lenis.min.js"></script>
+  <script src="/js/site.js"></script>
+</body>
+</html>

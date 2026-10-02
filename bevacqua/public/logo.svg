@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
+  <rect width="600" height="600" fill="#000"/>
+  <defs>
+    <path id="o" d="M300,300 m-250,0 a250,250 0 1,1 500,0 a250,250 0 1,1 -500,0"/>
+    <path id="i" d="M300,300 m-212,0 a212,212 0 1,1 424,0 a212,212 0 1,1 -424,0"/>
+  </defs>
+  <g font-family="Futura, 'Jost', 'Century Gothic', sans-serif">
+    <text fill="#2CF56D" font-size="34" font-weight="700" letter-spacing="6"><textPath href="#o" textLength="1560" lengthAdjust="spacing">BEVACQUA • BEVACQUA • BEVACQUA • BEVACQUA •</textPath></text>
+    <text fill="#fff" font-size="28" font-weight="300" letter-spacing="5"><textPath href="#i" textLength="1320" lengthAdjust="spacing">LOOK &amp; MORE • LOOK &amp; MORE • LOOK &amp; MORE • LOOK &amp; MORE •</textPath></text>
+    <text x="300" y="336" fill="#2CF56D" font-size="104" font-weight="700" letter-spacing="22" text-anchor="middle">BVCQ</text>
+  </g>
+</svg>

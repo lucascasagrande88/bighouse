@@ -1,0 +1,11 @@
+{
+  "name": "bevacqua-look-and-more",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@netlify/blobs": "^11.1.3"
+  },
+  "scripts": {
+    "dev": "node dev-server.mjs"
+  }
+}

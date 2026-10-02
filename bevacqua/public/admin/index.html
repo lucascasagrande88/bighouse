@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Panel BVCQ</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg:#080808; --bg2:#121212; --bg3:#1b1b1b; --fg:#f1f1ec; --muted:#8a8a85; --line:rgba(241,241,236,.12); --green:#2cf56d; --red:#ff6b6b; --amber:#ffc95c; }
+    * { box-sizing: border-box; }
+    body { margin:0; background:var(--bg); color:var(--fg); font-family:Jost, sans-serif; font-size:15px; -webkit-font-smoothing:antialiased; }
+    button, input, select, textarea { font:inherit; color:inherit; }
+    button { cursor:pointer; background:none; border:0; padding:0; }
+    a { color:inherit; }
+    .serif { font-family:"Instrument Serif", serif; font-style:italic; }
+    /* login */
+    .login { min-height:100vh; display:grid; place-items:center; padding:24px; }
+    .login form { width:min(380px,100%); display:grid; gap:18px; text-align:center; }
+    .login img { width:160px; margin:0 auto 10px; border-radius:50%; }
+    /* layout */
+    .app { display:none; min-height:100vh; grid-template-columns:240px 1fr; }
+    .authed .app { display:grid; } .authed .login { display:none; }
+    aside { border-right:1px solid var(--line); padding:24px 16px; position:sticky; top:0; height:100vh; display:flex; flex-direction:column; gap:4px; }
+    aside .brand { display:flex; align-items:center; gap:10px; font-weight:600; letter-spacing:.25em; margin:0 8px 24px; }
+    aside .brand img { width:36px; border-radius:50%; }
+    .tab { text-align:left; padding:11px 12px; border-radius:6px; font-size:14px; letter-spacing:.05em; display:flex; justify-content:space-between; align-items:center; color:var(--muted); }
+    .tab:hover { background:var(--bg2); color:var(--fg); }
+    .tab.on { background:var(--bg3); color:var(--fg); }
+    .tab .badge { background:var(--green); color:#000; border-radius:20px; font-size:11px; padding:1px 8px; font-weight:600; }
+    aside .foot { margin-top:auto; display:grid; gap:8px; font-size:13px; color:var(--muted); padding:0 8px; }
+    main { padding:32px clamp(16px,3vw,48px) 120px; min-width:0; }
+    h1 { font-size:clamp(30px,4vw,48px); font-weight:500; text-transform:uppercase; letter-spacing:-.01em; margin:0 0 6px; }
+    h1 .serif { color:var(--green); text-transform:none; }
+    h2 { font-size:18px; font-weight:500; text-transform:uppercase; letter-spacing:.1em; margin:36px 0 14px; }
+    .sub { color:var(--muted); margin:0 0 28px; }
+    .pane { display:none; } .pane.on { display:block; }
+    .status { position:fixed; top:16px; right:20px; font-size:12px; letter-spacing:.15em; text-transform:uppercase; padding:8px 14px; border-radius:30px; background:var(--bg3); z-index:20; }
+    .status.saving { color:var(--amber); } .status.ok { color:var(--green); } .status.err { color:var(--red); }
+    /* ui */
+    .btn { display:inline-flex; align-items:center; gap:8px; padding:10px 16px; border:1px solid var(--line); border-radius:40px; font-size:12px; letter-spacing:.14em; text-transform:uppercase; font-weight:500; transition:all .2s; white-space:nowrap; }
+    .btn:hover { border-color:var(--fg); }
+    .btn.g { background:var(--green); color:#000; border-color:var(--green); }
+    .btn.r { color:var(--red); border-color:rgba(255,107,107,.4); }
+    .btn.sm { padding:6px 11px; font-size:11px; }
+    .btn:disabled { opacity:.4; pointer-events:none; }
+    input, select, textarea { width:100%; background:var(--bg2); border:1px solid var(--line); border-radius:6px; padding:10px 12px; outline:none; }
+    input:focus, select:focus, textarea:focus { border-color:var(--green); }
+    textarea { min-height:90px; resize:vertical; }
+    label.f { display:grid; gap:6px; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); }
+    label.f > * { letter-spacing:normal; text-transform:none; color:var(--fg); font-size:15px; }
+    .row { display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); margin-bottom:14px; }
+    .card { background:var(--bg2); border:1px solid var(--line); border-radius:10px; padding:20px; }
+    .kpis { display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:12px; }
+    .kpi b { display:block; font-size:42px; font-weight:500; line-height:1; margin-top:8px; }
+    .kpi small { font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); }
+    table { width:100%; border-collapse:collapse; font-size:14px; }
+    th { text-align:left; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); font-weight:500; padding:10px 8px; border-bottom:1px solid var(--line); }
+    td { padding:12px 8px; border-bottom:1px solid var(--line); vertical-align:top; }
+    td small { color:var(--muted); display:block; }
+    .tw { overflow-x:auto; }
+    .pill { display:inline-block; font-size:10px; letter-spacing:.15em; text-transform:uppercase; padding:4px 9px; border-radius:20px; background:var(--bg3); white-space:nowrap; }
+    .pill.confirmada, .pill.aprobada { background:rgba(44,245,109,.15); color:var(--green); }
+    .pill.pendiente { background:rgba(255,201,92,.15); color:var(--amber); }
+    .pill.cancelada, .pill.rechazada { background:rgba(255,107,107,.12); color:var(--red); }
+    .pill.completada { background:rgba(255,255,255,.1); }
+    .acts { display:flex; gap:6px; flex-wrap:wrap; }
+    .filters { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px; align-items:center; }
+    .filters select, .filters input { width:auto; }
+    /* calendar */
+    .cal-wrap { display:grid; grid-template-columns:minmax(0,1.5fr) minmax(280px,1fr); gap:24px; align-items:start; }
+    .cal-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
+    .cal-head h3 { margin:0; text-transform:uppercase; font-weight:500; font-size:22px; }
+    .cal-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:4px; }
+    .dow { font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); text-align:center; padding:6px 0; }
+    .d { min-height:74px; border:1px solid var(--line); border-radius:6px; padding:6px; text-align:left; display:flex; flex-direction:column; gap:3px; font-size:13px; position:relative; }
+    .d:hover { border-color:var(--fg); }
+    .d.past { opacity:.35; }
+    .d.sel { outline:2px solid var(--green); outline-offset:-1px; }
+    .d .loc { font-size:10px; letter-spacing:.1em; text-transform:uppercase; padding:2px 6px; border-radius:4px; align-self:flex-start; color:#000; font-weight:600; }
+    .d .hrs { font-size:11px; color:var(--muted); }
+    .d .cnt { position:absolute; top:6px; right:6px; font-size:10px; background:var(--fg); color:#000; border-radius:10px; padding:0 6px; font-weight:600; }
+    .d.empty { visibility:hidden; }
+    .d .st { display:flex; gap:3px; margin-top:auto; }
+    .d .st i { flex:1; height:6px; border-radius:3px; background:var(--green); }
+    .d .st i.p { background:var(--amber); } .d .st i.x { background:var(--bg3); }
+    .d.closed { background:repeating-linear-gradient(45deg,transparent 0 6px,rgba(255,255,255,.04) 6px 7px); }
+    /* content */
+    .posts { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:14px; }
+    .post { background:var(--bg2); border:1px solid var(--line); border-radius:10px; overflow:hidden; display:flex; flex-direction:column; }
+    .post .m { aspect-ratio:4/5; background:#000; position:relative; }
+    .post .m video, .post .m img { width:100%; height:100%; object-fit:cover; display:block; }
+    .post .m .ty { position:absolute; top:8px; left:8px; }
+    .post .b { padding:12px; display:grid; gap:8px; }
+    .post .b b { text-transform:uppercase; font-weight:500; }
+    .drop { border:1.5px dashed var(--line); border-radius:10px; padding:28px; text-align:center; color:var(--muted); cursor:pointer; transition:border-color .2s; }
+    .drop:hover, .drop.over { border-color:var(--green); color:var(--fg); }
+    .progress { height:4px; background:var(--bg3); border-radius:4px; overflow:hidden; margin-top:10px; display:none; }
+    .progress i { display:block; height:100%; width:0; background:var(--green); transition:width .2s; }
+    .modal { position:fixed; inset:0; background:rgba(0,0,0,.8); display:none; place-items:center; z-index:30; padding:16px; }
+    .modal.on { display:grid; }
+    .modal .card { width:min(640px,100%); max-height:90vh; overflow:auto; }
+    .list-item { display:grid; grid-template-columns:1fr auto; gap:12px; align-items:center; padding:14px 0; border-bottom:1px solid var(--line); }
+    .chk { display:flex; gap:8px; flex-wrap:wrap; }
+    .chk label { display:flex; gap:6px; align-items:center; background:var(--bg2); border:1px solid var(--line); padding:8px 12px; border-radius:30px; font-size:13px; cursor:pointer; }
+    .chk input { width:auto; }
+    .burger { display:none; }
+    @media (max-width: 860px) {
+      .app { grid-template-columns:1fr; }
+      aside { position:fixed; inset:0 30% 0 0; z-index:25; background:var(--bg); transform:translateX(-102%); transition:transform .3s; }
+      .nav-open aside { transform:none; }
+      .burger { display:inline-flex; position:fixed; top:14px; left:14px; z-index:26; }
+      main { padding-top:70px; }
+      .cal-wrap { grid-template-columns:1fr; }
+      .d { min-height:56px; } .d .hrs { display:none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="login">
+    <form id="loginForm">
+      <img src="/logo.svg" alt="BVCQ">
+      <h1 style="font-size:28px">Panel <span class="serif">Bevacqua</span></h1>
+      <input type="password" id="pass" placeholder="Contraseña" autocomplete="current-password" required>
+      <button class="btn g" style="justify-content:center">Entrar</button>
+      <p id="loginErr" style="color:var(--red);min-height:1em;margin:0"></p>
+      <a href="/" style="color:var(--muted);font-size:13px">← Volver a la web</a>
+    </form>
+  </div>
+
+  <button class="btn burger" id="burger">☰ Menú</button>
+  <div class="status ok" id="status" hidden>Guardado ✓</div>
+
+  <div class="app">
+    <aside>
+      <div class="brand"><img src="/logo.svg" alt="">BVCQ</div>
+      <button class="tab on" data-tab="resumen">Resumen</button>
+      <button class="tab" data-tab="agenda">Agenda de Esteban</button>
+      <button class="tab" data-tab="turnos">Turnos clientes <span class="badge" id="bTurnos" hidden></span></button>
+      <button class="tab" data-tab="pros">Profesionales <span class="badge" id="bPros" hidden></span></button>
+      <button class="tab" data-tab="contenido">Contenido</button>
+      <button class="tab" data-tab="servicios">Servicios y precios</button>
+      <button class="tab" data-tab="textos">Textos, contacto y ciudades</button>
+      <button class="tab" data-tab="mensajes">Mensajes <span class="badge" id="bMsgs" hidden></span></button>
+      <div class="foot">
+        <a href="/" target="_blank">Ver la web ↗</a>
+        <button class="btn sm" id="logout" style="justify-content:center">Salir</button>
+      </div>
+    </aside>
+
+    <main>
+      <!-- RESUMEN -->
+      <section class="pane on" data-pane="resumen">
+        <h1>Hola, <span class="serif">Esteban</span></h1>
+        <p class="sub" id="hoyTxt"></p>
+        <div class="kpis" id="kpis"></div>
+        <h2>Próximos turnos</h2>
+        <div class="tw"><table id="nextTable"></table></div>
+        <h2>Solicitudes de profesionales pendientes</h2>
+        <div class="tw"><table id="pendTable"></table></div>
+      </section>
+
+      <!-- AGENDA -->
+      <section class="pane" data-pane="agenda">
+        <h1>Agenda <span class="serif">de Esteban</span></h1>
+        <p class="sub">Tocá un día para indicar dónde estás, abrir/cerrar el día y cambiar horarios. Usá “carga rápida” para períodos largos.</p>
+        <div class="cal-wrap">
+          <div class="card"><div id="aCal"></div></div>
+          <div style="display:grid;gap:16px">
+            <div class="card" id="dayEditor"><p class="sub" style="margin:0">Elegí un día del calendario.</p></div>
+            <div class="card">
+              <h2 style="margin-top:0">Carga rápida</h2>
+              <div class="row"><label class="f">Desde<input type="date" id="rFrom"></label><label class="f">Hasta<input type="date" id="rTo"></label></div>
+              <div class="row">
+                <label class="f">Estado<select id="rLoc"></select></label>
+              </div>
+              <div class="row"><label class="f">Abre<input type="time" id="rStart" value="10:00"></label><label class="f">Cierra<input type="time" id="rEnd" value="19:00"></label></div>
+              <label class="f" style="margin-bottom:14px">Días de la semana
+                <div class="chk" id="rDows"></div>
+              </label>
+              <button class="btn g" id="rApply">Aplicar al período</button>
+            </div>
+            <div class="card">
+              <h2 style="margin-top:0">Turnos</h2>
+              <label class="f">Intervalo entre turnos (min)<select id="slotStep"><option>15</option><option>30</option><option>45</option><option>60</option></select></label>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TURNOS -->
+      <section class="pane" data-pane="turnos">
+        <h1>Turnos <span class="serif">clientes</span></h1>
+        <p class="sub">Todos los turnos reservados desde la web.</p>
+        <div class="filters">
+          <select id="tFilter"><option value="prox">Próximos</option><option value="hoy">Hoy</option><option value="todos">Todos</option><option value="pasados">Pasados</option><option value="cancelada">Cancelados</option></select>
+          <select id="tLoc"><option value="">Todas las ciudades</option></select>
+          <input id="tSearch" placeholder="Buscar nombre, código, teléfono…">
+          <button class="btn sm" id="tCsv">Exportar CSV</button>
+        </div>
+        <div class="tw"><table id="tTable"></table></div>
+      </section>
+
+      <!-- PROS -->
+      <section class="pane" data-pane="pros">
+        <h1>Espacio <span class="serif">profesionales</span></h1>
+        <p class="sub">Ocupación de los puestos, solicitudes y configuración del alquiler.</p>
+        <div class="cal-wrap">
+          <div class="card"><div id="pCal"></div>
+            <p class="sub" style="margin:14px 0 0;font-size:13px">■ <span style="color:var(--green)">libre</span> · ■ <span style="color:var(--amber)">pendiente</span> · ■ ocupado. Tocá un día para bloquearlo / desbloquearlo.</p>
+          </div>
+          <div class="card">
+            <h2 style="margin-top:0">Configuración</h2>
+            <div class="row"><label class="f">Puestos<input type="number" min="1" max="20" id="sStations"></label><label class="f">Horario<input id="sHours"></label></div>
+            <div class="row"><label class="f">Día $<input type="number" id="sDay"></label><label class="f">Semana $<input type="number" id="sWeek"></label><label class="f">Mes $<input type="number" id="sMonth"></label></div>
+            <label class="f" style="margin-bottom:14px">Dirección del estudio<input id="sAddr"></label>
+            <label class="f" style="margin-bottom:14px">Días que abre el estudio<div class="chk" id="sDows"></div></label>
+            <label class="f">Beneficios (uno por línea)<textarea id="sPerks"></textarea></label>
+          </div>
+        </div>
+        <h2>Solicitudes y reservas</h2>
+        <div class="filters"><select id="prFilter"><option value="activas">Activas / futuras</option><option value="pendiente">Pendientes</option><option value="todas">Todas</option></select></div>
+        <div class="tw"><table id="prTable"></table></div>
+      </section>
+
+      <!-- CONTENIDO -->
+      <section class="pane" data-pane="contenido">
+        <h1>Contenido <span class="serif">& experiencia</span></h1>
+        <p class="sub">Subí fotos y videos. Aparecen al instante en la web. Los primeros 8 van al carrete horizontal.</p>
+        <div class="drop" id="drop">
+          <b style="color:var(--fg)">Arrastrá fotos o videos acá</b><br>o tocá para elegir archivos (videos hasta 200MB · recomendado MP4 vertical u horizontal, &lt;30MB)
+          <input type="file" id="file" accept="image/*,video/*" multiple hidden>
+          <div class="progress" id="prog"><i></i></div>
+          <div id="progTxt" style="font-size:13px;margin-top:6px"></div>
+        </div>
+        <p style="margin:12px 0 24px"><button class="btn sm" id="addUrl">+ Agregar desde URL</button></p>
+        <div class="posts" id="posts"></div>
+      </section>
+
+      <!-- SERVICIOS -->
+      <section class="pane" data-pane="servicios">
+        <h1>Servicios <span class="serif">& precios</span></h1>
+        <p class="sub">Lo que los clientes pueden reservar. La duración define cuánto tiempo bloquea en la agenda.</p>
+        <div id="svcList"></div>
+        <p><button class="btn g" id="addSvc">+ Agregar servicio</button></p>
+      </section>
+
+      <!-- TEXTOS -->
+      <section class="pane" data-pane="textos">
+        <h1>Textos <span class="serif">& contacto</span></h1>
+        <p class="sub">Todo lo que se lee en la web.</p>
+        <div class="card">
+          <label class="f" style="margin-bottom:14px">Bajada superior del inicio<input data-cfg="brand.heroKicker"></label>
+          <label class="f" style="margin-bottom:14px">Texto del inicio<textarea data-cfg="brand.heroSub"></textarea></label>
+          <label class="f" style="margin-bottom:14px">Manifiesto<textarea data-cfg="brand.manifesto" style="min-height:120px"></textarea></label>
+          <label class="f">Sobre Esteban<textarea data-cfg="brand.about"></textarea></label>
+        </div>
+        <h2>Contacto</h2>
+        <div class="card row">
+          <label class="f">WhatsApp (solo números, con 549)<input data-cfg="contact.whatsapp"></label>
+          <label class="f">Email<input data-cfg="contact.email"></label>
+          <label class="f">Instagram (sin @)<input data-cfg="contact.instagram"></label>
+        </div>
+        <h2>Ciudades / ubicaciones</h2>
+        <div id="locList"></div>
+        <p><button class="btn g" id="addLoc">+ Agregar ciudad</button></p>
+        <h2>Zona peligrosa</h2>
+        <button class="btn r" id="resetCfg">Restaurar configuración de fábrica</button>
+      </section>
+
+      <!-- MENSAJES -->
+      <section class="pane" data-pane="mensajes">
+        <h1>Mensajes</h1>
+        <p class="sub">Lo que llega desde el formulario de contacto.</p>
+        <div id="msgList"></div>
+      </section>
+    </main>
+  </div>
+
+  <!-- post modal -->
+  <div class="modal" id="postModal">
+    <div class="card">
+      <h2 style="margin-top:0">Publicación</h2>
+      <div class="row"><label class="f">Título<input id="mTitle"></label><label class="f">Categoría<input id="mTag" list="tags"></label></div>
+      <datalist id="tags"><option>Cortes</option><option>Color</option><option>Transformación</option><option>Experiencia</option><option>Editorial</option><option>Vanguardia</option><option>Estudio</option><option>Backstage</option></datalist>
+      <div class="row"><label class="f">Lugar<input id="mPlace"></label>
+        <label class="f">Tamaño en la grilla<select id="mSize"><option value="normal">Normal</option><option value="tall">Alto</option><option value="wide">Ancho</option></select></label></div>
+      <label class="f" style="margin-bottom:14px">Texto<textarea id="mText"></textarea></label>
+      <div class="row"><label class="f">URL del archivo<input id="mSrc"></label><label class="f">Tipo<select id="mType"><option value="video">Video</option><option value="image">Foto</option></select></label></div>
+      <label class="f" style="margin-bottom:18px">Portada (opcional, URL de imagen)<input id="mPoster"></label>
+      <div class="acts"><button class="btn g" id="mSave">Guardar</button><button class="btn" id="mCancel">Cancelar</button></div>
+    </div>
+  </div>
+
+  <script src="/js/admin.js"></script>
+</body>
+</html>
