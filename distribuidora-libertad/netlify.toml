@@ -15,6 +15,14 @@
   to = "/tablero.html"
   status = 301
 [[redirects]]
+  from = "/links"
+  to = "/links.html"
+  status = 200
+[[redirects]]
+  from = "/linktree"
+  to = "/links.html"
+  status = 301
+[[redirects]]
   from = "/catalogo"
   to = "/catalogo.html"
   status = 200

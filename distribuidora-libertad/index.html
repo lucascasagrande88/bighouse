@@ -21,6 +21,9 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"HardwareStore","name":"Distribuidora Libertad","description":"Distribuidora mayorista de productos de ferretería. Empresa familiar con más de 24 años de trayectoria.","address":{"@type":"PostalAddress","streetAddress":"Edison 666","addressLocality":"Villa Mercedes","postalCode":"5732","addressRegion":"San Luis","addressCountry":"AR"},"telephone":"+54 2657 435525","email":"ventas@distrilibertad.com.ar","areaServed":"Provincia de San Luis"}
 </script>
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "¿Venden solo por mayor?", "acceptedAnswer": {"@type": "Answer", "text": "Somos una distribuidora mayorista: abastecemos a ferreterías, comercios y profesionales de la provincia de San Luis. Si no sabés si tu compra aplica, escribinos por WhatsApp y te asesoramos."}}, {"@type": "Question", "name": "¿Cómo hago un pedido?", "acceptedAnswer": {"@type": "Answer", "text": "Entrá al catálogo, buscá los artículos por nombre o código y sumalos a tu pedido con las cantidades. Al final completás tus datos y lo enviás por WhatsApp con el detalle completo. Te respondemos confirmando stock y precio."}}, {"@type": "Question", "name": "¿Los precios del catálogo están actualizados?", "acceptedAnswer": {"@type": "Answer", "text": "Sí, el catálogo muestra la lista de precios vigente y se actualiza cada vez que cambia la lista. Los precios pueden variar sin previo aviso, por eso confirmamos el total al recibir tu pedido."}}, {"@type": "Question", "name": "¿A qué zonas hacen entregas?", "acceptedAnswer": {"@type": "Answer", "text": "Trabajamos en Villa Mercedes, San Luis Capital y diferentes localidades y zonas de la provincia. Consultanos por tu localidad y coordinamos la forma de entrega."}}, {"@type": "Question", "name": "¿Qué significa “Consultar” en lugar del precio?", "acceptedAnswer": {"@type": "Answer", "text": "Son artículos que no tienen el precio cargado en la lista online. Podés sumarlos igual a tu pedido y te pasamos el precio al confirmarlo."}}, {"@type": "Question", "name": "No encuentro un producto en el catálogo, ¿qué hago?", "acceptedAnswer": {"@type": "Answer", "text": "Probá buscarlo por otra palabra o por el código. Si igual no aparece, consultanos por WhatsApp y te decimos si podemos conseguirlo."}}, {"@type": "Question", "name": "¿Cuántos artículos tienen?", "acceptedAnswer": {"@type": "Answer", "text": "Más de 6.500 artículos en 13 rubros: herramientas eléctricas y de corte, herramientas manuales, tornillería y fijaciones, electricidad, plomería, pinturería, químicos y cintas, riego, gas, herrajes, cerrajería, mallas y alambres, y ferretería general."}}, {"@type": "Question", "name": "¿Dónde están ubicados?", "acceptedAnswer": {"@type": "Answer", "text": "Estamos en Edison 666, Villa Mercedes (5732), San Luis. Somos una empresa familiar con más de 24 años de trayectoria en la distribución de productos de ferretería."}}]}
+</script>
 </head>
 <body>
 <a class="sr" href="#main">Saltar al contenido</a>
@@ -44,7 +47,7 @@
       <a href="catalogo.html">Catálogo y precios</a>
       <a href="#como-pedir">Cómo pedir</a>
       <a href="#nosotros">Nosotros</a>
-      <a href="#cobertura">Cobertura</a>
+      <a href="#preguntas">Preguntas</a>
       <a href="#contacto">Contacto</a>
     </nav>
     <div class="header__acciones">
@@ -67,6 +70,7 @@
     <a href="#como-pedir">Cómo pedir</a>
     <a href="#nosotros">Nosotros</a>
     <a href="#cobertura">Cobertura</a>
+    <a href="#preguntas">Preguntas frecuentes</a>
     <a href="#contacto">Contacto</a>
   </nav>
   <a class="btn btn--wa" data-wa href="#"><i data-ic="wa"></i>Escribinos por WhatsApp</a>
@@ -95,7 +99,8 @@
         <a class="btn btn--linea" data-wa="Hola Distribuidora Libertad, quería hacer un pedido." href="#"><i data-ic="wa"></i>Pedir por WhatsApp</a>
       </div>
     </div>
-    <aside class="remito rv" aria-label="Nuestro compromiso">
+    <div class="remito-wrap">
+    <aside class="remito" aria-label="Nuestro compromiso">
       <div class="remito__cab">
         <img src="assets/img/logo.webp" alt="">
         <div class="remito__num">REMITO Nº 0024<br>VILLA MERCEDES · S.L.</div>
@@ -111,6 +116,7 @@
         <span class="sello">Cumplido</span>
       </div>
     </aside>
+    </div>
   </div>
 </section>
 
@@ -178,7 +184,7 @@
 <section class="seccion seccion--blanca" id="nosotros">
   <div class="wrap">
     <div class="nosotros">
-      <div class="nosotros__texto rv">
+      <div class="nosotros__texto rv rv--alto">
         <span class="kicker">04 · Nosotros</span>
         <h2 class="h2" style="margin:14px 0 30px">Una empresa familiar con trayectoria y compromiso.</h2>
         <div class="anios"><b data-aj="anios">24</b><span>años cumpliendo nuestra palabra</span></div>
@@ -226,7 +232,7 @@
     <div class="rv">
       <span class="kicker">06 · Cobertura</span>
       <h2 class="h2" style="margin-top:14px">Desde Villa Mercedes a toda la provincia.</h2>
-      <p class="lead" style="margin-top:18px">Trabajamos en Villa Mercedes, San Luis Capital y diferentes localidades y zonas de la provincia, adaptándonos a las necesidades de cada cliente.</p>
+      <p class="lead sube" style="margin-top:18px">Trabajamos en Villa Mercedes, San Luis Capital y diferentes localidades y zonas de la provincia, adaptándonos a las necesidades de cada cliente.</p>
       <ul class="zonas" id="zonas"></ul>
       <a class="btn btn--blanco" style="margin-top:30px" data-wa="Hola, quería saber si llegan con entregas a mi localidad: " href="#">Consultar por mi localidad</a>
     </div>
@@ -243,6 +249,52 @@
       <p>Escribinos y te pasamos condiciones, lista de precios y formas de entrega.</p>
     </div>
     <a class="btn btn--blanco" data-wa="Hola Distribuidora Libertad, tengo un comercio y quería empezar a trabajar con ustedes." href="#"><i data-ic="wa"></i>Quiero ser cliente</a>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="seccion" id="preguntas">
+  <div class="wrap faq">
+    <div class="rv">
+      <span class="kicker">08 · Preguntas frecuentes</span>
+      <h2 class="h2" style="margin-top:14px">Lo que más nos preguntan.</h2>
+      <p class="lead sube" style="margin-top:18px">¿Te quedó alguna duda? Escribinos y te respondemos personalmente.</p>
+      <a class="btn btn--wa" style="margin-top:24px" data-wa="Hola Distribuidora Libertad, tengo una consulta." href="#"><i data-ic="wa"></i>Hacer una consulta</a>
+    </div>
+    <div class="faq__lista">
+      <details class="rv">
+        <summary>¿Venden solo por mayor?</summary>
+        <div class="faq__resp"><div><p>Somos una distribuidora mayorista: abastecemos a ferreterías, comercios y profesionales de la provincia de San Luis. Si no sabés si tu compra aplica, <a data-wa href="#">escribinos por WhatsApp</a> y te asesoramos.</p></div></div>
+      </details>
+      <details class="rv">
+        <summary>¿Cómo hago un pedido?</summary>
+        <div class="faq__resp"><div><p>Entrá al <a href="catalogo.html">catálogo</a>, buscá los artículos por nombre o código y sumalos a tu pedido con las cantidades. Al final completás tus datos y lo enviás por WhatsApp con el detalle completo. Te respondemos confirmando stock y precio.</p></div></div>
+      </details>
+      <details class="rv">
+        <summary>¿Los precios del catálogo están actualizados?</summary>
+        <div class="faq__resp"><div><p>Sí, el catálogo muestra la lista de precios vigente y se actualiza cada vez que cambia la lista. Los precios pueden variar sin previo aviso, por eso confirmamos el total al recibir tu pedido.</p></div></div>
+      </details>
+      <details class="rv">
+        <summary>¿A qué zonas hacen entregas?</summary>
+        <div class="faq__resp"><div><p>Trabajamos en Villa Mercedes, San Luis Capital y diferentes localidades y zonas de la provincia. Consultanos por tu localidad y coordinamos la forma de entrega.</p></div></div>
+      </details>
+      <details class="rv">
+        <summary>¿Qué significa “Consultar” en lugar del precio?</summary>
+        <div class="faq__resp"><div><p>Son artículos que no tienen el precio cargado en la lista online. Podés sumarlos igual a tu pedido y te pasamos el precio al confirmarlo.</p></div></div>
+      </details>
+      <details class="rv">
+        <summary>No encuentro un producto en el catálogo, ¿qué hago?</summary>
+        <div class="faq__resp"><div><p>Probá buscarlo por otra palabra o por el código. Si igual no aparece, consultanos por WhatsApp y te decimos si podemos conseguirlo.</p></div></div>
+      </details>
+      <details class="rv">
+        <summary>¿Cuántos artículos tienen?</summary>
+        <div class="faq__resp"><div><p>Más de 6.500 artículos en 13 rubros: herramientas eléctricas y de corte, herramientas manuales, tornillería y fijaciones, electricidad, plomería, pinturería, químicos y cintas, riego, gas, herrajes, cerrajería, mallas y alambres, y ferretería general.</p></div></div>
+      </details>
+      <details class="rv">
+        <summary>¿Dónde están ubicados?</summary>
+        <div class="faq__resp"><div><p>Estamos en Edison 666, Villa Mercedes (5732), San Luis. Somos una empresa familiar con más de 24 años de trayectoria en la distribución de productos de ferretería.</p></div></div>
+      </details>
+    </div>
   </div>
 </section>
 
@@ -276,10 +328,11 @@
         <img src="assets/img/logo-blanco.webp" alt="Distribuidora Libertad" width="720" height="240">
         <p style="max-width:34ch;margin-top:16px">Empresa familiar de Villa Mercedes, San Luis. Más de 24 años distribuyendo productos de ferretería.</p>
       </div>
-      <div><h4>Sitio</h4><ul><li><a href="#rubros">Rubros</a></li><li><a href="catalogo.html">Catálogo y precios</a></li><li><a href="#como-pedir">Cómo pedir</a></li><li><a href="#nosotros">Nosotros</a></li></ul></div>
+      <div><h4>Sitio</h4><ul><li><a href="#rubros">Rubros</a></li><li><a href="catalogo.html">Catálogo y precios</a></li><li><a href="#como-pedir">Cómo pedir</a></li><li><a href="#nosotros">Nosotros</a></li><li><a href="#preguntas">Preguntas frecuentes</a></li><li><a href="links.html">Links</a></li></ul></div>
       <div><h4>Contacto</h4><ul><li><a data-wa href="#">WhatsApp</a></li><li><a data-tel href="#" data-aj="telefono">02657 435525</a></li><li><a data-mail href="#">Email</a></li><li data-aj-if="instagram" hidden><a data-ig href="#" target="_blank" rel="noopener">Instagram</a></li><li data-aj-if="facebook" hidden><a data-fb href="#" target="_blank" rel="noopener">Facebook</a></li></ul></div>
       <div><h4>Dónde estamos</h4><ul><li><span data-aj="direccion">Edison 666</span></li><li data-aj="localidad">Villa Mercedes (5732), San Luis</li></ul></div>
     </div>
+    <nav class="footer__rubros" aria-label="Rubros del catálogo"><a href="catalogo.html?rubro=corte">Herramientas eléctricas y corte</a> <a href="catalogo.html?rubro=manuales">Herramientas manuales</a> <a href="catalogo.html?rubro=fijaciones">Tornillería y fijaciones</a> <a href="catalogo.html?rubro=electricidad">Electricidad e iluminación</a> <a href="catalogo.html?rubro=plomeria">Plomería y sanitarios</a> <a href="catalogo.html?rubro=pintureria">Pinturería</a> <a href="catalogo.html?rubro=quimicos">Adhesivos, químicos y cintas</a> <a href="catalogo.html?rubro=riego">Riego y jardín</a> <a href="catalogo.html?rubro=gas">Gas y calefacción</a> <a href="catalogo.html?rubro=herrajes">Ruedas, herrajes y soportes</a> <a href="catalogo.html?rubro=seguridad">Cerrajería y seguridad</a> <a href="catalogo.html?rubro=mallas">Mallas, tejidos y alambres</a> <a href="catalogo.html?rubro=general">Ferretería general</a></nav>
     <div class="footer__base">
       <span>© <span id="anio">2026</span> Distribuidora Libertad. Todos los derechos reservados.</span>
       <span>Lista de precios <span data-aj="lista_nombre">Agosto 2026</span></span>

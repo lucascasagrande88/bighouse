@@ -6,6 +6,7 @@ Sitio estático (HTML/CSS/JS, sin build) + Supabase como base de datos. Mismo mo
 |---|---|---|
 | `/` | Público | Web: portada, rubros, destacados, cómo pedir, nosotros, cobertura, contacto |
 | `/catalogo` | Público | Lista de precios completa (6.528 artículos): búsqueda, filtros, pedido → WhatsApp |
+| `/links` | Público | Página tipo Linktree para la bio de Instagram/WhatsApp (pedido, catálogo, cómo llegar, llamar, rubros) |
 | `/tablero` | Cliente | Panel de edición con usuario y contraseña |
 
 Netlify: proyecto `distribuidora-libertad` → https://distribuidora-libertad.netlify.app
@@ -28,6 +29,16 @@ Netlify: proyecto `distribuidora-libertad` → https://distribuidora-libertad.ne
 5. Completar `assets/js/config.js` → `LIB_SUPABASE.url` y `LIB_SUPABASE.key` (publishable/anon key) y volver a publicar.
 
 Mientras la base no esté conectada, la web y el catálogo funcionan igual con el catálogo base; el tablero muestra un aviso.
+
+## SEO
+
+- FAQ en la portada con datos estructurados `FAQPage` + `HardwareStore` (JSON-LD).
+- `sitemap.xml`, `robots.txt` (tablero excluido), canonical y Open Graph con imagen para compartir.
+- Links a los 13 rubros del catálogo en el pie (rastreables).
+
+## Movimiento
+
+Todo entra y sale con ease-in-out: bloques ligados al scroll (entran desde abajo y salen por arriba), títulos palabra por palabra, entrada escalonada del hero, acordeón de FAQ animado y transición suave entre páginas. Respeta "reducir movimiento" del sistema.
 
 ## Imágenes
 

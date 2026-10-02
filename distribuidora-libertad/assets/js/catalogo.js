@@ -128,8 +128,14 @@
 
   function cabecera() {
     var r = st.rubro ? LIB.rubro(st.rubro) : null;
-    $("#cat-titulo").textContent = r ? r.nombre : "Catálogo y lista de precios";
+    var ct = $("#cat-titulo"), nt = r ? r.nombre : "Catálogo y lista de precios";
+    if (ct.textContent.replace(/\s+/g, " ").trim() !== nt) {
+      ct.textContent = nt; ct.__split = false; ct.classList.remove("in", "split");
+      U.split(ct); requestAnimationFrame(function () { requestAnimationFrame(function () { ct.classList.add("in"); }); });
+    }
     var mg = $("#miga-rubro"); mg.hidden = !r; if (r) mg.textContent = "/ " + r.corto;
+    var canon = document.querySelector('link[rel="canonical"]');
+    if (canon) canon.href = "https://distribuidora-libertad.netlify.app/catalogo" + (r ? "?rubro=" + r.id : "");
     document.title = (r ? r.nombre + " · " : "Catálogo y lista de precios · ") + "Distribuidora Libertad";
     if (A.covers && r) $("#cat-bg").innerHTML = '<img src="assets/img/rubros/cover-' + r.id + '.webp" alt="" style="filter:none">';
     var chips = [];

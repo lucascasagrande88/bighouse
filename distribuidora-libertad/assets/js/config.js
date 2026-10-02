@@ -65,12 +65,11 @@ window.LIB_DESTACADOS_BASE = [
 /* Imágenes generadas disponibles (poner en true a medida que se suben a assets/img/). */
 window.LIB_ASSETS = {
   hero: true,         // assets/img/hero-desktop.webp + hero-mobile.webp
-  // rubros con ícono 3D listo (assets/img/rubros/rubro-<id>.webp); el resto usa ícono de línea
-  rubros: ["corte", "manuales", "fijaciones", "electricidad", "plomeria", "pintureria", "quimicos", "riego"],
+  rubros: true,       // assets/img/rubros/rubro-<id>.webp (los 13)
   covers: false,      // assets/img/rubros/cover-<id>.webp
-  historia: false,    // assets/img/historia-1..3.webp
+  historia: true,     // assets/img/historia-1..3.webp
   clientes: false,    // assets/img/cliente-*.webp
-  cobertura: false,   // assets/img/cobertura-ruta.webp
+  cobertura: true,    // assets/img/cobertura-ruta.webp
   contacto: false,    // assets/img/contacto.webp
   sinfoto: false      // assets/img/sin-foto.webp
 };

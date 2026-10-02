@@ -128,13 +128,14 @@
 
   LIB.ready = (function () {
     var aj = loadAjustes();
-    var prods = !sb ? Promise.resolve(null) :
+    var prods = (!sb || window.LIB_SOLO_AJUSTES) ? Promise.resolve(null) :
       withTimeout(fetchAll("productos", COLS, function (q) { return q.eq("activo", true); }), 12000)
         .then(function (rows) { return rows && rows.length ? rows.map(mapRow) : null; })
         .catch(function (e) { console.warn("[Libertad] base no disponible, uso catálogo local", e); return null; });
     return Promise.all([aj, prods]).then(function (r) {
       LIB.ajustes = r[0];
       if (r[1]) { LIB.productos = r[1]; LIB.fuente = "db"; return LIB; }
+      if (window.LIB_SOLO_AJUSTES) return LIB;
       return cargarBase().then(function () { LIB.productos = fromBase(); LIB.fuente = "base"; return LIB; });
     }).then(function () {
       try { window.dispatchEvent(new CustomEvent("lib:ready")); } catch (e) {}

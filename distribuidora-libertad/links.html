@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Distribuidora Libertad · Links</title>
+<meta name="description" content="Todos los accesos de Distribuidora Libertad: pedidos por WhatsApp, catálogo y lista de precios, cómo llegar y contacto. Ferretería mayorista en Villa Mercedes, San Luis.">
+<meta name="theme-color" content="#003D1D">
+<link rel="canonical" href="https://distribuidora-libertad.netlify.app/links">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Distribuidora Libertad · Links">
+<meta property="og:description" content="Pedidos por WhatsApp, catálogo y lista de precios, cómo llegar y contacto.">
+<meta property="og:image" content="https://distribuidora-libertad.netlify.app/assets/img/og-share.jpg">
+<meta property="og:url" content="https://distribuidora-libertad.netlify.app/links">
+<link rel="icon" href="assets/img/icon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/img/icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preload" href="assets/fonts/archivo-wdth.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css">
+<style>
+  body { background: var(--verde-3); color: #fff; min-height: 100vh; }
+  .lk-bg { position: fixed; inset: 0; z-index: -1; }
+  .lk-bg img { width: 100%; height: 100%; object-fit: cover; opacity: .35; animation: respira 24s var(--ease-io-suave) infinite alternate; }
+  .lk-bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0, 38, 18, .78), rgba(0, 38, 18, .96) 55%); }
+  .lk { max-width: 480px; margin: 0 auto; padding: 48px 18px 40px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .lk-logo { width: 220px; height: auto; }
+  .lk h1 { font-size: 15px; font-weight: 600; color: #CFE3D5; margin: 18px 0 4px; line-height: 1.45; }
+  .lk-tag { font-family: var(--f-mono); font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; color: #8FE0A8; }
+  .lk-lista { list-style: none; padding: 0; margin: 30px 0 0; width: 100%; display: grid; gap: 12px; }
+  .lk-btn { display: grid; grid-template-columns: 46px 1fr 20px; align-items: center; gap: 14px; text-align: left; text-decoration: none; color: var(--tinta); background: #FBFAF6; border-radius: 14px; padding: 12px 16px 12px 12px; min-height: 70px; box-shadow: 0 14px 30px -18px rgba(0, 0, 0, .7); transition: transform .45s var(--ease-io), box-shadow .45s var(--ease-io), background .3s var(--ease-io); }
+  .lk-btn:hover { transform: translateY(-3px) scale(1.01); box-shadow: 0 22px 40px -20px rgba(0, 0, 0, .8); }
+  .lk-btn:active { transform: scale(.99); }
+  .lk-btn .ic { width: 46px; height: 46px; border-radius: 12px; background: var(--verde-claro); color: var(--verde); display: grid; place-items: center; }
+  .lk-btn .ic svg { width: 24px; height: 24px; }
+  .lk-btn b { display: block; font-size: 16.5px; font-weight: 750; line-height: 1.2; }
+  .lk-btn small { display: block; font-size: 13px; color: var(--gris); margin-top: 2px; }
+  .lk-btn::after { content: "→"; color: var(--verde); font-weight: 700; transition: transform .45s var(--ease-io); }
+  .lk-btn:hover::after { transform: translateX(4px); }
+  .lk-btn--wa { background: var(--wa); color: #fff; }
+  .lk-btn--wa .ic { background: rgba(255, 255, 255, .18); color: #fff; }
+  .lk-btn--wa small { color: #DFF5E7; }
+  .lk-btn--wa::after { color: #fff; }
+  .lk-sub { margin: 34px 0 12px; font-family: var(--f-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: #8FB59A; }
+  .lk-rubros { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; width: 100%; }
+  .lk-rubros a { background: rgba(255, 255, 255, .06); border: 1px solid rgba(255, 255, 255, .12); border-radius: 12px; padding: 10px 4px 8px; text-decoration: none; color: #E2EEE5; font-size: 11.5px; font-weight: 650; line-height: 1.2; display: grid; justify-items: center; gap: 4px; transition: background .4s var(--ease-io), transform .4s var(--ease-io); }
+  .lk-rubros a:hover { background: rgba(255, 255, 255, .14); transform: translateY(-2px); }
+  .lk-rubros img { width: 52px; height: 52px; object-fit: contain; }
+  .lk-pie { margin-top: 34px; font-size: 12.5px; color: #8FB59A; }
+  .lk-pie a { color: #CFE3D5; }
+  /* entrada escalonada con ease-in-out */
+  .ent { opacity: 0; transform: translateY(18px); animation: ent .9s var(--ease-io) forwards; animation-delay: calc(var(--n, 0) * 70ms + 120ms); }
+  @keyframes ent { to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .ent { opacity: 1; transform: none; animation: none; } }
+</style>
+</head>
+<body>
+<div class="lk-bg"><img src="assets/img/hero-mobile.webp" alt=""></div>
+<main class="lk">
+  <img class="lk-logo ent" style="--n:0" src="assets/img/logo-blanco.webp" alt="Distribuidora Libertad" width="720" height="240">
+  <h1 class="ent" style="--n:1">Ferretería por mayor en Villa Mercedes, San Luis.<br>Empresa familiar con más de <span data-aj="anios">24</span> años.</h1>
+  <span class="lk-tag ent" style="--n:2">Lista vigente · <span data-aj="lista_nombre">Agosto 2026</span></span>
+
+  <ul class="lk-lista" id="lk-lista">
+    <li class="ent" style="--n:3"><a class="lk-btn lk-btn--wa" data-wa="Hola Distribuidora Libertad, quería hacer un pedido." href="#"><span class="ic"><i data-ic="wa"></i></span><span><b>Hacer un pedido por WhatsApp</b><small data-aj="whatsapp_visible">2657 55-7780</small></span></a></li>
+    <li class="ent" style="--n:4"><a class="lk-btn" href="catalogo.html"><span class="ic"><i data-ic="lista"></i></span><span><b>Catálogo y lista de precios</b><small>Más de 6.500 artículos · armá tu pedido online</small></span></a></li>
+    <li class="ent" style="--n:5"><a class="lk-btn" href="./#como-pedir"><span class="ic"><i data-ic="enviar"></i></span><span><b>Cómo hacer un pedido</b><small>Cuatro pasos simples</small></span></a></li>
+    <li class="ent" style="--n:6"><a class="lk-btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Edison+666+Villa+Mercedes+San+Luis"><span class="ic"><i data-ic="pin"></i></span><span><b>Cómo llegar</b><small><span data-aj="direccion">Edison 666</span>, Villa Mercedes</small></span></a></li>
+    <li class="ent" style="--n:7"><a class="lk-btn" data-tel href="#"><span class="ic"><i data-ic="tel"></i></span><span><b>Llamar</b><small data-aj="telefono">02657 435525</small></span></a></li>
+    <li class="ent" style="--n:8"><a class="lk-btn" data-mail href="#"><span class="ic"><i data-ic="mail"></i></span><span><b>Enviar un email</b><small data-aj="email">ventas@distrilibertad.com.ar</small></span></a></li>
+    <li class="ent" style="--n:9" data-aj-if="instagram" hidden><a class="lk-btn" data-ig href="#" target="_blank" rel="noopener"><span class="ic"><i data-ic="tienda"></i></span><span><b>Instagram</b><small>Novedades y productos</small></span></a></li>
+    <li class="ent" style="--n:9" data-aj-if="facebook" hidden><a class="lk-btn" data-fb href="#" target="_blank" rel="noopener"><span class="ic"><i data-ic="tienda"></i></span><span><b>Facebook</b><small>Seguinos</small></span></a></li>
+    <li class="ent" style="--n:10"><a class="lk-btn" href="./"><span class="ic"><i data-ic="caja"></i></span><span><b>Sitio web</b><small>Quiénes somos, cobertura y preguntas frecuentes</small></span></a></li>
+  </ul>
+
+  <p class="lk-sub ent" style="--n:11">Buscá por rubro</p>
+  <nav class="lk-rubros ent" style="--n:12" id="lk-rubros" aria-label="Rubros"></nav>
+
+  <p class="lk-pie ent" style="--n:13">© <span id="anio">2026</span> Distribuidora Libertad · <a href="./">distribuidora-libertad.netlify.app</a></p>
+</main>
+
+<script src="assets/vendor/supabase.min.js" defer></script>
+<script src="assets/js/config.js" defer></script>
+<script>window.LIB_SOLO_AJUSTES = true;</script>
+<script src="assets/js/iconos.js" defer></script>
+<script src="assets/js/db.js" defer></script>
+<script defer>
+document.addEventListener("DOMContentLoaded", function () {
+  var R = window.LIB_RUBROS || [];
+  document.getElementById("lk-rubros").innerHTML = R.map(function (r) {
+    return '<a href="catalogo.html?rubro=' + r.id + '"><img src="assets/img/rubros/rubro-' + r.id + '.webp" alt="" loading="lazy" width="52" height="52">' + r.corto + '</a>';
+  }).join("");
+  document.getElementById("anio").textContent = new Date().getFullYear();
+});
+</script>
+<script src="assets/js/comun.js" defer></script>
+</body>
+</html>

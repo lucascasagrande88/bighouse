@@ -343,7 +343,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 
 /* ---------- cobertura ---------- */
 .cobertura { background: var(--tinta); color: #fff; position: relative; overflow: hidden; isolation: isolate; }
-.cobertura__bg { position: absolute; inset: 0; z-index: -1; opacity: .28; }
+.cobertura__bg { position: absolute; inset: 0; z-index: -1; opacity: .16; }
 .cobertura__bg img { width: 100%; height: 100%; object-fit: cover; }
 .cobertura .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 80px); align-items: center; }
 .cobertura .kicker { color: #8FE0A8; }
@@ -566,3 +566,95 @@ button.link-flecha { border: 0; background: none; padding: 0; cursor: pointer; f
 .rubro__ic img { height: 108px; filter: drop-shadow(0 8px 10px rgba(0, 0, 0, .12)); }
 .link-flecha { white-space: nowrap; }
 @media (max-width: 520px) { .rubro__ic, .rubro__ic img { height: 80px; } }
+
+/* =========================================================================
+   MOVIMIENTO · todo entra y sale con ease-in-out
+   - .rv: entra al aparecer y sale al irse (ligado al scroll cuando el
+     navegador lo soporta; si no, IntersectionObserver en ambos sentidos).
+   - .split: títulos que suben palabra por palabra.
+   - Transición suave entre páginas (View Transitions).
+   ========================================================================= */
+:root { --ease-io: cubic-bezier(.65, 0, .35, 1); --ease-io-suave: cubic-bezier(.45, 0, .55, 1); }
+
+/* fallback (IO): entra y sale */
+.rv { opacity: 0; transform: translateY(34px); transition: opacity .9s var(--ease-io), transform .9s var(--ease-io); transition-delay: var(--d, 0s); }
+.rv.in { opacity: 1; transform: none; }
+
+/* scroll-driven: entrada al pie de la pantalla, salida al llegar arriba */
+@supports (animation-timeline: view()) {
+  .rv, .rv.in {
+    opacity: 1; transform: none; transition: none;
+    animation: rv-io linear both;
+    animation-timeline: view();
+    animation-range: entry 0% exit 100%;
+  }
+  @keyframes rv-io {
+    0%   { opacity: 0; transform: translateY(46px) scale(.985); animation-timing-function: var(--ease-io); }
+    22%  { opacity: 1; transform: none; }
+    84%  { opacity: 1; transform: none; animation-timing-function: var(--ease-io); }
+    100% { opacity: 0; transform: translateY(-28px) scale(.99); }
+  }
+  /* bloques muy altos: solo la entrada, para no esconder contenido que se está leyendo */
+  .rv--alto, .rv--alto.in { animation-name: rv-in; animation-range: entry 0% entry 70%; }
+  @keyframes rv-in { from { opacity: 0; transform: translateY(46px); } to { opacity: 1; transform: none; } }
+}
+
+/* títulos palabra por palabra */
+.split .w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .08em; margin-bottom: -.08em; }
+.split .w > span { display: inline-block; transform: translateY(105%); opacity: 0; transition: transform .95s var(--ease-io), opacity .95s var(--ease-io); transition-delay: calc(var(--i) * 55ms + var(--d, 0s)); }
+.split.in .w > span { transform: none; opacity: 1; }
+.split.out .w > span { transform: translateY(-105%); opacity: 0; transition-duration: .6s; transition-delay: calc(var(--i) * 25ms); }
+
+/* textos de apoyo: aparecen con un pequeño retraso después del título */
+.sube { opacity: 0; transform: translateY(16px); transition: opacity .9s var(--ease-io), transform .9s var(--ease-io); transition-delay: var(--d, .25s); }
+.sube.in { opacity: 1; transform: none; }
+
+/* hero: imagen con respiración lenta, remito flotando */
+.hero__img img { animation: respira 22s var(--ease-io-suave) infinite alternate; transform-origin: 60% 50%; }
+@keyframes respira { from { transform: scale(1.02); } to { transform: scale(1.1) translateX(-1.5%); } }
+.remito { animation: flota 7s var(--ease-io-suave) infinite alternate; }
+@keyframes flota { from { transform: rotate(1.6deg) translateY(0); } to { transform: rotate(.6deg) translateY(-10px); } }
+@media (max-width: 900px) { @keyframes flota { from { transform: rotate(-1deg); } to { transform: rotate(0deg) translateY(-6px); } } }
+.hero .kicker, .hero .lead, .hero .buscador, .hero__ctas, .remito-wrap { opacity: 0; transform: translateY(22px); transition: opacity 1s var(--ease-io), transform 1s var(--ease-io); }
+.hero.listo .kicker { opacity: 1; transform: none; transition-delay: .05s; }
+.hero.listo .lead { opacity: 1; transform: none; transition-delay: .55s; }
+.hero.listo .buscador { opacity: 1; transform: none; transition-delay: .7s; }
+.hero.listo .hero__ctas { opacity: 1; transform: none; transition-delay: .85s; }
+.hero.listo .remito-wrap { opacity: 1; transform: none; transition-delay: 1s; }
+.remito-wrap { justify-self: end; max-width: 360px; width: 100%; }
+@media (max-width: 900px) { .remito-wrap { justify-self: start; max-width: 100%; } }
+.cinta__item { transition: background .5s var(--ease-io); }
+.cinta__item:hover { background: rgba(255, 255, 255, .06); }
+
+/* microinteracciones con ease-in-out */
+.btn, .rubro, .prod, .cliente img, .nav a, .link-flecha::after, .chip, .btn-add, .filtro-rubros button { transition-timing-function: var(--ease-io) !important; }
+.rubro, .prod { transition-duration: .45s; }
+
+/* transición entre páginas */
+@view-transition { navigation: auto; }
+::view-transition-old(root) { animation: vt-out .45s var(--ease-io) both; }
+::view-transition-new(root) { animation: vt-in .55s var(--ease-io) both; }
+@keyframes vt-out { to { opacity: 0; transform: translateY(-12px); } }
+@keyframes vt-in { from { opacity: 0; transform: translateY(14px); } }
+
+/* ---------- FAQ ---------- */
+.faq { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(28px, 6vw, 80px); align-items: start; }
+.faq__lista { border-top: 2px solid var(--tinta); }
+.faq details { border-bottom: 1px solid var(--linea); }
+.faq summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: 1fr 32px; gap: 16px; align-items: center; padding: 20px 0; font-weight: 700; font-size: clamp(16.5px, 1.5vw, 19px); line-height: 1.35; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; width: 32px; height: 32px; border-radius: 50%; border: 1.5px solid var(--linea); display: grid; place-items: center; font-weight: 500; font-size: 20px; color: var(--verde); transition: transform .5s var(--ease-io), background .3s var(--ease-io), color .3s; }
+.faq details[open] summary::after { transform: rotate(135deg); background: var(--verde); color: #fff; border-color: var(--verde); }
+.faq summary:hover { color: var(--verde); }
+.faq__resp { overflow: hidden; }
+.faq__resp p { margin: 0 0 22px; color: var(--tinta-2); max-width: 62ch; }
+.faq__resp a { color: var(--verde); font-weight: 650; }
+@media (max-width: 860px) { .faq { grid-template-columns: 1fr; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .rv, .rv.in, .split .w > span, .sube, .hero .kicker, .hero .lead, .hero .buscador, .hero__ctas, .remito-wrap { opacity: 1 !important; transform: none !important; animation: none !important; }
+  @view-transition { navigation: none; }
+}
+.faq details.cerrando summary::after { transform: none; background: transparent; color: var(--verde); border-color: var(--linea); }
+.footer__rubros { margin-top: 40px; padding-top: 22px; border-top: 1px solid rgba(255, 255, 255, .12); display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 13.5px; }
+.footer__rubros a { color: #BFD3C5; }

@@ -97,8 +97,30 @@
 
   function heroTitulo() {
     var t = LIB.ajustes.hero_titulo, def = (window.LIB_DEFAULTS || {}).hero_titulo;
-    if (t && t !== def) $("#hero-titulo").textContent = t;
+    if (t && t !== def) { var h = $("#hero-titulo"); h.textContent = t; h.__split = false; U.split(h); }
   }
+
+  /* ---------- hero: entrada escalonada ---------- */
+  requestAnimationFrame(function () { requestAnimationFrame(function () { var h = $(".hero"); if (h) h.classList.add("listo"); }); });
+
+  /* ---------- FAQ: abrir y cerrar con ease-in-out ---------- */
+  var EASE = "cubic-bezier(.65,0,.35,1)";
+  U.$$(".faq details").forEach(function (d) {
+    var sum = d.querySelector("summary"), resp = d.querySelector(".faq__resp");
+    sum.addEventListener("click", function (e) {
+      e.preventDefault();
+      if (!resp.animate) { d.open = !d.open; return; }
+      if (d.open) {
+        var a = resp.animate([{ height: resp.offsetHeight + "px", opacity: 1 }, { height: "0px", opacity: 0 }], { duration: 450, easing: EASE });
+        d.classList.add("cerrando");
+        a.onfinish = function () { d.open = false; d.classList.remove("cerrando"); };
+      } else {
+        d.open = true;
+        var h = resp.offsetHeight;
+        resp.animate([{ height: "0px", opacity: 0 }, { height: h + "px", opacity: 1 }], { duration: 550, easing: EASE });
+      }
+    });
+  });
 
   mapa();
   LIB.ready.then(function () {
