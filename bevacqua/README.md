@@ -8,6 +8,20 @@ La web de Bevacqua: contenido editorial, calendario de Esteban, turnos para clie
 
 ## Deploy (Netlify)
 
+**Opción rápida (Netlify CLI, desde esta carpeta):**
+
+```bash
+npm install
+npx netlify-cli login
+npx netlify-cli link --id 8d5bfd18-14cc-4200-a6fd-f90dae7fe742   # proyecto bevacqua-look-and-more
+npx netlify-cli deploy --prod
+```
+
+> No uses "arrastrar y soltar" (Netlify Drop): sube solo lo estático y deja afuera la API, así que las reservas y el panel no funcionarían.
+> Si deployás en un proyecto nuevo, creá la variable `ADMIN_PASSWORD` en *Project configuration → Environment variables*.
+
+**Opción Git:**
+
 Proyecto: `bevacqua-look-and-more` → https://bevacqua-look-and-more.netlify.app
 
 Para conectarlo al repo en Netlify:
