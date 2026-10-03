@@ -8,7 +8,9 @@ import { SITE, PRODUCTS, CATEGORIES, bySlug } from './data.mjs';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const IMG = JSON.parse(readFileSync(join(ROOT, 'assets/img/manifest.json'), 'utf8'));
 const V = '8'; // versión de assets (cache busting)
-const B = SITE.base;
+let B = SITE.base;
+// Modo artifact (FISU_TARGET=artifact): rutas relativas y salida en FISU_OUT
+const ARTIFACT = process.env.FISU_TARGET === 'artifact';
 const abs = p => SITE.url + p;
 
 /* ---------------------------------------------------------------- helpers */
@@ -564,7 +566,21 @@ ${CTAFinal({ home: false })}`;
 }
 
 /* ================================================================ escribir */
-const write = (rel, s) => { const f = join(ROOT, rel); mkdirSync(dirname(f), { recursive: true }); writeFileSync(f, s); };
+const OUT = ARTIFACT ? process.env.FISU_OUT : ROOT;
+const relLinks = h => h.replace(/(href)="((?:\.\.?\/)+(?:[^"#:?]*\/)?)(#[^"]*)?"/g, (m, a, path, hash = '') => `${a}="${path}index.html${hash}"`);
+const toFragment = h => {
+  // El artifact envuelve la página principal en su propio esqueleto
+  const head = h.slice(h.indexOf('<head>') + 6, h.indexOf('</head>'));
+  const body = h.slice(h.indexOf('<body>') + 6, h.indexOf('</body>'));
+  return head.replace(/<meta charset[^>]*>\n|<meta name="viewport"[^>]*>\n/g, '') + body;
+};
+const write = (rel, s) => { const f = join(OUT, rel); mkdirSync(dirname(f), { recursive: true }); writeFileSync(f, s); };
+if (ARTIFACT) {
+  const gf = '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@300..600&family=Poppins:wght@600;700;800&display=swap">';
+  B = '.'; write('index.html', toFragment(relLinks(buildHome()).replace('</title>', '</title>\n' + gf)));
+  B = '../..'; PRODUCTS.forEach(p => write(`productos/${p.slug}/index.html`, relLinks(buildProduct(p)).replace('</title>', '</title>\n' + gf)));
+  console.log('OK · artifact en ' + OUT); process.exit(0);
+}
 write('index.html', buildHome());
 PRODUCTS.forEach(p => write(`productos/${p.slug}/index.html`, buildProduct(p)));
 const urls = [`${B}/`, ...PRODUCTS.map(p => `${B}/productos/${p.slug}/`)];
