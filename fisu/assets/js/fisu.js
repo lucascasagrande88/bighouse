@@ -9,7 +9,8 @@
 
   /* ---------- Header ---------- */
   const header = $('.site-header');
-  const onScrollHeader = () => header && header.classList.toggle('is-scrolled', window.scrollY > 24);
+  let scrolled = null;
+  const onScrollHeader = () => { const s = window.scrollY > 24; if (header && s !== scrolled) { header.classList.toggle('is-scrolled', s); scrolled = s; } };
   onScrollHeader();
   window.addEventListener('scroll', onScrollHeader, { passive: true });
 
@@ -84,6 +85,7 @@
   const navLinks = flavors ? $$('.flv-nav a', flavors) : [];
   const progressBar = flavors ? $('.flv-progress', flavors) : null;
   let active = -1;
+  let lastProg = '';
 
   const setActive = i => {
     if (i === active) return;
@@ -93,24 +95,38 @@
     navLinks.forEach((a, k) => { a.classList.toggle('is-active', k === i); a.setAttribute('aria-current', k === i ? 'step' : 'false'); });
   };
 
-  const tick = () => {
-    if (!reduce.matches) {
-      for (const el of speedEls) {
-        const r = el.getBoundingClientRect();
-        if (r.bottom < -200 || r.top > vh + 200) continue;
-        const c = (r.top + r.height / 2 - vh / 2) / vh; // -1..1 aprox.
-        el.style.transform = `translate3d(0, ${(c * parseFloat(el.dataset.speed) * 100).toFixed(1)}px, 0)`;
-      }
+  // Parallax interpolado: cada elemento se acerca a su destino un 10% por cuadro (ease-out continuo)
+  const pos = new Map();
+  let looping = false;
+  const parallax = () => {
+    let moving = false;
+    // 1) todas las lecturas
+    const reads = speedEls.map(el => [el, el.getBoundingClientRect()]);
+    // 2) todas las escrituras (sin forzar layout entre medio)
+    for (const [el, r] of reads) {
+      const st = pos.get(el) || { cur: 0 };
+      pos.set(el, st);
+      if (r.bottom < -300 || r.top > vh + 300) continue;
+      const c = (r.top - st.cur + r.height / 2 - vh / 2) / vh;
+      const target = c * parseFloat(el.dataset.speed) * 100;
+      st.cur += (target - st.cur) * 0.1;
+      if (Math.abs(target - st.cur) > 0.05) moving = true;
+      el.style.transform = `translate3d(0, ${st.cur.toFixed(2)}px, 0)`;
     }
+    if (moving) requestAnimationFrame(parallax); else looping = false;
+  };
+  const kickParallax = () => { if (!looping && !reduce.matches && speedEls.length) { looping = true; requestAnimationFrame(parallax); } };
+
+  const tick = () => {
+    kickParallax();
     if (flavors) {
       const r = flavors.getBoundingClientRect();
       const total = r.height - vh;
       const p = Math.min(1, Math.max(0, -r.top / total));
       const n = steps.length;
       setActive(Math.min(n - 1, Math.floor(p * n * 0.999)));
-      const local = (p * n) % 1;
-      steps[active] && steps[active].style.setProperty('--fp', (local - .5).toFixed(3));
-      progressBar && progressBar.style.setProperty('--prog', p.toFixed(3));
+      const pr = p.toFixed(3);
+      if (progressBar && pr !== lastProg) { progressBar.style.setProperty('--prog', pr); lastProg = pr; }
     }
   };
   let ticking = false;

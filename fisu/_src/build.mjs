@@ -7,11 +7,13 @@ import { SITE, PRODUCTS, CATEGORIES, bySlug } from './data.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const IMG = JSON.parse(readFileSync(join(ROOT, 'assets/img/manifest.json'), 'utf8'));
-const V = '8'; // versión de assets (cache busting)
+const V = '9'; // versión de assets (cache busting)
 let B = SITE.base;
 // Modo artifact (FISU_TARGET=artifact): rutas relativas y salida en FISU_OUT
 const ARTIFACT = process.env.FISU_TARGET === 'artifact';
-const abs = p => SITE.url + p;
+// Modo zip (FISU_TARGET=zip): rutas relativas, documentos completos, sitio en la raíz del dominio
+const ZIP = process.env.FISU_TARGET === 'zip';
+const abs = p => (ZIP || ARTIFACT) ? `${SITE.url}/${p.replace(/^(\.\.?\/)+/, '').replace(/^\.$/, '')}` : SITE.url + p;
 
 /* ---------------------------------------------------------------- helpers */
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -75,8 +77,8 @@ const FloatingIngredient = (name, { x, y, w, r = 0, i = 0, sp = 40, cls = '' }) 
   `<div class="flv-ing ${cls}" style="--x:${x};--y:${y};--w:${w};--ir:${r}deg;--i:${i};--sp:${sp}px" aria-hidden="true"><div class="float" style="--dur:${6 + (i % 3)}s">${Pic(name, { sizes: '160px' })}</div></div>`;
 
 /* ---------------------------------------------------------------- layout */
-const LOGO = `${B}/assets/logo.svg`;
-const LOGO_W = `${B}/assets/logo-white.svg`;
+const logoC = () => `${B}/assets/logo.svg`;
+const logoW = () => `${B}/assets/logo-white.svg`;
 
 const NAV = [
   ['Productos', '#productos'], ['Sabores', '#sabores'], ['FISÚ', '#fisu'], ['Dónde encontrar', '#donde'], ['Contacto', '#contacto'],
@@ -89,7 +91,7 @@ function Header({ home }) {
 <a class="skip-link" href="#main">Saltar al contenido</a>
 <header class="site-header">
   <div class="wrap">
-    <a class="brand-link" href="${B}/" aria-label="FISÚ helados, inicio"><img class="logo-c" src="${LOGO}" width="790" height="436" alt="FISÚ helados"><img class="logo-w" src="${LOGO_W}" width="790" height="436" alt=""></a>
+    <a class="brand-link" href="${B}/" aria-label="FISÚ helados, inicio"><img class="logo-c" src="${logoC()}" width="790" height="436" alt="FISÚ helados"><img class="logo-w" src="${logoW()}" width="790" height="436" alt=""></a>
     <nav class="main-nav" aria-label="Principal">${links}<a class="btn" href="${navHref('#catalogo', home)}">Ver productos</a></nav>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menú">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M4 8h16M4 16h11"/></svg>
@@ -100,7 +102,7 @@ function Header({ home }) {
   ${OrganicBlob({ seed: 41, cls: 'mm-blob', style: 'width:90vw;height:70vw;right:-38vw;bottom:-14vw', color: 'var(--fisu-yellow)', anim: 'drift' })}
   ${OrganicBlob({ seed: 42, cls: 'mm-blob', style: 'width:60vw;height:60vw;left:-30vw;bottom:22vh', color: 'var(--fisu-lilac)', anim: 'drift-b' })}
   ${OrganicBlob({ seed: 43, cls: 'mm-blob', style: 'width:46vw;height:46vw;right:-16vw;top:26vh', color: 'var(--fisu-blue)', anim: 'drift' })}
-  <div class="mm-top"><img src="${LOGO_W}" width="790" height="436" alt="FISÚ helados">
+  <div class="mm-top"><img src="${logoW()}" width="790" height="436" alt="FISÚ helados">
     <button class="mm-close" type="button" aria-label="Cerrar menú"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
   <nav aria-label="Menú mobile">
     ${NAV.map(([t, h], i) => `<a href="${navHref(h, home)}" style="--i:${i}">${t}</a>`).join('')}
@@ -118,11 +120,11 @@ function Footer() {
   const prod = PRODUCTS.slice(0, 6).map(p => `<li><a href="${B}/productos/${p.slug}/">${esc(p.name)}</a></li>`).join('');
   return `
 <footer class="site-footer on-color" id="contacto">
-  <img class="f-giant" src="${LOGO_W}" alt="" aria-hidden="true" width="790" height="436" loading="lazy">
+  <img class="f-giant" src="${logoW()}" alt="" aria-hidden="true" width="790" height="436" loading="lazy">
   <div class="wrap">
     <div class="f-top">
       <div class="f-brand">
-        <img class="f-logo" src="${LOGO_W}" width="790" height="436" alt="FISÚ helados" loading="lazy">
+        <img class="f-logo" src="${logoW()}" width="790" height="436" alt="FISÚ helados" loading="lazy">
         <p class="f-claim">Ese momento pide FISÚ.</p>
         <div class="f-social">
           <a href="${SITE.instagram}" target="_blank" rel="noopener" aria-label="Instagram de FISÚ">${ICON_IG}</a>
@@ -377,7 +379,7 @@ function Moments() {
         </div>
         <div class="mo-visual" style="--c:${m.c}">
           <div class="mo-blob drift" style="--dur:${22 + i * 3}s" aria-hidden="true">${blobSvg(m.seed, .2, 7)}</div>
-          <div class="mo-img" style="--w:${m.w};--r:${m.r}deg"><div class="pop" style="--d:.15s" data-speed="-.25">${Pic(m.img, { alt: altOf(p), sizes: '(max-width: 860px) 86vw, 40vw' })}</div></div>
+          <div class="mo-img" style="--w:${m.w};--r:${m.r}deg"><div data-speed="-.25"><div class="pop" style="--d:.15s">${Pic(m.img, { alt: altOf(p), sizes: '(max-width: 860px) 86vw, 40vw' })}</div></div></div>
           ${Splash({ style: `right:${i % 2 ? '70%' : '8%'};top:4%;width:16%;height:16%`, color: i === 3 ? 'var(--fisu-pink)' : 'var(--fisu-blue)', rot: i % 2 ? -30 : 20 })}
         </div>
       </div>`;
@@ -404,7 +406,7 @@ function Explosion() {
   ${P('ing-choco-fly', { x: '26%', y: '22%', w: '5vw', r: 30, s: -.8, dur: 5, cls: 'ex-hide-m' })}
   <div class="ex-center">
     <h2 class="sr-only" id="fisu-title">FISÚ: más sabor, más color, más momentos</h2>
-    <img class="ex-logo pop" data-reveal src="${LOGO_W}" width="790" height="436" alt="" aria-hidden="true" loading="lazy">
+    <img class="ex-logo pop" data-reveal src="${logoW()}" width="790" height="436" alt="" aria-hidden="true" loading="lazy">
     <p class="ex-words fade-up" data-reveal style="--d:.2s" aria-hidden="true"><span>Más sabor.</span> <span>Más color.</span> <span>Más momentos.</span></p>
     <p class="ex-line fade-up" data-reveal style="--d:.35s">Postres helados listos para disfrutar: cercanos, coloridos y memorables.</p>
   </div>
@@ -566,7 +568,7 @@ ${CTAFinal({ home: false })}`;
 }
 
 /* ================================================================ escribir */
-const OUT = ARTIFACT ? process.env.FISU_OUT : ROOT;
+const OUT = (ARTIFACT || ZIP) ? process.env.FISU_OUT : ROOT;
 const relLinks = h => h.replace(/(href)="((?:\.\.?\/)+(?:[^"#:?]*\/)?)(#[^"]*)?"/g, (m, a, path, hash = '') => `${a}="${path}index.html${hash}"`);
 const toFragment = h => {
   // El artifact envuelve la página principal en su propio esqueleto
@@ -575,6 +577,14 @@ const toFragment = h => {
   return head.replace(/<meta charset[^>]*>\n|<meta name="viewport"[^>]*>\n/g, '') + body;
 };
 const write = (rel, s) => { const f = join(OUT, rel); mkdirSync(dirname(f), { recursive: true }); writeFileSync(f, s); };
+if (ZIP) {
+  B = '.'; write('index.html', relLinks(buildHome()));
+  B = '../..'; PRODUCTS.forEach(p => write(`productos/${p.slug}/index.html`, relLinks(buildProduct(p))));
+  const zurls = ['/', ...PRODUCTS.map(p => `/productos/${p.slug}/`)];
+  write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${zurls.map(u => `  <url><loc>${SITE.url}${u}</loc></url>`).join('\n')}\n</urlset>\n`);
+  write('robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${SITE.url}/sitemap.xml\n`);
+  console.log('OK · zip en ' + OUT); process.exit(0);
+}
 if (ARTIFACT) {
   const gf = '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@300..600&family=Poppins:wght@600;700;800&display=swap">';
   B = '.'; write('index.html', toFragment(relLinks(buildHome()).replace('</title>', '</title>\n' + gf)));
