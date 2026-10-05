@@ -1,6 +1,6 @@
 # FINAL RECEIPT — ELECTRICOMERCIO
 
-STATUS: BUILT + QA LOCAL PASS · DEPLOY PENDIENTE (sitio nuevo aislado, a confirmar)
+STATUS: DONE · EN VIVO
 
 ## SOURCE
 - Base usada: patrones de `lucascasagrande88/demo-distribuidora-del-valle` (config central / store localStorage / lista → WhatsApp / panel CRUD + import/export JSON). Reescrito desde cero para Electricomercio: sin copy ni datos de alimentos.
@@ -21,9 +21,13 @@ STATUS: BUILT + QA LOCAL PASS · DEPLOY PENDIENTE (sitio nuevo aislado, a confir
 - Assets rotos: ninguno.
 
 ## DEPLOY
-- URL: PENDIENTE
-- Destino: sitio Netlify NUEVO sugerido `electricomercio-demo-chimi` (nunca sobre TV Luz / Libertad / base).
-- Verificado: —
+- URL: https://electricomercio-demo-chimi.vercel.app  (panel: /admin.html)
+- Destino: proyecto Vercel NUEVO `electricomercio-demo-chimi`, desplegado desde esta rama (carpeta `electricomercio/`). Producción pública; los previews siguen protegidos.
+- Verificado: 2026-10-05: index, admin.html y config.js responden 200 con la versión final; metadatos OG apuntan a la URL pública.
+- Por qué Vercel: la red del entorno bloquea api.netlify.com, así que no se pudo subir a Netlify. Quedó creado vacío el sitio Netlify `electricomercio-demo-chimi` (sin deploy); se puede borrar o usar después.
+- chimichurridiseno.com/electricomercio: no se tocó el sitio principal. Para activarlo, agregar al `_redirects` de chimichurridiseno.com:
+    /electricomercio    /electricomercio/   301
+    /electricomercio/*  https://electricomercio-demo-chimi.vercel.app/:splat  200
 
 ## KNOWN LIMITS / UNKNOWN
 - El número +54 9 11 4582-9911 está en formato wa.me (5491145829911), pero no se pudo confirmar que tenga WhatsApp activo.
