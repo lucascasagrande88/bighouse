@@ -48,6 +48,7 @@
       </form>
       <nav class="hnav" aria-label="Secciones">
         <a href="#proyectos">Proyectos</a>
+        <a href="#categorias">Rubros</a>
         <a href="#catalogo">Catálogo</a>
         <a href="#contacto">Contacto</a>
       </nav>
@@ -60,35 +61,66 @@
   </header>
 
   <main id="inicio">
-    <!-- HERO + PROYECTOS -->
-    <section class="hero">
-      <div class="wrap">
-        <div class="hero-copy">
-          <p class="eyebrow">Electricidad + Iluminación</p>
-          <h1>Todo para tu instalación.</h1>
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <div class="hero-media" data-parallax="0.25" data-media-slot="hero" aria-hidden="true"></div>
+      <div class="hero-shade" aria-hidden="true"></div>
+      <div class="wrap hero-in">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">Electricidad + Iluminación · Flores, CABA</p>
+          <h1>Todo para tu<br><em>instalación.</em></h1>
           <p class="hero-sub">Encontrá materiales por producto o por proyecto.</p>
           <div class="hero-cta">
             <a href="#proyectos" class="btn btn-accent btn-lg">Elegir proyecto</a>
             <a href="#catalogo" class="btn btn-ghost-light btn-lg">Ver catálogo</a>
           </div>
+          <div class="hero-quick" id="heroQuick" aria-label="Arrancar por proyecto"></div>
         </div>
+      </div>
+      <div class="hero-cut" data-parallax="-0.35" data-media-slot="cutout" aria-hidden="true"></div>
+      <a class="scrollcue" href="#recorrido"><span>De la caja al encendido</span><i aria-hidden="true"></i></a>
+    </section>
 
-        <div class="projects" id="proyectos">
-          <div class="projects-head">
-            <h2>Qué estás armando</h2>
-            <p>Elegí el tipo de instalación y arrancá con una lista base. Después ajustás productos y cantidades.</p>
-          </div>
-          <div class="pgrid" id="projectGrid"><!-- JS --></div>
+    <!-- RECORRIDO: apagado → cableado → encendido -->
+    <section class="story" id="recorrido" aria-label="De la caja al encendido">
+      <div class="story-pin">
+        <div class="story-frames" id="storyFrames" aria-hidden="true"></div>
+        <div class="story-shade" aria-hidden="true"></div>
+        <div class="wrap story-copy">
+          <p class="kicker kicker-light">De la caja al encendido</p>
+          <ol class="story-steps" id="storySteps">
+            <li class="on"><span class="sn">01</span><b>Una pared vacía.</b><span>Toda instalación arranca acá: cajas, caños y un plan.</span></li>
+            <li><span class="sn">02</span><b>El cableado.</b><span>Cables, protecciones y canalización: lo que no se ve, pero tiene que estar bien.</span></li>
+            <li><span class="sn">03</span><b>Se hace la luz.</b><span>Iluminación, tomas y terminaciones. Todo en una sola lista.</span></li>
+          </ol>
+          <div class="story-bar" aria-hidden="true"><i id="storyBar"></i></div>
         </div>
       </div>
     </section>
 
-    <!-- CATEGORÍAS -->
-    <section class="section" id="categorias" aria-labelledby="catTitle">
+    <!-- PROYECTOS -->
+    <section class="projects" id="proyectos" aria-labelledby="projTitle">
       <div class="wrap">
-        <div class="sec-head">
-          <p class="kicker">Buscar por categoría</p>
-          <h2 id="catTitle">Materiales eléctricos e iluminación</h2>
+        <div class="sec-head sec-head-row reveal">
+          <div>
+            <p class="kicker kicker-light">Por proyecto</p>
+            <h2 id="projTitle">Qué estás armando</h2>
+          </div>
+          <p class="sec-lead light">Elegí el tipo de instalación y arrancá con una lista base. Después ajustás productos y cantidades.</p>
+        </div>
+        <div class="pgrid" id="projectGrid"><!-- JS --></div>
+      </div>
+    </section>
+
+    <!-- CATEGORÍAS -->
+    <section class="section section-cats" id="categorias" aria-labelledby="catTitle">
+      <div class="wrap">
+        <div class="sec-head sec-head-row reveal">
+          <div>
+            <p class="kicker">Por rubro</p>
+            <h2 id="catTitle">Materiales eléctricos e iluminación</h2>
+          </div>
+          <p class="sec-lead">Ocho rubros para resolver la obra completa, del tablero a la última lámpara.</p>
         </div>
         <div class="catgrid" id="catGrid"><!-- JS --></div>
       </div>
@@ -118,6 +150,8 @@
         </div>
         <div class="chips" id="catChips" role="group" aria-label="Filtrar por categoría"><!-- JS --></div>
 
+        <div class="catbanner" id="catBanner" hidden></div>
+
         <div class="result-bar">
           <span id="resultCount" aria-live="polite"></span>
           <button type="button" class="linkbtn" id="clearFilters" hidden>Limpiar filtros</button>
@@ -137,24 +171,31 @@
 
     <!-- ARMÁ TU LISTA -->
     <section class="section section-steps" aria-labelledby="stepsTitle">
-      <div class="wrap">
-        <div class="sec-head">
-          <p class="kicker">Cómo pedir</p>
-          <h2 id="stepsTitle">Armá tu lista</h2>
-          <p class="sec-lead">Sumá lo que necesitás, ajustá cantidades y mandá todo junto para cotizar.</p>
+      <div class="wrap steps-in">
+        <figure class="steps-media" data-media-slot="lista" aria-hidden="true"></figure>
+        <div class="steps-copy">
+          <div class="sec-head reveal">
+            <p class="kicker">Cómo pedir</p>
+            <h2 id="stepsTitle">Armá tu lista</h2>
+            <p class="sec-lead">Sumá lo que necesitás, ajustá cantidades y mandá todo junto para cotizar.</p>
+          </div>
+          <ol class="steps">
+            <li class="reveal"><span class="step-n">01</span><b>Elegí un proyecto o buscá productos</b><span>Arrancá con una lista base o buscá material por material.</span></li>
+            <li class="reveal"><span class="step-n">02</span><b>Ajustá cantidades</b><span>Sumá, quitá y escribí la cantidad exacta. Agregá observaciones.</span></li>
+            <li class="reveal"><span class="step-n">03</span><b>Pedí cotización por WhatsApp</b><span>Te llega un mensaje ordenado, ítem por ítem, listo para responder.</span></li>
+          </ol>
+          <button type="button" class="btn btn-dark btn-lg" data-open-list>Abrir mi lista</button>
         </div>
-        <ol class="steps">
-          <li><span class="step-n">01</span><b>Elegí un proyecto o buscá productos</b><span>Arrancá con una lista base o buscá material por material.</span></li>
-          <li><span class="step-n">02</span><b>Ajustá cantidades</b><span>Sumá, quitá y escribí la cantidad exacta. Agregá observaciones.</span></li>
-          <li><span class="step-n">03</span><b>Pedí cotización por WhatsApp</b><span>Te llega un mensaje ordenado, ítem por ítem, listo para responder.</span></li>
-        </ol>
       </div>
     </section>
 
     <!-- CONTACTO -->
     <section class="contact" id="contacto" aria-labelledby="contactTitle">
+      <div class="contact-media" data-parallax="0.18" data-media-slot="contacto" aria-hidden="true"></div>
+      <div class="contact-shade" aria-hidden="true"></div>
       <div class="wrap contact-in">
-        <div class="final">
+        <div class="final reveal">
+          <p class="kicker kicker-light">Av. Gaona 3307 · Flores</p>
           <h2 id="contactTitle">Mandanos la lista. Nosotros te ayudamos a cerrarla.</h2>
           <div class="final-cta">
             <button type="button" class="btn btn-accent btn-lg" data-open-list>
@@ -164,7 +205,7 @@
             <a href="#proyectos" class="btn btn-ghost-light btn-lg">Empezar por un proyecto</a>
           </div>
         </div>
-        <ul class="facts">
+        <ul class="facts reveal">
           <li><span class="f-k">Dirección</span><a target="_blank" rel="noopener" data-maps href="#"><span data-cfg="address"></span></a></li>
           <li><span class="f-k">WhatsApp / Tel.</span><a data-wa-plain href="#"><span data-cfg="phonePretty"></span></a></li>
           <li><span class="f-k">Email</span><a data-mail href="#"><span data-cfg="email"></span></a></li>
@@ -247,6 +288,7 @@
 
   <script src="config.js"></script>
   <script src="products-data.js"></script>
+  <script src="media.js"></script>
   <script src="store.js"></script>
   <script src="app.js"></script>
 </body>
