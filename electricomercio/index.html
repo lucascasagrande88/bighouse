@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Electricomercio · Todo para tu instalación</title>
+  <meta name="description" content="Materiales eléctricos e iluminación. Encontrá materiales por producto o por proyecto, armá tu lista y pedí cotización por WhatsApp.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#16181b">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2316181b'/%3E%3Cpath d='M18 4L8 18h7l-1 10 10-14h-7z' fill='%23f5b800'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#catalogo">Saltar al catálogo</a>
+
+  <!-- Barra utilitaria -->
+  <div class="utility">
+    <div class="wrap utility-in">
+      <span class="u-addr"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span data-cfg="address"></span></span>
+      <a class="u-phone" data-wa-plain href="#"><span data-cfg="phonePretty"></span></a>
+      <span class="u-demo">Demo<span class="u-long"> · catálogo ilustrativo</span></span>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="wrap header-in">
+      <a href="#inicio" class="wordmark" aria-label="Electricomercio, inicio">
+        <span class="wm-mark" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M13 2L4 14h7l-1 8 9-12h-7z" fill="currentColor"/></svg></span>
+        <span class="wm-text"><b>ELECTRICOMERCIO</b><small>ex-ElectroFlores · Electricidad e iluminación</small></span>
+      </a>
+      <form class="hsearch" id="headerSearch" role="search">
+        <label for="hq" class="sr">Buscar productos</label>
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        <input id="hq" type="search" placeholder="Buscar cable, térmica, toma, LED…" autocomplete="off">
+      </form>
+      <nav class="hnav" aria-label="Secciones">
+        <a href="#proyectos">Proyectos</a>
+        <a href="#catalogo">Catálogo</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <button class="listbtn" id="listBtn" type="button" aria-haspopup="dialog" aria-controls="listDrawer">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6h.01M4 12h.01M4 18h.01"/></svg>
+        <span class="lb-label">Mi lista</span>
+        <span class="count" id="listCount" aria-live="polite">0</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="inicio">
+    <!-- HERO + PROYECTOS -->
+    <section class="hero">
+      <div class="wrap">
+        <div class="hero-copy">
+          <p class="eyebrow">Electricidad + Iluminación</p>
+          <h1>Todo para tu instalación.</h1>
+          <p class="hero-sub">Encontrá materiales por producto o por proyecto.</p>
+          <div class="hero-cta">
+            <a href="#proyectos" class="btn btn-accent btn-lg">Elegir proyecto</a>
+            <a href="#catalogo" class="btn btn-ghost-light btn-lg">Ver catálogo</a>
+          </div>
+        </div>
+
+        <div class="projects" id="proyectos">
+          <div class="projects-head">
+            <h2>Qué estás armando</h2>
+            <p>Elegí el tipo de instalación y arrancá con una lista base. Después ajustás productos y cantidades.</p>
+          </div>
+          <div class="pgrid" id="projectGrid"><!-- JS --></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CATEGORÍAS -->
+    <section class="section" id="categorias" aria-labelledby="catTitle">
+      <div class="wrap">
+        <div class="sec-head">
+          <p class="kicker">Buscar por categoría</p>
+          <h2 id="catTitle">Materiales eléctricos e iluminación</h2>
+        </div>
+        <div class="catgrid" id="catGrid"><!-- JS --></div>
+      </div>
+    </section>
+
+    <!-- CATÁLOGO -->
+    <section class="section section-catalog" id="catalogo" aria-labelledby="catalogTitle">
+      <div class="wrap">
+        <div class="sec-head sec-head-row">
+          <div>
+            <p class="kicker">Catálogo</p>
+            <h2 id="catalogTitle">Buscá por producto</h2>
+          </div>
+          <p class="sec-note">Sin precios online: armá la lista y te cotizamos.</p>
+        </div>
+
+        <div class="toolbar">
+          <div class="search">
+            <label for="q" class="sr">Buscar en el catálogo</label>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+            <input id="q" type="search" placeholder="Buscar cable, térmica, toma, LED…" autocomplete="off">
+          </div>
+          <div class="usefilter" role="group" aria-label="Filtrar por uso">
+            <span class="uf-label">Uso</span>
+            <div class="seg" id="useSeg"><!-- JS --></div>
+          </div>
+        </div>
+        <div class="chips" id="catChips" role="group" aria-label="Filtrar por categoría"><!-- JS --></div>
+
+        <div class="result-bar">
+          <span id="resultCount" aria-live="polite"></span>
+          <button type="button" class="linkbtn" id="clearFilters" hidden>Limpiar filtros</button>
+        </div>
+
+        <div class="plist" id="productList"><!-- JS --></div>
+        <div class="empty" id="catalogEmpty" hidden>
+          <b>No encontramos productos con ese filtro.</b>
+          <span>Probá con otra palabra o pedilo igual en la lista: lo cotizamos.</span>
+          <div class="empty-actions">
+            <button type="button" class="btn btn-dark" id="emptyReset">Ver todo el catálogo</button>
+            <button type="button" class="btn btn-line" id="emptyCustom">Agregar “<span id="emptyTerm"></span>” como pedido libre</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ARMÁ TU LISTA -->
+    <section class="section section-steps" aria-labelledby="stepsTitle">
+      <div class="wrap">
+        <div class="sec-head">
+          <p class="kicker">Cómo pedir</p>
+          <h2 id="stepsTitle">Armá tu lista</h2>
+          <p class="sec-lead">Sumá lo que necesitás, ajustá cantidades y mandá todo junto para cotizar.</p>
+        </div>
+        <ol class="steps">
+          <li><span class="step-n">01</span><b>Elegí un proyecto o buscá productos</b><span>Arrancá con una lista base o buscá material por material.</span></li>
+          <li><span class="step-n">02</span><b>Ajustá cantidades</b><span>Sumá, quitá y escribí la cantidad exacta. Agregá observaciones.</span></li>
+          <li><span class="step-n">03</span><b>Pedí cotización por WhatsApp</b><span>Te llega un mensaje ordenado, ítem por ítem, listo para responder.</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section class="contact" id="contacto" aria-labelledby="contactTitle">
+      <div class="wrap contact-in">
+        <div class="final">
+          <h2 id="contactTitle">Mandanos la lista. Nosotros te ayudamos a cerrarla.</h2>
+          <div class="final-cta">
+            <button type="button" class="btn btn-accent btn-lg" data-open-list>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6h.01M4 12h.01M4 18h.01"/></svg>
+              Ver mi lista
+            </button>
+            <a href="#proyectos" class="btn btn-ghost-light btn-lg">Empezar por un proyecto</a>
+          </div>
+        </div>
+        <ul class="facts">
+          <li><span class="f-k">Dirección</span><a target="_blank" rel="noopener" data-maps href="#"><span data-cfg="address"></span></a></li>
+          <li><span class="f-k">WhatsApp / Tel.</span><a data-wa-plain href="#"><span data-cfg="phonePretty"></span></a></li>
+          <li><span class="f-k">Email</span><a data-mail href="#"><span data-cfg="email"></span></a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-in">
+      <span><b>ELECTRICOMERCIO</b> · ex-ElectroFlores · Electricidad e iluminación</span>
+      <span class="foot-note">Demo para presentación. Productos de ejemplo, sin precios ni stock: el catálogo real se carga desde el panel. <a href="admin.html">Panel demo</a></span>
+    </div>
+  </footer>
+
+  <!-- Barra fija mobile -->
+  <div class="mbar" id="mbar">
+    <button type="button" class="mbar-btn" data-open-list>
+      <span class="mbar-txt"><b id="mbarCount">0 ítems</b><small id="mbarProject">Tu lista</small></span>
+      <span class="mbar-go">Ver y cotizar
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </button>
+  </div>
+
+  <!-- Drawer lista -->
+  <div class="drawer" id="listDrawer" role="dialog" aria-modal="true" aria-labelledby="listTitle" hidden>
+    <div class="drawer-bg" data-close></div>
+    <aside class="drawer-panel">
+      <header class="dh">
+        <div>
+          <h2 id="listTitle">Armá tu lista</h2>
+          <p id="listSummary">Sumá lo que necesitás y mandá todo junto para cotizar.</p>
+        </div>
+        <button type="button" class="iconbtn" data-close aria-label="Cerrar lista">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </header>
+
+      <div class="dbody">
+        <div class="field">
+          <label for="projectSel">Tipo de proyecto <span class="opt">(opcional)</span></label>
+          <select id="projectSel"></select>
+        </div>
+
+        <div class="litems" id="listItems"></div>
+        <div class="lempty" id="listEmpty">
+          <b>Todavía no agregaste productos.</b>
+          <span>Podés empezar por un proyecto o recorrer el catálogo.</span>
+          <div class="lempty-p" id="emptyProjects"></div>
+          <button type="button" class="btn btn-line" data-goto-catalog>Ir al catálogo</button>
+        </div>
+
+        <button type="button" class="addmore" id="addMore" data-goto-catalog>+ Sumar más productos del catálogo</button>
+
+        <div class="field">
+          <label for="note">Observaciones <span class="opt">(opcional)</span></label>
+          <textarea id="note" rows="3" placeholder="Ej: obra en Flores, entrega a coordinar, necesito alternativa en otra marca…"></textarea>
+        </div>
+
+        <details class="preview">
+          <summary>Ver mensaje que se envía</summary>
+          <pre id="msgPreview"></pre>
+        </details>
+      </div>
+
+      <footer class="dfoot">
+        <button type="button" class="btn btn-accent btn-block btn-lg" id="sendWa">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.7.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.18-1.41-.08-.13-.27-.2-.57-.35M12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89a9.82 9.82 0 0 1 6.99 2.9 9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.43 9.89-9.88 9.89m8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.17-3.48-8.41"/></svg>
+          Pedir cotización por WhatsApp
+        </button>
+        <div class="drow">
+          <button type="button" class="btn btn-line" id="copyList">Copiar lista</button>
+          <button type="button" class="btn btn-quiet" id="clearList">Vaciar</button>
+        </div>
+      </footer>
+    </aside>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"><span id="toastMsg"></span><button type="button" id="toastAction" hidden></button></div>
+
+  <script src="config.js"></script>
+  <script src="products-data.js"></script>
+  <script src="store.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
