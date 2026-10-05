@@ -177,6 +177,10 @@ Usá banda-1-apagado.jpg como primer cuadro y banda-3-encendido.jpg como último
 
 ---
 
+## Estado (2026-10-05)
+
+Recibidas e integradas: las 19 imágenes. Pendiente: los 3 videos (el código ya los toma solos si aparecen en `media-src/` con su nombre) y, opcional, la foto real de la fachada.
+
 ## Checklist para devolver
 
 - [ ] `hero-desktop.jpg`, `hero-mobile.jpg`, `hero-cable-cutout.png` (transparente)
