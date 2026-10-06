@@ -1,0 +1,617 @@
+{
+ "nahuel": {
+  "folder": "Nahuel-Ponce",
+  "items": [
+   {
+    "file": "Nahuel-Ponce_Logo-Principal_Positivo.svg",
+    "logo": "Logo-Principal",
+    "variant": "Positivo",
+    "bg": "#F2EFEA",
+    "w": 709.2239999999999,
+    "h": 414.62600000000003
+   },
+   {
+    "file": "Nahuel-Ponce_Logo-Horizontal_Positivo.svg",
+    "logo": "Logo-Horizontal",
+    "variant": "Positivo",
+    "bg": "#F2EFEA",
+    "w": 1071.5616,
+    "h": 293.8732
+   },
+   {
+    "file": "Nahuel-Ponce_Logo-Secundario_Positivo.svg",
+    "logo": "Logo-Secundario",
+    "variant": "Positivo",
+    "bg": "#F2EFEA",
+    "w": 458.13040000000007,
+    "h": 352.86560000000003
+   },
+   {
+    "file": "Nahuel-Ponce_Monograma_Positivo.svg",
+    "logo": "Monograma",
+    "variant": "Positivo",
+    "bg": "#F2EFEA",
+    "w": 270.12,
+    "h": 370.62
+   },
+   {
+    "file": "Nahuel-Ponce_Logo-Principal_Negativo.svg",
+    "logo": "Logo-Principal",
+    "variant": "Negativo",
+    "bg": "#232323",
+    "w": 709.2239999999999,
+    "h": 414.62600000000003
+   },
+   {
+    "file": "Nahuel-Ponce_Logo-Horizontal_Negativo.svg",
+    "logo": "Logo-Horizontal",
+    "variant": "Negativo",
+    "bg": "#232323",
+    "w": 1071.5616,
+    "h": 293.8732
+   },
+   {
+    "file": "Nahuel-Ponce_Logo-Secundario_Negativo.svg",
+    "logo": "Logo-Secundario",
+    "variant": "Negativo",
+    "bg": "#232323",
+    "w": 458.13040000000007,
+    "h": 352.86560000000003
+   },
+   {
+    "file": "Nahuel-Ponce_Monograma_Negativo.svg",
+    "logo": "Monograma",
+    "variant": "Negativo",
+    "bg": "#232323",
+    "w": 270.12,
+    "h": 370.62
+   },
+   {
+    "file": "Nahuel-Ponce_Logo-Principal_Taupe.svg",
+    "logo": "Logo-Principal",
+    "variant": "Taupe",
+    "bg": "#8D7D70",
+    "w": 709.2239999999999,
+    "h": 414.62600000000003
+   },
+   {
+    "file": "Nahuel-Ponce_Logo-Horizontal_Taupe.svg",
+    "logo": "Logo-Horizontal",
+    "variant": "Taupe",
+    "bg": "#8D7D70",
+    "w": 1071.5616,
+    "h": 293.8732
+   },
+   {
+    "file": "Nahuel-Ponce_Logo-Secundario_Taupe.svg",
+    "logo": "Logo-Secundario",
+    "variant": "Taupe",
+    "bg": "#8D7D70",
+    "w": 458.13040000000007,
+    "h": 352.86560000000003
+   },
+   {
+    "file": "Nahuel-Ponce_Monograma_Taupe.svg",
+    "logo": "Monograma",
+    "variant": "Taupe",
+    "bg": "#8D7D70",
+    "w": 270.12,
+    "h": 370.62
+   },
+   {
+    "file": "Nahuel-Ponce_Logo-Principal_Mono-Negro.svg",
+    "logo": "Logo-Principal",
+    "variant": "Mono-Negro",
+    "bg": "#FFFFFF",
+    "w": 709.2239999999999,
+    "h": 414.62600000000003
+   },
+   {
+    "file": "Nahuel-Ponce_Logo-Horizontal_Mono-Negro.svg",
+    "logo": "Logo-Horizontal",
+    "variant": "Mono-Negro",
+    "bg": "#FFFFFF",
+    "w": 1071.5616,
+    "h": 293.8732
+   },
+   {
+    "file": "Nahuel-Ponce_Logo-Secundario_Mono-Negro.svg",
+    "logo": "Logo-Secundario",
+    "variant": "Mono-Negro",
+    "bg": "#FFFFFF",
+    "w": 458.13040000000007,
+    "h": 352.86560000000003
+   },
+   {
+    "file": "Nahuel-Ponce_Monograma_Mono-Negro.svg",
+    "logo": "Monograma",
+    "variant": "Mono-Negro",
+    "bg": "#FFFFFF",
+    "w": 270.12,
+    "h": 370.62
+   },
+   {
+    "file": "Nahuel-Ponce_Logo-Principal_Mono-Blanco.svg",
+    "logo": "Logo-Principal",
+    "variant": "Mono-Blanco",
+    "bg": "#232323",
+    "w": 709.2239999999999,
+    "h": 414.62600000000003
+   },
+   {
+    "file": "Nahuel-Ponce_Logo-Horizontal_Mono-Blanco.svg",
+    "logo": "Logo-Horizontal",
+    "variant": "Mono-Blanco",
+    "bg": "#232323",
+    "w": 1071.5616,
+    "h": 293.8732
+   },
+   {
+    "file": "Nahuel-Ponce_Logo-Secundario_Mono-Blanco.svg",
+    "logo": "Logo-Secundario",
+    "variant": "Mono-Blanco",
+    "bg": "#232323",
+    "w": 458.13040000000007,
+    "h": 352.86560000000003
+   },
+   {
+    "file": "Nahuel-Ponce_Monograma_Mono-Blanco.svg",
+    "logo": "Monograma",
+    "variant": "Mono-Blanco",
+    "bg": "#232323",
+    "w": 270.12,
+    "h": 370.62
+   }
+  ]
+ },
+ "sol": {
+  "folder": "Sol-Galiana",
+  "items": [
+   {
+    "file": "Sol-Galiana_Logo-Principal_Positivo.svg",
+    "logo": "Logo-Principal",
+    "variant": "Positivo",
+    "bg": "#F4F0E8",
+    "w": 991.51,
+    "h": 296.6334
+   },
+   {
+    "file": "Sol-Galiana_Logotipo_Positivo.svg",
+    "logo": "Logotipo",
+    "variant": "Positivo",
+    "bg": "#F4F0E8",
+    "w": 991.51,
+    "h": 253.9134
+   },
+   {
+    "file": "Sol-Galiana_Logo-Vertical_Positivo.svg",
+    "logo": "Logo-Vertical",
+    "variant": "Positivo",
+    "bg": "#F4F0E8",
+    "w": 740.3816000000002,
+    "h": 437.5718
+   },
+   {
+    "file": "Sol-Galiana_Logo-con-Simbolo_Positivo.svg",
+    "logo": "Logo-con-Simbolo",
+    "variant": "Positivo",
+    "bg": "#F4F0E8",
+    "w": 915.24,
+    "h": 417.99
+   },
+   {
+    "file": "Sol-Galiana_Simbolo-Sol_Positivo.svg",
+    "logo": "Simbolo-Sol",
+    "variant": "Positivo",
+    "bg": "#F4F0E8",
+    "w": 605.52,
+    "h": 211.32
+   },
+   {
+    "file": "Sol-Galiana_Monograma_Positivo.svg",
+    "logo": "Monograma",
+    "variant": "Positivo",
+    "bg": "#F4F0E8",
+    "w": 377.35663999999997,
+    "h": 404.96064
+   },
+   {
+    "file": "Sol-Galiana_Logo-Principal_Negativo.svg",
+    "logo": "Logo-Principal",
+    "variant": "Negativo",
+    "bg": "#4A4F48",
+    "w": 991.51,
+    "h": 296.6334
+   },
+   {
+    "file": "Sol-Galiana_Logotipo_Negativo.svg",
+    "logo": "Logotipo",
+    "variant": "Negativo",
+    "bg": "#4A4F48",
+    "w": 991.51,
+    "h": 253.9134
+   },
+   {
+    "file": "Sol-Galiana_Logo-Vertical_Negativo.svg",
+    "logo": "Logo-Vertical",
+    "variant": "Negativo",
+    "bg": "#4A4F48",
+    "w": 740.3816000000002,
+    "h": 437.5718
+   },
+   {
+    "file": "Sol-Galiana_Logo-con-Simbolo_Negativo.svg",
+    "logo": "Logo-con-Simbolo",
+    "variant": "Negativo",
+    "bg": "#4A4F48",
+    "w": 915.24,
+    "h": 417.99
+   },
+   {
+    "file": "Sol-Galiana_Simbolo-Sol_Negativo.svg",
+    "logo": "Simbolo-Sol",
+    "variant": "Negativo",
+    "bg": "#4A4F48",
+    "w": 605.52,
+    "h": 211.32
+   },
+   {
+    "file": "Sol-Galiana_Monograma_Negativo.svg",
+    "logo": "Monograma",
+    "variant": "Negativo",
+    "bg": "#4A4F48",
+    "w": 377.35663999999997,
+    "h": 404.96064
+   },
+   {
+    "file": "Sol-Galiana_Logo-Principal_Sage.svg",
+    "logo": "Logo-Principal",
+    "variant": "Sage",
+    "bg": "#A9B39F",
+    "w": 991.51,
+    "h": 296.6334
+   },
+   {
+    "file": "Sol-Galiana_Logotipo_Sage.svg",
+    "logo": "Logotipo",
+    "variant": "Sage",
+    "bg": "#A9B39F",
+    "w": 991.51,
+    "h": 253.9134
+   },
+   {
+    "file": "Sol-Galiana_Logo-Vertical_Sage.svg",
+    "logo": "Logo-Vertical",
+    "variant": "Sage",
+    "bg": "#A9B39F",
+    "w": 740.3816000000002,
+    "h": 437.5718
+   },
+   {
+    "file": "Sol-Galiana_Logo-con-Simbolo_Sage.svg",
+    "logo": "Logo-con-Simbolo",
+    "variant": "Sage",
+    "bg": "#A9B39F",
+    "w": 915.24,
+    "h": 417.99
+   },
+   {
+    "file": "Sol-Galiana_Simbolo-Sol_Sage.svg",
+    "logo": "Simbolo-Sol",
+    "variant": "Sage",
+    "bg": "#A9B39F",
+    "w": 605.52,
+    "h": 211.32
+   },
+   {
+    "file": "Sol-Galiana_Monograma_Sage.svg",
+    "logo": "Monograma",
+    "variant": "Sage",
+    "bg": "#A9B39F",
+    "w": 377.35663999999997,
+    "h": 404.96064
+   },
+   {
+    "file": "Sol-Galiana_Logo-Principal_Mono-Negro.svg",
+    "logo": "Logo-Principal",
+    "variant": "Mono-Negro",
+    "bg": "#FFFFFF",
+    "w": 991.51,
+    "h": 296.6334
+   },
+   {
+    "file": "Sol-Galiana_Logotipo_Mono-Negro.svg",
+    "logo": "Logotipo",
+    "variant": "Mono-Negro",
+    "bg": "#FFFFFF",
+    "w": 991.51,
+    "h": 253.9134
+   },
+   {
+    "file": "Sol-Galiana_Logo-Vertical_Mono-Negro.svg",
+    "logo": "Logo-Vertical",
+    "variant": "Mono-Negro",
+    "bg": "#FFFFFF",
+    "w": 740.3816000000002,
+    "h": 437.5718
+   },
+   {
+    "file": "Sol-Galiana_Logo-con-Simbolo_Mono-Negro.svg",
+    "logo": "Logo-con-Simbolo",
+    "variant": "Mono-Negro",
+    "bg": "#FFFFFF",
+    "w": 915.24,
+    "h": 417.99
+   },
+   {
+    "file": "Sol-Galiana_Simbolo-Sol_Mono-Negro.svg",
+    "logo": "Simbolo-Sol",
+    "variant": "Mono-Negro",
+    "bg": "#FFFFFF",
+    "w": 605.52,
+    "h": 211.32
+   },
+   {
+    "file": "Sol-Galiana_Monograma_Mono-Negro.svg",
+    "logo": "Monograma",
+    "variant": "Mono-Negro",
+    "bg": "#FFFFFF",
+    "w": 377.35663999999997,
+    "h": 404.96064
+   },
+   {
+    "file": "Sol-Galiana_Logo-Principal_Mono-Blanco.svg",
+    "logo": "Logo-Principal",
+    "variant": "Mono-Blanco",
+    "bg": "#4A4F48",
+    "w": 991.51,
+    "h": 296.6334
+   },
+   {
+    "file": "Sol-Galiana_Logotipo_Mono-Blanco.svg",
+    "logo": "Logotipo",
+    "variant": "Mono-Blanco",
+    "bg": "#4A4F48",
+    "w": 991.51,
+    "h": 253.9134
+   },
+   {
+    "file": "Sol-Galiana_Logo-Vertical_Mono-Blanco.svg",
+    "logo": "Logo-Vertical",
+    "variant": "Mono-Blanco",
+    "bg": "#4A4F48",
+    "w": 740.3816000000002,
+    "h": 437.5718
+   },
+   {
+    "file": "Sol-Galiana_Logo-con-Simbolo_Mono-Blanco.svg",
+    "logo": "Logo-con-Simbolo",
+    "variant": "Mono-Blanco",
+    "bg": "#4A4F48",
+    "w": 915.24,
+    "h": 417.99
+   },
+   {
+    "file": "Sol-Galiana_Simbolo-Sol_Mono-Blanco.svg",
+    "logo": "Simbolo-Sol",
+    "variant": "Mono-Blanco",
+    "bg": "#4A4F48",
+    "w": 605.52,
+    "h": 211.32
+   },
+   {
+    "file": "Sol-Galiana_Monograma_Mono-Blanco.svg",
+    "logo": "Monograma",
+    "variant": "Mono-Blanco",
+    "bg": "#4A4F48",
+    "w": 377.35663999999997,
+    "h": 404.96064
+   }
+  ]
+ },
+ "conjunta": {
+  "folder": "Psicoanalisis-en-Barcelona",
+  "items": [
+   {
+    "file": "Psicoanalisis-en-Barcelona_Logo-Principal_Positivo.svg",
+    "logo": "Logo-Principal",
+    "variant": "Positivo",
+    "bg": "#F4EEE5",
+    "w": 779.97472,
+    "h": 501.1651702220968
+   },
+   {
+    "file": "Psicoanalisis-en-Barcelona_Logo-Secundario_Positivo.svg",
+    "logo": "Logo-Secundario",
+    "variant": "Positivo",
+    "bg": "#F4EEE5",
+    "w": 779.97472,
+    "h": 437.0787792474854
+   },
+   {
+    "file": "Psicoanalisis-en-Barcelona_Logo-Horizontal_Positivo.svg",
+    "logo": "Logo-Horizontal",
+    "variant": "Positivo",
+    "bg": "#F4EEE5",
+    "w": 1416.6792158346989,
+    "h": 304.1363297703033
+   },
+   {
+    "file": "Psicoanalisis-en-Barcelona_Simbolo_Positivo.svg",
+    "logo": "Simbolo",
+    "variant": "Positivo",
+    "bg": "#F4EEE5",
+    "w": 348.35321821478175,
+    "h": 130.29586585838769
+   },
+   {
+    "file": "Psicoanalisis-en-Barcelona_Monograma_Positivo.svg",
+    "logo": "Monograma",
+    "variant": "Positivo",
+    "bg": "#F4EEE5",
+    "w": 333.32700800000003,
+    "h": 533.7958080000001
+   },
+   {
+    "file": "Psicoanalisis-en-Barcelona_Logo-Principal_Negativo.svg",
+    "logo": "Logo-Principal",
+    "variant": "Negativo",
+    "bg": "#4E5448",
+    "w": 779.97472,
+    "h": 501.1651702220968
+   },
+   {
+    "file": "Psicoanalisis-en-Barcelona_Logo-Secundario_Negativo.svg",
+    "logo": "Logo-Secundario",
+    "variant": "Negativo",
+    "bg": "#4E5448",
+    "w": 779.97472,
+    "h": 437.0787792474854
+   },
+   {
+    "file": "Psicoanalisis-en-Barcelona_Logo-Horizontal_Negativo.svg",
+    "logo": "Logo-Horizontal",
+    "variant": "Negativo",
+    "bg": "#4E5448",
+    "w": 1416.6792158346989,
+    "h": 304.1363297703033
+   },
+   {
+    "file": "Psicoanalisis-en-Barcelona_Simbolo_Negativo.svg",
+    "logo": "Simbolo",
+    "variant": "Negativo",
+    "bg": "#4E5448",
+    "w": 348.35321821478175,
+    "h": 130.29586585838769
+   },
+   {
+    "file": "Psicoanalisis-en-Barcelona_Monograma_Negativo.svg",
+    "logo": "Monograma",
+    "variant": "Negativo",
+    "bg": "#4E5448",
+    "w": 333.32700800000003,
+    "h": 533.7958080000001
+   },
+   {
+    "file": "Psicoanalisis-en-Barcelona_Logo-Principal_Terracota.svg",
+    "logo": "Logo-Principal",
+    "variant": "Terracota",
+    "bg": "#B76D4F",
+    "w": 779.97472,
+    "h": 501.1651702220968
+   },
+   {
+    "file": "Psicoanalisis-en-Barcelona_Logo-Secundario_Terracota.svg",
+    "logo": "Logo-Secundario",
+    "variant": "Terracota",
+    "bg": "#B76D4F",
+    "w": 779.97472,
+    "h": 437.0787792474854
+   },
+   {
+    "file": "Psicoanalisis-en-Barcelona_Logo-Horizontal_Terracota.svg",
+    "logo": "Logo-Horizontal",
+    "variant": "Terracota",
+    "bg": "#B76D4F",
+    "w": 1416.6792158346989,
+    "h": 304.1363297703033
+   },
+   {
+    "file": "Psicoanalisis-en-Barcelona_Simbolo_Terracota.svg",
+    "logo": "Simbolo",
+    "variant": "Terracota",
+    "bg": "#B76D4F",
+    "w": 348.35321821478175,
+    "h": 130.29586585838769
+   },
+   {
+    "file": "Psicoanalisis-en-Barcelona_Monograma_Terracota.svg",
+    "logo": "Monograma",
+    "variant": "Terracota",
+    "bg": "#B76D4F",
+    "w": 333.32700800000003,
+    "h": 533.7958080000001
+   },
+   {
+    "file": "Psicoanalisis-en-Barcelona_Logo-Principal_Mono-Negro.svg",
+    "logo": "Logo-Principal",
+    "variant": "Mono-Negro",
+    "bg": "#FFFFFF",
+    "w": 779.97472,
+    "h": 501.1651702220968
+   },
+   {
+    "file": "Psicoanalisis-en-Barcelona_Logo-Secundario_Mono-Negro.svg",
+    "logo": "Logo-Secundario",
+    "variant": "Mono-Negro",
+    "bg": "#FFFFFF",
+    "w": 779.97472,
+    "h": 437.0787792474854
+   },
+   {
+    "file": "Psicoanalisis-en-Barcelona_Logo-Horizontal_Mono-Negro.svg",
+    "logo": "Logo-Horizontal",
+    "variant": "Mono-Negro",
+    "bg": "#FFFFFF",
+    "w": 1416.6792158346989,
+    "h": 304.1363297703033
+   },
+   {
+    "file": "Psicoanalisis-en-Barcelona_Simbolo_Mono-Negro.svg",
+    "logo": "Simbolo",
+    "variant": "Mono-Negro",
+    "bg": "#FFFFFF",
+    "w": 348.35321821478175,
+    "h": 130.29586585838769
+   },
+   {
+    "file": "Psicoanalisis-en-Barcelona_Monograma_Mono-Negro.svg",
+    "logo": "Monograma",
+    "variant": "Mono-Negro",
+    "bg": "#FFFFFF",
+    "w": 333.32700800000003,
+    "h": 533.7958080000001
+   },
+   {
+    "file": "Psicoanalisis-en-Barcelona_Logo-Principal_Mono-Blanco.svg",
+    "logo": "Logo-Principal",
+    "variant": "Mono-Blanco",
+    "bg": "#2E2D2A",
+    "w": 779.97472,
+    "h": 501.1651702220968
+   },
+   {
+    "file": "Psicoanalisis-en-Barcelona_Logo-Secundario_Mono-Blanco.svg",
+    "logo": "Logo-Secundario",
+    "variant": "Mono-Blanco",
+    "bg": "#2E2D2A",
+    "w": 779.97472,
+    "h": 437.0787792474854
+   },
+   {
+    "file": "Psicoanalisis-en-Barcelona_Logo-Horizontal_Mono-Blanco.svg",
+    "logo": "Logo-Horizontal",
+    "variant": "Mono-Blanco",
+    "bg": "#2E2D2A",
+    "w": 1416.6792158346989,
+    "h": 304.1363297703033
+   },
+   {
+    "file": "Psicoanalisis-en-Barcelona_Simbolo_Mono-Blanco.svg",
+    "logo": "Simbolo",
+    "variant": "Mono-Blanco",
+    "bg": "#2E2D2A",
+    "w": 348.35321821478175,
+    "h": 130.29586585838769
+   },
+   {
+    "file": "Psicoanalisis-en-Barcelona_Monograma_Mono-Blanco.svg",
+    "logo": "Monograma",
+    "variant": "Mono-Blanco",
+    "bg": "#2E2D2A",
+    "w": 333.32700800000003,
+    "h": 533.7958080000001
+   }
+  ]
+ }
+}
