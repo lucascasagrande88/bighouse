@@ -1,0 +1,146 @@
+name: Package Psicologia Barcelona deliveries
+
+on:
+  push:
+    branches:
+      - 'claude/wizardly-planck-k8eqja'
+    paths:
+      - '.github/workflows/package-psicologia-barcelona.yml'
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build clean client packages
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          rm -rf package
+          mkdir -p package/sol package/nahuel package/conjunta
+
+          # SOL
+          cp "psicologia-barcelona/entrega/01-Sol-Galiana/Manual-panel-Sol-Galiana.pdf" package/sol/
+          cp "psicologia-barcelona/entrega/01-Sol-Galiana/Tutorial-panel-sol.mp4" package/sol/
+          mkdir -p package/sol/01-Manual-de-Marca package/sol/02-Logos package/sol/03-Imprenta
+          cp "psicologia-barcelona/marca/Sol-Galiana/manual/Sol-Galiana_Manual-de-marca.pdf" package/sol/01-Manual-de-Marca/
+          cp -R "psicologia-barcelona/marca/Sol-Galiana/logos/." package/sol/02-Logos/
+          find "psicologia-barcelona/marca/Sol-Galiana/papeleria" -maxdepth 1 -type f -exec cp {} package/sol/03-Imprenta/ \;
+          cat > package/sol/00-LEEME.txt <<'EOF'
+SOL GALIANA · ENTREGA FINAL
+
+WEB
+https://sol-galiana-psicologia.netlify.app
+
+PANEL DE EDICION
+https://sol-galiana-psicologia.netlify.app/admin
+La contraseña se entrega por separado.
+
+CANVA
+Tarjeta personal
+Ver: https://www.canva.com/d/gVH1DDRQjtCN89C
+Editar: https://www.canva.com/d/BcKOqpN2bh0-GfK
+
+Tríptico A4
+Ver: https://www.canva.com/d/yeLFkAzIF82PS79
+Editar: https://www.canva.com/d/o28N0w9yXOd1nrA
+
+Stickers
+Ver: https://www.canva.com/d/5eH793C71rKaXOY
+Editar: https://www.canva.com/d/9M0zQxPUgDUPyyz
+EOF
+
+          # NAHUEL
+          cp "psicologia-barcelona/entrega/02-Nahuel-Ponce/Manual-panel-Nahuel-Ponce.pdf" package/nahuel/
+          cp "psicologia-barcelona/entrega/02-Nahuel-Ponce/Tutorial-panel-nahuel.mp4" package/nahuel/
+          mkdir -p package/nahuel/01-Manual-de-Marca package/nahuel/02-Logos package/nahuel/03-Imprenta
+          cp "psicologia-barcelona/marca/Nahuel-Ponce/manual/Nahuel-Ponce_Manual-de-marca.pdf" package/nahuel/01-Manual-de-Marca/
+          cp -R "psicologia-barcelona/marca/Nahuel-Ponce/logos/." package/nahuel/02-Logos/
+          find "psicologia-barcelona/marca/Nahuel-Ponce/papeleria" -maxdepth 1 -type f -exec cp {} package/nahuel/03-Imprenta/ \;
+          cat > package/nahuel/00-LEEME.txt <<'EOF'
+NAHUEL PONCE · ENTREGA FINAL
+
+WEB
+https://nahuel-psicologia-barcelona.netlify.app
+
+PANEL DE EDICION
+https://nahuel-psicologia-barcelona.netlify.app/admin
+La contraseña se entrega por separado.
+
+CANVA
+Kit de Instagram (12 plantillas)
+Ver: https://www.canva.com/d/viNO2ThPLUa6wml
+Editar: https://www.canva.com/d/5AD8h7GJcVdIxvz
+
+Tarjeta personal
+Ver: https://www.canva.com/d/O1q-XgUBjjmzdK0
+Editar: https://www.canva.com/d/ndWY0zT_FmrqXo7
+
+Tríptico A4
+Ver: https://www.canva.com/d/PN2C6a2ukSzoB3T
+Editar: https://www.canva.com/d/NIEVTiFjEvQnAzV
+
+Stickers
+Ver: https://www.canva.com/d/jlk064XNQjrneSC
+Editar: https://www.canva.com/d/MEqkhKR7fSPxHER
+EOF
+
+          # CONJUNTA
+          cp "psicologia-barcelona/entrega/03-Psicoanalisis-en-Barcelona/Manual-panel-Psicoanalisis-en-Barcelona.pdf" package/conjunta/
+          cp "psicologia-barcelona/entrega/03-Psicoanalisis-en-Barcelona/Tutorial-panel-conjunta.mp4" package/conjunta/
+          mkdir -p package/conjunta/01-Manual-de-Marca package/conjunta/02-Logos package/conjunta/03-Imprenta
+          cp "psicologia-barcelona/marca/Psicoanalisis-en-Barcelona/manual/Psicoanalisis-en-Barcelona_Manual-de-marca.pdf" package/conjunta/01-Manual-de-Marca/
+          cp -R "psicologia-barcelona/marca/Psicoanalisis-en-Barcelona/logos/." package/conjunta/02-Logos/
+          find "psicologia-barcelona/marca/Psicoanalisis-en-Barcelona/papeleria" -maxdepth 1 -type f -exec cp {} package/conjunta/03-Imprenta/ \;
+          cat > package/conjunta/00-LEEME.txt <<'EOF'
+PSICOANALISIS EN BARCELONA · ENTREGA FINAL
+
+WEB
+https://psicoanalisis-en-barcelona.netlify.app
+
+PANEL DE EDICION
+https://psicoanalisis-en-barcelona.netlify.app/admin
+La contraseña se entrega por separado.
+
+CANVA
+Tarjeta
+Ver: https://www.canva.com/d/5I6Ofe5C4q786t3
+Editar: https://www.canva.com/d/IcktH988ZN_K5LL
+
+Tríptico A4
+Ver: https://www.canva.com/d/T5K8YpheMS-M6Ah
+Editar: https://www.canva.com/d/G_2ICUuoXlBDdsc
+
+Stickers
+Ver: https://www.canva.com/d/01ycdSB_wXsmmLN
+Editar: https://www.canva.com/d/M8pzypxbIjztkZM
+EOF
+
+      - name: Upload Sol package
+        uses: actions/upload-artifact@v4
+        with:
+          name: Entrega-Sol-Galiana
+          path: package/sol/
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Upload Nahuel package
+        uses: actions/upload-artifact@v4
+        with:
+          name: Entrega-Nahuel-Ponce
+          path: package/nahuel/
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Upload joint package
+        uses: actions/upload-artifact@v4
+        with:
+          name: Entrega-Psicoanalisis-en-Barcelona
+          path: package/conjunta/
+          if-no-files-found: error
+          retention-days: 7
