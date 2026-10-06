@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Electricomercio · Todo para tu instalación</title>
-  <meta name="description" content="Materiales eléctricos e iluminación. Encontrá materiales por producto o por proyecto, armá tu lista y pedí cotización por WhatsApp.">
+  <meta name="description" content="Materiales eléctricos e iluminación en Flores, CABA. Encontrá materiales por producto o por proyecto, armá tu lista y pedí cotización por WhatsApp.">
   <meta name="robots" content="noindex">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Electricomercio · Todo para tu instalación">
@@ -50,6 +50,7 @@
         <a href="#proyectos">Proyectos</a>
         <a href="#categorias">Rubros</a>
         <a href="#catalogo">Catálogo</a>
+        <a href="#nosotros">Nosotros</a>
         <a href="#contacto">Contacto</a>
       </nav>
       <button class="listbtn" id="listBtn" type="button" aria-haspopup="dialog" aria-controls="listDrawer">
@@ -65,6 +66,9 @@
     <section class="hero" id="hero">
       <div class="hero-media" data-parallax="0.25" data-media-slot="hero" aria-hidden="true"></div>
       <div class="hero-shade" aria-hidden="true"></div>
+      <div class="hero-glow" aria-hidden="true"></div>
+      <canvas class="particles" data-particles="hero" aria-hidden="true"></canvas>
+      <div class="hero-spot" aria-hidden="true"></div>
       <div class="wrap hero-in">
         <div class="hero-copy reveal">
           <p class="eyebrow">Electricidad + Iluminación · Flores, CABA</p>
@@ -86,6 +90,7 @@
       <div class="story-pin">
         <div class="story-frames" id="storyFrames" aria-hidden="true"></div>
         <div class="story-shade" aria-hidden="true"></div>
+        <canvas class="particles" data-particles="story" aria-hidden="true"></canvas>
         <div class="wrap story-copy">
           <p class="kicker kicker-light">De la caja al encendido</p>
           <ol class="story-steps" id="storySteps">
@@ -189,10 +194,35 @@
       </div>
     </section>
 
+    <!-- NOSOTROS -->
+    <section class="about" id="nosotros" aria-labelledby="aboutTitle">
+      <div class="about-glow" aria-hidden="true"></div>
+      <div class="wrap about-in">
+        <figure class="about-media lightup reveal" data-media-slot="nosotros" aria-hidden="true"></figure>
+        <div class="about-copy">
+          <p class="kicker kicker-light reveal">Nosotros</p>
+          <h2 id="aboutTitle" class="reveal">De ElectroFlores a <em>Electricomercio.</em></h2>
+          <p class="about-lead reveal">Somos la casa de electricidad e iluminación de Av. Gaona 3307, en Flores. Antes nos conocías como ElectroFlores: cambiamos el nombre, no el mostrador.</p>
+          <p class="about-text reveal">Atendemos al que está haciendo la instalación de su casa, al que arma un local y a la obra que necesita material en cantidad. Cables, protecciones, tomas, canalización, iluminación LED y todo lo que lleva una instalación, con alguien que te ayuda a cerrar la lista.</p>
+          <ul class="about-facts reveal">
+            <li><b>Flores, CABA</b><span>Av. Gaona 3307</span></li>
+            <li><b>3 tipos de obra</b><span>Residencial · Comercial · Industrial</span></li>
+            <li><b>Electricidad + iluminación</b><span>Del tablero a la última lámpara</span></li>
+            <li><b>Por WhatsApp</b><span>Mandás la lista y te cotizamos</span></li>
+          </ul>
+          <a class="iglink reveal" data-ig href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+            <span>Seguinos en <b data-cfg="instagramHandle"></b></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
     <!-- CONTACTO -->
     <section class="contact" id="contacto" aria-labelledby="contactTitle">
       <div class="contact-media" data-parallax="0.18" data-media-slot="contacto" aria-hidden="true"></div>
       <div class="contact-shade" aria-hidden="true"></div>
+      <canvas class="particles" data-particles="contact" aria-hidden="true"></canvas>
       <div class="wrap contact-in">
         <div class="final reveal">
           <p class="kicker kicker-light">Av. Gaona 3307 · Flores</p>
@@ -209,17 +239,61 @@
           <li><span class="f-k">Dirección</span><a target="_blank" rel="noopener" data-maps href="#"><span data-cfg="address"></span></a></li>
           <li><span class="f-k">WhatsApp / Tel.</span><a data-wa-plain href="#"><span data-cfg="phonePretty"></span></a></li>
           <li><span class="f-k">Email</span><a data-mail href="#"><span data-cfg="email"></span></a></li>
+          <li><span class="f-k">Instagram</span><a data-ig href="#" target="_blank" rel="noopener"><span data-cfg="instagramHandle"></span></a></li>
         </ul>
+      </div>
+
+      <div class="wrap contact-grid">
+        <form class="cform reveal" id="contactForm" novalidate>
+          <h3>Escribinos</h3>
+          <p class="cform-sub">Contanos qué necesitás y te respondemos por WhatsApp.</p>
+          <div class="cf-row">
+            <div class="cf-field"><label for="cfName">Nombre</label><input id="cfName" name="name" type="text" autocomplete="name" required maxlength="80"></div>
+            <div class="cf-field"><label for="cfPhone">Teléfono <span class="opt">(opcional)</span></label><input id="cfPhone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="30"></div>
+          </div>
+          <div class="cf-field">
+            <span class="cf-label" id="cfTypeL">Motivo</span>
+            <div class="cf-seg" role="radiogroup" aria-labelledby="cfTypeL">
+              <label><input type="radio" name="type" value="Cotización" checked><span>Cotización</span></label>
+              <label><input type="radio" name="type" value="Proyecto / obra"><span>Proyecto / obra</span></label>
+              <label><input type="radio" name="type" value="Consulta"><span>Consulta</span></label>
+            </div>
+          </div>
+          <div class="cf-field"><label for="cfMsg">Mensaje</label><textarea id="cfMsg" name="msg" rows="4" required maxlength="1200" placeholder="Ej: necesito material para la instalación de un local de 60 m²…"></textarea></div>
+          <label class="cf-check"><input type="checkbox" name="withList" id="cfWithList"> <span>Adjuntar mi lista de materiales (<b id="cfListN">0</b> productos)</span></label>
+          <p class="cf-err" id="cfErr" role="alert" hidden></p>
+          <div class="cf-actions">
+            <button type="submit" class="btn btn-accent btn-lg">Enviar por WhatsApp</button>
+            <a href="#" class="cf-mail" id="cfMail">o mandalo por email</a>
+          </div>
+        </form>
+        <div class="mapcard reveal">
+          <div class="map-frame" id="mapFrame">
+            <button type="button" class="map-load" id="mapLoad">
+              <span class="map-pin" aria-hidden="true"></span>
+              <b>Av. Gaona 3307, Flores</b>
+              <span>Ver mapa</span>
+            </button>
+          </div>
+          <a class="map-cta" data-maps href="#" target="_blank" rel="noopener">Cómo llegar
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
       </div>
     </section>
   </main>
 
   <footer class="footer">
     <div class="wrap footer-in">
-      <span><b>ELECTRICOMERCIO</b> · ex-ElectroFlores · Electricidad e iluminación</span>
+      <span><b>ELECTRICOMERCIO</b> · ex-ElectroFlores · Electricidad e iluminación · <a data-ig href="#" target="_blank" rel="noopener" data-cfg="instagramHandle"></a></span>
       <span class="foot-note">Demo para presentación. Productos de ejemplo, sin precios ni stock: el catálogo real se carga desde el panel. <a href="admin.html">Panel demo</a></span>
     </div>
   </footer>
+
+  <!-- WhatsApp flotante -->
+  <a class="wafab" id="waFab" data-wa-plain href="#" aria-label="Hablar por WhatsApp">
+    <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.7.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.18-1.41-.08-.13-.27-.2-.57-.35M12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.450 4.44-9.89 9.89-9.89a9.82 9.82 0 0 1 6.99 2.9 9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.43 9.890-9.88 9.89m8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.17-3.48-8.41"/></svg>
+    <span class="wafab-tip">¿Hablamos?</span>
+  </a>
 
   <!-- Barra fija mobile -->
   <div class="mbar" id="mbar">

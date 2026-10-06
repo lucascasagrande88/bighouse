@@ -18,7 +18,10 @@ window.EC_CONFIG = {
     phonePretty: "+54 9 11 4582-9911",
     email: "electricomercio@gmail.com",
     address: "Av. Gaona 3307, C1416, Buenos Aires",
-    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Av.+Gaona+3307,+C1416,+Buenos+Aires"
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Av.+Gaona+3307,+C1416,+Buenos+Aires",
+    mapsEmbed: "https://www.google.com/maps?q=Av.+Gaona+3307,+C1416,+Buenos+Aires&z=16&output=embed",
+    instagram: "https://www.instagram.com/electricomercio/",
+    instagramHandle: "@electricomercio"
   },
   quoteSource: "Demo web"
 };

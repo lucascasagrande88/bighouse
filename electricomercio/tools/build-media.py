@@ -21,6 +21,7 @@ WIDTHS = {
     "rubro": [480, 800],
     "lista": [900, 1500],
     "contacto": [1280, 2400],
+    "nosotros": [900, 1600],
 }
 
 def kind(name):

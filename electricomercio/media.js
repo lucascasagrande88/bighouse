@@ -48,6 +48,12 @@ window.EC_MEDIA = {
     "h": 1024,
     "srcset": "img/lista-manos-900.webp 900w, img/lista-manos-1500.webp 1500w"
   },
+  "nosotros-local": {
+    "src": "img/nosotros-local-1600.webp",
+    "w": 1672,
+    "h": 941,
+    "srcset": "img/nosotros-local-900.webp 900w, img/nosotros-local-1600.webp 1600w"
+  },
   "proyecto-comercial": {
     "src": "img/proyecto-comercial-1000.webp",
     "w": 1122,
