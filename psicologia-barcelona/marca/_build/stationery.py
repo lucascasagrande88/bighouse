@@ -99,7 +99,7 @@ def card(key):
   <div class="abs" style="left:{m + 39}mm;top:{m}mm;width:34mm">{person(na, 'ES / PT')}</div>
   <div class="abs" style="left:{m}mm;right:{m}mm;top:{m + 24}mm;height:.2mm;background:rgba(244,238,229,.35)"></div>
   <div class="abs" style="left:{m}mm;bottom:{m}mm"><p style="font-size:6.8pt">{web}</p><p style="font-size:6pt;letter-spacing:.16em;text-transform:uppercase;margin-top:1.2mm;color:{t['soft']}">Gràcia · Sants · Online</p></div>
-  <div class="abs" style="right:{m}mm;bottom:{m}mm">{qr(web, t['on_dark'], '13mm')}</div></div>''')
+  <div class="abs" style="right:{m}mm;bottom:{m}mm;padding:1.4mm;background:{t['bg']}">{qr(web, t['ink'], '12mm')}</div></div>''')
     return html(t, W, H, s, f'Tarjeta · {f}')
 
 
