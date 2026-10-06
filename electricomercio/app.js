@@ -428,6 +428,9 @@
     var ns = document.querySelector("[data-media-slot=nosotros]");
     var nh = img("nosotros-local", "(max-width: 900px) 100vw, 55vw");
     if (ns) { ns.innerHTML = nh ? '<span data-parallax="0.12">' + nh + '</span>' : ""; ns.hidden = !nh; }
+    var ni = document.querySelector("[data-media-slot=nosotros-interior]");
+    var nih = img("nosotros-interior", "(max-width: 900px) 60vw, 26vw");
+    if (ni) { ni.innerHTML = nih; ni.hidden = !nih; }
     var ct = document.querySelector("[data-media-slot=contacto]");
     var ch = img("contacto-mostrador", "100vw");
     if (ct && ch) { ct.innerHTML = ch; $("contacto").classList.add("has-img"); }
