@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Panel de control</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/admin/admin.css">
+  <script type="module" src="/admin/admin.js"></script>
+</head>
+<body>
+  <!-- Entrada -->
+  <main class="login" id="login" hidden>
+    <form class="login-card" id="login-form" novalidate>
+      <p class="login-kicker">Panel de control</p>
+      <h1 class="login-title" data-site-name>Tu web</h1>
+      <p class="login-help">Escribe tu contraseña para editar los textos de la web.</p>
+      <label class="field-label" for="password">Contraseña</label>
+      <div class="password-row">
+        <input id="password" name="password" type="password" autocomplete="current-password" required>
+        <button class="btn btn-quiet" type="button" data-toggle-password aria-controls="password" aria-pressed="false">Mostrar</button>
+      </div>
+      <p class="form-error" id="login-error" role="alert" hidden></p>
+      <button class="btn btn-primary btn-wide" type="submit">Entrar</button>
+      <p class="login-foot">¿Olvidaste la contraseña? Escribe a Chimichurri y te la restablecemos.</p>
+    </form>
+  </main>
+
+  <!-- Panel -->
+  <div class="app" id="app" hidden>
+    <header class="topbar">
+      <div class="topbar-brand">
+        <span class="brand-dot" aria-hidden="true"></span>
+        <div><strong data-site-name>Tu web</strong><span>Panel de control</span></div>
+      </div>
+      <label class="page-picker">
+        <span class="sr-only">Página que estás editando</span>
+        <select id="page-select"></select>
+      </label>
+      <nav class="topbar-actions" aria-label="Acciones">
+        <a class="btn btn-quiet" id="view-site" href="/" target="_blank" rel="noopener">Ver la web ↗</a>
+        <button class="btn btn-quiet" type="button" data-open="history-dialog">Historial</button>
+        <button class="btn btn-quiet" type="button" data-open="password-dialog">Contraseña</button>
+        <button class="btn btn-quiet" type="button" id="logout">Salir</button>
+      </nav>
+      <div class="savebar">
+        <span class="status" id="status" aria-live="polite">Todo guardado</span>
+        <button class="btn btn-ghost" type="button" id="discard" disabled>Descartar</button>
+        <button class="btn btn-primary" type="button" id="save" disabled>Guardar y publicar</button>
+      </div>
+    </header>
+
+    <div class="mobile-switch" role="tablist" aria-label="Vista">
+      <button type="button" role="tab" aria-selected="true" data-view="edit">Editar</button>
+      <button type="button" role="tab" aria-selected="false" data-view="preview">Vista previa</button>
+    </div>
+
+    <div class="workspace" data-view="edit">
+      <aside class="editor" aria-label="Editor">
+        <div class="tabs" role="tablist" aria-label="Qué quieres editar">
+          <button type="button" role="tab" id="tab-texts" aria-controls="panel-texts" aria-selected="true">Textos</button>
+          <button type="button" role="tab" id="tab-contact" aria-controls="panel-contact" aria-selected="false">Contacto</button>
+          <button type="button" role="tab" id="tab-seo" aria-controls="panel-seo" aria-selected="false">Google</button>
+        </div>
+
+        <section class="tab-panel" id="panel-texts" role="tabpanel" aria-labelledby="tab-texts">
+          <p class="hint">Haz clic en cualquier texto de la vista previa, o búscalo acá. Los cambios se ven al instante; se publican cuando pulsas <strong>Guardar y publicar</strong>.</p>
+          <label class="search">
+            <span class="sr-only">Buscar un texto</span>
+            <input type="search" id="search" placeholder="Buscar un texto…" autocomplete="off">
+          </label>
+          <div id="fields" class="fields"><p class="empty">Cargando la página…</p></div>
+        </section>
+
+        <section class="tab-panel" id="panel-contact" role="tabpanel" aria-labelledby="tab-contact" hidden>
+          <p class="hint">Estos datos se cambian en <strong>todas las páginas</strong> de la web (botones de WhatsApp, enlaces y pie de página) al guardar.</p>
+          <div id="contact-fields" class="stack"></div>
+        </section>
+
+        <section class="tab-panel" id="panel-seo" role="tabpanel" aria-labelledby="tab-seo" hidden>
+          <p class="hint">Así aparece <strong>esta página</strong> en los resultados de Google y al compartirla por WhatsApp o redes. Cambia de página arriba para editar otra.</p>
+          <div class="stack">
+            <div>
+              <label class="field-label" for="seo-title">Título <span class="counter" id="seo-title-count"></span></label>
+              <input id="seo-title" type="text" maxlength="90">
+              <p class="field-help">Ideal: entre 45 y 60 caracteres. Empieza por lo más importante.</p>
+            </div>
+            <div>
+              <label class="field-label" for="seo-description">Descripción <span class="counter" id="seo-description-count"></span></label>
+              <textarea id="seo-description" rows="4" maxlength="300"></textarea>
+              <p class="field-help">Ideal: entre 120 y 160 caracteres. Cuenta qué ofreces y dónde.</p>
+            </div>
+            <div class="serp" aria-label="Vista previa en Google">
+              <p class="serp-url" id="serp-url"></p>
+              <p class="serp-title" id="serp-title"></p>
+              <p class="serp-desc" id="serp-desc"></p>
+            </div>
+            <button class="btn btn-ghost" type="button" id="seo-reset">Volver al texto original</button>
+          </div>
+        </section>
+      </aside>
+
+      <section class="preview" aria-label="Vista previa">
+        <div class="preview-bar">
+          <span class="preview-label">Vista previa <small>(sin publicar)</small></span>
+          <div class="device" role="group" aria-label="Tamaño de pantalla">
+            <button type="button" data-device="desktop" aria-pressed="true">Ordenador</button>
+            <button type="button" data-device="mobile" aria-pressed="false">Móvil</button>
+          </div>
+        </div>
+        <div class="frame-wrap" id="frame-wrap">
+          <iframe id="frame" title="Vista previa de la página"></iframe>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Historial -->
+  <dialog id="history-dialog" aria-labelledby="history-title">
+    <form method="dialog" class="dialog-card">
+      <h2 id="history-title">Historial de versiones</h2>
+      <p class="hint">Cada vez que guardas, la versión anterior queda acá (se conservan las últimas 30). Puedes volver a cualquiera.</p>
+      <ol id="history-list" class="history"></ol>
+      <div class="dialog-actions"><button class="btn btn-ghost" value="close">Cerrar</button></div>
+    </form>
+  </dialog>
+
+  <!-- Contraseña -->
+  <dialog id="password-dialog" aria-labelledby="password-title">
+    <form class="dialog-card" id="password-form" novalidate>
+      <h2 id="password-title">Cambiar contraseña</h2>
+      <label class="field-label" for="pw-current">Contraseña actual</label>
+      <input id="pw-current" type="password" autocomplete="current-password" required>
+      <label class="field-label" for="pw-next">Contraseña nueva <span class="counter">mínimo 10 caracteres</span></label>
+      <input id="pw-next" type="password" autocomplete="new-password" minlength="10" required>
+      <label class="field-label" for="pw-repeat">Repite la contraseña nueva</label>
+      <input id="pw-repeat" type="password" autocomplete="new-password" minlength="10" required>
+      <p class="form-error" id="pw-error" role="alert" hidden></p>
+      <div class="dialog-actions">
+        <button class="btn btn-ghost" type="button" data-close>Cancelar</button>
+        <button class="btn btn-primary" type="submit">Cambiar contraseña</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>

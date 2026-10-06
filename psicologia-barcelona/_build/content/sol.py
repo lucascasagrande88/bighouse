@@ -66,7 +66,7 @@ ES = {
             'Presto especial atención a tu historia y a tu experiencia particular. Cada proceso se construye contigo, a tu ritmo.',
         ],
         'points': ['Escucha sin juicios', 'Tu historia, no un protocolo', 'Un ritmo propio'],
-        'img_alt': 'Consultorio luminoso con láminas de flores, plantas y un sofá',
+        'img_alt': 'Sol Galiana sonriendo, sentada con una taza de café',
     },
     'safe': {
         'kicker': 'Un espacio abierto',
@@ -110,12 +110,15 @@ ES = {
         'research_note': 'La pregunta de mi tesis de máster. Ya sea a través de la docencia, la investigación o la clínica, me mueve la misma curiosidad: comprender cómo las personas construyen un sentido de su propia experiencia, especialmente cuando esa experiencia implica estar lejos del lugar del que partieron.',
     },
     'places': {
+        'in_person': 'Presencial',
+        'address_note': 'Dirección exacta al confirmar la cita',
         'kicker': 'Dónde atiendo',
         'title': 'En Barcelona o desde donde estés.',
         'online_zone': 'Online',
         'online_title': 'Videollamada',
         'online_detail': 'En español o inglés, desde cualquier país',
         'img_alt': 'Sala de espera con sofá gris y cojines',
+        'img_alt_2': 'Consultorio luminoso con una lámina de flores, plantas y un sofá',
     },
     'faq': {
         'kicker': 'Preguntas frecuentes',
@@ -206,7 +209,7 @@ EN = {
             'I pay close attention to your history and your particular experience. Each process is built with you, at your own pace.',
         ],
         'points': ['Listening without judgement', 'Your story, not a protocol', 'Your own pace'],
-        'img_alt': 'Bright therapy room with floral prints, plants and a sofa',
+        'img_alt': 'Sol Galiana smiling, sitting with a cup of coffee',
     },
     'safe': {
         'kicker': 'An open space',
@@ -250,12 +253,15 @@ EN = {
         'research_note': 'The question behind my master’s thesis. Whether through teaching, research or clinical work, I’m driven by the same curiosity: understanding how people make sense of their own experience — especially when that experience means being far from where they started.',
     },
     'places': {
+        'in_person': 'In person',
+        'address_note': 'Exact address shared once your session is confirmed',
         'kicker': 'Where I work',
         'title': 'In Barcelona, or wherever you are.',
         'online_zone': 'Online',
         'online_title': 'Video sessions',
         'online_detail': 'In English or Spanish, from any country',
         'img_alt': 'Waiting room with a grey sofa and cushions',
+        'img_alt_2': 'Bright therapy room with a floral print, plants and a sofa',
     },
     'faq': {
         'kicker': 'FAQ',

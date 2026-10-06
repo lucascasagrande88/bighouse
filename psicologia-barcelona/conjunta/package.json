@@ -1,0 +1,9 @@
+{
+  "name": "web-conjunta",
+  "private": true,
+  "type": "module",
+  "description": "Psicoan\u00e1lisis en Barcelona \u2014 web est\u00e1tica + panel de control",
+  "dependencies": {
+    "@netlify/blobs": "^11.1.3"
+  }
+}

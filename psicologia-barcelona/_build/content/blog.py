@@ -1,6 +1,23 @@
 """Artículos del blog conjunto. Para sumar uno nuevo, agregar un dict a POSTS (el más nuevo primero).
 El cuerpo es HTML simple: <p>, <h2>, <ul><li>, <blockquote>."""
 
+# Textos fijos de las páginas del blog (editables desde el panel).
+UI = {
+    'home': 'Inicio',
+    'blog': 'Blog',
+    'eyebrow': 'Blog · Psicoanálisis en Barcelona',
+    'title': 'Escritos para pensar lo que nos pasa.',
+    'lead': 'Textos breves sobre psicoterapia, psicoanálisis, vínculos y la experiencia de vivir lejos del lugar de origen. Escritos por Sol Galiana y Nahuel Ponce a partir de su práctica clínica y sus espacios de formación e investigación.',
+    'read': 'Leer',
+    'minutes': 'min',
+    'minutes_long': 'min de lectura',
+    'author': 'Psicoanálisis en Barcelona',
+    'cta_title': '¿Quieres hablarlo con alguien?',
+    'cta_text': 'Atendemos en Barcelona (Gràcia y Sants) y online, en español, inglés y portugués.',
+    'cta_button': 'Pedir una primera consulta',
+    'disclaimer': 'Este artículo tiene un fin informativo y no sustituye una consulta profesional. Si estás en una situación de crisis o de riesgo, llama al 112 o a la línea de atención a la conducta suicida 024.',
+}
+
 POSTS = [
     {
         'slug': 'que-es-la-psicoterapia-psicoanalitica',

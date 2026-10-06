@@ -9,7 +9,7 @@
 <section class="hero" data-hero>
   <div class="hero-copy">
     <p class="eyebrow">{{ h.eyebrow }}</p>
-    <h1>{{ h.h1 | safe }}</h1>
+    <h1>{{ h.h1 }}</h1>
     <p class="hero-rotate" data-rotate>
       <span class="rotate-intro">{{ h.rotate_intro }}</span>
       <span class="rotate-track" aria-live="polite">
@@ -38,18 +38,18 @@
 <section class="intro">
   <div class="shell intro-inner" data-reveal>
     <p class="kicker"><span>I</span>{{ i.kicker }}</p>
-    <h2 class="intro-title"><span class="initial" aria-hidden="true">{{ i.title[0] }}</span><span class="sr-only">{{ i.title[0] }}</span>{{ i.title[1:] }}</h2>
+    <h2 class="intro-title">{{ i.title }}</h2>
     <p data-words data-scroll data-start=".95" data-span=".6">{{ i.text }}</p>
   </div>
 </section>
 
 {% set sc = c.scene %}
-<section class="scene" data-pin data-steps="3" aria-label="{{ sc.label }}">
+<section class="scene" data-pin data-steps="3" aria-label="{{ sc.label | plain }}">
   <div class="scene-sticky">
     <div class="scene-lines" aria-hidden="true">{% for i in range(9) %}<i></i>{% endfor %}</div>
     <figure class="scene-window"><img src="/assets/noche-lg.webp" width="1125" height="1500" alt="" loading="lazy"></figure>
     <div class="scene-text">
-      {%- for line in sc.lines %}<h2 class="t{{ loop.index0 }}">{{ line | safe }}</h2>{% endfor %}
+      {%- for line in sc.lines %}<h2 class="t{{ loop.index0 }}">{{ line }}</h2>{% endfor %}
     </div>
     <p class="scene-count" aria-hidden="true"><span class="c0">I</span><span class="c1">II</span><span class="c2">III</span></p>
   </div>
@@ -66,7 +66,7 @@
     </figure>
     <div class="approach-copy" data-reveal>
       <p class="kicker"><span>II</span>{{ a.kicker }}</p>
-      <h2>{{ a.title | safe }}</h2>
+      <h2>{{ a.title }}</h2>
       {%- for p in a.paras %}<p>{{ p }}</p>{% endfor %}
       <dl class="details">{% for d in a.details %}<div><dt>{{ d.k }}</dt><dd>{{ d.v }}</dd></div>{% endfor %}</dl>
     </div>
@@ -94,7 +94,7 @@
   <div class="shell about-inner">
     <div class="about-copy" data-reveal>
       <p class="kicker"><span>IV</span>{{ ab.kicker }}</p>
-      <h2>{{ ab.title | safe }}</h2>
+      <h2>{{ ab.title }}</h2>
       {%- for p in ab.paras %}<p>{{ p }}</p>{% endfor %}
     </div>
     <figure class="about-photo" data-scroll data-start="1" data-span=".9">
@@ -133,7 +133,7 @@
     <img src="/assets/calle-lg.webp" width="1500" height="844" alt="{{ bn.img_alt }}" loading="lazy">
   </picture>
   <div class="banner-copy shell" data-reveal>
-    <h2>{{ bn.title | safe }}</h2>
+    <h2>{{ bn.title }}</h2>
     <p>{{ bn.text }}</p>
   </div>
 </section>
@@ -168,7 +168,7 @@
     <p class="kicker"><span>VII</span>{{ pl.kicker }}</p>
     <div class="places-grid">
       {%- for p in places %}
-      <article><span class="zone">{{ p.zone }}</span><h3>{{ p.street }}</h3><p>{{ p.detail }}</p><a href="{{ p.map }}" target="_blank" rel="noopener">{{ ui.map }} ↗</a></article>
+      <article><span class="zone">{{ pl.in_person }}</span><h3>{{ p.zone }}</h3><p>{{ pl.address_note }}</p></article>
       {%- endfor %}
       <article><span class="zone">{{ pl.online_zone }}</span><h3>{{ pl.online_title }}</h3><p>{{ pl.online_detail }}</p></article>
     </div>

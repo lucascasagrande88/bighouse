@@ -124,6 +124,8 @@ ES = {
         'migr_text': 'Acompañamiento a personas migrantes, estudiantes internacionales y adultos jóvenes en la adaptación, el desarraigo y la construcción de nuevos proyectos personales.',
     },
     'places': {
+        'in_person': 'Presencial',
+        'address_note': 'Dirección exacta al confirmar la cita',
         'kicker': 'Consultorios',
         'online_zone': 'Online',
         'online_title': 'Videollamada',
@@ -273,6 +275,8 @@ PT = {
         'migr_text': 'Acompanhamento de pessoas migrantes, estudantes internacionais e jovens adultos na adaptação, no desenraizamento e na construção de novos projetos pessoais.',
     },
     'places': {
+        'in_person': 'Presencial',
+        'address_note': 'Endereço exato ao confirmar a consulta',
         'kicker': 'Consultórios',
         'online_zone': 'Online',
         'online_title': 'Videochamada',

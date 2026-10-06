@@ -1,10 +1,11 @@
 {% extends layout %}
 {% block main %}
+{% set u = blog_ui %}
 <section class="page-hero shell">
-  <p class="crumbs"><a href="/">Inicio</a> / Blog</p>
-  <p class="eyebrow">Blog · Psicoanálisis en Barcelona</p>
-  <h1>Escritos para pensar lo que nos pasa.</h1>
-  <p class="lead">Textos breves sobre psicoterapia, psicoanálisis, vínculos y la experiencia de vivir lejos del lugar de origen. Escritos por Sol Galiana y Nahuel Ponce a partir de su práctica clínica y sus espacios de formación e investigación.</p>
+  <p class="crumbs"><a href="/">{{ u.home }}</a> / {{ u.blog }}</p>
+  <p class="eyebrow">{{ u.eyebrow }}</p>
+  <h1>{{ u.title }}</h1>
+  <p class="lead">{{ u.lead }}</p>
 </section>
 <section class="shell blog-list">
   {%- for post in posts %}
@@ -12,7 +13,7 @@
     <span class="post-tag">{{ post.tag }}</span>
     <h3>{{ post.title }}</h3>
     <p>{{ post.excerpt }}</p>
-    <span class="post-more">Leer · {{ post.minutes }} min <span aria-hidden="true">→</span></span>
+    <span class="post-more">{{ u.read }} · {{ post.minutes }} {{ u.minutes }} <span aria-hidden="true">→</span></span>
   </a>
   {%- endfor %}
 </section>

@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>{{ k.title }}</title>
+<style>
+{{ fonts | safe }}
+@page { size: A4; margin: 0; }
+:root { --accent: {{ k.accent }}; --accent-2: {{ k.accent2 }}; --paper: {{ k.paper }}; --ink: #1f1c19; --muted: #6a645d; --line: #e2dbcf; }
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { margin: 0; color: var(--ink); font: 400 10.6pt/1.55 {{ k.sans | safe }}; }
+h1, h2, h3 { font-family: {{ k.serif | safe }}; font-weight: 400; line-height: 1.1; margin: 0; }
+p { margin: 0 0 8pt; }
+.page { position: relative; width: 210mm; height: 297mm; padding: 20mm 18mm 18mm; overflow: hidden; page-break-after: always; background: #fff; }
+.page:last-child { page-break-after: auto; }
+.foot { position: absolute; left: 18mm; right: 18mm; bottom: 9mm; display: flex; justify-content: space-between; color: var(--muted); font-size: 8pt; letter-spacing: .04em; }
+.kicker { margin: 0 0 6pt; color: var(--accent-2); font: 700 8pt/1.2 {{ k.sans | safe }}; letter-spacing: .16em; text-transform: uppercase; }
+h2 { font-size: 26pt; margin-bottom: 10pt; }
+h3 { font-size: 14pt; margin: 0 0 4pt; }
+.lead { font-size: 12pt; color: #3b3632; max-width: 150mm; }
+.muted { color: var(--muted); }
+
+/* Portada */
+.cover { display: flex; flex-direction: column; justify-content: space-between; padding: 22mm 20mm; color: {{ k.cover_ink }}; background: var(--paper); }
+.cover .brand { font: 700 9pt/1 {{ k.sans | safe }}; letter-spacing: .2em; text-transform: uppercase; }
+.cover .brand span { color: var(--accent-2); }
+.cover h1 { font-size: 46pt; letter-spacing: -.01em; }
+.cover h1 em { color: var(--accent-2); }
+.cover .sub { margin-top: 10pt; font-size: 13pt; max-width: 130mm; opacity: .85; }
+.cover .art { position: absolute; right: -30mm; top: 40mm; width: 150mm; height: 150mm; border-radius: 50%; background: radial-gradient(circle at 40% 40%, var(--accent-2), transparent 70%); opacity: .25; }
+.cover .meta { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8mm; padding-top: 8mm; border-top: 1px solid currentColor; font-size: 9pt; }
+.cover .meta strong { display: block; margin-bottom: 2pt; font-size: 7.5pt; letter-spacing: .14em; text-transform: uppercase; opacity: .7; }
+
+/* Bloques */
+.cards { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; margin-top: 8mm; }
+.card { padding: 6mm; border: 1px solid var(--line); border-radius: 4mm; break-inside: avoid; }
+.card.accent { color: #fff; background: var(--accent); border-color: var(--accent); }
+.card.accent .kicker { color: rgba(255, 255, 255, .75); }
+.card p:last-child, .card ul:last-child { margin-bottom: 0; }
+.big { font: 400 15pt/1.25 {{ k.serif | safe }}; }
+ul.clean { margin: 0; padding: 0; list-style: none; }
+ul.clean li { position: relative; padding: 0 0 5pt 13pt; }
+ul.clean li::before { content: ''; position: absolute; left: 0; top: 6pt; width: 5pt; height: 5pt; border-radius: 50%; background: var(--accent-2); }
+.steps3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5mm; margin-top: 6mm; counter-reset: s; }
+.steps3 div { padding: 5mm; border-radius: 4mm; background: #f6f2ec; }
+.steps3 div::before { counter-increment: s; content: counter(s); display: grid; place-items: center; width: 9mm; height: 9mm; margin-bottom: 3mm; border-radius: 50%; color: #fff; background: var(--accent); font: 700 11pt/1 {{ k.sans | safe }}; }
+.note { margin-top: 6mm; padding: 4mm 5mm; border-left: 3pt solid var(--accent-2); background: #faf7f2; font-size: 9.5pt; }
+
+/* Tutorial */
+.tut { display: grid; gap: 7mm; margin-top: 5mm; }
+.tut-row { display: grid; grid-template-columns: 52mm 1fr; gap: 6mm; align-items: start; break-inside: avoid; }
+.tut-row h3 { font-size: 13pt; }
+.tut-row .n { display: inline-grid; place-items: center; width: 8mm; height: 8mm; margin-bottom: 2mm; border-radius: 50%; color: #fff; background: var(--accent); font: 700 10pt/1 {{ k.sans | safe }}; }
+.tut-row p { font-size: 9.8pt; }
+.shot { width: 100%; border: 1px solid var(--line); border-radius: 2.5mm; box-shadow: 0 2mm 6mm rgba(0, 0, 0, .08); }
+.phones { display: flex; gap: 8mm; justify-content: center; margin-top: 6mm; }
+.phones img { height: 150mm; border: 1px solid var(--line); border-radius: 6mm; box-shadow: 0 2mm 8mm rgba(0, 0, 0, .12); }
+
+table { width: 100%; border-collapse: collapse; font-size: 9.5pt; }
+th, td { padding: 6pt 8pt; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+th { font-size: 7.5pt; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.faq h3 { font-size: 12pt; margin-top: 7pt; }
+.faq p { font-size: 9.8pt; }
+.cols { columns: 2; column-gap: 9mm; }
+.cols > * { break-inside: avoid; }
+</style>
+</head>
+<body>
+
+<section class="page cover">
+  <div class="art"></div>
+  <p class="brand">Chimichurri <span>·</span> Kit de entrega</p>
+  <div>
+    <h1>{{ k.name }}<br><em>Tu web y su panel de control</em></h1>
+    <p class="sub">Todo lo necesario para usar, cuidar y actualizar tu web por tu cuenta: qué se entrega, cómo entrar al panel y cómo cambiar cada texto paso a paso.</p>
+  </div>
+  <div class="meta">
+    <div><strong>Para</strong>{{ k.client }}</div>
+    <div><strong>Web</strong>{{ k.host }}</div>
+    <div><strong>Fecha</strong>{{ date }}</div>
+  </div>
+</section>
+
+<section class="page">
+  <p class="kicker">01 · La entrega</p>
+  <h2>Qué recibes</h2>
+  <p class="lead">Una web profesional publicada, con un panel privado para que puedas cambiar los textos cuando quieras, sin depender de nadie y sin tocar código.</p>
+  <div class="cards">
+    <div class="card accent">
+      <p class="kicker">Tu web</p>
+      <p class="big">{{ k.host_wbr | safe }}</p>
+      <p>{{ k.langs_text }}. {{ k.pages_text }}</p>
+    </div>
+    <div class="card accent">
+      <p class="kicker">Tu panel de control</p>
+      <p class="big">{{ k.host_wbr | safe }}/<wbr>admin</p>
+      <p>La contraseña te la enviamos <strong>por un mensaje privado aparte</strong>: por seguridad no viaja en este documento.</p>
+    </div>
+    <div class="card">
+      <p class="kicker">Desde el panel puedes cambiar</p>
+      <ul class="clean">
+        <li>Todos los títulos, frases y párrafos de la web, en cada idioma.</li>
+        <li>Preguntas frecuentes, servicios, trayectoria y botones.</li>
+        <li>Teléfono / WhatsApp{% if k.has_instagram %}, email e Instagram{% else %} y email{% endif %} (se actualizan en toda la web).</li>
+        <li>Cómo aparece cada página en Google.</li>
+        {% if k.blog %}<li>Los textos de los artículos del blog.</li>{% endif %}
+      </ul>
+    </div>
+    <div class="card">
+      <p class="kicker">En esta versión</p>
+      <ul class="clean">
+        {% for c in k.changes %}<li>{{ c }}</li>{% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="steps3">
+    <div><h3>Entra</h3><p>Abre <strong>{{ k.host }}/admin</strong> y escribe tu contraseña.</p></div>
+    <div><h3>Cambia la contraseña</h3><p>La primera vez, pon una contraseña propia desde el botón «Contraseña».</p></div>
+    <div><h3>Edita y guarda</h3><p>Haz clic en un texto, escríbelo y pulsa «Guardar y publicar».</p></div>
+  </div>
+  <p class="note">Hay un video tutorial de 45 segundos en este kit (<strong>{{ k.video }}</strong>) que muestra todo el recorrido.</p>
+  <div class="foot"><span>{{ k.name }} · Kit de entrega</span><span>Chimichurri</span></div>
+</section>
+
+{% for sp in k.step_pages %}
+<section class="page">
+  <p class="kicker">{{ sp.kicker }}</p>
+  <h2>{{ sp.title }}</h2>
+  <div class="tut">
+    {% for s in sp.steps %}
+    <div class="tut-row">
+      <div><span class="n">{{ s.n }}</span><h3>{{ s.t }}</h3><p>{{ s.d }}</p></div>
+      <img class="shot" src="{{ s.img }}" alt="">
+    </div>
+    {% endfor %}
+  </div>
+  <div class="foot"><span>{{ k.name }} · Kit de entrega</span><span>Chimichurri</span></div>
+</section>
+{% endfor %}
+
+<section class="page">
+  <p class="kicker">04 · Desde el móvil</p>
+  <h2>También funciona en el teléfono</h2>
+  <p class="lead">En el móvil el panel se divide en dos: <strong>Editar</strong> (los textos) y <strong>Vista previa</strong> (cómo queda). El botón «Guardar y publicar» siempre está abajo.</p>
+  <div class="phones">
+    <img src="{{ k.mobile_edit }}" alt="">
+    <img src="{{ k.mobile_view }}" alt="">
+  </div>
+  <div class="foot"><span>{{ k.name }} · Kit de entrega</span><span>Chimichurri</span></div>
+</section>
+
+<section class="page">
+  <p class="kicker">05 · Buenas prácticas</p>
+  <h2>Para que la web siga viéndose bien</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>Sí, adelante</h3>
+      <ul class="clean">
+        <li>Mantén una longitud parecida a la del texto original: el diseño está pensado para esas medidas.</li>
+        <li>Si cambias algo en español, revisa también los otros idiomas (se eligen en el menú de páginas).</li>
+        <li>Usa la vista previa en «Móvil» antes de guardar: la mayoría de las visitas llegan desde el teléfono.</li>
+        <li>Cambia la contraseña la primera vez y guárdala en un lugar seguro.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Mejor evitar</h3>
+      <ul class="clean">
+        <li>Publicar la dirección exacta del consultorio: la web muestra sólo el barrio y la dirección se comparte al confirmar la cita.</li>
+        <li>Pegar textos con formato desde Word: el panel los convierte en texto simple a propósito.</li>
+        <li>Compartir la contraseña por redes o correos abiertos.</li>
+        <li>Editar a la vez desde dos dispositivos: se queda la última versión guardada.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Lo que hacemos nosotros</h3>
+      <p>Cambiar fotos, colores o diseño, sumar secciones o páginas nuevas{% if k.blog %}, publicar artículos nuevos en el blog{% endif %}, conectar un dominio propio o Google Analytics. Escríbenos y lo resolvemos.</p>
+    </div>
+    <div class="card">
+      <h3>Si algo sale mal</h3>
+      <p>Nada se pierde: cada vez que guardas, la versión anterior queda en el <strong>Historial</strong> (las últimas 30). Desde ahí vuelves a cualquiera con un clic.</p>
+    </div>
+  </div>
+  <div class="foot"><span>{{ k.name }} · Kit de entrega</span><span>Chimichurri</span></div>
+</section>
+
+<section class="page faq">
+  <p class="kicker">06 · Preguntas frecuentes</p>
+  <h2>Dudas habituales</h2>
+  <div class="cols">
+    <div><h3>Guardé, pero no veo el cambio en la web.</h3><p>Puede tardar hasta un minuto. Recarga la página; si sigue igual, prueba en una ventana privada del navegador.</p></div>
+    <div><h3>Me equivoqué y ya guardé.</h3><p>En la casilla del texto pulsa «Volver al texto original», o abre «Historial» y vuelve a la versión anterior.</p></div>
+    <div><h3>Olvidé la contraseña.</h3><p>Escríbenos y te generamos una nueva. Después de 8 intentos fallidos el panel se bloquea 15 minutos por seguridad.</p></div>
+    <div><h3>¿Puedo cambiar las fotos?</h3><p>Por ahora las fotos las cambiamos nosotros, para mantener la calidad y el peso de la web. Mándanos las nuevas.</p></div>
+    <div><h3>¿Los cambios afectan a Google?</h3><p>Sí, para bien: Google ve los textos nuevos. En la pestaña «Google» defines el título y la descripción de cada página.</p></div>
+    <div><h3>Cambié el teléfono en «Contacto».</h3><p>Se cambia en toda la web: botones de WhatsApp, enlaces y pie de página. Escríbelo con el prefijo, por ejemplo +34 600 00 00 00.</p></div>
+    <div><h3>¿Para qué es la cursiva?</h3><p>Algunos títulos tienen una parte en cursiva y en otro color. Selecciona esas palabras y pulsa «Cursiva» para mantener ese estilo.</p></div>
+    <div><h3>La sesión se cerró sola.</h3><p>Por seguridad dura 12 horas. Vuelve a entrar con tu contraseña: los cambios sin guardar siguen en la pantalla.</p></div>
+  </div>
+  <div class="card" style="margin-top:8mm">
+    <p class="kicker">Datos de tu web</p>
+    <table>
+      <tr><th>Web</th><td>{{ k.url }}</td></tr>
+      <tr><th>Panel</th><td>{{ k.url }}/admin</td></tr>
+      <tr><th>Idiomas</th><td>{{ k.langs_text }}</td></tr>
+      <tr><th>Alojamiento</th><td>Netlify (con certificado de seguridad HTTPS incluido)</td></tr>
+      <tr><th>Soporte</th><td>Chimichurri, por el canal habitual</td></tr>
+    </table>
+  </div>
+  <div class="foot"><span>{{ k.name }} · Kit de entrega</span><span>Chimichurri</span></div>
+</section>
+</body>
+</html>

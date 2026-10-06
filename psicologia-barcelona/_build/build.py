@@ -3,7 +3,9 @@
 
 Uso:  python3 _build/build.py           (desde psicologia-barcelona/)
 Salida: conjunta/, sol/, nahuel/ listas para publicar en Netlify.
-Los estilos (styles.css), las fuentes y las imágenes viven directamente en cada carpeta.
+  <web>/public/   la web estática (los estilos, las fuentes y las imágenes viven acá)
+  <web>/netlify/  funciones del panel de control (/admin)
+Los textos se publican con marcadores <!--cms:clave--> para que el panel pueda editarlos.
 """
 import json
 import shutil
@@ -19,6 +21,7 @@ sys.path.insert(0, str(BUILD))
 
 import importlib  # noqa: E402
 from content import common, blog, legal  # noqa: E402
+from cms import mark, plain  # noqa: E402
 
 VERSION = time.strftime('%Y%m%d%H%M')
 
@@ -34,6 +37,8 @@ SITES = {
         'content': 'content.conjunta',
         'analytics': '',
         'blog': True,
+        'accent': '#7a2e3a',
+        'contacts': ['sol_phone', 'sol_email', 'nahuel_phone', 'nahuel_email'],
     },
     'sol': {
         'name': 'Sol Galiana · Psicóloga',
@@ -46,6 +51,8 @@ SITES = {
         'content': 'content.sol',
         'analytics': '',
         'blog': False,
+        'accent': '#2f4a3b',
+        'contacts': ['sol_phone', 'sol_email', 'sol_instagram'],
     },
     'nahuel': {
         'name': 'Nahuel Ponce · Psicólogo',
@@ -58,11 +65,14 @@ SITES = {
         'content': 'content.nahuel',
         'analytics': '',
         'blog': False,
+        'accent': '#0e0e0d',
+        'contacts': ['nahuel_phone', 'nahuel_email'],
     },
 }
 
 env = Environment(loader=FileSystemLoader(BUILD / 'templates'), undefined=StrictUndefined,
                   autoescape=True, trim_blocks=False, lstrip_blocks=False)
+env.filters['plain'] = plain
 env.filters['roman'] = lambda n: ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'][n]
 
 
@@ -80,21 +90,21 @@ def jsonld(data):
 
 
 def address(place):
-    return {'@type': 'PostalAddress', 'addressLocality': 'Barcelona', 'addressRegion': 'Cataluña',
-            'addressCountry': 'ES', **place['schema']}
+    # Sin calle ni código postal: sólo ciudad (las direcciones no se publican).
+    return {'@type': 'PostalAddress', 'addressLocality': 'Barcelona', 'addressRegion': 'Cataluña', 'addressCountry': 'ES'}
 
 
-def base_context(key, site, lang, langs, page_path, meta):
+def base_context(key, site, lang, langs, page_path, meta, page_key):
     url = site['url']
     default = langs[0]
     return {
-        'site': site, 'lang': lang, 'version': VERSION, 'meta': meta,
+        'site': site, 'lang': lang, 'version': VERSION, 'meta': meta, 'page_key': page_key,
         'canonical': url + page_path,
         'og_locale': common.OG_LOCALES[lang],
-        'ui': common.UI[lang],
+        'ui': mark(common.UI[lang], f'ui.{lang}'),
         'home_url': lang_path(lang, default),
         'privacy_url': '/privacidad/',
-        'places': common.PLACES,
+        'places': mark(common.PLACES, 'places'),
         'urls': common.URLS,
         'layout': site['layout'],
         'jsonld': '',
@@ -148,51 +158,57 @@ def schema_for(key, site, lang, c):
 
 
 def build_site(key, site):
-    out = ROOT / key
+    out = ROOT / key / 'public'
     mod = importlib.import_module(site['content'])
     langs = mod.LANGS
+    pages = {lang: mark(mod.PAGES[lang], lang) for lang in langs}
+    posts = [mark(p, f"blog.{p['slug']}") for p in blog.POSTS]
+    blog_ui = mark(blog.UI, 'blog.ui')
     urls = []  # (path, alternates)
+    panel_pages = []  # páginas que se pueden editar desde /admin
     alt = [{'lang': l, 'url': site['url'] + lang_path(l, langs[0])} for l in langs]
     languages = [{'code': l, 'name': common.LANG_NAMES[l], 'url': lang_path(l, langs[0])} for l in langs]
 
     for lang in langs:
-        c = mod.PAGES[lang]
+        c = pages[lang]
         path = lang_path(lang, langs[0])
-        ctx = base_context(key, site, lang, langs, path, c['meta'])
+        ctx = base_context(key, site, lang, langs, path, c['meta'], f'home.{lang}')
         ctx.update({
             'c': c, 'nav': c['nav'], 'cta': c['cta'], 'alternates': alt if len(langs) > 1 else [],
             'languages': languages, 'jsonld': schema_for(key, site, lang, c),
-            'posts': blog.POSTS[:3] if site['blog'] else [],
+            'posts': posts[:3] if site['blog'] else [],
             'dock': c.get('dock'),
         })
         html = env.get_template(site['template']).render(**ctx)
         target = out / ('index.html' if path == '/' else f'{lang}/index.html')
         write(target, html)
         urls.append((path, alt if len(langs) > 1 else []))
+        panel_pages.append({'path': path, 'label': f"Inicio · {common.LANG_NAMES[lang]}", 'group': 'Páginas'})
 
-    es = mod.PAGES[langs[0]]
+    es = pages[langs[0]]
     nav_sub = [{'href': '/' + n['href'], 'label': n['label']} if n['href'].startswith('#') else n for n in es['nav']]
     cta_sub = {'href': '/' + es['cta']['href'], 'label': es['cta']['label']}
 
-    def simple_ctx(path, meta):
-        ctx = base_context(key, site, langs[0], langs, path, meta)
-        ctx.update({'c': es, 'nav': nav_sub, 'cta': cta_sub, 'posts': []})
+    def simple_ctx(path, meta, page_key):
+        ctx = base_context(key, site, langs[0], langs, path, meta, page_key)
+        ctx.update({'c': es, 'nav': nav_sub, 'cta': cta_sub, 'posts': [], 'blog_ui': blog_ui})
         return ctx
 
     if site['blog']:
         meta = {'title': 'Blog de psicología y psicoanálisis | Psicoanálisis en Barcelona',
                 'description': 'Artículos sobre psicoterapia psicoanalítica, ansiedad, vínculos, duelo y la experiencia de migrar, escritos por psicólogos en Barcelona.'}
-        ctx = simple_ctx('/blog/', meta)
-        ctx['posts'] = blog.POSTS
+        ctx = simple_ctx('/blog/', meta, 'blog')
+        ctx['posts'] = posts
         ctx['jsonld'] = jsonld({'@context': 'https://schema.org', '@type': 'Blog', 'name': 'Blog · Psicoanálisis en Barcelona',
                                 'url': site['url'] + '/blog/', 'inLanguage': 'es',
                                 'blogPost': [{'@type': 'BlogPosting', 'headline': p['title'], 'url': f"{site['url']}/blog/{p['slug']}/"} for p in blog.POSTS]})
         write(out / 'blog/index.html', env.get_template('blog_index.html').render(**ctx))
         urls.append(('/blog/', []))
-        for post in blog.POSTS:
+        panel_pages.append({'path': '/blog/', 'label': 'Blog · listado', 'group': 'Blog'})
+        for post in posts:
             path = f"/blog/{post['slug']}/"
-            meta = {'title': f"{post['title']} | Psicoanálisis en Barcelona", 'description': post['description'], 'og_type': 'article'}
-            ctx = simple_ctx(path, meta)
+            meta = {'title': f"{post['title']} | Psicoanálisis en Barcelona", 'description': str(post['description']), 'og_type': 'article'}
+            ctx = simple_ctx(path, meta, f"blog.{post['slug']}")
             ctx['post'] = post
             ctx['jsonld'] = jsonld({
                 '@context': 'https://schema.org', '@type': 'BlogPosting', 'headline': post['title'],
@@ -203,21 +219,23 @@ def build_site(key, site):
             })
             write(out / f"blog/{post['slug']}/index.html", env.get_template('blog_post.html').render(**ctx))
             urls.append((path, []))
+            panel_pages.append({'path': path, 'label': f"Blog · {post['title']}", 'group': 'Blog'})
 
     # Privacidad y 404
-    priv = legal.privacy(key)
-    ctx = simple_ctx('/privacidad/', {'title': f"Privacidad | {site['name']}", 'description': 'Política de privacidad y uso de cookies.', 'robots': 'noindex,follow'})
+    priv = mark(legal.privacy(key), 'legal.privacy')
+    ctx = simple_ctx('/privacidad/', {'title': f"Privacidad | {site['name']}", 'description': 'Política de privacidad y uso de cookies.', 'robots': 'noindex,follow'}, 'privacy')
     ctx['page'] = priv
     write(out / 'privacidad/index.html', env.get_template('simple.html').render(**ctx))
-    ctx = simple_ctx('/404.html', {'title': f"Página no encontrada | {site['name']}", 'description': 'Página no encontrada.', 'robots': 'noindex'})
-    ctx['page'] = legal.not_found(key)
+    panel_pages.append({'path': '/privacidad/', 'label': 'Privacidad y cookies', 'group': 'Otras'})
+    ctx = simple_ctx('/404.html', {'title': f"Página no encontrada | {site['name']}", 'description': 'Página no encontrada.', 'robots': 'noindex'}, '404')
+    ctx['page'] = mark(legal.not_found(key), 'legal.404')
     write(out / '404.html', env.get_template('simple.html').render(**ctx))
 
     # Estáticos
     shutil.copy(BUILD / 'static/app.js', out / 'app.js')
     write(out / 'config.js', "window.SITE_CONFIG = {\n  // ID de medición de Google Analytics 4 (G-XXXXXXX). Vacío = sin analítica.\n"
           f"  analyticsMeasurementId: '{site['analytics']}'\n}};\n")
-    write(out / 'robots.txt', f"User-agent: *\nAllow: /\n\nSitemap: {site['url']}/sitemap.xml\n")
+    write(out / 'robots.txt', f"User-agent: *\nAllow: /\nDisallow: /admin/\n\nSitemap: {site['url']}/sitemap.xml\n")
     today = time.strftime('%Y-%m-%d')
     rows = []
     for path, alts in urls:
@@ -230,8 +248,12 @@ def build_site(key, site):
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
-  X-Frame-Options: DENY
-  Content-Security-Policy: default-src 'self'; img-src 'self' data: {analytics_hosts}; style-src 'self'; font-src 'self'; script-src 'self' https://www.googletagmanager.com; connect-src 'self' {analytics_hosts}; frame-ancestors 'none'; base-uri 'self'; form-action 'self'
+  X-Frame-Options: SAMEORIGIN
+  Content-Security-Policy: default-src 'self'; img-src 'self' data: {analytics_hosts}; style-src 'self'; font-src 'self'; script-src 'self' https://www.googletagmanager.com; connect-src 'self' {analytics_hosts}; frame-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'
+
+/admin/*
+  Cache-Control: no-store
+  X-Robots-Tag: noindex, nofollow
 
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
@@ -239,8 +261,45 @@ def build_site(key, site):
 /fonts/*
   Cache-Control: public, max-age=31536000, immutable
 """)
-    write(out / 'netlify.toml', '[build]\n  publish = "."\n  command = ""\n\n[build.processing.html]\n  pretty_urls = true\n')
+    write_panel(key, site, out, panel_pages, langs)
     print(f'{key}: {len(urls)} páginas')
+
+
+def write_panel(key, site, out, panel_pages, langs):
+    """Copia el panel de control (/admin) y las funciones de Netlify, y genera su configuración."""
+    site_dir = out.parent
+    runtime = BUILD / 'cms_runtime'
+    if (out / 'admin').exists():
+        shutil.rmtree(out / 'admin')
+    shutil.copytree(runtime / 'admin', out / 'admin')
+    shutil.copy(runtime / 'netlify/lib/sanitize.mjs', out / 'admin/sanitize.mjs')
+    if (site_dir / 'netlify').exists():
+        shutil.rmtree(site_dir / 'netlify')
+    shutil.copytree(runtime / 'netlify', site_dir / 'netlify')
+    contacts = [{'id': c, **common.CONTACTS[c]} for c in site['contacts']]
+    config = {
+        'key': key, 'name': site['name'], 'url': site['url'], 'accent': site['accent'],
+        'langs': langs, 'pages': panel_pages, 'contacts': contacts,
+    }
+    write(out / 'admin/site.json', json.dumps(config, ensure_ascii=False, indent=2) + '\n')
+    write(site_dir / 'netlify/lib/site.mjs', '// Generado por _build/build.py — no editar a mano.\n'
+          f'export const SITE = {json.dumps(config, ensure_ascii=False, indent=2)};\n')
+    write(site_dir / 'netlify.toml', """[build]
+  publish = "public"
+  command = ""
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+[build.processing.html]
+  pretty_urls = true
+""")
+    write(site_dir / 'package.json', json.dumps({
+        'name': f'web-{key}', 'private': True, 'type': 'module',
+        'description': f"{site['name']} — web estática + panel de control",
+        'dependencies': {'@netlify/blobs': '^11.1.3'},
+    }, indent=2) + '\n')
 
 
 if __name__ == '__main__':

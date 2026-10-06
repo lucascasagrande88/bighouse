@@ -138,6 +138,8 @@ ES = {
         'img_alt': 'Sol Galiana en su consultorio, escuchando',
     },
     'places': {
+        'in_person': 'Presencial',
+        'address_note': 'Dirección exacta al confirmar la cita',
         'kicker': 'Consultorios',
         'title': 'Dos espacios en Barcelona.',
         'online_zone': 'Online',
@@ -157,7 +159,7 @@ ES = {
         'title': 'Información para orientarte.',
         'items': [
             {'q': '¿Qué es la psicoterapia psicoanalítica?', 'a': 'Es una forma de psicoterapia que, además de atender el malestar actual, busca comprender cómo se relaciona con la historia, los vínculos y la experiencia singular de cada persona. No se trata de aplicar una técnica igual para todos, sino de construir un proceso a partir de lo que cada uno trae.'},
-            {'q': '¿Atienden de forma presencial en Barcelona?', 'a': 'Sí. Atendemos en dos consultorios de Barcelona, en Gràcia (Carrer de Badia, 24) y en Sants (Carrer de València, 28), y también ofrecemos sesiones online.'},
+            {'q': '¿Atienden de forma presencial en Barcelona?', 'a': 'Sí. Atendemos en dos consultorios de Barcelona, uno en Gràcia y otro en Sants, y también ofrecemos sesiones online.'},
             {'q': '¿En qué idiomas puedo hacer terapia?', 'a': 'Entre ambos profesionales, las sesiones pueden realizarse en español, inglés y portugués. Sol Galiana atiende en español e inglés; Nahuel Ponce, en español y portugués.'},
             {'q': '¿Trabajan con expatriados y estudiantes internacionales?', 'a': 'Sí. Tenemos experiencia acompañando procesos migratorios, adaptación cultural, identidad, soledad, desarraigo y la construcción de nuevos proyectos personales.'},
             {'q': '¿Cuánto dura una sesión y cuánto cuesta?', 'a': 'La sesión individual dura 45 minutos. Además existe una modalidad con tarifa flexible, de una hora, desde 40 €. Para conocer los honorarios exactos y la disponibilidad, escribe directamente al profesional.'},
@@ -316,6 +318,8 @@ EN = {
         'img_alt': 'Sol Galiana in her office, listening',
     },
     'places': {
+        'in_person': 'In person',
+        'address_note': 'Exact address shared once your session is confirmed',
         'kicker': 'Locations',
         'title': 'Two spaces in Barcelona.',
         'online_zone': 'Online',
@@ -335,7 +339,7 @@ EN = {
         'title': 'Things you might want to know.',
         'items': [
             {'q': 'What is psychoanalytic psychotherapy?', 'a': 'It is a form of therapy that, as well as addressing current distress, seeks to understand how it relates to each person’s history, relationships and unique experience. It isn’t about applying the same technique to everyone, but about building a process from what each person brings.'},
-            {'q': 'Do you offer in-person sessions in Barcelona?', 'a': 'Yes. We see clients at two offices in Barcelona — Gràcia (Carrer de Badia, 24) and Sants (Carrer de València, 28) — and we also offer online sessions.'},
+            {'q': 'Do you offer in-person sessions in Barcelona?', 'a': 'Yes. We see clients at two offices in Barcelona — one in Gràcia and one in Sants — and we also offer online sessions.'},
             {'q': 'Which languages can I do therapy in?', 'a': 'Between the two of us, sessions are available in English, Spanish and Portuguese. Sol Galiana works in English and Spanish; Nahuel Ponce in Spanish and Portuguese.'},
             {'q': 'Do you work with expats and international students?', 'a': 'Yes. We have experience supporting migration, cultural adaptation, identity, loneliness, uprootedness and building a new life project.'},
             {'q': 'How long is a session and how much does it cost?', 'a': 'An individual session lasts 45 minutes. There is also a one-hour sliding-scale option from €40. For exact fees and availability, message the therapist directly.'},
@@ -494,6 +498,8 @@ PT = {
         'img_alt': 'Sol Galiana em seu consultório, escutando',
     },
     'places': {
+        'in_person': 'Presencial',
+        'address_note': 'Endereço exato ao confirmar a consulta',
         'kicker': 'Consultórios',
         'title': 'Dois espaços em Barcelona.',
         'online_zone': 'Online',
@@ -513,7 +519,7 @@ PT = {
         'title': 'Informações para te orientar.',
         'items': [
             {'q': 'O que é a psicoterapia psicanalítica?', 'a': 'É uma forma de psicoterapia que, além de cuidar do sofrimento atual, busca compreender como ele se relaciona com a história, os vínculos e a experiência singular de cada pessoa. Não se trata de aplicar a mesma técnica para todos, mas de construir um processo a partir do que cada um traz.'},
-            {'q': 'Vocês atendem presencialmente em Barcelona?', 'a': 'Sim. Atendemos em dois consultórios em Barcelona, em Gràcia (Carrer de Badia, 24) e em Sants (Carrer de València, 28), e também oferecemos sessões online.'},
+            {'q': 'Vocês atendem presencialmente em Barcelona?', 'a': 'Sim. Atendemos em dois consultórios em Barcelona, um em Gràcia e outro em Sants, e também oferecemos sessões online.'},
             {'q': 'Em quais idiomas posso fazer terapia?', 'a': 'Entre os dois profissionais, as sessões podem ser em português, espanhol e inglês. Nahuel Ponce atende em português e espanhol; Sol Galiana, em espanhol e inglês.'},
             {'q': 'Vocês trabalham com expatriados e estudantes internacionais?', 'a': 'Sim. Temos experiência com processos migratórios, adaptação cultural, identidade, solidão, desenraizamento e construção de novos projetos de vida.'},
             {'q': 'Quanto dura uma sessão e quanto custa?', 'a': 'A sessão individual dura 45 minutos. Também existe uma modalidade com valor flexível, de uma hora, a partir de 40 €. Para valores exatos e disponibilidade, escreva diretamente ao profissional.'},

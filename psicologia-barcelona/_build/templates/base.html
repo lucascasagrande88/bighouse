@@ -6,6 +6,7 @@
   <title>{{ meta.title }}</title>
   <meta name="description" content="{{ meta.description }}">
   <meta name="theme-color" content="{{ site.theme_color }}">
+  <meta name="cms-page" content="{{ page_key }}">
   <meta name="robots" content="{{ meta.robots | default('index,follow,max-image-preview:large') }}">
   <link rel="canonical" href="{{ canonical }}">
   {%- for alt in alternates %}
@@ -41,18 +42,18 @@
   <a class="skip-link" href="#contenido">{{ ui.skip }}</a>
 
   <header class="site-header">
-    <a class="brand" href="{{ home_url }}" aria-label="{{ site.name }} — {{ ui.home }}">
+    <a class="brand" href="{{ home_url }}" aria-label="{{ site.name }} — {{ ui.home | plain }}">
       {% block brand %}{% endblock %}
     </a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
       <span aria-hidden="true"></span><span aria-hidden="true"></span><span class="sr-only">{{ ui.menu }}</span>
     </button>
-    <nav class="site-nav" id="site-nav" aria-label="{{ ui.nav_label }}" data-nav data-open="false">
+    <nav class="site-nav" id="site-nav" aria-label="{{ ui.nav_label | plain }}" data-nav data-open="false">
       {%- for item in nav %}
       <a href="{{ item.href }}">{{ item.label }}</a>
       {%- endfor %}
       {%- if languages | length > 1 %}
-      <span class="lang-switch" aria-label="{{ ui.language }}">
+      <span class="lang-switch" aria-label="{{ ui.language | plain }}">
         {%- for l in languages %}
         {%- if l.code == lang %}<span aria-current="true">{{ l.code | upper }}</span>{% else %}<a href="{{ l.url }}" hreflang="{{ l.code }}" lang="{{ l.code }}" title="{{ l.name }}">{{ l.code | upper }}</a>{% endif %}
         {%- endfor %}
@@ -77,7 +78,7 @@
   </div>
   {%- endif %}
 
-  <aside class="consent" data-consent hidden aria-label="{{ ui.consent_label }}">
+  <aside class="consent" data-consent hidden aria-label="{{ ui.consent_label | plain }}">
     <p>{{ ui.consent_text }} <a href="{{ privacy_url }}">{{ ui.consent_more }}</a></p>
     <div><button type="button" data-consent-reject>{{ ui.consent_reject }}</button><button type="button" data-consent-accept>{{ ui.consent_accept }}</button></div>
   </aside>

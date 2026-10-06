@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://psicoanalisis-en-barcelona.netlify.app/sitemap.xml

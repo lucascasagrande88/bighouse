@@ -1,4 +1,4 @@
-"""Datos compartidos entre las tres webs. Cambiar acá teléfonos, emails y direcciones."""
+"""Datos compartidos entre las tres webs. Cambiar acá teléfonos y emails."""
 from urllib.parse import quote
 
 URLS = {
@@ -22,22 +22,22 @@ NAHUEL = {
     'email': 'lic.poncenahuel@gmail.com',
 }
 
+# Sólo el barrio: la dirección exacta se comparte por privado al confirmar la cita.
 PLACES = [
-    {
-        'zone': 'Gràcia',
-        'street': 'Carrer de Badia, 24',
-        'detail': 'Local 3 · 08012 Barcelona',
-        'map': 'https://www.google.com/maps/search/?api=1&query=' + quote('Carrer de Badia 24, 08012 Barcelona'),
-        'schema': {'streetAddress': 'Carrer de Badia, 24, Local 3', 'postalCode': '08012'},
-    },
-    {
-        'zone': 'Sants',
-        'street': 'Carrer de València, 28',
-        'detail': 'Sants · Barcelona',
-        'map': 'https://www.google.com/maps/search/?api=1&query=' + quote('Carrer de València 28, Barcelona'),
-        'schema': {'streetAddress': 'Carrer de València, 28'},
-    },
+    {'zone': 'Gràcia'},
+    {'zone': 'Sants'},
 ]
+
+
+# Datos de contacto editables desde el panel. 'original' es el valor publicado hoy en las webs:
+# si en el panel se cambia, la web reemplaza el original por el nuevo en todas las páginas.
+CONTACTS = {
+    'sol_phone': {'label': 'WhatsApp / teléfono de Sol', 'type': 'phone', 'original': SOL['phone_display']},
+    'sol_email': {'label': 'Email de Sol', 'type': 'email', 'original': SOL['email']},
+    'sol_instagram': {'label': 'Instagram de Sol (usuario, sin @)', 'type': 'instagram', 'original': 'lic.solgaliana'},
+    'nahuel_phone': {'label': 'WhatsApp / teléfono de Nahuel', 'type': 'phone', 'original': NAHUEL['phone_display']},
+    'nahuel_email': {'label': 'Email de Nahuel', 'type': 'email', 'original': NAHUEL['email']},
+}
 
 
 def wa(phone, text):

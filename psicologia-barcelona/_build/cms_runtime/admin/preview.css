@@ -1,0 +1,5 @@
+/* Se inyecta en la vista previa del panel (dentro del iframe). */
+.consent, .dock { display: none !important; }
+[data-cms-hover] { outline: 2px dashed #1b5fd6 !important; outline-offset: 4px; cursor: text !important; }
+[data-cms-flash] { outline: 3px solid #f0a500 !important; outline-offset: 4px; transition: outline-color .6s; }
+[data-reveal] { opacity: 1 !important; transform: none !important; }

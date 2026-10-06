@@ -1,0 +1,9 @@
+{
+  "name": "web-sol",
+  "private": true,
+  "type": "module",
+  "description": "Sol Galiana \u00b7 Psic\u00f3loga \u2014 web est\u00e1tica + panel de control",
+  "dependencies": {
+    "@netlify/blobs": "^11.1.3"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "web-nahuel",
+  "private": true,
+  "type": "module",
+  "description": "Nahuel Ponce \u00b7 Psic\u00f3logo \u2014 web est\u00e1tica + panel de control",
+  "dependencies": {
+    "@netlify/blobs": "^11.1.3"
+  }
+}

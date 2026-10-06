@@ -9,7 +9,7 @@
 <section class="hero" data-hero>
   <div class="hero-copy">
     <p class="eyebrow">{{ h.eyebrow }}</p>
-    <h1>{{ h.h1 | safe }}</h1>
+    <h1>{{ h.h1 }}</h1>
     <p class="hero-rotate" data-rotate>
       <span class="rotate-intro">{{ h.rotate_intro }}</span>
       <span class="rotate-track" aria-live="polite">
@@ -37,7 +37,7 @@
 </section>
 
 {% set sc = c.scene %}
-<section class="scene" data-pin data-steps="3" aria-label="{{ sc.label }}">
+<section class="scene" data-pin data-steps="3" aria-label="{{ sc.label | plain }}">
   <div class="scene-sticky">
     <svg class="scene-geo" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
       <path pathLength="1" d="M120 1000V520a380 380 0 0 1 760 0v480"/>
@@ -49,7 +49,7 @@
     <figure class="scene-c"><img src="/assets/espacio-lg.webp" width="1200" height="1500" alt="" loading="lazy"></figure>
     <div class="scene-text">
       {%- for line in sc.lines %}
-      <h2 class="t{{ loop.index0 }}">{{ line | safe }}</h2>
+      <h2 class="t{{ loop.index0 }}">{{ line }}</h2>
       {%- endfor %}
       <p class="scene-sub">{{ sc.sub }}</p>
     </div>
@@ -81,7 +81,7 @@
   <div class="shell reasons-inner">
     <div class="reasons-head" data-reveal>
       <p class="kicker"><span>02</span>{{ r.kicker }}</p>
-      <h2>{{ r.title | safe }}</h2>
+      <h2>{{ r.title }}</h2>
       <p>{{ r.lead }}</p>
     </div>
     <ol class="reasons-list" data-reveal>
@@ -108,13 +108,13 @@
 <section class="team shell" id="equipo">
   <div class="team-head" data-reveal>
     <p class="kicker"><span>04</span>{{ t.kicker }}</p>
-    <h2>{{ t.title | safe }}</h2>
+    <h2>{{ t.title }}</h2>
     <p>{{ t.lead }}</p>
   </div>
   <div class="team-grid">
     {%- for p in t.people %}
     <article class="person person-{{ p.key }}" data-reveal>
-      <a class="person-photo" data-scroll data-start="1" data-span=".9" href="{{ p.url }}" aria-label="{{ t.web }} — {{ p.name }}">
+      <a class="person-photo" data-scroll data-start="1" data-span=".9" href="{{ p.url }}" aria-label="{{ t.web | plain }} — {{ p.name | plain }}">
         <picture>
           <source srcset="/assets/{{ p.img }}-sm.webp" media="(max-width: 760px)">
           <img src="/assets/{{ p.img }}-lg.webp" width="1200" height="1500" alt="{{ p.img_alt }}" loading="lazy">
@@ -140,7 +140,7 @@
   <div class="shell">
     <div class="services-head" data-reveal>
       <p class="kicker"><span>05</span>{{ s.kicker }}</p>
-      <h2>{{ s.title | safe }}</h2>
+      <h2>{{ s.title }}</h2>
     </div>
     <div class="services-list">
       {%- for item in s['items'] %}
@@ -193,10 +193,9 @@
     <div class="places-list" data-reveal>
       {%- for p in places %}
       <article>
-        <span class="zone">{{ p.zone }}</span>
-        <h3>{{ p.street }}</h3>
-        <p>{{ p.detail }}</p>
-        <a href="{{ p.map }}" target="_blank" rel="noopener">{{ ui.map }} <span aria-hidden="true">↗</span></a>
+        <span class="zone">{{ pl.in_person }}</span>
+        <h3>{{ p.zone }}</h3>
+        <p>{{ pl.address_note }}</p>
       </article>
       {%- endfor %}
       <article class="online">

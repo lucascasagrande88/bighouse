@@ -1,0 +1,41 @@
+{
+  "key": "nahuel",
+  "name": "Nahuel Ponce · Psicólogo",
+  "url": "https://nahuel-psicologia-barcelona.netlify.app",
+  "accent": "#0e0e0d",
+  "langs": [
+    "es",
+    "pt"
+  ],
+  "pages": [
+    {
+      "path": "/",
+      "label": "Inicio · Español",
+      "group": "Páginas"
+    },
+    {
+      "path": "/pt/",
+      "label": "Inicio · Português",
+      "group": "Páginas"
+    },
+    {
+      "path": "/privacidad/",
+      "label": "Privacidad y cookies",
+      "group": "Otras"
+    }
+  ],
+  "contacts": [
+    {
+      "id": "nahuel_phone",
+      "label": "WhatsApp / teléfono de Nahuel",
+      "type": "phone",
+      "original": "+34 641 90 16 60"
+    },
+    {
+      "id": "nahuel_email",
+      "label": "Email de Nahuel",
+      "type": "email",
+      "original": "lic.poncenahuel@gmail.com"
+    }
+  ]
+}
