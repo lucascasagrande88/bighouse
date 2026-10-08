@@ -135,7 +135,7 @@
     }
     var mg = $("#miga-rubro"); mg.hidden = !r; if (r) mg.textContent = "/ " + r.corto;
     var canon = document.querySelector('link[rel="canonical"]');
-    if (canon) canon.href = "https://distribuidora-libertad.netlify.app/catalogo" + (r ? "?rubro=" + r.id : "");
+    if (canon) canon.href = "https://distribuidora-libertad-v1.netlify.app/catalogo" + (r ? "?rubro=" + r.id : "");
     document.title = (r ? r.nombre + " · " : "Catálogo y lista de precios · ") + "Distribuidora Libertad";
     if (A.covers && r) $("#cat-bg").innerHTML = '<img src="assets/img/rubros/cover-' + r.id + '.webp" alt="" style="filter:none">';
     var chips = [];

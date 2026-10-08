@@ -9,7 +9,7 @@ Sitio estático (HTML/CSS/JS, sin build) + Supabase como base de datos. Mismo mo
 | `/links` | Público | Página tipo Linktree para la bio de Instagram/WhatsApp (pedido, catálogo, cómo llegar, llamar, rubros) |
 | `/tablero` | Cliente | Panel de edición con usuario y contraseña |
 
-Netlify: proyecto `distribuidora-libertad` → https://distribuidora-libertad.netlify.app
+Netlify: proyecto `distribuidora-libertad` → https://distribuidora-libertad-v1.netlify.app
 
 ## Qué se edita desde el Tablero
 
@@ -25,7 +25,7 @@ Netlify: proyecto `distribuidora-libertad` → https://distribuidora-libertad.ne
 1. Crear proyecto Supabase `DISTRIBUIDORA-LIBERTAD` (región São Paulo).
 2. Authentication → Users → crear el usuario del cliente (email + contraseña).
 3. Authentication → Sign In / Providers → desactivar "Allow new users to sign up".
-4. Authentication → URL Configuration → Site URL `https://distribuidora-libertad.netlify.app` y sumar `https://distribuidora-libertad.netlify.app/tablero` a Redirect URLs (para "Olvidé mi contraseña").
+4. Authentication → URL Configuration → Site URL `https://distribuidora-libertad-v1.netlify.app` y sumar `https://distribuidora-libertad-v1.netlify.app/tablero` a Redirect URLs (para "Olvidé mi contraseña").
 5. SQL Editor → correr `SUPABASE-SETUP.sql` (crea tablas, permisos y da acceso al tablero a los usuarios ya creados). Si más adelante se suma otro usuario, volver a correrlo.
 6. Completar `assets/js/config.js` → `LIB_SUPABASE.url` y `LIB_SUPABASE.key` (publishable/anon key) y volver a publicar.
 7. Entrar a `/tablero` → Resumen → "Cargar catálogo inicial" (6.528 artículos, una sola vez).
