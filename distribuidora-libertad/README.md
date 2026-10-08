@@ -23,10 +23,14 @@ Netlify: proyecto `distribuidora-libertad` → https://distribuidora-libertad.ne
 ## Puesta en marcha de la base (una sola vez)
 
 1. Crear proyecto Supabase `DISTRIBUIDORA-LIBERTAD` (región São Paulo).
-2. SQL Editor → correr `SUPABASE-SETUP.sql`.
-3. Cargar el catálogo inicial (6.528 artículos de `assets/data/catalogo-base.js`).
-4. Authentication → Users → crear el usuario del cliente.
-5. Completar `assets/js/config.js` → `LIB_SUPABASE.url` y `LIB_SUPABASE.key` (publishable/anon key) y volver a publicar.
+2. Authentication → Users → crear el usuario del cliente (email + contraseña).
+3. Authentication → Sign In / Providers → desactivar "Allow new users to sign up".
+4. Authentication → URL Configuration → Site URL `https://distribuidora-libertad.netlify.app` y sumar `https://distribuidora-libertad.netlify.app/tablero` a Redirect URLs (para "Olvidé mi contraseña").
+5. SQL Editor → correr `SUPABASE-SETUP.sql` (crea tablas, permisos y da acceso al tablero a los usuarios ya creados). Si más adelante se suma otro usuario, volver a correrlo.
+6. Completar `assets/js/config.js` → `LIB_SUPABASE.url` y `LIB_SUPABASE.key` (publishable/anon key) y volver a publicar.
+7. Entrar a `/tablero` → Resumen → "Cargar catálogo inicial" (6.528 artículos, una sola vez).
+
+Seguridad: solo los usuarios de la tabla `admins` pueden editar; cualquier otro usuario que entre al tablero es rechazado. Las fotos de catálogo de proveedores (`assets/data/fotos.js`) se usan cuando un producto no tiene foto propia.
 
 Mientras la base no esté conectada, la web y el catálogo funcionan igual con el catálogo base; el tablero muestra un aviso.
 

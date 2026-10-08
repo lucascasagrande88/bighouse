@@ -135,7 +135,7 @@
     agregar: function (p, q) {
       q = q || 1;
       var it = pedido[p.a];
-      if (it) it.q += q; else pedido[p.a] = { a: p.a, n: p.n, p: p.p, q: q };
+      if (it) it.q = Math.min(9999, it.q + q); else pedido[p.a] = { a: p.a, n: p.n, p: p.p, q: Math.min(9999, q) };
       guardar(); pintar();
       var b = $("#btn-pedido"); if (b) { b.classList.remove("pop"); void b.offsetWidth; b.classList.add("pop"); }
       toast(IC.svg("check") + ' Agregado al pedido · <b>' + cantidad() + ' u.</b>');
@@ -189,11 +189,11 @@
       '<form class="drawer__pie" id="drawer-pie" hidden>' +
       '<div class="total"><div><span style="font-weight:700">Total estimado</span><small id="pedido-nota"></small></div><b id="pedido-total"></b></div>' +
       '<div class="campos">' +
-      '<div class="fila"><div class="campo"><label for="c-nom">Nombre *</label><input id="c-nom" name="nombre" required autocomplete="name"></div>' +
-      '<div class="campo"><label for="c-neg">Comercio</label><input id="c-neg" name="negocio" autocomplete="organization"></div></div>' +
-      '<div class="fila"><div class="campo"><label for="c-loc">Localidad *</label><input id="c-loc" name="localidad" required></div>' +
-      '<div class="campo"><label for="c-tel">Teléfono</label><input id="c-tel" name="telefono" type="tel" autocomplete="tel"></div></div>' +
-      '<div class="campo"><label for="c-nota">Nota (opcional)</label><textarea id="c-nota" name="nota" rows="2" placeholder="Forma de entrega, horario, CUIT…"></textarea></div>' +
+      '<div class="fila"><div class="campo"><label for="c-nom">Nombre *</label><input id="c-nom" name="nombre" required maxlength="120" autocomplete="name"></div>' +
+      '<div class="campo"><label for="c-neg">Comercio</label><input id="c-neg" name="negocio" maxlength="120" autocomplete="organization"></div></div>' +
+      '<div class="fila"><div class="campo"><label for="c-loc">Localidad *</label><input id="c-loc" name="localidad" required maxlength="120"></div>' +
+      '<div class="campo"><label for="c-tel">Teléfono</label><input id="c-tel" name="telefono" type="tel" maxlength="40" autocomplete="tel"></div></div>' +
+      '<div class="campo"><label for="c-nota">Nota (opcional)</label><textarea id="c-nota" name="nota" rows="2" maxlength="1000" placeholder="Forma de entrega, horario, CUIT…"></textarea></div>' +
       '</div>' +
       '<button class="btn btn--wa" type="submit">' + IC.svg("wa") + 'Enviar pedido por WhatsApp</button>' +
       '<button class="quitar" type="button" data-vaciar style="justify-self:center">Vaciar pedido</button>' +
@@ -231,6 +231,7 @@
     ["nombre", "negocio", "localidad", "telefono", "nota"].forEach(function (k) { cli[k] = f[k].value.trim(); });
     try { localStorage.setItem(KEY_CLI, JSON.stringify(cli)); } catch (er) {}
     var its = items(), tot = total();
+    if (!its.length) return;
     var lineas = its.map(function (i) {
       return "• " + i.q + " × " + i.n + " [" + i.a + "]" + (i.p ? " — " + LIB.precio(i.p * i.q) : " — a confirmar");
     });
@@ -269,5 +270,13 @@
   if (location.hash === "#pedido") setTimeout(abrir, 300);
   pintar();
   reveal();
-  LIB.ready.then(function () { aplicarAjustes(); pintar(); });
+  // Un pedido guardado de otra visita puede tener precios viejos: se actualizan con la lista vigente.
+  function refrescarPedido() {
+    if (!LIB.productos.length) return;
+    var m = {}; LIB.productos.forEach(function (p) { m[p.a] = p; });
+    Object.keys(pedido).forEach(function (a) { var p = m[a]; if (p) { pedido[a].n = p.n; pedido[a].p = p.p; } });
+    guardar();
+  }
+
+  LIB.ready.then(function () { aplicarAjustes(); refrescarPedido(); pintar(); });
 })();

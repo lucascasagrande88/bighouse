@@ -179,7 +179,11 @@
     document.body.style.overflow = "hidden";
     setTimeout(function () { $("#m-add").focus(); }, 50);
   }
-  function cerrarModal() { $("#modal").classList.remove("on"); document.body.style.overflow = ""; }
+  function cerrarModal() {
+    if (!$("#modal").classList.contains("on")) return;
+    $("#modal").classList.remove("on");
+    if (!$("#drawer.on")) document.body.style.overflow = "";
+  }
 
   /* ---------- eventos ---------- */
   var tDeb;

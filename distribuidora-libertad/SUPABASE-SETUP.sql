@@ -1,7 +1,27 @@
 -- =====================================================================
 -- Distribuidora Libertad · esquema Supabase
--- Correr una sola vez en el SQL Editor del proyecto (es idempotente).
+-- Correr una sola vez en el SQL Editor del proyecto (es idempotente:
+-- se puede volver a correr sin perder datos).
+--
+-- Seguridad: solo los usuarios cargados en public.admins pueden editar.
+-- Un usuario que se registre por su cuenta NO tiene acceso al tablero.
 -- =====================================================================
+
+-- ---------- administradores del tablero ----------
+create table if not exists public.admins (
+  user_id uuid primary key references auth.users (id) on delete cascade,
+  email text,
+  created_at timestamptz not null default now()
+);
+alter table public.admins enable row level security;
+-- sin políticas: nadie la lee ni la escribe desde la web; se maneja desde el SQL Editor.
+
+create or replace function public.es_admin() returns boolean
+language sql stable security definer set search_path = '' as $$
+  select exists (select 1 from public.admins a where a.user_id = auth.uid());
+$$;
+revoke all on function public.es_admin() from public;
+grant execute on function public.es_admin() to anon, authenticated;
 
 -- ---------- productos ----------
 create table if not exists public.productos (
@@ -32,10 +52,11 @@ create trigger productos_updated before update on public.productos
 alter table public.productos enable row level security;
 drop policy if exists "productos lectura publica" on public.productos;
 create policy "productos lectura publica" on public.productos
-  for select to anon using (activo = true);
+  for select to anon, authenticated using (activo = true);
 drop policy if exists "productos admin" on public.productos;
 create policy "productos admin" on public.productos
-  for all to authenticated using (true) with check (true);
+  for all to authenticated
+  using ((select public.es_admin())) with check ((select public.es_admin()));
 
 -- ---------- ajustes del sitio (clave / valor) ----------
 create table if not exists public.ajustes (
@@ -49,7 +70,12 @@ create policy "ajustes lectura publica" on public.ajustes
   for select to anon, authenticated using (true);
 drop policy if exists "ajustes admin" on public.ajustes;
 create policy "ajustes admin" on public.ajustes
-  for all to authenticated using (true) with check (true);
+  for all to authenticated
+  using ((select public.es_admin())) with check ((select public.es_admin()));
+
+drop trigger if exists ajustes_updated on public.ajustes;
+create trigger ajustes_updated before update on public.ajustes
+  for each row execute function public.tocar_updated_at();
 
 -- ---------- pedidos que llegan desde la web ----------
 create table if not exists public.pedidos (
@@ -66,6 +92,7 @@ create table if not exists public.pedidos (
   estado text not null default 'nuevo'
     check (estado in ('nuevo','confirmado','entregado','cancelado'))
 );
+create index if not exists pedidos_created_idx on public.pedidos (created_at desc);
 alter table public.pedidos enable row level security;
 drop policy if exists "pedidos alta publica" on public.pedidos;
 create policy "pedidos alta publica" on public.pedidos
@@ -73,32 +100,52 @@ create policy "pedidos alta publica" on public.pedidos
   with check (
     estado = 'nuevo'
     and length(cliente) between 1 and 120
+    and coalesce(length(negocio), 0) <= 120
+    and coalesce(length(localidad), 0) <= 120
+    and coalesce(length(telefono), 0) <= 40
+    and coalesce(length(nota), 0) <= 1000
     and jsonb_typeof(items) = 'array'
     and jsonb_array_length(items) between 1 and 400
+    and pg_column_size(items) <= 200000
+    and coalesce(total, 0) >= 0
+    and coalesce(unidades, 0) between 0 and 1000000
   );
 drop policy if exists "pedidos admin lectura" on public.pedidos;
 create policy "pedidos admin lectura" on public.pedidos
-  for select to authenticated using (true);
+  for select to authenticated using ((select public.es_admin()));
 drop policy if exists "pedidos admin cambios" on public.pedidos;
 create policy "pedidos admin cambios" on public.pedidos
-  for update to authenticated using (true) with check (true);
+  for update to authenticated
+  using ((select public.es_admin())) with check ((select public.es_admin()));
 drop policy if exists "pedidos admin baja" on public.pedidos;
 create policy "pedidos admin baja" on public.pedidos
-  for delete to authenticated using (true);
+  for delete to authenticated using ((select public.es_admin()));
 
--- ---------- fotos (Storage) ----------
-insert into storage.buckets (id, name, public)
-values ('fotos', 'fotos', true)
-on conflict (id) do nothing;
+-- ---------- fotos (Storage): públicas para ver, solo admin sube ----------
+insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+values ('fotos', 'fotos', true, 5242880, array['image/webp','image/jpeg','image/png'])
+on conflict (id) do update
+  set public = true, file_size_limit = excluded.file_size_limit, allowed_mime_types = excluded.allowed_mime_types;
 
+drop policy if exists "fotos admin lectura" on storage.objects;
+create policy "fotos admin lectura" on storage.objects
+  for select to authenticated using (bucket_id = 'fotos' and (select public.es_admin()));
 drop policy if exists "fotos admin alta" on storage.objects;
 create policy "fotos admin alta" on storage.objects
-  for insert to authenticated with check (bucket_id = 'fotos');
+  for insert to authenticated with check (bucket_id = 'fotos' and (select public.es_admin()));
 drop policy if exists "fotos admin cambios" on storage.objects;
 create policy "fotos admin cambios" on storage.objects
-  for update to authenticated using (bucket_id = 'fotos');
+  for update to authenticated using (bucket_id = 'fotos' and (select public.es_admin()));
 drop policy if exists "fotos admin baja" on storage.objects;
 create policy "fotos admin baja" on storage.objects
-  for delete to authenticated using (bucket_id = 'fotos');
+  for delete to authenticated using (bucket_id = 'fotos' and (select public.es_admin()));
 
--- Después: Authentication > Users > Add user (email + contraseña) para entrar al Tablero.
+-- =====================================================================
+-- DESPUÉS de crear el usuario del cliente
+-- (Authentication > Users > Add user, con email + contraseña),
+-- correr esta línea para darle acceso al Tablero. Suma como admin a
+-- todos los usuarios que existan en ese momento.
+-- =====================================================================
+insert into public.admins (user_id, email)
+select id, email from auth.users
+on conflict (user_id) do nothing;

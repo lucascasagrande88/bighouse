@@ -40,9 +40,21 @@
      ===================================================================== */
   function verLogin() { $("#v-app").hidden = true; $("#v-login").hidden = false; }
   function verApp(user) {
-    $("#v-login").hidden = true; $("#v-app").hidden = false;
-    $("#usuario").textContent = user && user.email || "";
-    cargarTodo();
+    // Solo entran los usuarios cargados como admin en la base (public.admins).
+    sb.rpc("es_admin").then(function (r) {
+      if (r.error || r.data !== true) {
+        var err = $("#login-err");
+        err.textContent = r.error
+          ? "La base no está lista: falta correr SUPABASE-SETUP.sql en Supabase."
+          : "Este usuario no tiene permiso para editar. Pedile acceso al administrador.";
+        err.hidden = false;
+        sb.auth.signOut();
+        return;
+      }
+      $("#v-login").hidden = true; $("#v-app").hidden = false;
+      $("#usuario").textContent = user && user.email || "";
+      cargarTodo();
+    });
   }
 
   if (!configured) {
@@ -119,6 +131,8 @@
       sb.from("ajustes").select("clave,valor"),
       sb.from("pedidos").select("*").order("created_at", { ascending: false }).limit(300)
     ]).then(function (r) {
+      if (r[1].error) throw r[1].error;
+      if (r[2].error) throw r[2].error;
       var FOTOS = window.LIB_FOTOS || {};
       D.prods = r[0].map(function (p) {
         p.precio = p.precio == null ? null : Number(p.precio);
@@ -160,6 +174,7 @@
       '<div class="kpi"><b>' + nuevos + '</b><span>pedidos nuevos</span></div>' +
       '<div class="kpi"><b>' + sinP.toLocaleString("es-AR") + '</b><span>sin precio (“Consultar”)</span></div>' +
       '<div class="kpi"><b>' + sinF.toLocaleString("es-AR") + '</b><span>sin foto</span></div>';
+    $("#importar").hidden = D.prods.length > 0;
     var ult = D.pedidos.slice(0, 5);
     $("#res-pedidos").innerHTML = ult.length ? '<div class="pedidos" style="margin-bottom:14px">' + ult.map(pedidoHtml).join("") + '</div>' : '<p class="ayuda">Todavía no llegaron pedidos desde la web.</p>';
   }
@@ -288,7 +303,7 @@
     $("#mp-img").innerHTML = '<span class="ayuda">Subiendo…</span>';
     optimizar(f).then(function (blob) {
       var path = "productos/" + art + "-" + Date.now() + ".webp";
-      return sb.storage.from("fotos").upload(path, blob, { contentType: "image/webp", upsert: true }).then(function (r) {
+      return sb.storage.from("fotos").upload(path, blob, { contentType: "image/webp", upsert: false }).then(function (r) {
         if (r.error) throw r.error;
         fotoNueva = sb.storage.from("fotos").getPublicUrl(path).data.publicUrl;
         fotoPreview(fotoNueva);
@@ -329,6 +344,45 @@
       D.prods = D.prods.filter(function (p) { return p !== edit; });
       cerrarProd(); pintarProds(); pintarResumen(); toast("Producto eliminado");
     });
+  });
+
+  /* ---------- importar el catálogo base (solo con la base vacía) ---------- */
+  function cargarScript(src) {
+    return new Promise(function (ok, ko) {
+      var sc = document.createElement("script"); sc.src = src; sc.onload = ok;
+      sc.onerror = function () { ko(new Error("No se pudo descargar " + src)); };
+      document.head.appendChild(sc);
+    });
+  }
+  $("#btn-importar").addEventListener("click", function () {
+    if (D.prods.length) return;
+    var btn = $("#btn-importar"); btn.disabled = true;
+    var bar = $("#imp-prog"); bar.hidden = false; var barIn = bar.firstElementChild;
+    (window.LIB_BASE ? Promise.resolve() : cargarScript("assets/data/catalogo-base.js")).then(function () {
+      var dest = {};
+      (window.LIB_DESTACADOS_BASE || []).forEach(function (d, i) { dest[d[0]] = { foto: d[1], orden: i + 1 }; });
+      var filas = window.LIB_BASE.items.map(function (x) {
+        var d = dest[x[0]];
+        return { art: x[0], nombre: x[1], precio: x[2], categoria: x[3], destacado: !!d, orden: d ? d.orden : null, foto_url: d ? d.foto : null };
+      });
+      if (!confirm("Se van a cargar " + filas.length.toLocaleString("es-AR") + " artículos de la lista " + window.LIB_BASE.lista + ". ¿Confirmás?")) throw null;
+      var ls = lotes(filas, 500), hechos = 0;
+      return ls.reduce(function (pr, l) {
+        return pr.then(function () {
+          return sb.from("productos").upsert(l, { onConflict: "art" }).then(function (r) {
+            if (r.error) throw r.error;
+            hechos += l.length; barIn.style.width = Math.round(hechos / filas.length * 100) + "%";
+          });
+        });
+      }, Promise.resolve()).then(function () {
+        return guardarAjustes({ lista_nombre: window.LIB_BASE.lista });
+      }).then(function () {
+        toast(filas.length.toLocaleString("es-AR") + " artículos cargados");
+        return cargarTodo();
+      });
+    }).catch(function (e) {
+      if (e) toast("Error al importar: " + (e.message || e) + ". Podés tocar de nuevo: no se duplican.", true);
+    }).then(function () { btn.disabled = false; bar.hidden = true; barIn.style.width = 0; });
   });
 
   /* =====================================================================
@@ -538,10 +592,10 @@
   function pedidoHtml(p) {
     var items = Array.isArray(p.items) ? p.items : [];
     return '<article class="pedido" data-id="' + p.id + '">' +
-      '<div class="pedido__cab" data-toggle><div><b>' + esc(p.cliente) + (p.negocio ? ' · ' + esc(p.negocio) : '') + '</b><small>#' + p.id + ' · ' + fecha(p.created_at) + ' · ' + esc(p.localidad || "") + ' · ' + (p.unidades || items.length) + ' u.</small></div>' +
+      '<div class="pedido__cab" data-toggle><div><b>' + esc(p.cliente) + (p.negocio ? ' · ' + esc(p.negocio) : '') + '</b><small>#' + p.id + ' · ' + fecha(p.created_at) + ' · ' + esc(p.localidad || "") + ' · ' + esc(p.unidades || items.length) + ' u.</small></div>' +
       '<select class="estado estado--' + p.estado + '" data-estado aria-label="Estado">' + ESTADOS.map(function (e) { return '<option value="' + e + '"' + (e === p.estado ? " selected" : "") + '>' + e + '</option>'; }).join("") + '</select>' +
       '<span class="pedido__total">' + plata(p.total) + '</span></div>' +
-      '<div class="pedido__det" hidden><table>' + items.map(function (i) { return '<tr><td>' + i.q + ' × ' + esc(i.n) + ' <span class="cod" style="font-family:var(--f-mono);font-size:11.5px;color:var(--gris)">' + esc(i.a) + '</span></td><td>' + (i.p ? plata(i.p * i.q) : "a confirmar") + '</td></tr>'; }).join("") + '</table>' +
+      '<div class="pedido__det" hidden><table>' + items.map(function (i) { return '<tr><td>' + esc(i.q) + ' × ' + esc(i.n) + ' <span class="cod" style="font-family:var(--f-mono);font-size:11.5px;color:var(--gris)">' + esc(i.a) + '</span></td><td>' + (Number(i.p) ? plata(Number(i.p) * Number(i.q)) : "a confirmar") + '</td></tr>'; }).join("") + '</table>' +
       (p.nota ? '<p><b>Nota:</b> ' + esc(p.nota) + '</p>' : '') +
       '<div class="pedido__acc">' + (p.telefono ? '<a class="btn btn--wa btn--chico" target="_blank" rel="noopener" href="https://wa.me/' + waNum(p.telefono) + '">' + IC.svg("wa") + 'Escribir a ' + esc(p.telefono) + '</a>' : '') +
       '<button class="btn btn--linea btn--chico" type="button" data-borrar style="color:var(--rojo)">Eliminar</button></div></div></article>';
