@@ -21,7 +21,7 @@ DATE = f"{t.tm_mday} de {MESES[t.tm_mon - 1]} de {t.tm_year}"
 
 COMMON_CHANGES = [
     'Panel de control privado con contraseña para editar los textos.',
-    'Las direcciones exactas de los consultorios ya no se publican: sólo el barrio (Gràcia y Sants).',
+    'Las direcciones exactas de los consultorios ya no se publican: sólo el barrio (Gràcia).',
 ]
 
 KITS = {

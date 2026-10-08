@@ -35,7 +35,7 @@
   <link rel="stylesheet" href="/fonts.css">
   <link rel="stylesheet" href="/styles.css?v={{ version }}">
   {%- if jsonld %}
-  <script type="application/ld+json">{{ jsonld }}</script>
+  <script type="application/ld+json">{{ jsonld | safe }}</script>
   {%- endif %}
 </head>
 <body class="{% block body_class %}{% endblock %}">

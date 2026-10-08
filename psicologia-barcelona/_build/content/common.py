@@ -25,7 +25,6 @@ NAHUEL = {
 # Sólo el barrio: la dirección exacta se comparte por privado al confirmar la cita.
 PLACES = [
     {'zone': 'Gràcia'},
-    {'zone': 'Sants'},
 ]
 
 

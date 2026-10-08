@@ -10,7 +10,7 @@ ES = {
     'scene': {'label': 'Llegar, extrañar, pertenecer, quedarse', 'kicker': 'Empezar en otro lugar', 'words': ['Llegar.', 'Extrañar.', 'Pertenecer.', 'Quedarse.'], 'sub': 'Cada etapa de una mudanza mueve algo distinto. La terapia puede acompañarlas todas.'},
     'meta': {
         'title': 'Sol Galiana | Psicóloga en Barcelona y online · Terapia para expatriados',
-        'description': 'Psicóloga clínica con orientación psicoanalítica en Barcelona (Gràcia y Sants) y online. Terapia en español e inglés para adultos, jóvenes y personas expatriadas. Espacio LGBTQ+ friendly.',
+        'description': 'Psicóloga clínica con orientación psicoanalítica en Barcelona (Gràcia) y online. Terapia en español e inglés para adultos, jóvenes y personas expatriadas. Espacio LGBTQ+ friendly.',
     },
     'schema': {'jobTitle': 'Psicóloga clínica', 'languages': ['es', 'en'],
                'alumniOf': [{'@type': 'CollegeOrUniversity', 'name': 'Universidad Nacional de La Matanza'},
@@ -44,7 +44,6 @@ ES = {
     'about': {
         'kicker': 'Sobre mí',
         'title': 'Empezar de nuevo puede abrir posibilidades. <em>También puede moverlo todo.</em>',
-        'quote': 'Yo también soy expatriada.',
         'paras': [
             'Soy psicóloga clínica habilitada para ejercer en España, con formación en psicoanálisis y siete años de experiencia trabajando con adultos y jóvenes, tanto online como de manera presencial.',
             'Transitar un país nuevo, un idioma nuevo y reconstruir el sentido de pertenencia a un hogar no es algo que simplemente estudie en consulta: es algo que he vivido. Esa combinación de experiencia personal y clínica es una parte importante de por qué me gusta trabajar con personas que atraviesan transiciones similares.',
@@ -68,6 +67,17 @@ ES = {
         'points': ['Escucha sin juicios', 'Tu historia, no un protocolo', 'Un ritmo propio'],
         'img_alt': 'Sol Galiana sonriendo, sentada con una taza de café',
     },
+    'quotes': {
+        'kicker': 'Para pensar',
+        'title': 'Frases que acompañan <em>mi forma de escuchar.</em>',
+        'items': [
+            {'q': 'Perderse significa ir encontrando y no saber qué hacer con lo que se va encontrando.', 'a': 'Clarice Lispector'},
+            {'q': 'La voz del inconsciente es sutil, pero no descansa hasta ser oída.', 'a': 'Sigmund Freud'},
+            {'q': 'No hay nada fuera del texto.', 'a': 'Jacques Derrida · De la gramatología, 1967'},
+            {'q': 'El yo no es amo en su propia casa.', 'a': 'Sigmund Freud'},
+            {'q': 'La interpretación de los sueños es la vía regia hacia el conocimiento de lo inconsciente.', 'a': 'Sigmund Freud'},
+        ],
+    },
     'safe': {
         'kicker': 'Un espacio abierto',
         'title': 'Tu identidad no necesita traducción.',
@@ -82,7 +92,7 @@ ES = {
         'title': 'Formas de encontrarnos.',
         'items': [
             {'name': 'Psicoterapia individual', 'meta': ['45 min', 'Presencial u online'], 'text': 'Para adultos y jóvenes, con especial experiencia en personas internacionales y expatriadas.', 'featured': True},
-            {'name': 'Sesión con tarifa flexible', 'meta': ['1 hora', 'Desde 40 €'], 'text': 'Para que el coste no sea un impedimento para empezar.'},
+            {'name': 'Sesión con tarifa flexible', 'meta': ['1 hora', 'Valor a conversar'], 'text': 'Si lo necesitas, podemos conversar el valor de la sesión para que sea algo que puedas sostener.'},
             {'name': 'Supervisión clínica individual', 'meta': ['1 hora', 'Presencial u online'], 'text': 'Análisis de casos clínicos para profesionales y personas en formación.'},
             {'name': 'Supervisión grupal', 'meta': ['2 horas', 'Presencial u online'], 'text': 'Para grupos de estudiantes y personas en formación psicoanalítica.'},
         ],
@@ -126,8 +136,8 @@ ES = {
         'items': [
             {'q': '¿Atiendes a personas expatriadas?', 'a': 'Sí. Trabajo especialmente con personas internacionales y expatriadas en temas de identidad, adaptación cultural, nostalgia por el país de origen, soledad y pertenencia, además de cuestiones más universales como la autoestima, las relaciones o las pérdidas.'},
             {'q': '¿Puedo hacer terapia en inglés?', 'a': 'Sí. Atiendo en español, mi lengua materna, y en inglés con fluidez. Puedes elegir el idioma en el que te sientas más cómodo o cómoda, e incluso combinar ambos.'},
-            {'q': '¿Las sesiones son presenciales u online?', 'a': 'Ambas opciones. Atiendo de forma presencial en Barcelona (Gràcia y Sants) y online por videollamada.'},
-            {'q': '¿Cuánto dura una sesión?', 'a': 'La sesión individual dura 45 minutos. También ofrezco una modalidad con tarifa flexible, de una hora, desde 40 €.'},
+            {'q': '¿Las sesiones son presenciales u online?', 'a': 'Ambas opciones. Atiendo de forma presencial en Barcelona (Gràcia) y online por videollamada.'},
+            {'q': '¿Cuánto dura una sesión?', 'a': 'La sesión individual dura 45 minutos. También ofrezco una modalidad con tarifa flexible, de una hora, en la que conversamos el valor para que sea algo que puedas sostener.'},
             {'q': '¿Con qué edades trabajas?', 'a': 'Trabajo con adultos y jóvenes, incluidos adolescentes en algunos casos.'},
             {'q': '¿Cómo es la primera consulta?', 'a': 'Es un primer encuentro para conocernos, empezar a poner en palabras lo que te trae y valorar juntas o juntos cómo seguir. No necesitas tener todo claro para empezar.'},
             {'q': '¿Ofreces supervisión clínica?', 'a': 'Sí, de forma individual (una hora) o grupal (dos horas), para profesionales y personas en formación psicoanalítica.'},
@@ -155,7 +165,7 @@ EN = {
     'scene': {'label': 'Arriving, missing, belonging, staying', 'kicker': 'Starting somewhere new', 'words': ['Arriving.', 'Missing.', 'Belonging.', 'Staying.'], 'sub': 'Every stage of a move stirs something different. Therapy can be there for all of them.'},
     'meta': {
         'title': 'Sol Galiana | English-speaking psychologist in Barcelona & online · Therapy for expats',
-        'description': 'Clinical psychologist with a psychoanalytic approach in Barcelona (Gràcia and Sants) and online. Therapy in English and Spanish for adults, young people and expats. LGBTQ+ affirming.',
+        'description': 'Clinical psychologist with a psychoanalytic approach in Barcelona (Gràcia) and online. Therapy in English and Spanish for adults, young people and expats. LGBTQ+ affirming.',
     },
     'schema': ES['schema'],
     'nav': [
@@ -187,7 +197,6 @@ EN = {
     'about': {
         'kicker': 'About me',
         'title': 'Starting over can open up possibilities. <em>It can also move everything.</em>',
-        'quote': 'I’m an expat too.',
         'paras': [
             'I’m a clinical psychologist licensed to practise in Spain, trained in psychoanalysis, with seven years of experience working with adults and young people, both online and in person.',
             'Navigating a new country, a new language and rebuilding a sense of belonging to a home is not something I simply study in session — it’s something I’ve lived. That combination of personal and clinical experience is a big part of why I love working with people going through similar transitions.',
@@ -211,6 +220,16 @@ EN = {
         'points': ['Listening without judgement', 'Your story, not a protocol', 'Your own pace'],
         'img_alt': 'Sol Galiana smiling, sitting with a cup of coffee',
     },
+    'quotes': {
+        'kicker': 'Food for thought',
+        'title': 'Words that shape <em>the way I listen.</em>',
+        'items': [
+            {'q': 'Dream interpretation is the royal road to a knowledge of the unconscious.', 'a': 'Sigmund Freud'},
+            {'q': 'The ego is not master in its own house.', 'a': 'Sigmund Freud'},
+            {'q': 'Most people do not really want freedom, because freedom involves responsibility, and most people are frightened of responsibility.', 'a': 'Sigmund Freud'},
+            {'q': 'There is nothing outside the text.', 'a': 'Jacques Derrida · Of Grammatology, 1967'},
+        ],
+    },
     'safe': {
         'kicker': 'An open space',
         'title': 'Your identity doesn’t need translating.',
@@ -225,7 +244,7 @@ EN = {
         'title': 'Ways we can meet.',
         'items': [
             {'name': 'Individual therapy', 'meta': ['45 min', 'In person or online'], 'text': 'For adults and young people, with particular experience with internationals and expats.', 'featured': True},
-            {'name': 'Sliding-scale session', 'meta': ['1 hour', 'From €40'], 'text': 'So that cost doesn’t stand in the way of getting started.'},
+            {'name': 'Sliding-scale session', 'meta': ['1 hour', 'Fee open to discussion'], 'text': 'If you need it, we can talk about the fee so it’s something you can sustain.'},
             {'name': 'Individual clinical supervision', 'meta': ['1 hour', 'In person or online'], 'text': 'Case analysis for professionals and trainees.'},
             {'name': 'Group supervision', 'meta': ['2 hours', 'In person or online'], 'text': 'For student groups and people in psychoanalytic training.'},
         ],
@@ -269,8 +288,8 @@ EN = {
         'items': [
             {'q': 'Do you work with expats?', 'a': 'Yes. I work especially with internationals and expats around identity, cultural adjustment, homesickness, loneliness and belonging, as well as more universal issues like self-esteem, relationships and loss.'},
             {'q': 'Can I do therapy in English?', 'a': 'Yes. I work in Spanish, my native language, and fluently in English. You can choose whichever language feels most comfortable — or mix both.'},
-            {'q': 'Are sessions in person or online?', 'a': 'Both. I see clients in person in Barcelona (Gràcia and Sants) and online via video call.'},
-            {'q': 'How long is a session?', 'a': 'An individual session lasts 45 minutes. I also offer a one-hour sliding-scale option from €40.'},
+            {'q': 'Are sessions in person or online?', 'a': 'Both. I see clients in person in Barcelona (Gràcia) and online via video call.'},
+            {'q': 'How long is a session?', 'a': 'An individual session lasts 45 minutes. I also offer a one-hour sliding-scale option, where we talk about the fee so it’s something you can sustain.'},
             {'q': 'Which ages do you work with?', 'a': 'I work with adults and young people, including adolescents in some cases.'},
             {'q': 'What is the first session like?', 'a': 'It’s a first meeting to get to know each other, start putting into words what brings you, and think together about how to continue. You don’t need to have it all figured out.'},
             {'q': 'Do you offer clinical supervision?', 'a': 'Yes, individually (one hour) or in groups (two hours), for professionals and people in psychoanalytic training.'},

@@ -139,7 +139,7 @@ BRANDS = {
         'photo_text': 'Fotografía real de los consultorios y de Sol y Nahuel. Tonos cálidos, plantas, madera y libros. Barcelona sin cliché turístico.',
         'photo_do': ['Luz natural y tonos cálidos', 'Interiores reales y habitados', 'Retratos de ambos profesionales', 'Plantas, madera, libros'],
         'photo_dont': ['Postales turísticas de Barcelona', 'Fotos de stock o generadas', 'Ambientes fríos u hospitalarios'],
-        'photos': ['sol-escucha', 'nahuel-lectura', 'rincon'],
+        'photos': ['sol', 'nahuel', 'rincon'],
         'voice': 'La voz de Psicoanálisis en Barcelona habla en plural, con calidez y precisión. Explica sin tecnicismos qué es un proceso psicoanalítico y deja claro que no hace falta tener todo resuelto para empezar.',
         'voice_words': ['Cercana', 'Precisa', 'Plural', 'Serena'],
         'voice_yes': ['Hablar en primera persona del plural', 'Explicar el enfoque con palabras simples', 'Invitar a elegir profesional, modalidad e idioma'],
@@ -360,7 +360,7 @@ def build(key):
     flist = ''.join(f'<li><b>{a}</b> — {d}</li>' for a, d in files)
     P('Datos y archivos', f'''<p class="kicker">Contacto y entregables</p><h2>Datos de la marca</h2>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:12mm"><div><div class="grid" style="grid-template-columns:1fr">{ppl}</div>
-  <p class="small" style="margin-top:5mm">Web: {web}<br>Atención presencial en Barcelona (Gràcia y Sants) y online. La dirección exacta se comparte al confirmar la cita.</p></div>
+  <p class="small" style="margin-top:5mm">Web: {web}<br>Atención presencial en Barcelona (Gràcia) y online. La dirección exacta se comparte al confirmar la cita.</p></div>
   <div><p class="kicker">Archivos entregados</p><ul class="list">{flist}</ul><p class="small" style="margin-top:6mm">Sistema de identidad visual diseñado por Chimichurri.</p></div></div>''')
 
     total = len(pages)

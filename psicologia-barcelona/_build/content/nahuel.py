@@ -10,7 +10,7 @@ ES = {
     'scene': {'label': 'Lo que no se dice, insiste', 'lines': ['Lo que no se dice', '<em>insiste.</em>', 'Escucharlo <em>es empezar.</em>']},
     'meta': {
         'title': 'Nahuel Ponce | Psicólogo en Barcelona y online · Orientación psicoanalítica',
-        'description': 'Psicólogo General Sanitario con orientación psicoanalítica en Barcelona (Gràcia y Sants) y online. Ansiedad, angustia, duelo, apego, trauma y procesos migratorios. Sesiones en español y portugués.',
+        'description': 'Psicólogo General Sanitario con orientación psicoanalítica en Barcelona (Gràcia) y online. Ansiedad, angustia, duelo, apego, trauma y procesos migratorios. Sesiones en español y portugués.',
     },
     'schema': {'jobTitle': 'Psicólogo General Sanitario', 'languages': ['es', 'pt'],
                'alumniOf': [{'@type': 'CollegeOrUniversity', 'name': 'Universidad de la Cuenca del Plata'},
@@ -108,7 +108,7 @@ ES = {
     },
     'banner': {
         'title': 'Presencia para encontrarse. <em>Distancia para poder llegar.</em>',
-        'text': 'Consultorios en Gràcia y Sants, y sesiones online desde cualquier lugar.',
+        'text': 'Consultorio en Gràcia y sesiones online desde cualquier lugar.',
         'img_alt': 'Fachadas de una avenida europea en blanco y negro',
     },
     'services': {
@@ -126,7 +126,7 @@ ES = {
     'places': {
         'in_person': 'Presencial',
         'address_note': 'Dirección exacta al confirmar la cita',
-        'kicker': 'Consultorios',
+        'kicker': 'Consultorio',
         'online_zone': 'Online',
         'online_title': 'Videollamada',
         'online_detail': 'En español o portugués',
@@ -135,7 +135,7 @@ ES = {
         'kicker': 'Preguntas frecuentes',
         'title': 'Antes de empezar.',
         'items': [
-            {'q': '¿Atiendes de forma presencial en Barcelona?', 'a': 'Sí. Atiendo en consultorios de Barcelona (Gràcia y Sants) y también ofrezco sesiones online.'},
+            {'q': '¿Atiendes de forma presencial en Barcelona?', 'a': 'Sí. Atiendo en Barcelona, en Gràcia, y también ofrezco sesiones online.'},
             {'q': '¿En qué idiomas pueden ser las sesiones?', 'a': 'En español y en portugués.'},
             {'q': '¿Con qué edades trabajas?', 'a': 'Trabajo principalmente con adultos, incluidos adultos jóvenes y estudiantes.'},
             {'q': '¿Tengo que saber exactamente qué me pasa?', 'a': 'No. La primera consulta también sirve para comenzar a poner en palabras aquello que preocupa o genera malestar.'},
@@ -164,7 +164,7 @@ PT = {
     'scene': {'label': 'O que não se diz, insiste', 'lines': ['O que não se diz', '<em>insiste.</em>', 'Escutar <em>é começar.</em>']},
     'meta': {
         'title': 'Nahuel Ponce | Psicólogo em português em Barcelona e online · Psicanálise',
-        'description': 'Psicólogo com orientação psicanalítica em Barcelona (Gràcia e Sants) e online, com atendimento em português. Ansiedade, angústia, luto, apego, trauma e processos migratórios.',
+        'description': 'Psicólogo com orientação psicanalítica em Barcelona (Gràcia) e online, com atendimento em português. Ansiedade, angústia, luto, apego, trauma e processos migratórios.',
     },
     'schema': ES['schema'],
     'nav': [
@@ -259,7 +259,7 @@ PT = {
     },
     'banner': {
         'title': 'Presença para se encontrar. <em>Distância para poder chegar.</em>',
-        'text': 'Consultórios em Gràcia e Sants, e sessões online de qualquer lugar.',
+        'text': 'Consultório em Gràcia e sessões online de qualquer lugar.',
         'img_alt': 'Fachadas de uma avenida europeia em preto e branco',
     },
     'services': {
@@ -286,7 +286,7 @@ PT = {
         'kicker': 'Perguntas frequentes',
         'title': 'Antes de começar.',
         'items': [
-            {'q': 'Você atende presencialmente em Barcelona?', 'a': 'Sim. Atendo em consultórios em Barcelona (Gràcia e Sants) e também ofereço sessões online.'},
+            {'q': 'Você atende presencialmente em Barcelona?', 'a': 'Sim. Atendo em Barcelona, em Gràcia, e também ofereço sessões online.'},
             {'q': 'Em quais idiomas podem ser as sessões?', 'a': 'Em português e em espanhol.'},
             {'q': 'Com que idades você trabalha?', 'a': 'Trabalho principalmente com adultos, incluindo jovens adultos e estudantes.'},
             {'q': 'Preciso saber exatamente o que está acontecendo comigo?', 'a': 'Não. A primeira consulta também serve para começar a colocar em palavras aquilo que preocupa ou causa sofrimento.'},

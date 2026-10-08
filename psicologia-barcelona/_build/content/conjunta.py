@@ -5,16 +5,16 @@ LANGS = ['es', 'en', 'pt']
 
 ES = {
     'scene': {'label': 'Dos recorridos, una escucha compartida', 'lines': ['Dos recorridos.', 'Una escucha <em>compartida.</em>', 'Un lugar <em>para empezar.</em>'], 'sub': 'Sol Galiana · Nahuel Ponce'},
-    'marquee': ['Escucha', 'Singularidad', 'Profundidad', 'Gràcia', 'Sants', 'Online', 'Español', 'English', 'Português'],
+    'marquee': ['Escucha', 'Singularidad', 'Profundidad', 'Gràcia', 'Online', 'Español', 'English', 'Português'],
     'meta': {
         'title': 'Psicoterapia psicoanalítica en Barcelona y online | Psicoanálisis en Barcelona',
-        'description': 'Psicólogos en Barcelona (Gràcia y Sants) y online, con orientación psicoanalítica. Ansiedad, vínculos, duelo, identidad y procesos migratorios. Atención en español, inglés y portugués.',
+        'description': 'Psicólogos en Barcelona (Gràcia) y online, con orientación psicoanalítica. Ansiedad, vínculos, duelo, identidad y procesos migratorios. Atención en español, inglés y portugués.',
     },
     'nav': [
         {'href': '#enfoque', 'label': 'Enfoque'},
         {'href': '#equipo', 'label': 'Profesionales'},
         {'href': '#servicios', 'label': 'Servicios'},
-        {'href': '#consultorios', 'label': 'Consultorios'},
+        {'href': '#consultorios', 'label': 'Consultorio'},
         {'href': '/blog/', 'label': 'Blog'},
         {'href': '#preguntas', 'label': 'Preguntas'},
     ],
@@ -36,7 +36,7 @@ ES = {
         'img_alt': 'Consultorio con la frase «Aquí y ahora» en la pared, un sillón y plantas',
         'caption': 'Aquí y ahora',
         'facts': [
-            {'k': 'Gràcia · Sants', 'v': 'Consultorios en Barcelona'},
+            {'k': 'Gràcia', 'v': 'Consultorio en Barcelona'},
             {'k': 'Online', 'v': 'Desde donde estés'},
             {'k': 'ES · EN · PT', 'v': 'Tres idiomas'},
             {'k': '45 min', 'v': 'Sesión individual'},
@@ -94,7 +94,7 @@ ES = {
         'people': [
             {
                 'key': 'sol', 'name': SOL['name'], 'role': 'Psicóloga clínica',
-                'img': 'sol', 'img_alt': 'Retrato de Sol Galiana, psicóloga',
+                'img': 'sol', 'img_alt': 'Retrato en blanco y negro de Sol Galiana, psicóloga',
                 'text': 'Máster en Psicoanálisis (Clínica de Adultos). Trabaja especialmente con personas internacionales y expatriadas: identidad, choque cultural, nostalgia, soledad, autoestima, vínculos y duelos. Espacio LGBTQ+ friendly.',
                 'langs': ['Español', 'English'],
                 'url': URLS['sol'],
@@ -115,7 +115,7 @@ ES = {
         'title': 'Presencial en Barcelona. <em>Online desde donde estés.</em>',
         'items': [
             {'name': 'Psicoterapia individual', 'meta': '45 minutos · Presencial u online', 'text': 'Para adultos y jóvenes. Un proceso a tu medida, en español, inglés o portugués.'},
-            {'name': 'Sesión con tarifa flexible', 'meta': '1 hora · Desde 40 €', 'text': 'Una opción accesible para que el coste no sea un impedimento para empezar.'},
+            {'name': 'Sesión con tarifa flexible', 'meta': '1 hora · Valor a conversar', 'text': 'Si lo necesitas, conversamos el valor para que sea algo que puedas sostener.'},
             {'name': 'Supervisión clínica individual', 'meta': '1 hora · Presencial u online', 'text': 'Análisis y construcción de casos clínicos para profesionales de la salud mental.'},
             {'name': 'Supervisión grupal', 'meta': '2 horas · Presencial u online', 'text': 'Para personas en formación psicoanalítica. Servicio personalizado de análisis de casos.'},
         ],
@@ -135,13 +135,13 @@ ES = {
             {'t': 'Conversamos', 'd': 'Una primera sesión para conocernos y empezar.'},
         ],
         'cta': 'Elegir con quién empezar',
-        'img_alt': 'Sol Galiana en su consultorio, escuchando',
+        'img_alt': 'Sol Galiana sonriendo, sentada con una taza de café',
     },
     'places': {
         'in_person': 'Presencial',
         'address_note': 'Dirección exacta al confirmar la cita',
-        'kicker': 'Consultorios',
-        'title': 'Dos espacios en Barcelona.',
+        'kicker': 'Consultorio',
+        'title': 'Un espacio en Barcelona.',
         'online_zone': 'Online',
         'online_title': 'Desde donde estés',
         'online_detail': 'Videollamada en español, inglés o portugués',
@@ -159,10 +159,10 @@ ES = {
         'title': 'Información para orientarte.',
         'items': [
             {'q': '¿Qué es la psicoterapia psicoanalítica?', 'a': 'Es una forma de psicoterapia que, además de atender el malestar actual, busca comprender cómo se relaciona con la historia, los vínculos y la experiencia singular de cada persona. No se trata de aplicar una técnica igual para todos, sino de construir un proceso a partir de lo que cada uno trae.'},
-            {'q': '¿Atienden de forma presencial en Barcelona?', 'a': 'Sí. Atendemos en dos consultorios de Barcelona, uno en Gràcia y otro en Sants, y también ofrecemos sesiones online.'},
+            {'q': '¿Atienden de forma presencial en Barcelona?', 'a': 'Sí. Atendemos en un consultorio en Gràcia, Barcelona, y también ofrecemos sesiones online.'},
             {'q': '¿En qué idiomas puedo hacer terapia?', 'a': 'Entre ambos profesionales, las sesiones pueden realizarse en español, inglés y portugués. Sol Galiana atiende en español e inglés; Nahuel Ponce, en español y portugués.'},
             {'q': '¿Trabajan con expatriados y estudiantes internacionales?', 'a': 'Sí. Tenemos experiencia acompañando procesos migratorios, adaptación cultural, identidad, soledad, desarraigo y la construcción de nuevos proyectos personales.'},
-            {'q': '¿Cuánto dura una sesión y cuánto cuesta?', 'a': 'La sesión individual dura 45 minutos. Además existe una modalidad con tarifa flexible, de una hora, desde 40 €. Para conocer los honorarios exactos y la disponibilidad, escribe directamente al profesional.'},
+            {'q': '¿Cuánto dura una sesión y cuánto cuesta?', 'a': 'La sesión individual dura 45 minutos. Además existe una modalidad con tarifa flexible, de una hora, en la que se conversa el valor para que sea algo que puedas sostener. Para conocer los honorarios exactos y la disponibilidad, escribe directamente al profesional.'},
             {'q': '¿Cómo elijo al profesional?', 'a': 'Puedes tener en cuenta el idioma, la modalidad, la disponibilidad y la presentación de cada uno. Si dudas, escríbenos y te orientamos.'},
             {'q': '¿Tengo que saber explicar lo que me pasa?', 'a': 'No. La primera consulta también sirve para empezar a encontrar palabras para eso que preocupa o genera malestar.'},
         ],
@@ -185,10 +185,10 @@ ES = {
 
 EN = {
     'scene': {'label': 'Two paths, one shared way of listening', 'lines': ['Two paths.', 'One shared <em>way of listening.</em>', 'A place <em>to begin.</em>'], 'sub': 'Sol Galiana · Nahuel Ponce'},
-    'marquee': ['Listening', 'Singularity', 'Depth', 'Gràcia', 'Sants', 'Online', 'English', 'Español', 'Português'],
+    'marquee': ['Listening', 'Singularity', 'Depth', 'Gràcia', 'Online', 'English', 'Español', 'Português'],
     'meta': {
         'title': 'Psychoanalytic psychotherapy in Barcelona and online | Psicoanálisis en Barcelona',
-        'description': 'English-speaking psychologists in Barcelona (Gràcia and Sants) and online, with a psychoanalytic approach. Anxiety, relationships, grief, identity and life abroad. Sessions in English, Spanish and Portuguese.',
+        'description': 'English-speaking psychologists in Barcelona (Gràcia) and online, with a psychoanalytic approach. Anxiety, relationships, grief, identity and life abroad. Sessions in English, Spanish and Portuguese.',
     },
     'nav': [
         {'href': '#enfoque', 'label': 'Approach'},
@@ -216,7 +216,7 @@ EN = {
         'img_alt': 'Therapy room with the words “Aquí y ahora” (here and now) on the wall, an armchair and plants',
         'caption': 'Here and now',
         'facts': [
-            {'k': 'Gràcia · Sants', 'v': 'Offices in Barcelona'},
+            {'k': 'Gràcia', 'v': 'Office in Barcelona'},
             {'k': 'Online', 'v': 'Wherever you are'},
             {'k': 'EN · ES · PT', 'v': 'Three languages'},
             {'k': '45 min', 'v': 'Individual session'},
@@ -274,7 +274,7 @@ EN = {
         'people': [
             {
                 'key': 'sol', 'name': SOL['name'], 'role': 'Clinical psychologist',
-                'img': 'sol', 'img_alt': 'Portrait of Sol Galiana, psychologist',
+                'img': 'sol', 'img_alt': 'Black and white portrait of Sol Galiana, psychologist',
                 'text': 'Master’s in Psychoanalysis (Adult Clinical Practice). Works especially with international people and expats: identity, culture shock, homesickness, loneliness, self-esteem, relationships and grief. LGBTQ+ affirming.',
                 'langs': ['English', 'Español'],
                 'url': URLS['sol'] + '/en/',
@@ -295,7 +295,7 @@ EN = {
         'title': 'In person in Barcelona. <em>Online wherever you are.</em>',
         'items': [
             {'name': 'Individual therapy', 'meta': '45 minutes · In person or online', 'text': 'For adults and young people. A process shaped around you, in English, Spanish or Portuguese.'},
-            {'name': 'Sliding-scale session', 'meta': '1 hour · From €40', 'text': 'An accessible option so that cost doesn’t stand in the way of getting started.'},
+            {'name': 'Sliding-scale session', 'meta': '1 hour · Fee open to discussion', 'text': 'If you need it, we talk about the fee so it’s something you can sustain.'},
             {'name': 'Individual clinical supervision', 'meta': '1 hour · In person or online', 'text': 'Case analysis and case formulation for mental health professionals.'},
             {'name': 'Group supervision', 'meta': '2 hours · In person or online', 'text': 'For people in psychoanalytic training. A tailored case-discussion service.'},
         ],
@@ -315,13 +315,13 @@ EN = {
             {'t': 'We talk', 'd': 'A first session to get to know each other.'},
         ],
         'cta': 'Choose who to start with',
-        'img_alt': 'Sol Galiana in her office, listening',
+        'img_alt': 'Sol Galiana smiling, sitting with a cup of coffee',
     },
     'places': {
         'in_person': 'In person',
         'address_note': 'Exact address shared once your session is confirmed',
-        'kicker': 'Locations',
-        'title': 'Two spaces in Barcelona.',
+        'kicker': 'Location',
+        'title': 'A space in Barcelona.',
         'online_zone': 'Online',
         'online_title': 'Wherever you are',
         'online_detail': 'Video sessions in English, Spanish or Portuguese',
@@ -339,10 +339,10 @@ EN = {
         'title': 'Things you might want to know.',
         'items': [
             {'q': 'What is psychoanalytic psychotherapy?', 'a': 'It is a form of therapy that, as well as addressing current distress, seeks to understand how it relates to each person’s history, relationships and unique experience. It isn’t about applying the same technique to everyone, but about building a process from what each person brings.'},
-            {'q': 'Do you offer in-person sessions in Barcelona?', 'a': 'Yes. We see clients at two offices in Barcelona — one in Gràcia and one in Sants — and we also offer online sessions.'},
+            {'q': 'Do you offer in-person sessions in Barcelona?', 'a': 'Yes. We see clients at our office in Gràcia, Barcelona, and we also offer online sessions.'},
             {'q': 'Which languages can I do therapy in?', 'a': 'Between the two of us, sessions are available in English, Spanish and Portuguese. Sol Galiana works in English and Spanish; Nahuel Ponce in Spanish and Portuguese.'},
             {'q': 'Do you work with expats and international students?', 'a': 'Yes. We have experience supporting migration, cultural adaptation, identity, loneliness, uprootedness and building a new life project.'},
-            {'q': 'How long is a session and how much does it cost?', 'a': 'An individual session lasts 45 minutes. There is also a one-hour sliding-scale option from €40. For exact fees and availability, message the therapist directly.'},
+            {'q': 'How long is a session and how much does it cost?', 'a': 'An individual session lasts 45 minutes. There is also a one-hour sliding-scale option, where the fee is discussed so it’s something you can sustain. For exact fees and availability, message the therapist directly.'},
             {'q': 'How do I choose a therapist?', 'a': 'Consider language, format, availability and how each of us presents our work. If you’re unsure, write to us and we’ll help you decide.'},
             {'q': 'Do I need to be able to explain what’s happening to me?', 'a': 'No. The first session is also a place to begin finding words for whatever is worrying or troubling you.'},
         ],
@@ -365,16 +365,16 @@ EN = {
 
 PT = {
     'scene': {'label': 'Dois percursos, uma escuta compartilhada', 'lines': ['Dois percursos.', 'Uma escuta <em>compartilhada.</em>', 'Um lugar <em>para começar.</em>'], 'sub': 'Nahuel Ponce · Sol Galiana'},
-    'marquee': ['Escuta', 'Singularidade', 'Profundidade', 'Gràcia', 'Sants', 'Online', 'Português', 'Español', 'English'],
+    'marquee': ['Escuta', 'Singularidade', 'Profundidade', 'Gràcia', 'Online', 'Português', 'Español', 'English'],
     'meta': {
         'title': 'Psicoterapia psicanalítica em Barcelona e online | Psicoanálisis en Barcelona',
-        'description': 'Psicólogos em Barcelona (Gràcia e Sants) e online, com orientação psicanalítica. Ansiedade, relações, luto, identidade e processos migratórios. Atendimento em português, espanhol e inglês.',
+        'description': 'Psicólogos em Barcelona (Gràcia) e online, com orientação psicanalítica. Ansiedade, relações, luto, identidade e processos migratórios. Atendimento em português, espanhol e inglês.',
     },
     'nav': [
         {'href': '#enfoque', 'label': 'Abordagem'},
         {'href': '#equipo', 'label': 'Profissionais'},
         {'href': '#servicios', 'label': 'Serviços'},
-        {'href': '#consultorios', 'label': 'Consultórios'},
+        {'href': '#consultorios', 'label': 'Consultório'},
         {'href': '/blog/', 'label': 'Blog (ES)'},
         {'href': '#preguntas', 'label': 'Perguntas'},
     ],
@@ -396,7 +396,7 @@ PT = {
         'img_alt': 'Consultório com a frase «Aquí y ahora» (aqui e agora) na parede, uma poltrona e plantas',
         'caption': 'Aqui e agora',
         'facts': [
-            {'k': 'Gràcia · Sants', 'v': 'Consultórios em Barcelona'},
+            {'k': 'Gràcia', 'v': 'Consultório em Barcelona'},
             {'k': 'Online', 'v': 'De onde você estiver'},
             {'k': 'PT · ES · EN', 'v': 'Três idiomas'},
             {'k': '45 min', 'v': 'Sessão individual'},
@@ -462,7 +462,7 @@ PT = {
             },
             {
                 'key': 'sol', 'name': SOL['name'], 'role': 'Psicóloga clínica',
-                'img': 'sol', 'img_alt': 'Retrato de Sol Galiana, psicóloga',
+                'img': 'sol', 'img_alt': 'Retrato em preto e branco de Sol Galiana, psicóloga',
                 'text': 'Mestrado em Psicanálise (Clínica de Adultos). Trabalha especialmente com pessoas internacionais e expatriadas: identidade, choque cultural, saudade, solidão, autoestima, relações e luto. Atendimento em espanhol e inglês.',
                 'langs': ['Español', 'English'],
                 'url': URLS['sol'],
@@ -475,7 +475,7 @@ PT = {
         'title': 'Presencial em Barcelona. <em>Online de onde você estiver.</em>',
         'items': [
             {'name': 'Psicoterapia individual', 'meta': '45 minutos · Presencial ou online', 'text': 'Para adultos e jovens. Um processo sob medida, em português, espanhol ou inglês.'},
-            {'name': 'Sessão com valor flexível', 'meta': '1 hora · A partir de 40 €', 'text': 'Uma opção acessível para que o custo não seja um impedimento para começar.'},
+            {'name': 'Sessão com valor flexível', 'meta': '1 hora · Valor a combinar', 'text': 'Se precisar, conversamos sobre o valor para que seja algo que você possa sustentara começar.'},
             {'name': 'Supervisão clínica individual', 'meta': '1 hora · Presencial ou online', 'text': 'Análise e construção de casos clínicos para profissionais de saúde mental.'},
             {'name': 'Supervisão em grupo', 'meta': '2 horas · Presencial ou online', 'text': 'Para pessoas em formação psicanalítica. Serviço personalizado de análise de casos.'},
         ],
@@ -495,13 +495,13 @@ PT = {
             {'t': 'Conversamos', 'd': 'Uma primeira sessão para nos conhecermos.'},
         ],
         'cta': 'Escolher com quem começar',
-        'img_alt': 'Sol Galiana em seu consultório, escutando',
+        'img_alt': 'Sol Galiana sorrindo, sentada com uma xícara de café',
     },
     'places': {
         'in_person': 'Presencial',
         'address_note': 'Endereço exato ao confirmar a consulta',
-        'kicker': 'Consultórios',
-        'title': 'Dois espaços em Barcelona.',
+        'kicker': 'Consultório',
+        'title': 'Um espaço em Barcelona.',
         'online_zone': 'Online',
         'online_title': 'De onde você estiver',
         'online_detail': 'Videochamada em português, espanhol ou inglês',
@@ -519,10 +519,10 @@ PT = {
         'title': 'Informações para te orientar.',
         'items': [
             {'q': 'O que é a psicoterapia psicanalítica?', 'a': 'É uma forma de psicoterapia que, além de cuidar do sofrimento atual, busca compreender como ele se relaciona com a história, os vínculos e a experiência singular de cada pessoa. Não se trata de aplicar a mesma técnica para todos, mas de construir um processo a partir do que cada um traz.'},
-            {'q': 'Vocês atendem presencialmente em Barcelona?', 'a': 'Sim. Atendemos em dois consultórios em Barcelona, um em Gràcia e outro em Sants, e também oferecemos sessões online.'},
+            {'q': 'Vocês atendem presencialmente em Barcelona?', 'a': 'Sim. Atendemos em um consultório em Gràcia, Barcelona, e também oferecemos sessões online.'},
             {'q': 'Em quais idiomas posso fazer terapia?', 'a': 'Entre os dois profissionais, as sessões podem ser em português, espanhol e inglês. Nahuel Ponce atende em português e espanhol; Sol Galiana, em espanhol e inglês.'},
             {'q': 'Vocês trabalham com expatriados e estudantes internacionais?', 'a': 'Sim. Temos experiência com processos migratórios, adaptação cultural, identidade, solidão, desenraizamento e construção de novos projetos de vida.'},
-            {'q': 'Quanto dura uma sessão e quanto custa?', 'a': 'A sessão individual dura 45 minutos. Também existe uma modalidade com valor flexível, de uma hora, a partir de 40 €. Para valores exatos e disponibilidade, escreva diretamente ao profissional.'},
+            {'q': 'Quanto dura uma sessão e quanto custa?', 'a': 'A sessão individual dura 45 minutos. Também existe uma modalidade com valor flexível, de uma hora, em que o valor é conversado para que seja algo que você possa sustentar. Para valores exatos e disponibilidade, escreva diretamente ao profissional.'},
             {'q': 'Como escolho o profissional?', 'a': 'Você pode considerar o idioma, a modalidade, a disponibilidade e a apresentação de cada um. Se tiver dúvidas, escreva e te orientamos.'},
             {'q': 'Preciso saber explicar o que está acontecendo comigo?', 'a': 'Não. A primeira consulta também serve para começar a encontrar palavras para aquilo que preocupa ou causa sofrimento.'},
         ],

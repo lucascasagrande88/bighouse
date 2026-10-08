@@ -13,7 +13,7 @@ UI = {
     'minutes_long': 'min de lectura',
     'author': 'Psicoanálisis en Barcelona',
     'cta_title': '¿Quieres hablarlo con alguien?',
-    'cta_text': 'Atendemos en Barcelona (Gràcia y Sants) y online, en español, inglés y portugués.',
+    'cta_text': 'Atendemos en Barcelona (Gràcia) y online, en español, inglés y portugués.',
     'cta_button': 'Pedir una primera consulta',
     'disclaimer': 'Este artículo tiene un fin informativo y no sustituye una consulta profesional. Si estás en una situación de crisis o de riesgo, llama al 112 o a la línea de atención a la conducta suicida 024.',
 }
@@ -128,7 +128,7 @@ POSTS = [
 <p>Es más habitual de lo que parece. La primera consulta también sirve para empezar a encontrar palabras para eso que preocupa o genera malestar. El silencio, las dudas o el «no sé por dónde empezar» también forman parte del proceso.</p>
 
 <h2>Presencial u online</h2>
-<p>Puedes elegir entre sesiones presenciales en nuestros consultorios de Barcelona (Gràcia y Sants) u online, desde donde estés. La sesión individual dura 45 minutos.</p>
+<p>Puedes elegir entre sesiones presenciales en nuestro consultorio de Barcelona (Gràcia) u online, desde donde estés. La sesión individual dura 45 minutos.</p>
 
 <h2>Cómo pedir la primera cita</h2>
 <p>Basta con escribir por WhatsApp o email al profesional con quien quieras empezar. Con unas pocas palabras alcanza: coordinamos día, modalidad e idioma, y respondemos personalmente.</p>

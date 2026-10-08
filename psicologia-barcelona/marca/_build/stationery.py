@@ -98,7 +98,7 @@ def card(key):
   <div class="abs" style="left:{m}mm;top:{m}mm;width:34mm">{person(so, 'ES / EN')}</div>
   <div class="abs" style="left:{m + 39}mm;top:{m}mm;width:34mm">{person(na, 'ES / PT')}</div>
   <div class="abs" style="left:{m}mm;right:{m}mm;top:{m + 24}mm;height:.2mm;background:rgba(244,238,229,.35)"></div>
-  <div class="abs" style="left:{m}mm;bottom:{m}mm"><p style="font-size:6.8pt">{web}</p><p style="font-size:6pt;letter-spacing:.16em;text-transform:uppercase;margin-top:1.2mm;color:{t['soft']}">Gràcia · Sants · Online</p></div>
+  <div class="abs" style="left:{m}mm;bottom:{m}mm"><p style="font-size:6.8pt">{web}</p><p style="font-size:6pt;letter-spacing:.16em;text-transform:uppercase;margin-top:1.2mm;color:{t['soft']}">Gràcia · Online</p></div>
   <div class="abs" style="right:{m}mm;bottom:{m}mm;padding:1.4mm;background:{t['bg']}">{qr(web, t['ink'], '12mm')}</div></div>''')
     return html(t, W, H, s, f'Tarjeta · {f}')
 
@@ -196,13 +196,13 @@ def build_content():
         'in3': (kick(n, 'Servicios', n['soft']) + h2({**n, 'ink': n['on_dark']}, 'Un proceso pensado <span class="it">para cada persona.</span>', 17)
                 + services({**n, 'soft': '#4B4B4B'}, [('Psicoterapia individual', '45 min · presencial u online'), ('Sesión con tarifa flexible', '1 hora · desde 40 €'),
                                                       ('Supervisión clínica', '1 hora · presencial u online'), ('Supervisión grupal', '2 horas · presencial u online')])
-                + f'<p class="body" style="margin-top:6mm;color:{n["soft"]}">Presencial en Barcelona (Gràcia y Sants) y online. Sesiones en español y en portugués. Principalmente adultos.</p>'),
+                + f'<p class="body" style="margin-top:6mm;color:{n["soft"]}">Presencial en Barcelona (Gràcia) y online. Sesiones en español y en portugués. Principalmente adultos.</p>'),
         'in3_style': f'background:{n["dark"]};color:{n["on_dark"]}',
     }
 
     # ---------------- Sol
     C['sol'] = {
-        'flap': (kick(s, 'Sobre mí') + h2(s, '“Yo también <span class="it">soy expatriada.</span>”', 21)
+        'flap': (kick(s, 'Sobre mí') + h2(s, 'Empezar de nuevo <span class="it">puede moverlo todo.</span>', 21)
                  + para('Soy psicóloga clínica habilitada para ejercer en España, con formación en psicoanálisis y siete años de experiencia con adultos y jóvenes, online y presencial.')
                  + para('Transitar un país nuevo, un idioma nuevo y reconstruir el sentido de pertenencia no es algo que sólo estudie en consulta: es algo que he vivido.')
                  + f'<img class="photo" src="{photo("sol", "consulta")}" style="left:0;right:0;bottom:0;width:100%;height:86mm" alt="">'),
@@ -222,9 +222,9 @@ def build_content():
                 + f'<div style="margin-top:6mm;padding:5mm;border-radius:6mm;background:{s["soft"]}">' + kick(s, 'Un espacio abierto', s['ink'])
                 + para('Cálido y respetuoso con todas las identidades de género y orientaciones sexuales, incluidas las personas LGBTQ+. Sesiones en español (lengua materna) o en inglés (fluido).', mb=0) + '</div>'),
         'in3': (kick(s, 'Servicios', s['on_dark']) + h2({**s, 'ink': s['on_dark']}, 'Formas de <span class="it">encontrarnos.</span>', 18)
-                + services({**s, 'soft': '#6b7268', 'accent': s['soft']}, [('Psicoterapia individual', '45 min · presencial u online'), ('Sesión con tarifa flexible', '1 hora · desde 40 €'),
+                + services({**s, 'soft': '#6b7268', 'accent': s['soft']}, [('Psicoterapia individual', '45 min · presencial u online'), ('Sesión con tarifa flexible', '1 hora · valor a conversar'),
                                                                          ('Supervisión clínica individual', '1 hora · presencial u online'), ('Supervisión grupal', '2 horas · presencial u online')])
-                + f'<p class="body" style="margin-top:6mm;color:{s["on_dark"]}">Presencial en Barcelona (Gràcia y Sants) y online desde cualquier país.</p>'),
+                + f'<p class="body" style="margin-top:6mm;color:{s["on_dark"]}">Presencial en Barcelona (Gràcia) y online desde cualquier país.</p>'),
         'in3_style': f'background:{s["dark"]};color:{s["on_dark"]}',
     }
 
@@ -240,7 +240,7 @@ def build_content():
                  + f'<img class="photo" src="{photo("conjunta", "espacio")}" style="left:0;right:0;bottom:0;width:100%;height:80mm" alt="">'),
         'back': (f'<div style="display:flex;flex-direction:column;height:100%">' + kick(c, 'Contacto directo') + h2(c, 'Elige con quién <span class="it">quieres empezar.</span>', 19)
                  + mini(ps, 'sol', 'Español · English') + mini(pn, 'nahuel', 'Español · Português')
-                 + f'<div style="margin-top:auto;display:flex;align-items:flex-end;gap:5mm">{qr(web_c, c["ink"], "20mm")}<p style="font-size:7.4pt;line-height:1.5">{web_c}<br><span style="color:{c["accent"]}">Gràcia · Sants · Online</span></p></div></div>'),
+                 + f'<div style="margin-top:auto;display:flex;align-items:flex-end;gap:5mm">{qr(web_c, c["ink"], "20mm")}<p style="font-size:7.4pt;line-height:1.5">{web_c}<br><span style="color:{c["accent"]}">Gràcia · Online</span></p></div></div>'),
         'front': (f'<img class="photo" src="{photo("conjunta", "aquiyahora")}" style="left:14mm;right:{14 + B}mm;top:{14 + B}mm;width:{100 + B - 28 - B}mm;height:96mm;border-radius:40mm 40mm 2mm 2mm" alt="">'
                   + f'<div class="abs" style="left:0;right:{B}mm;top:124mm;display:flex;justify-content:center">{logo("Psicoanalisis-en-Barcelona", "Logo-Principal_Positivo", width="64mm")}</div>'
                   + f'<p class="serif abs" style="left:12mm;right:{12 + B}mm;top:178mm;text-align:center;font-size:14pt;line-height:1.2">Dos recorridos. <span class="it" style="color:{c["accent"]}">Una escucha compartida.</span></p>'),
@@ -256,7 +256,7 @@ def build_content():
                 + ''.join(f'<p class="body" style="margin-bottom:2mm"><span class="serif it" style="color:{c["accent"]};font-size:10pt">{i}.</span> <b>{a}</b> {b}</p>' for i, (a, b) in enumerate([('Escribes', 'por WhatsApp o email, con pocas palabras alcanza.'), ('Coordinamos', 'día, modalidad e idioma.'), ('Conversamos', 'en una primera sesión para conocernos.')], 1))
                 + '</div>'),
         'in3': (kick(c, 'Servicios', c['soft']) + h2({**c, 'ink': c['on_dark']}, 'Presencial en Barcelona. <span class="it">Online desde donde estés.</span>', 16)
-                + services({**c, 'soft': '#6a7064', 'accent': c['soft']}, [('Psicoterapia individual', '45 min · presencial u online'), ('Tarifa flexible', '1 hora · desde 40 €'),
+                + services({**c, 'soft': '#6a7064', 'accent': c['soft']}, [('Psicoterapia individual', '45 min · presencial u online'), ('Tarifa flexible', '1 hora · valor a conversar'),
                                                                          ('Supervisión clínica', '1 hora · individual'), ('Supervisión grupal', '2 horas · en formación')])
                 + f'<p class="body" style="margin-top:6mm;color:{c["on_dark"]}">En español, inglés y portugués. Consulta honorarios y disponibilidad con cada profesional.</p>'),
         'in3_style': f'background:{c["dark"]};color:{c["on_dark"]}',

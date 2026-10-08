@@ -57,7 +57,6 @@
       <source srcset="/assets/consulta-sm.webp" media="(max-width: 760px)">
       <img src="/assets/consulta-lg.webp" width="836" height="1045" alt="{{ a.img_alt }}" loading="lazy">
     </picture>
-    <figcaption>“{{ a.quote }}”</figcaption>
   </figure>
   <div class="about-copy" data-reveal>
     <p class="kicker">{{ a.kicker }}</p>
@@ -96,6 +95,21 @@
       <img src="/assets/cafe-lg.webp" width="840" height="1050" alt="{{ ap.img_alt }}" loading="lazy">
     </picture>
   </figure>
+</section>
+
+{% set qt = c.quotes %}
+<section class="quotes" id="frases">
+  <div class="shell">
+    <div class="quotes-head" data-reveal>
+      <p class="kicker">{{ qt.kicker }}</p>
+      <h2>{{ qt.title }}</h2>
+    </div>
+    <ul class="quotes-list">
+      {%- for item in qt['items'] %}
+      <li data-reveal><blockquote><p>“{{ item.q }}”</p><footer>{{ item.a }}</footer></blockquote></li>
+      {%- endfor %}
+    </ul>
+  </div>
 </section>
 
 {% set sf = c.safe %}
