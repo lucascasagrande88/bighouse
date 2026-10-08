@@ -1,0 +1,57 @@
+name: Publicar webs Psicología Barcelona
+# Publica las 3 webs (con panel) en Netlify. Usa el secreto NETLIFY_AUTH_TOKEN del repo;
+# no hay ninguna credencial escrita en este archivo.
+on:
+  push:
+    branches: [claude/wizardly-planck-k8eqja]
+    paths:
+      - 'psicologia-barcelona/sol/**'
+      - 'psicologia-barcelona/nahuel/**'
+      - 'psicologia-barcelona/conjunta/**'
+      - '.github/workflows/deploy-psicologia-barcelona.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-psicologia-barcelona
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - site: sol
+            id: 9f47e700-8347-4651-903f-faf8e9350e75
+            url: https://sol-galiana-psicologia.netlify.app
+          - site: nahuel
+            id: 1c70862c-7589-44cc-9184-3cfbebd1e684
+            url: https://nahuel-psicologia-barcelona.netlify.app
+          - site: conjunta
+            id: 33329ecf-a346-405d-baf5-f10dee83deb6
+            url: https://psicoanalisis-en-barcelona.netlify.app
+    defaults:
+      run:
+        working-directory: psicologia-barcelona/${{ matrix.site }}
+    env:
+      NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Comprobar secreto
+        run: test -n "$NETLIFY_AUTH_TOKEN" || { echo "::error::Falta el secreto NETLIFY_AUTH_TOKEN en Settings → Secrets and variables → Actions"; exit 1; }
+      - run: npm ci
+      - name: Publicar
+        run: npx -y netlify-cli@17 deploy --prod --site ${{ matrix.id }} --dir public --functions netlify/functions --message "GitHub ${{ github.sha }}"
+      - name: Verificar
+        run: |
+          sleep 15
+          admin=$(curl -s -o /dev/null -w '%{http_code}' ${{ matrix.url }}/admin/)
+          login=$(curl -s -X POST -H 'content-type: application/json' -d '{"action":"login","password":"prueba-incorrecta"}' ${{ matrix.url }}/api/cms)
+          echo "admin=$admin  login con clave incorrecta=$login"
+          test "$admin" = 200
+          echo "$login" | grep -q 'incorrecta'
