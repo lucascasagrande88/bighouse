@@ -46,7 +46,10 @@ jobs:
         run: test -n "$NETLIFY_AUTH_TOKEN" || { echo "::error::Falta el secreto NETLIFY_AUTH_TOKEN en Settings → Secrets and variables → Actions"; exit 1; }
       - run: npm ci
       - name: Publicar
-        run: npx -y netlify-cli@17 deploy --prod --site ${{ matrix.id }} --dir public --functions netlify/functions --message "GitHub ${{ github.sha }}"
+        run: |
+          # --build empaqueta la función del panel y la edge function que aplica los textos editados
+          npx -y netlify-cli@17 deploy --build --prod --site ${{ matrix.id }} --message "GitHub ${{ github.sha }}" | tee deploy.log
+          grep -qiE 'edge function' deploy.log || { echo "::error::No se empaquetó la edge function del panel"; exit 1; }
       - name: Verificar
         run: |
           sleep 15
