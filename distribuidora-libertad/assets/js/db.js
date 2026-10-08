@@ -22,13 +22,16 @@
     return String(s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
   }
 
+  /* Fotos por código (assets/data/fotos.js) para lo que no tenga foto propia. */
+  var FOTOS = window.LIB_FOTOS || {};
+
   function fromBase() {
     var base = (window.LIB_BASE && window.LIB_BASE.items) || [];
     var dest = {};
     (window.LIB_DESTACADOS_BASE || []).forEach(function (d, i) { dest[d[0]] = { foto: d[1], orden: i + 1 }; });
     return base.map(function (x) {
       var d = dest[x[0]];
-      return { a: x[0], n: x[1], p: x[2], c: x[3], foto: d ? d.foto : "", dest: !!d, orden: d ? d.orden : null, nota: "" };
+      return { a: x[0], n: x[1], p: x[2], c: x[3], foto: d ? d.foto : (FOTOS[x[0]] || ""), dest: !!d, orden: d ? d.orden : null, nota: "" };
     });
   }
 
@@ -46,7 +49,7 @@
   function mapRow(r) {
     return {
       id: r.id, a: r.art, n: r.nombre, p: r.precio == null ? null : Number(r.precio),
-      c: r.categoria || "general", foto: r.foto_url || "", dest: !!r.destacado,
+      c: r.categoria || "general", foto: r.foto_url || FOTOS[r.art] || "", dest: !!r.destacado,
       orden: r.orden, nota: r.nota || "", activo: r.activo !== false
     };
   }

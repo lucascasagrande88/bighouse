@@ -45,7 +45,7 @@
       el.href = LIB.waLink(el.getAttribute("data-wa") || "Hola Distribuidora Libertad, quería hacer una consulta.");
       el.target = "_blank"; el.rel = "noopener";
     });
-    $$("[data-tel]").forEach(function (el) { el.href = "tel:" + String(aj.telefono || "").replace(/[^\d+]/g, ""); });
+    $$("[data-tel]").forEach(function (el) { var t = String(aj.telefono || "").replace(/[^\d+]/g, ""); if (/^\d{10}$/.test(t)) t = "+54" + t; el.href = "tel:" + t; });
     $$("[data-mail]").forEach(function (el) { el.href = "mailto:" + aj.email; });
     $$("[data-ig]").forEach(function (el) { el.href = aj.instagram; });
     $$("[data-fb]").forEach(function (el) { el.href = aj.facebook; });

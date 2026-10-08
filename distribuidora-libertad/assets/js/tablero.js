@@ -119,7 +119,12 @@
       sb.from("ajustes").select("clave,valor"),
       sb.from("pedidos").select("*").order("created_at", { ascending: false }).limit(300)
     ]).then(function (r) {
-      D.prods = r[0].map(function (p) { p.precio = p.precio == null ? null : Number(p.precio); return p; });
+      var FOTOS = window.LIB_FOTOS || {};
+      D.prods = r[0].map(function (p) {
+        p.precio = p.precio == null ? null : Number(p.precio);
+        if (!p.foto_url && FOTOS[p.art]) p.foto_url = FOTOS[p.art]; // foto de catálogo de proveedor
+        return p;
+      });
       D.aj = Object.assign({}, DEF);
       (r[1].data || []).forEach(function (x) { if (x.valor != null) D.aj[x.clave] = x.valor; });
       D.pedidos = r[2].data || [];
