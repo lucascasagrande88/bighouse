@@ -1,0 +1,42 @@
+name: Publicar Distribuidora Libertad
+# Publica distribuidora-libertad/ (sitio estático, sin build) en Netlify.
+# Usa el secreto NETLIFY_AUTH_TOKEN del repo; no hay credenciales en este archivo.
+on:
+  push:
+    branches: [claude/project-thread-ov1nfl]
+    paths:
+      - 'distribuidora-libertad/**'
+      - '.github/workflows/deploy-distribuidora-libertad.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-distribuidora-libertad
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      SITE_ID: 172e88fc-e418-404a-bb7b-17cf97b1a9c3
+      SITE_URL: https://distribuidora-libertad-v1.netlify.app
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Comprobar secreto
+        run: test -n "$NETLIFY_AUTH_TOKEN" || { echo "::error::Falta el secreto NETLIFY_AUTH_TOKEN en Settings → Secrets and variables → Actions"; exit 1; }
+      - name: Publicar
+        working-directory: distribuidora-libertad
+        run: npx -y netlify-cli@17 deploy --prod --site "$SITE_ID" --dir . --message "GitHub ${{ github.sha }}"
+      - name: Verificar
+        run: |
+          sleep 10
+          for p in / /catalogo /tablero /links /sitemap.xml; do
+            c=$(curl -s -o /dev/null -w '%{http_code}' "$SITE_URL$p"); echo "$p → $c"; test "$c" = 200
+          done
+          curl -s "$SITE_URL/" | grep -q '2657-798948'
+          curl -s "$SITE_URL/tablero" | grep -q 'btn-importar'
+          echo "Publicado y verificado: $SITE_URL"
