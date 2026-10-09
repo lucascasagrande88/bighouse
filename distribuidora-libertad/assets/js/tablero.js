@@ -41,7 +41,7 @@
   function verLogin() { $("#v-app").hidden = true; $("#v-login").hidden = false; }
   function verApp(user) {
     // Solo entran los usuarios cargados como admin en la base (public.admins).
-    sb.rpc("es_admin").then(function (r) {
+    sb.rpc("lib_es_admin").then(function (r) {
       if (r.error || r.data !== true) {
         var err = $("#login-err");
         err.textContent = r.error
@@ -127,9 +127,9 @@
   function cargarTodo() {
     $("#kpis").innerHTML = '<div class="kpi"><b>…</b><span>Cargando</span></div>';
     return Promise.all([
-      fetchAll("productos", "id,art,nombre,precio,categoria,foto_url,activo,destacado,orden,nota,updated_at", "nombre"),
-      sb.from("ajustes").select("clave,valor"),
-      sb.from("pedidos").select("*").order("created_at", { ascending: false }).limit(300)
+      fetchAll("lib_productos", "id,art,nombre,precio,categoria,foto_url,activo,destacado,orden,nota,updated_at", "nombre"),
+      sb.from("lib_ajustes").select("clave,valor"),
+      sb.from("lib_pedidos").select("*").order("created_at", { ascending: false }).limit(300)
     ]).then(function (r) {
       if (r[1].error) throw r[1].error;
       if (r[2].error) throw r[2].error;
@@ -226,7 +226,7 @@
 
   function prodPorId(id) { return D.prods.find(function (p) { return p.id === id; }); }
   function guardarCampo(p, cambios) {
-    return sb.from("productos").update(cambios).eq("id", p.id).then(function (r) {
+    return sb.from("lib_productos").update(cambios).eq("id", p.id).then(function (r) {
       if (r.error) { toast(r.error.message, true); return false; }
       Object.assign(p, cambios); return true;
     });
@@ -303,9 +303,9 @@
     $("#mp-img").innerHTML = '<span class="ayuda">Subiendo…</span>';
     optimizar(f).then(function (blob) {
       var path = "productos/" + art + "-" + Date.now() + ".webp";
-      return sb.storage.from("fotos").upload(path, blob, { contentType: "image/webp", upsert: false }).then(function (r) {
+      return sb.storage.from("lib-fotos").upload(path, blob, { contentType: "image/webp", upsert: false }).then(function (r) {
         if (r.error) throw r.error;
-        fotoNueva = sb.storage.from("fotos").getPublicUrl(path).data.publicUrl;
+        fotoNueva = sb.storage.from("lib-fotos").getPublicUrl(path).data.publicUrl;
         fotoPreview(fotoNueva);
       });
     }).catch(function (er) { toast(er.message || String(er), true); fotoPreview(edit ? edit.foto_url : ""); });
@@ -325,8 +325,8 @@
     };
     if (fotoNueva !== undefined) row.foto_url = fotoNueva || null;
     if (row.destacado && !(edit && edit.destacado)) row.orden = maxOrden() + 1;
-    var q = edit ? sb.from("productos").update(row).eq("id", edit.id).select().single()
-                 : sb.from("productos").insert(row).select().single();
+    var q = edit ? sb.from("lib_productos").update(row).eq("id", edit.id).select().single()
+                 : sb.from("lib_productos").insert(row).select().single();
     q.then(function (r) {
       if (r.error) {
         $("#mp-err").textContent = /duplicate|unique/i.test(r.error.message) ? "Ya existe un producto con ese código." : r.error.message;
@@ -339,7 +339,7 @@
   });
   $("#mp-borrar").addEventListener("click", function () {
     if (!edit || !confirm("¿Eliminar definitivamente “" + edit.nombre + "”?\nSi solo querés que no se vea, usá “Visible en la web”.")) return;
-    sb.from("productos").delete().eq("id", edit.id).then(function (r) {
+    sb.from("lib_productos").delete().eq("id", edit.id).then(function (r) {
       if (r.error) return toast(r.error.message, true);
       D.prods = D.prods.filter(function (p) { return p !== edit; });
       cerrarProd(); pintarProds(); pintarResumen(); toast("Producto eliminado");
@@ -369,7 +369,7 @@
       var ls = lotes(filas, 500), hechos = 0;
       return ls.reduce(function (pr, l) {
         return pr.then(function () {
-          return sb.from("productos").upsert(l, { onConflict: "art" }).then(function (r) {
+          return sb.from("lib_productos").upsert(l, { onConflict: "art" }).then(function (r) {
             if (r.error) throw r.error;
             hechos += l.length; barIn.style.width = Math.round(hechos / filas.length * 100) + "%";
           });
@@ -527,7 +527,7 @@
     var ls = lotes(todo, 400), hechos = 0;
     ls.reduce(function (pr, l) {
       return pr.then(function () {
-        return sb.from("productos").upsert(l, { onConflict: "art" }).then(function (r) {
+        return sb.from("lib_productos").upsert(l, { onConflict: "art" }).then(function (r) {
           if (r.error) throw r.error;
           hechos += l.length; barIn.style.width = Math.round(hechos / todo.length * 100) + "%";
         });
@@ -619,7 +619,7 @@
     if (e.target.closest("[data-estado]")) return;
     if (e.target.closest("[data-borrar]")) {
       if (!confirm("¿Eliminar el pedido #" + p.id + "?")) return;
-      sb.from("pedidos").delete().eq("id", p.id).then(function (r) {
+      sb.from("lib_pedidos").delete().eq("id", p.id).then(function (r) {
         if (r.error) return toast(r.error.message, true);
         D.pedidos = D.pedidos.filter(function (x) { return x !== p; }); pintarPedidos(); pintarResumen(); badge();
       });
@@ -631,7 +631,7 @@
     if (!e.target.matches("[data-estado]")) return;
     var art = e.target.closest(".pedido"); var p = D.pedidos.find(function (x) { return String(x.id) === art.getAttribute("data-id"); });
     var v = e.target.value;
-    sb.from("pedidos").update({ estado: v }).eq("id", p.id).then(function (r) {
+    sb.from("lib_pedidos").update({ estado: v }).eq("id", p.id).then(function (r) {
       if (r.error) return toast(r.error.message, true);
       p.estado = v; e.target.className = "estado estado--" + v; badge(); toast("Pedido #" + p.id + ": " + v);
     });
@@ -672,7 +672,7 @@
   }
   function guardarAjustes(obj) {
     var rows = Object.keys(obj).map(function (k) { return { clave: k, valor: obj[k], updated_at: new Date().toISOString() }; });
-    return sb.from("ajustes").upsert(rows, { onConflict: "clave" }).then(function (r) {
+    return sb.from("lib_ajustes").upsert(rows, { onConflict: "clave" }).then(function (r) {
       if (r.error) throw r.error;
       Object.assign(D.aj, obj);
     });

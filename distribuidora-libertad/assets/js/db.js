@@ -74,7 +74,7 @@
   function loadAjustes() {
     var aj = Object.assign({}, window.LIB_DEFAULTS || {});
     if (!sb) return Promise.resolve(aj);
-    return sb.from("ajustes").select("clave,valor").then(function (res) {
+    return sb.from("lib_ajustes").select("clave,valor").then(function (res) {
       if (!res.error && res.data) res.data.forEach(function (r) {
         if (r.valor != null && r.valor !== "") aj[r.clave] = r.valor;
       });
@@ -124,7 +124,7 @@
 
     guardarPedido: function (pedido) {
       if (!sb) return Promise.resolve({ ok: false });
-      return sb.from("pedidos").insert(pedido).then(function (r) { return { ok: !r.error, error: r.error }; },
+      return sb.from("lib_pedidos").insert(pedido).then(function (r) { return { ok: !r.error, error: r.error }; },
         function (e) { return { ok: false, error: e }; });
     }
   };
@@ -132,7 +132,7 @@
   LIB.ready = (function () {
     var aj = loadAjustes();
     var prods = (!sb || window.LIB_SOLO_AJUSTES) ? Promise.resolve(null) :
-      withTimeout(fetchAll("productos", COLS, function (q) { return q.eq("activo", true); }), 12000)
+      withTimeout(fetchAll("lib_productos", COLS, function (q) { return q.eq("activo", true); }), 12000)
         .then(function (rows) { return rows && rows.length ? rows.map(mapRow) : null; })
         .catch(function (e) { console.warn("[Libertad] base no disponible, uso catálogo local", e); return null; });
     return Promise.all([aj, prods]).then(function (r) {
