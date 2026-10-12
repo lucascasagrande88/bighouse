@@ -11,6 +11,20 @@ Cuando descargues las imágenes, renombralas con el nombre exacto que indica cad
 
 En la web ya hay placeholders oscuros. Cada uno muestra su número (`IMG 01`, `IMG 02`, etc.), así ves qué imagen va en cada lugar.
 
+## Estado
+
+- ✅ **Tanda 1 (01 a 10): cargada en la web.**
+- ⏳ **Tanda 2 (11 a 17): pendiente.** Mientras tanto, esos lugares usan imágenes de la tanda 1 para que la web no muestre placeholders:
+  - `separador.jpg` usa *Textura*.
+  - `ciudad-buenos-aires.jpg` usa la terraza de turnos.
+  - `ciudad-bariloche.jpg` usa la ruta.
+  - `servicios.jpg` usa *Cobre*.
+  - `og.jpg` es un recorte del hero.
+
+  Cuando generes la tanda 2, pisá esos archivos con el mismo nombre.
+- Los looks **15 y 16** (`contenido-07` y `contenido-08`) no tienen lugar fijo: subilos desde `/admin` → **Contenido (looks)** y se suman al carrete y al archivo.
+- 📸 Falta la **foto real de Tebi** (`tebi.jpg`).
+
 > **Regla de oro:** es estilismo, pero **nunca se ve a nadie cortando**. Nada de tijeras, peines, secadores, capas, sillones de peluquería ni barbería. Se ve el **resultado** (el pelo vivo, en movimiento, en la calle, en la ruta) y el **mundo** de Bevacqua.
 
 ---

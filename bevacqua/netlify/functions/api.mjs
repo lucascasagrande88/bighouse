@@ -165,13 +165,11 @@ function defaultConfig() {
     },
     posts: [
       { id: "c1", type: "image", src: IMG("contenido-01"), title: "La ruta", tag: "Experiencia", place: "Patagonia", text: "Cortes que se mueven con el viento.", size: "tall" },
-      { id: "c2", type: "image", src: IMG("contenido-02"), title: "Ciudad de noche", tag: "Cortes", place: "Buenos Aires", text: "Textura, forma y actitud.", size: "normal" },
+      { id: "c2", type: "image", src: IMG("contenido-02"), title: "Ciudad de noche", tag: "Cortes", place: "Buenos Aires", text: "Textura, forma y actitud.", size: "tall" },
       { id: "c3", type: "image", src: IMG("contenido-03"), title: "La previa", tag: "Experiencia", place: "Villa Crespo", text: "El momento antes de salir.", size: "tall" },
       { id: "c4", type: "image", src: IMG("contenido-04"), title: "Textura", tag: "Editorial", place: "Nahuel Huapi", text: "El pelo como materia.", size: "wide" },
-      { id: "c5", type: "image", src: IMG("contenido-05"), title: "Cobre", tag: "Color", place: "Estudio", text: "Color de autor, a contraluz.", size: "normal" },
+      { id: "c5", type: "image", src: IMG("contenido-05"), title: "Cobre", tag: "Color", place: "Estudio", text: "Color de autor, a contraluz.", size: "tall" },
       { id: "c6", type: "image", src: IMG("contenido-06"), title: "Nuevo capítulo", tag: "Transformación", place: "Buenos Aires", text: "Un corte que cambia la forma de mirarse.", size: "wide" },
-      { id: "c7", type: "image", src: IMG("contenido-07"), title: "Domingo", tag: "Color", place: "Bariloche", text: "Rubio frío, luz de lago.", size: "normal" },
-      { id: "c8", type: "image", src: IMG("contenido-08"), title: "Detalle", tag: "Cortes", place: "Estudio", text: "La nuca también cuenta.", size: "normal" },
     ],
   };
 }

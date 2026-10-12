@@ -5,7 +5,7 @@ La web de Bevacqua: experiencia, turnera por ciudad (Buenos Aires / Bariloche), 
 - `public/`: el sitio estático. `index.html` es la home y `admin/` es el panel.
 - `netlify/functions/api.mjs`: la API. Guarda configuración, turnos, alquileres, mensajes y archivos subidos en Netlify Blobs.
 - `PROMPTS-IMAGENES.md`: los prompts para generar las imágenes con ChatGPT, en dos tandas.
-- `public/img/`: las imágenes de la web. Hasta que estén las definitivas hay placeholders numerados (`IMG 01`…`IMG 17`). Para cambiarlas, reemplazá el archivo con el mismo nombre o subilas desde `/admin` → *Imágenes de la web*.
+- `public/img/`: las imágenes de la web. La tanda 1 ya está cargada; los lugares de la tanda 2 usan imágenes de la tanda 1 hasta que lleguen las definitivas (ver estado en `PROMPTS-IMAGENES.md`). Para cambiarlas, reemplazá el archivo con el mismo nombre o subilas desde `/admin` → *Imágenes de la web*.
 
 ## Deploy (Netlify)
 
