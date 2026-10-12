@@ -74,53 +74,124 @@ function seedDays() {
   return days;
 }
 
+const IMG = (n) => `/img/${n}.jpg`;
+const V3 = (corto, medio, largo) => [
+  { label: "Corto", price: corto },
+  { label: "Medio", price: medio },
+  { label: "Largo", price: largo },
+];
+
+function defaultServices() {
+  return [
+    { id: "corte", cat: "Cortes", name: "Corte", note: "Incluye lavado y secado", duration: 40, price: 50000, variants: [], active: true },
+    { id: "flequillo", cat: "Cortes", name: "Flequillo", note: "", duration: 20, price: 25000, variants: [], active: true },
+    { id: "color", cat: "Coloraciones", name: "Color L'Oréal · Igora · Alfaparf", note: "", duration: 40, price: 105000, variants: V3(105000, 121000, 137000), active: true },
+    { id: "color-inoa", cat: "Coloraciones", name: "Color Inoa", note: "", duration: 40, price: 115000, variants: V3(115000, 131000, 147000), active: true },
+    { id: "mechas", cat: "Coloraciones", name: "Mechas", note: "", duration: 120, price: 116000, variants: V3(116000, 131000, 146000), active: true },
+    { id: "balayage", cat: "Coloraciones", name: "Balayage", note: "", duration: 120, price: 122000, variants: V3(122000, 137000, 152000), active: true },
+    { id: "decoloracion", cat: "Decoloración", name: "Decoloración", note: "", duration: 120, price: 106000, variants: V3(106000, 121000, 136000), active: true },
+    { id: "fantasia", cat: "Color fantasía", name: "Color fantasía", note: "Precio desde, según diseño", duration: 120, price: 90000, from: true, variants: [], active: true },
+    { id: "botox", cat: "Botox", name: "Botox", note: "", duration: 60, price: 104000, variants: V3(104000, 119000, 134000), active: true },
+  ];
+}
+
 function defaultConfig() {
   return {
-    version: 1,
+    version: 2,
     brand: {
       heroKicker: "Estudio de estilismo · Buenos Aires — Patagonia",
-      heroTitle: "Look & More",
       heroSub: "Imagen, corte, color y experiencia. Un estudio que se mueve entre la ciudad y la montaña.",
       manifesto:
         "No somos una peluquería. Somos un estudio de imagen: cortes, color y asesoramiento pensados como una pieza editorial. Cada cliente es una historia, cada look es un escenario propio.",
       about:
-        "Esteban Bevacqua trabaja entre Buenos Aires y Bariloche, llevando el estudio a donde está la gente. Estilismo, imagen y comunicación en un mismo lugar.",
+        "Tebi Bevacqua trabaja entre Buenos Aires y Bariloche, llevando el estudio a donde está la gente. Estilismo, imagen y comunicación en un mismo lugar.",
+      experiencia: [
+        "Bevacqua Look & More cuenta más de 22 años de experiencia, con una trayectoria atravesada por la moda, la cultura visual y la evolución de las tendencias.",
+        "Una mirada construida desde el oficio, mucho antes de la era digital, donde la creatividad y la vanguardia nacen de una visión propia: no se replican. Se observan, se interpretan y se transforman.",
+        "Un espacio donde la búsqueda va más allá. Donde cada persona encuentra una imagen que dialoga con su identidad, su estilo de vida y su rutina.",
+        "Porque no se trata solamente de crear un look, sino de encontrar una manera auténtica de expresarse.",
+      ].join("\n\n"),
+      tebiCaption: "Tebi Bevacqua",
+      turnosTitle: "Reservá",
+      turnosSub: "Sé parte de esta experiencia",
+      serviciosNote: "10% OFF abonando en efectivo",
+      serviciosBrands: "L'Oréal · Igora · Alfaparf",
+      coworkingIntro: "Un espacio para crear, compartir y desarrollar tu identidad.",
+      coworkingText: [
+        "En el corazón de Villa Crespo, frente a una plaza y ubicado en un séptimo piso, Bevacqua Look & More propone una nueva forma de trabajar: un espacio privado, tranquilo y confortable, pensado para profesionales que buscan libertad, creatividad y una experiencia diferente.",
+        "Un lugar donde cada profesional puede expresar su identidad, desarrollar su mirada artística, explorar nuevas ideas y trabajar a su manera, brindando a cada cliente una atención personalizada, lejos del ruido y del movimiento de los espacios tradicionales.",
+        "Más que un lugar de trabajo, una comunidad creativa donde compartir experiencias, conectar con otros profesionales y encontrar nuevas formas de expresión.",
+        "Un espacio abierto al mundo, pensado para profesionales locales e internacionales que buscan un lugar propio para crear, trabajar y desarrollar sus proyectos en Buenos Aires.",
+      ].join("\n\n"),
+      coworkingClaim: "Tu espacio de trabajo. Tu identidad. Tu forma de crear.",
+      contactText: "Envianos tu consulta a través de Facebook Messenger, WhatsApp, Instagram, teléfono o e-mail.",
+    },
+    images: {
+      hero: IMG("hero"),
+      heroMobile: IMG("hero-mobile"),
+      separador: IMG("separador"),
+      tebi: IMG("tebi"),
+      turnos: IMG("turnos"),
+      turnosMobile: IMG("turnos-mobile"),
+      servicios: IMG("servicios"),
+      coworking: IMG("coworking"),
+      "ciudad-bue": IMG("ciudad-buenos-aires"),
+      "ciudad-brc": IMG("ciudad-bariloche"),
     },
     contact: {
       whatsapp: "5491100000000",
+      phone: "",
       email: "hola@bevacqua.com.ar",
-      instagram: "bevacqua.lookandmore",
+      instagram: "tebi.bevacqua",
+      messenger: "",
     },
     locations: [
-      { id: "bue", name: "Buenos Aires", short: "BUE", address: "Palermo, CABA", color: "#2BFF88" },
-      { id: "brc", name: "Bariloche", short: "BRC", address: "Centro Cívico, San Carlos de Bariloche", color: "#FFFFFF" },
+      { id: "bue", name: "Buenos Aires", short: "BUE", address: "Villa Crespo, CABA", color: "#2CF56D" },
+      { id: "brc", name: "Bariloche", short: "BRC", address: "San Carlos de Bariloche", color: "#FFFFFF" },
     ],
-    slotStep: 30,
-    services: [
-      { id: "corte", name: "Corte", duration: 60, price: 35000, desc: "Corte de autor, lavado y styling final.", active: true },
-      { id: "color", name: "Color", duration: 120, price: 70000, desc: "Color, decoloración o matiz. Incluye diagnóstico.", active: true },
-      { id: "corte-color", name: "Corte + Color", duration: 150, price: 95000, desc: "El servicio completo. Transformación total.", active: true },
-      { id: "experiencia", name: "Experiencia de imagen", duration: 90, price: 80000, desc: "Asesoramiento de imagen, estilo y tendencia. Sesión 1 a 1.", active: true },
-    ],
+    slotStep: 40,
+    services: defaultServices(),
     days: seedDays(),
     studio: {
       stations: 3,
-      prices: { day: 50000, week: 250000, month: 800000 },
-      hours: "09:00 — 21:00",
-      address: "Palermo, CABA",
+      prices: { hour: 12000, day: 50000, week: 250000, month: 800000 },
+      plans: ["hora", "dia", "mes"],
+      open: "09:00",
+      close: "21:00",
+      address: "Villa Crespo, CABA · 7º piso, frente a la plaza",
       openDays: [1, 2, 3, 4, 5, 6],
       blocked: [],
-      perks: ["Sillón y espejo profesional", "Lavacabezas compartido", "Wi-Fi + música", "Productos de cortesía", "Espacio para contenido"],
+      perks: ["Sillón y espejo profesional", "Luz natural", "Vista a la plaza", "Wi-Fi + música", "Espacio para contenido"],
     },
     posts: [
-      { id: "p6", type: "video", src: "/media/v6.mp4", poster: "/media/v6.jpg", title: "Still Summer", tag: "Experiencia", place: "Buenos Aires", text: "Un día abierto, piezas favoritas y ningún apuro.", size: "wide" },
-      { id: "p4", type: "video", src: "/media/v4.mp4", poster: "/media/v4.jpg", title: "Freedom of Form", tag: "Editorial", place: "Patagonia", text: "Libertad de movimiento, de combinaciones, de elección.", size: "tall" },
-      { id: "p2", type: "video", src: "/media/v2.mp4", poster: "/media/v2.jpg", title: "Autumn Cut", tag: "Cortes", place: "Bariloche", text: "Texturas para el frío. Cortes que se mueven con el viento.", size: "normal" },
-      { id: "p5", type: "video", src: "/media/v5.mp4", poster: "/media/v5.jpg", title: "New In", tag: "Transformación", place: "Estudio", text: "Piezas pensadas para ser parte de tu historia.", size: "tall" },
-      { id: "p3", type: "video", src: "/media/v3.mp4", poster: "/media/v3.jpg", title: "Born to Disobey", tag: "Vanguardia", place: "Ruta 40", text: "Decisiones espontáneas. Escenarios propios.", size: "wide" },
-      { id: "p1", type: "video", src: "/media/v1.mp4", poster: "/media/v1.jpg", title: "Backstage", tag: "Estudio", place: "Buenos Aires", text: "Detrás del sillón: el proceso.", size: "normal" },
+      { id: "c1", type: "image", src: IMG("contenido-01"), title: "La ruta", tag: "Experiencia", place: "Patagonia", text: "Cortes que se mueven con el viento.", size: "tall" },
+      { id: "c2", type: "image", src: IMG("contenido-02"), title: "Ciudad de noche", tag: "Cortes", place: "Buenos Aires", text: "Textura, forma y actitud.", size: "normal" },
+      { id: "c3", type: "image", src: IMG("contenido-03"), title: "La previa", tag: "Experiencia", place: "Villa Crespo", text: "El momento antes de salir.", size: "tall" },
+      { id: "c4", type: "image", src: IMG("contenido-04"), title: "Textura", tag: "Editorial", place: "Nahuel Huapi", text: "El pelo como materia.", size: "wide" },
+      { id: "c5", type: "image", src: IMG("contenido-05"), title: "Cobre", tag: "Color", place: "Estudio", text: "Color de autor, a contraluz.", size: "normal" },
+      { id: "c6", type: "image", src: IMG("contenido-06"), title: "Nuevo capítulo", tag: "Transformación", place: "Buenos Aires", text: "Un corte que cambia la forma de mirarse.", size: "wide" },
+      { id: "c7", type: "image", src: IMG("contenido-07"), title: "Domingo", tag: "Color", place: "Bariloche", text: "Rubio frío, luz de lago.", size: "normal" },
+      { id: "c8", type: "image", src: IMG("contenido-08"), title: "Detalle", tag: "Cortes", place: "Estudio", text: "La nuca también cuenta.", size: "normal" },
     ],
   };
+}
+
+// Brings a v1 config (first build) up to v2 without losing the agenda or uploaded content.
+function migrate(cfg) {
+  if (cfg.version === 2) return { cfg, changed: false };
+  const next = defaultConfig();
+  if (cfg.days) next.days = cfg.days;
+  if (cfg.slotStep) next.slotStep = Math.max(cfg.slotStep, 20);
+  const uploaded = (cfg.posts || []).filter((p) => String(p.src || "").startsWith("/api/media/"));
+  next.posts = [...uploaded, ...next.posts];
+  for (const k of ["whatsapp", "email"]) if (cfg.contact?.[k] && !/0000000|hola@bevacqua/.test(cfg.contact[k])) next.contact[k] = cfg.contact[k];
+  if (cfg.studio) {
+    next.studio.stations = cfg.studio.stations || 3;
+    next.studio.blocked = cfg.studio.blocked || [];
+    next.studio.openDays = cfg.studio.openDays || next.studio.openDays;
+    next.studio.prices = { ...next.studio.prices, ...cfg.studio.prices };
+  }
+  return { cfg: next, changed: true };
 }
 
 async function getConfig() {
@@ -129,8 +200,11 @@ async function getConfig() {
   if (!cfg) {
     cfg = defaultConfig();
     await s.setJSON("config", cfg);
+    return cfg;
   }
-  return cfg;
+  const m = migrate(cfg);
+  if (m.changed) await s.setJSON("config", m.cfg);
+  return m.cfg;
 }
 const getList = async (key) => (await store(DATA).get(key, { type: "json" })) || [];
 const setList = (key, val) => store(DATA).setJSON(key, val);
@@ -141,7 +215,7 @@ const ACTIVE = (b) => b.status !== "cancelada" && b.status !== "rechazada";
 function freeSlots(cfg, bookings, date, duration) {
   const day = cfg.days[date];
   if (!day) return [];
-  const step = cfg.slotStep || 30;
+  const step = cfg.slotStep || 40;
   const start = toMin(day.start);
   const end = toMin(day.end);
   const taken = bookings.filter((b) => b.date === date && ACTIVE(b)).map((b) => [toMin(b.time), toMin(b.time) + b.duration]);
@@ -155,15 +229,44 @@ function freeSlots(cfg, bookings, date, duration) {
   return out;
 }
 
-function proRange(type, start) {
-  const len = type === "dia" ? 1 : type === "semana" ? 7 : 30;
-  return { start, end: addDays(start, len - 1), len };
+// Resolves the requested services (with their length variant) into a priced, timed list.
+function resolveItems(cfg, body) {
+  const raw = Array.isArray(body.items) ? body.items : body.serviceId ? [{ serviceId: body.serviceId }] : [];
+  const items = [];
+  for (const it of raw.slice(0, 6)) {
+    const s = cfg.services.find((x) => x.id === it.serviceId && x.active);
+    if (!s) return null;
+    let price = s.price;
+    let variant = "";
+    if (s.variants && s.variants.length) {
+      const v = s.variants.find((x) => x.label === it.variant);
+      if (!v) return null;
+      price = v.price;
+      variant = v.label;
+    }
+    items.push({ serviceId: s.id, name: s.name, variant, price, duration: s.duration, from: !!s.from });
+  }
+  return items.length ? items : null;
 }
-const overlaps = (a, b) => a.start <= b.end && b.start <= a.end;
 
+const PLAN = {
+  hora: { len: 1, key: "hour" },
+  dia: { len: 1, key: "day" },
+  semana: { len: 7, key: "week" },
+  mes: { len: 30, key: "month" },
+};
+function proRange(type, start) {
+  return { start, end: addDays(start, PLAN[type].len - 1) };
+}
+// Two rentals collide when their dates overlap and, if both are hourly, their hours overlap too.
+function collides(a, b) {
+  if (!(a.start <= b.end && b.start <= a.end)) return false;
+  if (a.tFrom && b.tFrom) return toMin(a.tFrom) < toMin(b.tTo) && toMin(b.tFrom) < toMin(a.tTo);
+  return true;
+}
 function freeStations(cfg, pros, range) {
   const all = Array.from({ length: cfg.studio.stations }, (_, i) => i + 1);
-  return all.filter((st) => !pros.some((p) => ACTIVE(p) && p.station === st && overlaps(p, range)));
+  return all.filter((st) => !pros.some((p) => ACTIVE(p) && p.station === st && collides(p, range)));
 }
 
 // ───────────────────────── handlers ─────────────────────────
@@ -173,6 +276,7 @@ async function publicData() {
   return json({
     today,
     brand: cfg.brand,
+    images: cfg.images,
     contact: cfg.contact,
     locations: cfg.locations,
     services: cfg.services.filter((s) => s.active),
@@ -180,7 +284,9 @@ async function publicData() {
     days: Object.fromEntries(Object.entries(cfg.days).filter(([d]) => d >= today)),
     busy: clients.filter((b) => b.date >= today && ACTIVE(b)).map((b) => ({ date: b.date, time: b.time, duration: b.duration })),
     studio: cfg.studio,
-    proBusy: pros.filter((p) => p.end >= today && ACTIVE(p)).map((p) => ({ start: p.start, end: p.end, station: p.station, status: p.status })),
+    proBusy: pros
+      .filter((p) => p.end >= today && ACTIVE(p))
+      .map((p) => ({ start: p.start, end: p.end, station: p.station, status: p.status, tFrom: p.tFrom, tTo: p.tTo })),
     posts: cfg.posts,
   });
 }
@@ -188,27 +294,29 @@ async function publicData() {
 async function bookClient(req) {
   const body = await req.json().catch(() => ({}));
   const cfg = await getConfig();
-  const service = cfg.services.find((s) => s.id === body.serviceId && s.active);
-  if (!service) return bad("Elegí un servicio válido.");
+  const items = resolveItems(cfg, body);
+  if (!items) return bad("Elegí al menos un servicio válido.");
   if (!isDate(body.date) || body.date < todayAR()) return bad("Fecha inválida.");
   const day = cfg.days[body.date];
-  if (!day) return bad("Esteban no atiende ese día.");
-  if (body.locationId && body.locationId !== day.loc) return bad("Ese día Esteban está en otra ciudad.");
+  if (!day) return bad("Tebi no atiende ese día.");
+  if (body.locationId && body.locationId !== day.loc) return bad("Ese día Tebi está en otra ciudad.");
   const name = clean(body.name, 80);
   const phone = clean(body.phone, 40);
   if (name.length < 2 || phone.length < 6) return bad("Completá nombre y teléfono.");
+  const duration = items.reduce((a, i) => a + i.duration, 0);
   const clients = await getList("clients");
-  if (!freeSlots(cfg, clients, body.date, service.duration).includes(body.time)) return bad("Ese horario ya no está disponible. Elegí otro.", 409);
+  if (!freeSlots(cfg, clients, body.date, duration).includes(body.time)) return bad("Ese horario ya no está disponible. Elegí otro.", 409);
   const loc = cfg.locations.find((l) => l.id === day.loc);
   const booking = {
     id: code("BV"),
     kind: "cliente",
     date: body.date,
     time: body.time,
-    duration: service.duration,
-    serviceId: service.id,
-    serviceName: service.name,
-    price: service.price,
+    duration,
+    items,
+    serviceName: items.map((i) => i.name + (i.variant ? ` (${i.variant})` : "")).join(" + "),
+    price: items.reduce((a, i) => a + i.price, 0),
+    priceFrom: items.some((i) => i.from),
     locationId: day.loc,
     locationName: loc?.name || day.loc,
     address: loc?.address || "",
@@ -227,12 +335,24 @@ async function bookClient(req) {
 async function bookPro(req) {
   const body = await req.json().catch(() => ({}));
   const cfg = await getConfig();
-  if (!["dia", "semana", "mes"].includes(body.type)) return bad("Tipo de alquiler inválido.");
+  const st = cfg.studio;
+  if (!PLAN[body.type] || !(st.plans || []).includes(body.type)) return bad("Tipo de alquiler inválido.");
   if (!isDate(body.start) || body.start < todayAR()) return bad("Fecha inválida.");
   const range = proRange(body.type, body.start);
-  if (body.type === "dia") {
+  let hours = 0;
+  if (body.type === "hora" || body.type === "dia") {
     const dow = parseYmd(body.start).getDay();
-    if (!cfg.studio.openDays.includes(dow) || cfg.studio.blocked.includes(body.start)) return bad("El estudio está cerrado ese día.");
+    if (!st.openDays.includes(dow) || st.blocked.includes(body.start)) return bad("El estudio está cerrado ese día.");
+  }
+  if (body.type === "hora") {
+    hours = Math.round(Number(body.hours));
+    if (!/^\d{2}:\d{2}$/.test(body.from || "") || !(hours >= 1 && hours <= 12)) return bad("Elegí horario y cantidad de horas.");
+    const a = toMin(body.from);
+    const z = a + hours * 60;
+    if (a < toMin(st.open) || z > toMin(st.close)) return bad("Fuera del horario del estudio.");
+    if (body.start === todayAR() && a <= nowMinAR()) return bad("Ese horario ya pasó.");
+    range.tFrom = toHHMM(a);
+    range.tTo = toHHMM(z);
   }
   const station = Number(body.station);
   const pros = await getList("pros");
@@ -240,15 +360,16 @@ async function bookPro(req) {
   const name = clean(body.name, 80);
   const phone = clean(body.phone, 40);
   if (name.length < 2 || phone.length < 6) return bad("Completá nombre y teléfono.");
-  const priceKey = body.type === "dia" ? "day" : body.type === "semana" ? "week" : "month";
+  const unit = st.prices[PLAN[body.type].key] || 0;
   const booking = {
     id: code("PR"),
     kind: "profesional",
     type: body.type,
     start: range.start,
     end: range.end,
+    ...(range.tFrom ? { tFrom: range.tFrom, tTo: range.tTo, hours } : {}),
     station,
-    price: cfg.studio.prices[priceKey],
+    price: body.type === "hora" ? unit * hours : unit,
     name,
     phone,
     email: clean(body.email, 120),

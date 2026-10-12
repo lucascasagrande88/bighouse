@@ -86,7 +86,7 @@
     .d.empty { visibility:hidden; }
     .d .st { display:flex; gap:3px; margin-top:auto; }
     .d .st i { flex:1; height:6px; border-radius:3px; background:var(--green); }
-    .d .st i.p { background:var(--amber); } .d .st i.x { background:var(--bg3); }
+    .d .st i.p { background:var(--amber); } .d .st i.h { background:linear-gradient(90deg,var(--fg) 50%,var(--green) 50%); } .d .st i.x { background:var(--bg3); }
     .d.closed { background:repeating-linear-gradient(45deg,transparent 0 6px,rgba(255,255,255,.04) 6px 7px); }
     /* content */
     .posts { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:14px; }
@@ -138,10 +138,11 @@
     <aside>
       <div class="brand"><img src="/logo.svg" alt="">BVCQ</div>
       <button class="tab on" data-tab="resumen">Resumen</button>
-      <button class="tab" data-tab="agenda">Agenda de Esteban</button>
+      <button class="tab" data-tab="agenda">Agenda de Tebi</button>
       <button class="tab" data-tab="turnos">Turnos clientes <span class="badge" id="bTurnos" hidden></span></button>
-      <button class="tab" data-tab="pros">Profesionales <span class="badge" id="bPros" hidden></span></button>
-      <button class="tab" data-tab="contenido">Contenido</button>
+      <button class="tab" data-tab="pros">Coworking <span class="badge" id="bPros" hidden></span></button>
+      <button class="tab" data-tab="contenido">Contenido (looks)</button>
+      <button class="tab" data-tab="imagenes">Imágenes de la web</button>
       <button class="tab" data-tab="servicios">Servicios y precios</button>
       <button class="tab" data-tab="textos">Textos, contacto y ciudades</button>
       <button class="tab" data-tab="mensajes">Mensajes <span class="badge" id="bMsgs" hidden></span></button>
@@ -154,18 +155,18 @@
     <main>
       <!-- RESUMEN -->
       <section class="pane on" data-pane="resumen">
-        <h1>Hola, <span class="serif">Esteban</span></h1>
+        <h1>Hola, <span class="serif">Tebi</span></h1>
         <p class="sub" id="hoyTxt"></p>
         <div class="kpis" id="kpis"></div>
         <h2>Próximos turnos</h2>
         <div class="tw"><table id="nextTable"></table></div>
-        <h2>Solicitudes de profesionales pendientes</h2>
+        <h2>Solicitudes de coworking pendientes</h2>
         <div class="tw"><table id="pendTable"></table></div>
       </section>
 
       <!-- AGENDA -->
       <section class="pane" data-pane="agenda">
-        <h1>Agenda <span class="serif">de Esteban</span></h1>
+        <h1>Agenda <span class="serif">de Tebi</span></h1>
         <p class="sub">Tocá un día para indicar dónde estás, abrir/cerrar el día y cambiar horarios. Usá “carga rápida” para períodos largos.</p>
         <div class="cal-wrap">
           <div class="card"><div id="aCal"></div></div>
@@ -206,7 +207,7 @@
 
       <!-- PROS -->
       <section class="pane" data-pane="pros">
-        <h1>Espacio <span class="serif">profesionales</span></h1>
+        <h1>Cowor<span class="serif">king</span></h1>
         <p class="sub">Ocupación de los puestos, solicitudes y configuración del alquiler.</p>
         <div class="cal-wrap">
           <div class="card"><div id="pCal"></div>
@@ -214,8 +215,9 @@
           </div>
           <div class="card">
             <h2 style="margin-top:0">Configuración</h2>
-            <div class="row"><label class="f">Puestos<input type="number" min="1" max="20" id="sStations"></label><label class="f">Horario<input id="sHours"></label></div>
-            <div class="row"><label class="f">Día $<input type="number" id="sDay"></label><label class="f">Semana $<input type="number" id="sWeek"></label><label class="f">Mes $<input type="number" id="sMonth"></label></div>
+            <div class="row"><label class="f">Puestos<input type="number" min="1" max="20" id="sStations"></label><label class="f">Abre<input type="time" id="sOpen"></label><label class="f">Cierra<input type="time" id="sClose"></label></div>
+            <div class="row"><label class="f">Hora $<input type="number" id="sHour"></label><label class="f">Día $<input type="number" id="sDay"></label><label class="f">Semana $<input type="number" id="sWeek"></label><label class="f">Mes $<input type="number" id="sMonth"></label></div>
+            <label class="f" style="margin-bottom:14px">Tipos de alquiler visibles en la web<div class="chk" id="sPlans"></div></label>
             <label class="f" style="margin-bottom:14px">Dirección del estudio<input id="sAddr"></label>
             <label class="f" style="margin-bottom:14px">Días que abre el estudio<div class="chk" id="sDows"></div></label>
             <label class="f">Beneficios (uno por línea)<textarea id="sPerks"></textarea></label>
@@ -240,10 +242,18 @@
         <div class="posts" id="posts"></div>
       </section>
 
+      <!-- IMAGENES -->
+      <section class="pane" data-pane="imagenes">
+        <h1>Imágenes <span class="serif">de la web</span></h1>
+        <p class="sub">Reemplazá cualquier foto de la web. Se actualiza al instante. Los nombres coinciden con PROMPTS-IMAGENES.md.</p>
+        <div class="posts" id="imgSlots"></div>
+        <input type="file" id="imgFile" accept="image/*" hidden>
+      </section>
+
       <!-- SERVICIOS -->
       <section class="pane" data-pane="servicios">
         <h1>Servicios <span class="serif">& precios</span></h1>
-        <p class="sub">Lo que los clientes pueden reservar. La duración define cuánto tiempo bloquea en la agenda.</p>
+        <p class="sub">Lo que se ve en la lista de precios y en la turnera. La duración define cuánto tiempo bloquea en la agenda (ej: corte y color 40 min, mechas y balayage 2 hs). Si un servicio tiene precios por largo, cargalos en “Variantes”.</p>
         <div id="svcList"></div>
         <p><button class="btn g" id="addSvc">+ Agregar servicio</button></p>
       </section>
@@ -256,13 +266,33 @@
           <label class="f" style="margin-bottom:14px">Bajada superior del inicio<input data-cfg="brand.heroKicker"></label>
           <label class="f" style="margin-bottom:14px">Texto del inicio<textarea data-cfg="brand.heroSub"></textarea></label>
           <label class="f" style="margin-bottom:14px">Manifiesto<textarea data-cfg="brand.manifesto" style="min-height:120px"></textarea></label>
-          <label class="f">Sobre Esteban<textarea data-cfg="brand.about"></textarea></label>
+          <label class="f">Sobre Tebi (debajo del manifiesto)<textarea data-cfg="brand.about"></textarea></label>
         </div>
+        <h2>Experiencia</h2>
+        <div class="card">
+          <label class="f" style="margin-bottom:14px">Texto (separá párrafos con una línea en blanco)<textarea data-cfg="brand.experiencia" style="min-height:220px"></textarea></label>
+          <label class="f">Pie de la foto de Tebi<input data-cfg="brand.tebiCaption"></label>
+        </div>
+        <h2>Turnos y servicios</h2>
+        <div class="card">
+          <div class="row"><label class="f">Título de turnos<input data-cfg="brand.turnosTitle"></label><label class="f">Bajada de turnos<input data-cfg="brand.turnosSub"></label></div>
+          <div class="row"><label class="f">Nota de la lista de precios<input data-cfg="brand.serviciosNote"></label><label class="f">Marcas<input data-cfg="brand.serviciosBrands"></label></div>
+        </div>
+        <h2>Coworking</h2>
+        <div class="card">
+          <label class="f" style="margin-bottom:14px">Frase de apertura<input data-cfg="brand.coworkingIntro"></label>
+          <label class="f" style="margin-bottom:14px">Texto (separá párrafos con una línea en blanco)<textarea data-cfg="brand.coworkingText" style="min-height:220px"></textarea></label>
+          <label class="f">Frase de cierre<input data-cfg="brand.coworkingClaim"></label>
+        </div>
+        <h2>Contacto (texto)</h2>
+        <div class="card"><label class="f">Bajada de contacto<textarea data-cfg="brand.contactText"></textarea></label></div>
         <h2>Contacto</h2>
         <div class="card row">
           <label class="f">WhatsApp (solo números, con 549)<input data-cfg="contact.whatsapp"></label>
           <label class="f">Email<input data-cfg="contact.email"></label>
           <label class="f">Instagram (sin @)<input data-cfg="contact.instagram"></label>
+          <label class="f">Teléfono (si no, usa el WhatsApp)<input data-cfg="contact.phone"></label>
+          <label class="f">Facebook Messenger (usuario de la página)<input data-cfg="contact.messenger" placeholder="ej: bevacqua.lookandmore"></label>
         </div>
         <h2>Ciudades / ubicaciones</h2>
         <div id="locList"></div>

@@ -63,7 +63,7 @@
     renderAll();
   }
   function renderAll() {
-    renderResumen(); renderAgenda(); renderTurnos(); renderPros(); renderPosts(); renderServices(); renderTextos(); renderMsgs(); badges();
+    renderResumen(); renderAgenda(); renderTurnos(); renderPros(); renderPosts(); renderServices(); renderImages(); renderTextos(); renderMsgs(); badges();
   }
   function badges() {
     const b = (id, n) => { $(id).hidden = !n; $(id).textContent = n; };
@@ -225,11 +225,11 @@
 
   // ───────── pros ─────────
   const pMonth = new Date(); pMonth.setDate(1);
-  const TYPES = { dia: "Día", semana: "Semana", mes: "Mes" };
+  const TYPES = { hora: "Hora", dia: "Día", semana: "Semana", mes: "Mes" };
   function proRows(list) {
     if (!list.length) return `<tr><td class="sub">Nada por acá.</td></tr>`;
     return `<tr><th>Período</th><th>Profesional</th><th>Puesto</th><th>Valor</th><th>Estado</th><th></th></tr>` + list.map((p) => `<tr>
-      <td><b>${TYPES[p.type]}</b><small>${nice(p.start)} → ${nice(p.end)} · ${p.id}</small></td>
+      <td><b>${TYPES[p.type]}</b><small>${p.tFrom ? `${nice(p.start)} · ${p.tFrom}–${p.tTo}` : `${nice(p.start)} → ${nice(p.end)}`} · ${p.id}</small></td>
       <td>${esc(p.name)}<small><a href="https://wa.me/${esc(p.phone.replace(/\D/g, ""))}" target="_blank">${esc(p.phone)}</a>${p.specialty ? " · " + esc(p.specialty) : ""}${p.instagram ? " · " + esc(p.instagram) : ""}</small>${p.notes ? `<small>“${esc(p.notes)}”</small>` : ""}</td>
       <td>${pad(p.station)}</td><td>${money(p.price)}</td>
       <td><span class="pill ${p.status}">${p.status}</span></td>
@@ -246,7 +246,7 @@
       const act = activePros(s);
       const bars = Array.from({ length: st.stations }, (_, i) => {
         const p = act.find((x) => x.station === i + 1);
-        return `<i class="${p ? (p.status === "pendiente" ? "p" : "x") : ""}" title="Puesto ${i + 1}${p ? ": " + esc(p.name) : ""}"></i>`;
+        return `<i class="${p ? (p.status === "pendiente" ? "p" : p.tFrom ? "h" : "x") : ""}" title="Puesto ${i + 1}${p ? ": " + esc(p.name) + (p.tFrom ? ` ${p.tFrom}–${p.tTo}` : "") : ""}"></i>`;
       }).join("");
       return { cls: open ? "" : "closed", html: open ? `<span class="st">${bars}</span>` : `<span class="hrs">${st.blocked.includes(s) ? "bloqueado" : "cerrado"}</span><span class="st">${bars}</span>` };
     }, (s) => {
@@ -257,7 +257,10 @@
       }
       renderPros();
     });
-    $("#sStations").value = st.stations; $("#sHours").value = st.hours; $("#sAddr").value = st.address;
+    $("#sStations").value = st.stations; $("#sOpen").value = st.open || "09:00"; $("#sClose").value = st.close || "21:00"; $("#sAddr").value = st.address;
+    $("#sHour").value = st.prices.hour || 0;
+    const PL = { hora: "Hora", dia: "Día", semana: "Semana", mes: "Mes" };
+    $("#sPlans").innerHTML = Object.keys(PL).map((k) => `<label><input type="checkbox" value="${k}" ${(st.plans || []).includes(k) ? "checked" : ""}>${PL[k]}</label>`).join("");
     $("#sDay").value = st.prices.day; $("#sWeek").value = st.prices.week; $("#sMonth").value = st.prices.month;
     $("#sPerks").value = (st.perks || []).join("\n");
     $("#sDows").innerHTML = [1, 2, 3, 4, 5, 6, 0].map((d) => `<label><input type="checkbox" value="${d}" ${st.openDays.includes(d) ? "checked" : ""}>${DOWS[d]}</label>`).join("");
@@ -270,7 +273,14 @@
   $("#prFilter").addEventListener("change", renderPros);
   const bindStudio = (sel, fn) => $(sel).addEventListener("change", (e) => { fn(C().studio, e.target.value); save(); renderPros(); });
   bindStudio("#sStations", (s, v) => (s.stations = Math.max(1, Number(v) || 1)));
-  bindStudio("#sHours", (s, v) => (s.hours = v));
+  bindStudio("#sOpen", (s, v) => (s.open = v || "09:00"));
+  bindStudio("#sClose", (s, v) => (s.close = v || "21:00"));
+  bindStudio("#sHour", (s, v) => (s.prices.hour = Number(v) || 0));
+  $("#sPlans").addEventListener("change", () => {
+    const order = ["hora", "dia", "semana", "mes"];
+    C().studio.plans = order.filter((k) => $$("#sPlans input:checked").some((i) => i.value === k));
+    save();
+  });
   bindStudio("#sAddr", (s, v) => (s.address = v));
   bindStudio("#sDay", (s, v) => (s.prices.day = Number(v) || 0));
   bindStudio("#sWeek", (s, v) => (s.prices.week = Number(v) || 0));
@@ -370,23 +380,72 @@
   // ───────── servicios ─────────
   function renderServices() {
     $("#svcList").innerHTML = C().services.map((s, i) => `<div class="card" style="margin-bottom:12px" data-svc="${i}">
-      <div class="row"><label class="f">Nombre<input data-k="name" value="${esc(s.name)}"></label><label class="f">Duración (min)<input type="number" step="15" min="15" data-k="duration" value="${s.duration}"></label><label class="f">Precio $<input type="number" data-k="price" value="${s.price}"></label>
+      <div class="row"><label class="f">Categoría<input data-k="cat" value="${esc(s.cat || "")}" list="svcCats"></label><label class="f">Nombre<input data-k="name" value="${esc(s.name)}"></label>
+      <label class="f">Duración (min)<input type="number" step="5" min="10" data-k="duration" value="${s.duration}"></label>
       <label class="f">Estado<select data-k="active"><option value="1" ${s.active ? "selected" : ""}>Visible</option><option value="0" ${!s.active ? "selected" : ""}>Oculto</option></select></label></div>
-      <label class="f">Descripción<input data-k="desc" value="${esc(s.desc || "")}"></label>
-      <p style="margin:12px 0 0"><button class="btn sm r" data-sdel="${i}">Eliminar servicio</button></p></div>`).join("");
+      <div class="row"><label class="f">Precio $ ${s.variants && s.variants.length ? "(se usan las variantes)" : ""}<input type="number" data-k="price" value="${s.price}"></label>
+      <label class="f">Aclaración<input data-k="note" value="${esc(s.note || "")}" placeholder="ej: incluye lavado y secado"></label>
+      <label class="f">¿Precio “desde”?<select data-k="from"><option value="0" ${!s.from ? "selected" : ""}>No</option><option value="1" ${s.from ? "selected" : ""}>Sí</option></select></label></div>
+      <label class="f">Variantes (precio por largo)</label>
+      <div class="vars" style="display:grid;gap:8px;margin:8px 0 12px">${(s.variants || []).map((v, j) => `<div style="display:grid;grid-template-columns:1fr 1fr auto;gap:8px" data-var="${j}"><input data-vk="label" value="${esc(v.label)}" placeholder="Corto"><input type="number" data-vk="price" value="${v.price}" placeholder="Precio"><button class="btn sm r" data-vdel="${j}">✕</button></div>`).join("")}</div>
+      <div class="acts"><button class="btn sm" data-vadd="${i}">+ Variante</button>${!(s.variants || []).length ? `<button class="btn sm" data-v3="${i}">+ Corto / Medio / Largo</button>` : ""}<button class="btn sm" data-smv="${i}" data-dir="-1" ${i === 0 ? "disabled" : ""}>↑</button><button class="btn sm" data-smv="${i}" data-dir="1" ${i === C().services.length - 1 ? "disabled" : ""}>↓</button><button class="btn sm r" data-sdel="${i}">Eliminar servicio</button></div></div>`).join("")
+      + `<datalist id="svcCats">${[...new Set(C().services.map((s) => s.cat).filter(Boolean))].map((c) => `<option>${esc(c)}</option>`).join("")}</datalist>`;
   }
   $("#svcList").addEventListener("change", (e) => {
-    const card = e.target.closest("[data-svc]"); const k = e.target.dataset.k;
-    if (!card || !k) return;
+    const card = e.target.closest("[data-svc]");
+    if (!card) return;
     const s = C().services[Number(card.dataset.svc)];
-    s[k] = k === "duration" || k === "price" ? Number(e.target.value) || 0 : k === "active" ? e.target.value === "1" : e.target.value;
+    const k = e.target.dataset.k, vk = e.target.dataset.vk;
+    if (k) s[k] = k === "duration" || k === "price" ? Number(e.target.value) || 0 : k === "active" || k === "from" ? e.target.value === "1" : e.target.value;
+    if (vk) {
+      const v = s.variants[Number(e.target.closest("[data-var]").dataset.var)];
+      v[vk] = vk === "price" ? Number(e.target.value) || 0 : e.target.value;
+      s.price = Math.min(...s.variants.map((x) => x.price));
+    }
     save();
   });
   $("#svcList").addEventListener("click", (e) => {
-    const d = e.target.closest("[data-sdel]");
-    if (d && confirm("¿Eliminar el servicio? Los turnos ya reservados se mantienen.")) { C().services.splice(Number(d.dataset.sdel), 1); save(); renderServices(); }
+    const card = e.target.closest("[data-svc]");
+    if (!card) return;
+    const i = Number(card.dataset.svc);
+    const s = C().services[i];
+    const t = (a) => e.target.closest(a);
+    if (t("[data-sdel]")) { if (!confirm("¿Eliminar el servicio? Los turnos ya reservados se mantienen.")) return; C().services.splice(i, 1); }
+    else if (t("[data-vadd]")) (s.variants ||= []).push({ label: "", price: s.price });
+    else if (t("[data-v3]")) s.variants = ["Corto", "Medio", "Largo"].map((label) => ({ label, price: s.price }));
+    else if (t("[data-vdel]")) s.variants.splice(Number(t("[data-vdel]").dataset.vdel), 1);
+    else if (t("[data-smv]")) { const j = i + Number(t("[data-smv]").dataset.dir); [C().services[i], C().services[j]] = [C().services[j], C().services[i]]; }
+    else return;
+    save(); renderServices();
   });
-  $("#addSvc").addEventListener("click", () => { C().services.push({ id: "s" + Date.now().toString(36), name: "Nuevo servicio", duration: 60, price: 0, desc: "", active: true }); save(); renderServices(); });
+  $("#addSvc").addEventListener("click", () => { C().services.push({ id: "s" + Date.now().toString(36), cat: "Cortes", name: "Nuevo servicio", note: "", duration: 40, price: 0, variants: [], active: true }); save(); renderServices(); });
+
+  // ───────── imágenes de la web ─────────
+  const SLOTS = [
+    ["hero", "Inicio (compu)", "IMG 01"], ["heroMobile", "Inicio (celular)", "IMG 02"], ["separador", "Banda “22 años”", "IMG 11"],
+    ["tebi", "Experiencia · foto de Tebi", "Foto real"], ["turnos", "Turnos (compu)", "IMG 03"], ["turnosMobile", "Turnos (celular)", "IMG 04"],
+    ["ciudad-bue", "Destino Buenos Aires", "IMG 12"], ["ciudad-brc", "Destino Bariloche", "IMG 13"], ["servicios", "Servicios", "IMG 14"], ["coworking", "Coworking", "Foto real"],
+  ];
+  let slotTarget = null;
+  function renderImages() {
+    const im = (C().images ||= {});
+    const extra = C().locations.filter((l) => !SLOTS.some(([k]) => k === "ciudad-" + l.id)).map((l) => ["ciudad-" + l.id, "Destino " + l.name, "nueva"]);
+    $("#imgSlots").innerHTML = [...SLOTS, ...extra].map(([k, label, tag]) => `<div class="post"><div class="m"><img src="${esc(im[k] || "/img/turnos.jpg")}" alt="" loading="lazy"><span class="pill ty">${esc(tag)}</span></div>
+      <div class="b"><b>${esc(label)}</b><small style="color:var(--muted);word-break:break-all">${esc(im[k] || "(usa la de turnos)")}</small>
+      <div class="acts"><button class="btn sm g" data-slot="${k}">Subir foto</button></div></div></div>`).join("");
+  }
+  $("#imgSlots").addEventListener("click", (e) => { const b = e.target.closest("[data-slot]"); if (b) { slotTarget = b.dataset.slot; $("#imgFile").click(); } });
+  $("#imgFile").addEventListener("change", async (e) => {
+    const f = e.target.files[0];
+    if (!f || !slotTarget) return;
+    try {
+      status("Subiendo…", "saving");
+      const url = await sendFile(f, f.name, f.type, (x) => status(`Subiendo ${Math.round(x * 100)}%`, "saving"));
+      C().images[slotTarget] = url;
+      save(); renderImages();
+    } catch (err) { status("Error: " + err.message, "err"); }
+    e.target.value = "";
+  });
 
   // ───────── textos / ciudades ─────────
   function renderTextos() {

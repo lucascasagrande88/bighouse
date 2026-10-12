@@ -1,10 +1,11 @@
 # Bevacqua — Look & More
 
-La web de Bevacqua: contenido editorial, calendario de Esteban, turnos para clientes, alquiler de puestos para profesionales y panel de administración.
+La web de Bevacqua: experiencia, turnera por ciudad (Buenos Aires / Bariloche), lista de precios, coworking (por hora, día o mes) y panel de administración.
 
 - `public/`: el sitio estático. `index.html` es la home y `admin/` es el panel.
 - `netlify/functions/api.mjs`: la API. Guarda configuración, turnos, alquileres, mensajes y archivos subidos en Netlify Blobs.
-- `PROMPTS.md`: los prompts para generar imágenes con ChatGPT.
+- `PROMPTS-IMAGENES.md`: los prompts para generar las imágenes con ChatGPT, en dos tandas.
+- `public/img/`: las imágenes de la web. Hasta que estén las definitivas hay placeholders numerados (`IMG 01`…`IMG 17`). Para cambiarlas, reemplazá el archivo con el mismo nombre o subilas desde `/admin` → *Imágenes de la web*.
 
 ## Deploy (Netlify)
 
@@ -43,8 +44,8 @@ ADMIN_PASSWORD=dev npm run dev   # http://localhost:8888  (panel: /admin, pass "
 | Método | Ruta | Uso |
 |---|---|---|
 | GET | `/api/public` | Datos públicos: agenda, servicios, contenido y ocupación |
-| POST | `/api/book` | Reserva un turno de cliente. Valida que el horario siga libre |
-| POST | `/api/pro-book` | Pide un puesto de profesional. Queda pendiente hasta que el admin lo apruebe |
+| POST | `/api/book` | Reserva un turno con uno o varios servicios (y su largo). Valida que el horario siga libre |
+| POST | `/api/pro-book` | Pide un puesto de coworking (hora, día, semana o mes). Queda pendiente hasta que el admin lo apruebe |
 | POST | `/api/contact` | Formulario de contacto |
 | GET | `/api/media/:id` | Sirve las fotos y videos subidos (soporta Range) |
 | * | `/api/admin/*` | Panel. Requiere el header `x-admin-key` |

@@ -4,11 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Bevacqua — Look & More</title>
-  <meta name="description" content="Bevacqua Look & More. Estudio de estilismo, imagen, cortes, color y experiencias entre Buenos Aires y Bariloche. Reservá tu turno con Esteban.">
+  <meta name="description" content="Bevacqua Look & More. 22 años de estilismo, imagen, cortes y color entre Buenos Aires y Bariloche. Reservá tu turno con Tebi y conocé el coworking en Villa Crespo.">
   <meta name="theme-color" content="#080808">
   <meta property="og:title" content="Bevacqua — Look & More">
-  <meta property="og:description" content="Estilismo, imagen y experiencia. Buenos Aires / Patagonia.">
-  <meta property="og:image" content="/media/v6.jpg">
+  <meta property="og:description" content="Estilismo, imagen y experiencia. Buenos Aires / Bariloche.">
+  <meta property="og:image" content="/img/og.jpg">
   <link rel="icon" href="/logo.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,38 +18,40 @@
 </head>
 <body>
   <div class="grain" aria-hidden="true"></div>
-  <div class="cursor" aria-hidden="true"><span>PLAY</span></div>
+  <div class="cursor" aria-hidden="true"><span>VER</span></div>
 
-  <!-- LOADER -->
-  <div class="loader" aria-hidden="true">
-    <div class="loader-word"><span>B</span><span>V</span><span>C</span><span>Q</span></div>
-    <div class="loader-bar"><i></i></div>
+  <!-- LOADER: old TV switching on -->
+  <div class="tv" id="tv" aria-hidden="true">
+    <div class="tv-screen">
+      <canvas class="tv-noise" width="160" height="90"></canvas>
+      <div class="tv-logo" data-ring="full"></div>
+      <div class="tv-scan"></div>
+      <div class="tv-vignette"></div>
+    </div>
+    <div class="tv-line"></div>
   </div>
 
   <!-- NAV -->
-  <header class="nav">
-    <a href="#top" class="nav-logo" aria-label="Bevacqua inicio">
-      <span class="ring-mini" data-ring="mini"></span>
-      <span>BVCQ</span>
-    </a>
+  <header class="nav" id="nav">
+    <a href="#top" class="nav-logo" aria-label="Bevacqua Look & More — inicio"><span data-ring="nav"></span></a>
+    <nav class="nav-links" aria-label="Principal">
+      <a href="#experiencia">Experiencia</a>
+      <a href="#turnos">Turnos</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#coworking">Coworking</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
     <div class="nav-right">
-      <nav class="nav-links" aria-label="Principal">
-        <a href="#experiencia">Experiencia</a>
-        <a href="#calendario">Calendario</a>
-        <a href="#turnos">Turnos</a>
-        <a href="#profesionales">Profesionales</a>
-        <a href="#contacto">Contacto</a>
-      </nav>
+      <a href="#turnos" class="nav-cta">Reservar</a>
       <button class="nav-burger" aria-label="Menú" id="burger"><i></i><i></i></button>
     </div>
   </header>
-  <a href="#turnos" class="nav-cta">Reservar</a>
 
   <div class="mobile-menu" id="mobileMenu">
     <a href="#experiencia"><small>01</small>Experiencia</a>
-    <a href="#calendario"><small>02</small>Calendario</a>
-    <a href="#turnos"><small>03</small>Turnos</a>
-    <a href="#profesionales"><small>04</small>Profesionales</a>
+    <a href="#turnos"><small>02</small>Turnos</a>
+    <a href="#servicios"><small>03</small>Servicios</a>
+    <a href="#coworking"><small>04</small>Coworking</a>
     <a href="#contacto"><small>05</small>Contacto</a>
   </div>
 
@@ -57,7 +59,10 @@
     <!-- HERO -->
     <section class="hero" id="hero">
       <div class="hero-media">
-        <video src="/media/v6.mp4" poster="/media/v6.jpg" autoplay muted loop playsinline preload="auto"></video>
+        <picture>
+          <source media="(max-width: 760px)" srcset="/img/hero-mobile.jpg" data-img="heroMobile">
+          <img src="/img/hero.jpg" alt="" data-img="hero" fetchpriority="high">
+        </picture>
       </div>
       <div class="hero-inner">
         <div class="hero-top">
@@ -65,22 +70,16 @@
           <p class="hero-sub" data-bind="brand.heroSub">Imagen, corte, color y experiencia. Un estudio que se mueve entre la ciudad y la montaña.</p>
         </div>
         <h1 class="hero-title" aria-label="Bevacqua Look and More">
-          <span>B</span><span>e</span><span>v</span><span>a</span><span>c</span><span>q</span><span>u</span><span>a</span>
+          <span class="ht-main" aria-hidden="true"><span>B</span><span>E</span><span>V</span><span>A</span><span>C</span><span>Q</span><span>U</span><span>A</span></span>
+          <span class="ht-sub" aria-hidden="true"><span>Look</span><span>&amp;</span><span>More</span></span>
         </h1>
       </div>
-      <a href="#turnos" class="hero-badge" aria-label="Reservar turno">
-        <svg viewBox="0 0 200 200" aria-hidden="true">
-          <defs><path id="badgePath" d="M100,100 m-82,0 a82,82 0 1,1 164,0 a82,82 0 1,1 -164,0"/></defs>
-          <text fill="#fff" font-size="13.5" font-weight="500" letter-spacing="3.5" font-family="Jost, sans-serif"><textPath href="#badgePath" textLength="512" lengthAdjust="spacing">LOOK &amp; MORE • RESERVÁ TU TURNO • BEVACQUA •</textPath></text>
-        </svg>
-        <b>TURNOS</b>
-      </a>
     </section>
 
     <!-- MARQUEE -->
     <div class="marquee" aria-hidden="true">
       <div class="marquee-track" id="marquee">
-        <span>Estilismo</span><span class="serif">imagen</span><span>Corte</span><span>Color</span><span class="serif">experiencia</span><span>Buenos Aires</span><span>Bariloche</span><span class="serif">vanguardia</span>
+        <span>Estilismo</span><span class="serif">imagen</span><span>Corte</span><span>Color</span><span class="serif">experiencia</span><span>Buenos Aires</span><span>Bariloche</span><span class="serif">coworking</span>
       </div>
     </div>
 
@@ -90,8 +89,8 @@
         <div class="label" data-reveal>Manifiesto</div>
         <p class="manifesto" id="manifesto" style="margin-top:32px">No somos una peluquería. Somos un <span class="serif">estudio de imagen</span>: cortes, color y asesoramiento pensados como una pieza editorial. Cada cliente es una historia, cada look es un <span class="serif">escenario propio.</span></p>
         <div class="manifesto-foot">
-          <p data-reveal data-bind="brand.about">Esteban Bevacqua trabaja entre Buenos Aires y Bariloche, llevando el estudio a donde está la gente. Estilismo, imagen y comunicación en un mismo lugar.</p>
-          <span data-ring="mid" style="width:150px;height:150px;display:block" data-reveal></span>
+          <p data-reveal data-bind="brand.about">Tebi Bevacqua trabaja entre Buenos Aires y Bariloche, llevando el estudio a donde está la gente. Estilismo, imagen y comunicación en un mismo lugar.</p>
+          <span data-ring="full" class="manifesto-ring" data-reveal></span>
         </div>
       </div>
     </section>
@@ -106,35 +105,56 @@
             <span class="q-a">Estilismo, imagen, cortes, color y experiencias.</span>
             <span class="q-arrow"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
           </a>
-          <a class="q-row" href="#calendario" data-reveal>
-            <span class="q-num">02</span><span class="q-q">¿Dónde está?</span>
-            <span class="q-a" id="qWhere">Buenos Aires / Bariloche / otros destinos.</span>
-            <span class="q-arrow"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
-          </a>
           <a class="q-row" href="#turnos" data-reveal>
-            <span class="q-num">03</span><span class="q-q">¿Cuándo puedo reservar?</span>
-            <span class="q-a" id="qWhen">Calendario actualizado, turnos en tiempo real.</span>
+            <span class="q-num">02</span><span class="q-q">¿Dónde está?</span>
+            <span class="q-a" id="qWhere">Buenos Aires / Bariloche.</span>
             <span class="q-arrow"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
           </a>
-          <a class="q-row" href="#profesionales" data-reveal>
+          <a class="q-row" href="#turnera" data-reveal>
+            <span class="q-num">03</span><span class="q-q">¿Cuándo puedo reservar?</span>
+            <span class="q-a" id="qWhen">Agenda actualizada, turnos en tiempo real.</span>
+            <span class="q-arrow"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+          </a>
+          <a class="q-row" href="#coworking" data-reveal>
             <span class="q-num">04</span><span class="q-q">¿Puedo trabajar en el estudio?</span>
-            <span class="q-a">Sí. 3 puestos para profesionales del estilismo.</span>
+            <span class="q-a">Sí. Coworking en Villa Crespo, por hora, día o mes.</span>
             <span class="q-arrow"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
           </a>
         </div>
       </div>
     </section>
 
-    <!-- EXPERIENCIA: REEL -->
-    <section id="experiencia">
+    <!-- PARALLAX BAND -->
+    <section class="band" aria-label="22 años de oficio">
+      <div class="band-media"><img src="/img/separador.jpg" alt="" data-img="separador" data-parallax loading="lazy"></div>
+      <div class="band-text wrap">
+        <b>22</b>
+        <span>años de oficio<br><em class="serif">moda, cultura visual y tendencia</em></span>
+      </div>
+    </section>
+
+    <!-- EXPERIENCIA -->
+    <section class="section" id="experiencia">
+      <div class="wrap exp-grid">
+        <div class="exp-text">
+          <h2 class="sec-title" data-reveal>Experiencia</h2>
+          <div class="exp-copy" id="expText" data-reveal></div>
+        </div>
+        <figure class="exp-photo" data-reveal>
+          <div class="exp-frame"><img src="/img/tebi.jpg" alt="Tebi Bevacqua" data-img="tebi" data-parallax loading="lazy"></div>
+          <figcaption><span class="label" data-bind="brand.tebiCaption">Tebi Bevacqua</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- REEL -->
+    <section aria-label="Looks">
       <div class="reel" id="reel">
         <div class="reel-track" id="reelTrack">
           <div class="reel-intro">
-            <div class="label">Bevacqua Content</div>
-            <h2 class="sec-title">Experiencia<br><span class="serif">& vanguardia</span></h2>
-            <p>Cortes, transformaciones, backstage y producciones dentro y fuera del estudio. Contenido propio, con estética editorial.</p>
+            <div class="label">Looks</div>
+            <h3 class="reel-title">Cortes, color<br><span class="serif">& transformaciones</span></h3>
           </div>
-          <!-- cards injected -->
         </div>
         <div class="reel-progress"><i id="reelBar"></i></div>
       </div>
@@ -146,7 +166,7 @@
               <div class="label" data-reveal>Archivo</div>
               <h2 class="sec-title" data-reveal>Todo el <span class="serif">contenido</span></h2>
             </div>
-            <p class="sec-lead" data-reveal>Fotos, videos, cortes y trabajos. Se actualiza desde el estudio, desde la ruta, desde donde estemos.</p>
+            <p class="sec-lead" data-reveal>Fotos y trabajos. Se actualiza desde el estudio, desde la ruta, desde donde estemos.</p>
           </div>
           <div class="filters" id="filters"></div>
           <div class="grid" id="grid"></div>
@@ -154,73 +174,64 @@
       </div>
     </section>
 
-    <!-- CALENDARIO ESTEBAN -->
-    <section class="section" id="calendario" style="border-top:1px solid var(--line)">
-      <div class="wrap">
-        <div class="sec-head">
-          <div>
-            <div class="label" data-reveal>Calendario de Esteban</div>
-            <h2 class="sec-title" data-reveal>¿Dónde<br><span class="serif">estoy?</span></h2>
-          </div>
-          <p class="sec-lead" data-reveal>Dónde estoy → qué días estoy → qué horarios tengo → reservar. Tocá un día para ver la disponibilidad.</p>
-        </div>
-
-        <div class="now-card" data-reveal id="nowCard">
-          <span class="pulse"></span>
-          <div><h3 id="nowText">Cargando agenda…</h3><p id="nowSub"></p></div>
-          <a href="#turnos" class="btn btn-green" id="nowBtn">Reservar</a>
-        </div>
-
-        <div class="cal-layout">
-          <div>
-            <div class="cal" id="estebanCal" data-reveal></div>
-            <div class="legend" id="legend"></div>
-            <div class="day-panel" id="dayPanel"></div>
-          </div>
-          <div class="stops" data-reveal>
-            <h4>Próximas paradas</h4>
-            <div id="stops"></div>
-          </div>
-        </div>
+    <!-- TURNOS: landing -->
+    <section class="turnos-hero" id="turnos">
+      <div class="th-media">
+        <picture>
+          <source media="(max-width: 760px)" srcset="/img/turnos-mobile.jpg" data-img="turnosMobile">
+          <img src="/img/turnos.jpg" alt="" data-img="turnos" data-parallax loading="lazy">
+        </picture>
+      </div>
+      <div class="th-inner wrap">
+        <div class="now-pill" data-reveal><span class="pulse"></span><span id="nowText">Agenda de Tebi</span></div>
+        <h2 class="th-title" data-reveal data-bind="brand.turnosTitle">Reservá</h2>
+        <p class="th-sub serif" data-reveal data-bind="brand.turnosSub">Sé parte de esta experiencia</p>
+        <div class="city-btns" id="cityBtns" data-reveal></div>
       </div>
     </section>
 
-    <!-- TURNOS -->
-    <section class="section" id="turnos" style="border-top:1px solid var(--line)">
+    <!-- TURNERA -->
+    <section class="section" id="turnera">
       <div class="wrap">
         <div class="sec-head">
           <div>
-            <div class="label" data-reveal>Turnos clientes</div>
-            <h2 class="sec-title" data-reveal>Reservá<br><span class="serif">con Esteban</span></h2>
+            <div class="label" data-reveal>Turnera</div>
+            <h2 class="sec-title" data-reveal>Tu <span class="serif">turno</span></h2>
           </div>
-          <p class="sec-lead" data-reveal>Ubicación, servicio, fecha y horario. Los turnos se organizan según la disponibilidad real de Esteban.</p>
+          <p class="sec-lead" data-reveal>Elegí destino, servicios, día y horario. La agenda se arma con la disponibilidad real de Tebi en cada ciudad.</p>
         </div>
 
         <div class="booking" data-reveal>
           <ol class="steps" id="bSteps">
-            <li data-step="0"><div><b>Ubicación</b><em></em></div></li>
-            <li data-step="1"><div><b>Servicio</b><em></em></div></li>
+            <li data-step="0"><div><b>Destino</b><em></em></div></li>
+            <li data-step="1"><div><b>Servicios</b><em></em></div></li>
             <li data-step="2"><div><b>Fecha</b><em></em></div></li>
             <li data-step="3"><div><b>Horario</b><em></em></div></li>
             <li data-step="4"><div><b>Tus datos</b><em></em></div></li>
           </ol>
           <div>
             <div class="step-pane" data-pane="0">
-              <h3>¿Dónde <span class="serif">te encontrás?</span></h3>
-              <div class="opt-grid" id="bLocs"></div>
+              <h3>¿Dónde <span class="serif">te atendés?</span></h3>
+              <div class="dest-grid" id="bLocs"></div>
             </div>
             <div class="step-pane" data-pane="1">
-              <h3>Elegí el <span class="serif">servicio</span></h3>
-              <div class="opt-grid" id="bServices"></div>
+              <h3>¿Qué servicio <span class="serif">querés?</span></h3>
+              <p class="pane-note" id="bLocNote"></p>
+              <div id="bServices"></div>
+              <div class="cart" id="bCart" hidden>
+                <div class="cart-info"><b id="bCartCount"></b><span id="bCartMeta"></span></div>
+                <button class="btn btn-green" id="bCartGo">Elegir fecha →</button>
+              </div>
               <div class="step-actions"><button class="btn" data-back>← Volver</button></div>
             </div>
             <div class="step-pane" data-pane="2">
               <h3>¿Qué <span class="serif">día?</span></h3>
+              <p class="pane-note" id="bDateNote"></p>
               <div class="cal" id="bCal"></div>
               <div class="step-actions"><button class="btn" data-back>← Volver</button></div>
             </div>
             <div class="step-pane" data-pane="3">
-              <h3>Horarios <span class="serif">disponibles</span></h3>
+              <h3 id="bSlotTitle">Horarios <span class="serif">disponibles</span></h3>
               <div class="slots" id="bSlots"></div>
               <div class="step-actions"><button class="btn" data-back>← Volver</button></div>
             </div>
@@ -245,32 +256,45 @@
       </div>
     </section>
 
-    <!-- PROFESIONALES -->
-    <section class="section light" id="profesionales">
-      <div class="wrap">
-        <div class="pro-hero">
-          <div>
-            <div class="label" data-reveal>Espacio para profesionales</div>
-            <h2 class="sec-title" data-reveal>Trabajá<br><span class="serif">en el estudio</span></h2>
-            <div style="margin-top:40px" data-reveal>
-              <div class="pro-big" id="proStations">3</div>
-              <p>Puestos de trabajo para profesionales del estilismo</p>
-              <p class="sec-lead" style="justify-self:start;margin:0">Un estudio equipado, con estética propia y comunidad. Alquilá por día, semana o mes y sumate al circuito Bevacqua.</p>
-              <ul class="perks" id="perks"></ul>
-            </div>
-          </div>
-          <div class="pro-media" data-reveal><video src="/media/v5.mp4" poster="/media/v5.jpg" autoplay muted loop playsinline data-parallax></video></div>
-        </div>
+    <!-- SERVICIOS -->
+    <section class="section" id="servicios" style="border-top:1px solid var(--line)">
+      <div class="wrap svc-layout">
+        <aside class="svc-side">
+          <div class="label" data-reveal>Lista de precios</div>
+          <h2 class="sec-title" data-reveal>Servicios</h2>
+          <figure class="svc-photo" data-reveal><img src="/img/servicios.jpg" alt="" data-img="servicios" data-parallax loading="lazy"></figure>
+          <p class="svc-note" data-reveal><b class="green" data-bind="brand.serviciosNote">10% OFF abonando en efectivo</b><br><span data-bind="brand.serviciosBrands">L'Oréal · Igora · Alfaparf</span></p>
+          <a href="#turnos" class="btn btn-green" data-reveal>Reservá tu turno →</a>
+        </aside>
+        <div class="price-list" id="priceList"></div>
+      </div>
+    </section>
 
-        <div class="label" data-reveal style="margin-bottom:20px">Tipo de alquiler</div>
+    <!-- COWORKING -->
+    <section class="section light" id="coworking">
+      <div class="wrap">
+        <div class="cw-head">
+          <div class="label" data-reveal>Coworking · Villa Crespo</div>
+          <h2 class="sec-title cw-title" data-reveal>Coworking</h2>
+          <p class="cw-intro serif" data-reveal data-bind="brand.coworkingIntro">Un espacio para crear, compartir y desarrollar tu identidad.</p>
+        </div>
+        <div class="cw-grid">
+          <div class="cw-text" id="cwText" data-reveal></div>
+          <figure class="cw-photo" data-reveal><img src="/img/coworking.jpg" alt="El estudio de Bevacqua en Villa Crespo" data-img="coworking" data-parallax loading="lazy"></figure>
+        </div>
+        <div class="cw-stats" id="cwStats" data-reveal></div>
+
+        <div class="label" data-reveal style="margin-bottom:20px">Alquiler</div>
         <div class="prices" id="prices" data-reveal></div>
+        <p class="cw-claim" id="cwClaim" data-reveal>Tu espacio de trabajo. Tu identidad. Tu forma de crear.</p>
 
         <div class="booking" data-reveal id="proBooking">
           <ol class="steps" id="pSteps">
             <li data-step="0"><div><b>Alquiler</b><em></em></div></li>
             <li data-step="1"><div><b>Fecha</b><em></em></div></li>
-            <li data-step="2"><div><b>Puesto</b><em></em></div></li>
-            <li data-step="3"><div><b>Tus datos</b><em></em></div></li>
+            <li data-step="2"><div><b>Horario</b><em></em></div></li>
+            <li data-step="3"><div><b>Puesto</b><em></em></div></li>
+            <li data-step="4"><div><b>Tus datos</b><em></em></div></li>
           </ol>
           <div>
             <div class="step-pane" data-pane="0">
@@ -278,18 +302,26 @@
               <div class="opt-grid" id="pTypes"></div>
             </div>
             <div class="step-pane" data-pane="1">
-              <h3 id="pDateTitle">¿Desde <span class="serif">qué día?</span></h3>
+              <h3 id="pDateTitle">¿Qué <span class="serif">día?</span></h3>
               <div class="cal" id="pCal"></div>
               <div class="legend"><span><i style="background:var(--green);border-radius:50%"></i>Puesto libre</span><span><i style="background:rgba(0,0,0,.18);border-radius:50%"></i>Ocupado</span></div>
               <div class="step-actions"><button class="btn" data-back>← Volver</button></div>
             </div>
             <div class="step-pane" data-pane="2">
+              <h3>¿En qué <span class="serif">horario?</span></h3>
+              <div class="field-label">Desde</div>
+              <div class="slots" id="pFrom"></div>
+              <div class="field-label" style="margin-top:24px">Cantidad de horas</div>
+              <div class="stepper"><button type="button" id="pHoursMinus" aria-label="Menos horas">−</button><b id="pHours">2</b><button type="button" id="pHoursPlus" aria-label="Más horas">+</button><span id="pHoursMeta"></span></div>
+              <div class="step-actions"><button class="btn" data-back>← Volver</button><button class="btn btn-dark" id="pTimeGo" disabled>Ver puestos →</button></div>
+            </div>
+            <div class="step-pane" data-pane="3">
               <h3>Puestos <span class="serif">disponibles</span></h3>
-              <p id="pRange" style="margin:-12px 0 24px;color:var(--muted)"></p>
+              <p id="pRange" class="pane-note"></p>
               <div class="stations" id="pStations"></div>
               <div class="step-actions"><button class="btn" data-back>← Volver</button></div>
             </div>
-            <div class="step-pane" data-pane="3">
+            <div class="step-pane" data-pane="4">
               <h3>Solicitá <span class="serif">tu lugar</span></h3>
               <div class="summary" id="pSummary"></div>
               <form id="pForm" class="form-grid">
@@ -306,7 +338,7 @@
                 <div class="full err" id="pErr"></div>
               </form>
             </div>
-            <div class="step-pane" data-pane="4" id="pDone"></div>
+            <div class="step-pane" data-pane="5" id="pDone"></div>
           </div>
         </div>
       </div>
@@ -315,15 +347,10 @@
     <!-- CONTACTO -->
     <section class="section" id="contacto">
       <div class="wrap">
-        <div class="label" data-reveal>Contacto</div>
-        <h2 class="contact-big"><span class="line-mask"><span>Hablemos</span></span><span class="line-mask"><span class="serif">de tu look.</span></span></h2>
+        <h2 class="contact-big"><span class="line-mask"><span>Contacto</span></span></h2>
+        <p class="contact-lead" data-reveal data-bind="brand.contactText">Envianos tu consulta a través de Facebook Messenger, WhatsApp, Instagram, teléfono o e-mail.</p>
         <div class="contact-grid">
-          <div class="contact-links" data-reveal>
-            <a id="cWa" href="#" target="_blank" rel="noopener">WhatsApp <small>Respuesta rápida →</small></a>
-            <a id="cIg" href="#" target="_blank" rel="noopener">Instagram <small id="cIgUser">@bevacqua</small></a>
-            <a id="cMail" href="#">Email <small id="cMailTxt">hola@</small></a>
-            <a href="#turnos">Reservar turno <small>Online, 24/7 →</small></a>
-          </div>
+          <div class="contact-links" id="cLinks" data-reveal></div>
           <form id="cForm" class="form-grid" data-reveal>
             <div class="field"><label for="cName">Nombre</label><input id="cName" required></div>
             <div class="field"><label for="cContact">Email o teléfono</label><input id="cContact"></div>
@@ -337,12 +364,10 @@
   </main>
 
   <footer class="footer">
-    <div class="wrap">
-      <div class="footer-row">
-        <span>Bevacqua Look & More</span>
-        <span>Buenos Aires — Bariloche</span>
-        <a href="/admin">Admin</a>
-      </div>
+    <div class="wrap footer-row">
+      <span>Bevacqua Look & More</span>
+      <span>Buenos Aires — Bariloche</span>
+      <a href="/admin">Admin</a>
     </div>
     <div class="footer-word" id="footerWord">BEVACQUA</div>
     <div class="wrap footer-row">
@@ -352,7 +377,7 @@
   </footer>
 
   <!-- LIGHTBOX -->
-  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Contenido">
     <button class="lightbox-close" id="lbClose">Cerrar ✕</button>
     <div class="lightbox-inner">
       <div class="lightbox-media" id="lbMedia"></div>
@@ -360,13 +385,13 @@
         <div class="label" id="lbTag"></div>
         <h3 id="lbTitle"></h3>
         <p id="lbText"></p>
-        <p id="lbPlace" style="font-size:12px;letter-spacing:.25em;text-transform:uppercase;color:var(--green)"></p>
+        <p id="lbPlace" class="lb-place"></p>
         <a href="#turnos" class="btn btn-green" id="lbBook" style="margin-top:16px">Quiero este look</a>
       </div>
     </div>
   </div>
 
-  <div class="toast" id="toast"></div>
+  <div class="toast" id="toast" role="status"></div>
 
   <script src="/js/vendor/gsap.min.js"></script>
   <script src="/js/vendor/ScrollTrigger.min.js"></script>
