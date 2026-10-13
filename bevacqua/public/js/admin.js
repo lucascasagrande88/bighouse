@@ -422,15 +422,12 @@
 
   // ───────── imágenes de la web ─────────
   const SLOTS = [
-    ["hero", "Inicio (compu)", "IMG 01"], ["heroMobile", "Inicio (celular)", "IMG 02"], ["separador", "Banda “22 años”", "IMG 11"],
-    ["tebi", "Experiencia · foto de Tebi", "Foto real"], ["turnos", "Turnos (compu)", "IMG 03"], ["turnosMobile", "Turnos (celular)", "IMG 04"],
-    ["ciudad-bue", "Destino Buenos Aires", "IMG 12"], ["ciudad-brc", "Destino Bariloche", "IMG 13"], ["servicios", "Servicios", "IMG 14"], ["coworking", "Coworking", "Foto real"],
+    ["tebi", "Experiencia · foto de Esteban", "Carrete"], ["turnos", "Turnos (compu)", "Fondo"], ["turnosMobile", "Turnos (celular)", "Fondo"], ["coworking", "Coworking", "Foto"],
   ];
   let slotTarget = null;
   function renderImages() {
     const im = (C().images ||= {});
-    const extra = C().locations.filter((l) => !SLOTS.some(([k]) => k === "ciudad-" + l.id)).map((l) => ["ciudad-" + l.id, "Destino " + l.name, "nueva"]);
-    $("#imgSlots").innerHTML = [...SLOTS, ...extra].map(([k, label, tag]) => `<div class="post"><div class="m"><img src="${esc(im[k] || "/img/turnos.jpg")}" alt="" loading="lazy"><span class="pill ty">${esc(tag)}</span></div>
+    $("#imgSlots").innerHTML = SLOTS.map(([k, label, tag]) => `<div class="post"><div class="m"><img src="${esc(im[k] || "/img/turnos.jpg")}" alt="" loading="lazy"><span class="pill ty">${esc(tag)}</span></div>
       <div class="b"><b>${esc(label)}</b><small style="color:var(--muted);word-break:break-all">${esc(im[k] || "(usa la de turnos)")}</small>
       <div class="acts"><button class="btn sm g" data-slot="${k}">Subir foto</button></div></div></div>`).join("");
   }

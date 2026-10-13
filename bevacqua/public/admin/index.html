@@ -138,7 +138,7 @@
     <aside>
       <div class="brand"><img src="/logo.svg" alt="">BVCQ</div>
       <button class="tab on" data-tab="resumen">Resumen</button>
-      <button class="tab" data-tab="agenda">Agenda de Tebi</button>
+      <button class="tab" data-tab="agenda">Agenda de Esteban</button>
       <button class="tab" data-tab="turnos">Turnos clientes <span class="badge" id="bTurnos" hidden></span></button>
       <button class="tab" data-tab="pros">Coworking <span class="badge" id="bPros" hidden></span></button>
       <button class="tab" data-tab="contenido">Contenido (looks)</button>
@@ -155,7 +155,7 @@
     <main>
       <!-- RESUMEN -->
       <section class="pane on" data-pane="resumen">
-        <h1>Hola, <span class="serif">Tebi</span></h1>
+        <h1>Hola, <span class="serif">Esteban</span></h1>
         <p class="sub" id="hoyTxt"></p>
         <div class="kpis" id="kpis"></div>
         <h2>Próximos turnos</h2>
@@ -166,7 +166,7 @@
 
       <!-- AGENDA -->
       <section class="pane" data-pane="agenda">
-        <h1>Agenda <span class="serif">de Tebi</span></h1>
+        <h1>Agenda <span class="serif">de Esteban</span></h1>
         <p class="sub">Tocá un día para indicar dónde estás, abrir/cerrar el día y cambiar horarios. Usá “carga rápida” para períodos largos.</p>
         <div class="cal-wrap">
           <div class="card"><div id="aCal"></div></div>
@@ -231,7 +231,7 @@
       <!-- CONTENIDO -->
       <section class="pane" data-pane="contenido">
         <h1>Contenido <span class="serif">& experiencia</span></h1>
-        <p class="sub">Subí fotos y videos. Aparecen al instante en la web. Los primeros 8 van al carrete horizontal.</p>
+        <p class="sub">Subí fotos y videos. Aparecen al instante en la web. Los primeros 8 van al carrete horizontal, después de la foto de Esteban.</p>
         <div class="drop" id="drop">
           <b style="color:var(--fg)">Arrastrá fotos o videos acá</b><br>o tocá para elegir archivos (videos hasta 200MB · recomendado MP4 vertical u horizontal, &lt;30MB)
           <input type="file" id="file" accept="image/*,video/*" multiple hidden>
@@ -245,7 +245,7 @@
       <!-- IMAGENES -->
       <section class="pane" data-pane="imagenes">
         <h1>Imágenes <span class="serif">de la web</span></h1>
-        <p class="sub">Reemplazá cualquier foto de la web. Se actualiza al instante. Los nombres coinciden con PROMPTS-IMAGENES.md.</p>
+        <p class="sub">Reemplazá las fotos de la web. Se actualiza al instante.</p>
         <div class="posts" id="imgSlots"></div>
         <input type="file" id="imgFile" accept="image/*" hidden>
       </section>
@@ -266,12 +266,11 @@
           <label class="f" style="margin-bottom:14px">Bajada superior del inicio<input data-cfg="brand.heroKicker"></label>
           <label class="f" style="margin-bottom:14px">Texto del inicio<textarea data-cfg="brand.heroSub"></textarea></label>
           <label class="f" style="margin-bottom:14px">Manifiesto<textarea data-cfg="brand.manifesto" style="min-height:120px"></textarea></label>
-          <label class="f">Sobre Tebi (debajo del manifiesto)<textarea data-cfg="brand.about"></textarea></label>
+          <label class="f">Sobre Esteban (debajo del manifiesto)<textarea data-cfg="brand.about"></textarea></label>
         </div>
         <h2>Experiencia</h2>
         <div class="card">
-          <label class="f" style="margin-bottom:14px">Texto (separá párrafos con una línea en blanco)<textarea data-cfg="brand.experiencia" style="min-height:220px"></textarea></label>
-          <label class="f">Pie de la foto de Tebi<input data-cfg="brand.tebiCaption"></label>
+          <label class="f">Texto (separá párrafos con una línea en blanco)<textarea data-cfg="brand.experiencia" style="min-height:220px"></textarea></label>
         </div>
         <h2>Turnos y servicios</h2>
         <div class="card">
@@ -282,6 +281,7 @@
         <div class="card">
           <label class="f" style="margin-bottom:14px">Frase de apertura<input data-cfg="brand.coworkingIntro"></label>
           <label class="f" style="margin-bottom:14px">Texto (separá párrafos con una línea en blanco)<textarea data-cfg="brand.coworkingText" style="min-height:220px"></textarea></label>
+          <label class="f" style="margin-bottom:14px">Línea de alquiler<input data-cfg="brand.coworkingRental"></label>
           <label class="f">Frase de cierre<input data-cfg="brand.coworkingClaim"></label>
         </div>
         <h2>Contacto (texto)</h2>

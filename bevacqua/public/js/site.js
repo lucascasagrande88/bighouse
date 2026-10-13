@@ -144,14 +144,17 @@
     }
     const c = D.contact;
     const digits = (x) => String(x || "").replace(/\D/g, "");
-    const links = [];
-    if (c.whatsapp) links.push([`https://wa.me/${digits(c.whatsapp)}`, "WhatsApp", "Respuesta rápida →"]);
-    if (c.instagram) links.push([`https://instagram.com/${c.instagram.replace(/^@/, "")}`, "Instagram", "@" + c.instagram.replace(/^@/, "")]);
-    if (c.messenger) links.push([`https://m.me/${c.messenger}`, "Messenger", "Facebook →"]);
+    $("#cWa").href = `https://wa.me/${digits(c.whatsapp)}`;
+    $("#cIg").href = `https://instagram.com/${String(c.instagram || "").replace(/^@/, "")}`;
+    $("#cIgUser").textContent = "@" + String(c.instagram || "").replace(/^@/, "");
+    $("#cMsn").hidden = !c.messenger;
+    if (c.messenger) $("#cMsn").href = `https://m.me/${c.messenger}`;
     const phone = c.phone || (c.whatsapp ? "+" + digits(c.whatsapp) : "");
-    if (phone) links.push([`tel:${phone.replace(/[^\d+]/g, "")}`, "Teléfono", phone]);
-    if (c.email) links.push([`mailto:${c.email}`, "E-mail", c.email]);
-    $("#cLinks").innerHTML = links.map(([h, t, s]) => `<a href="${esc(h)}" ${h.startsWith("http") ? 'target="_blank" rel="noopener"' : ""}>${t} <small>${esc(s)}</small></a>`).join("");
+    $("#cTel").hidden = !phone;
+    $("#cTel").href = `tel:${phone.replace(/[^\d+]/g, "")}`;
+    $("#cTelTxt").textContent = phone;
+    $("#cMail").href = `mailto:${c.email}`;
+    $("#cMailTxt").textContent = c.email;
     $("#year").textContent = new Date().getFullYear();
   }
 
@@ -164,6 +167,10 @@
   function renderContent() {
     const track = $("#reelTrack");
     track.querySelectorAll(".reel-card").forEach((n) => n.remove());
+    const tebi = document.createElement("figure");
+    tebi.className = "reel-card tebi-card";
+    tebi.innerHTML = `<img src="${esc(D.images?.tebi || "/img/tebi.jpg")}" alt="Esteban Bevacqua" loading="lazy"><div class="reel-meta"><h3>Esteban Bevacqua</h3><small>Tebi</small></div>`;
+    track.appendChild(tebi);
     D.posts.slice(0, 8).forEach((p, i) => {
       const a = document.createElement("article");
       a.className = "reel-card";
@@ -181,10 +188,10 @@
     const list = tag === "Todo" ? D.posts : D.posts.filter((p) => p.tag === tag);
     $("#grid").innerHTML = list
       .map((p) => `<article class="tile ${p.size === "wide" ? "wide" : p.size === "tall" ? "tall" : ""}" data-post="${p.id}" data-cursor="${p.type === "video" ? "PLAY" : "VER"}">
-        ${mediaEl(p, 'data-tile')}<div class="tile-cap"><span>${esc(p.tag)}</span><b>${esc(p.title)}</b></div></article>`)
+        ${mediaEl(p)}<div class="tile-cap"><span>${esc(p.tag)}</span><b>${esc(p.title)}</b></div></article>`)
       .join("") || `<p class="empty-msg">Pronto, contenido nuevo.</p>`;
     observeVideos();
-    if (booted) { tileParallax(); ScrollTrigger.refresh(); }
+    if (booted) ScrollTrigger.refresh();
   }
   $("#filters").addEventListener("click", (e) => {
     const b = e.target.closest(".chip");
@@ -226,7 +233,7 @@
     const today = D.today;
     const td = D.days[today];
     if (td) {
-      $("#nowText").innerHTML = `Hoy Tebi está en <b>${esc(locOf(td.loc).name)}</b>`;
+      $("#nowText").innerHTML = `Hoy Esteban está en <b>${esc(locOf(td.loc).name)}</b>`;
     } else {
       const next = stops().find((s) => s.end >= today);
       $("#nowText").innerHTML = next ? `Próxima parada: <b>${esc(locOf(next.loc).name)}</b> · ${short(next.start)}` : "Agenda en preparación";
@@ -255,44 +262,66 @@
     const totalPrice = () => st.items.reduce((a, it) => a + itemPrice(it), 0);
     const hasFrom = () => st.items.some((it) => svcById(it.id)?.from);
 
+    // shortest booking that still makes sense for a day: the selected services, or the shortest service
+    const need = () => (st.items.length ? totalDur() : minService());
+
     function go(n) {
       st.step = n;
       panes.forEach((p) => p.classList.toggle("active", Number(p.dataset.pane) === n));
       steps.forEach((li, i) => { li.classList.toggle("active", i === n); li.classList.toggle("done", i < n && n < 5); });
       const em = (i, t) => (steps[i].querySelector("em").textContent = t || "");
       em(0, st.loc && locOf(st.loc).name);
-      em(1, st.items.length ? (st.items.length === 1 ? itemName(st.items[0]) : `${st.items.length} servicios`) : "");
-      em(2, st.date && short(st.date));
+      em(1, st.date && short(st.date));
+      em(2, st.items.length ? (st.items.length === 1 ? itemName(st.items[0]) : `${st.items.length} servicios`) : "");
       em(3, st.time);
       keepInView("#turnera .booking");
       if (n === 0) renderLocs();
-      if (n === 1) renderServices();
-      if (n === 2) renderCal();
+      if (n === 1) renderCal();
+      if (n === 2) renderServices();
       if (n === 3) renderSlots();
       if (n === 4) renderSummary();
     }
+    // destination cards with the dates Esteban is in each city
     function renderLocs() {
       $("#bLocs").innerHTML = D.locations.map((l) => {
         const sts = stops(l.id).slice(0, 3);
         const free = sortedDays().some((d) => D.days[d].loc === l.id && freeSlots(d, minService()).length);
-        return `<button class="dest ${st.loc === l.id ? "on" : ""}" data-loc="${l.id}" ${free ? "" : "disabled"}>
-          <img src="${esc(locImg(l.id))}" alt="" loading="lazy">
+        return `<button class="opt ${st.loc === l.id ? "on" : ""}" data-loc="${l.id}" ${free ? "" : "disabled style='opacity:.4'"}>
           <small>📍 ${esc(l.address || "")}</small><b>${esc(l.name)}</b>
-          <ul>${sts.length ? sts.map((s) => `<li>${rangeTxt(s)}</li>`).join("") : "<li>Sin fechas por ahora</li>"}</ul></button>`;
+          <ul class="dates">${sts.length ? sts.map((s) => `<li>${rangeTxt(s)}</li>`).join("") : "<li>Sin fechas por ahora</li>"}</ul></button>`;
       }).join("");
     }
     $("#bLocs").addEventListener("click", (e) => {
       const b = e.target.closest("[data-loc]");
-      if (b) pickCity(b.dataset.loc, true);
+      if (b) pickCity(b.dataset.loc);
     });
-    function pickCity(id, fromPane) {
+    function pickCity(id) {
       if (st.loc !== id) { st.date = null; st.time = null; }
       st.loc = id;
-      if (fromPane || !st.items.length) go(1); else go(2);
+      go(1);
     }
+    // the city's own calendar
+    function renderCal() {
+      const ds = sortedDays().filter((d) => D.days[d].loc === st.loc);
+      const first = ds.find((d) => freeSlots(d, need()).length) || D.today;
+      const sts = stops(st.loc).slice(0, 4);
+      $("#bCalTitle").innerHTML = `${esc(locOf(st.loc).name)} <span class="serif">· ¿qué día?</span>`;
+      $("#bDates").innerHTML = `Esteban en <b>${esc(locOf(st.loc).name)}</b>: ${sts.map(rangeTxt).join(" · ") || "sin fechas publicadas"}`;
+      Calendar($("#bCal"), {
+        start: st.date || first, min: D.today, max: ds[ds.length - 1] || D.today, selected: st.date,
+        day(s) {
+          const d = D.days[s];
+          if (!d || d.loc !== st.loc) return {};
+          const n = freeSlots(s, need()).length;
+          if (!n) return { html: "<small>completo</small>" };
+          return { cls: "loc-bue", click: true, html: `<small>${n} libres</small>` };
+        },
+        onPick(s) { st.date = s; st.time = null; setTimeout(() => go(2), 180); },
+      });
+    }
+    // agendamas-style service picker
     function renderServices() {
-      const sts = stops(st.loc).slice(0, 3);
-      $("#bLocNote").innerHTML = `Tebi en <b>${esc(locOf(st.loc).name)}</b>: ${sts.map(rangeTxt).join(" · ") || "sin fechas publicadas"}`;
+      $("#bSvcNote").innerHTML = `${nice(st.date)} · <b>${esc(locOf(st.loc).name)}</b>. Podés sumar más de un servicio.`;
       $("#bServices").innerHTML = cats().map((c) => `<div class="svc-group"><h4>${esc(c)}</h4><div class="svc-cards">${
         D.services.filter((s) => (s.cat || "Servicios") === c).map((s) => {
           const sel = st.items.find((it) => it.id === s.id);
@@ -332,34 +361,18 @@
     });
     $("#bCartGo").addEventListener("click", () => {
       if (!st.loc) return go(0);
-      if (st.date && !freeSlots(st.date, totalDur()).length) st.date = null;
-      go(st.date ? 3 : 2);
+      if (!st.date) return go(1);
+      go(3);
     });
-    function renderCal() {
-      const need = totalDur();
-      const ds = sortedDays().filter((d) => D.days[d].loc === st.loc);
-      const first = ds.find((d) => freeSlots(d, need).length) || D.today;
-      $("#bDateNote").innerHTML = `${esc(locOf(st.loc).name)} · ${esc(st.items.map(itemName).join(" + "))} · <b>${dur(need)}</b>`;
-      Calendar($("#bCal"), {
-        start: st.date || first, min: D.today, max: ds[ds.length - 1] || D.today, selected: st.date,
-        day(s) {
-          const d = D.days[s];
-          if (!d || d.loc !== st.loc) return {};
-          const n = freeSlots(s, need).length;
-          if (!n) return { html: "<small>completo</small>" };
-          return { cls: "avail", click: true, html: `<small>${n} libres</small>` };
-        },
-        onPick(s) { st.date = s; st.time = null; setTimeout(() => go(3), 180); },
-      });
-    }
     function renderSlots() {
       const sl = freeSlots(st.date, totalDur());
       $("#bSlots").innerHTML = sl.length
         ? sl.map((t) => `<button class="slot ${st.time === t ? "on" : ""}" data-time="${t}">${t}</button>`).join("")
-        : `<p class="empty-msg">No quedan horarios este día. Probá otra fecha.</p>`;
+        : `<p class="empty-msg">Ese día no queda lugar para ${dur(totalDur())}. <button class="btn" data-goto="1" style="margin-top:12px">Elegir otra fecha</button></p>`;
       $("#bSlotTitle").innerHTML = `${nice(st.date)} <span class="serif">· ${esc(locOf(st.loc).name)}</span>`;
     }
     $("#bSlots").addEventListener("click", (e) => {
+      if (e.target.closest("[data-goto]")) { st.date = null; return go(1); }
       const b = e.target.closest("[data-time]");
       if (!b) return;
       st.time = b.dataset.time;
@@ -367,7 +380,7 @@
     });
     function renderSummary() {
       $("#bSummary").innerHTML = [
-        ["Destino", locOf(st.loc).name], ["Servicios", st.items.map(itemName).join(" + ")], ["Fecha", nice(st.date)], ["Horario", st.time + " hs"],
+        ["Destino", locOf(st.loc).name], ["Fecha", nice(st.date)], ["Servicios", st.items.map(itemName).join(" + ")], ["Horario", st.time + " hs"],
         ["Duración", dur(totalDur())], ["Valor", (hasFrom() ? "desde " : "") + money(totalPrice())],
       ].map(([k, v]) => `<div><small>${k}</small><b>${esc(v)}</b></div>`).join("");
       $("#bErr").textContent = "";
@@ -403,8 +416,8 @@
       return URL.createObjectURL(new Blob([txt], { type: "text/calendar" }));
     }
     function done(b) {
-      const msg = encodeURIComponent(`¡Hola Tebi! Reservé un turno 🙌\n${b.serviceName}\n${nice(b.date)} ${b.time} hs (${b.locationName})\nCódigo: ${b.id}\nNombre: ${b.name}`);
-      $("#bDone").innerHTML = `<div class="ticket"><span class="ticket-ring" data-ring="t"></span>
+      const msg = encodeURIComponent(`Hola Esteban! Reservé un turno 🙌\n${b.serviceName}\n${nice(b.date)} ${b.time} hs (${b.locationName})\nCódigo: ${b.id}\nNombre: ${b.name}`);
+      $("#bDone").innerHTML = `<div class="ticket">
         <div class="label">Turno confirmado</div>
         <div class="code">${b.id}</div>
         <div class="summary" style="border:0;padding:0">
@@ -420,7 +433,6 @@
           <a class="btn" href="${ics(b)}" download="turno-bevacqua-${b.id}.ics">Agregar al calendario</a>
           <button class="btn" id="bAgain">Nuevo turno</button>
         </div></div>`;
-      ring($("#bDone [data-ring]"), { center: true });
       go(5);
       $("#bAgain").onclick = () => { Object.assign(st, { items: [], date: null, time: null }); $("#bForm").reset(); go(st.loc ? 1 : 0); };
       toast("¡Turno confirmado! Código " + b.id);
@@ -433,12 +445,12 @@
     return {
       init: () => go(0),
       refresh: () => go(st.step),
-      pickCity: (id) => pickCity(id, false),
+      pickCity: (id) => pickCity(id),
       addService(id) {
         const s = svcById(id);
         if (!s) return;
         if (!st.items.find((it) => it.id === id) && !(s.variants && s.variants.length)) st.items.push({ id, variant: "" });
-        go(st.loc ? 1 : 0);
+        go(!st.loc ? 0 : !st.date ? 1 : 2);
         if (s.variants && s.variants.length) {
           const card = $(`#bServices [data-svc="${id}"]`);
           if (card) card.classList.add("open");
@@ -527,8 +539,8 @@
     }
     function renderTop() {
       const s = D.studio;
-      $("#cwStats").innerHTML = [[s.stations, "Puestos de trabajo"], ["7º", "Piso, frente a la plaza"], ["VC", "Villa Crespo"], [`${s.open}`, `a ${s.close} hs`]]
-        .map(([b, t]) => `<div><b>${esc(b)}</b><span>${esc(t)}</span></div>`).join("");
+      $("#proStations").textContent = s.stations;
+      $("#perks").innerHTML = (s.perks || []).map((p) => `<li>${esc(p)}</li>`).join("") + `<li>🕘 ${esc(s.open)} — ${esc(s.close)}</li><li>📍 ${esc(s.address)}</li>`;
       $("#prices").innerHTML = plans().map((t) => `<button class="price-card" data-type="${t}"><small>Alquiler ${PLAN[t].unit}</small><b>${money(s.prices[PLAN[t].key])}</b><span>${PLAN[t].desc} →</span></button>`).join("");
     }
     function renderTypes() {
@@ -721,15 +733,6 @@
     });
   }
 
-  function tileParallax() {
-    if (!window.ScrollTrigger || reduce) return;
-    $$("img[data-tile], video[data-tile]").forEach((m) => {
-      if (m._px) return;
-      m._px = 1;
-      gsap.fromTo(m, { yPercent: -8 }, { yPercent: 0, ease: "none", scrollTrigger: { trigger: m.parentElement, start: "top bottom", end: "bottom top", scrub: true } });
-    });
-  }
-
   function animations() {
     if (!window.gsap || !window.ScrollTrigger || reduce) {
       $$("[data-reveal]").forEach((el) => { el.style.opacity = 1; el.style.transform = "none"; });
@@ -766,11 +769,10 @@
       ScrollTrigger.create({ trigger: `#${id}`, endTrigger: end, start: "top 50%", end: "bottom 50%", onToggle: (s) => link.classList.toggle("on", s.isActive) });
     });
 
-    // hero: image drifts slower than the page, frame closes in, title rises
+    // hero: frame closes in + title drift
     gsap.timeline({ scrollTrigger: { trigger: "#hero", start: "top top", end: "bottom top", scrub: true } })
-      .to(".hero-media", { clipPath: "inset(5% 3% 9% 3% round 4px)", ease: "none" }, 0)
-      .to(".hero-media img", { yPercent: 10, ease: "none" }, 0)
-      .to(".hero-title", { yPercent: -35, ease: "none" }, 0)
+      .to(".hero-media", { clipPath: "inset(6% 4% 10% 4% round 4px)", scale: 0.96, ease: "none" }, 0)
+      .to(".hero-title", { yPercent: -40, ease: "none" }, 0)
       .to(".hero-top", { opacity: 0, ease: "none" }, 0);
 
     // marquee reacts to scroll velocity
@@ -790,12 +792,10 @@
 
     // parallax on every editorial image (moves inside its frame)
     $$("img[data-parallax]").forEach((img) => {
-      const box = img.closest(".band, .turnos-hero, figure, .exp-frame") || img.parentElement;
+      const box = img.closest(".turnos-hero") || img.parentElement;
       gsap.fromTo(img, { yPercent: -14 }, { yPercent: 0, ease: "none", scrollTrigger: { trigger: box, start: "top bottom", end: "bottom top", scrub: true } });
     });
-    gsap.fromTo(".band-text b", { yPercent: 30 }, { yPercent: -10, ease: "none", scrollTrigger: { trigger: ".band", start: "top bottom", end: "bottom top", scrub: true } });
     gsap.fromTo(".th-title", { yPercent: 25 }, { yPercent: -10, ease: "none", scrollTrigger: { trigger: "#turnos", start: "top bottom", end: "bottom top", scrub: true } });
-    tileParallax();
 
     gsap.from(".contact-big .line-mask > span", { yPercent: 110, duration: 1.3, ease: "expo.out", scrollTrigger: { trigger: ".contact-big", start: "top 85%" } });
     gsap.fromTo("#footerWord", { xPercent: 8 }, { xPercent: -6, ease: "none", scrollTrigger: { trigger: ".footer", start: "top bottom", end: "bottom bottom", scrub: true } });
@@ -864,6 +864,7 @@
     await introP;
     animations();
     booted = true;
+    $(".hero-media video").play().catch(() => {});
   }
   boot();
 })();

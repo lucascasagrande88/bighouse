@@ -97,21 +97,20 @@ function defaultServices() {
 
 function defaultConfig() {
   return {
-    version: 2,
+    version: 3,
     brand: {
       heroKicker: "Estudio de estilismo · Buenos Aires — Patagonia",
       heroSub: "Imagen, corte, color y experiencia. Un estudio que se mueve entre la ciudad y la montaña.",
       manifesto:
         "No somos una peluquería. Somos un estudio de imagen: cortes, color y asesoramiento pensados como una pieza editorial. Cada cliente es una historia, cada look es un escenario propio.",
       about:
-        "Tebi Bevacqua trabaja entre Buenos Aires y Bariloche, llevando el estudio a donde está la gente. Estilismo, imagen y comunicación en un mismo lugar.",
+        "Esteban Bevacqua trabaja entre Buenos Aires y Bariloche, llevando el estudio a donde está la gente. Estilismo, imagen y comunicación en un mismo lugar.",
       experiencia: [
         "Bevacqua Look & More cuenta más de 22 años de experiencia, con una trayectoria atravesada por la moda, la cultura visual y la evolución de las tendencias.",
         "Una mirada construida desde el oficio, mucho antes de la era digital, donde la creatividad y la vanguardia nacen de una visión propia: no se replican. Se observan, se interpretan y se transforman.",
         "Un espacio donde la búsqueda va más allá. Donde cada persona encuentra una imagen que dialoga con su identidad, su estilo de vida y su rutina.",
         "Porque no se trata solamente de crear un look, sino de encontrar una manera auténtica de expresarse.",
       ].join("\n\n"),
-      tebiCaption: "Tebi Bevacqua",
       turnosTitle: "Reservá",
       turnosSub: "Sé parte de esta experiencia",
       serviciosNote: "10% OFF abonando en efectivo",
@@ -123,20 +122,15 @@ function defaultConfig() {
         "Más que un lugar de trabajo, una comunidad creativa donde compartir experiencias, conectar con otros profesionales y encontrar nuevas formas de expresión.",
         "Un espacio abierto al mundo, pensado para profesionales locales e internacionales que buscan un lugar propio para crear, trabajar y desarrollar sus proyectos en Buenos Aires.",
       ].join("\n\n"),
+      coworkingRental: "Alquiler por hora, por día o por mes.",
       coworkingClaim: "Tu espacio de trabajo. Tu identidad. Tu forma de crear.",
       contactText: "Envianos tu consulta a través de Facebook Messenger, WhatsApp, Instagram, teléfono o e-mail.",
     },
     images: {
-      hero: IMG("hero"),
-      heroMobile: IMG("hero-mobile"),
-      separador: IMG("separador"),
       tebi: IMG("tebi"),
       turnos: IMG("turnos"),
       turnosMobile: IMG("turnos-mobile"),
-      servicios: IMG("servicios"),
       coworking: IMG("coworking"),
-      "ciudad-bue": IMG("ciudad-buenos-aires"),
-      "ciudad-brc": IMG("ciudad-bariloche"),
     },
     contact: {
       whatsapp: "5491100000000",
@@ -146,8 +140,8 @@ function defaultConfig() {
       messenger: "",
     },
     locations: [
-      { id: "bue", name: "Buenos Aires", short: "BUE", address: "Villa Crespo, CABA", color: "#2CF56D" },
-      { id: "brc", name: "Bariloche", short: "BRC", address: "San Carlos de Bariloche", color: "#FFFFFF" },
+      { id: "bue", name: "Buenos Aires", short: "BUE", address: "Villa Crespo, CABA", color: "#2BFF88" },
+      { id: "brc", name: "Bariloche", short: "BRC", address: "Centro Cívico, San Carlos de Bariloche", color: "#FFFFFF" },
     ],
     slotStep: 40,
     services: defaultServices(),
@@ -161,22 +155,22 @@ function defaultConfig() {
       address: "Villa Crespo, CABA · 7º piso, frente a la plaza",
       openDays: [1, 2, 3, 4, 5, 6],
       blocked: [],
-      perks: ["Sillón y espejo profesional", "Luz natural", "Vista a la plaza", "Wi-Fi + música", "Espacio para contenido"],
+      perks: ["Sillón y espejo profesional", "Lavacabezas compartido", "Wi-Fi + música", "Productos de cortesía", "Espacio para contenido"],
     },
     posts: [
-      { id: "c1", type: "image", src: IMG("contenido-01"), title: "La ruta", tag: "Experiencia", place: "Patagonia", text: "Cortes que se mueven con el viento.", size: "tall" },
-      { id: "c2", type: "image", src: IMG("contenido-02"), title: "Ciudad de noche", tag: "Cortes", place: "Buenos Aires", text: "Textura, forma y actitud.", size: "tall" },
-      { id: "c3", type: "image", src: IMG("contenido-03"), title: "La previa", tag: "Experiencia", place: "Villa Crespo", text: "El momento antes de salir.", size: "tall" },
-      { id: "c4", type: "image", src: IMG("contenido-04"), title: "Textura", tag: "Editorial", place: "Nahuel Huapi", text: "El pelo como materia.", size: "wide" },
-      { id: "c5", type: "image", src: IMG("contenido-05"), title: "Cobre", tag: "Color", place: "Estudio", text: "Color de autor, a contraluz.", size: "tall" },
-      { id: "c6", type: "image", src: IMG("contenido-06"), title: "Nuevo capítulo", tag: "Transformación", place: "Buenos Aires", text: "Un corte que cambia la forma de mirarse.", size: "wide" },
+      { id: "p6", type: "video", src: "/media/v6.mp4", poster: "/media/v6.jpg", title: "Still Summer", tag: "Experiencia", place: "Buenos Aires", text: "Un día abierto, piezas favoritas y ningún apuro.", size: "wide" },
+      { id: "p4", type: "video", src: "/media/v4.mp4", poster: "/media/v4.jpg", title: "Freedom of Form", tag: "Editorial", place: "Patagonia", text: "Libertad de movimiento, de combinaciones, de elección.", size: "tall" },
+      { id: "p2", type: "video", src: "/media/v2.mp4", poster: "/media/v2.jpg", title: "Autumn Cut", tag: "Cortes", place: "Bariloche", text: "Texturas para el frío. Cortes que se mueven con el viento.", size: "normal" },
+      { id: "p5", type: "video", src: "/media/v5.mp4", poster: "/media/v5.jpg", title: "New In", tag: "Transformación", place: "Estudio", text: "Piezas pensadas para ser parte de tu historia.", size: "tall" },
+      { id: "p3", type: "video", src: "/media/v3.mp4", poster: "/media/v3.jpg", title: "Born to Disobey", tag: "Vanguardia", place: "Ruta 40", text: "Decisiones espontáneas. Escenarios propios.", size: "wide" },
+      { id: "p1", type: "video", src: "/media/v1.mp4", poster: "/media/v1.jpg", title: "Backstage", tag: "Estudio", place: "Buenos Aires", text: "Detrás del sillón: el proceso.", size: "normal" },
     ],
   };
 }
 
-// Brings a v1 config (first build) up to v2 without losing the agenda or uploaded content.
+// Rebuilds older configs on top of the current defaults without losing the agenda or uploaded content.
 function migrate(cfg) {
-  if (cfg.version === 2) return { cfg, changed: false };
+  if (cfg.version === 3) return { cfg, changed: false };
   const next = defaultConfig();
   if (cfg.days) next.days = cfg.days;
   if (cfg.slotStep) next.slotStep = Math.max(cfg.slotStep, 20);
@@ -296,8 +290,8 @@ async function bookClient(req) {
   if (!items) return bad("Elegí al menos un servicio válido.");
   if (!isDate(body.date) || body.date < todayAR()) return bad("Fecha inválida.");
   const day = cfg.days[body.date];
-  if (!day) return bad("Tebi no atiende ese día.");
-  if (body.locationId && body.locationId !== day.loc) return bad("Ese día Tebi está en otra ciudad.");
+  if (!day) return bad("Esteban no atiende ese día.");
+  if (body.locationId && body.locationId !== day.loc) return bad("Ese día Esteban está en otra ciudad.");
   const name = clean(body.name, 80);
   const phone = clean(body.phone, 40);
   if (name.length < 2 || phone.length < 6) return bad("Completá nombre y teléfono.");

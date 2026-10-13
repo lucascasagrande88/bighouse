@@ -1,11 +1,12 @@
 # Bevacqua — Look & More
 
-La web de Bevacqua: experiencia, turnera por ciudad (Buenos Aires / Bariloche), lista de precios, coworking (por hora, día o mes) y panel de administración.
+La web de Bevacqua: la versión original más los cambios del PDF "Landing Bevacqua" aplicados tal cual. Tiene Experiencia, Turnos (Buenos Aires / Bariloche → calendario de cada ciudad), Servicios (lista de precios), Coworking (por hora, día o mes), Contacto y el panel de administración.
 
 - `public/`: el sitio estático. `index.html` es la home y `admin/` es el panel.
 - `netlify/functions/api.mjs`: la API. Guarda configuración, turnos, alquileres, mensajes y archivos subidos en Netlify Blobs.
-- `PROMPTS-IMAGENES.md`: los prompts para generar las imágenes con ChatGPT, en dos tandas.
-- `public/img/`: las imágenes de la web. La tanda 1 ya está cargada; los lugares de la tanda 2 usan imágenes de la tanda 1 hasta que lleguen las definitivas (ver estado en `PROMPTS-IMAGENES.md`). Para cambiarlas, reemplazá el archivo con el mismo nombre o subilas desde `/admin` → *Imágenes de la web*.
+- `public/media/`: los videos originales del carrete y del inicio.
+- `public/img/`: las fotos fijas (fondo de Turnos, foto del Coworking y lugar de la foto de Tebi). Se cambian desde `/admin` → *Imágenes de la web*.
+- `imagenes-propias/` y `PROMPTS-IMAGENES.md`: las imágenes generadas con ChatGPT y sus prompts. Esta versión no las usa, pero quedan listas para reemplazar los videos cuando se decida.
 
 ## Deploy (Netlify)
 
@@ -45,7 +46,7 @@ ADMIN_PASSWORD=dev npm run dev   # http://localhost:8888  (panel: /admin, pass "
 |---|---|---|
 | GET | `/api/public` | Datos públicos: agenda, servicios, contenido y ocupación |
 | POST | `/api/book` | Reserva un turno con uno o varios servicios (y su largo). Valida que el horario siga libre |
-| POST | `/api/pro-book` | Pide un puesto de coworking (hora, día, semana o mes). Queda pendiente hasta que el admin lo apruebe |
+| POST | `/api/pro-book` | Pide un puesto de coworking (hora, día o mes). Queda pendiente hasta que el admin lo apruebe |
 | POST | `/api/contact` | Formulario de contacto |
 | GET | `/api/media/:id` | Sirve las fotos y videos subidos (soporta Range) |
 | * | `/api/admin/*` | Panel. Requiere el header `x-admin-key` |

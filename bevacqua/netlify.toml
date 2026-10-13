@@ -3,6 +3,11 @@
   functions = "netlify/functions"
 
 [[headers]]
+  for = "/media/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
   for = "/img/*"
   [headers.values]
     Cache-Control = "public, max-age=604800"
