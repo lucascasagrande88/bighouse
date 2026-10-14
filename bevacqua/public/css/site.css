@@ -194,7 +194,7 @@ body.loading { overflow: hidden; }
 .exp-copy p:first-child { color: var(--fg); font-size: clamp(16px, 1.3vw, 20px); line-height: 1.35; margin-top: 22px; }
 .exp-copy p:last-child { font-family: var(--serif); font-style: italic; color: var(--green); font-size: clamp(18px, 1.6vw, 24px); line-height: 1.2; }
 .reel-card.tebi-card { cursor: default; }
-.reel-card.tebi-card img { transform: none; }
+.reel-card.tebi-card img { transform: none; object-position: 40% center; }
 .reel-card { flex: 0 0 auto; position: relative; height: 72vh; aspect-ratio: 3/4; overflow: hidden; background: var(--bg-2); cursor: pointer; }
 .reel-card:nth-child(3n) { aspect-ratio: 4/3; height: 58vh; }
 .reel-card:nth-child(3n+1) { height: 64vh; }
