@@ -174,7 +174,7 @@
     }).join("");
     $("#pedido-total").textContent = LIB.precio(total());
     var sp = sinPrecio();
-    $("#pedido-nota").textContent = (sp ? sp + " artículo(s) sin precio: te lo confirmamos. " : "") + "Total estimado, sujeto a confirmación.";
+    $("#pedido-nota").textContent = (sp ? sp + " artículo(s) sin precio: te lo confirmamos. " : "") + "Total estimado sin IVA, sujeto a confirmación.";
   }
 
   function abrir() { $("#drawer").classList.add("on"); $("#velo").classList.add("on"); document.body.style.overflow = "hidden"; pintar(); }
@@ -238,7 +238,7 @@
       "Cliente: " + cli.nombre + (cli.negocio ? " (" + cli.negocio + ")" : "") + "\n" +
       "Localidad: " + cli.localidad + (cli.telefono ? "\nTel: " + cli.telefono : "") + "\n\n" +
       lineas.join("\n") + "\n\n" +
-      "*Total estimado: " + LIB.precio(tot) + "*" + (sinPrecio() ? " (+ artículos a confirmar)" : "") +
+      "*Total estimado (sin IVA): " + LIB.precio(tot) + "*" + (sinPrecio() ? " (+ artículos a confirmar)" : "") +
       (cli.nota ? "\n\nNota: " + cli.nota : "");
     // abrir WhatsApp en el mismo gesto (evita bloqueo de popups)
     var w = window.open(LIB.waLink(msg), "_blank");

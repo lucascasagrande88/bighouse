@@ -398,7 +398,9 @@
   ["dragleave", "drop"].forEach(function (ev) { drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.remove("sobre"); }); });
   drop.addEventListener("drop", function (e) { var f = e.dataTransfer.files[0]; if (f) leerArchivo(f); });
 
-  function porArt() { var m = {}; D.prods.forEach(function (p) { m[String(p.art).trim().toUpperCase()] = p; }); return m; }
+  /* Clave de código: ignora mayúsculas y el prefijo "HUS-" (el proveedor lo saca y lo pone según la lista). */
+  function claveArt(c) { return String(c == null ? "" : c).trim().toUpperCase().replace(/^HUS-/, ""); }
+  function porArt() { var m = {}; D.prods.forEach(function (p) { m[claveArt(p.art)] = p; }); return m; }
 
   $("#btn-analizar").addEventListener("click", function () {
     if (!hoja) return;
@@ -410,7 +412,7 @@
       if (!cod) continue;
       var pr = numero(row[ip]); if (pr == null) continue;
       pr = Math.round(pr * 100) / 100; leidas++;
-      var key = cod.toUpperCase(); if (vistos[key]) continue; vistos[key] = 1;
+      var key = claveArt(cod); if (vistos[key]) continue; vistos[key] = 1;
       var p = m[key];
       if (p) { if (p.precio == null || Math.abs(p.precio - pr) > 0.004) cambios.push({ p: p, antes: p.precio, ahora: pr }); else iguales++; }
       else if (inn > -1 && String(row[inn]).trim()) nuevos.push({ art: cod, nombre: String(row[inn]).trim(), precio: pr });

@@ -5,7 +5,7 @@ Sitio estático (HTML/CSS/JS, sin build) + Supabase como base de datos. Mismo mo
 | Link | Para quién | Qué hace |
 |---|---|---|
 | `/` | Público | Web: portada, rubros, destacados, cómo pedir, nosotros, cobertura, contacto |
-| `/catalogo` | Público | Lista de precios completa (6.528 artículos): búsqueda, filtros, pedido → WhatsApp |
+| `/catalogo` | Público | Lista de precios completa (6.519 artículos): búsqueda, filtros, pedido → WhatsApp |
 | `/links` | Público | Página tipo Linktree para la bio de Instagram/WhatsApp (pedido, catálogo, cómo llegar, llamar, rubros) |
 | `/tablero` | Cliente | Panel de edición con usuario y contraseña |
 
