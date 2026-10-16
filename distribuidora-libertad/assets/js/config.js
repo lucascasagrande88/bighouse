@@ -11,7 +11,7 @@ window.LIB_SUPABASE = {
 window.LIB_DEFAULTS = {
   whatsapp: "5492657557780",
   whatsapp_visible: "2657 55-7780",
-  telefono: "02657 435525",
+  telefono: "2657-798948",
   email: "ventas@distrilibertad.com.ar",
   direccion: "Edison 666",
   localidad: "Villa Mercedes (5732), San Luis",
