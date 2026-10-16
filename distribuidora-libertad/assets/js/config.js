@@ -1,11 +1,11 @@
 /* =========================================================================
    Distribuidora Libertad · configuración base
-   - SUPABASE: proyecto propio de Libertad (lo usan web, catálogo y tablero).
+   - SUPABASE: proyecto compartido "clientes"; las tablas de Libertad llevan prefijo lib_.
    - AJUSTES: valores por defecto. Desde el Tablero > Sitio se pisan.
    ========================================================================= */
 window.LIB_SUPABASE = {
-  url: "",
-  key: ""
+  url: "https://gbdqxpatunbgegywtlkd.supabase.co",
+  key: "sb_publishable_HB2MWuOjvnNlQ_ZcZaS19g_ot9zyo54"
 };
 
 window.LIB_DEFAULTS = {
