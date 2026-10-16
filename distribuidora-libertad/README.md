@@ -5,11 +5,11 @@ Sitio estático (HTML/CSS/JS, sin build) + Supabase como base de datos. Mismo mo
 | Link | Para quién | Qué hace |
 |---|---|---|
 | `/` | Público | Web: portada, rubros, destacados, cómo pedir, nosotros, cobertura, contacto |
-| `/catalogo` | Público | Lista de precios completa (6.519 artículos): búsqueda, filtros, pedido → WhatsApp |
+| `/catalogo` | Público | Lista de precios completa (6.528 artículos): búsqueda, filtros, pedido → WhatsApp |
 | `/links` | Público | Página tipo Linktree para la bio de Instagram/WhatsApp (pedido, catálogo, cómo llegar, llamar, rubros) |
 | `/tablero` | Cliente | Panel de edición con usuario y contraseña |
 
-Netlify: proyecto `distribuidora-libertad` → https://distribuidora-libertad.netlify.app
+Netlify: proyecto `distribuidora-libertad` → https://distribuidora-libertad-v1.netlify.app
 
 ## Qué se edita desde el Tablero
 
@@ -20,13 +20,16 @@ Netlify: proyecto `distribuidora-libertad` → https://distribuidora-libertad.ne
 - **Pedidos**: copia de cada pedido que se manda por WhatsApp desde la web, con estados (nuevo / confirmado / entregado / cancelado).
 - **Datos del sitio**: WhatsApp, teléfono, email, dirección, horario, redes, aviso superior, título de portada, nombre de la lista, zonas.
 
-## Puesta en marcha de la base (una sola vez)
+## Base de datos (ya configurada)
 
-1. Crear proyecto Supabase `DISTRIBUIDORA-LIBERTAD` (región São Paulo).
-2. SQL Editor → correr `SUPABASE-SETUP.sql`.
-3. Cargar el catálogo inicial (6.528 artículos de `assets/data/catalogo-base.js`).
-4. Authentication → Users → crear el usuario del cliente.
-5. Completar `assets/js/config.js` → `LIB_SUPABASE.url` y `LIB_SUPABASE.key` (publishable/anon key) y volver a publicar.
+Libertad usa el proyecto Supabase compartido **"clientes"** (`gbdqxpatunbgegywtlkd`, el mismo de TV Luz). Para no chocar con otras webs, todo lo de Libertad lleva prefijo: tablas `lib_productos`, `lib_ajustes`, `lib_pedidos`, bucket `lib-fotos`, función `lib_es_admin()`. El esquema está en `SUPABASE-SETUP.sql` (idempotente).
+
+- Usuario del Tablero: `ventas@distrilibertad.com.ar` (la contraseña la tiene Lucas).
+- Acceso por sitio: tabla compartida `panel_accesos (user_id, sitio)`. Solo los usuarios con `sitio = 'libertad'` editan Libertad. Para sumar uno: crearlo en Authentication → Users y correr el insert del final de `SUPABASE-SETUP.sql`.
+- Catálogo inicial cargado: 6.528 artículos, 14 destacados. Si la tabla quedara vacía, el Tablero muestra "Cargar catálogo inicial".
+- Pendiente opcional en Supabase → Authentication → URL Configuration: sumar `https://distribuidora-libertad-v1.netlify.app/tablero` a Redirect URLs (para "Olvidé mi contraseña").
+
+Las fotos de catálogo de proveedores (`assets/data/fotos.js`) se usan cuando un producto no tiene foto propia.
 
 Mientras la base no esté conectada, la web y el catálogo funcionan igual con el catálogo base; el tablero muestra un aviso.
 

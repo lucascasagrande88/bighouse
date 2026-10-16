@@ -56,6 +56,12 @@
     <section data-vista="resumen">
       <header class="panel__cab"><div><span class="kicker">Tablero</span><h1>Hola 👋</h1><p>Lo que ves acá se refleja en la web al instante.</p></div></header>
       <div class="kpis" id="kpis"></div>
+      <div class="tarjeta" id="importar" hidden style="margin-bottom:18px">
+        <h2>La base está vacía</h2>
+        <p class="ayuda">Cargá la lista inicial de artículos (con precios, rubros y destacados) para que la web empiece a leer de acá. Se hace una sola vez.</p>
+        <div class="progreso" id="imp-prog" hidden style="margin-bottom:12px"><div></div></div>
+        <button class="btn btn--verde" type="button" id="btn-importar">Cargar catálogo inicial</button>
+      </div>
       <div class="dos">
         <div class="tarjeta"><h2>Últimos pedidos</h2><div id="res-pedidos"></div><button class="link-flecha" type="button" data-ir="pedidos">Ver todos</button></div>
         <div class="tarjeta"><h2>Accesos rápidos</h2>
