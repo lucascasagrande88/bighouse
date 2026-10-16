@@ -12,28 +12,43 @@ Estado al 16/10/2026. Web, catálogo, tablero, links, FAQ, animaciones e imágen
 - **Bonificación:** no se muestra. La columna tiene 450 valores, no 10: los `P57x` con 0,15 y muchos con −0,0865 (por ejemplo `RIEG*` y `EVOL*`). Hay que consultar al cliente qué significan antes de mostrarla.
 - El script que generó el catálogo no está en el repo. Para la próxima lista alcanza con usar la importación del tablero (cuando haya Supabase) o pedirle a Claude que lo regenere igual.
 
-## 2. Fotos de productos: EN CURSO (16/10)
+## 2. Fotos de productos: HECHO (16/10), con revisión pendiente
 
-- **Hecho:** 74 artículos con foto del catálogo del proveedor: Candela 32 (asociadas por COD. SIGMA = código `C*` de la lista), BRITEX 18 e INDELPLAS 24 (por descripción). Hay 22 dudosas para revisar, listadas en `FOTOS.md`. Son WebP de 600×600 con fondo blanco en `assets/img/productos/<codigo>.webp` y están cargadas como 5.º campo (`foto`) del catálogo base. `db.js` (`fromBase`) lo lee; la foto del destacado tiene prioridad.
-- Contando los 13 destacados, hoy hay 87 artículos con foto.
-- **Respaldo por rubro: HECHO.** Sin foto, `U.foto()` (`comun.js`) muestra `assets/img/rubros/rubro-<id>.webp` (clase `img-rubro`, al 70 %) en tarjetas, filas y ficha. El filtro "con foto" sigue contando solo fotos reales.
-- **Falta: catálogo Rottweiler.** Está en Drive ("DISTRIBUIDORA LIBERTAD Interno", 51 MB), pero no está sincronizado en `G:` y es demasiado grande para el conector. Hay que bajarlo a `MATERIAL/`. Cubre los códigos `EVOL*`/`EVO*` (unos 900 artículos), así que es la fuente más grande.
-- INDELPLAS (fichas, portalámparas, cintas pasacable, tanzas) viene en el PDF comprimido con fotos de unos 80 px, que no sirven. Si el cliente consigue el catálogo sin comprimir, se suman.
+- 922 artículos con foto del catálogo del proveedor (928 contando los destacados):
+  - Rottweiler: 848, asociadas por código EVOL* y revisadas a ojo.
+  - Candela: 32, por COD. SIGMA.
+  - INDELPLAS: 24 y BRITEX: 18, por descripción.
+- **79 dudosas para revisar en `FOTOS.md`.** Son WebP de 600×600 con fondo blanco en `assets/img/productos/<codigo>.webp`, cargadas en `lib_productos.foto_url` y en el 5.º campo del catálogo base.
+- Se descartaron 11 asociaciones malas de Rottweiler (barras de extensión, escuadras magnéticas, cortadora de cerámica, barras de silicona y pico).
+- Respaldo: sin foto, `U.foto()` muestra la imagen 3D del rubro.
+- **Falta:** generar las 40 subcategorías de `IMAGENES.md` §9 y programar el segundo nivel (palabra clave → `sub-<id>.webp`).
+- Los fichas, portalámparas y tanzas de INDELPLAS no tienen foto: el PDF comprimido trae imágenes de unos 80 px.
 - Scripts y mapeo: `WEB/fotos-catalogo/` (fuera del repo, ver `LEEME.txt`).
-- **Subcategorías:** propuesta de 40 en `IMAGENES.md` §9 (cubren el 69 % del catálogo), para generarlas con ChatGPT. Falta el código del segundo nivel (palabra clave → `sub-<id>.webp`) cuando estén las imágenes.
 
-## 3. Supabase (sigue pendiente)
+## 3. Supabase: HECHO (16/10)
 
-- 16/10: el conector de Supabase solo ve la organización "DATABASE 01" (Pro; proyectos CEMENTERA, CHIMI_BRAIN y CLIENTES), no TV-LUZ. Un proyecto nuevo ahí cuesta USD 10 por mes. Falta decidir la organización.
-- La creación del proyecto por API dio timeout 4 veces. Crear `DISTRIBUIDORA-LIBERTAD` (São Paulo) en la organización de TV-LUZ y después:
-  - Correr `SUPABASE-SETUP.sql`.
-  - Cargar el catálogo (ya con la lista de octubre y las fotos).
-  - Crear el usuario del cliente.
-  - Completar `assets/js/config.js` (`LIB_SUPABASE.url` / `key`).
+- Libertad vive en el proyecto compartido **CLIENTES** (`gbdqxpatunbgegywtlkd`, organización DATABASE 01, el mismo de TV Luz). Sin costo extra.
+  - Tablas `lib_productos`, `lib_ajustes`, `lib_pedidos`, bucket `lib-fotos` y función `lib_es_admin()`.
+  - El acceso al tablero se da por sitio en `panel_accesos` (sitio = `libertad`). Hoy hay 2 usuarios.
+- `config.js` apunta al proyecto con la clave publicable.
+- La lista de octubre está cargada: 6.515 artículos activos y 928 con foto.
+  - 59 artículos que ya no están en la lista quedaron ocultos (`activo = false`), no borrados.
+  - Ya estaban ocultos de antes, y siguen así: `SO103316`, `SO103305`, `SO103306` y `EVOL3350`.
+- Ajustes en la base: lista "Octubre 2026", nota de precios sin IVA y título de portada.
+- Se trajo de la rama `claude/project-thread-ov1nfl` la revisión de seguridad del tablero (escapado de pedidos, rechazo de usuarios sin permiso, topes en el pedido) y el teléfono fijo nuevo 2657-798948.
+- **Alta de un usuario del cliente:**
+  1. Supabase > proyecto CLIENTES > Authentication > Users > Add user (email y contraseña, marcar "Auto confirm").
+  2. En el SQL Editor: `insert into public.panel_accesos (user_id, sitio) select id, 'libertad' from auth.users where email = 'EMAIL';`
+  3. Entra en `/tablero`.
 
 ## 4. Deploy
 
 - Proyecto Netlify ya creado: `distribuidora-libertad` (https://distribuidora-libertad.netlify.app). Se sube arrastrando el zip de esta carpeta en Deploys, o con `netlify deploy --prod --dir distribuidora-libertad` desde local.
+
+## Ramas
+
+- La rama `claude/project-thread-ov1nfl` es una línea paralela que publica en `distribuidora-libertad-v1`, un proyecto que no se toca. De ahí se trajeron solo el cableado de Supabase, la revisión de seguridad y el teléfono.
+- No se trajeron `assets/data/fotos.js`, que tenía 82 recortes y quedó superado por las fotos nuevas, ni el dominio `-v1` en canonical y sitemap.
 
 ## Datos a confirmar con el cliente
 
