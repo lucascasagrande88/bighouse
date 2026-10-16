@@ -28,7 +28,7 @@
     (window.LIB_DESTACADOS_BASE || []).forEach(function (d, i) { dest[d[0]] = { foto: d[1], orden: i + 1 }; });
     return base.map(function (x) {
       var d = dest[x[0]];
-      return { a: x[0], n: x[1], p: x[2], c: x[3], foto: d ? d.foto : "", dest: !!d, orden: d ? d.orden : null, nota: "" };
+      return { a: x[0], n: x[1], p: x[2], c: x[3], foto: d ? d.foto : (x[4] || ""), dest: !!d, orden: d ? d.orden : null, nota: "" };
     });
   }
 

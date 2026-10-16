@@ -105,6 +105,55 @@ Formato 1200×1500 (4:5).
 
 ---
 
+## 9. Subcategorías por palabra clave (respaldo para artículos sin foto)
+
+Mismo estilo que los íconos de rubro (sección 3): render 3D, objeto único, fondo transparente, detalles verde #007838, 1024×1024. Se muestran en lugar de la imagen del rubro cuando el artículo no tiene foto propia.
+
+Propuesta del 16/10/2026: 40 subcategorías; cubren 4550 de 6519 (69%); quedan 1969 con la imagen del rubro. La columna «Ejemplo» es un artículo real de la lista.
+
+| Subcategoría | Archivo | Artículos | Sin foto | Ejemplo |
+|---|---|---|---|---|
+| Tornillos, tirafondos y autoperforantes | `sub-tornillos.webp` | 533 | 533 | TEK -FLANGE pta.mecha 14 x 3 x 800 |
+| Mechas y brocas | `sub-mechas.webp` | 315 | 315 | BROCA ESCALONADA P/METAL. 4-12mm |
+| Esmaltes, látex y pinturas | `sub-pinturas.webp` | 292 | 292 | BARNIZ "DUKRON" PROTECTOR LADRILLOS x4L |
+| Llaves de mano (ajustables, combinadas, francesas) | `sub-llaves.webp` | 287 | 287 | BOCALLAVE 1/2" ESTRIADA "RHEIN" 1/2" |
+| Discos de corte y desbaste | `sub-discos.webp` | 220 | 220 | DISCO "RHEIN" DE CORTE C/D OX/AL 9"x 3.2 |
+| Bulones, tuercas y arandelas | `sub-bulones.webp` | 191 | 191 | ARANDELA BISELADA DE 10 mm. x 100u. |
+| Sierras, hojas y serruchos | `sub-sierras.webp` | 168 | 168 | ARCO DE SIERRA 12" corte recto y 45° |
+| Conexiones (codos, uniones, niples, tees) | `sub-conexiones.webp` | 157 | 157 | BUJE REDUCCION DE 1 1/2" x 1 1/4" |
+| Clavos y grampas | `sub-clavos.webp` | 138 | 138 | CLAVO CAB. CHATA 10 x 30 x kg. |
+| Soportes, ménsulas y escuadras | `sub-soportes.webp` | 131 | 131 | ANGULO 24 x 24 mm. DORADO MATE 0.95 |
+| Cintas (aisladora, embalar, papel, teflón) | `sub-cintas.webp` | 126 | 117 | CINTA 771 DF ACRILICA DOBLE A 10 x 30 |
+| Pilas, baterías y linternas | `sub-pilas.webp` | 120 | 113 | BATERIA ALCALINA 9V CANDELA |
+| Destornilladores y puntas | `sub-destornilladores.webp` | 118 | 118 | DESTORN. CELESTAL ELECT pta.recta 3 x75 |
+| Lijas | `sub-lijas.webp` | 115 | 115 | LIJA "KOLN" ANTIEMPASTE GR. 100 |
+| Pinceles y rodillos | `sub-pinceles.webp` | 104 | 104 | PINCEL C/CHINA N° 07 serie 2 Verde-Negro |
+| Tarugos | `sub-tarugos.webp` | 100 | 100 | TARUGO C/TOPE DEL 10 bolsa x 500 u. |
+| Siliconas, adhesivos y selladores | `sub-siliconas.webp` | 95 | 87 | ADHESIVO DE POLIESTIRENO EXP. x 1 l |
+| Espátulas, llanas y fratachos | `sub-espatulas.webp` | 91 | 91 | CUCHARA ALBAÑIL DE 7" |
+| Machos y terrajas | `sub-machos.webp` | 90 | 90 | MACHO "KOLN" M x 3 u. 12 x 1.25 |
+| Pitones, ganchos y mosquetones | `sub-ganchos.webp` | 82 | 82 | ARGOLLAS PLAST. P/CORT. BAÑO x 12 u. |
+| Mangueras | `sub-mangueras.webp` | 80 | 80 | MANGUERA ALBAÑIL TRANSP. 9x 11 x 50 m |
+| Candados | `sub-candados.webp` | 78 | 74 | CANDADO BLINDADO 60mm. c/3 llaves P/CORT. COMER. |
+| Canillas, griferías y llaves de paso | `sub-canillas.webp` | 75 | 75 | CANILLA 1 AGUA MESADA PICO J metal cab/b |
+| Fichas, adaptadores y enchufes | `sub-fichas.webp` | 74 | 74 | ADAPTADOR 2 A 3 10A BL. |
+| Pinzas, alicates y tenazas | `sub-pinzas.webp` | 73 | 65 | ALICATE "METZ" 1/2 CAÑA 6" INDUST. |
+| Cepillos | `sub-cepillos.webp` | 70 | 70 | CEPILLO ACERO bronc. c/mango plastico |
+| Pasadores y trabas | `sub-pasadores.webp` | 64 | 64 | PASADOR C/Porta Cand.zinc.125-14 190mm 6 |
+| Tijeras y cutters | `sub-tijeras.webp` | 58 | 58 | CUTTER acero inoxid. c/2 hojas rep. |
+| Lámparas | `sub-lamparas.webp` | 57 | 57 | LAMPARA 3U T3 RAYOVAC 15W- 220V BL. |
+| Inyectores y picos de gas | `sub-inyectores.webp` | 55 | 55 | INYECTOR CALEFON LONGVIE MODERNO QUEM. |
+| Precintos | `sub-precintos.webp` | 54 | 54 | PRECINTO 4.8 x 500mm NEGRO x 100u |
+| Remaches | `sub-remaches.webp` | 47 | 47 | REMACHE ALUM. ALA ANCHA 4 x10 x1000 |
+| Flexibles | `sub-flexibles.webp` | 45 | 45 | FLEXIBLE C/MALLA (cierre alum) 1/2"x35 |
+| Limas | `sub-limas.webp` | 41 | 41 | LIMA "PLENA" 1/2 CAÑA BASTARDA 20 cm. |
+| Guantes | `sub-guantes.webp` | 41 | 41 | GUANTE ACRILONITRILO VERDE (AN-1001) x doc |
+| Tanzas | `sub-tanzas.webp` | 37 | 37 | TANZA ALBAÑIL 100% NYLON 0.80mm x 8 |
+| Regatones | `sub-regatones.webp` | 36 | 36 | REGATON 1/2 CAÑA 1" x 50 |
+| Niveles y plomadas | `sub-niveles.webp` | 34 | 34 | NIVEL ALTO IMPACTO MAGNET.30 CM PROF. (C/ESTUCHE, BURB. BLIND. ESCALA MILIM. Y PULG.) |
+| Electrodos | `sub-electrodos.webp` | 32 | 32 | ELECTRODO CONARCO 10 3.25 mm |
+| Martillos y mazas | `sub-martillos.webp` | 26 | 26 | MARTILLO BOLITA DE 1000 GRAMOS (CALIDAD "GS") |
+
 ## Lo que NO hace falta que generes (lo hago yo en código)
 
 - Íconos de interfaz: valores (confianza, respeto, responsabilidad, palabra), pasos "cómo hacer tu pedido", WhatsApp, teléfono, ubicación, carrito, búsqueda, etc. → SVG propios, coherentes con la marca.

@@ -9,17 +9,21 @@
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
   var esc = function (s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (m) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[m]; }); };
 
+  var hayRubro = function (id) { return A.rubros === true || !!(A.rubros && A.rubros.indexOf && A.rubros.indexOf(id) !== -1); };
+
   /* ---------- helpers públicos ---------- */
   var U = window.LIBU = {
     $: $, $$: $$, esc: esc,
     icono: function (n, cls) { return IC.svg(n, cls); },
     rubroIcono: function (id) {
-      return (A.rubros === true || (A.rubros && A.rubros.indexOf && A.rubros.indexOf(id) !== -1))
+      return hayRubro(id)
         ? '<img src="assets/img/rubros/rubro-' + id + '.webp" alt="" loading="lazy" width="84" height="84">'
         : IC.svg(id);
     },
-    foto: function (p) {
-      if (p.foto) return '<img src="' + esc(p.foto) + '" alt="' + esc(p.n) + '" loading="lazy">';
+    /* Foto del artículo; si no tiene, la imagen 3D de su rubro (img-rubro), y si tampoco, el ícono de línea. */
+    foto: function (p, alt) {
+      if (p.foto) return '<img src="' + esc(p.foto) + '" alt="' + esc(alt === undefined ? p.n : alt) + '" loading="lazy">';
+      if (hayRubro(p.c)) return '<img class="img-rubro" src="assets/img/rubros/rubro-' + esc(p.c) + '.webp" alt="" loading="lazy">';
       if (A.sinfoto) return '<img src="assets/img/sin-foto.webp" alt="" loading="lazy">';
       return IC.svg(p.c);
     },

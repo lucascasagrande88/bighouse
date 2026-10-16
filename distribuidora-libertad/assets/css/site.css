@@ -257,6 +257,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .prod:hover { box-shadow: var(--sombra-2); transform: translateY(-2px); }
 .prod__img { aspect-ratio: 1; background: #fff; display: grid; place-items: center; padding: 18px; border-bottom: 1px solid var(--linea-2); position: relative; }
 .prod__img img { width: 100%; height: 100%; object-fit: contain; }
+.prod__img img.img-rubro { width: 70%; height: 70%; }
 .prod__rubro { position: absolute; top: 10px; left: 10px; font-family: var(--f-mono); font-size: 10.5px; letter-spacing: .05em; text-transform: uppercase; background: var(--papel); padding: 3px 7px; border-radius: 3px; color: var(--tinta-2); }
 .prod__body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
 .prod__cod { font-family: var(--f-mono); font-size: 11.5px; color: var(--gris); }
@@ -543,6 +544,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .modal.on .modal__caja { transform: none; }
 .modal__img { background: #fff; padding: 28px; display: grid; place-items: center; border-right: 1px solid var(--linea-2); }
 .modal__img img { max-height: 340px; object-fit: contain; }
+.modal__img img.img-rubro { max-height: 220px; }
 .modal__info { padding: 30px 28px; display: flex; flex-direction: column; gap: 12px; overflow-y: auto; }
 .modal .x { position: absolute; top: 12px; right: 12px; z-index: 2; }
 @media (max-width: 640px) { .modal__caja { grid-template-columns: 1fr; } .modal__img { border-right: 0; border-bottom: 1px solid var(--linea-2); max-height: 260px; } .modal__img img { max-height: 200px; } }

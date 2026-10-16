@@ -84,7 +84,7 @@
   function fila(p) {
     var r = LIB.rubro(p.c);
     return '<div class="fila-p" data-ver="' + esc(p.a) + '" role="button" tabindex="0">' +
-      '<div class="fila-p__img">' + (p.foto ? '<img src="' + esc(p.foto) + '" alt="" loading="lazy">' : U.icono(p.c)) + '</div>' +
+      '<div class="fila-p__img">' + U.foto(p, "") + '</div>' +
       '<div class="fila-p__cod">' + marcar(p.a) + '</div>' +
       '<div class="fila-p__nom">' + marcar(p.n) + (st.rubro ? '' : '<small>' + esc(r.corto) + '</small>') + '</div>' +
       precioHtml(p, "fila-p__precio") +
@@ -167,7 +167,8 @@
     var p = LIB.productos.find(function (x) { return x.a === a; }); if (!p) return;
     actual = p;
     var r = LIB.rubro(p.c);
-    $("#m-img").innerHTML = p.foto ? '<img src="' + esc(p.foto) + '" alt="' + esc(p.n) + '">' : '<div style="width:120px;color:var(--verde)">' + U.icono(p.c) + '</div>';
+    var img = U.foto(p);
+    $("#m-img").innerHTML = /^<img/.test(img) ? img : '<div style="width:120px;color:var(--verde)">' + img + '</div>';
     $("#m-rubro").textContent = r.nombre;
     $("#m-nom").textContent = p.n;
     $("#m-cod").textContent = p.a;
