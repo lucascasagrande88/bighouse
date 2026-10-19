@@ -19,7 +19,7 @@ window.LIB_DEFAULTS = {
   lista_nombre: "Octubre 2026",
   nota_precios: "Precios de lista mayorista sin IVA. Pueden variar sin previo aviso; confirmamos el total al recibir tu pedido.",
   aviso: "",
-  hero_titulo: "Ferretería por mayor, con palabra.",
+  hero_titulo: "Distribuidora mayorista, con palabra.",
   hero_bajada: "Hace 24 años abastecemos ferreterías, comercios y profesionales de toda la provincia de San Luis desde Villa Mercedes.",
   anios: "24",
   instagram: "",
