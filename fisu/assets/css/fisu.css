@@ -718,3 +718,9 @@ ul { margin: 0; padding: 0; list-style: none; }
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; transition-delay: 0s !important; }
   .marquee-track { animation: none !important; }
 }
+
+/* Producto sin foto aprobada: tarjeta de marca, no se inventa imagen */
+.ph-photo { width: 100%; aspect-ratio: 1; border-radius: 28px; background: var(--fisu-pink); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; color: #fff; font-family: var(--font-display); font-weight: 700; font-size: 1rem; }
+.ph-photo img { width: 48%; }
+.info-tile.wide { grid-column: span 2; }
+@media (max-width: 860px) { .info-tile.wide { grid-column: 1 / -1; } }

@@ -150,5 +150,109 @@
   "sizes": [
    333
   ]
+ },
+ "p-alfajor-helado": {
+  "w": 1082,
+  "h": 729,
+  "sizes": [
+   541,
+   1082
+  ]
+ },
+ "p-almendrado": {
+  "w": 884,
+  "h": 599,
+  "sizes": [
+   442,
+   884
+  ]
+ },
+ "p-bocha-americana": {
+  "w": 911,
+  "h": 768,
+  "sizes": [
+   456,
+   911
+  ]
+ },
+ "p-bocha-chocolate": {
+  "w": 864,
+  "h": 777,
+  "sizes": [
+   432,
+   864
+  ]
+ },
+ "p-bocha-dulce-de-leche": {
+  "w": 873,
+  "h": 807,
+  "sizes": [
+   436,
+   873
+  ]
+ },
+ "p-bocha-frutilla": {
+  "w": 873,
+  "h": 774,
+  "sizes": [
+   436,
+   873
+  ]
+ },
+ "p-bombon-escoces": {
+  "w": 877,
+  "h": 884,
+  "sizes": [
+   438,
+   877
+  ]
+ },
+ "p-cuadrado-americana": {
+  "w": 1066,
+  "h": 764,
+  "sizes": [
+   533,
+   1066
+  ]
+ },
+ "p-omele": {
+  "w": 1025,
+  "h": 688,
+  "sizes": [
+   512,
+   1025
+  ]
+ },
+ "p-torta-helada-chocolate": {
+  "w": 1075,
+  "h": 863,
+  "sizes": [
+   538,
+   1075
+  ]
+ },
+ "p-torta-helada-dulce-de-leche": {
+  "w": 1100,
+  "h": 876,
+  "sizes": [
+   550,
+   1100
+  ]
+ },
+ "p-torta-helada-frutilla": {
+  "w": 1100,
+  "h": 923,
+  "sizes": [
+   550,
+   1100
+  ]
+ },
+ "p-tricolor": {
+  "w": 1100,
+  "h": 956,
+  "sizes": [
+   550,
+   1100
+  ]
  }
 }

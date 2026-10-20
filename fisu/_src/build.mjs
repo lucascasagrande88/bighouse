@@ -3,11 +3,11 @@
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { SITE, PRODUCTS, CATEGORIES, bySlug } from './data.mjs';
+import { SITE, PRODUCTS, CATEGORIES, OLD_SLUGS, bySlug } from './data.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const IMG = JSON.parse(readFileSync(join(ROOT, 'assets/img/manifest.json'), 'utf8'));
-const V = '9'; // versión de assets (cache busting)
+const V = '10'; // versión de assets (cache busting)
 let B = SITE.base;
 // Modo artifact (FISU_TARGET=artifact): rutas relativas y salida en FISU_OUT
 const ARTIFACT = process.env.FISU_TARGET === 'artifact';
@@ -57,12 +57,12 @@ const SWIPE = '<svg viewBox="0 0 40 16" fill="none" stroke="currentColor" stroke
 /* Imagen de producto responsive (AVIF + WebP, dimensiones explícitas → CLS 0) */
 function Pic(name, { alt = '', cls = '', sizes = '50vw', eager = false, style = '' } = {}) {
   const m = IMG[name];
-  if (!m) throw new Error('Imagen faltante: ' + name);
+  if (!m) return `<div class="ph-photo ${cls}" style="${style}" role="img" aria-label="${esc(alt || 'Foto en producción')}"><img src="${logoW()}" alt="" width="790" height="436"><span>Foto en producción</span></div>`;
   const set = ext => m.sizes.map(w => `${B}/assets/img/${name}-${w}.${ext} ${w}w`).join(', ');
   const big = Math.max(...m.sizes);
   return `<picture class="${cls}" style="${style}"><source type="image/avif" srcset="${set('avif')}" sizes="${sizes}"><img src="${B}/assets/img/${name}-${big}.webp" srcset="${set('webp')}" sizes="${sizes}" width="${m.w}" height="${m.h}" alt="${esc(alt)}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async"></picture>`;
 }
-const altOf = p => `${p.name} FISÚ: ${p.flavorLine.toLowerCase()}`;
+const altOf = p => `${p.name} FISÚ: ${p.desc.charAt(0).toLowerCase() + p.desc.slice(1, -1)}`;
 
 /* Componente: BrandHeading — títulos que entran por palabras */
 function BrandHeading(tag, html, cls = '', attrs = '') {
@@ -108,7 +108,7 @@ function Header({ home }) {
     ${NAV.map(([t, h], i) => `<a href="${navHref(h, home)}" style="--i:${i}">${t}</a>`).join('')}
     <a href="${navHref('#catalogo', home)}" style="--i:${NAV.length}"><span>Ver productos</span></a>
   </nav>
-  <div class="mm-foot"><p>Ese momento pide FISÚ.</p><a class="btn btn-white pinkfg" href="${SITE.instagram}" rel="noopener" target="_blank">Seguinos en Instagram</a></div>
+  <div class="mm-foot"><p>Ese momento pide FISÚ.</p>${SITE.instagram ? `<a class="btn btn-white pinkfg" href="${SITE.instagram}" rel="noopener" target="_blank">Seguinos en Instagram</a>` : ''}</div>
 </div>`;
 }
 
@@ -127,18 +127,18 @@ function Footer() {
         <img class="f-logo" src="${logoW()}" width="790" height="436" alt="FISÚ helados" loading="lazy">
         <p class="f-claim">Ese momento pide FISÚ.</p>
         <div class="f-social">
-          <a href="${SITE.instagram}" target="_blank" rel="noopener" aria-label="Instagram de FISÚ">${ICON_IG}</a>
-          <a href="${SITE.whatsapp}" target="_blank" rel="noopener" aria-label="WhatsApp de FISÚ">${ICON_WA}</a>
-          <a href="mailto:${SITE.email}" aria-label="Escribir un email a FISÚ">${ICON_MAIL}</a>
+          ${SITE.instagram ? `<a href="${SITE.instagram}" target="_blank" rel="noopener" aria-label="Instagram de FISÚ">${ICON_IG}</a>` : ''}
+          ${SITE.whatsapp ? `<a href="${SITE.whatsapp}" target="_blank" rel="noopener" aria-label="WhatsApp de FISÚ">${ICON_WA}</a>` : ''}
+          ${SITE.email ? `<a href="mailto:${SITE.email}" aria-label="Escribir un email a FISÚ">${ICON_MAIL}</a>` : ''}
         </div>
       </div>
       <div><h3>Productos</h3><ul>${prod}<li><a href="${B}/#catalogo">Ver todos</a></li></ul></div>
       <div><h3>FISÚ</h3><ul><li><a href="${B}/#sabores">Sabores</a></li><li><a href="${B}/#fisu">La marca</a></li><li><a href="${B}/#momentos">Momentos</a></li><li><a href="${B}/#donde">Dónde encontrar</a></li></ul></div>
       <div><h3>Contacto</h3><ul>
-        <li><a href="${SITE.whatsapp}" target="_blank" rel="noopener">WhatsApp</a></li>
-        <li><a href="mailto:${SITE.email}">${SITE.email}</a></li>
-        <li><a href="${SITE.instagram}" target="_blank" rel="noopener">${SITE.instagramHandle}</a></li>
-        <li><a href="mailto:${SITE.email}?subject=Quiero%20vender%20FIS%C3%9A">Vender FISÚ en tu comercio</a></li>
+        ${SITE.whatsapp ? `<li><a href="${SITE.whatsapp}" target="_blank" rel="noopener">WhatsApp</a></li>` : ''}
+        ${SITE.email ? `<li><a href="mailto:${SITE.email}">${SITE.email}</a></li>` : ''}
+        ${SITE.instagram ? `<li><a href="${SITE.instagram}" target="_blank" rel="noopener">${SITE.instagramHandle}</a></li>` : ''}
+        ${!SITE.whatsapp && !SITE.email && !SITE.instagram ? '<li>Próximamente</li>' : ''}
       </ul></div>
     </div>
     <div class="f-bottom">
@@ -217,16 +217,15 @@ function Hero() {
       </div>
       <p class="hero-note fade-up" data-reveal style="--d:.65s"><span class="c-pink" style="width:30px;display:block">${splashSvg(0)}</span>Sí, te estamos tentando.</p>
     </div>
-    <div class="hero-stage stage" data-reveal aria-label="Composición de productos FISÚ: pote de tres sabores, barra crocante, torta de frutilla, almendrado y bombón helado" role="img">
+    <div class="hero-stage stage" data-reveal aria-label="Composición de productos FISÚ: torta helada de chocolate, bombón escocés, alfajor helado, tricolor y cuadrado de americana" role="img">
       <div class="podium pink" style="--x:14%;--y:58%;--w:72%;--z:1"></div>
       <div class="podium cream" style="--x:-6%;--y:83%;--w:48%;--z:4"></div>
       <div class="podium blue" style="--x:54%;--y:84%;--w:44%;--z:4"></div>
-      ${L('bombon-pack', { x: '6%', y: '4%', w: '29%', r: -9, z: 1, depth: -10, d: .3, float: true, dur: 8, alt: '' })}
-      ${L('barra-crocante-b', { x: '60%', y: '-2%', w: '38%', r: 6, z: 2, depth: -18, d: .4, float: true, dur: 6.5 })}
-      ${L('pote-trio', { x: '6%', y: '30%', w: '88%', z: 3, depth: 6, d: .1, eager: true, sizes: '(max-width: 860px) 96vw, 46vw' })}
-      ${L('torta-frutilla-b', { x: '-8%', y: '70%', w: '52%', z: 5, depth: 14, d: .5 })}
-      ${L('almendrado-b', { x: '55%', y: '74%', w: '42%', z: 5, depth: 18, d: .6 })}
-      ${L('ing-choco-fly', { x: '40%', y: '14%', w: '9%', r: 24, z: 6, depth: -26, d: .75, float: true, dur: 5, cls: 'float-only-desktop' })}
+      ${L('p-bombon-escoces', { x: '2%', y: '2%', w: '34%', r: -6, z: 1, depth: -10, d: .3, float: true, dur: 8 })}
+      ${L('p-alfajor-helado', { x: '62%', y: '2%', w: '36%', r: 5, z: 2, depth: -18, d: .4, float: true, dur: 6.5 })}
+      ${L('p-torta-helada-chocolate', { x: '10%', y: '26%', w: '80%', z: 3, depth: 6, d: .1, eager: true, sizes: '(max-width: 860px) 96vw, 46vw' })}
+      ${L('p-tricolor', { x: '-6%', y: '66%', w: '46%', z: 5, depth: 14, d: .5 })}
+      ${L('p-cuadrado-americana', { x: '56%', y: '68%', w: '44%', z: 5, depth: 18, d: .6 })}
       ${Splash({ style: 'left:86%;top:30%;width:11%;height:11%;z-index:6', color: 'var(--fisu-pink)', rot: 30 })}
     </div>
   </div>
@@ -236,11 +235,11 @@ function Hero() {
 
 /* 02 · PRODUCTOS — módulos grandes (ProductCard grande) */
 const MODULES = [
-  { slug: 'pote-fisu', theme: 't-pink', cat: 'Potes', title: 'Pote FISÚ', flavor: 'Frutilla, chocolate y vainilla.', desc: 'Tres sabores. Una cuchara.', img: 'pote-trio', iw: '80%', ix: '-2%', iy: '13%', ir: -4, seed: 11, sx: '8%', sy: '18%' },
-  { slug: 'barra-crocante', theme: 't-blue', cat: 'Barras', title: 'Barra crocante', flavor: 'Chocolate con crocante.', desc: 'Crocante en cada mordida.', img: 'barra-crocante-b', iw: '66%', ix: '6%', iy: '13%', ir: 4, seed: 12, sx: '12%', sy: '26%' },
-  { slug: 'torta-helada-frutilla', theme: 't-yellow', cat: 'Tortas', title: 'Torta de frutilla', flavor: 'Frutilla y crema, base de galleta.', desc: 'Uno más y listo.', img: 'torta-frutilla-b', iw: '92%', ix: '-8%', iy: '17%', ir: -3, seed: 13, sx: '70%', sy: '36%' },
-  { slug: 'postre-tricolor', theme: 't-lilac', cat: 'Postres', title: 'Postre tricolor', flavor: 'Chocolate, frutilla y vainilla.', desc: 'Para no elegir.', img: 'tricolor', iw: '96%', ix: '-10%', iy: '16%', ir: -5, seed: 14, sx: '68%', sy: '34%' },
-  { slug: 'bombon-helado', theme: 't-choco', cat: 'Bombones', title: 'Bombón helado', flavor: 'Vainilla con baño de chocolate.', desc: 'La primera mordida.', img: 'bombon-pack', iw: '58%', ix: '8%', iy: '14%', ir: 5, seed: 15, sx: '66%', sy: '30%' },
+  { slug: 'torta-helada-chocolate', theme: 't-pink', cat: 'Tortas', title: 'Torta helada de chocolate', iw: '60%', ix: '4%', iy: '12%', ir: -3, seed: 11, sx: '8%', sy: '18%' },
+  { slug: 'bombon-escoces', theme: 't-blue', cat: 'Bombones', title: 'Bombón escocés', iw: '60%', ix: '6%', iy: '12%', ir: 4, seed: 12, sx: '12%', sy: '26%' },
+  { slug: 'tricolor', theme: 't-yellow', cat: 'Postres', title: 'Tricolor', iw: '84%', ix: '-4%', iy: '17%', ir: -3, seed: 13, sx: '70%', sy: '36%' },
+  { slug: 'alfajor-helado', theme: 't-lilac', cat: 'Postres', title: 'Alfajor helado', iw: '84%', ix: '-4%', iy: '16%', ir: -4, seed: 14, sx: '68%', sy: '34%' },
+  { slug: 'bocha-dulce-de-leche', theme: 't-choco', cat: 'Bochas', title: 'Bochas', iw: '70%', ix: '8%', iy: '14%', ir: 3, seed: 15, sx: '66%', sy: '30%' },
 ];
 function ProductModules() {
   return `
@@ -248,7 +247,7 @@ function ProductModules() {
   <div class="wrap">
     <div class="sec-head">
       <div><p class="kicker">Productos</p>${BrandHeading('h2', 'Elegí tu próximo <span class="c-pink">antojo.</span>', 't-section', 'id="productos-title"')}</div>
-      <p class="fade-up" data-reveal>Potes, barras, tortas y postres helados. Difícil elegir uno solo.</p>
+      <p class="fade-up" data-reveal>Bombones, bochas, tortas y postres helados. Difícil elegir uno solo.</p>
     </div>
     <div class="modules">
       ${MODULES.map((m, i) => {
@@ -257,10 +256,10 @@ function ProductModules() {
         <div class="m-blob" aria-hidden="true">${blobSvg(m.seed, .22, 7)}</div>
         <span class="m-cat">${m.cat}</span>
         <h3>${esc(m.title)}</h3>
-        <p class="m-flavor">${esc(m.flavor)}</p>
-        <div class="m-img pop" style="--iw:${m.iw};--ix:${m.ix};--iy:${m.iy};--ir:${m.ir}deg;--d:${.1 + i * .05}s">${Pic(m.img, { alt: altOf(p), sizes: i < 2 ? '(max-width: 860px) 80vw, 40vw' : '(max-width: 860px) 80vw, 30vw' })}</div>
+        <p class="m-flavor">${esc(p.flavorLine)}</p>
+        <div class="m-img pop" style="--iw:${m.iw};--ix:${m.ix};--iy:${m.iy};--ir:${m.ir}deg;--d:${.1 + i * .05}s">${Pic(p.img, { alt: altOf(p), sizes: i < 2 ? '(max-width: 860px) 80vw, 40vw' : '(max-width: 860px) 80vw, 30vw' })}</div>
         <span class="m-splash" style="--sx:${m.sx};--sy:${m.sy}">${splashSvg(i * 30)}</span>
-        <div class="m-foot"><p class="m-desc">${esc(m.desc)}</p><span class="m-go" aria-hidden="true">${ARROW_UR}</span></div>
+        <div class="m-foot"><p class="m-desc">${m.slug.startsWith('bocha') ? 'Americana, chocolate, frutilla y dulce de leche.' : 'Ver producto'}</p><span class="m-go" aria-hidden="true">${ARROW_UR}</span></div>
       </a>`;
       }).join('')}
     </div>
@@ -271,16 +270,12 @@ function ProductModules() {
 
 /* 03 · SABORES — escena sticky (FlavorSection) */
 const FLAVORS = [
-  { id: 'frutilla', word: 'FRUTILLA', title: 'Rosa por fuera.<br>Frutilla por dentro.', text: 'Torta helada de frutilla: capa frutal, centro cremoso y base de galleta.', slug: 'torta-helada-frutilla', img: 'torta-frutilla-b', w: 'min(60vw, 820px)', pr: -3,
-    ings: [], blob: { seed: 31, style: 'left:52%;top:46%;width:52vw;height:52vw;margin:-26vw 0 0 -26vw' } },
-  { id: 'chocolate', word: 'CHOCOLATE', title: 'Chocolate<br>por todos lados.', text: 'Barra crocante bañada en chocolate. Mirar bajo tu propio riesgo.', slug: 'barra-crocante', img: 'barra-crocante-b', w: 'min(44vw, 620px)', pr: 6,
-    ings: [['ing-choco', { x: '70%', y: '62%', w: '10vw', r: 10 }], ['ing-choco-fly', { x: '20%', y: '18%', w: '7vw', r: -20 }], ['ing-choco-fly', { x: '76%', y: '14%', w: '5vw', r: 40 }]], blob: { seed: 32, style: 'left:50%;top:50%;width:44vw;height:44vw;margin:-22vw 0 0 -22vw' } },
-  { id: 'vainilla', word: 'VAINILLA', title: 'Vainilla, crocante<br>y almendras.', text: 'Almendrado: el clásico de sobremesa que nunca falla.', slug: 'almendrado', img: 'almendrado', w: 'min(52vw, 720px)', pr: -4,
-    ings: [], blob: { seed: 33, style: 'left:50%;top:50%;width:50vw;height:42vw;margin:-21vw 0 0 -25vw' } },
-  { id: 'mix', word: 'MIX', title: '¿Para qué<br>elegir uno?', text: 'Postre tricolor: chocolate, frutilla y vainilla en capas, con salsa de chocolate.', slug: 'postre-tricolor', img: 'tricolor', w: 'min(58vw, 800px)', pr: -3,
-    ings: [['ing-choco-fly', { x: '18%', y: '20%', w: '6vw', r: -14 }]], blob: { seed: 34, style: 'left:50%;top:50%;width:48vw;height:48vw;margin:-24vw 0 0 -24vw' } },
+  { id: 'frutilla', word: 'FRUTILLA', title: 'Rosa por fuera.<br>Frutilla por dentro.', slug: 'torta-helada-frutilla', w: 'min(54vw, 760px)', pr: -3, ings: [], blob: { seed: 31, style: 'left:52%;top:46%;width:52vw;height:52vw;margin:-26vw 0 0 -26vw' } },
+  { id: 'chocolate', word: 'CHOCOLATE', title: 'Chocolate<br>por todos lados.', slug: 'alfajor-helado', w: 'min(50vw, 700px)', pr: 4, ings: [], blob: { seed: 32, style: 'left:50%;top:50%;width:44vw;height:44vw;margin:-22vw 0 0 -22vw' } },
+  { id: 'vainilla', word: 'DULCE DE LECHE', title: 'Dulce de leche,<br>como tiene que ser.', slug: 'torta-helada-dulce-de-leche', w: 'min(54vw, 760px)', pr: -4, ings: [], blob: { seed: 33, style: 'left:50%;top:50%;width:50vw;height:42vw;margin:-21vw 0 0 -25vw' } },
+  { id: 'mix', word: 'MIX', title: '¿Para qué<br>elegir uno?', slug: 'tricolor', w: 'min(48vw, 680px)', pr: -3, ings: [], blob: { seed: 34, style: 'left:50%;top:50%;width:48vw;height:48vw;margin:-24vw 0 0 -24vw' } },
 ];
-const FLAVOR_NAMES = { frutilla: 'Frutilla', chocolate: 'Chocolate', vainilla: 'Vainilla', mix: 'Mix' };
+const FLAVOR_NAMES = { frutilla: 'Frutilla', chocolate: 'Chocolate', vainilla: 'Dulce de leche', mix: 'Mix' };
 function Flavors() {
   return `
 <section class="flavors on-color" id="sabores" aria-labelledby="sabores-title" style="--steps:${FLAVORS.length}" data-active="0">
@@ -292,14 +287,14 @@ function Flavors() {
       return `<article class="flv-step${i === 0 ? ' is-active' : ''}" data-flavor="${f.id}" aria-label="${FLAVOR_NAMES[f.id]}">
       <div class="flv-giant" aria-hidden="true">${f.word}</div>
       <div class="flv-blob" style="${f.blob.style}" aria-hidden="true">${blobSvg(f.blob.seed, .18, 8)}</div>
-      <div class="flv-prod" style="--pr:${f.pr}deg;--pw:${f.w}">${Pic(f.img, { alt: altOf(p), sizes: '(max-width: 860px) 92vw, 56vw' })}</div>
+      <div class="flv-prod" style="--pr:${f.pr}deg;--pw:${f.w}">${Pic(p.img, { alt: altOf(p), sizes: '(max-width: 860px) 92vw, 56vw' })}</div>
       ${f.ings.map(([n, o], k) => FloatingIngredient(n, { ...o, w: o.w, i: k, sp: 60 + k * 30 })).join('')}
       <div class="flv-ing" style="--x:18%;--y:16%;--w:7vw;--ir:-20deg;--i:3;--sp:50px;color:var(--fg)" aria-hidden="true">${splashSvg(-20)}</div>
       <div class="flv-ing" style="--x:76%;--y:70%;--w:5vw;--ir:150deg;--i:4;--sp:90px;color:var(--fg)" aria-hidden="true">${splashSvg(0)}</div>
       <div class="flv-copy">
         <p class="n" style="--i:0">0${i + 1} / ${FLAVOR_NAMES[f.id]}</p>
         <h3 style="--i:1">${f.title}</h3>
-        <p style="--i:2">${esc(f.text)}</p>
+        <p style="--i:2">${esc(p.name)}: ${esc(p.desc.charAt(0).toLowerCase() + p.desc.slice(1))}</p>
         <a class="link-arrow" style="--i:3" href="${B}/productos/${p.slug}/">Ver ${esc(p.short.toLowerCase())} ${ARROW}</a>
       </div>
     </article>`;
@@ -312,17 +307,21 @@ function Flavors() {
 
 /* 04 · FAMILY SHOT (ProductGallery) */
 const FAMILY = [
-  // [slug, img, x, y, w, z, podium]
-  ['postre-tricolor', 'tricolor', '1%', '30%', '22%', 3],
-  ['bombon-helado', 'bombon-pack', '17%', '6%', '15%', 2],
-  ['pote-fisu', 'pote-trio', '33%', '4%', '30%', 4],
-  ['barra-crocante', 'barra-crocante-b', '62%', '0%', '17%', 3],
-  ['almendrado', 'almendrado', '76%', '22%', '21%', 2],
-  ['canastitas', 'bochas', '20%', '52%', '20%', 6],
-  ['bombon-con-crema', 'bombon-crema', '42%', '55%', '17%', 7],
-  ['torta-helada-frutilla', 'torta-frutilla-b', '59%', '52%', '24%', 6],
-  ['canasta-chocolate', 'canasta-choco', '83%', '50%', '17%', 6],
-  ['panqueque-helado', 'panqueque', '-1%', '66%', '22%', 7],
+  // [slug, x, y, w, z]
+  ['bombon-escoces', '2%', '4%', '15%', 3],
+  ['torta-helada-frutilla', '16%', '0%', '22%', 2],
+  ['torta-helada-chocolate', '38%', '-2%', '24%', 3],
+  ['torta-helada-dulce-de-leche', '62%', '0%', '22%', 2],
+  ['alfajor-helado', '83%', '6%', '16%', 3],
+  ['tricolor', '-1%', '42%', '18%', 5],
+  ['bocha-americana', '17%', '38%', '12%', 4],
+  ['bocha-chocolate', '28%', '40%', '12%', 4],
+  ['omele', '40%', '38%', '19%', 5],
+  ['bocha-frutilla', '59%', '40%', '12%', 4],
+  ['bocha-dulce-de-leche', '70%', '38%', '12%', 4],
+  ['almendrado', '82%', '42%', '17%', 5],
+  ['cuadrado-americana', '26%', '60%', '18%', 6],
+  ['bombon-suizo', '56%', '62%', '11%', 6],
 ];
 function Family() {
   return `
@@ -339,11 +338,11 @@ function Family() {
           <div class="blob drift" style="--dur:30s;left:4%;top:0;width:52%;height:96%;color:var(--fisu-cream)">${blobSvg(51, .14, 8)}</div>
           <div class="blob drift-b" style="--dur:26s;right:2%;top:6%;width:46%;height:88%;color:#FFE3EF">${blobSvg(52, .16, 8)}</div>
           <div class="blob drift" style="--dur:34s;left:34%;top:-12%;width:22%;height:36%;color:var(--fisu-yellow)">${blobSvg(53, .2, 6)}</div>
-          <div class="blob drift-b" style="--dur:28s;right:-3%;top:58%;width:14%;height:30%;color:var(--fisu-lilac)">${blobSvg(54, .2, 6)}</div>
+          <div class="blob drift-b" style="--dur:28s;right:-6%;top:-6%;width:12%;height:26%;color:var(--fisu-lilac)">${blobSvg(54, .2, 6)}</div>
         </div>
-        ${FAMILY.map(([slug, img, x, y, w, z], i) => {
+        ${FAMILY.map(([slug, x, y, w, z], i) => {
           const p = bySlug[slug];
-          return `<a class="fam-item pop" href="${B}/productos/${slug}/" style="--x:${x};--y:${y};--w:${w};--z:${z};--d:${.05 * i}s;--r0:${i % 2 ? 6 : -6}deg"><span class="fam-tag">${esc(p.name)}</span>${Pic(img, { alt: altOf(p), sizes: '(max-width: 860px) 260px, 22vw' })}</a>`;
+          return `<a class="fam-item pop" href="${B}/productos/${slug}/" style="--x:${x};--y:${y};--w:${w};--z:${z};--d:${.05 * i}s;--r0:${i % 2 ? 6 : -6}deg"><span class="fam-tag">${esc(p.name)}</span>${Pic(p.img, { alt: altOf(p), sizes: '(max-width: 860px) 260px, 22vw' })}</a>`;
         }).join('')}
       </div>
     </div>
@@ -355,10 +354,10 @@ function Family() {
 
 /* 05 · MOMENTOS */
 const MOMENTS = [
-  { q: 'Ese postre <em>después de comer.</em>', chip: 'Sobremesa', p: 'Cuando la comida terminó pero la mesa no.', slug: 'bombon-con-crema', img: 'bombon-crema', c: 'var(--fisu-yellow)', w: '70%', r: -4, seed: 61 },
-  { q: 'Ese antojo <em>de las once.</em>', chip: '11:00 h', p: 'No es hambre. Es antojo. Es distinto.', slug: 'barra-crocante', img: 'crocante-duo', c: 'var(--fisu-blue)', w: '80%', r: 6, seed: 62 },
-  { q: 'Ese <em>“dame un pedacito”</em> que termina siendo media torta.', chip: 'Para compartir', p: 'Nadie pide una porción entera. Nadie deja de comerla.', slug: 'torta-helada-frutilla', img: 'torta-frutilla-b', c: 'var(--fisu-pink)', w: '96%', r: -3, seed: 63 },
-  { q: 'Ese freezer que <em>siempre tiene algo bueno.</em>', chip: 'Siempre', p: 'Abrís, mirás, sonreís. Ya sabés lo que viene.', slug: 'pote-fisu', img: 'pote-solo', c: 'var(--fisu-lilac)', w: '64%', r: 4, seed: 64 },
+  { q: 'Ese postre <em>después de comer.</em>', chip: 'Sobremesa', p: 'Cuando la comida terminó pero la mesa no.', slug: 'bombon-escoces', c: 'var(--fisu-yellow)', w: '70%', r: -4, seed: 61 },
+  { q: 'Ese antojo <em>de las once.</em>', chip: '11:00 h', p: 'No es hambre. Es antojo. Es distinto.', slug: 'alfajor-helado', c: 'var(--fisu-blue)', w: '78%', r: 5, seed: 62 },
+  { q: 'Ese <em>“dame un pedacito”</em> que termina siendo media torta.', chip: 'Para compartir', p: 'Nadie pide una porción entera. Nadie deja de comerla.', slug: 'torta-helada-frutilla', c: 'var(--fisu-pink)', w: '88%', r: -3, seed: 63 },
+  { q: 'Ese freezer que <em>siempre tiene algo bueno.</em>', chip: 'Siempre', p: 'Abrís, mirás, sonreís. Ya sabés lo que viene.', slug: 'tricolor', c: 'var(--fisu-lilac)', w: '72%', r: 4, seed: 64 },
 ];
 const CLOCK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>';
 function Moments() {
@@ -379,7 +378,7 @@ function Moments() {
         </div>
         <div class="mo-visual" style="--c:${m.c}">
           <div class="mo-blob drift" style="--dur:${22 + i * 3}s" aria-hidden="true">${blobSvg(m.seed, .2, 7)}</div>
-          <div class="mo-img" style="--w:${m.w};--r:${m.r}deg"><div data-speed="-.25"><div class="pop" style="--d:.15s">${Pic(m.img, { alt: altOf(p), sizes: '(max-width: 860px) 86vw, 40vw' })}</div></div></div>
+          <div class="mo-img" style="--w:${m.w};--r:${m.r}deg"><div data-speed="-.25"><div class="pop" style="--d:.15s">${Pic(p.img, { alt: altOf(p), sizes: '(max-width: 860px) 86vw, 40vw' })}</div></div></div>
           ${Splash({ style: `right:${i % 2 ? '70%' : '8%'};top:4%;width:16%;height:16%`, color: i === 3 ? 'var(--fisu-pink)' : 'var(--fisu-blue)', rot: i % 2 ? -30 : 20 })}
         </div>
       </div>`;
@@ -399,11 +398,10 @@ function Explosion() {
   <div class="ex-shape blob drift-b" style="--dur:30s;right:-12%;top:8%;width:30vw;height:38vw;color:var(--fisu-lilac)" aria-hidden="true">${blobSvg(72, .2, 7)}</div>
   <div class="ex-shape blob drift" style="--dur:28s;right:6%;bottom:-16%;width:36vw;height:30vw;color:var(--fisu-blue)" aria-hidden="true">${blobSvg(73, .18, 7)}</div>
   <div class="ex-shape blob drift-b" style="--dur:34s;left:8%;bottom:-8%;width:22vw;height:22vw;color:var(--fisu-strawberry)" aria-hidden="true">${blobSvg(74, .2, 6)}</div>
-  ${P('crocante-duo', { x: '4%', y: '8%', w: '20vw', r: -14, s: -.5 })}
-  ${P('pote-solo', { x: '78%', y: '6%', w: '15vw', r: 10, s: .4, cls: 'ex-hide-m' })}
-  ${P('canasta-choco', { x: '76%', y: '56%', w: '20vw', r: 8, s: -.35, cls: 'ex-low r' })}
-  ${P('bochas', { x: '3%', y: '60%', w: '19vw', r: -6, s: .45, cls: 'ex-low' })}
-  ${P('ing-choco-fly', { x: '26%', y: '22%', w: '5vw', r: 30, s: -.8, dur: 5, cls: 'ex-hide-m' })}
+  ${P('p-bocha-frutilla', { x: '4%', y: '8%', w: '16vw', r: -10, s: -.5 })}
+  ${P('p-bombon-escoces', { x: '80%', y: '6%', w: '14vw', r: 8, s: .4, cls: 'ex-hide-m' })}
+  ${P('p-bocha-chocolate', { x: '78%', y: '56%', w: '16vw', r: 6, s: -.35, cls: 'ex-low r' })}
+  ${P('p-bocha-americana', { x: '4%', y: '60%', w: '16vw', r: -6, s: .45, cls: 'ex-low' })}
   <div class="ex-center">
     <h2 class="sr-only" id="fisu-title">FISÚ: más sabor, más color, más momentos</h2>
     <img class="ex-logo pop" data-reveal src="${logoW()}" width="790" height="436" alt="" aria-hidden="true" loading="lazy">
@@ -459,15 +457,15 @@ function CTAFinal({ home = true } = {}) {
     </div>
     <div class="cta-stage stage" data-reveal aria-hidden="true">
       <div class="podium white" style="--x:13%;--y:47%;--w:74%"></div>
-      <div class="p" style="--x:8%;--y:6%;--w:84%;--z:3"><div class="pop" style="--d:.1s"><div class="float" style="--dur:8s">${Pic('pote-trio', { sizes: '(max-width: 860px) 90vw, 40vw' })}</div></div></div>
+      <div class="p" style="--x:8%;--y:6%;--w:84%;--z:3"><div class="pop" style="--d:.1s"><div class="float" style="--dur:8s">${Pic('p-torta-helada-frutilla', { sizes: '(max-width: 860px) 90vw, 40vw' })}</div></div></div>
       ${Splash({ style: 'left:4%;top:2%;width:16%;height:16%;z-index:5', color: '#fff', rot: -20 })}
     </div>
   </div>
   <div class="wrap where-wrap">
     <div class="where" id="donde-cards">
-      <div class="where-card fade-up" data-reveal>${iconImg('icon-tienda')}<h3>¿Dónde comprar?</h3><p>Escribinos y te contamos cuál es el punto de venta FISÚ más cerca tuyo.</p><a class="link-arrow" href="${SITE.whatsapp}" target="_blank" rel="noopener">Consultar por WhatsApp ${ARROW}</a></div>
-      <div class="where-card fade-up" data-reveal style="--d:.1s">${iconImg('icon-delivery')}<h3>¿Tenés un comercio?</h3><p>Sumá FISÚ a tu freezer. Te contamos cómo trabajar con nosotros.</p><a class="link-arrow" href="mailto:${SITE.email}?subject=Quiero%20vender%20FIS%C3%9A">Quiero vender FISÚ ${ARROW}</a></div>
-      <div class="where-card fade-up" data-reveal style="--d:.2s">${iconImg('icon-redes')}<h3>Seguinos</h3><p>Lanzamientos, sabores y antojos diarios. Avisados quedan.</p><a class="link-arrow" href="${SITE.instagram}" target="_blank" rel="noopener">${SITE.instagramHandle} ${ARROW}</a></div>
+      <div class="where-card fade-up" data-reveal>${iconImg('icon-tienda')}<h3>¿Dónde comprar?</h3><p>Muy pronto vas a encontrar acá los puntos de venta FISÚ.</p></div>
+      <div class="where-card fade-up" data-reveal style="--d:.1s">${iconImg('icon-delivery')}<h3>¿Tenés un comercio?</h3><p>Sumá FISÚ a tu freezer.</p>${SITE.email ? `<a class="link-arrow" href="mailto:${SITE.email}?subject=Quiero%20vender%20FIS%C3%9A">Quiero vender FISÚ ${ARROW}</a>` : ''}</div>
+      <div class="where-card fade-up" data-reveal style="--d:.2s">${iconImg('icon-redes')}<h3>Seguinos</h3><p>Lanzamientos, sabores y antojos.</p>${SITE.instagram ? `<a class="link-arrow" href="${SITE.instagram}" target="_blank" rel="noopener">${SITE.instagramHandle} ${ARROW}</a>` : ''}</div>
     </div>
   </div>
 </section>`;
@@ -475,7 +473,7 @@ function CTAFinal({ home = true } = {}) {
 
 function homeJsonLd() {
   return [
-    { '@context': 'https://schema.org', '@type': 'Organization', name: 'FISÚ Helados', alternateName: 'FISÚ', url: abs(`${B}/`), logo: abs(`${B}/assets/img/logo-512.png`), sameAs: [SITE.instagram], description: 'Marca de postres y productos helados.' },
+    { '@context': 'https://schema.org', '@type': 'Organization', name: 'FISÚ Helados', alternateName: 'FISÚ', url: abs(`${B}/`), logo: abs(`${B}/assets/img/logo-512.png`), ...(SITE.instagram ? { sameAs: [SITE.instagram] } : {}), description: 'Marca de postres y productos helados.' },
     { '@context': 'https://schema.org', '@type': 'WebSite', name: 'FISÚ Helados', url: abs(`${B}/`), inLanguage: 'es-AR' },
     { '@context': 'https://schema.org', '@type': 'ItemList', name: 'Productos FISÚ', itemListElement: PRODUCTS.map((p, i) => ({ '@type': 'ListItem', position: i + 1, url: abs(`${B}/productos/${p.slug}/`), name: p.name })) },
   ];
@@ -485,25 +483,19 @@ function buildHome() {
   const body = [Hero(), ProductModules(), Flavors(), Family(), Moments(), Explosion(), Catalog(), CTAFinal()].join('\n');
   return Doc({
     title: 'FISÚ Helados — Postres helados que dan ganas de mirar dos veces',
-    desc: 'FISÚ Helados: postres helados, potes, barras, tortas y bombones. Sabores de frutilla, chocolate y vainilla listos para disfrutar. Elegí tu próximo antojo.',
+    desc: 'FISÚ Helados: bombones, bochas, tortas heladas y postres. Sabores de americana, chocolate, frutilla y dulce de leche. Elegí tu próximo antojo.',
     path: `${B}/`, body, jsonld: homeJsonLd(), home: true,
-    preload: [{ srcset: avifSet('pote-trio'), sizes: '(max-width: 860px) 96vw, 46vw' }],
+    preload: [{ srcset: avifSet('p-torta-helada-chocolate'), sizes: '(max-width: 860px) 96vw, 46vw' }],
   });
 }
 
 /* ================================================================ PRODUCTO (ProductHero) */
 const THEME_COLOR = { pink: '#F81F86', chocolate: '#6B3A24', vainilla: '#F5C52D', mix: '#B796FF', blue: '#1147F5' };
-const THEME_INGS = {
-  pink: [],
-  chocolate: [['ing-choco', { x: '80%', y: '62%', w: '14%', r: 10 }], ['ing-choco-fly', { x: '6%', y: '10%', w: '9%', r: -20 }]],
-  vainilla: [['ing-choco-fly', { x: '80%', y: '12%', w: '9%', r: 16 }]],
-  mix: [['ing-choco-fly', { x: '4%', y: '66%', w: '9%', r: -14 }]],
-  blue: [['ing-choco-fly', { x: '82%', y: '10%', w: '10%', r: 20 }], ['ing-choco', { x: '2%', y: '64%', w: '13%', r: -10 }]],
-};
+const THEME_INGS = { pink: [], chocolate: [], vainilla: [], mix: [], blue: [] };
 function buildProduct(p) {
   const related = PRODUCTS.filter(x => x.slug !== p.slug).map(x => ({ x, s: x.cats.filter(c => p.cats.includes(c)).length + (x.theme === p.theme ? 1 : 0) }))
     .sort((a, b) => b.s - a.s).slice(0, 3).map(r => r.x);
-  const giant = p.short.split(' ')[0].toUpperCase();
+  const giant = p.family.toUpperCase();
   const body = `
 <div class="pp th-${p.theme}">
   <section class="pp-hero on-color${p.theme === 'vainilla' ? ' on-yellow' : ''}" data-mouse aria-labelledby="pp-title">
@@ -515,7 +507,6 @@ function buildProduct(p) {
         ${BrandHeading('h1', esc(p.name), '', 'id="pp-title"')}
         <p class="pp-flavor fade-up" data-reveal style="--d:.2s">${p.flavors.map(f => `<span>${esc(f)}</span>`).join('')}</p>
         <p class="pp-desc fade-up" data-reveal style="--d:.3s">${esc(p.long)}</p>
-        <ul class="pp-feels fade-up" data-reveal style="--d:.4s" aria-label="Sensaciones">${p.feels.map(f => `<li>${esc(f)}</li>`).join('')}</ul>
       </div>
       <div class="pp-vis" data-reveal>
         <div class="pp-blob drift" style="--dur:24s" aria-hidden="true">${blobSvg(p.slug.length * 7, .18, 8)}</div>
@@ -530,9 +521,8 @@ function buildProduct(p) {
       <div class="sec-head"><div><p class="kicker">Lo que tenés que saber</p>${BrandHeading('h2', 'Así es <span class="c-pink">por dentro.</span>', 't-section', 'id="info-title"')}</div></div>
       <div class="grid">
         <div class="info-tile fade-up" data-reveal><span class="lbl">Sabor</span><span class="val">${esc(p.flavorLine)}</span></div>
-        <div class="info-tile fade-up" data-reveal style="--d:.08s"><span class="lbl">Formato</span><span class="val">${esc(p.format)}</span></div>
-        <div class="info-tile fade-up" data-reveal style="--d:.16s"><span class="lbl">Ideal para</span><span class="val">${esc(p.ideal)}</span></div>
-        <div class="info-tile fade-up" data-reveal style="--d:.24s"><span class="lbl">Conservación</span><span class="val">En freezer, a −18&nbsp;°C</span></div>
+        <div class="info-tile fade-up" data-reveal style="--d:.08s"><span class="lbl">Familia</span><span class="val">${esc(p.family)}</span></div>
+        <div class="info-tile fade-up wide" data-reveal style="--d:.16s"><span class="lbl">Qué lleva</span><span class="val">${esc(p.desc)}</span></div>
       </div>
     </div>
   </section>
@@ -553,7 +543,7 @@ function buildProduct(p) {
 ${CTAFinal({ home: false })}`;
   const path = `${B}/productos/${p.slug}/`;
   const jsonld = [
-    { '@context': 'https://schema.org', '@type': 'Product', name: `${p.name} FISÚ`, description: p.long, brand: { '@type': 'Brand', name: 'FISÚ' }, category: 'Postres helados', image: abs(`${B}/assets/img/${p.img}-${Math.max(...IMG[p.img].sizes)}.webp`), url: abs(path) },
+    { '@context': 'https://schema.org', '@type': 'Product', name: `${p.name} FISÚ`, description: p.long, brand: { '@type': 'Brand', name: 'FISÚ' }, category: 'Postres helados', ...(IMG[p.img] ? { image: abs(`${B}/assets/img/${p.img}-${Math.max(...IMG[p.img].sizes)}.webp`) } : {}), url: abs(path) },
     { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'FISÚ', item: abs(`${B}/`) },
       { '@type': 'ListItem', position: 2, name: 'Productos', item: abs(`${B}/#catalogo`) },
@@ -563,7 +553,7 @@ ${CTAFinal({ home: false })}`;
     title: `${p.name} — ${p.flavorLine} | FISÚ Helados`,
     desc: `${p.name} FISÚ: ${p.flavorLine.toLowerCase()}. ${p.desc}`,
     path, body, jsonld, headerColor: ['vainilla', 'mix'].includes(p.theme) ? 'on-light-top' : 'on-color-top', themeColor: THEME_COLOR[p.theme],
-    preload: [{ srcset: avifSet(p.img), sizes: '(max-width: 860px) 100vw, 56vw' }],
+    preload: IMG[p.img] ? [{ srcset: avifSet(p.img), sizes: '(max-width: 860px) 100vw, 56vw' }] : [],
   });
 }
 
@@ -583,6 +573,7 @@ if (ZIP) {
   const zurls = ['/', ...PRODUCTS.map(p => `/productos/${p.slug}/`)];
   write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${zurls.map(u => `  <url><loc>${SITE.url}${u}</loc></url>`).join('\n')}\n</urlset>\n`);
   write('robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${SITE.url}/sitemap.xml\n`);
+  write('_redirects', OLD_SLUGS.map(sl => `/productos/${sl}/*  /#catalogo  302`).join('\n') + '\n');
   console.log('OK · zip en ' + OUT); process.exit(0);
 }
 if (ARTIFACT) {
