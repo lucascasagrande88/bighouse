@@ -27,6 +27,33 @@
   to = "/catalogo.html"
   status = 200
 
+# Notas internas: no se publican.
+[[redirects]]
+  from = "/PENDIENTES.md"
+  to = "/"
+  status = 404
+  force = true
+[[redirects]]
+  from = "/README.md"
+  to = "/"
+  status = 404
+  force = true
+[[redirects]]
+  from = "/FOTOS.md"
+  to = "/"
+  status = 404
+  force = true
+[[redirects]]
+  from = "/IMAGENES.md"
+  to = "/"
+  status = 404
+  force = true
+[[redirects]]
+  from = "/SUPABASE-SETUP.sql"
+  to = "/"
+  status = 404
+  force = true
+
 [[headers]]
   for = "/*"
   [headers.values]

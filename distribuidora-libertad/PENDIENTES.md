@@ -1,6 +1,6 @@
 # Pendientes · Distribuidora Libertad (traspaso a sesión local)
 
-Estado al 16/10/2026. Web, catálogo, tablero, links, FAQ, animaciones e imágenes están terminados y en la rama `claude/hopeful-clarke-sq4eqx`. El zip para Netlify se genera desde esta carpeta (`index.html` en la raíz).
+Estado al 02/11/2026. Web, catálogo, tablero, links, FAQ, animaciones e imágenes están terminados y en la rama `claude/hopeful-clarke-sq4eqx`. El zip para Netlify se genera desde esta carpeta (`index.html` en la raíz).
 
 ## 1. Lista de precios de octubre: HECHO
 
@@ -44,6 +44,20 @@ Estado al 16/10/2026. Web, catálogo, tablero, links, FAQ, animaciones e imágen
 ## 4. Deploy
 
 - Proyecto Netlify ya creado: `distribuidora-libertad` (https://distribuidora-libertad.netlify.app). Se sube arrastrando el zip de esta carpeta en Deploys, o con `netlify deploy --prod --dir distribuidora-libertad` desde local.
+
+## 5. Lista de precios con clave: HECHO (02/11)
+
+- La web es pública, pero el catálogo muestra un candado y los precios solo aparecen con la **clave de clientes** (8 números). La clave está en el PDF de entrega y no se escribe en el repo.
+- Base:
+  - `anon` ya no puede leer `lib_productos.precio`.
+  - Los precios se piden con `public.lib_precios(clave)`, que devuelve `{código: precio}` o null.
+  - El hash bcrypt está en `lib_priv.clave_precios`, un esquema que la API no expone.
+  - Para cambiar la clave, ver el final de `SUPABASE-SETUP.sql`.
+- `catalogo-base.js` ya no publica precios. Ojo: el repo es público y las versiones anteriores del archivo, que sí tenían precios, quedan en el historial de git.
+- Portada: los destacados muestran "Ver precio" hasta que el navegador ingresa la clave, que queda guardada en `localStorage`.
+- El cliente ya usa el panel: al 02/11 había 6.051 artículos visibles, 510 ocultos, 1.712 con foto (813 subidas desde el panel) y 1 pedido.
+- Pendiente de Lucas: "Olvidé mi contraseña" del panel no funciona porque el proyecto CLIENTES tiene el Site URL en `localhost:3000` y no tiene Redirect URLs. Hay que agregar `https://distribuidora-libertad.netlify.app/**`.
+- Entrega final: `FINALES/ENTREGA-WEB-2026-11/` (PDF y ZIP). Las notas internas (`.md` y `.sql`) dan 404 en Netlify (`netlify.toml`).
 
 ## Ramas
 
