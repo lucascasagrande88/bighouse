@@ -234,9 +234,31 @@
     $$("[data-add]").forEach(function (b) { b.classList.toggle("en", window.LIBPedido.tiene(b.getAttribute("data-add"))); });
   }, 0); });
 
-  LIB.ready.then(function () {
-    indexar();
-    actualizar(false);
+  /* ---------- lista de precios con clave ---------- */
+  function abrirLista() {
+    $("#cat").classList.remove("bloqueado"); $("#candado").hidden = true;
+    indexar(); actualizar(false);
     var art = params.get("art"); if (art) verProd(art);
+  }
+  $("#f-clave").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var btn = e.target.querySelector("button"), err = $("#clave-err");
+    btn.disabled = true; err.hidden = true;
+    LIB.desbloquear($("#clave").value).then(function (r) {
+      btn.disabled = false;
+      if (r === "ok") { abrirLista(); return; }
+      err.textContent = r === "mala" ? "La clave no es correcta. Revisala o pedila por WhatsApp."
+        : "No pudimos verificar la clave. Probá de nuevo en un rato.";
+      err.hidden = false; $("#clave").select();
+    });
+  });
+
+  LIB.ready.then(function () {
+    if (!LIB.conPrecios) {
+      $("#n-res").textContent = "";
+      $("#candado").hidden = false;
+      return;
+    }
+    abrirLista();
   });
 })();

@@ -276,11 +276,12 @@
   reveal();
   // Un pedido guardado de otra visita puede tener precios viejos: se actualizan con la lista vigente.
   function refrescarPedido() {
-    if (!LIB.productos.length) return;
+    if (!LIB.productos.length || !LIB.conPrecios) return;
     var m = {}; LIB.productos.forEach(function (p) { m[p.a] = p; });
     Object.keys(pedido).forEach(function (a) { var p = m[a]; if (p) { pedido[a].n = p.n; pedido[a].p = p.p; } });
     guardar();
   }
 
   LIB.ready.then(function () { aplicarAjustes(); refrescarPedido(); pintar(); });
+  window.addEventListener("lib:precios", function () { refrescarPedido(); pintar(); });
 })();

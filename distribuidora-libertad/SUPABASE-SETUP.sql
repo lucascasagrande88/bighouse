@@ -158,3 +158,38 @@ create policy "lib fotos admin baja" on storage.objects
 --   select id, 'libertad' from auth.users where email = 'EMAIL'
 --   on conflict do nothing;
 -- =====================================================================
+
+-- ---------- lista de precios con clave de clientes (02/11/2026) ----------
+-- La web es pública, pero los precios solo se entregan con la clave de clientes.
+-- La clave se guarda hasheada (bcrypt) en lib_priv, que no está expuesto por la API.
+-- Para cambiarla (desde el SQL Editor):
+--   update lib_priv.clave_precios set hash = extensions.crypt('NUEVA', extensions.gen_salt('bf', 8)), updated_at = now() where id = 1;
+create extension if not exists pgcrypto with schema extensions;
+create schema if not exists lib_priv;
+revoke all on schema lib_priv from public, anon, authenticated;
+create table if not exists lib_priv.clave_precios (
+  id int primary key default 1 check (id = 1),
+  hash text not null,
+  updated_at timestamptz not null default now()
+);
+revoke all on lib_priv.clave_precios from public, anon, authenticated;
+
+create or replace function public.lib_precios(p_clave text) returns jsonb
+language plpgsql stable security definer set search_path = '' as $$
+declare h text;
+begin
+  select c.hash into h from lib_priv.clave_precios c where c.id = 1;
+  if h is null or p_clave is null or length(p_clave) > 32
+     or extensions.crypt(p_clave, h) <> h then
+    return null;
+  end if;
+  return (select coalesce(jsonb_object_agg(p.art, p.precio), '{}'::jsonb)
+          from public.lib_productos p where p.activo and p.precio is not null);
+end $$;
+revoke all on function public.lib_precios(text) from public;
+grant execute on function public.lib_precios(text) to anon, authenticated;
+
+-- El público (anon) no lee la columna precio; el Tablero (authenticated) sí.
+revoke select on public.lib_productos from anon;
+grant select (id, art, nombre, categoria, foto_url, activo, destacado, orden, nota, created_at, updated_at)
+  on public.lib_productos to anon;

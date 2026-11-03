@@ -48,7 +48,8 @@
       '<div class="prod__img"><span class="prod__rubro">' + esc(r.corto) + '</span>' + U.foto(p) + '</div>' +
       '<div class="prod__body"><span class="prod__cod">' + esc(p.a) + '</span>' +
       '<h3 class="prod__nom">' + esc(p.n) + '</h3>' +
-      '<div class="prod__pie">' + (p.p != null ? '<span class="prod__precio">' + LIB.precio(p.p) + '</span>' : '<span class="prod__consultar">Consultar</span>') +
+      '<div class="prod__pie">' + (!LIB.conPrecios ? '<a class="prod__consultar" href="catalogo.html">Ver precio</a>'
+        : p.p != null ? '<span class="prod__precio">' + LIB.precio(p.p) + '</span>' : '<span class="prod__consultar">Consultar</span>') +
       '<button class="btn-add" type="button" data-add="' + esc(p.a) + '" aria-label="Agregar ' + esc(p.n) + ' al pedido">' + U.icono("mas") + 'Agregar</button></div></div></article>';
   }
   function destacados() {

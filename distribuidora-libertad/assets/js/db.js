@@ -51,7 +51,9 @@
     };
   }
 
-  var COLS = "id,art,nombre,precio,categoria,foto_url,destacado,orden,nota,activo";
+  /* El público no lee la columna precio: los precios llegan con la clave de clientes (lib_precios). */
+  var COLS = "id,art,nombre,categoria,foto_url,destacado,orden,nota,activo";
+  var KEY_CLAVE = "lib-clave-precios";
 
   /* Trae todas las filas paginando de a 1000 (límite de la API). */
   function fetchAll(table, cols, filter) {
@@ -79,6 +81,24 @@
     }, function () { return aj; });
   }
 
+  function claveGuardada() { try { return localStorage.getItem(KEY_CLAVE) || ""; } catch (e) { return ""; } }
+
+  /* Pide los precios con la clave. Resuelve "ok", "mala" o "error" (base no disponible). */
+  function desbloquear(clave) {
+    clave = String(clave || "").replace(/\D/g, "");
+    if (!sb) return Promise.resolve("error");
+    if (!clave) return Promise.resolve("mala");
+    return withTimeout(sb.rpc("lib_precios", { p_clave: clave }), 15000).then(function (r) {
+      if (r.error) return "error";
+      if (!r.data) { try { localStorage.removeItem(KEY_CLAVE); } catch (e) {} return "mala"; }
+      LIB.productos.forEach(function (p) { var v = r.data[p.a]; p.p = v == null ? null : Number(v); });
+      LIB.conPrecios = true;
+      try { localStorage.setItem(KEY_CLAVE, clave); } catch (e) {}
+      try { window.dispatchEvent(new CustomEvent("lib:precios")); } catch (e) {}
+      return "ok";
+    }, function () { return "error"; });
+  }
+
   function withTimeout(p, ms) {
     return Promise.race([p, new Promise(function (_, rej) { setTimeout(function () { rej(new Error("timeout")); }, ms); })]);
   }
@@ -89,6 +109,10 @@
     productos: [],
     ajustes: Object.assign({}, window.LIB_DEFAULTS || {}),
     fuente: "base",
+    conPrecios: false,
+    desbloquear: desbloquear,
+    claveGuardada: claveGuardada,
+    olvidarClave: function () { try { localStorage.removeItem(KEY_CLAVE); } catch (e) {} },
     rubros: RUBROS,
     rubro: function (id) { return RUBRO_BY_ID[id] || { id: id, nombre: id, corto: id, bajada: "" }; },
     norm: norm,
@@ -137,6 +161,9 @@
       if (r[1]) { LIB.productos = r[1]; LIB.fuente = "db"; return LIB; }
       if (window.LIB_SOLO_AJUSTES) return LIB;
       return cargarBase().then(function () { LIB.productos = fromBase(); LIB.fuente = "base"; return LIB; });
+    }).then(function () {
+      // Si este navegador ya ingresó la clave, se cargan los precios antes de pintar.
+      if (LIB.fuente === "db" && claveGuardada()) return desbloquear(claveGuardada());
     }).then(function () {
       try { window.dispatchEvent(new CustomEvent("lib:ready")); } catch (e) {}
       return LIB;

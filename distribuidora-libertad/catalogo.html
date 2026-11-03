@@ -80,7 +80,20 @@
     </div>
   </section>
 
-  <div class="wrap cat">
+  <div class="wrap cat bloqueado" id="cat">
+    <div class="candado" id="candado" hidden>
+      <div class="candado__ic"><i data-ic="seguridad"></i></div>
+      <span class="kicker">Lista de precios para clientes</span>
+      <h2 class="h2">Ingresá tu clave para ver la lista.</h2>
+      <p>La lista de precios es exclusiva para clientes de Distribuidora Libertad. Si todavía no tenés la clave, pedila por WhatsApp.</p>
+      <form class="candado__form" id="f-clave" autocomplete="off">
+        <label class="sr" for="clave">Clave de clientes</label>
+        <input id="clave" name="clave" type="password" inputmode="numeric" maxlength="8" placeholder="Clave de 8 números" required>
+        <button class="btn btn--verde" type="submit">Ver precios</button>
+      </form>
+      <p class="candado__err" id="clave-err" role="alert" hidden></p>
+      <a class="link-flecha" data-wa="Hola Distribuidora Libertad, quiero la clave para ver la lista de precios." href="#" target="_blank" rel="noopener">Pedir la clave por WhatsApp</a>
+    </div>
     <aside class="filtros" aria-label="Filtros">
       <h3>Rubros</h3>
       <ul class="filtro-rubros" id="f-rubros"></ul>
