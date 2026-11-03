@@ -90,9 +90,14 @@
     if (!clave) return Promise.resolve("mala");
     return withTimeout(sb.rpc("lib_precios", { p_clave: clave }), 15000).then(function (r) {
       if (r.error) return "error";
-      if (!r.data) { try { localStorage.removeItem(KEY_CLAVE); } catch (e) {} return "mala"; }
+      if (!r.data) {
+        try { localStorage.removeItem(KEY_CLAVE); } catch (e) {}
+        document.documentElement.classList.remove("con-clave");
+        return "mala";
+      }
       LIB.productos.forEach(function (p) { var v = r.data[p.a]; p.p = v == null ? null : Number(v); });
       LIB.conPrecios = true;
+      document.documentElement.classList.add("con-clave");
       try { localStorage.setItem(KEY_CLAVE, clave); } catch (e) {}
       try { window.dispatchEvent(new CustomEvent("lib:precios")); } catch (e) {}
       return "ok";

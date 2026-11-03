@@ -538,8 +538,23 @@ a.prod__consultar { color: var(--verde); text-decoration: none; }
 .sin-res p { color: var(--gris); margin: 0 0 18px; }
 .nota-precios { font-size: 13px; color: var(--gris); margin-top: 16px; }
 /* Lista de precios con clave */
-.cat.bloqueado { grid-template-columns: 1fr; }
-.cat.bloqueado > aside, .cat.bloqueado > section { display: none; }
+/* Sin clave: sin buscador ni listado, el candado primero. La clase con-clave la pone un script en el <head>. */
+html:not(.con-clave) .solo-clientes { display: none !important; }
+html:not(.con-clave) .cat { grid-template-columns: 1fr; padding-top: 24px; }
+html:not(.con-clave) .cat > aside, html:not(.con-clave) .cat > section { display: none; }
+html.con-clave .candado { display: none; }
+html:not(.con-clave) .pag-catalogo .wa-flot { display: none; }
+.chips:empty { display: none; }
+@media (max-width: 640px) { .cat { gap: 14px; } .pag-catalogo .wa-flot { display: none; } }
+html:not(.con-clave) .cat-cab { padding: 26px 0 24px; }
+@media (max-width: 640px) {
+  html:not(.con-clave) .cat-cab { padding: 16px 0 18px; }
+  html:not(.con-clave) .cat { padding-top: 14px; }
+  html .candado .candado__ic { width: 48px; height: 48px; margin-bottom: 10px; }
+  html .candado .candado__ic svg { width: 24px; height: 24px; }
+  html .candado .h2 { font-size: 26px; margin: 8px 0 10px; }
+  html .candado p { margin-bottom: 16px; font-size: 15px; }
+}
 .candado { max-width: 560px; margin: 8px auto 0; padding: 40px 32px; background: #fff; border: 1px solid var(--linea); border-radius: var(--r-l); text-align: center; }
 .candado__ic { width: 64px; height: 64px; margin: 0 auto 14px; border-radius: 50%; background: var(--verde-claro); color: var(--verde); display: grid; place-items: center; }
 .candado__ic svg { width: 30px; height: 30px; }
@@ -551,8 +566,8 @@ a.prod__consultar { color: var(--verde); text-decoration: none; }
 .candado__form input:focus { outline: none; border-color: var(--verde); background: #fff; }
 .candado__form .btn { height: 52px; white-space: nowrap; }
 .candado__err { color: var(--rojo); font-weight: 600; font-size: 14px; margin: 4px 0 12px !important; }
-.candado .link-flecha { display: inline-block; margin-top: 10px; }
-@media (max-width: 520px) { .candado { padding: 28px 18px; } .candado__form { flex-direction: column; } }
+.candado .link-flecha { margin-top: 10px; }
+@media (max-width: 520px) { .candado { padding: 22px 18px 24px; } .candado__form { flex-direction: column; } }
 
 /* modal producto */
 .modal { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; padding: 16px; visibility: hidden; opacity: 0; transition: opacity .25s, visibility .25s; }

@@ -17,6 +17,8 @@
   var idx = [], res = [];
 
   $("#q").value = st.q;
+  // Sin clave guardada, el candado está a la vista desde el primer momento: se pide de entrada.
+  if (!document.documentElement.classList.contains("con-clave") && window.matchMedia("(pointer: fine)").matches) $("#clave").focus({ preventScroll: true });
 
   function indexar() {
     idx = LIB.productos.map(function (p) {
@@ -236,7 +238,7 @@
 
   /* ---------- lista de precios con clave ---------- */
   function abrirLista() {
-    $("#cat").classList.remove("bloqueado"); $("#candado").hidden = true;
+    document.documentElement.classList.add("con-clave");
     indexar(); actualizar(false);
     var art = params.get("art"); if (art) verProd(art);
   }
@@ -255,8 +257,8 @@
 
   LIB.ready.then(function () {
     if (!LIB.conPrecios) {
-      $("#n-res").textContent = "";
-      $("#candado").hidden = false;
+      document.documentElement.classList.remove("con-clave");
+      if (window.matchMedia("(pointer: fine)").matches) $("#clave").focus({ preventScroll: true });
       return;
     }
     abrirLista();

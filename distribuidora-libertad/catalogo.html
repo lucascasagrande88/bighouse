@@ -15,14 +15,15 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="preload" href="assets/fonts/archivo-wdth.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/site.css">
+<script>try{if(localStorage.getItem("lib-clave-precios"))document.documentElement.classList.add("con-clave")}catch(e){}</script>
 </head>
-<body>
+<body class="pag-catalogo">
 <a class="sr" href="#main">Saltar al contenido</a>
 <div class="aviso" id="aviso" hidden></div>
 
 <div class="topbar">
   <div class="wrap">
-    <span class="topbar__lista mono">LISTA VIGENTE · <span data-aj="lista_nombre">Octubre 2026</span> · <span data-total-art>6.519</span> ARTÍCULOS</span>
+    <span class="topbar__lista mono">LISTA VIGENTE · <span data-aj="lista_nombre">Octubre 2026</span> · <span data-total-art>6.051</span> ARTÍCULOS</span>
     <span class="topbar__datos">
       <a data-tel href="#"><span data-aj="telefono">2657-798948</span></a>
       <a data-wa href="#">WhatsApp <span data-aj="whatsapp_visible">2657 55-7780</span></a>
@@ -71,8 +72,8 @@
     <div class="wrap">
       <nav class="migas" aria-label="Ubicación"><a href="./">Inicio</a><span>/</span><span>Catálogo</span><span id="miga-rubro" hidden></span></nav>
       <h1 class="h2" id="cat-titulo">Catálogo y lista de precios</h1>
-      <p id="cat-bajada">Lista <span data-aj="lista_nombre">Octubre 2026</span> · <span data-total-art>6.519</span> artículos. Sumá lo que necesitás y envianos el pedido por WhatsApp.</p>
-      <form class="buscador" id="f-buscar" role="search">
+      <p id="cat-bajada" class="solo-clientes">Lista <span data-aj="lista_nombre">Octubre 2026</span> · <span data-total-art>6.051</span> artículos. Sumá lo que necesitás y envianos el pedido por WhatsApp.</p>
+      <form class="buscador solo-clientes" id="f-buscar" role="search">
         <label class="sr" for="q">Buscar</label>
         <input id="q" name="q" type="search" placeholder="Buscá por nombre o código…" autocomplete="off">
         <button type="submit"><i data-ic="buscar"></i><span>Buscar</span></button>
@@ -80,12 +81,12 @@
     </div>
   </section>
 
-  <div class="wrap cat bloqueado" id="cat">
-    <div class="candado" id="candado" hidden>
+  <div class="wrap cat" id="cat">
+    <div class="candado" id="candado">
       <div class="candado__ic"><i data-ic="seguridad"></i></div>
       <span class="kicker">Lista de precios para clientes</span>
       <h2 class="h2">Ingresá tu clave para ver la lista.</h2>
-      <p>La lista de precios es exclusiva para clientes de Distribuidora Libertad. Si todavía no tenés la clave, pedila por WhatsApp.</p>
+      <p>Es exclusiva para clientes de Distribuidora Libertad. ¿No tenés la clave? Pedila por WhatsApp.</p>
       <form class="candado__form" id="f-clave" autocomplete="off">
         <label class="sr" for="clave">Clave de clientes</label>
         <input id="clave" name="clave" type="password" inputmode="numeric" maxlength="8" placeholder="Clave de 8 números" required>
