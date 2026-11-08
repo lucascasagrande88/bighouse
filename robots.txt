@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-
-Sitemap: https://lucascasagrande.netlify.app/sitemap.xml
+Sitemap: https://lucascasagrande.com/sitemap.xml

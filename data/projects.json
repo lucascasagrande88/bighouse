@@ -2,364 +2,454 @@
   {
     "slug": "reel-2026",
     "num": "01",
-    "title": "REEL 2026",
-    "sub": "Showreel",
+    "title": "REEL / MOTION & 3D",
+    "sub": "Una mirada al recorrido",
     "tags": [
-      "Motion Direction",
-      "3D",
-      "CGI"
+      "Dirección",
+      "Motion",
+      "3D"
     ],
     "img": "https://framerusercontent.com/images/YrJyTlynlK9JahFSr5rX0OWxnQ.jpg",
     "vid": "850730171",
-    "body": "A compilation of recent 3D motion work spanning brand campaigns, CGI production and motion direction across global clients — the through-line of a decade-and-a-half turning briefs into moving images.",
+    "body": "Una selección de imágenes y secuencias que conecta distintos momentos de mi trabajo. Producto, personajes, identidad y mundos digitales: cambia el encargo, se mantiene la búsqueda de una imagen con carácter.",
     "url": "/work/reel-2026/",
-    "vimeo": "https://vimeo.com/850730171"
+    "vimeo": "https://vimeo.com/850730171",
+    "focus": "Conectar piezas de distintos universos a través del ritmo, la composición y el movimiento.",
+    "video_status": "exact_title_match",
+    "role": null
   },
   {
     "slug": "noorus-fill",
     "num": "02",
     "title": "NOORUS FILL+",
-    "sub": "CGI Product Visualization",
+    "sub": "Producto, materia y escala",
     "tags": [
-      "3D",
       "CGI",
-      "Product"
+      "Producto",
+      "3D"
     ],
     "img": "https://framerusercontent.com/images/Ry0legV6ZdMtJ33X265OMneSo.jpg",
-    "body": "Full 3D CGI product visualization for NOORUS — from modeling and shading through to final compositing.",
+    "body": "Una pieza que acerca la mirada al producto a través de superficies, volúmenes y una iluminación contenida. El espacio se convierte en parte de su lenguaje visual.",
     "url": "/work/noorus-fill/",
-    "vimeo": "https://vimeo.com/lucascasagrande"
+    "vimeo": "https://vimeo.com/1095640044",
+    "focus": "Construir una lectura clara del objeto y darle presencia a través de la luz.",
+    "vid": "1095640044",
+    "video_status": "exact_title_match",
+    "role": null
   },
   {
     "slug": "lamicell-v22",
     "num": "03",
     "title": "LAMICELL V22",
-    "sub": "Motion Design & Brand Film",
+    "sub": "Del concepto al movimiento",
     "tags": [
-      "Motion",
+      "Dirección",
       "3D",
-      "Brand"
+      "Producto"
     ],
     "img": "https://framerusercontent.com/images/UzzUtXoyoU3tIMkiuQWxpXlPsV8.png",
-    "body": "Motion design and brand film for the Lamicell V22 product line. A clean, technical aesthetic carried by precision 3D animation.",
+    "body": "Un trabajo de dirección desarrollado con equipo: de la búsqueda visual y el conceptboard a la pieza terminada. Un universo de materiales y luz que le da identidad al producto.",
     "url": "/work/lamicell-v22/",
-    "vimeo": "https://vimeo.com/lucascasagrande"
+    "vimeo": "https://vimeo.com/960506224",
+    "focus": "Sostener una dirección visual coherente durante el recorrido del concepto al render.",
+    "vid": "960506224",
+    "video_status": "exact_title_match",
+    "role": "Dirección con equipo"
   },
   {
     "slug": "pandora",
     "num": "04",
     "title": "PANDORA",
-    "sub": "Luxury CGI Campaign",
+    "sub": "Identidad para la experiencia en vivo",
     "tags": [
-      "Jewelry",
-      "CGI",
-      "Luxury"
+      "Visuales",
+      "Live",
+      "3D"
     ],
     "img": "https://framerusercontent.com/images/9HJsvaIulWgfdnHvFmG4RvQNZI.jpg",
-    "body": "Luxury jewelry campaign built on photo-real CGI, with meticulous attention to light, material translucency and motion storytelling.",
+    "body": "Escaleras, formas, objetos y paisajes que cambian de escala para construir una identidad audiovisual. Imágenes pensadas para acompañar la energía de una experiencia en vivo.",
     "url": "/work/pandora/",
-    "vimeo": "https://vimeo.com/lucascasagrande"
+    "vimeo": "https://vimeo.com/921866273",
+    "focus": "Trabajar con repetición, contraste y profundidad para crear una familia de visuales reconocible.",
+    "vid": "921866273",
+    "video_status": "exact_title_match",
+    "role": null
   },
   {
     "slug": "youtopia-vitacura",
     "num": "05",
-    "title": "YOUTOPIA VITACURA",
-    "sub": "Architectural Visualization",
+    "title": "YOUTOPIA / VITACURA",
+    "sub": "Espacios que se recorren con la mirada",
     "tags": [
-      "Arch Viz",
+      "Arquitectura",
       "3D",
-      "Environment"
+      "Animatic"
     ],
     "img": "https://framerusercontent.com/images/gfKIAHznDJ3G9q3Vt07U8BBDk.png",
-    "body": "Architectural visualization for Youtopia's Vitacura development — space, natural light and a lifestyle narrative rendered in 3D.",
+    "body": "Arquitectura, vegetación y luz se encuentran en un recorrido visual. El animatic organiza la experiencia del espacio y el ritmo con el que se lo descubre.",
     "url": "/work/youtopia-vitacura/",
-    "vimeo": "https://vimeo.com/lucascasagrande"
+    "vimeo": "https://vimeo.com/831680968",
+    "focus": "Usar la cámara y la composición para dar continuidad a una serie de ambientes.",
+    "vid": "831680968",
+    "video_status": "exact_title_match",
+    "role": null
   },
   {
     "slug": "toyota",
     "num": "06",
-    "title": "TOYOTA",
-    "sub": "Full CGI Automotive TVC",
+    "title": "TOYOTA GR COROLLA",
+    "sub": "La imagen sale de la pantalla",
     "tags": [
-      "Automotive",
-      "CGI",
-      "TVC"
+      "Anamorfismo",
+      "Automotriz",
+      "CGI"
     ],
     "img": "https://framerusercontent.com/images/RnrQ4NhU80PUisTYATbmJ4Nwuzs.png",
-    "body": "A full-CGI automotive TVC for Toyota, driven by dynamic motion direction and photorealistic vehicle rendering.",
+    "body": "Una pieza para el lanzamiento del GR Corolla en Puerto Rico, concebida para una pantalla anamórfica. La perspectiva y la puesta en escena hacen que el vehículo dialogue con el espacio exterior.",
     "url": "/work/toyota/",
-    "vimeo": "https://vimeo.com/lucascasagrande"
+    "vimeo": "https://vimeo.com/930788376",
+    "focus": "Diseñar una lectura espacial clara desde un punto de vista concreto.",
+    "vid": "930788376",
+    "video_status": "exact_title_match",
+    "role": null
   },
   {
     "slug": "viva-one",
     "num": "07",
     "title": "VIVA ONE",
-    "sub": "Telecom Motion Campaign · Ogilvy Bahrain",
+    "sub": "Conectividad en movimiento",
     "tags": [
       "Motion",
-      "Telecom",
-      "Ogilvy"
+      "Telecom"
     ],
     "img": "https://framerusercontent.com/images/TXyn0nLFS5eLridXanzqiN5Uu4.png",
-    "body": "Motion campaign for VIVA's ONE product — dynamic visual systems communicating connectivity and innovation, produced through Ogilvy Bahrain.",
+    "body": "Una selección de mi trabajo en imagen y movimiento. Forma, composición y materialidad se encuentran para construir un lenguaje visual propio.",
     "url": "/work/viva-one/",
-    "vimeo": "https://vimeo.com/lucascasagrande"
+    "vimeo": "https://vimeo.com/318691860",
+    "focus": "La relación entre la cámara, la luz y el ritmo de la imagen.",
+    "vid": "318691860",
+    "video_status": "exact_title_match",
+    "role": null
   },
   {
     "slug": "claro-cgi",
     "num": "08",
-    "title": "CLARO CGI SHOTS",
-    "sub": "CGI Product Campaign",
+    "title": "CLARO / ORC",
+    "sub": "Personaje y atmósfera",
     "tags": [
+      "Personaje",
       "CGI",
-      "Product",
-      "Telecom"
+      "Composición"
     ],
     "img": "https://framerusercontent.com/images/PWHIuuC48syU1NW2S0DaBuacGY.png",
-    "body": "CGI product visualization campaign for Claro. A sleek, modern aesthetic with photo-real rendering and precise motion.",
+    "body": "Una exploración de presencia, textura y escala alrededor de un personaje. La iluminación y el entorno sostienen el tono de la escena.",
     "url": "/work/claro-cgi/",
-    "vimeo": "https://vimeo.com/lucascasagrande"
+    "vimeo": "https://vimeo.com/729842986",
+    "focus": "Hacer que el personaje se lea con fuerza sin perder la relación con su mundo.",
+    "vid": "729842986",
+    "video_status": "exact_title_match",
+    "role": null
   },
   {
     "slug": "gillette-j20",
     "num": "09",
     "title": "GILLETTE J20",
-    "sub": "TVC · MPC Shanghai",
+    "sub": "Precisión visual y energía",
     "tags": [
       "TVC",
-      "MPC Shanghai",
       "VFX"
     ],
     "img": "https://framerusercontent.com/images/aECR4ibIPeFyGqYrSkfWdndlq0.jpg",
-    "body": "Global TVC for Gillette produced at MPC Shanghai — 3D integration with live-action footage for an international campaign.",
+    "body": "Una selección de mi trabajo en imagen y movimiento. Forma, composición y materialidad se encuentran para construir un lenguaje visual propio.",
     "url": "/work/gillette-j20/",
-    "vimeo": "https://vimeo.com/lucascasagrande"
+    "vimeo": "https://vimeo.com/436009842",
+    "focus": "La relación entre la cámara, la luz y el ritmo de la imagen.",
+    "vid": "436009842",
+    "video_status": "exact_title_match",
+    "role": null
   },
   {
     "slug": "lamicell",
     "num": "10",
     "title": "LAMICELL",
-    "sub": "Brand Motion System",
+    "sub": "Identidad a través del objeto",
     "tags": [
       "Motion",
       "3D",
       "Brand"
     ],
     "img": "https://framerusercontent.com/images/Q906Xny6im8J5TaHR3JqFtCS298.png",
-    "body": "A brand motion system for Lamicell — technical 3D animation expressing material precision and product quality.",
+    "body": "Una selección de mi trabajo en imagen y movimiento. Forma, composición y materialidad se encuentran para construir un lenguaje visual propio.",
     "url": "/work/lamicell/",
-    "vimeo": "https://vimeo.com/lucascasagrande"
+    "vimeo": "https://vimeo.com/676071521",
+    "focus": "La relación entre la cámara, la luz y el ritmo de la imagen.",
+    "vid": "676071521",
+    "video_status": "exact_title_match",
+    "role": null
   },
   {
     "slug": "stc-film",
     "num": "11",
     "title": "STC FILM",
-    "sub": "TVC · Ogilvy",
+    "sub": "Una escena, un sistema de ideas",
     "tags": [
-      "TVC",
-      "Ogilvy",
-      "Direction"
+      "TVC"
     ],
     "img": "https://framerusercontent.com/images/GoHCG3W3x7w1xQcf0mzGbROD8.png",
-    "body": "TVC motion direction for STC Film, produced with Ogilvy — cinematic storytelling that fuses live action with 3D motion design.",
+    "body": "Una selección de mi trabajo en imagen y movimiento. Forma, composición y materialidad se encuentran para construir un lenguaje visual propio.",
     "url": "/work/stc-film/",
-    "vimeo": "https://vimeo.com/lucascasagrande"
+    "vimeo": "https://vimeo.com/318699438",
+    "focus": "La relación entre la cámara, la luz y el ritmo de la imagen.",
+    "vid": "318699438",
+    "video_status": "exact_title_match",
+    "role": null
   },
   {
     "slug": "snapdragon-pro",
     "num": "12",
-    "title": "SNAPDRAGON PRO",
-    "sub": "Superunion · Qualcomm",
+    "title": "SNAPDRAGON PRO SERIES",
+    "sub": "La intensidad del juego",
     "tags": [
-      "Superunion",
-      "Tech",
-      "Esports"
+      "Esports",
+      "Motion",
+      "Identidad"
     ],
     "img": "https://framerusercontent.com/images/kkU08YO6FBR4dUxIr2ZKwM4vSRQ.jpeg",
-    "body": "Motion and 3D direction for Qualcomm's Snapdragon Pro Series esports platform, produced with Superunion.",
+    "body": "Trabajo realizado para Superunion UK. Una introducción audiovisual que combina materia, geometría y energía para construir el universo de Snapdragon Pro Series.",
     "url": "/work/snapdragon-pro/",
-    "vimeo": "https://vimeo.com/lucascasagrande"
+    "vimeo": "https://vimeo.com/770796912",
+    "focus": "Crear un lenguaje que funcione como entrada a una experiencia de competición.",
+    "vid": "770796912",
+    "video_status": "exact_title_match",
+    "role": null,
+    "context": "Trabajo para Superunion UK, según la descripción pública de la pieza."
   },
   {
     "slug": "cctv-esports",
     "num": "13",
     "title": "CCTV ESPORTS",
-    "sub": "Broadcast Motion Package",
+    "sub": "Apertura de un universo audiovisual",
     "tags": [
       "Broadcast",
       "Esports",
       "Motion"
     ],
     "img": "https://framerusercontent.com/images/f2k0CKpZ0lXBPluW681cmq8H2CI.png",
-    "body": "Broadcast motion package for CCTV Esports — high-energy visual design for live broadcast with real-time 3D graphics.",
+    "body": "Una selección de mi trabajo en imagen y movimiento. Forma, composición y materialidad se encuentran para construir un lenguaje visual propio.",
     "url": "/work/cctv-esports/",
-    "vimeo": "https://vimeo.com/lucascasagrande"
+    "vimeo": "https://vimeo.com/556284286",
+    "focus": "La relación entre la cámara, la luz y el ritmo de la imagen.",
+    "vid": "556284286",
+    "video_status": "exact_title_match",
+    "role": null
   },
   {
     "slug": "viva-fiber",
     "num": "14",
     "title": "VIVA FIBER",
-    "sub": "Ogilvy · Telecom",
+    "sub": "Conexiones en movimiento",
     "tags": [
       "Motion",
       "Telecom",
       "CGI"
     ],
     "img": "https://framerusercontent.com/images/x13vZEAFyNCZgovQztriYQrZdQw.png",
-    "body": "Visual campaign for VIVA Fiber — dynamic CGI visualization of connectivity and digital infrastructure, through Ogilvy.",
+    "body": "Una selección de mi trabajo en imagen y movimiento. Forma, composición y materialidad se encuentran para construir un lenguaje visual propio.",
     "url": "/work/viva-fiber/",
-    "vimeo": "https://vimeo.com/lucascasagrande"
+    "vimeo": "https://vimeo.com/317038460",
+    "focus": "La relación entre la cámara, la luz y el ritmo de la imagen.",
+    "vid": "317038460",
+    "video_status": "exact_title_match",
+    "role": null
   },
   {
     "slug": "creepshow",
     "num": "15",
-    "title": "CREEPSHOW",
-    "sub": "Entertainment Motion Design",
+    "title": "CREEPSHOW / CHEAT CODE",
+    "sub": "Una identidad que se siente",
     "tags": [
-      "Motion",
-      "Entertainment",
-      "Identity"
+      "Dirección de arte",
+      "3D",
+      "Identidad"
     ],
     "img": "https://framerusercontent.com/images/os4ky1HUKF9CSl8xvuPr0tPf5YE.jpeg",
-    "body": "Motion identity for Creepshow — a dark, cinematic visual language with expressive 3D animation and textural compositing.",
+    "body": "Dirección de arte para una pieza donde el tono se construye desde la textura, el contraste y una atmósfera particular.",
     "url": "/work/creepshow/",
-    "vimeo": "https://vimeo.com/lucascasagrande"
+    "vimeo": "https://vimeo.com/884411342",
+    "focus": "Encontrar un lenguaje de imagen que sostenga la personalidad de la pieza.",
+    "vid": "884411342",
+    "video_status": "exact_title_match",
+    "role": "Dirección de arte"
   },
   {
     "slug": "stc-invest",
     "num": "16",
     "title": "STC INVEST",
-    "sub": "Ogilvy · Finance",
+    "sub": "Conceptos que toman forma",
     "tags": [
       "Motion",
       "Finance",
       "STC"
     ],
     "img": "https://framerusercontent.com/images/bvUXFyWh9Be18d0csdtRrAi04U.png",
-    "body": "Motion design for STC Invest, visualizing financial concepts through clean, authoritative 3D animation.",
+    "body": "Una selección de mi trabajo en imagen y movimiento. Forma, composición y materialidad se encuentran para construir un lenguaje visual propio.",
     "url": "/work/stc-invest/",
-    "vimeo": "https://vimeo.com/lucascasagrande"
+    "vimeo": null,
+    "focus": "La relación entre la cámara, la luz y el ritmo de la imagen.",
+    "vid": null,
+    "video_status": "not_linked",
+    "role": null
   },
   {
     "slug": "cctv9",
     "num": "17",
     "title": "CCTV9",
-    "sub": "Broadcast Identity",
+    "sub": "Identidad de pantalla / NOW",
     "tags": [
       "Broadcast",
       "Identity",
       "Motion"
     ],
     "img": "https://framerusercontent.com/images/q5QDeU2HALgMWfWX7yoQ2jGsTU.png",
-    "body": "Broadcast identity design for the CCTV9 documentary channel — an authoritative visual language with cinematic motion.",
+    "body": "Una selección de mi trabajo en imagen y movimiento. Forma, composición y materialidad se encuentran para construir un lenguaje visual propio.",
     "url": "/work/cctv9/",
-    "vimeo": "https://vimeo.com/lucascasagrande"
+    "vimeo": "https://vimeo.com/385192789",
+    "focus": "La relación entre la cámara, la luz y el ritmo de la imagen.",
+    "vid": "385192789",
+    "video_status": "exact_title_match",
+    "role": null
   },
   {
     "slug": "caterpillar",
     "num": "18",
     "title": "CATERPILLAR",
-    "sub": "CGI Industrial Campaign",
+    "sub": "Materia y presencia industrial",
     "tags": [
       "CGI",
       "Industrial",
       "Campaign"
     ],
     "img": "https://framerusercontent.com/images/nujs4JabOQ7y4zy4wtqaJtDmmc.png",
-    "body": "A full-CGI industrial campaign for Caterpillar — a powerful visual language emphasizing engineering strength and precision.",
+    "body": "Una selección de mi trabajo en imagen y movimiento. Forma, composición y materialidad se encuentran para construir un lenguaje visual propio.",
     "url": "/work/caterpillar/",
-    "vimeo": "https://vimeo.com/lucascasagrande"
+    "vimeo": "https://vimeo.com/592318682",
+    "focus": "La relación entre la cámara, la luz y el ritmo de la imagen.",
+    "vid": "592318682",
+    "video_status": "exact_title_match",
+    "role": null
   },
   {
     "slug": "f1-2022",
     "num": "19",
     "title": "F1 2022",
-    "sub": "GP Bahrain Campaign",
+    "sub": "Velocidad como materia visual",
     "tags": [
       "F1",
       "Sports",
       "Broadcast"
     ],
     "img": "https://framerusercontent.com/images/abFGLaxvQjVaaewslXFzdjEiA.png",
-    "body": "Motion direction and broadcast graphics for the 2022 Formula 1 Bahrain Grand Prix campaign.",
+    "body": "Una selección de mi trabajo en imagen y movimiento. Forma, composición y materialidad se encuentran para construir un lenguaje visual propio.",
     "year": "2022",
     "url": "/work/f1-2022/",
-    "vimeo": "https://vimeo.com/lucascasagrande"
+    "vimeo": "https://vimeo.com/846402098",
+    "focus": "La relación entre la cámara, la luz y el ritmo de la imagen.",
+    "vid": "846402098",
+    "video_status": "exact_title_match",
+    "role": null
   },
   {
     "slug": "viva-network",
     "num": "20",
     "title": "VIVA NETWORK",
-    "sub": "Ogilvy · Campaign",
+    "sub": "Un mundo conectado",
     "tags": [
       "Motion",
-      "Telecom",
-      "Ogilvy"
+      "Telecom"
     ],
     "img": "https://framerusercontent.com/images/zcExtjkaMtmvRU8UdyqnlIGQ9bI.jpg",
-    "body": "Telecom campaign for VIVA Network through Ogilvy Bahrain — motion storytelling communicating network reach and reliability.",
+    "body": "Una selección de mi trabajo en imagen y movimiento. Forma, composición y materialidad se encuentran para construir un lenguaje visual propio.",
     "url": "/work/viva-network/",
-    "vimeo": "https://vimeo.com/lucascasagrande"
+    "vimeo": "https://vimeo.com/281125532",
+    "focus": "La relación entre la cámara, la luz y el ritmo de la imagen.",
+    "vid": "281125532",
+    "video_status": "exact_title_match",
+    "role": null
   },
   {
     "slug": "crystal-light",
     "num": "21",
     "title": "CRYSTAL LIGHT",
-    "sub": "CGI Beverage Campaign",
+    "sub": "Luz, color y producto",
     "tags": [
       "CGI",
       "Beverage",
       "Product"
     ],
     "img": "https://framerusercontent.com/images/MUaXdygxW6taz5Ja6x86VYZcQes.png",
-    "body": "Photo-real CGI product campaign for Crystal Light — luminous liquid simulations with precise lighting and compositing.",
+    "body": "Una selección de mi trabajo en imagen y movimiento. Forma, composición y materialidad se encuentran para construir un lenguaje visual propio.",
     "url": "/work/crystal-light/",
-    "vimeo": "https://vimeo.com/lucascasagrande"
+    "vimeo": null,
+    "focus": "La relación entre la cámara, la luz y el ritmo de la imagen.",
+    "vid": null,
+    "video_status": "not_linked",
+    "role": null
   },
   {
     "slug": "stc-card",
     "num": "22",
     "title": "STC CARD",
-    "sub": "Motion · STC",
+    "sub": "Comunicar con movimiento",
     "tags": [
       "Motion",
       "Brand",
       "STC"
     ],
     "img": "https://framerusercontent.com/images/MY9zf9fej694kxUj6NKwKCHc20.png",
-    "body": "Motion design for the STC Card product launch — a clean, premium visual language communicating financial brand values.",
+    "body": "Una selección de mi trabajo en imagen y movimiento. Forma, composición y materialidad se encuentran para construir un lenguaje visual propio.",
     "url": "/work/stc-card/",
-    "vimeo": "https://vimeo.com/lucascasagrande"
+    "vimeo": null,
+    "focus": "La relación entre la cámara, la luz y el ritmo de la imagen.",
+    "vid": null,
+    "video_status": "not_linked",
+    "role": null
   },
   {
     "slug": "saint-bodhi",
     "num": "23",
-    "title": "SAINT BODHI",
-    "sub": "Universal Music",
+    "title": "SAINT BODHI / MAD WORLD",
+    "sub": "Planetas para un universo musical",
     "tags": [
-      "Music",
-      "Motion",
-      "Identity"
+      "Música",
+      "Artworks",
+      "3D"
     ],
     "img": "https://framerusercontent.com/images/1rLQcl5Mfu1YcJ1ZyVRHPR0qr8Q.jpg",
-    "body": "Motion identity for Saint Bodhi, produced for Universal Music — atmospheric visual storytelling for a contemporary artist.",
+    "body": "Un sistema de mundos y planetas para acompañar un universo musical. Cada imagen desarrolla una atmósfera, una materia y una personalidad.",
     "url": "/work/saint-bodhi/",
-    "vimeo": "https://vimeo.com/lucascasagrande"
+    "vimeo": "https://vimeo.com/599779288",
+    "focus": "Dar unidad a una familia de imágenes sin borrar la singularidad de cada mundo.",
+    "vid": "599779288",
+    "video_status": "exact_title_match",
+    "role": null
   },
   {
     "slug": "f1-2019",
     "num": "24",
     "title": "F1 2019",
-    "sub": "GP Bahrain · Ogilvy",
+    "sub": "Una identidad en la pista",
     "tags": [
       "F1",
-      "Sports",
-      "Ogilvy"
+      "Sports"
     ],
     "img": "https://framerusercontent.com/images/o3QjqqvnYVLReardrSjUvdwYcw.jpg",
-    "body": "Motion direction for the 2019 Formula 1 Bahrain Grand Prix campaign, through Ogilvy Bahrain.",
+    "body": "Una selección de mi trabajo en imagen y movimiento. Forma, composición y materialidad se encuentran para construir un lenguaje visual propio.",
     "year": "2019",
     "url": "/work/f1-2019/",
-    "vimeo": "https://vimeo.com/lucascasagrande"
+    "vimeo": null,
+    "focus": "La relación entre la cámara, la luz y el ritmo de la imagen.",
+    "vid": null,
+    "video_status": "not_linked",
+    "role": null
   }
 ]
