@@ -1,0 +1,66 @@
+[
+  {
+    "slug": "newart_02_1920",
+    "title": "Neon Studies",
+    "description": "Reflejos, materia y color.",
+    "category": "Escultura digital",
+    "image": "/assets/artworks/newart_02_1920.webp",
+    "source": "Selección del archivo personal"
+  },
+  {
+    "slug": "finalpersonalartwork_1920x1920_01_1920",
+    "title": "Creature / Matter",
+    "description": "Una forma orgánica entre metal, piel y luz.",
+    "category": "Obra experimental",
+    "image": "/assets/artworks/finalpersonalartwork_1920x1920_01_1920.webp",
+    "source": "Selección del archivo personal"
+  },
+  {
+    "slug": "gartden_01",
+    "title": "Garden",
+    "description": "Un paisaje posible, suspendido en otro mundo.",
+    "category": "Paisaje digital",
+    "image": "/assets/artworks/gartden_01.webp",
+    "source": "Selección del archivo personal"
+  },
+  {
+    "slug": "xmarksthespot_01",
+    "title": "X Marks the Spot",
+    "description": "Una señal que altera la lectura del paisaje.",
+    "category": "Escultura digital",
+    "image": "/assets/artworks/xmarksthespot_01.webp",
+    "source": "Selección del archivo personal"
+  },
+  {
+    "slug": "quietplace_01",
+    "title": "Quiet Place",
+    "description": "Un espacio para detener la mirada.",
+    "category": "Arquitectura imaginada",
+    "image": "/assets/artworks/quietplace_01.webp",
+    "source": "Selección del archivo personal"
+  },
+  {
+    "slug": "city_02",
+    "title": "City / 02",
+    "description": "Escena nocturna y atmósfera urbana.",
+    "category": "Entorno 3D",
+    "image": "/assets/artworks/city_02.webp",
+    "source": "Selección del archivo personal"
+  },
+  {
+    "slug": "madworld_01",
+    "title": "Mad World",
+    "description": "Materia y gravedad en un mundo propio.",
+    "category": "Planeta / estudio",
+    "image": "/assets/artworks/madworld_01.webp",
+    "source": "Selección del archivo personal"
+  },
+  {
+    "slug": "hero_03",
+    "title": "Organic Study",
+    "description": "Una búsqueda de textura, tensión y forma.",
+    "category": "Estudio de forma",
+    "image": "/assets/artworks/hero_03.webp",
+    "source": "Selección del archivo personal"
+  }
+]
