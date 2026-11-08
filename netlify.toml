@@ -2,6 +2,27 @@
 [build]
   publish = "."
 
+[[redirects]]
+  from = "/work/stc-invest/*"
+  to = "/work/"
+  status = 301
+[[redirects]]
+  from = "/work/crystal-light/*"
+  to = "/work/"
+  status = 301
+[[redirects]]
+  from = "/work/stc-card/*"
+  to = "/work/"
+  status = 301
+[[redirects]]
+  from = "/work/f1-2019/*"
+  to = "/work/"
+  status = 301
+[[redirects]]
+  from = "/work/viva-carriage/*"
+  to = "/work/claro-reel/"
+  status = 301
+
 # Pretty 404 for any unknown path
 [[redirects]]
   from = "/*"

@@ -2,78 +2,326 @@
   {
     "slug": "reel-2026",
     "num": "01",
-    "title": "REEL / MOTION & 3D",
-    "sub": "Una mirada al recorrido",
+    "title": "REEL / 2025",
+    "sub": "Una selección de concepto, diseño y movimiento",
     "tags": [
       "Dirección",
       "Motion",
       "3D"
     ],
-    "img": "https://framerusercontent.com/images/YrJyTlynlK9JahFSr5rX0OWxnQ.jpg",
-    "vid": "850730171",
-    "body": "Una selección de imágenes y secuencias que conecta distintos momentos de mi trabajo. Producto, personajes, identidad y mundos digitales: cambia el encargo, se mantiene la búsqueda de una imagen con carácter.",
+    "img": "/assets/projects/vimeo-957330193.webp",
+    "vid": "957330193",
+    "body": "Una colección de fragmentos del trabajo de Lucas Casagrande en concepto, diseño, animación y dirección. Piezas para marcas, personajes, producto e identidades audiovisuales se encuentran en un montaje que recorre distintos lenguajes del motion y el 3D.",
     "url": "/work/reel-2026/",
-    "vimeo": "https://vimeo.com/850730171",
-    "focus": "Conectar piezas de distintos universos a través del ritmo, la composición y el movimiento.",
+    "vimeo": "https://vimeo.com/957330193",
+    "focus": "El reel conecta una selección del recorrido a través del ritmo, la luz y las transformaciones de la imagen.",
     "video_status": "exact_title_match",
-    "role": null
+    "role": "Concepto, diseño, animación y dirección de los fragmentos seleccionados",
+    "category": "Motion y CGI",
+    "local_video": "/assets/videos/957330193.mp4",
+    "duration": 91,
+    "sources": [
+      {
+        "title": "Reel Lucas Casagrande 2025 / descripción del autor",
+        "url": "https://vimeo.com/957330193"
+      }
+    ],
+    "sections": [
+      {
+        "id": "seleccion-visual",
+        "nav": "Imágenes",
+        "label": "REEL / 2025 / Selección visual",
+        "title": "La imagen, en detalle.",
+        "description": "Composición, luz y materialidad en una selección de imágenes del proyecto.",
+        "images": [
+          {
+            "image": "/assets/projects/frames/957330193-01.webp",
+            "title": "Frame del film / 01",
+            "description": "REEL / 2025 / Selección de imagen del film"
+          },
+          {
+            "image": "/assets/projects/frames/957330193-02.webp",
+            "title": "Frame del film / 02",
+            "description": "REEL / 2025 / Selección de imagen del film"
+          },
+          {
+            "image": "/assets/projects/frames/957330193-03.webp",
+            "title": "Frame del film / 03",
+            "description": "REEL / 2025 / Selección de imagen del film"
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "noorus-fill",
     "num": "02",
-    "title": "NOORUS FILL+",
-    "sub": "Producto, materia y escala",
+    "title": "NOORUS / FILL+",
+    "sub": "Anatomía, materia y luz",
     "tags": [
       "CGI",
       "Producto",
       "3D"
     ],
-    "img": "https://framerusercontent.com/images/Ry0legV6ZdMtJ33X265OMneSo.jpg",
-    "body": "Una pieza que acerca la mirada al producto a través de superficies, volúmenes y una iluminación contenida. El espacio se convierte en parte de su lenguaje visual.",
+    "img": "/assets/projects/vimeo-1095640044.webp",
+    "body": "Una pieza CGI para FILL+ que combina cápsulas, partículas, representación anatómica y estructuras de apariencia molecular. La paleta clara y los acentos verdes conectan la identidad de producto con una secuencia de comunicación visual sobre el cuerpo.",
     "url": "/work/noorus-fill/",
     "vimeo": "https://vimeo.com/1095640044",
-    "focus": "Construir una lectura clara del objeto y darle presencia a través de la luz.",
+    "focus": "Construir una lectura visual de la anatomía mediante volumen, contraste y movimiento.",
     "vid": "1095640044",
     "video_status": "exact_title_match",
-    "role": null
+    "role": null,
+    "category": "Motion y CGI",
+    "local_video": "/assets/videos/1095640044.mp4",
+    "duration": 95,
+    "sources": [
+      {
+        "title": "FILL+ / Lucas Casagrande",
+        "url": "https://vimeo.com/1095640044",
+        "type": "author_vimeo",
+        "supports": "Título, duración y fotograma público de la pieza."
+      }
+    ],
+    "sections": [
+      {
+        "id": "seleccion-visual",
+        "nav": "Imágenes",
+        "label": "NOORUS / FILL+ / Selección visual",
+        "title": "La imagen, en detalle.",
+        "description": "Composición, luz y materialidad en una selección de imágenes del proyecto.",
+        "images": [
+          {
+            "image": "/assets/cases/noorus-fill-film-01.webp",
+            "title": "Frame del film / Frame 01",
+            "description": "NOORUS / FILL+ / Frame del film: Frame 01"
+          },
+          {
+            "image": "/assets/cases/noorus-fill-film-02.webp",
+            "title": "Frame del film / Frame 02",
+            "description": "NOORUS / FILL+ / Frame del film: Frame 02"
+          },
+          {
+            "image": "/assets/cases/noorus-fill-film-03.webp",
+            "title": "Frame del film / Frame 03",
+            "description": "NOORUS / FILL+ / Frame del film: Frame 03"
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "lamicell-v22",
     "num": "03",
-    "title": "LAMICELL V22",
+    "title": "LAMICELL / V22",
     "sub": "Del concepto al movimiento",
     "tags": [
       "Dirección",
       "3D",
       "Producto"
     ],
-    "img": "https://framerusercontent.com/images/UzzUtXoyoU3tIMkiuQWxpXlPsV8.png",
-    "body": "Un trabajo de dirección desarrollado con equipo: de la búsqueda visual y el conceptboard a la pieza terminada. Un universo de materiales y luz que le da identidad al producto.",
+    "img": "/assets/projects/vimeo-960506224.webp",
+    "body": "Dirección de una película de motion graphics para los protectores ecuestres Lamicell V22, desarrollada con equipo desde el conceptboard hasta el render final y el diseño sonoro. El CGI acerca la mirada al producto mediante detalles de superficie, cambios de escala y visualizaciones de su estructura. La producción se realizó en Cinema 4D y Redshift.",
     "url": "/work/lamicell-v22/",
     "vimeo": "https://vimeo.com/960506224",
     "focus": "Sostener una dirección visual coherente durante el recorrido del concepto al render.",
     "vid": "960506224",
     "video_status": "exact_title_match",
-    "role": "Dirección con equipo"
+    "role": "Dirección con equipo",
+    "category": "Motion y CGI",
+    "duration": 62,
+    "sources": [
+      {
+        "title": "Publicación de Lucas sobre Lamicell V22",
+        "url": "https://ar.linkedin.com/in/lucascasagrande/es",
+        "type": "author_linkedin",
+        "supports": "Texto público del post de lanzamiento asociado a LAMICELL - V22; se leyó en búsqueda indexada."
+      },
+      {
+        "title": "LAMICELL - V22",
+        "url": "https://vimeo.com/960506224",
+        "type": "author_vimeo",
+        "supports": "Título exacto de la pieza."
+      },
+      {
+        "title": "V22 Neoprene / Lamicell",
+        "url": "https://b2c.lamicell.com/technologies/v22-neoprene/",
+        "type": "client_official",
+        "supports": "Identifica la línea tecnológica V22. No se incorporaron promesas de rendimiento al texto del caso."
+      }
+    ],
+    "local_video": "/assets/videos/960506224.mp4",
+    "sections": [
+      {
+        "id": "seleccion-visual",
+        "nav": "Imágenes",
+        "label": "LAMICELL / V22 / Selección visual",
+        "title": "La imagen, en detalle.",
+        "description": "Composición, luz y materialidad en una selección de imágenes del proyecto.",
+        "images": [
+          {
+            "image": "/assets/cases/lamicell-v22-film-01.webp",
+            "title": "Frame del film / Frame 01",
+            "description": "LAMICELL / V22 / Frame del film: Frame 01"
+          },
+          {
+            "image": "/assets/cases/lamicell-v22-film-02.webp",
+            "title": "Frame del film / Frame 02",
+            "description": "LAMICELL / V22 / Frame del film: Frame 02"
+          },
+          {
+            "image": "/assets/cases/lamicell-v22-film-03.webp",
+            "title": "Frame del film / Frame 03",
+            "description": "LAMICELL / V22 / Frame del film: Frame 03"
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "pandora",
     "num": "04",
-    "title": "PANDORA",
-    "sub": "Identidad para la experiencia en vivo",
+    "title": "PANDORA IN RIO",
+    "sub": "FOOH, IDs y opening para un mismo universo.",
     "tags": [
-      "Visuales",
-      "Live",
+      "FOOH",
+      "Identidad",
+      "Opening",
       "3D"
     ],
-    "img": "https://framerusercontent.com/images/9HJsvaIulWgfdnHvFmG4RvQNZI.jpg",
-    "body": "Escaleras, formas, objetos y paisajes que cambian de escala para construir una identidad audiovisual. Imágenes pensadas para acompañar la energía de una experiencia en vivo.",
+    "img": "/assets/projects/vimeo-919432223.webp",
+    "body": "Pandora in Rio reúne distintas escalas de una misma experiencia visual. Los charms irrumpen en locaciones reconocibles de Río de Janeiro; las piezas de identidad exploran luz, materia y movimiento; y un opening 3D presenta el universo del evento. El caso se completa con una selección de styleframes del desarrollo visual.",
     "url": "/work/pandora/",
-    "vimeo": "https://vimeo.com/921866273",
-    "focus": "Trabajar con repetición, contraste y profundidad para crear una familia de visuales reconocible.",
-    "vid": "921866273",
+    "vimeo": "https://vimeo.com/919432223",
+    "focus": "El objeto como punto de partida: cambiar su escala, explorar su materialidad y convertirlo en una identidad que se mueve entre la ciudad y las pantallas.",
+    "vid": "919432223",
     "video_status": "exact_title_match",
-    "role": null
+    "role": null,
+    "category": "Experiencias y FOOH",
+    "sections": [
+      {
+        "id": "fooh",
+        "nav": "FOOH",
+        "title": "FOOH · La ciudad como escenario",
+        "description": "Tres intervenciones digitales en Río de Janeiro. Los charms cambian de escala y transforman la ciudad en parte del universo de Pandora.",
+        "label": "Pandora in Rio / fooh",
+        "videos": [
+          {
+            "vid": "920209654",
+            "title": "Escalinatas",
+            "img": "/assets/projects/pandora/poster-920209654.webp",
+            "portrait": true,
+            "description": "Un charm de escala monumental recorre las escalinatas de Río."
+          },
+          {
+            "vid": "920206551",
+            "title": "Cristo Redentor",
+            "img": "/assets/projects/pandora/poster-920206551.webp",
+            "portrait": true,
+            "description": "El paisaje de Río y el Cristo Redentor se convierten en parte de la intervención visual."
+          },
+          {
+            "vid": "920207441",
+            "title": "Playa · Seashell",
+            "img": "/assets/projects/pandora/poster-920207441.webp",
+            "portrait": true,
+            "description": "Una pieza inspirada en la forma de una concha aparece sobre la costa de Río."
+          }
+        ]
+      },
+      {
+        "id": "ids",
+        "nav": "IDs del evento",
+        "title": "IDs · Identidad en movimiento",
+        "description": "Una familia de piezas breves para pantallas, con distintas exploraciones de luz y materialidad alrededor de la marca.",
+        "label": "Pandora in Rio / ids",
+        "videos": [
+          {
+            "vid": "919425403",
+            "title": "ID 01",
+            "img": "/assets/projects/pandora/poster-919425403.webp",
+            "portrait": false,
+            "description": "Luz, materia y movimiento en una pieza de identidad para el evento."
+          },
+          {
+            "vid": "919429139",
+            "title": "ID 02",
+            "img": "/assets/projects/pandora/poster-919429139.webp",
+            "portrait": false,
+            "description": "Luz, materia y movimiento en una pieza de identidad para el evento."
+          },
+          {
+            "vid": "919430981",
+            "title": "ID 03",
+            "img": "/assets/projects/pandora/poster-919430981.webp",
+            "portrait": false,
+            "description": "Luz, materia y movimiento en una pieza de identidad para el evento."
+          },
+          {
+            "vid": "921866273",
+            "title": "Lasers",
+            "img": "/assets/projects/pandora/poster-921866273.webp",
+            "portrait": false,
+            "description": "Luz, materia y movimiento en una pieza de identidad para el evento."
+          }
+        ]
+      },
+      {
+        "id": "styleframes",
+        "nav": "Styleframes",
+        "title": "Styleframes · Desarrollo visual",
+        "description": "Charms, carrozas y paisajes de un Río imaginado. Una selección del desarrollo 3D que define la escala, la luz y la paleta de la propuesta.",
+        "label": "Pandora in Rio / styleframes",
+        "images": [
+          {
+            "image": "/assets/projects/pandora/sf01.webp",
+            "title": "Desarrollo visual / 01",
+            "description": "Styleframe de carroza Pandora con charm musical en una avenida de Río"
+          },
+          {
+            "image": "/assets/projects/pandora/sf02.webp",
+            "title": "Desarrollo visual / 02",
+            "description": "Detalle del charm musical y su base en el desarrollo 3D de Pandora in Rio"
+          },
+          {
+            "image": "/assets/projects/pandora/sf03.webp",
+            "title": "Desarrollo visual / 03",
+            "description": "Carroza 3D con charm de mundo y paleta rosa y violeta de Pandora"
+          },
+          {
+            "image": "/assets/projects/pandora/sf04.webp",
+            "title": "Desarrollo visual / 04",
+            "description": "Vista general de carroza Pandora con joyas y formas orgánicas"
+          },
+          {
+            "image": "/assets/projects/pandora/sf05.webp",
+            "title": "Desarrollo visual / 05",
+            "description": "Styleframe de charm de concha con piedras sobre carroza 3D"
+          },
+          {
+            "image": "/assets/projects/pandora/sf06.webp",
+            "title": "Desarrollo visual / 06",
+            "description": "Carroza de concha Pandora en un entorno urbano inspirado en Río"
+          },
+          {
+            "image": "/assets/projects/pandora/sf07.webp",
+            "title": "Desarrollo visual / 07",
+            "description": "Vista aérea de carrozas Pandora junto a la costa de Río"
+          },
+          {
+            "image": "/assets/projects/pandora/sf08.webp",
+            "title": "Desarrollo visual / 08",
+            "description": "Desarrollo de entorno costero de Río al atardecer con paleta violeta"
+          }
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "Video original en Vimeo",
+        "url": "https://vimeo.com/919432223"
+      }
+    ],
+    "local_video": "/assets/videos/919432223.mp4"
   },
   {
     "slug": "youtopia-vitacura",
@@ -85,14 +333,57 @@
       "3D",
       "Animatic"
     ],
-    "img": "https://framerusercontent.com/images/gfKIAHznDJ3G9q3Vt07U8BBDk.png",
-    "body": "Arquitectura, vegetación y luz se encuentran en un recorrido visual. El animatic organiza la experiencia del espacio y el ritmo con el que se lo descubre.",
+    "img": "/assets/projects/vimeo-831680968.webp",
+    "body": "Un animatic para Youtopia Vitacura que plantea el recorrido de la cámara y el ritmo con el que se descubre un espacio de wellness. El corte del director organiza arquitectura, ambientes y continuidad antes de la terminación de la pieza.",
     "url": "/work/youtopia-vitacura/",
     "vimeo": "https://vimeo.com/831680968",
     "focus": "Usar la cámara y la composición para dar continuidad a una serie de ambientes.",
     "vid": "831680968",
     "video_status": "exact_title_match",
-    "role": null
+    "role": null,
+    "category": "Espacio y 3D",
+    "duration": 29,
+    "sources": [
+      {
+        "title": "Vitacura Animatic / corte del director",
+        "url": "https://vimeo.com/831680968",
+        "type": "author_vimeo",
+        "supports": "Título y naturaleza de animatic."
+      },
+      {
+        "title": "Youtopia Vitacura",
+        "url": "https://youtopia.company/vitacura/",
+        "type": "client_official",
+        "supports": "Naturaleza de la sede y contexto arquitectónico/wellness."
+      }
+    ],
+    "sections": [
+      {
+        "id": "seleccion-visual",
+        "nav": "Imágenes",
+        "label": "YOUTOPIA / VITACURA / Selección visual",
+        "title": "Del desarrollo a la imagen.",
+        "description": "Styleframes del desarrollo visual: una mirada a las decisiones de composición, materialidad y atmósfera que construyen el proyecto.",
+        "images": [
+          {
+            "image": "/assets/cases/youtopia-vitacura-gym.webp",
+            "title": "Desarrollo visual / GYM",
+            "description": "YOUTOPIA / VITACURA / Desarrollo visual: GYM"
+          },
+          {
+            "image": "/assets/cases/youtopia-vitacura-spa.webp",
+            "title": "Desarrollo visual / SPA",
+            "description": "YOUTOPIA / VITACURA / Desarrollo visual: SPA"
+          },
+          {
+            "image": "/assets/cases/youtopia-vitacura-yoga.webp",
+            "title": "Desarrollo visual / YOGA",
+            "description": "YOUTOPIA / VITACURA / Desarrollo visual: YOGA"
+          }
+        ]
+      }
+    ],
+    "local_video": "/assets/videos/831680968.mp4"
   },
   {
     "slug": "toyota",
@@ -104,105 +395,350 @@
       "Automotriz",
       "CGI"
     ],
-    "img": "https://framerusercontent.com/images/RnrQ4NhU80PUisTYATbmJ4Nwuzs.png",
-    "body": "Una pieza para el lanzamiento del GR Corolla en Puerto Rico, concebida para una pantalla anamórfica. La perspectiva y la puesta en escena hacen que el vehículo dialogue con el espacio exterior.",
+    "img": "/assets/projects/vimeo-930788376.webp",
+    "body": "Una pieza para el lanzamiento del Toyota GR Corolla en Puerto Rico, concebida para una pantalla anamórfica. La perspectiva y la puesta en escena trabajan desde un punto de observación definido para proyectar la presencia del vehículo hacia el espacio exterior.",
     "url": "/work/toyota/",
     "vimeo": "https://vimeo.com/930788376",
     "focus": "Diseñar una lectura espacial clara desde un punto de vista concreto.",
     "vid": "930788376",
     "video_status": "exact_title_match",
-    "role": null
+    "role": null,
+    "category": "Experiencias y FOOH",
+    "duration": 30,
+    "sources": [
+      {
+        "title": "Toyota GR Corolla / Puerto Rico Launch / Anamorphic screen",
+        "url": "https://vimeo.com/930788376",
+        "type": "author_vimeo",
+        "supports": "Cliente/modelo, territorio y formato del proyecto."
+      }
+    ],
+    "local_video": "/assets/videos/930788376.mp4",
+    "sections": [
+      {
+        "id": "seleccion-visual",
+        "nav": "Imágenes",
+        "label": "TOYOTA GR COROLLA / Selección visual",
+        "title": "La imagen, en detalle.",
+        "description": "Composición, luz y materialidad en una selección de imágenes del proyecto.",
+        "images": [
+          {
+            "image": "/assets/cases/toyota-film-01.webp",
+            "title": "Frame del film / Frame 01",
+            "description": "TOYOTA GR COROLLA / Frame del film: Frame 01"
+          },
+          {
+            "image": "/assets/cases/toyota-film-02.webp",
+            "title": "Frame del film / Frame 02",
+            "description": "TOYOTA GR COROLLA / Frame del film: Frame 02"
+          },
+          {
+            "image": "/assets/cases/toyota-film-03.webp",
+            "title": "Frame del film / Frame 03",
+            "description": "TOYOTA GR COROLLA / Frame del film: Frame 03"
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "viva-one",
     "num": "07",
-    "title": "VIVA ONE",
-    "sub": "Conectividad en movimiento",
+    "title": "VIVA ONE / OGILVY",
+    "sub": "Un mundo en órbita",
     "tags": [
       "Motion",
       "Telecom"
     ],
-    "img": "https://framerusercontent.com/images/TXyn0nLFS5eLridXanzqiN5Uu4.png",
-    "body": "Una selección de mi trabajo en imagen y movimiento. Forma, composición y materialidad se encuentran para construir un lenguaje visual propio.",
+    "img": "/assets/projects/vimeo-318691860.webp",
+    "body": "Una animación para Ogilvy y su cliente VIVA que explica las funcionalidades de un plan de telefonía para empresas. Lucas desarrolló la pieza desde el storyboard hasta la animación final, construyendo un sistema de objetos, órbitas y transiciones para ordenar la información.",
     "url": "/work/viva-one/",
     "vimeo": "https://vimeo.com/318691860",
-    "focus": "La relación entre la cámara, la luz y el ritmo de la imagen.",
+    "focus": "Dar continuidad a la marca mediante trayectorias, repetición y cambios de escala.",
     "vid": "318691860",
     "video_status": "exact_title_match",
-    "role": null
+    "role": "Storyboard y producción hasta la animación final",
+    "category": "Motion y CGI",
+    "duration": 90,
+    "studio": "Ogilvy / VIVA",
+    "sources": [
+      {
+        "title": "VIVA ONE - OGILVY - 3D Animation / Lucas Casagrande",
+        "url": "https://www.domestika.org/es/projects/922598-viva-one-ogilvy-3d-animation",
+        "type": "author_portfolio",
+        "supports": "Brief, alcance declarado y herramientas; texto leído desde resultado indexado."
+      },
+      {
+        "title": "VIVA ONE / Director's Cut",
+        "url": "https://vimeo.com/318691860",
+        "type": "author_vimeo",
+        "supports": "Versión y título del film."
+      }
+    ],
+    "local_video": "/assets/videos/318691860.mp4",
+    "sections": [
+      {
+        "id": "seleccion-visual",
+        "nav": "Imágenes",
+        "label": "VIVA ONE / OGILVY / Selección visual",
+        "title": "La imagen, en detalle.",
+        "description": "Composición, luz y materialidad en una selección de imágenes del proyecto.",
+        "images": [
+          {
+            "image": "/assets/cases/viva-one-film-01.webp",
+            "title": "Frame del film / Frame 01",
+            "description": "VIVA ONE / OGILVY / Frame del film: Frame 01"
+          },
+          {
+            "image": "/assets/cases/viva-one-film-02.webp",
+            "title": "Frame del film / Frame 02",
+            "description": "VIVA ONE / OGILVY / Frame del film: Frame 02"
+          },
+          {
+            "image": "/assets/cases/viva-one-film-03.webp",
+            "title": "Frame del film / Frame 03",
+            "description": "VIVA ONE / OGILVY / Frame del film: Frame 03"
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "claro-cgi",
     "num": "08",
     "title": "CLARO / ORC",
-    "sub": "Personaje y atmósfera",
+    "sub": "Plano de personaje / CGI",
     "tags": [
       "Personaje",
       "CGI",
       "Composición"
     ],
-    "img": "https://framerusercontent.com/images/PWHIuuC48syU1NW2S0DaBuacGY.png",
-    "body": "Una exploración de presencia, textura y escala alrededor de un personaje. La iluminación y el entorno sostienen el tono de la escena.",
+    "img": "/assets/projects/vimeo-729842986.webp",
+    "body": "Un plano de personaje CGI para Claro, publicado con el nombre Orc. El fragmento concentra la atención en la presencia del personaje, la textura y el trabajo de iluminación de la escena.",
     "url": "/work/claro-cgi/",
     "vimeo": "https://vimeo.com/729842986",
-    "focus": "Hacer que el personaje se lea con fuerza sin perder la relación con su mundo.",
+    "focus": "Un fragmento de tres segundos: el diseño, la iluminación y el gesto concentran la presencia del personaje.",
     "vid": "729842986",
     "video_status": "exact_title_match",
-    "role": null
+    "role": null,
+    "category": "Motion y CGI",
+    "duration": 3,
+    "sources": [
+      {
+        "title": "Claro - Orc / Lucas Casagrande",
+        "url": "https://vimeo.com/729842986",
+        "type": "author_vimeo",
+        "supports": "Título y alcance del fragmento."
+      }
+    ],
+    "local_video": "/assets/videos/729842986.mp4",
+    "sections": [
+      {
+        "id": "seleccion-visual",
+        "nav": "Imágenes",
+        "label": "CLARO / ORC / Selección visual",
+        "title": "La imagen, en detalle.",
+        "description": "Composición, luz y materialidad en una selección de imágenes del proyecto.",
+        "images": [
+          {
+            "image": "/assets/projects/frames/729842986-01.webp",
+            "title": "Frame del film / 01",
+            "description": "CLARO / ORC / Selección de imagen del film"
+          },
+          {
+            "image": "/assets/projects/frames/729842986-02.webp",
+            "title": "Frame del film / 02",
+            "description": "CLARO / ORC / Selección de imagen del film"
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "gillette-j20",
     "num": "09",
-    "title": "GILLETTE J20",
+    "title": "GILLETTE J20 / MPC SHANGHAI",
     "sub": "Precisión visual y energía",
     "tags": [
       "TVC",
       "VFX"
     ],
-    "img": "https://framerusercontent.com/images/aECR4ibIPeFyGqYrSkfWdndlq0.jpg",
-    "body": "Una selección de mi trabajo en imagen y movimiento. Forma, composición y materialidad se encuentran para construir un lenguaje visual propio.",
+    "img": "/assets/projects/vimeo-436009842.webp",
+    "body": "Dirección de arte y dirección de animación para un TVC de Gillette J20 junto al equipo de MPC Shanghai. La pieza desarrolla un universo de precisión técnica, superficies mecánicas y movimiento de producto; el caso del autor también reúne styleframes del proceso.",
     "url": "/work/gillette-j20/",
     "vimeo": "https://vimeo.com/436009842",
-    "focus": "La relación entre la cámara, la luz y el ritmo de la imagen.",
+    "focus": "Dirigir una imagen de energía mecánica, cuidando la lectura del objeto y la continuidad de la animación.",
     "vid": "436009842",
     "video_status": "exact_title_match",
-    "role": null
+    "role": "Dirección de arte y dirección de animación",
+    "context": "MPC Shanghai, según los créditos publicados en Vimeo.",
+    "category": "Motion y CGI",
+    "duration": 30,
+    "studio": "MPC Shanghai",
+    "sources": [
+      {
+        "title": "Gillette J20 - MPC Shanghai / Lucas Casagrande",
+        "url": "https://www.behance.net/gallery/100231211/Gillette-J20-MPC-Shanghai",
+        "type": "author_case_study",
+        "supports": "Roles explícitos, estudio, TVC y existencia de styleframes."
+      },
+      {
+        "title": "Gillette J20 - MPC Shanghai",
+        "url": "https://vimeo.com/436009842",
+        "type": "author_vimeo",
+        "supports": "Mismos roles publicados en descripción del video."
+      }
+    ],
+    "local_video": "/assets/videos/436009842.mp4",
+    "sections": [
+      {
+        "id": "seleccion-visual",
+        "nav": "Imágenes",
+        "label": "GILLETTE J20 / MPC SHANGHAI / Selección visual",
+        "title": "La imagen, en detalle.",
+        "description": "Composición, luz y materialidad en una selección de imágenes del proyecto.",
+        "images": [
+          {
+            "image": "/assets/cases/gillette-j20-film-01.webp",
+            "title": "Frame del film / Frame 01",
+            "description": "GILLETTE J20 / MPC SHANGHAI / Frame del film: Frame 01"
+          },
+          {
+            "image": "/assets/cases/gillette-j20-film-02.webp",
+            "title": "Frame del film / Frame 02",
+            "description": "GILLETTE J20 / MPC SHANGHAI / Frame del film: Frame 02"
+          },
+          {
+            "image": "/assets/cases/gillette-j20-film-03.webp",
+            "title": "Frame del film / Frame 03",
+            "description": "GILLETTE J20 / MPC SHANGHAI / Frame del film: Frame 03"
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "lamicell",
     "num": "10",
-    "title": "LAMICELL",
-    "sub": "Identidad a través del objeto",
+    "title": "LAMICELL / ENVIROGREEN",
+    "sub": "La trama como lenguaje",
     "tags": [
       "Motion",
       "3D",
       "Brand"
     ],
-    "img": "https://framerusercontent.com/images/Q906Xny6im8J5TaHR3JqFtCS298.png",
-    "body": "Una selección de mi trabajo en imagen y movimiento. Forma, composición y materialidad se encuentran para construir un lenguaje visual propio.",
+    "img": "/assets/projects/vimeo-676071521.webp",
+    "body": "Una película CGI para EnviroGreen de Lamicell que conecta el producto ecuestre con un imaginario de naturaleza y fibras. El caso se presenta bajo el concepto The Future is Green y reúne trama, materia y movimiento para construir la imagen de la línea.",
     "url": "/work/lamicell/",
     "vimeo": "https://vimeo.com/676071521",
-    "focus": "La relación entre la cámara, la luz y el ritmo de la imagen.",
+    "focus": "Convertir la textura en protagonista y conectar el detalle con la composición general.",
     "vid": "676071521",
     "video_status": "exact_title_match",
-    "role": null
+    "role": null,
+    "category": "Motion y CGI",
+    "duration": 47,
+    "sources": [
+      {
+        "title": "LAMICELL EnviroGreen / Rodrigo Gorosito",
+        "url": "https://www.behance.net/gallery/145987091/LAMICELL-EnviroGreen",
+        "type": "collaborator_case_study",
+        "supports": "Nombre, concepto y créditos explícitos leídos en resultado de búsqueda."
+      },
+      {
+        "title": "Lamicell / Lucas Casagrande",
+        "url": "https://vimeo.com/676071521",
+        "type": "author_vimeo",
+        "supports": "Video de47segundos y fotograma de tejido observado."
+      }
+    ],
+    "local_video": "/assets/videos/676071521.mp4",
+    "sections": [
+      {
+        "id": "seleccion-visual",
+        "nav": "Imágenes",
+        "label": "LAMICELL / ENVIROGREEN / Selección visual",
+        "title": "Del desarrollo a la imagen.",
+        "description": "Styleframes del desarrollo visual: una mirada a las decisiones de composición, materialidad y atmósfera que construyen el proyecto.",
+        "images": [
+          {
+            "image": "/assets/cases/lamicell-bamboo-woods.webp",
+            "title": "Desarrollo visual / Bamboo woods",
+            "description": "LAMICELL / ENVIROGREEN / Desarrollo visual: Bamboo woods"
+          },
+          {
+            "image": "/assets/cases/lamicell-twist.webp",
+            "title": "Desarrollo visual / Twist",
+            "description": "LAMICELL / ENVIROGREEN / Desarrollo visual: Twist"
+          },
+          {
+            "image": "/assets/cases/lamicell-bottles.webp",
+            "title": "Desarrollo visual / Bottles",
+            "description": "LAMICELL / ENVIROGREEN / Desarrollo visual: Bottles"
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "stc-film",
     "num": "11",
-    "title": "STC FILM",
-    "sub": "Una escena, un sistema de ideas",
+    "title": "STC FILM / VIVA",
+    "sub": "Ideas que ocupan un espacio",
     "tags": [
       "TVC"
     ],
-    "img": "https://framerusercontent.com/images/GoHCG3W3x7w1xQcf0mzGbROD8.png",
-    "body": "Una selección de mi trabajo en imagen y movimiento. Forma, composición y materialidad se encuentran para construir un lenguaje visual propio.",
+    "img": "/assets/projects/vimeo-318699438.webp",
+    "body": "Un spot para STC Investment Group presentado en el corte del director como VIVA / STCFILM. Lucas declara dirección de arte y dirección de animación para una secuencia de espacios y objetos que convierte ideas de la pieza en situaciones tridimensionales.",
     "url": "/work/stc-film/",
     "vimeo": "https://vimeo.com/318699438",
-    "focus": "La relación entre la cámara, la luz y el ritmo de la imagen.",
+    "focus": "Construir una secuencia de imágenes con una lógica común de luz, escala y puesta en escena.",
     "vid": "318699438",
     "video_status": "exact_title_match",
-    "role": null
+    "role": "Dirección de arte / Dirección de animación",
+    "context": "STC Investment Group, según la descripción pública del director.",
+    "category": "Motion y CGI",
+    "duration": 53,
+    "sources": [
+      {
+        "title": "VIVA - STCFILM / Director's Cut",
+        "url": "https://vimeo.com/318699438",
+        "type": "author_vimeo",
+        "supports": "Título, cliente y roles explícitos."
+      },
+      {
+        "title": "STC Film / Lucas Casagrande",
+        "url": "https://www.behance.net/gallery/87272915/STC-Film",
+        "type": "author_case_study",
+        "supports": "Existencia de ficha del mismo caso; contenido completo no accesible por la herramienta."
+      }
+    ],
+    "local_video": "/assets/videos/318699438.mp4",
+    "sections": [
+      {
+        "id": "seleccion-visual",
+        "nav": "Imágenes",
+        "label": "STC FILM / VIVA / Selección visual",
+        "title": "La imagen, en detalle.",
+        "description": "Composición, luz y materialidad en una selección de imágenes del proyecto.",
+        "images": [
+          {
+            "image": "/assets/cases/stc-film-film-01.webp",
+            "title": "Frame del film / Frame 01",
+            "description": "STC FILM / VIVA / Frame del film: Frame 01"
+          },
+          {
+            "image": "/assets/cases/stc-film-film-02.webp",
+            "title": "Frame del film / Frame 02",
+            "description": "STC FILM / VIVA / Frame del film: Frame 02"
+          },
+          {
+            "image": "/assets/cases/stc-film-film-03.webp",
+            "title": "Frame del film / Frame 03",
+            "description": "STC FILM / VIVA / Frame del film: Frame 03"
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "snapdragon-pro",
@@ -214,53 +750,190 @@
       "Motion",
       "Identidad"
     ],
-    "img": "https://framerusercontent.com/images/kkU08YO6FBR4dUxIr2ZKwM4vSRQ.jpeg",
-    "body": "Trabajo realizado para Superunion UK. Una introducción audiovisual que combina materia, geometría y energía para construir el universo de Snapdragon Pro Series.",
+    "img": "/assets/projects/vimeo-770796912.webp",
+    "body": "Una introducción audiovisual de doce segundos para Snapdragon Pro Series, realizada para Superunion UK. La pieza abre el universo de una competición internacional de esports móviles, con materia, geometría y energía como elementos de identidad.",
     "url": "/work/snapdragon-pro/",
     "vimeo": "https://vimeo.com/770796912",
     "focus": "Crear un lenguaje que funcione como entrada a una experiencia de competición.",
     "vid": "770796912",
     "video_status": "exact_title_match",
     "role": null,
-    "context": "Trabajo para Superunion UK, según la descripción pública de la pieza."
+    "context": "Trabajo para Superunion UK, según la descripción pública de la pieza.",
+    "category": "Identidad y broadcast",
+    "duration": 12,
+    "sources": [
+      {
+        "title": "Snapdragon Pro Series - Intro / Lucas Casagrande",
+        "url": "https://vimeo.com/770796912",
+        "type": "author_vimeo",
+        "supports": "Título, duración y relación con Superunion UK."
+      },
+      {
+        "title": "Qualcomm y ESL Gaming presentan Snapdragon Pro Series",
+        "url": "https://www.qualcomm.com/news/releases/2022/03/qualcomm-and-esl-gaming-join-forces-revolutionize-future-mobile-esports",
+        "type": "client_official",
+        "supports": "Contexto del sistema de competición móvil."
+      }
+    ],
+    "local_video": "/assets/videos/770796912.mp4",
+    "sections": [
+      {
+        "id": "seleccion-visual",
+        "nav": "Imágenes",
+        "label": "SNAPDRAGON PRO SERIES / Selección visual",
+        "title": "La imagen, en detalle.",
+        "description": "Composición, luz y materialidad en una selección de imágenes del proyecto.",
+        "images": [
+          {
+            "image": "/assets/cases/snapdragon-pro-film-01.webp",
+            "title": "Frame del film / Frame 01",
+            "description": "SNAPDRAGON PRO SERIES / Frame del film: Frame 01"
+          },
+          {
+            "image": "/assets/cases/snapdragon-pro-film-02.webp",
+            "title": "Frame del film / Frame 02",
+            "description": "SNAPDRAGON PRO SERIES / Frame del film: Frame 02"
+          },
+          {
+            "image": "/assets/cases/snapdragon-pro-film-03.webp",
+            "title": "Frame del film / Frame 03",
+            "description": "SNAPDRAGON PRO SERIES / Frame del film: Frame 03"
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "cctv-esports",
     "num": "13",
-    "title": "CCTV ESPORTS",
-    "sub": "Apertura de un universo audiovisual",
+    "title": "SEEKING TRUTH",
+    "sub": "Apertura para un programa de esports",
     "tags": [
       "Broadcast",
       "Esports",
       "Motion"
     ],
-    "img": "https://framerusercontent.com/images/f2k0CKpZ0lXBPluW681cmq8H2CI.png",
-    "body": "Una selección de mi trabajo en imagen y movimiento. Forma, composición y materialidad se encuentran para construir un lenguaje visual propio.",
+    "img": "/assets/projects/vimeo-556284286.webp",
+    "body": "Una apertura de esports publicada como Seeking Truth. La pieza utiliza geometría triangular, superficies técnicas y luces azules y magenta para construir un recorrido de profundidad y energía concentrada.",
     "url": "/work/cctv-esports/",
     "vimeo": "https://vimeo.com/556284286",
-    "focus": "La relación entre la cámara, la luz y el ritmo de la imagen.",
+    "focus": "Concentrar la energía de la apertura en un sistema de ejes, profundidad y contraste.",
     "vid": "556284286",
     "video_status": "exact_title_match",
-    "role": null
+    "role": null,
+    "category": "Identidad y broadcast",
+    "duration": 15,
+    "sources": [
+      {
+        "title": "Seeking Truth / E-sports Opener",
+        "url": "https://vimeo.com/556284286",
+        "type": "author_vimeo",
+        "supports": "Título del video y fotograma técnico triangular observado."
+      },
+      {
+        "title": "Seeking Truth / Lucas Casagrande",
+        "url": "https://www.behance.net/gallery/120444209/-Seeking-Truth-%28E-sports-Show-Opener%29",
+        "type": "author_case_study",
+        "supports": "Título corroborado por perfil público del autor."
+      },
+      {
+        "title": "Perfil Behance de Lucas Casagrande",
+        "url": "https://www.behance.net/lucascasagrande",
+        "type": "author_portfolio",
+        "supports": "Lista el proyecto con el nombre Seeking Truth / E-sports Show Opener."
+      },
+      {
+        "title": "CCTV ESPORTOPEN / archivo de producción de Lucas",
+        "url": "https://drive.google.com/drive/folders/1NpoK8BDMFM2bv4oZ-xEvAd5atoizPiF_",
+        "type": "owner_production_archive",
+        "supports": "Relación interna con CCTV y coincidencia visual exacta TUNNEL_01 con el film."
+      }
+    ],
+    "sections": [
+      {
+        "id": "seleccion-visual",
+        "nav": "Imágenes",
+        "label": "SEEKING TRUTH / Selección visual",
+        "title": "La imagen, en detalle.",
+        "description": "Composición, luz y materialidad en una selección de imágenes del proyecto.",
+        "images": [
+          {
+            "image": "/assets/cases/cctv-esports-tunnel_01.webp",
+            "title": "Arte de producción / TUNNEL_01",
+            "description": "SEEKING TRUTH / Arte de producción: TUNNEL_01"
+          },
+          {
+            "image": "/assets/cases/cctv-esports-planet_01.webp",
+            "title": "Arte de producción / PLANET_01",
+            "description": "SEEKING TRUTH / Arte de producción: PLANET_01"
+          }
+        ]
+      }
+    ],
+    "local_video": "/assets/videos/556284286.mp4"
   },
   {
     "slug": "viva-fiber",
     "num": "14",
-    "title": "VIVA FIBER",
-    "sub": "Conexiones en movimiento",
+    "title": "VIVA FIBER / OGILVY",
+    "sub": "Conexión y entretenimiento",
     "tags": [
       "Motion",
       "Telecom",
       "CGI"
     ],
-    "img": "https://framerusercontent.com/images/x13vZEAFyNCZgovQztriYQrZdQw.png",
-    "body": "Una selección de mi trabajo en imagen y movimiento. Forma, composición y materialidad se encuentran para construir un lenguaje visual propio.",
+    "img": "/assets/projects/vimeo-317038460.webp",
+    "body": "Un spot para VIVA Wireless Fiber desarrollado para Ogilvy. Lucas declara dirección de arte y animación, además del recorrido de idea, storyboard, diseño y sonido. Objetos de entretenimiento y tecnología permiten llevar el concepto de conectividad a una puesta CGI de alto contraste.",
     "url": "/work/viva-fiber/",
     "vimeo": "https://vimeo.com/317038460",
-    "focus": "La relación entre la cámara, la luz y el ritmo de la imagen.",
+    "focus": "Construir continuidad entre el objeto, el espacio y una iluminación de alto contraste.",
     "vid": "317038460",
     "video_status": "exact_title_match",
-    "role": null
+    "role": "Dirección de arte y animación; desarrollo de idea, storyboard, diseño y sonido",
+    "category": "Motion y CGI",
+    "duration": 34,
+    "studio": "Ogilvy / VIVA",
+    "sources": [
+      {
+        "title": "Ogilvy - VIVA FIBER / Lucas Casagrande",
+        "url": "https://www.behance.net/gallery/87465501/Ogilvy-VIVA-FIBER",
+        "type": "author_case_study",
+        "supports": "Brief de servicio, roles, alcance y styleframes."
+      },
+      {
+        "title": "VIVA Fiber / Lucas Casagrande",
+        "url": "https://vimeo.com/317038460",
+        "type": "author_vimeo",
+        "supports": "Video del mismo caso."
+      }
+    ],
+    "local_video": "/assets/videos/317038460.mp4",
+    "sections": [
+      {
+        "id": "seleccion-visual",
+        "nav": "Imágenes",
+        "label": "VIVA FIBER / OGILVY / Selección visual",
+        "title": "La imagen, en detalle.",
+        "description": "Composición, luz y materialidad en una selección de imágenes del proyecto.",
+        "images": [
+          {
+            "image": "/assets/cases/viva-fiber-film-01.webp",
+            "title": "Frame del film / Frame 01",
+            "description": "VIVA FIBER / OGILVY / Frame del film: Frame 01"
+          },
+          {
+            "image": "/assets/cases/viva-fiber-film-02.webp",
+            "title": "Frame del film / Frame 02",
+            "description": "VIVA FIBER / OGILVY / Frame del film: Frame 02"
+          },
+          {
+            "image": "/assets/cases/viva-fiber-film-03.webp",
+            "title": "Frame del film / Frame 03",
+            "description": "VIVA FIBER / OGILVY / Frame del film: Frame 03"
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "creepshow",
@@ -272,151 +945,360 @@
       "3D",
       "Identidad"
     ],
-    "img": "https://framerusercontent.com/images/os4ky1HUKF9CSl8xvuPr0tPf5YE.jpeg",
-    "body": "Dirección de arte para una pieza donde el tono se construye desde la textura, el contraste y una atmósfera particular.",
+    "img": "/assets/projects/vimeo-884411342.webp",
+    "body": "Material de dirección de arte para Cheat Code, un segmento de Creepshow que gira alrededor de un viejo videojuego. La selección publicada por Lucas desarrolla una interfaz pixel-art y un universo de personajes bajo el nombre Weird Wednesday, donde la estética de juego forma parte del relato de terror.",
     "url": "/work/creepshow/",
     "vimeo": "https://vimeo.com/884411342",
     "focus": "Encontrar un lenguaje de imagen que sostenga la personalidad de la pieza.",
     "vid": "884411342",
     "video_status": "exact_title_match",
-    "role": "Dirección de arte"
-  },
-  {
-    "slug": "stc-invest",
-    "num": "16",
-    "title": "STC INVEST",
-    "sub": "Conceptos que toman forma",
-    "tags": [
-      "Motion",
-      "Finance",
-      "STC"
+    "role": "Dirección de arte",
+    "category": "Identidad y broadcast",
+    "duration": 68,
+    "sources": [
+      {
+        "title": "Creepshow - Cheat Code - Art Direction / Lucas Casagrande",
+        "url": "https://vimeo.com/884411342",
+        "type": "author_vimeo",
+        "supports": "Título y alcance; fotograma de interfaz Weird Wednesday observado."
+      },
+      {
+        "title": "Creepshow / Meet the Belaskos / Cheat Code",
+        "url": "https://www.itv.com/watch/creepshow/10a5556/10a5556a0023",
+        "type": "official_broadcaster",
+        "supports": "Temporada/episodio y contexto narrativo del segmento."
+      },
+      {
+        "title": "Cheat Code / case study de producción",
+        "url": "https://drive.google.com/file/d/1zk2cDqzQEWgGV2laF40rRiKChzA-Expd/view",
+        "type": "owner_production_archive",
+        "supports": "Escenarios barrio/bosque, UI, personajes y sprite sheets del videojuego. El PDF contiene texto de borrador y no se propone publicarlo completo."
+      }
     ],
-    "img": "https://framerusercontent.com/images/bvUXFyWh9Be18d0csdtRrAi04U.png",
-    "body": "Una selección de mi trabajo en imagen y movimiento. Forma, composición y materialidad se encuentran para construir un lenguaje visual propio.",
-    "url": "/work/stc-invest/",
-    "vimeo": null,
-    "focus": "La relación entre la cámara, la luz y el ritmo de la imagen.",
-    "vid": null,
-    "video_status": "not_linked",
-    "role": null
+    "local_video": "/assets/videos/884411342.mp4",
+    "sections": [
+      {
+        "id": "seleccion-visual",
+        "nav": "Imágenes",
+        "label": "CREEPSHOW / CHEAT CODE / Selección visual",
+        "title": "La imagen, en detalle.",
+        "description": "Composición, luz y materialidad en una selección de imágenes del proyecto.",
+        "images": [
+          {
+            "image": "/assets/cases/creepshow-production-53.webp",
+            "title": "Arte de producción / Escenario / barrio",
+            "description": "CREEPSHOW / CHEAT CODE / Arte de producción: Escenario / barrio"
+          },
+          {
+            "image": "/assets/cases/creepshow-production-74.webp",
+            "title": "Arte de producción / Escenario / bosque y nave",
+            "description": "CREEPSHOW / CHEAT CODE / Arte de producción: Escenario / bosque y nave"
+          },
+          {
+            "image": "/assets/cases/creepshow-production-242.webp",
+            "title": "Arte de producción / Sprite sheet / personaje",
+            "description": "CREEPSHOW / CHEAT CODE / Arte de producción: Sprite sheet / personaje"
+          },
+          {
+            "image": "/assets/cases/creepshow-production-267.webp",
+            "title": "Arte de producción / Sprite sheet / alien",
+            "description": "CREEPSHOW / CHEAT CODE / Arte de producción: Sprite sheet / alien"
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "cctv9",
-    "num": "17",
+    "num": "16",
     "title": "CCTV9",
-    "sub": "Identidad de pantalla / NOW",
+    "sub": "NOW / Identidad de pantalla",
     "tags": [
       "Broadcast",
       "Identity",
       "Motion"
     ],
-    "img": "https://framerusercontent.com/images/q5QDeU2HALgMWfWX7yoQ2jGsTU.png",
-    "body": "Una selección de mi trabajo en imagen y movimiento. Forma, composición y materialidad se encuentran para construir un lenguaje visual propio.",
+    "img": "/assets/projects/vimeo-385192789.webp",
+    "body": "Un sistema de identidad para CCTV9, canal documental de China. El proyecto publicado reúne logo, lower thirds, menú y piezas de continuidad como Next y Now, junto con exploraciones de un cubo. Desarrollado en JL Design, Shanghai, con Lucas como Head of Motion Design y trabajo junto al equipo.",
     "url": "/work/cctv9/",
     "vimeo": "https://vimeo.com/385192789",
-    "focus": "La relación entre la cámara, la luz y el ritmo de la imagen.",
+    "focus": "Construir una presencia de marca precisa con geometría, materiales y espacio negativo.",
     "vid": "385192789",
     "video_status": "exact_title_match",
-    "role": null
+    "role": "Head of Motion Design, junto al equipo",
+    "category": "Identidad y broadcast",
+    "local_video": "/assets/videos/385192789.mp4",
+    "context": "Identidad de canal / JL Design, Shanghai",
+    "duration": 4,
+    "studio": "JL Design / Shanghai",
+    "sources": [
+      {
+        "title": "CCTV9_NOW / Vimeo de Lucas Casagrande",
+        "url": "https://vimeo.com/385192789",
+        "supports": "Título, autor de la publicación, duración y formato; observación del thumbnail original."
+      },
+      {
+        "title": "CCTV9 / caso Behance de Lucas Casagrande",
+        "url": "https://www.behance.net/gallery/163870407/CCTV9",
+        "supports": "Canal documental chino, JL Design Shanghai, rol Head of Motion Design con equipo, entregables de broadcast."
+      }
+    ],
+    "sections": [
+      {
+        "id": "seleccion-visual",
+        "nav": "Imágenes",
+        "label": "CCTV9 / Selección visual",
+        "title": "La imagen, en detalle.",
+        "description": "Composición, luz y materialidad en una selección de imágenes del proyecto.",
+        "images": [
+          {
+            "image": "/assets/projects/frames/385192789-01.webp",
+            "title": "Frame del film / 01",
+            "description": "CCTV9 / Selección de imagen del film"
+          },
+          {
+            "image": "/assets/projects/frames/385192789-02.webp",
+            "title": "Frame del film / 02",
+            "description": "CCTV9 / Selección de imagen del film"
+          },
+          {
+            "image": "/assets/projects/frames/385192789-03.webp",
+            "title": "Frame del film / 03",
+            "description": "CCTV9 / Selección de imagen del film"
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "caterpillar",
-    "num": "18",
-    "title": "CATERPILLAR",
+    "num": "17",
+    "title": "CAT / HOSE SERVICE SOLUTIONS",
     "sub": "Materia y presencia industrial",
     "tags": [
       "CGI",
       "Industrial",
       "Campaign"
     ],
-    "img": "https://framerusercontent.com/images/nujs4JabOQ7y4zy4wtqaJtDmmc.png",
-    "body": "Una selección de mi trabajo en imagen y movimiento. Forma, composición y materialidad se encuentran para construir un lenguaje visual propio.",
+    "img": "/assets/projects/vimeo-592318682.webp",
+    "body": "Una pieza CGI de comunicación industrial para Cat Hose Service Solutions. La maquinaria y sus componentes se presentan a través de escala, modelado y una puesta de producto que combina el amarillo de la marca con un entorno claro.",
     "url": "/work/caterpillar/",
     "vimeo": "https://vimeo.com/592318682",
-    "focus": "La relación entre la cámara, la luz y el ritmo de la imagen.",
+    "focus": "Mostrar la construcción y la presencia de la máquina mediante encuadre, volumen y contraste.",
     "vid": "592318682",
     "video_status": "exact_title_match",
-    "role": null
+    "role": null,
+    "category": "Motion y CGI",
+    "context": "Comunicación industrial / mangueras y acoplamientos",
+    "duration": 135,
+    "sources": [
+      {
+        "title": "CAT_H&C_20210202_v2_mp4-Vimeo-Codec.mp4 / Vimeo de Lucas Casagrande",
+        "url": "https://vimeo.com/592318682",
+        "supports": "Título, autor de la publicación, duración y formato; observación del thumbnail original."
+      },
+      {
+        "title": "CAT - Hose Service Solutions / portfolio de Lucas en Behance",
+        "url": "https://www.behance.net/lucascasagrande",
+        "supports": "Título del caso CAT - Hose Service Solutions en portfolio del autor."
+      },
+      {
+        "title": "Cat / Hose and Couplings",
+        "url": "https://www.cat.com/en_US/products/new/parts/hydraulics/hose-couplings.html",
+        "supports": "Contexto de servicio de mangueras y acoplamientos Cat. No acredita el equipo de la pieza."
+      }
+    ],
+    "sections": [
+      {
+        "id": "seleccion-visual",
+        "nav": "Imágenes",
+        "label": "CAT / HOSE SERVICE SOLUTIONS / Selección visual",
+        "title": "La imagen, en detalle.",
+        "description": "Composición, luz y materialidad en una selección de imágenes del proyecto.",
+        "images": [
+          {
+            "image": "/assets/projects/frames/592318682-01.webp",
+            "title": "Frame del film / 01",
+            "description": "CAT / HOSE SERVICE SOLUTIONS / Selección de imagen del film"
+          },
+          {
+            "image": "/assets/projects/frames/592318682-02.webp",
+            "title": "Frame del film / 02",
+            "description": "CAT / HOSE SERVICE SOLUTIONS / Selección de imagen del film"
+          },
+          {
+            "image": "/assets/projects/frames/592318682-03.webp",
+            "title": "Frame del film / 03",
+            "description": "CAT / HOSE SERVICE SOLUTIONS / Selección de imagen del film"
+          }
+        ]
+      }
+    ],
+    "local_video": "/assets/videos/592318682.mp4"
   },
   {
     "slug": "f1-2022",
-    "num": "19",
+    "num": "18",
     "title": "F1 2022",
-    "sub": "Velocidad como materia visual",
+    "sub": "Una campaña, tres formatos",
     "tags": [
       "F1",
       "Sports",
       "Broadcast"
     ],
-    "img": "https://framerusercontent.com/images/abFGLaxvQjVaaewslXFzdjEiA.png",
-    "body": "Una selección de mi trabajo en imagen y movimiento. Forma, composición y materialidad se encuentran para construir un lenguaje visual propio.",
+    "img": "/assets/projects/vimeo-846402098.webp",
+    "body": "Una promoción del Formula 1 Gulf Air Bahrain Grand Prix 2022. El auto, las líneas de velocidad y la información de la carrera componen una pieza breve de lectura rápida. La imagen publicada anuncia las fechas del 18 al 20 de marzo de 2022.",
     "year": "2022",
     "url": "/work/f1-2022/",
     "vimeo": "https://vimeo.com/846402098",
-    "focus": "La relación entre la cámara, la luz y el ritmo de la imagen.",
+    "focus": "Mantener una identidad reconocible y una lectura rápida en diferentes relaciones de aspecto.",
     "vid": "846402098",
     "video_status": "exact_title_match",
-    "role": null
+    "role": null,
+    "pieces": [
+      {
+        "title": "Promo horizontal",
+        "vid": "846402098",
+        "label": "16:9"
+      },
+      {
+        "title": "Promo cuadrada",
+        "vid": "846403366",
+        "label": "1:1"
+      },
+      {
+        "title": "Promo vertical",
+        "vid": "846402641",
+        "label": "9:16"
+      }
+    ],
+    "category": "Identidad y broadcast",
+    "sections": [
+      {
+        "id": "formatos",
+        "nav": "Versiones",
+        "title": "Una identidad en varios formatos.",
+        "description": "La composición se reorganiza para la pantalla horizontal, cuadrada y vertical.",
+        "label": "F1 2022 / Versiones",
+        "videos": [
+          {
+            "title": "Promo cuadrada",
+            "vid": "846403366",
+            "label": "1:1",
+            "description": "1:1",
+            "img": "https://framerusercontent.com/images/abFGLaxvQjVaaewslXFzdjEiA.png",
+            "portrait": false
+          },
+          {
+            "title": "Promo vertical",
+            "vid": "846402641",
+            "label": "9:16",
+            "description": "9:16",
+            "img": "https://framerusercontent.com/images/abFGLaxvQjVaaewslXFzdjEiA.png",
+            "portrait": true
+          }
+        ]
+      },
+      {
+        "id": "seleccion-visual",
+        "nav": "Imágenes",
+        "label": "F1 2022 / Selección visual",
+        "title": "La imagen, en detalle.",
+        "description": "Composición, luz y materialidad en una selección de imágenes del proyecto.",
+        "images": [
+          {
+            "image": "/assets/projects/frames/846402098-01.webp",
+            "title": "Frame del film / 01",
+            "description": "F1 2022 / Selección de imagen del film"
+          },
+          {
+            "image": "/assets/projects/frames/846402098-02.webp",
+            "title": "Frame del film / 02",
+            "description": "F1 2022 / Selección de imagen del film"
+          },
+          {
+            "image": "/assets/projects/frames/846402098-03.webp",
+            "title": "Frame del film / 03",
+            "description": "F1 2022 / Selección de imagen del film"
+          }
+        ]
+      }
+    ],
+    "context": "Formula 1 Gulf Air Bahrain Grand Prix 2022",
+    "duration": 6,
+    "sources": [
+      {
+        "title": "F1 2022 - Promo Video / Vimeo de Lucas Casagrande",
+        "url": "https://vimeo.com/846402098",
+        "supports": "Título, autor de la publicación, duración y formato; observación del thumbnail original."
+      }
+    ],
+    "local_video": "/assets/videos/846402098.mp4"
   },
   {
     "slug": "viva-network",
-    "num": "20",
+    "num": "19",
     "title": "VIVA NETWORK",
     "sub": "Un mundo conectado",
     "tags": [
       "Motion",
       "Telecom"
     ],
-    "img": "https://framerusercontent.com/images/zcExtjkaMtmvRU8UdyqnlIGQ9bI.jpg",
-    "body": "Una selección de mi trabajo en imagen y movimiento. Forma, composición y materialidad se encuentran para construir un lenguaje visual propio.",
+    "img": "/assets/projects/vimeo-281125532.webp",
+    "body": "Campaña para VIVA desarrollada en Ogilvy. El caso publicado reúne storyboard, modelado 3D, styleframes, dirección de animación y dirección de sonido. Los objetos tecnológicos, los reflejos y la paleta violeta construyen una familia de imágenes de producto.",
     "url": "/work/viva-network/",
     "vimeo": "https://vimeo.com/281125532",
-    "focus": "La relación entre la cámara, la luz y el ritmo de la imagen.",
+    "focus": "Relacionar la información de la pieza con objetos claros y una composición de lectura directa.",
     "vid": "281125532",
     "video_status": "exact_title_match",
-    "role": null
-  },
-  {
-    "slug": "crystal-light",
-    "num": "21",
-    "title": "CRYSTAL LIGHT",
-    "sub": "Luz, color y producto",
-    "tags": [
-      "CGI",
-      "Beverage",
-      "Product"
+    "role": "Storyboard, modelado 3D y styleframes; dirección de animación, sonido y campaña",
+    "category": "Motion y CGI",
+    "context": "Campaña para VIVA / Ogilvy",
+    "duration": 36,
+    "studio": "Ogilvy / VIVA",
+    "sources": [
+      {
+        "title": "VIVA Network / Vimeo de Lucas Casagrande",
+        "url": "https://vimeo.com/281125532",
+        "supports": "Título, autor de la publicación, duración y formato; observación del thumbnail original."
+      },
+      {
+        "title": "VIVA Network / caso Behance de Lucas Casagrande",
+        "url": "https://www.behance.net/gallery/73146309/VIVA-NETWORK",
+        "supports": "Ogilvy y roles enumerados por Lucas en el caso."
+      }
     ],
-    "img": "https://framerusercontent.com/images/MUaXdygxW6taz5Ja6x86VYZcQes.png",
-    "body": "Una selección de mi trabajo en imagen y movimiento. Forma, composición y materialidad se encuentran para construir un lenguaje visual propio.",
-    "url": "/work/crystal-light/",
-    "vimeo": null,
-    "focus": "La relación entre la cámara, la luz y el ritmo de la imagen.",
-    "vid": null,
-    "video_status": "not_linked",
-    "role": null
-  },
-  {
-    "slug": "stc-card",
-    "num": "22",
-    "title": "STC CARD",
-    "sub": "Comunicar con movimiento",
-    "tags": [
-      "Motion",
-      "Brand",
-      "STC"
-    ],
-    "img": "https://framerusercontent.com/images/MY9zf9fej694kxUj6NKwKCHc20.png",
-    "body": "Una selección de mi trabajo en imagen y movimiento. Forma, composición y materialidad se encuentran para construir un lenguaje visual propio.",
-    "url": "/work/stc-card/",
-    "vimeo": null,
-    "focus": "La relación entre la cámara, la luz y el ritmo de la imagen.",
-    "vid": null,
-    "video_status": "not_linked",
-    "role": null
+    "local_video": "/assets/videos/281125532.mp4",
+    "sections": [
+      {
+        "id": "seleccion-visual",
+        "nav": "Imágenes",
+        "label": "VIVA NETWORK / Selección visual",
+        "title": "La imagen, en detalle.",
+        "description": "Composición, luz y materialidad en una selección de imágenes del proyecto.",
+        "images": [
+          {
+            "image": "/assets/projects/frames/281125532-01.webp",
+            "title": "Frame del film / 01",
+            "description": "VIVA NETWORK / Selección de imagen del film"
+          },
+          {
+            "image": "/assets/projects/frames/281125532-02.webp",
+            "title": "Frame del film / 02",
+            "description": "VIVA NETWORK / Selección de imagen del film"
+          },
+          {
+            "image": "/assets/projects/frames/281125532-03.webp",
+            "title": "Frame del film / 03",
+            "description": "VIVA NETWORK / Selección de imagen del film"
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "saint-bodhi",
-    "num": "23",
+    "num": "20",
     "title": "SAINT BODHI / MAD WORLD",
     "sub": "Planetas para un universo musical",
     "tags": [
@@ -424,32 +1306,614 @@
       "Artworks",
       "3D"
     ],
-    "img": "https://framerusercontent.com/images/1rLQcl5Mfu1YcJ1ZyVRHPR0qr8Q.jpg",
+    "img": "/assets/projects/vimeo-599779288.webp",
     "body": "Un sistema de mundos y planetas para acompañar un universo musical. Cada imagen desarrolla una atmósfera, una materia y una personalidad.",
     "url": "/work/saint-bodhi/",
     "vimeo": "https://vimeo.com/599779288",
     "focus": "Dar unidad a una familia de imágenes sin borrar la singularidad de cada mundo.",
     "vid": "599779288",
     "video_status": "exact_title_match",
-    "role": null
+    "role": null,
+    "category": "Música y exploración",
+    "context": "Saint Bodhi / Mad World / Songs-Planets",
+    "duration": 20,
+    "sources": [
+      {
+        "title": "Saint Bodhi - Mad World - Songs/Planets / Vimeo de Lucas Casagrande",
+        "url": "https://vimeo.com/599779288",
+        "supports": "Título, autor de la publicación, duración y formato; observación del thumbnail original."
+      }
+    ],
+    "local_video": "/assets/videos/599779288.mp4",
+    "sections": [
+      {
+        "id": "seleccion-visual",
+        "nav": "Imágenes",
+        "label": "SAINT BODHI / MAD WORLD / Selección visual",
+        "title": "La imagen, en detalle.",
+        "description": "Composición, luz y materialidad en una selección de imágenes del proyecto.",
+        "images": [
+          {
+            "image": "/assets/projects/frames/599779288-01.webp",
+            "title": "Frame del film / 01",
+            "description": "SAINT BODHI / MAD WORLD / Selección de imagen del film"
+          },
+          {
+            "image": "/assets/projects/frames/599779288-02.webp",
+            "title": "Frame del film / 02",
+            "description": "SAINT BODHI / MAD WORLD / Selección de imagen del film"
+          },
+          {
+            "image": "/assets/projects/frames/599779288-03.webp",
+            "title": "Frame del film / 03",
+            "description": "SAINT BODHI / MAD WORLD / Selección de imagen del film"
+          }
+        ]
+      }
+    ]
   },
   {
-    "slug": "f1-2019",
-    "num": "24",
-    "title": "F1 2019",
-    "sub": "Una identidad en la pista",
+    "slug": "portsaid",
+    "num": "21",
+    "title": "PORTSAID",
+    "sub": "La marca en movimiento",
     "tags": [
-      "F1",
-      "Sports"
+      "Identidad",
+      "Logo",
+      "Motion"
     ],
-    "img": "https://framerusercontent.com/images/o3QjqqvnYVLReardrSjUvdwYcw.jpg",
-    "body": "Una selección de mi trabajo en imagen y movimiento. Forma, composición y materialidad se encuentran para construir un lenguaje visual propio.",
-    "year": "2019",
-    "url": "/work/f1-2019/",
-    "vimeo": null,
-    "focus": "La relación entre la cámara, la luz y el ritmo de la imagen.",
-    "vid": null,
-    "video_status": "not_linked",
-    "role": null
+    "img": "/assets/projects/vimeo-913015151.webp",
+    "body": "Una firma audiovisual para Portsaid. El nombre aparece como un objeto de relieve sobre un espacio claro, con una puesta que concentra la atención en la tipografía y la luz.",
+    "url": "/work/portsaid/",
+    "vimeo": "https://vimeo.com/913015151",
+    "focus": "Dar presencia y ritmo a la marca con una intervención visual contenida.",
+    "vid": "913015151",
+    "video_status": "exact_title_match",
+    "role": null,
+    "category": "Identidad y broadcast",
+    "context": "Identidad de logo / Portsaid",
+    "duration": 14,
+    "sources": [
+      {
+        "title": "PORTSAID - LOGO ID / Vimeo de Lucas Casagrande",
+        "url": "https://vimeo.com/913015151",
+        "supports": "Título, autor de la publicación, duración y formato; observación del thumbnail original."
+      }
+    ],
+    "local_video": "/assets/videos/913015151.mp4",
+    "sections": [
+      {
+        "id": "seleccion-visual",
+        "nav": "Imágenes",
+        "label": "PORTSAID / Selección visual",
+        "title": "La imagen, en detalle.",
+        "description": "Composición, luz y materialidad en una selección de imágenes del proyecto.",
+        "images": [
+          {
+            "image": "/assets/projects/frames/913015151-01.webp",
+            "title": "Frame del film / 01",
+            "description": "PORTSAID / Selección de imagen del film"
+          },
+          {
+            "image": "/assets/projects/frames/913015151-02.webp",
+            "title": "Frame del film / 02",
+            "description": "PORTSAID / Selección de imagen del film"
+          },
+          {
+            "image": "/assets/projects/frames/913015151-03.webp",
+            "title": "Frame del film / 03",
+            "description": "PORTSAID / Selección de imagen del film"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "inegi",
+    "num": "22",
+    "title": "INEGI / PEPPERMELON",
+    "sub": "Territorio en miniatura",
+    "tags": [
+      "3D",
+      "Spot",
+      "Entorno"
+    ],
+    "img": "/assets/projects/vimeo-798885470.webp",
+    "body": "Un spot de INEGI publicado junto al nombre de Peppermelon. Caminos, árboles y volúmenes de color construyen un territorio en miniatura de formas simples y materiales táctiles.",
+    "url": "/work/inegi/",
+    "vimeo": "https://vimeo.com/798885470",
+    "focus": "Hacer legible un mundo complejo mediante una escala lúdica y una composición clara.",
+    "vid": "798885470",
+    "video_status": "exact_title_match",
+    "role": null,
+    "category": "Motion y CGI",
+    "local_video": "/assets/videos/798885470.mp4",
+    "context": "INEGI / Peppermelon / Spot 01",
+    "duration": 20,
+    "sources": [
+      {
+        "title": "INEGI - Peppermelon - Spot 01 / Vimeo de Lucas Casagrande",
+        "url": "https://vimeo.com/798885470",
+        "supports": "Título, autor de la publicación, duración y formato; observación del thumbnail original."
+      }
+    ],
+    "sections": [
+      {
+        "id": "seleccion-visual",
+        "nav": "Imágenes",
+        "label": "INEGI / PEPPERMELON / Selección visual",
+        "title": "La imagen, en detalle.",
+        "description": "Composición, luz y materialidad en una selección de imágenes del proyecto.",
+        "images": [
+          {
+            "image": "/assets/projects/frames/798885470-01.webp",
+            "title": "Frame del film / 01",
+            "description": "INEGI / PEPPERMELON / Selección de imagen del film"
+          },
+          {
+            "image": "/assets/projects/frames/798885470-02.webp",
+            "title": "Frame del film / 02",
+            "description": "INEGI / PEPPERMELON / Selección de imagen del film"
+          },
+          {
+            "image": "/assets/projects/frames/798885470-03.webp",
+            "title": "Frame del film / 03",
+            "description": "INEGI / PEPPERMELON / Selección de imagen del film"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "sofasummit",
+    "num": "23",
+    "title": "SOFASUMMIT",
+    "sub": "Una escena que vuelve a empezar",
+    "tags": [
+      "Loop",
+      "3D",
+      "Evento"
+    ],
+    "img": "/assets/projects/vimeo-729863076.webp",
+    "body": "Una animación en loop para SofaSummit. Objetos, plantas y estructuras se agrupan en un escenario violeta con un recorrido visual de distintas alturas.",
+    "url": "/work/sofasummit/",
+    "vimeo": "https://vimeo.com/729863076",
+    "focus": "Construir una escena que pueda sostener la mirada y regresar al inicio con continuidad.",
+    "vid": "729863076",
+    "video_status": "exact_title_match",
+    "role": null,
+    "category": "Experiencias y FOOH",
+    "context": "Animación en loop / SofaSummit",
+    "duration": 7,
+    "sources": [
+      {
+        "title": "SOFASUMMIT - Loop Animation / Vimeo de Lucas Casagrande",
+        "url": "https://vimeo.com/729863076",
+        "supports": "Título, autor de la publicación, duración y formato; observación del thumbnail original."
+      }
+    ],
+    "local_video": "/assets/videos/729863076.mp4",
+    "sections": [
+      {
+        "id": "seleccion-visual",
+        "nav": "Imágenes",
+        "label": "SOFASUMMIT / Selección visual",
+        "title": "La imagen, en detalle.",
+        "description": "Composición, luz y materialidad en una selección de imágenes del proyecto.",
+        "images": [
+          {
+            "image": "/assets/projects/frames/729863076-01.webp",
+            "title": "Frame del film / 01",
+            "description": "SOFASUMMIT / Selección de imagen del film"
+          },
+          {
+            "image": "/assets/projects/frames/729863076-02.webp",
+            "title": "Frame del film / 02",
+            "description": "SOFASUMMIT / Selección de imagen del film"
+          },
+          {
+            "image": "/assets/projects/frames/729863076-03.webp",
+            "title": "Frame del film / 03",
+            "description": "SOFASUMMIT / Selección de imagen del film"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "jump-saudi",
+    "num": "24",
+    "title": "JUMP SAUDI",
+    "sub": "Una firma para la apertura",
+    "tags": [
+      "Identidad",
+      "Intro",
+      "Motion"
+    ],
+    "img": "/assets/projects/vimeo-729856502.webp",
+    "body": "Una introducción audiovisual para Jump Saudi. La síntesis del caballo y la tipografía sostienen una identidad ecuestre de líneas delicadas y espacio abierto.",
+    "url": "/work/jump-saudi/",
+    "vimeo": "https://vimeo.com/729856502",
+    "focus": "Acompañar la aparición de marca con una lectura limpia de la forma y el movimiento.",
+    "vid": "729856502",
+    "video_status": "exact_title_match",
+    "role": null,
+    "category": "Identidad y broadcast",
+    "context": "Intro / Jump Saudi",
+    "duration": 25,
+    "sources": [
+      {
+        "title": "Jump Saudi - Intro / Vimeo de Lucas Casagrande",
+        "url": "https://vimeo.com/729856502",
+        "supports": "Título, autor de la publicación, duración y formato; observación del thumbnail original."
+      }
+    ],
+    "sections": [
+      {
+        "id": "seleccion-visual",
+        "nav": "Imágenes",
+        "label": "JUMP SAUDI / Selección visual",
+        "title": "La imagen, en detalle.",
+        "description": "Composición, luz y materialidad en una selección de imágenes del proyecto.",
+        "images": [
+          {
+            "image": "/assets/projects/frames/729856502-01.webp",
+            "title": "Frame del film / 01",
+            "description": "JUMP SAUDI / Selección de imagen del film"
+          },
+          {
+            "image": "/assets/projects/frames/729856502-02.webp",
+            "title": "Frame del film / 02",
+            "description": "JUMP SAUDI / Selección de imagen del film"
+          },
+          {
+            "image": "/assets/projects/frames/729856502-03.webp",
+            "title": "Frame del film / 03",
+            "description": "JUMP SAUDI / Selección de imagen del film"
+          }
+        ]
+      }
+    ],
+    "local_video": "/assets/videos/729856502.mp4"
+  },
+  {
+    "slug": "unicards-animatic",
+    "num": "25",
+    "title": "UNICARDS / ANIMATIC",
+    "sub": "Pensar el relato antes del render",
+    "tags": [
+      "Animatic",
+      "Proceso",
+      "Producto"
+    ],
+    "img": "/assets/projects/vimeo-729868269.webp",
+    "body": "El animatic de Uni Cards muestra una etapa de desarrollo del relato de producto. Una estructura de escenas permite revisar el orden, la duración y la continuidad antes de la terminación visual.",
+    "url": "/work/unicards-animatic/",
+    "vimeo": "https://vimeo.com/729868269",
+    "focus": "Resolver la secuencia y el ritmo de comunicación desde una versión de trabajo.",
+    "vid": "729868269",
+    "video_status": "exact_title_match",
+    "role": null,
+    "category": "Motion y CGI",
+    "context": "Animatic de producto / Uni Cards",
+    "duration": 144,
+    "sources": [
+      {
+        "title": "UniCards-Animatic.mp4 / Vimeo de Lucas Casagrande",
+        "url": "https://vimeo.com/729868269",
+        "supports": "Título, autor de la publicación, duración y formato; observación del thumbnail original."
+      }
+    ],
+    "sections": [
+      {
+        "id": "seleccion-visual",
+        "nav": "Imágenes",
+        "label": "UNICARDS / ANIMATIC / Selección visual",
+        "title": "La imagen, en detalle.",
+        "description": "Composición, luz y materialidad en una selección de imágenes del proyecto.",
+        "images": [
+          {
+            "image": "/assets/projects/frames/729868269-01.webp",
+            "title": "Frame del film / 01",
+            "description": "UNICARDS / ANIMATIC / Selección de imagen del film"
+          },
+          {
+            "image": "/assets/projects/frames/729868269-02.webp",
+            "title": "Frame del film / 02",
+            "description": "UNICARDS / ANIMATIC / Selección de imagen del film"
+          },
+          {
+            "image": "/assets/projects/frames/729868269-03.webp",
+            "title": "Frame del film / 03",
+            "description": "UNICARDS / ANIMATIC / Selección de imagen del film"
+          }
+        ]
+      }
+    ],
+    "local_video": "/assets/videos/729868269.mp4"
+  },
+  {
+    "slug": "rubber",
+    "num": "26",
+    "title": "RUBBER",
+    "sub": "Un objeto, una regla de movimiento",
+    "tags": [
+      "Experimento",
+      "3D",
+      "Animación"
+    ],
+    "img": "/assets/projects/vimeo-831222839.webp",
+    "body": "Una pieza experimental que concentra la escena en una esfera roja dentro de un ambiente doméstico. El contraste entre el objeto, la pared y el pequeño cactus deja que el movimiento lleve la atención.",
+    "url": "/work/rubber/",
+    "vimeo": "https://vimeo.com/831222839",
+    "focus": "Explorar el carácter de un objeto mediante una puesta simple y un gesto de animación.",
+    "vid": "831222839",
+    "video_status": "exact_title_match",
+    "role": null,
+    "category": "Motion y CGI",
+    "context": "Estudio experimental / imagen y movimiento",
+    "duration": 4,
+    "sources": [
+      {
+        "title": "RUBBER / Vimeo de Lucas Casagrande",
+        "url": "https://vimeo.com/831222839",
+        "supports": "Título, autor de la publicación, duración y formato; observación del thumbnail original."
+      }
+    ],
+    "local_video": "/assets/videos/831222839.mp4",
+    "sections": [
+      {
+        "id": "seleccion-visual",
+        "nav": "Imágenes",
+        "label": "RUBBER / Selección visual",
+        "title": "La imagen, en detalle.",
+        "description": "Composición, luz y materialidad en una selección de imágenes del proyecto.",
+        "images": [
+          {
+            "image": "/assets/projects/frames/831222839-01.webp",
+            "title": "Frame del film / 01",
+            "description": "RUBBER / Selección de imagen del film"
+          },
+          {
+            "image": "/assets/projects/frames/831222839-02.webp",
+            "title": "Frame del film / 02",
+            "description": "RUBBER / Selección de imagen del film"
+          },
+          {
+            "image": "/assets/projects/frames/831222839-03.webp",
+            "title": "Frame del film / 03",
+            "description": "RUBBER / Selección de imagen del film"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "supermarket",
+    "num": "27",
+    "title": "SUPERMARKET",
+    "sub": "Lo cotidiano cambia de escala",
+    "tags": [
+      "Experimento",
+      "3D",
+      "Objeto"
+    ],
+    "img": "/assets/projects/vimeo-831219127.webp",
+    "body": "Carritos de supermercado se reorganizan como una estructura escultórica dentro de un espacio de hormigón. Un objeto cotidiano se vuelve una composición de líneas, metal y acentos rojos.",
+    "url": "/work/supermarket/",
+    "vimeo": "https://vimeo.com/831219127",
+    "focus": "Buscar otra lectura de lo familiar a través de la repetición y la disposición espacial.",
+    "vid": "831219127",
+    "video_status": "exact_title_match",
+    "role": null,
+    "category": "Motion y CGI",
+    "context": "Estudio experimental / objeto cotidiano",
+    "duration": 4,
+    "sources": [
+      {
+        "title": "SUPERMARKET / Vimeo de Lucas Casagrande",
+        "url": "https://vimeo.com/831219127",
+        "supports": "Título, autor de la publicación, duración y formato; observación del thumbnail original."
+      }
+    ],
+    "local_video": "/assets/videos/831219127.mp4",
+    "sections": [
+      {
+        "id": "seleccion-visual",
+        "nav": "Imágenes",
+        "label": "SUPERMARKET / Selección visual",
+        "title": "La imagen, en detalle.",
+        "description": "Composición, luz y materialidad en una selección de imágenes del proyecto.",
+        "images": [
+          {
+            "image": "/assets/projects/frames/831219127-01.webp",
+            "title": "Frame del film / 01",
+            "description": "SUPERMARKET / Selección de imagen del film"
+          },
+          {
+            "image": "/assets/projects/frames/831219127-02.webp",
+            "title": "Frame del film / 02",
+            "description": "SUPERMARKET / Selección de imagen del film"
+          },
+          {
+            "image": "/assets/projects/frames/831219127-03.webp",
+            "title": "Frame del film / 03",
+            "description": "SUPERMARKET / Selección de imagen del film"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "toyota-tvc",
+    "num": "28",
+    "title": "TOYOTA / TVC",
+    "sub": "Velocidad en un mundo construido",
+    "tags": [
+      "Automotriz",
+      "TVC",
+      "CGI"
+    ],
+    "img": "/assets/projects/vimeo-833759639.webp",
+    "body": "Una pieza horizontal de Toyota donde los vehículos recorren una puesta CGI de fuerte identidad gráfica. El rojo, la arquitectura y el punto de vista construyen la energía de la escena.",
+    "url": "/work/toyota-tvc/",
+    "vimeo": "https://vimeo.com/833759639",
+    "focus": "Dar continuidad al recorrido de los autos y hacer que cada encuadre sostenga la presencia del producto.",
+    "vid": "833759639",
+    "video_status": "exact_title_match",
+    "role": null,
+    "category": "Motion y CGI",
+    "context": "TVC horizontal / Toyota",
+    "duration": 16,
+    "sources": [
+      {
+        "title": "TOYOTA Horizontal final TVC / Vimeo de Lucas Casagrande",
+        "url": "https://vimeo.com/833759639",
+        "supports": "Título, autor de la publicación, duración y formato; observación del thumbnail original."
+      }
+    ],
+    "local_video": "/assets/videos/833759639.mp4",
+    "sections": [
+      {
+        "id": "seleccion-visual",
+        "nav": "Imágenes",
+        "label": "TOYOTA / TVC / Selección visual",
+        "title": "La imagen, en detalle.",
+        "description": "Composición, luz y materialidad en una selección de imágenes del proyecto.",
+        "images": [
+          {
+            "image": "/assets/projects/frames/833759639-01.webp",
+            "title": "Frame del film / 01",
+            "description": "TOYOTA / TVC / Selección de imagen del film"
+          },
+          {
+            "image": "/assets/projects/frames/833759639-02.webp",
+            "title": "Frame del film / 02",
+            "description": "TOYOTA / TVC / Selección de imagen del film"
+          },
+          {
+            "image": "/assets/projects/frames/833759639-03.webp",
+            "title": "Frame del film / 03",
+            "description": "TOYOTA / TVC / Selección de imagen del film"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "ojs-glove",
+    "num": "29",
+    "title": "OJS / GLOVE",
+    "sub": "Transición entre mundos",
+    "tags": [
+      "Transición",
+      "3D",
+      "Música"
+    ],
+    "img": "/assets/projects/vimeo-599807189.webp",
+    "body": "Una transición audiovisual publicada como OJS Glove. La pieza recorre un universo de planetas, materia y color dentro de una composición circular.",
+    "url": "/work/ojs-glove/",
+    "vimeo": "https://vimeo.com/599807189",
+    "focus": "Construir continuidad entre distintas escalas y atmósferas mediante el movimiento.",
+    "vid": "599807189",
+    "video_status": "exact_title_match",
+    "role": null,
+    "category": "Música y exploración",
+    "context": "Transición / OJS Glove",
+    "duration": 10,
+    "sources": [
+      {
+        "title": "TRANSITION - OJS GLOVE / Vimeo de Lucas Casagrande",
+        "url": "https://vimeo.com/599807189",
+        "supports": "Título, autor de la publicación, duración y formato; observación del thumbnail original."
+      }
+    ],
+    "sections": [
+      {
+        "id": "seleccion-visual",
+        "nav": "Imágenes",
+        "label": "OJS / GLOVE / Selección visual",
+        "title": "La imagen, en detalle.",
+        "description": "Composición, luz y materialidad en una selección de imágenes del proyecto.",
+        "images": [
+          {
+            "image": "/assets/projects/frames/599807189-01.webp",
+            "title": "Frame del film / 01",
+            "description": "OJS / GLOVE / Selección de imagen del film"
+          },
+          {
+            "image": "/assets/projects/frames/599807189-02.webp",
+            "title": "Frame del film / 02",
+            "description": "OJS / GLOVE / Selección de imagen del film"
+          },
+          {
+            "image": "/assets/projects/frames/599807189-03.webp",
+            "title": "Frame del film / 03",
+            "description": "OJS / GLOVE / Selección de imagen del film"
+          }
+        ]
+      }
+    ],
+    "local_video": "/assets/videos/599807189.mp4"
+  },
+  {
+    "slug": "claro-reel",
+    "title": "CLARO / REEL DE PERSONAJES",
+    "sub": "Una colección de mundos y personajes",
+    "tags": [
+      "Personajes",
+      "3D",
+      "Motion"
+    ],
+    "img": "/assets/projects/vimeo-832067590.webp",
+    "vid": "832067590",
+    "vimeo": "https://vimeo.com/832067590",
+    "url": "/work/claro-reel/",
+    "body": "Una selección audiovisual de piezas para Claro, publicada como Reel Claro. Personajes de distintos registros, entornos digitales y tratamientos de imagen conviven en una compilación de 30 segundos.",
+    "focus": "El personaje como punto de entrada a diferentes universos visuales.",
+    "context": "Reel de personajes / Claro",
+    "video_status": "exact_title_match",
+    "role": null,
+    "source": "https://vimeo.com/832067590",
+    "source_title": "REEL CLARO",
+    "duration": 30,
+    "width": 3840,
+    "height": 2160,
+    "quality_note": "Thumbnail limpio, sin interfaz de móvil. Es una compilación; rotularlo como reel.",
+    "num": "30",
+    "category": "Motion y CGI",
+    "sources": [
+      {
+        "title": "Video original en Vimeo",
+        "url": "https://vimeo.com/832067590"
+      }
+    ],
+    "sections": [
+      {
+        "id": "seleccion-visual",
+        "nav": "Imágenes",
+        "label": "CLARO / REEL DE PERSONAJES / Selección visual",
+        "title": "La imagen, en detalle.",
+        "description": "Composición, luz y materialidad en una selección de imágenes del proyecto.",
+        "images": [
+          {
+            "image": "/assets/projects/frames/832067590-01.webp",
+            "title": "Frame del film / 01",
+            "description": "CLARO / REEL DE PERSONAJES / Selección de imagen del film"
+          },
+          {
+            "image": "/assets/projects/frames/832067590-02.webp",
+            "title": "Frame del film / 02",
+            "description": "CLARO / REEL DE PERSONAJES / Selección de imagen del film"
+          },
+          {
+            "image": "/assets/projects/frames/832067590-03.webp",
+            "title": "Frame del film / 03",
+            "description": "CLARO / REEL DE PERSONAJES / Selección de imagen del film"
+          }
+        ]
+      }
+    ],
+    "local_video": "/assets/videos/832067590.mp4"
   }
 ]

@@ -1,0 +1,305 @@
+{
+  "verified_at": "2026-11-08",
+  "policy": "Evidence for editorial content. Upload dates are not treated as project dates. Credits only when explicitly stated by the author. Pandora integration is handled separately.",
+  "projects": [
+    {
+      "slug": "reel-2026",
+      "source_url": "https://vimeo.com/850730171",
+      "metadata_url": "https://vimeo.com/api/v2/video/850730171.json",
+      "verified_title": "LUCAS CASAGRANDE - WORKREEL 2024",
+      "author": "Lucas Casagrande",
+      "credits": "Collection of works created and directed by Lucas Casagrande.",
+      "basis": "Public Vimeo metadata and visually inspected public poster. Descriptive prose is editorial observation; no additional production credits inferred."
+    },
+    {
+      "slug": "noorus-fill",
+      "source_url": "https://vimeo.com/1095640044",
+      "metadata_url": "https://vimeo.com/api/v2/video/1095640044.json",
+      "verified_title": "FILL+",
+      "author": "Lucas Casagrande",
+      "credits": "",
+      "basis": "Public Vimeo metadata and visually inspected public poster. Descriptive prose is editorial observation; no additional production credits inferred."
+    },
+    {
+      "slug": "lamicell-v22",
+      "source_url": "https://vimeo.com/960506224",
+      "metadata_url": "https://vimeo.com/api/v2/video/960506224.json",
+      "verified_title": "LAMICELL - V22",
+      "author": "Lucas Casagrande",
+      "credits": "",
+      "basis": "Public Vimeo metadata and visually inspected public poster. Descriptive prose is editorial observation; no additional production credits inferred."
+    },
+    {
+      "slug": "youtopia-vitacura",
+      "source_url": "https://vimeo.com/831680968",
+      "metadata_url": "https://vimeo.com/api/v2/video/831680968.json",
+      "verified_title": "VITACURA ANIMATIC - DIRECTORS CUT",
+      "author": "Lucas Casagrande",
+      "credits": "",
+      "basis": "Public Vimeo metadata and visually inspected public poster. Descriptive prose is editorial observation; no additional production credits inferred."
+    },
+    {
+      "slug": "toyota",
+      "source_url": "https://vimeo.com/930788376",
+      "metadata_url": "https://vimeo.com/api/v2/video/930788376.json",
+      "verified_title": "TOYOTA GR COROLLA - Puerto Rico Launch - Anamorphic screen",
+      "author": "Lucas Casagrande",
+      "credits": "",
+      "basis": "Public Vimeo metadata and visually inspected public poster. Descriptive prose is editorial observation; no additional production credits inferred."
+    },
+    {
+      "slug": "viva-one",
+      "source_url": "https://vimeo.com/318691860",
+      "metadata_url": "https://vimeo.com/api/v2/video/318691860.json",
+      "verified_title": "VIVA ONE - Director's cut",
+      "author": "Lucas Casagrande",
+      "credits": "",
+      "basis": "Public Vimeo metadata and visually inspected public poster. Descriptive prose is editorial observation; no additional production credits inferred."
+    },
+    {
+      "slug": "claro-cgi",
+      "source_url": "https://vimeo.com/729842986",
+      "metadata_url": "https://vimeo.com/api/v2/video/729842986.json",
+      "verified_title": "Claro - Orc",
+      "author": "Lucas Casagrande",
+      "credits": "",
+      "basis": "Public Vimeo metadata and visually inspected public poster. Descriptive prose is editorial observation; no additional production credits inferred."
+    },
+    {
+      "slug": "gillette-j20",
+      "source_url": "https://vimeo.com/436009842",
+      "metadata_url": "https://vimeo.com/api/v2/video/436009842.json",
+      "verified_title": "GILLETTE J20 - MPC Shanghai",
+      "author": "Lucas Casagrande",
+      "credits": "Gillette J20 - MPC Shanghai<br />\nRole: Art Direction - Animation Direction",
+      "basis": "Public Vimeo metadata and visually inspected public poster. Descriptive prose is editorial observation; no additional production credits inferred."
+    },
+    {
+      "slug": "lamicell",
+      "source_url": "https://vimeo.com/676071521",
+      "metadata_url": "https://vimeo.com/api/v2/video/676071521.json",
+      "verified_title": "Lamicell",
+      "author": "Lucas Casagrande",
+      "credits": "",
+      "basis": "Public Vimeo metadata and visually inspected public poster. Descriptive prose is editorial observation; no additional production credits inferred."
+    },
+    {
+      "slug": "stc-film",
+      "source_url": "https://vimeo.com/318699438",
+      "metadata_url": "https://vimeo.com/api/v2/video/318699438.json",
+      "verified_title": "VIVA - STCFILM - Director's Cut",
+      "author": "Lucas Casagrande",
+      "credits": "Art direction / Animation direction<br />\n<br />\nI was in charge of creating this spot for the STC Investment Group.",
+      "basis": "Public Vimeo metadata and visually inspected public poster. Descriptive prose is editorial observation; no additional production credits inferred."
+    },
+    {
+      "slug": "snapdragon-pro",
+      "source_url": "https://vimeo.com/770796912",
+      "metadata_url": "https://vimeo.com/api/v2/video/770796912.json",
+      "verified_title": "SNAPDRAGON PRO SERIES - INTRO",
+      "author": "Lucas Casagrande",
+      "credits": "Work done by me for Superunion UK",
+      "basis": "Public Vimeo metadata and visually inspected public poster. Descriptive prose is editorial observation; no additional production credits inferred."
+    },
+    {
+      "slug": "cctv-esports",
+      "source_url": "https://vimeo.com/556284286",
+      "metadata_url": "https://vimeo.com/api/v2/video/556284286.json",
+      "verified_title": "「新闻大求真」片头 \"Seeking Truth\" (E-sports Opener)",
+      "author": "Lucas Casagrande",
+      "credits": "",
+      "basis": "Public Vimeo metadata and visually inspected public poster. Descriptive prose is editorial observation; no additional production credits inferred."
+    },
+    {
+      "slug": "viva-fiber",
+      "source_url": "https://vimeo.com/317038460",
+      "metadata_url": "https://vimeo.com/api/v2/video/317038460.json",
+      "verified_title": "VIVA Fiber",
+      "author": "Lucas Casagrande",
+      "credits": "",
+      "basis": "Public Vimeo metadata and visually inspected public poster. Descriptive prose is editorial observation; no additional production credits inferred."
+    },
+    {
+      "slug": "creepshow",
+      "source_url": "https://vimeo.com/884411342",
+      "metadata_url": "https://vimeo.com/api/v2/video/884411342.json",
+      "verified_title": "CREEPSHOW - CHEAT CODE - ART DIRECTION",
+      "author": "Lucas Casagrande",
+      "credits": "",
+      "basis": "Public Vimeo metadata and visually inspected public poster. Descriptive prose is editorial observation; no additional production credits inferred."
+    },
+    {
+      "slug": "stc-invest",
+      "source_url": "https://framerusercontent.com/images/bvUXFyWh9Be18d0csdtRrAi04U.png",
+      "basis": "Visually inspected image already used in the published portfolio; project identity retained from existing data. New prose describes visible composition only. No role or studio credit added."
+    },
+    {
+      "slug": "cctv9",
+      "source_url": "https://vimeo.com/385192789",
+      "metadata_url": "https://vimeo.com/api/v2/video/385192789.json",
+      "verified_title": "CCTV9_NOW",
+      "author": "Lucas Casagrande",
+      "credits": "",
+      "basis": "Public Vimeo metadata and visually inspected public poster. Descriptive prose is editorial observation; no additional production credits inferred."
+    },
+    {
+      "slug": "caterpillar",
+      "source_url": "https://vimeo.com/592318682",
+      "metadata_url": "https://vimeo.com/api/v2/video/592318682.json",
+      "verified_title": "CAT_H&C_20210202_v2_mp4-Vimeo-Codec.mp4",
+      "author": "Lucas Casagrande",
+      "credits": "",
+      "basis": "Public Vimeo metadata and visually inspected public poster. Descriptive prose is editorial observation; no additional production credits inferred."
+    },
+    {
+      "slug": "f1-2022",
+      "source_url": "https://vimeo.com/846402098",
+      "metadata_url": "https://vimeo.com/api/v2/video/846402098.json",
+      "verified_title": "F1 2022 - Promo Video",
+      "author": "Lucas Casagrande",
+      "credits": "",
+      "basis": "Public Vimeo metadata and visually inspected public poster. Descriptive prose is editorial observation; no additional production credits inferred."
+    },
+    {
+      "slug": "viva-network",
+      "source_url": "https://vimeo.com/281125532",
+      "metadata_url": "https://vimeo.com/api/v2/video/281125532.json",
+      "verified_title": "VIVA Network",
+      "author": "Lucas Casagrande",
+      "credits": "VIVA Network",
+      "basis": "Public Vimeo metadata and visually inspected public poster. Descriptive prose is editorial observation; no additional production credits inferred."
+    },
+    {
+      "slug": "crystal-light",
+      "source_url": "https://framerusercontent.com/images/MUaXdygxW6taz5Ja6x86VYZcQes.png",
+      "basis": "Visually inspected image already used in the published portfolio; project identity retained from existing data. New prose describes visible composition only. No role or studio credit added."
+    },
+    {
+      "slug": "stc-card",
+      "source_url": "https://framerusercontent.com/images/MY9zf9fej694kxUj6NKwKCHc20.png",
+      "basis": "Visually inspected image already used in the published portfolio; project identity retained from existing data. New prose describes visible composition only. No role or studio credit added."
+    },
+    {
+      "slug": "saint-bodhi",
+      "source_url": "https://vimeo.com/599779288",
+      "metadata_url": "https://vimeo.com/api/v2/video/599779288.json",
+      "verified_title": "Saint Bodhi - Mad World - Songs/Planets",
+      "author": "Lucas Casagrande",
+      "credits": "",
+      "basis": "Public Vimeo metadata and visually inspected public poster. Descriptive prose is editorial observation; no additional production credits inferred."
+    },
+    {
+      "slug": "f1-2019",
+      "source_url": "https://framerusercontent.com/images/o3QjqqvnYVLReardrSjUvdwYcw.jpg",
+      "basis": "Visually inspected image already used in the published portfolio; project identity retained from existing data. New prose describes visible composition only. No role or studio credit added."
+    },
+    {
+      "slug": "portsaid",
+      "source_url": "https://vimeo.com/913015151",
+      "metadata_url": "https://vimeo.com/api/v2/video/913015151.json",
+      "verified_title": "PORTSAID - LOGO ID",
+      "author": "Lucas Casagrande",
+      "credits": "",
+      "basis": "Public author profile, exact Vimeo title and visually inspected public poster. New prose is editorial description of observed imagery; no additional production credits or project dates inferred."
+    },
+    {
+      "slug": "inegi",
+      "source_url": "https://vimeo.com/798885470",
+      "metadata_url": "https://vimeo.com/api/v2/video/798885470.json",
+      "verified_title": "INEGI - Peppermelon - Spot 01",
+      "author": "Lucas Casagrande",
+      "credits": "",
+      "basis": "Public author profile, exact Vimeo title and visually inspected public poster. New prose is editorial description of observed imagery; no additional production credits or project dates inferred."
+    },
+    {
+      "slug": "sofasummit",
+      "source_url": "https://vimeo.com/729863076",
+      "metadata_url": "https://vimeo.com/api/v2/video/729863076.json",
+      "verified_title": "SOFASUMMIT - Loop Animation",
+      "author": "Lucas Casagrande",
+      "credits": "",
+      "basis": "Public author profile, exact Vimeo title and visually inspected public poster. New prose is editorial description of observed imagery; no additional production credits or project dates inferred."
+    },
+    {
+      "slug": "jump-saudi",
+      "source_url": "https://vimeo.com/729856502",
+      "metadata_url": "https://vimeo.com/api/v2/video/729856502.json",
+      "verified_title": "Jump Saudi - Intro",
+      "author": "Lucas Casagrande",
+      "credits": "",
+      "basis": "Public author profile, exact Vimeo title and visually inspected public poster. New prose is editorial description of observed imagery; no additional production credits or project dates inferred."
+    },
+    {
+      "slug": "unicards-animatic",
+      "source_url": "https://vimeo.com/729868269",
+      "metadata_url": "https://vimeo.com/api/v2/video/729868269.json",
+      "verified_title": "UniCards-Animatic.mp4",
+      "author": "Lucas Casagrande",
+      "credits": "",
+      "basis": "Public author profile, exact Vimeo title and visually inspected public poster. New prose is editorial description of observed imagery; no additional production credits or project dates inferred."
+    },
+    {
+      "slug": "rubber",
+      "source_url": "https://vimeo.com/831222839",
+      "metadata_url": "https://vimeo.com/api/v2/video/831222839.json",
+      "verified_title": "RUBBER",
+      "author": "Lucas Casagrande",
+      "credits": "",
+      "basis": "Public author profile, exact Vimeo title and visually inspected public poster. New prose is editorial description of observed imagery; no additional production credits or project dates inferred."
+    },
+    {
+      "slug": "supermarket",
+      "source_url": "https://vimeo.com/831219127",
+      "metadata_url": "https://vimeo.com/api/v2/video/831219127.json",
+      "verified_title": "SUPERMARKET",
+      "author": "Lucas Casagrande",
+      "credits": "",
+      "basis": "Public author profile, exact Vimeo title and visually inspected public poster. New prose is editorial description of observed imagery; no additional production credits or project dates inferred."
+    },
+    {
+      "slug": "toyota-tvc",
+      "source_url": "https://vimeo.com/833759639",
+      "metadata_url": "https://vimeo.com/api/v2/video/833759639.json",
+      "verified_title": "TOYOTA Horizontal final TVC",
+      "author": "Lucas Casagrande",
+      "credits": "",
+      "basis": "Public author profile, exact Vimeo title and visually inspected public poster. New prose is editorial description of observed imagery; no additional production credits or project dates inferred."
+    },
+    {
+      "slug": "stc-invest",
+      "status": "retained_archive_not_in_30_selection",
+      "source_url": "/assets/projects/stc-invest.webp"
+    },
+    {
+      "slug": "crystal-light",
+      "status": "retained_archive_not_in_30_selection",
+      "source_url": "/assets/projects/crystal-light.webp"
+    },
+    {
+      "slug": "stc-card",
+      "status": "retained_archive_not_in_30_selection",
+      "source_url": "/assets/projects/stc-card.webp"
+    },
+    {
+      "slug": "f1-2019",
+      "status": "retained_archive_not_in_30_selection",
+      "source_url": "/assets/projects/f1-2019.webp"
+    },
+    {
+      "slug": "ojs-glove",
+      "source_url": "https://vimeo.com/599807189",
+      "metadata_url": "https://vimeo.com/api/v2/video/599807189.json",
+      "verified_title": "TRANSITION - OJS GLOVE",
+      "author": "Lucas Casagrande",
+      "basis": "Exact title in public author profile and public poster. No credits inferred."
+    },
+    {
+      "slug": "viva-carriage",
+      "source_url": "https://vimeo.com/490257038",
+      "metadata_url": "https://vimeo.com/api/v2/video/490257038.json",
+      "verified_title": "VIVA CARRIAGE",
+      "author": "Lucas Casagrande",
+      "basis": "Exact title in public author profile and public poster. No credits inferred."
+    }
+  ]
+}
