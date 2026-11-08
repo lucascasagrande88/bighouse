@@ -3,6 +3,14 @@
   publish = "."
 
 [[redirects]]
+  from = "/work/jump-saudi/*"
+  to = "/work/mtv-bull-on-drugs/"
+  status = 301
+[[redirects]]
+  from = "/work/unicards-animatic/*"
+  to = "/work/continuous-reflection/"
+  status = 301
+[[redirects]]
   from = "/work/stc-invest/*"
   to = "/work/"
   status = 301

@@ -10,5 +10,17 @@ if(modal){modal.querySelector('.lightbox-close').addEventListener('click',close)
 document.querySelectorAll('[data-vimeo]').forEach(b=>b.addEventListener('click',()=>{const id=b.dataset.vimeo;if(!/^\d+$/.test(id))return;const f=document.createElement('iframe');f.src='https://player.vimeo.com/video/'+id+'?autoplay=1&title=0&byline=0&portrait=0&dnt=1';f.title=b.dataset.title||'Video de proyecto';f.allow='autoplay; fullscreen; picture-in-picture';f.allowFullscreen=true;b.replaceWith(f);f.focus()}));
 document.querySelectorAll('[data-local-video]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('video').forEach(v=>v.pause());const v=document.createElement('video');v.src=b.dataset.localVideo;v.poster=b.querySelector('img')?.src||'';v.controls=true;v.playsInline=true;v.preload='metadata';v.setAttribute('aria-label',b.dataset.title||'Video de proyecto');b.replaceWith(v);v.play().catch(()=>{});v.focus()}));
 document.querySelectorAll('[data-year]').forEach(e=>e.textContent=new Date().getFullYear());
-document.querySelectorAll('[data-filter-for]').forEach(bar=>{const grid=document.getElementById(bar.dataset.filterFor);if(!grid)return;bar.querySelectorAll('[data-filter]').forEach(button=>button.addEventListener('click',()=>{bar.querySelectorAll('button').forEach(b=>{b.classList.toggle('active',b===button);b.setAttribute('aria-pressed',String(b===button))});let count=0;[...grid.children].forEach(item=>{item.hidden=button.dataset.filter!=='all'&&item.dataset.category!==button.dataset.filter;if(!item.hidden)count++});const counter=bar.nextElementSibling;if(counter?.classList.contains('selection-count')){counter.textContent=count+' '+(grid.id==='art-grid'?'imágenes':'proyectos')+' / '+(button.dataset.filter==='all'?'Selección completa':button.dataset.filter);counter.setAttribute('aria-live','polite')}}))});
+document.querySelectorAll('[data-filter-for]').forEach(bar=>{
+ const grid=document.getElementById(bar.dataset.filterFor);if(!grid)return;let run=0;
+ bar.querySelectorAll('[data-filter]').forEach(button=>button.addEventListener('click',async()=>{
+  const current=++run,reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  bar.querySelectorAll('button').forEach(b=>{b.classList.toggle('active',b===button);b.setAttribute('aria-pressed',String(b===button))});
+  const items=[...grid.children],matches=item=>button.dataset.filter==='all'||item.dataset.category===button.dataset.filter;
+  items.forEach(item=>item.getAnimations().forEach(a=>a.cancel()));
+  if(!reduce)await Promise.all(items.filter(item=>!item.hidden&&!matches(item)).map(item=>item.animate([{opacity:1,transform:'translateY(0)'},{opacity:0,transform:'translateY(-12px)'}],{duration:180,easing:'cubic-bezier(.76,0,.24,1)'}).finished.catch(()=>{})));
+  if(current!==run)return;
+  let count=0;items.forEach(item=>{item.hidden=!matches(item);if(!item.hidden){count++;item.classList.add('is-visible');if(!reduce)item.animate([{opacity:0,transform:'translateY(24px)'},{opacity:1,transform:'translateY(0)'}],{duration:650,delay:Math.min(count-1,5)*35,easing:'cubic-bezier(.16,1,.3,1)',fill:'backwards'})}});
+  const counter=bar.nextElementSibling;if(counter?.classList.contains('selection-count')){counter.textContent=count+' '+(grid.id==='art-grid'?'imágenes':'proyectos')+' / '+(button.dataset.filter==='all'?'Selección completa':button.dataset.filter);counter.setAttribute('aria-live','polite')}
+ }));
+});
 })();
