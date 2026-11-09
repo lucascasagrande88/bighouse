@@ -1,12 +1,18 @@
 {
-  "name": "Lucas Casagrande — Creative Director & Motion Designer",
+  "name": "Lucas Casagrande — Dirección de arte y motion",
   "short_name": "Lucas Casagrande",
-  "description": "Art Director & Motion Designer — CGI, 3D animation and AI-driven storytelling for global brands.",
+  "description": "Dirección de arte, motion y 3D. Trabajo comercial, obra personal y visuales desde Buenos Aires para proyectos internacionales.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#080808",
   "theme_color": "#080808",
   "icons": [
-    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
-  ]
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "lang": "es-AR"
 }

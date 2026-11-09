@@ -31,6 +31,39 @@
   to = "/work/claro-reel/"
   status = 301
 
+[[redirects]]
+  from = "/en/work/jump-saudi/*"
+  to = "/en/work/mtv-bull-on-drugs/"
+  status = 301
+[[redirects]]
+  from = "/en/work/unicards-animatic/*"
+  to = "/en/work/continuous-reflection/"
+  status = 301
+[[redirects]]
+  from = "/en/work/stc-invest/*"
+  to = "/en/work/"
+  status = 301
+[[redirects]]
+  from = "/en/work/crystal-light/*"
+  to = "/en/work/"
+  status = 301
+[[redirects]]
+  from = "/en/work/stc-card/*"
+  to = "/en/work/"
+  status = 301
+[[redirects]]
+  from = "/en/work/f1-2019/*"
+  to = "/en/work/"
+  status = 301
+[[redirects]]
+  from = "/en/work/viva-carriage/*"
+  to = "/en/work/claro-reel/"
+  status = 301
+[[redirects]]
+  from = "/en/*"
+  to = "/en/404.html"
+  status = 404
+
 # Pretty 404 for any unknown path
 [[redirects]]
   from = "/*"
@@ -62,3 +95,83 @@
   for = "/*.html"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
+
+# Bilingual response metadata and PDF language alternates
+
+[[headers]]
+  for = "/"
+  [headers.values]
+    Content-Language = "es-AR"
+
+[[headers]]
+  for = "/en/*"
+  [headers.values]
+    Content-Language = "en"
+
+[[headers]]
+  for = "/assets/press/Lucas_Casagrande_Press_Kit_2026_Horizontal.pdf"
+  [headers.values]
+    Content-Language = "es-AR"
+    Link = "<https://lucascasagrande.com/assets/press/Lucas_Casagrande_Press_Kit_2026_Horizontal.pdf>; rel=\"canonical\", <https://lucascasagrande.com/assets/press/Lucas_Casagrande_Press_Kit_2026_Horizontal.pdf>; rel=\"alternate\"; hreflang=\"es-AR\", <https://lucascasagrande.com/assets/press/Lucas_Casagrande_Press_Kit_2026_Horizontal_EN.pdf>; rel=\"alternate\"; hreflang=\"en\", <https://lucascasagrande.com/assets/press/Lucas_Casagrande_Press_Kit_2026_Horizontal.pdf>; rel=\"alternate\"; hreflang=\"x-default\""
+
+[[headers]]
+  for = "/assets/press/Lucas_Casagrande_Press_Kit_2026_Horizontal_EN.pdf"
+  [headers.values]
+    Content-Language = "en"
+    Link = "<https://lucascasagrande.com/assets/press/Lucas_Casagrande_Press_Kit_2026_Horizontal_EN.pdf>; rel=\"canonical\", <https://lucascasagrande.com/assets/press/Lucas_Casagrande_Press_Kit_2026_Horizontal.pdf>; rel=\"alternate\"; hreflang=\"es-AR\", <https://lucascasagrande.com/assets/press/Lucas_Casagrande_Press_Kit_2026_Horizontal_EN.pdf>; rel=\"alternate\"; hreflang=\"en\", <https://lucascasagrande.com/assets/press/Lucas_Casagrande_Press_Kit_2026_Horizontal.pdf>; rel=\"alternate\"; hreflang=\"x-default\""
+
+[[headers]]
+  for = "/assets/press/Lucas_Casagrande_Press_Kit_2026_Vertical.pdf"
+  [headers.values]
+    Content-Language = "es-AR"
+    Link = "<https://lucascasagrande.com/assets/press/Lucas_Casagrande_Press_Kit_2026_Vertical.pdf>; rel=\"canonical\", <https://lucascasagrande.com/assets/press/Lucas_Casagrande_Press_Kit_2026_Vertical.pdf>; rel=\"alternate\"; hreflang=\"es-AR\", <https://lucascasagrande.com/assets/press/Lucas_Casagrande_Press_Kit_2026_Vertical_EN.pdf>; rel=\"alternate\"; hreflang=\"en\", <https://lucascasagrande.com/assets/press/Lucas_Casagrande_Press_Kit_2026_Vertical.pdf>; rel=\"alternate\"; hreflang=\"x-default\""
+
+[[headers]]
+  for = "/assets/press/Lucas_Casagrande_Press_Kit_2026_Vertical_EN.pdf"
+  [headers.values]
+    Content-Language = "en"
+    Link = "<https://lucascasagrande.com/assets/press/Lucas_Casagrande_Press_Kit_2026_Vertical_EN.pdf>; rel=\"canonical\", <https://lucascasagrande.com/assets/press/Lucas_Casagrande_Press_Kit_2026_Vertical.pdf>; rel=\"alternate\"; hreflang=\"es-AR\", <https://lucascasagrande.com/assets/press/Lucas_Casagrande_Press_Kit_2026_Vertical_EN.pdf>; rel=\"alternate\"; hreflang=\"en\", <https://lucascasagrande.com/assets/press/Lucas_Casagrande_Press_Kit_2026_Vertical.pdf>; rel=\"alternate\"; hreflang=\"x-default\""
+
+[[headers]]
+  for = "/assets/press/Lucas_Casagrande_Artworks_2026_Horizontal.pdf"
+  [headers.values]
+    Content-Language = "es-AR"
+    Link = "<https://lucascasagrande.com/assets/press/Lucas_Casagrande_Artworks_2026_Horizontal.pdf>; rel=\"canonical\", <https://lucascasagrande.com/assets/press/Lucas_Casagrande_Artworks_2026_Horizontal.pdf>; rel=\"alternate\"; hreflang=\"es-AR\", <https://lucascasagrande.com/assets/press/Lucas_Casagrande_Artworks_2026_Horizontal_EN.pdf>; rel=\"alternate\"; hreflang=\"en\", <https://lucascasagrande.com/assets/press/Lucas_Casagrande_Artworks_2026_Horizontal.pdf>; rel=\"alternate\"; hreflang=\"x-default\""
+
+[[headers]]
+  for = "/assets/press/Lucas_Casagrande_Artworks_2026_Horizontal_EN.pdf"
+  [headers.values]
+    Content-Language = "en"
+    Link = "<https://lucascasagrande.com/assets/press/Lucas_Casagrande_Artworks_2026_Horizontal_EN.pdf>; rel=\"canonical\", <https://lucascasagrande.com/assets/press/Lucas_Casagrande_Artworks_2026_Horizontal.pdf>; rel=\"alternate\"; hreflang=\"es-AR\", <https://lucascasagrande.com/assets/press/Lucas_Casagrande_Artworks_2026_Horizontal_EN.pdf>; rel=\"alternate\"; hreflang=\"en\", <https://lucascasagrande.com/assets/press/Lucas_Casagrande_Artworks_2026_Horizontal.pdf>; rel=\"alternate\"; hreflang=\"x-default\""
+
+[[headers]]
+  for = "/assets/press/Lucas_Casagrande_Artworks_2026_Vertical.pdf"
+  [headers.values]
+    Content-Language = "es-AR"
+    Link = "<https://lucascasagrande.com/assets/press/Lucas_Casagrande_Artworks_2026_Vertical.pdf>; rel=\"canonical\", <https://lucascasagrande.com/assets/press/Lucas_Casagrande_Artworks_2026_Vertical.pdf>; rel=\"alternate\"; hreflang=\"es-AR\", <https://lucascasagrande.com/assets/press/Lucas_Casagrande_Artworks_2026_Vertical_EN.pdf>; rel=\"alternate\"; hreflang=\"en\", <https://lucascasagrande.com/assets/press/Lucas_Casagrande_Artworks_2026_Vertical.pdf>; rel=\"alternate\"; hreflang=\"x-default\""
+
+[[headers]]
+  for = "/assets/press/Lucas_Casagrande_Artworks_2026_Vertical_EN.pdf"
+  [headers.values]
+    Content-Language = "en"
+    Link = "<https://lucascasagrande.com/assets/press/Lucas_Casagrande_Artworks_2026_Vertical_EN.pdf>; rel=\"canonical\", <https://lucascasagrande.com/assets/press/Lucas_Casagrande_Artworks_2026_Vertical.pdf>; rel=\"alternate\"; hreflang=\"es-AR\", <https://lucascasagrande.com/assets/press/Lucas_Casagrande_Artworks_2026_Vertical_EN.pdf>; rel=\"alternate\"; hreflang=\"en\", <https://lucascasagrande.com/assets/press/Lucas_Casagrande_Artworks_2026_Vertical.pdf>; rel=\"alternate\"; hreflang=\"x-default\""
+
+[[headers]]
+  for = "/scripts/*"
+  [headers.values]
+    X-Robots-Tag = "noindex"
+
+[[headers]]
+  for = "/data/*"
+  [headers.values]
+    X-Robots-Tag = "noindex"
+
+[[headers]]
+  for = "/netlify.toml"
+  [headers.values]
+    X-Robots-Tag = "noindex"
+
+[[headers]]
+  for = "/assets/artworks/README.md"
+  [headers.values]
+    X-Robots-Tag = "noindex"

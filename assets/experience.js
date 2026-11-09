@@ -1,7 +1,8 @@
 (()=>{'use strict';
+const t=(key,fallback)=>window.LC_I18N?.[key]||fallback;
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');
 const ease='cubic-bezier(.16,1,.3,1)';
-document.addEventListener('keydown',event=>{if(event.key!=='Escape')return;const menu=document.querySelector('.nav-toggle'),nav=document.querySelector('.nav-links');if(menu&&nav?.classList.contains('open')){nav.classList.remove('open');menu.setAttribute('aria-expanded','false');menu.textContent='Menú +';menu.focus()}});
+document.addEventListener('keydown',event=>{if(event.key!=='Escape')return;const menu=document.querySelector('.nav-toggle'),nav=document.querySelector('.nav-links');if(menu&&nav?.classList.contains('open')){nav.classList.remove('open');menu.setAttribute('aria-expanded','false');menu.textContent=t('menu','Menú +');menu.focus()}});
 
 // Only below-the-fold content is initially hidden. Reading and keyboard access
 // continue to work if motion is unavailable or JavaScript runs late.
@@ -50,7 +51,7 @@ if(slider){
   function updateVideo(){
     slides.forEach((s,i)=>{const v=s.querySelector('video');if(!v)return;if(i!==index||stopped()){v.pause();return}if(navigator.connection?.saveData)return;if(!v.src)v.src=v.dataset.src;v.play().then(()=>v.classList.add('is-playing')).catch(()=>v.classList.remove('is-playing'))});
   }
-  function controls(){pause.textContent=userPaused?'▶':'Ⅱ';pause.setAttribute('aria-label',userPaused?'Reanudar presentación':'Pausar presentación');pause.setAttribute('aria-pressed',String(userPaused))}
+  function controls(){pause.textContent=userPaused?'▶':'Ⅱ';pause.setAttribute('aria-label',userPaused?t('resume','Reanudar presentación'):t('pause','Pausar presentación'));pause.setAttribute('aria-pressed',String(userPaused))}
   function go(next,manual=false){
     const previous=index;index=(next+slides.length)%slides.length;elapsed=0;last=0;
     slides.forEach((s,i)=>{const active=i===index;s.classList.toggle('is-active',active);s.inert=!active;s.setAttribute('aria-hidden',String(!active))});
@@ -85,14 +86,14 @@ document.querySelectorAll('.contact-form').forEach(form=>{
   const button=form.querySelector('[type=submit]'),label=button.querySelector('span'),status=form.querySelector('.form-status');
   form.addEventListener('submit',async event=>{
     event.preventDefault();if(!form.reportValidity()||button.disabled)return;
-    button.disabled=true;form.setAttribute('aria-busy','true');label.textContent='Enviando…';status.textContent='';status.classList.remove('is-error');
+    button.disabled=true;form.setAttribute('aria-busy','true');label.textContent=t('sending','Enviando…');status.textContent='';status.classList.remove('is-error');
     try{
       const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),20000);
       let response;
       try{response=await fetch('/contacto/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(form)).toString(),signal:controller.signal})}finally{clearTimeout(timeout)}
       if(!response.ok)throw new Error('Request not accepted');
-      form.reset();status.textContent='Tu consulta ya quedó recibida. Gracias por escribir, seguimos por mail.';label.textContent='Idea recibida ✓';
-    }catch(error){status.textContent='No pudimos recibir la consulta. Probá de nuevo o escribime por WhatsApp o mail; tu texto sigue acá.';status.classList.add('is-error');label.textContent='Volver a enviar'}
+      form.reset();status.textContent=t('sent','Tu consulta ya quedó recibida. Gracias por escribir, seguimos por mail.');label.textContent=t('received','Idea recibida ✓');
+    }catch(error){status.textContent=t('error','No pudimos recibir la consulta. Probá de nuevo o escribime por WhatsApp o mail; tu texto sigue acá.');status.classList.add('is-error');label.textContent=t('retry','Volver a enviar')}
     finally{button.disabled=false;form.removeAttribute('aria-busy')}
   });
 });

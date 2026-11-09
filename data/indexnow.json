@@ -1,0 +1,10 @@
+{
+  "host": "lucascasagrande.com",
+  "key": "bdf844d7d29b4d43918b54d2970832b9",
+  "keyLocation": "https://lucascasagrande.com/bdf844d7d29b4d43918b54d2970832b9.txt",
+  "endpoint": "https://api.indexnow.org/indexnow",
+  "sitemap": "/sitemap.xml",
+  "expected_url_count": 70,
+  "protocol_documentation": "https://www.indexnow.org/documentation",
+  "purpose": "Public IndexNow ownership verification; not a private account credential."
+}
