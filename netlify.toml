@@ -2,6 +2,19 @@
 [build]
   publish = "."
 
+# Consolidate the historical public Netlify host on the canonical custom domain.
+# Deploy permalinks and previews use a different host and remain inspectable.
+[[redirects]]
+  from = "https://lucascasagrande.netlify.app/*"
+  to = "https://lucascasagrande.com/:splat"
+  status = 301
+  force = true
+[[redirects]]
+  from = "http://lucascasagrande.netlify.app/*"
+  to = "https://lucascasagrande.com/:splat"
+  status = 301
+  force = true
+
 [[redirects]]
   from = "/work/jump-saudi/*"
   to = "/work/mtv-bull-on-drugs/"

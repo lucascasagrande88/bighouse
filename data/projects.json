@@ -9,7 +9,7 @@
       "Motion",
       "3D"
     ],
-    "img": "/assets/projects/vimeo-957330193.webp",
+    "img": "/assets/projects/hd/reel-2026.webp",
     "vid": "957330193",
     "body": "Una colección de fragmentos del trabajo de Lucas Casagrande en concepto, diseño, animación y dirección. Piezas para marcas, personajes, producto e identidades audiovisuales se encuentran en un montaje que recorre distintos lenguajes del motion y el 3D.",
     "url": "/work/reel-2026/",
@@ -64,7 +64,7 @@
       "Opening",
       "3D"
     ],
-    "img": "/assets/projects/vimeo-919432223.webp",
+    "img": "/assets/projects/hd/pandora.webp",
     "body": "Pandora in Rio reúne distintas escalas de una misma experiencia visual. Los charms irrumpen en locaciones reconocibles de Río de Janeiro; las piezas de identidad exploran luz, materia y movimiento; y un opening 3D presenta el universo del evento. El caso se completa con una selección de styleframes del desarrollo visual.",
     "url": "/work/pandora/",
     "vimeo": "https://vimeo.com/919432223",
@@ -209,7 +209,7 @@
       "Producto",
       "3D"
     ],
-    "img": "/assets/projects/vimeo-1095640044.webp",
+    "img": "/assets/projects/hd/noorus-fill.webp",
     "body": "Una pieza CGI para FILL+ que combina cápsulas, partículas, representación anatómica y estructuras de apariencia molecular. La paleta clara y los acentos verdes conectan la identidad de producto con una secuencia de comunicación visual sobre el cuerpo.",
     "url": "/work/noorus-fill/",
     "vimeo": "https://vimeo.com/1095640044",
@@ -265,7 +265,7 @@
       "3D",
       "Producto"
     ],
-    "img": "/assets/projects/vimeo-960506224.webp",
+    "img": "/assets/projects/hd/lamicell-v22.webp",
     "body": "Dirección de una película de motion graphics para los protectores ecuestres Lamicell V22, desarrollada con equipo desde el conceptboard hasta el render final y el diseño sonoro. El CGI acerca la mirada al producto mediante detalles de superficie, cambios de escala y visualizaciones de su estructura. La producción se realizó en Cinema 4D y Redshift.",
     "url": "/work/lamicell-v22/",
     "vimeo": "https://vimeo.com/960506224",
@@ -332,7 +332,7 @@
       "3D",
       "Naturaleza"
     ],
-    "img": "/assets/projects/vimeo-436103360.webp",
+    "img": "/assets/projects/hd/continuous-reflection.webp",
     "vid": "436103360",
     "body": "Dos films de diez segundos creados bajo el concepto «Vuelta a la naturaleza» para la exposición virtual de ecoarte Continuous Refle(a)ction 2.0, de Morcreate Beijing. Factory transforma una fábrica suspendida entre nubes en una estructura de energía eólica y vegetación. Flowers encuentra otra escala del mismo cambio: las flores avanzan sobre el suelo y abren la imagen hacia un paisaje urbano.",
     "focus": "Contar una transformación en diez segundos. La industria y la ciudad cambian a través del color, el crecimiento y el movimiento de cámara.",
@@ -446,7 +446,7 @@
       "Automotriz",
       "CGI"
     ],
-    "img": "/assets/projects/vimeo-930788376.webp",
+    "img": "/assets/projects/hd/toyota.webp",
     "body": "Una pieza para el lanzamiento del Toyota GR Corolla en Puerto Rico, concebida para una pantalla anamórfica. La perspectiva y la puesta en escena trabajan desde un punto de observación definido para proyectar la presencia del vehículo hacia el espacio exterior.",
     "url": "/work/toyota/",
     "vimeo": "https://vimeo.com/930788376",
@@ -501,7 +501,7 @@
       "Personajes",
       "3D"
     ],
-    "img": "/assets/projects/vimeo-189238929.webp",
+    "img": "/assets/projects/hd/mtv-bull-on-drugs.webp",
     "vid": "189238929",
     "body": "Un ident para MTV diseñado y animado por Lucas Casagrande para Bluna. El toro y el torero aparecen primero en una composición de pocas formas y fondo plano. El gesto de la capa abre un mundo de personajes flotantes, repetición y color saturado que termina por ocupar la pantalla alrededor de la marca.",
     "focus": "Usar el contraste como motor del relato: una escena contenida se convierte en un universo psicodélico en apenas diez segundos.",
@@ -568,7 +568,7 @@
       "Motion",
       "Identidad"
     ],
-    "img": "/assets/projects/vimeo-770796912.webp",
+    "img": "/assets/projects/hd/snapdragon-pro.webp",
     "body": "Una introducción audiovisual de doce segundos para Snapdragon Pro Series, realizada para Superunion UK. La pieza abre el universo de una competición internacional de esports móviles, con materia, geometría y energía como elementos de identidad.",
     "url": "/work/snapdragon-pro/",
     "vimeo": "https://vimeo.com/770796912",
@@ -631,7 +631,7 @@
       "Identity",
       "Motion"
     ],
-    "img": "/assets/projects/vimeo-385192789.webp",
+    "img": "/assets/projects/hd/cctv9.webp",
     "body": "Un sistema de identidad para CCTV9, canal documental de China. El proyecto publicado reúne logo, lower thirds, menú y piezas de continuidad como Next y Now, junto con exploraciones de un cubo. Desarrollado en JL Design, Shanghai, con Lucas como Head of Motion Design y trabajo junto al equipo.",
     "url": "/work/cctv9/",
     "vimeo": "https://vimeo.com/385192789",
@@ -680,6 +680,71 @@
             "description": "CCTV9 / Selección de imagen del film"
           }
         ]
+      },
+      {
+        "id": "sistema-broadcast",
+        "kind": "broadcast-design",
+        "source_url": "https://www.behance.net/gallery/163870407/CCTV9",
+        "nav": "Sistema gráfico",
+        "label": "CCTV9 / Originales de identidad",
+        "title": "Una marca, en cada pantalla.",
+        "description": "Logo, lower third, menú y continuidad Next / Now, junto con una exploración animada del cubo. Son los originales del caso publicado por Lucas: un sistema desarrollado en JL Design Shanghai junto al equipo.",
+        "images": [
+          {
+            "image": "/assets/process/cctv9/924235255.webp",
+            "title": "Logo / geometría de marca",
+            "description": "Logo / geometría de marca / Original publicado en Behance",
+            "width": 1280,
+            "height": 720,
+            "source_url": "https://www.behance.net/gallery/163870407/CCTV9/modules/924235255",
+            "source_module_id": 924235255
+          },
+          {
+            "image": "/assets/process/cctv9/924235253.webp",
+            "title": "Lower third / información en pantalla",
+            "description": "Lower third / información en pantalla / Original publicado en Behance",
+            "width": 1280,
+            "height": 720,
+            "source_url": "https://www.behance.net/gallery/163870407/CCTV9/modules/924235253",
+            "source_module_id": 924235253
+          },
+          {
+            "image": "/assets/process/cctv9/924235251.webp",
+            "title": "Menú / programación",
+            "description": "Menú / programación / Original publicado en Behance",
+            "width": 1280,
+            "height": 720,
+            "source_url": "https://www.behance.net/gallery/163870407/CCTV9/modules/924235251",
+            "source_module_id": 924235251
+          },
+          {
+            "image": "/assets/process/cctv9/924235261.webp",
+            "title": "Next / continuidad",
+            "description": "Next / continuidad / Original publicado en Behance",
+            "width": 1280,
+            "height": 720,
+            "source_url": "https://www.behance.net/gallery/163870407/CCTV9/modules/924235261",
+            "source_module_id": 924235261
+          },
+          {
+            "image": "/assets/process/cctv9/924235257.webp",
+            "title": "Now / continuidad",
+            "description": "Now / continuidad / Original publicado en Behance",
+            "width": 1280,
+            "height": 720,
+            "source_url": "https://www.behance.net/gallery/163870407/CCTV9/modules/924235257",
+            "source_module_id": 924235257
+          },
+          {
+            "image": "/assets/process/cctv9/924235259.webp",
+            "title": "Cubo / exploración animada",
+            "description": "Cubo / exploración animada / Original publicado en Behance",
+            "width": 960,
+            "height": 540,
+            "source_url": "https://www.behance.net/gallery/163870407/CCTV9/modules/924235259",
+            "source_module_id": 924235259
+          }
+        ]
       }
     ]
   },
@@ -693,7 +758,7 @@
       "3D",
       "Animatic"
     ],
-    "img": "/assets/projects/vimeo-831680968.webp",
+    "img": "/assets/projects/hd/youtopia-vitacura.webp",
     "body": "Un animatic para Youtopia Vitacura que plantea el recorrido de la cámara y el ritmo con el que se descubre un espacio de wellness. El corte del director organiza arquitectura, ambientes y continuidad antes de la terminación de la pieza.",
     "url": "/work/youtopia-vitacura/",
     "vimeo": "https://vimeo.com/831680968",
@@ -754,7 +819,7 @@
       "Motion",
       "Telecom"
     ],
-    "img": "/assets/projects/vimeo-318691860.webp",
+    "img": "/assets/projects/hd/viva-one.webp",
     "body": "Una animación para Ogilvy y su cliente VIVA que explica las funcionalidades de un plan de telefonía para empresas. Lucas desarrolló la pieza desde el storyboard hasta la animación final, construyendo un sistema de objetos, órbitas y transiciones para ordenar la información.",
     "url": "/work/viva-one/",
     "vimeo": "https://vimeo.com/318691860",
@@ -817,7 +882,7 @@
       "CGI",
       "Composición"
     ],
-    "img": "/assets/projects/vimeo-729842986.webp",
+    "img": "/assets/projects/hd/claro-cgi.webp",
     "body": "Un plano de personaje CGI para Claro, publicado con el nombre Orc. El fragmento concentra la atención en la presencia del personaje, la textura y el trabajo de iluminación de la escena.",
     "url": "/work/claro-cgi/",
     "vimeo": "https://vimeo.com/729842986",
@@ -867,7 +932,7 @@
       "TVC",
       "VFX"
     ],
-    "img": "/assets/projects/vimeo-436009842.webp",
+    "img": "/assets/projects/hd/gillette-j20.webp",
     "body": "Dirección de arte y dirección de animación para un TVC de Gillette J20 junto al equipo de MPC Shanghai. La pieza desarrolla un universo de precisión técnica, superficies mecánicas y movimiento de producto; el caso del autor también reúne styleframes del proceso.",
     "url": "/work/gillette-j20/",
     "vimeo": "https://vimeo.com/436009842",
@@ -918,6 +983,71 @@
             "description": "GILLETTE J20 / MPC SHANGHAI / Frame del film: Frame 03"
           }
         ]
+      },
+      {
+        "id": "styleframes-behance",
+        "kind": "styleframes",
+        "source_url": "https://www.behance.net/gallery/100231211/Gillette-J20-MPC-Shanghai",
+        "nav": "Styleframes",
+        "label": "Gillette J20 / Styleframes originales",
+        "title": "La máquina, desde adentro.",
+        "description": "Los styleframes publicados en el caso de Lucas Casagrande con MPC Shanghai relacionan turbinas, hojas, tramas gráficas y producto. Luz azul, metal y detalles técnicos construyen un mismo lenguaje de precisión.",
+        "images": [
+          {
+            "image": "/assets/process/gillette-j20/578231585.webp",
+            "title": "Turbina / luz y energía",
+            "description": "Turbina / luz y energía / Original publicado en Behance",
+            "width": 1280,
+            "height": 720,
+            "source_url": "https://www.behance.net/gallery/100231211/Gillette-J20-MPC-Shanghai/modules/578231585",
+            "source_module_id": 578231585
+          },
+          {
+            "image": "/assets/process/gillette-j20/578231589.webp",
+            "title": "Hojas / escala y superficie",
+            "description": "Hojas / escala y superficie / Original publicado en Behance",
+            "width": 1280,
+            "height": 720,
+            "source_url": "https://www.behance.net/gallery/100231211/Gillette-J20-MPC-Shanghai/modules/578231589",
+            "source_module_id": 578231589
+          },
+          {
+            "image": "/assets/process/gillette-j20/578231583.webp",
+            "title": "Producto / trama y luz azul",
+            "description": "Producto / trama y luz azul / Original publicado en Behance",
+            "width": 1280,
+            "height": 720,
+            "source_url": "https://www.behance.net/gallery/100231211/Gillette-J20-MPC-Shanghai/modules/578231583",
+            "source_module_id": 578231583
+          },
+          {
+            "image": "/assets/process/gillette-j20/578231591.webp",
+            "title": "Mecánica / detalle de las hojas",
+            "description": "Mecánica / detalle de las hojas / Original publicado en Behance",
+            "width": 1280,
+            "height": 720,
+            "source_url": "https://www.behance.net/gallery/100231211/Gillette-J20-MPC-Shanghai/modules/578231591",
+            "source_module_id": 578231591
+          },
+          {
+            "image": "/assets/process/gillette-j20/578231587.webp",
+            "title": "Jet / geometría gráfica",
+            "description": "Jet / geometría gráfica / Original publicado en Behance",
+            "width": 1280,
+            "height": 720,
+            "source_url": "https://www.behance.net/gallery/100231211/Gillette-J20-MPC-Shanghai/modules/578231587",
+            "source_module_id": 578231587
+          },
+          {
+            "image": "/assets/process/gillette-j20/578231581.webp",
+            "title": "Producto / presentación final",
+            "description": "Producto / presentación final / Original publicado en Behance",
+            "width": 1280,
+            "height": 720,
+            "source_url": "https://www.behance.net/gallery/100231211/Gillette-J20-MPC-Shanghai/modules/578231581",
+            "source_module_id": 578231581
+          }
+        ]
       }
     ]
   },
@@ -931,7 +1061,7 @@
       "3D",
       "Brand"
     ],
-    "img": "/assets/projects/vimeo-676071521.webp",
+    "img": "/assets/projects/hd/lamicell.webp",
     "body": "Una película CGI para EnviroGreen de Lamicell que conecta el producto ecuestre con un imaginario de naturaleza y fibras. El caso se presenta bajo el concepto The Future is Green y reúne trama, materia y movimiento para construir la imagen de la línea.",
     "url": "/work/lamicell/",
     "vimeo": "https://vimeo.com/676071521",
@@ -980,6 +1110,26 @@
             "description": "LAMICELL / ENVIROGREEN / Desarrollo visual: Bottles"
           }
         ]
+      },
+      {
+        "id": "storyboard-original",
+        "kind": "storyboard",
+        "source_url": "https://www.behance.net/gallery/163855207/LAMICELL",
+        "nav": "Storyboard",
+        "label": "Lamicell / The Future is Green / Storyboard",
+        "title": "El relato, plano a plano.",
+        "description": "Storyboard original publicado por Lucas en el caso The Future is Green. La lámina conecta bambú, reciclaje, fibras y producto, y permite ver cómo se articula el recorrido entre materia prima, transformación y protección.",
+        "images": [
+          {
+            "image": "/assets/process/lamicell/924146899.webp",
+            "title": "Storyboard / secuencia completa",
+            "description": "Storyboard / secuencia completa / Original publicado en Behance",
+            "width": 1280,
+            "height": 1010,
+            "source_url": "https://www.behance.net/gallery/163855207/LAMICELL/modules/924146899",
+            "source_module_id": 924146899
+          }
+        ]
       }
     ]
   },
@@ -991,7 +1141,7 @@
     "tags": [
       "TVC"
     ],
-    "img": "/assets/projects/vimeo-318699438.webp",
+    "img": "/assets/projects/hd/stc-film.webp",
     "body": "Un spot para STC Investment Group presentado en el corte del director como VIVA / STCFILM. Lucas declara dirección de arte y dirección de animación para una secuencia de espacios y objetos que convierte ideas de la pieza en situaciones tridimensionales.",
     "url": "/work/stc-film/",
     "vimeo": "https://vimeo.com/318699438",
@@ -1041,6 +1191,107 @@
             "description": "STC FILM / VIVA / Frame del film: Frame 03"
           }
         ]
+      },
+      {
+        "id": "styleframes-behance",
+        "kind": "styleframes",
+        "source_url": "https://www.behance.net/gallery/87272915/STC-Film",
+        "nav": "Styleframes",
+        "label": "STC Film / Styleframes originales",
+        "title": "Los hitos se vuelven instalaciones.",
+        "description": "El caso publicado por Lucas plantea una galería imaginada: una instalación por cada año de la compañía como soporte de sus hitos. Estos styleframes recorren espacios, objetos, tipografía y materiales de ese sistema visual.",
+        "images": [
+          {
+            "image": "/assets/process/stc-film/504874275.webp",
+            "title": "Acceso / Enter",
+            "description": "Acceso / Enter / Original publicado en Behance",
+            "width": 1280,
+            "height": 720,
+            "source_url": "https://www.behance.net/gallery/87272915/STC-Film/modules/504874275",
+            "source_module_id": 504874275
+          },
+          {
+            "image": "/assets/process/stc-film/504874273.webp",
+            "title": "Espacio / instalación de 2011",
+            "description": "Espacio / instalación de 2011 / Original publicado en Behance",
+            "width": 1280,
+            "height": 720,
+            "source_url": "https://www.behance.net/gallery/87272915/STC-Film/modules/504874273",
+            "source_module_id": 504874273
+          },
+          {
+            "image": "/assets/process/stc-film/504874265.webp",
+            "title": "Instalación / Supporting",
+            "description": "Instalación / Supporting / Original publicado en Behance",
+            "width": 1280,
+            "height": 720,
+            "source_url": "https://www.behance.net/gallery/87272915/STC-Film/modules/504874265",
+            "source_module_id": 504874265
+          },
+          {
+            "image": "/assets/process/stc-film/504874277.webp",
+            "title": "Instalación / First",
+            "description": "Instalación / First / Original publicado en Behance",
+            "width": 1280,
+            "height": 720,
+            "source_url": "https://www.behance.net/gallery/87272915/STC-Film/modules/504874277",
+            "source_module_id": 504874277
+          },
+          {
+            "image": "/assets/process/stc-film/504874267.webp",
+            "title": "Vidrio / Awarded Best Brand",
+            "description": "Vidrio / Awarded Best Brand / Original publicado en Behance",
+            "width": 1280,
+            "height": 720,
+            "source_url": "https://www.behance.net/gallery/87272915/STC-Film/modules/504874267",
+            "source_module_id": 504874267
+          },
+          {
+            "image": "/assets/process/stc-film/504874269.webp",
+            "title": "Instalación / 2015",
+            "description": "Instalación / 2015 / Original publicado en Behance",
+            "width": 1280,
+            "height": 720,
+            "source_url": "https://www.behance.net/gallery/87272915/STC-Film/modules/504874269",
+            "source_module_id": 504874269
+          },
+          {
+            "image": "/assets/process/stc-film/504874283.webp",
+            "title": "Instalación / Recognition",
+            "description": "Instalación / Recognition / Original publicado en Behance",
+            "width": 1280,
+            "height": 720,
+            "source_url": "https://www.behance.net/gallery/87272915/STC-Film/modules/504874283",
+            "source_module_id": 504874283
+          },
+          {
+            "image": "/assets/process/stc-film/504874279.webp",
+            "title": "Espacio / instalación de 2017",
+            "description": "Espacio / instalación de 2017 / Original publicado en Behance",
+            "width": 1280,
+            "height": 720,
+            "source_url": "https://www.behance.net/gallery/87272915/STC-Film/modules/504874279",
+            "source_module_id": 504874279
+          },
+          {
+            "image": "/assets/process/stc-film/504874271.webp",
+            "title": "Tipografía / 2018",
+            "description": "Tipografía / 2018 / Original publicado en Behance",
+            "width": 1280,
+            "height": 720,
+            "source_url": "https://www.behance.net/gallery/87272915/STC-Film/modules/504874271",
+            "source_module_id": 504874271
+          },
+          {
+            "image": "/assets/process/stc-film/504874281.webp",
+            "title": "Marca / cierre",
+            "description": "Marca / cierre / Original publicado en Behance",
+            "width": 1280,
+            "height": 720,
+            "source_url": "https://www.behance.net/gallery/87272915/STC-Film/modules/504874281",
+            "source_module_id": 504874281
+          }
+        ]
       }
     ]
   },
@@ -1054,7 +1305,7 @@
       "Esports",
       "Motion"
     ],
-    "img": "/assets/projects/vimeo-556284286.webp",
+    "img": "/assets/projects/hd/cctv-esports.webp",
     "body": "Una apertura de esports publicada como Seeking Truth. La pieza utiliza geometría triangular, superficies técnicas y luces azules y magenta para construir un recorrido de profundidad y energía concentrada.",
     "url": "/work/cctv-esports/",
     "vimeo": "https://vimeo.com/556284286",
@@ -1109,6 +1360,80 @@
             "description": "SEEKING TRUTH / Arte de producción: PLANET_01"
           }
         ]
+      },
+      {
+        "id": "styleframes-behance",
+        "kind": "styleframes",
+        "source_url": "https://www.behance.net/gallery/120444209/-Seeking-Truth-%28E-sports-Show-Opener%29",
+        "nav": "Styleframes",
+        "label": "Seeking Truth / Styleframes originales",
+        "title": "La búsqueda de un universo.",
+        "description": "Styleframes del caso publicado por Lucas: materia orgánica, personajes, estructuras geométricas y luz. El proyecto acredita dirección creativa y de arte, diseño y animación a Zhanhom Ho y Lucas Casagrande.",
+        "images": [
+          {
+            "image": "/assets/process/cctv-esports/685433909.webp",
+            "title": "Burbujas / espacio y refracción",
+            "description": "Burbujas / espacio y refracción / Original publicado en Behance",
+            "width": 1920,
+            "height": 1080,
+            "source_url": "https://www.behance.net/gallery/120444209/-Seeking-Truth-%28E-sports-Show-Opener%29/modules/685433909",
+            "source_module_id": 685433909
+          },
+          {
+            "image": "/assets/process/cctv-esports/685433895.webp",
+            "title": "Materia orgánica / luz y filamentos",
+            "description": "Materia orgánica / luz y filamentos / Original publicado en Behance",
+            "width": 1920,
+            "height": 1080,
+            "source_url": "https://www.behance.net/gallery/120444209/-Seeking-Truth-%28E-sports-Show-Opener%29/modules/685433895",
+            "source_module_id": 685433895
+          },
+          {
+            "image": "/assets/process/cctv-esports/685433899.webp",
+            "title": "Paisaje / onda de color",
+            "description": "Paisaje / onda de color / Original publicado en Behance",
+            "width": 1920,
+            "height": 1080,
+            "source_url": "https://www.behance.net/gallery/120444209/-Seeking-Truth-%28E-sports-Show-Opener%29/modules/685433899",
+            "source_module_id": 685433899
+          },
+          {
+            "image": "/assets/process/cctv-esports/685433901.webp",
+            "title": "Escena urbana / escala humana",
+            "description": "Escena urbana / escala humana / Original publicado en Behance",
+            "width": 1920,
+            "height": 1080,
+            "source_url": "https://www.behance.net/gallery/120444209/-Seeking-Truth-%28E-sports-Show-Opener%29/modules/685433901",
+            "source_module_id": 685433901
+          },
+          {
+            "image": "/assets/process/cctv-esports/685433903.webp",
+            "title": "Brazo / esfera y reflejos",
+            "description": "Brazo / esfera y reflejos / Original publicado en Behance",
+            "width": 1920,
+            "height": 1080,
+            "source_url": "https://www.behance.net/gallery/120444209/-Seeking-Truth-%28E-sports-Show-Opener%29/modules/685433903",
+            "source_module_id": 685433903
+          },
+          {
+            "image": "/assets/process/cctv-esports/685433907.webp",
+            "title": "Personaje / luz roja y azul",
+            "description": "Personaje / luz roja y azul / Original publicado en Behance",
+            "width": 1920,
+            "height": 1080,
+            "source_url": "https://www.behance.net/gallery/120444209/-Seeking-Truth-%28E-sports-Show-Opener%29/modules/685433907",
+            "source_module_id": 685433907
+          },
+          {
+            "image": "/assets/process/cctv-esports/685433897.webp",
+            "title": "Túnel / geometría y profundidad",
+            "description": "Túnel / geometría y profundidad / Original publicado en Behance",
+            "width": 1920,
+            "height": 1080,
+            "source_url": "https://www.behance.net/gallery/120444209/-Seeking-Truth-%28E-sports-Show-Opener%29/modules/685433897",
+            "source_module_id": 685433897
+          }
+        ]
       }
     ],
     "local_video": "/assets/videos/556284286.mp4"
@@ -1123,7 +1448,7 @@
       "Telecom",
       "CGI"
     ],
-    "img": "/assets/projects/vimeo-317038460.webp",
+    "img": "/assets/projects/hd/viva-fiber.webp",
     "body": "Un spot para VIVA Wireless Fiber desarrollado para Ogilvy. Lucas declara dirección de arte y animación, además del recorrido de idea, storyboard, diseño y sonido. Objetos de entretenimiento y tecnología permiten llevar el concepto de conectividad a una puesta CGI de alto contraste.",
     "url": "/work/viva-fiber/",
     "vimeo": "https://vimeo.com/317038460",
@@ -1173,6 +1498,53 @@
             "description": "VIVA FIBER / OGILVY / Frame del film: Frame 03"
           }
         ]
+      },
+      {
+        "id": "styleframes-behance",
+        "kind": "styleframes",
+        "source_url": "https://www.behance.net/gallery/87465501/Ogilvy-VIVA-FIBER",
+        "nav": "Styleframes",
+        "label": "VIVA Fiber / Styleframes originales",
+        "title": "La conexión toma forma.",
+        "description": "Cuatro styleframes del caso publicado por Lucas para Ogilvy: control, reproducción, auriculares y entorno urbano. El magenta, las líneas y la profundidad conectan los objetos con una misma atmósfera tecnológica.",
+        "images": [
+          {
+            "image": "/assets/process/viva-fiber/505952139.webp",
+            "title": "Control / volumen y líneas",
+            "description": "Control / volumen y líneas / Original publicado en Behance",
+            "width": 1280,
+            "height": 720,
+            "source_url": "https://www.behance.net/gallery/87465501/Ogilvy-VIVA-FIBER/modules/505952139",
+            "source_module_id": 505952139
+          },
+          {
+            "image": "/assets/process/viva-fiber/505952141.webp",
+            "title": "Reproducción / símbolo y espacio",
+            "description": "Reproducción / símbolo y espacio / Original publicado en Behance",
+            "width": 1280,
+            "height": 720,
+            "source_url": "https://www.behance.net/gallery/87465501/Ogilvy-VIVA-FIBER/modules/505952141",
+            "source_module_id": 505952141
+          },
+          {
+            "image": "/assets/process/viva-fiber/505952135.webp",
+            "title": "Auriculares / escala y profundidad",
+            "description": "Auriculares / escala y profundidad / Original publicado en Behance",
+            "width": 1280,
+            "height": 720,
+            "source_url": "https://www.behance.net/gallery/87465501/Ogilvy-VIVA-FIBER/modules/505952135",
+            "source_module_id": 505952135
+          },
+          {
+            "image": "/assets/process/viva-fiber/505952137.webp",
+            "title": "Entorno urbano / composición",
+            "description": "Entorno urbano / composición / Original publicado en Behance",
+            "width": 1280,
+            "height": 720,
+            "source_url": "https://www.behance.net/gallery/87465501/Ogilvy-VIVA-FIBER/modules/505952137",
+            "source_module_id": 505952137
+          }
+        ]
       }
     ]
   },
@@ -1186,7 +1558,7 @@
       "3D",
       "Identidad"
     ],
-    "img": "/assets/projects/vimeo-884411342.webp",
+    "img": "/assets/projects/hd/creepshow.webp",
     "body": "Material de dirección de arte para Cheat Code, un segmento de Creepshow que gira alrededor de un viejo videojuego. La selección publicada por Lucas desarrolla una interfaz pixel-art y un universo de personajes bajo el nombre Weird Wednesday, donde la estética de juego forma parte del relato de terror.",
     "url": "/work/creepshow/",
     "vimeo": "https://vimeo.com/884411342",
@@ -1259,7 +1631,7 @@
       "Industrial",
       "Campaign"
     ],
-    "img": "/assets/projects/vimeo-592318682.webp",
+    "img": "/assets/projects/hd/caterpillar.webp",
     "body": "Una pieza CGI de comunicación industrial para Cat Hose Service Solutions. La maquinaria y sus componentes se presentan a través de escala, modelado y una puesta de producto que combina el amarillo de la marca con un entorno claro.",
     "url": "/work/caterpillar/",
     "vimeo": "https://vimeo.com/592318682",
@@ -1325,7 +1697,7 @@
       "Sports",
       "Broadcast"
     ],
-    "img": "/assets/projects/vimeo-846402098.webp",
+    "img": "/assets/projects/hd/f1-2022.webp",
     "body": "Una promoción del Formula 1 Gulf Air Bahrain Grand Prix 2022. El auto, las líneas de velocidad y la información de la carrera componen una pieza breve de lectura rápida. La imagen publicada anuncia las fechas del 18 al 20 de marzo de 2022.",
     "year": "2022",
     "url": "/work/f1-2022/",
@@ -1423,7 +1795,7 @@
       "Motion",
       "Telecom"
     ],
-    "img": "/assets/projects/vimeo-281125532.webp",
+    "img": "/assets/projects/hd/viva-network.webp",
     "body": "Campaña para VIVA desarrollada en Ogilvy. El caso publicado reúne storyboard, modelado 3D, styleframes, dirección de animación y dirección de sonido. Los objetos tecnológicos, los reflejos y la paleta violeta construyen una familia de imágenes de producto.",
     "url": "/work/viva-network/",
     "vimeo": "https://vimeo.com/281125532",
@@ -1472,6 +1844,62 @@
             "description": "VIVA NETWORK / Selección de imagen del film"
           }
         ]
+      },
+      {
+        "id": "styleframes-behance",
+        "kind": "styleframes",
+        "source_url": "https://www.behance.net/gallery/73146309/VIVA-NETWORK",
+        "nav": "Styleframes",
+        "label": "VIVA Network / Styleframes originales",
+        "title": "Un teléfono, muchas metáforas.",
+        "description": "Los styleframes publicados en el caso de Ogilvy convierten el teléfono en sonido, velocidad, fuerza y rendimiento. Color, objetos y tipografía articulan una familia de imágenes para la campaña.",
+        "images": [
+          {
+            "image": "/assets/process/viva-network/425801777.webp",
+            "title": "Sonido / equipo DJ",
+            "description": "Sonido / equipo DJ / Original publicado en Behance",
+            "width": 1280,
+            "height": 905,
+            "source_url": "https://www.behance.net/gallery/73146309/VIVA-NETWORK/modules/425801777",
+            "source_module_id": 425801777
+          },
+          {
+            "image": "/assets/process/viva-network/425801775.webp",
+            "title": "Velocidad / auto",
+            "description": "Velocidad / auto / Original publicado en Behance",
+            "width": 1280,
+            "height": 905,
+            "source_url": "https://www.behance.net/gallery/73146309/VIVA-NETWORK/modules/425801775",
+            "source_module_id": 425801775
+          },
+          {
+            "image": "/assets/process/viva-network/425801771.webp",
+            "title": "Potencia / avión",
+            "description": "Potencia / avión / Original publicado en Behance",
+            "width": 1280,
+            "height": 905,
+            "source_url": "https://www.behance.net/gallery/73146309/VIVA-NETWORK/modules/425801771",
+            "source_module_id": 425801771
+          },
+          {
+            "image": "/assets/process/viva-network/425801773.webp",
+            "title": "Fuerza / entrenamiento",
+            "description": "Fuerza / entrenamiento / Original publicado en Behance",
+            "width": 1280,
+            "height": 905,
+            "source_url": "https://www.behance.net/gallery/73146309/VIVA-NETWORK/modules/425801773",
+            "source_module_id": 425801773
+          },
+          {
+            "image": "/assets/process/viva-network/425801769.webp",
+            "title": "Rendimiento / podio",
+            "description": "Rendimiento / podio / Original publicado en Behance",
+            "width": 1280,
+            "height": 905,
+            "source_url": "https://www.behance.net/gallery/73146309/VIVA-NETWORK/modules/425801769",
+            "source_module_id": 425801769
+          }
+        ]
       }
     ]
   },
@@ -1485,7 +1913,7 @@
       "Artworks",
       "3D"
     ],
-    "img": "/assets/projects/vimeo-599779288.webp",
+    "img": "/assets/projects/hd/saint-bodhi.webp",
     "body": "Un sistema de mundos y planetas para acompañar un universo musical. Cada imagen desarrolla una atmósfera, una materia y una personalidad.",
     "url": "/work/saint-bodhi/",
     "vimeo": "https://vimeo.com/599779288",
@@ -1541,7 +1969,7 @@
       "Logo",
       "Motion"
     ],
-    "img": "/assets/projects/vimeo-913015151.webp",
+    "img": "/assets/projects/hd/portsaid.webp",
     "body": "Una firma audiovisual para Portsaid. El nombre aparece como un objeto de relieve sobre un espacio claro, con una puesta que concentra la atención en la tipografía y la luz.",
     "url": "/work/portsaid/",
     "vimeo": "https://vimeo.com/913015151",
@@ -1597,7 +2025,7 @@
       "Spot",
       "Entorno"
     ],
-    "img": "/assets/projects/vimeo-798885470.webp",
+    "img": "/assets/projects/hd/inegi.webp",
     "body": "Un spot de INEGI publicado junto al nombre de Peppermelon. Caminos, árboles y volúmenes de color construyen un territorio en miniatura de formas simples y materiales táctiles.",
     "url": "/work/inegi/",
     "vimeo": "https://vimeo.com/798885470",
@@ -1640,8 +2068,42 @@
             "description": "INEGI / PEPPERMELON / Selección de imagen del film"
           }
         ]
+      },
+      {
+        "id": "desarrollo-visual-archivo",
+        "kind": "visual-development",
+        "source_type": "project-archive",
+        "nav": "Desarrollo visual",
+        "label": "INEGI / Desarrollo visual / Archivo de proyecto",
+        "title": "De los volúmenes a la ciudad.",
+        "description": "Tres vistas originales del entorno urbano en fase de modelado y shading, recuperadas del archivo del proyecto INEGI. Son imágenes de desarrollo visual, no cuadros finales del film.",
+        "images": [
+          {
+            "image": "/assets/process/inegi-01.webp",
+            "title": "Vista general / modelado y shading",
+            "description": "Vista general / modelado y shading / Archivo de desarrollo visual de INEGI",
+            "width": 1280,
+            "height": 720
+          },
+          {
+            "image": "/assets/process/inegi-02.webp",
+            "title": "Detalle / fachadas y vegetación",
+            "description": "Detalle / fachadas y vegetación / Archivo de desarrollo visual de INEGI",
+            "width": 1280,
+            "height": 720
+          },
+          {
+            "image": "/assets/process/inegi-03.webp",
+            "title": "Detalle / calle y vehículo",
+            "description": "Detalle / calle y vehículo / Archivo de desarrollo visual de INEGI",
+            "width": 1280,
+            "height": 720
+          }
+        ]
       }
-    ]
+    ],
+    "thumbnail_label": "Desarrollo visual",
+    "video_poster": "/assets/projects/vimeo-798885470.webp"
   },
   {
     "slug": "sofasummit",
@@ -1653,7 +2115,7 @@
       "3D",
       "Evento"
     ],
-    "img": "/assets/projects/vimeo-729863076.webp",
+    "img": "/assets/projects/hd/sofasummit.webp",
     "body": "Una animación en loop para SofaSummit. Objetos, plantas y estructuras se agrupan en un escenario violeta con un recorrido visual de distintas alturas.",
     "url": "/work/sofasummit/",
     "vimeo": "https://vimeo.com/729863076",
@@ -1709,7 +2171,7 @@
       "3D",
       "Animación"
     ],
-    "img": "/assets/projects/vimeo-831222839.webp",
+    "img": "/assets/projects/hd/rubber.webp",
     "body": "Una pieza experimental que concentra la escena en una esfera roja dentro de un ambiente doméstico. El contraste entre el objeto, la pared y el pequeño cactus deja que el movimiento lleve la atención.",
     "url": "/work/rubber/",
     "vimeo": "https://vimeo.com/831222839",
@@ -1765,7 +2227,7 @@
       "3D",
       "Objeto"
     ],
-    "img": "/assets/projects/vimeo-831219127.webp",
+    "img": "/assets/projects/hd/supermarket.webp",
     "body": "Carritos de supermercado se reorganizan como una estructura escultórica dentro de un espacio de hormigón. Un objeto cotidiano se vuelve una composición de líneas, metal y acentos rojos.",
     "url": "/work/supermarket/",
     "vimeo": "https://vimeo.com/831219127",
@@ -1821,7 +2283,7 @@
       "TVC",
       "CGI"
     ],
-    "img": "/assets/projects/vimeo-833759639.webp",
+    "img": "/assets/projects/hd/toyota-tvc.webp",
     "body": "Una pieza horizontal de Toyota donde los vehículos recorren una puesta CGI de fuerte identidad gráfica. El rojo, la arquitectura y el punto de vista construyen la energía de la escena.",
     "url": "/work/toyota-tvc/",
     "vimeo": "https://vimeo.com/833759639",
@@ -1877,7 +2339,7 @@
       "3D",
       "Música"
     ],
-    "img": "/assets/projects/vimeo-599807189.webp",
+    "img": "/assets/projects/hd/ojs-glove.webp",
     "body": "Una transición audiovisual publicada como OJS Glove. La pieza recorre un universo de planetas, materia y color dentro de una composición circular.",
     "url": "/work/ojs-glove/",
     "vimeo": "https://vimeo.com/599807189",
@@ -1932,7 +2394,7 @@
       "3D",
       "Motion"
     ],
-    "img": "/assets/projects/vimeo-832067590.webp",
+    "img": "/assets/projects/hd/claro-reel.webp",
     "vid": "832067590",
     "vimeo": "https://vimeo.com/832067590",
     "url": "/work/claro-reel/",

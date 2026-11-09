@@ -41,6 +41,34 @@ function updateScroll(){
 addEventListener('scroll',()=>{if(!scrollScheduled){scrollScheduled=true;requestAnimationFrame(updateScroll)}},{passive:true});
 addEventListener('resize',updateScroll,{passive:true});updateScroll();
 
+const reel=document.querySelector('.reel-video');
+if(reel){
+  const region=reel.closest('.reel-hero'),pause=region.querySelector('[data-reel-pause]'),sound=region.querySelector('[data-reel-sound]');
+  let userPaused=false,onScreen=true;
+  function reelControls(){
+    pause.textContent=reel.paused?t('reelResume','Reproducir'):t('reelPause','Pausar');
+    pause.setAttribute('aria-label',reel.paused?t('reelResumeLabel','Reproducir reel'):t('reelPauseLabel','Pausar reel'));
+    pause.setAttribute('aria-pressed',String(reel.paused));
+    sound.textContent=reel.muted?t('reelSound','Activar sonido'):t('reelMute','Silenciar');
+    sound.setAttribute('aria-label',sound.textContent);sound.setAttribute('aria-pressed',String(!reel.muted));
+  }
+  function reelVisibility(){
+    if(document.hidden||!onScreen||userPaused){reel.pause();return}
+    reel.play().catch(()=>reelControls());
+  }
+  pause.addEventListener('click',()=>{userPaused=!reel.paused;if(userPaused)reel.pause();else reel.play().catch(()=>reelControls())});
+  sound.addEventListener('click',()=>{reel.muted=!reel.muted;if(!userPaused&&reel.paused)reel.play().catch(()=>{});reelControls()});
+  reel.addEventListener('play',()=>{userPaused=false;reelControls()});
+  reel.addEventListener('pause',()=>{if(onScreen&&!document.hidden)userPaused=true;reelControls()});
+  ['volumechange','loadedmetadata','error'].forEach(event=>reel.addEventListener(event,reelControls));
+  document.addEventListener('visibilitychange',reelVisibility);
+  if('IntersectionObserver'in window)new IntersectionObserver(entries=>{onScreen=entries[0].isIntersecting;reelVisibility()},{threshold:.08}).observe(region);
+  addEventListener('pagehide',()=>reel.pause());addEventListener('pageshow',reelVisibility);
+  if(navigator.connection?.saveData){userPaused=true;reel.autoplay=false;reel.pause()}
+  else reelVisibility();
+  reelControls();
+}
+
 const slider=document.querySelector('.hero-slider');
 if(slider){
   const slides=[...slider.querySelectorAll('.hero-slide')],tabs=[...slider.querySelectorAll('.hero-tab')],pause=slider.querySelector('[data-hero-pause]'),announce=slider.querySelector('.hero-announcement');

@@ -5,24 +5,9 @@ WHATSAPP='https://wa.me/5491134112537?text=Hola%20Lucas%2C%20vi%20tu%20portfolio
 EMAIL='lucas.g.casagrande@gmail.com'
 
 def hero(projects):
-    specs=[
-      ('pandora','Una idea.','Otro universo.','Dirección visual / Experiencias / FOOH','Un lanzamiento, múltiples maneras de llevar una marca a otro mundo.','pandora'),
-      ('noorus-fill','Hacer visible','lo invisible.','CGI / Forma / Materia','Cuerpos, texturas e ideas que encuentran una forma propia.','noorus'),
-      ('cctv-esports','La imagen','toma el control.','Identidad / Broadcast / Motion','Universos que se construyen para moverse, conectar y quedarse.','truth'),
-      (None,'Mundos en','movimiento.','Artworks / Exploración / 3D','La búsqueda visual también es parte del trabajo.','art'),
-    ]
-    slides=[]; tabs=[]
-    for i,(slug,line1,line2,kicker,desc,asset) in enumerate(specs):
-        p=next((p for p in projects if p['slug']==slug),None)
-        name=p['title'] if p else 'ARTWORKS'
-        poster='/assets/hero/'+asset+'.webp'
-        dest='/work/'+slug+'/' if slug else '/artworks/'
-        video=(f'<video class="hero-video" muted playsinline loop preload="none" data-src="/assets/hero/{asset}.mp4" aria-hidden="true" tabindex="-1"></video>' if slug else '')
-        slides.append(f'''<article class="hero-slide{' is-active' if i==0 else ''}" role="group" aria-roledescription="diapositiva" aria-label="{i+1} de 4: {e(name)}" {'inert aria-hidden="true"' if i else 'aria-hidden="false"'}>
-        <div class="hero-backdrop"><img src="{poster}" alt="" width="1600" height="900" {'fetchpriority="high"' if i==0 else 'loading="lazy"'}>{video}</div>
-        <div class="hero-copy shell"><p class="eyebrow">{e(kicker)}</p><{'h1' if i==0 else 'h2'}><span class="hero-line">{e(line1)}</span><em class="hero-line">{e(line2)}</em></{'h1' if i==0 else 'h2'}><p class="hero-description">{e(desc)}</p><a class="hero-project" href="{dest}"><span>Explorar {'el proyecto' if slug else 'la obra'}</span><span class="circle-arrow" aria-hidden="true">↗</span></a></div></article>''')
-        tabs.append(f'<button type="button" class="hero-tab{" is-active" if i==0 else ""}" data-slide="{i}" aria-label="Ver {e(name)}" aria-pressed="{"true" if i==0 else "false"}"><span class="hero-tab-line"><i></i></span><small>0{i+1}</small><span>{e(name)}</span></button>')
-    return '''<section class="hero-slider" aria-roledescription="carrusel" aria-label="Selección visual" tabindex="0"><div class="hero-topline shell"><span>Lucas Casagrande / Dirección de arte · Motion · 3D</span><a href="/work/reel-2026/">PLAY REEL ↗</a></div><div class="hero-stage">'''+''.join(slides)+'''</div><div class="hero-bottom shell"><div class="hero-tabs" aria-label="Elegir proyecto">'''+''.join(tabs)+'''</div><div class="hero-controls"><button type="button" data-hero-prev aria-label="Diapositiva anterior">←</button><button type="button" data-hero-pause aria-label="Pausar presentación" aria-pressed="false">Ⅱ</button><button type="button" data-hero-next aria-label="Diapositiva siguiente">→</button></div></div><p class="sr-only hero-announcement" aria-live="off"></p><a class="hero-scroll" href="#selected" aria-label="Bajar a proyectos">SCROLL <span>↓</span></a></section>'''
+    reel=next(p for p in projects if p['slug']=='reel-2026')
+    source=reel['local_video']
+    return f'''<section class="reel-hero" aria-label="Reel de Lucas Casagrande"><div class="reel-topline shell"><h1>Lucas Casagrande<span>.</span></h1><p>Dirección de arte / Motion / 3D</p></div><div class="reel-screen"><video class="reel-video" autoplay muted loop playsinline controls preload="metadata" poster="{reel['img']}" width="1920" height="1080" aria-label="Reel de Lucas Casagrande"><source src="{source}" type="video/mp4"></video><div class="reel-toolbar"><button type="button" data-reel-pause aria-label="Pausar reel" aria-pressed="false">Pausar</button><button type="button" data-reel-sound aria-label="Activar sonido" aria-pressed="false">Activar sonido</button></div></div><div class="reel-bottom shell"><span>Reel / Selección de trabajo</span><a href="/work/reel-2026/">Ver el reel completo ↗</a><a class="reel-projects" href="#selected">Ver proyectos ↓</a></div></section>'''
 
 def contact():
     return f'''<section class="contact-section shell" id="contact"><div class="contact-heading"><p class="eyebrow">Un nuevo punto de partida</p><h2>Contame<br>qué <em>imaginás.</em></h2><p>Una pieza, una campaña, una experiencia o una conversación sobre lo que viene. Empecemos por tu idea.</p><a class="contact-channel whatsapp-link" href="{WHATSAPP}" target="_blank" rel="noopener"><span class="channel-icon" aria-hidden="true">↗</span><span>Conversemos por WhatsApp<small>+54 9 11 3411 2537</small></span></a><a class="contact-channel" href="mailto:{EMAIL}"><span class="channel-icon" aria-hidden="true">@</span><span>Escribime por mail<small>{EMAIL}</small></span></a><div class="contact-location"><span class="status-dot"></span> Buenos Aires, Argentina / Trabajo internacional</div></div>

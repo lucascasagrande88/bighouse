@@ -35,9 +35,9 @@ def decorate(html, path, lang):
     verification=json.loads((ROOT/'data/site-verification.json').read_text(encoding='utf8'))
     for name,value in verification.items():
         html=html.replace('</head>',f'<meta name="{name}" content="{escape(value,quote=True)}"></head>',1)
-    html = html.replace('</head>', '<link rel="stylesheet" href="/assets/locale.css?v=20261109-r4"></head>', 1)
+    html = html.replace('</head>', '<link rel="stylesheet" href="/assets/locale.css?v=20261109-r5"></head>', 1)
     # Run before deferred interaction scripts, including first-entry preference.
-    html = html.replace('<script src="/assets/site.js"', '<script src="/assets/locale.js?v=20261109-r4"></script><script src="/assets/site.js?v=20261109-r4"', 1)
+    html = html.replace('<script src="/assets/site.js"', '<script src="/assets/locale.js?v=20261109-r5"></script><script src="/assets/site.js?v=20261109-r5"', 1)
     html = html.replace('<input type="hidden" name="form-name"', f'<input type="hidden" name="language" value="{lang}"><input type="hidden" name="form-name"')
     if path == '/' and lang == 'es':
         prompt = '<aside class="language-prompt" aria-label="Language suggestion"><p>This site is also available in English.</p><a href="/en/" data-language="en" lang="en" hreflang="en">Explore in English ↗</a><button type="button" data-dismiss-language aria-label="Keep browsing in Spanish">×</button></aside>'

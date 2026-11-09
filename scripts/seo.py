@@ -234,6 +234,26 @@ def _schema(parser, canonical, lang, project, projects, artworks, root, video_me
         page["primaryImageOfPage"] = {"@id": image["@id"]}
     if base == "/":
         page["about"] = {"@id": person["@id"]}
+        reel = next((p for p in projects if p.get("slug") == "reel-2026"), None)
+        if reel:
+            vid = str(reel.get("vid", ""))
+            metadata = (video_metadata or {}).get(vid, {})
+            date = _verified_date(metadata) if str(metadata.get("id", vid)) == vid else None
+            content = _public_media(reel.get("local_video"))
+            poster = _public_media(reel.get("img"))
+            visible = content and any(_public_media(c.get("data-local-video")) == content
+                                      for c in parser.video_controls)
+            exists = root is None or (content and (Path(root) / urlsplit(content).path.lstrip("/")).is_file())
+            if date and vid.isdigit() and visible and exists and poster:
+                reel_node = {"@type": "VideoObject", "@id": canonical + "#reel",
+                             "name": _clean(reel["title"]), "description": _description(reel.get("body")),
+                             "thumbnailUrl": poster, "uploadDate": date, "contentUrl": content,
+                             "encodingFormat": "video/mp4", "mainEntityOfPage": {"@id": page["@id"]}}
+                duration = _duration(reel.get("duration"))
+                if duration:
+                    reel_node["duration"] = duration
+                graph.append(reel_node)
+                page["video"] = {"@id": reel_node["@id"]}
     if project:
         work = {"@type": "CreativeWork", "@id": canonical + "#work",
                 "url": canonical, "name": _clean(project.get("title") or title),
@@ -259,7 +279,7 @@ def _schema(parser, canonical, lang, project, projects, artworks, root, video_me
         if date and image and vid.isdigit() and visible:
             video = {"@type": "VideoObject", "@id": canonical + "#video",
                      "name": work["name"], "description": description,
-                     "thumbnailUrl": image["contentUrl"], "uploadDate": date,
+                     "thumbnailUrl": _public_media(project.get("video_poster")) or image["contentUrl"], "uploadDate": date,
                      "isPartOf": {"@id": work["@id"]},
                      "mainEntityOfPage": {"@id": page["@id"]}}
             if local_video:
@@ -418,10 +438,11 @@ def audit_html(html):
 
 
 def generate_discovery(root):
-    """Write sitemap.xml and update only the Sitemap directive in robots.txt.
+    """Write a sitemap index + plain ES/EN children, preserving robots policy.
 
     Uses actual indexable HTML, checks reciprocal annotations, and never invents
-    lastmod dates. Fails before writing if a counterpart is missing/inconsistent.
+    lastmod dates. Language alternatives remain in HTML, not sitemap extensions.
+    Fails before writing if a counterpart is missing/inconsistent.
     """
     root = Path(root)
     pages = {}
@@ -454,17 +475,24 @@ def generate_discovery(root):
             for other in set(alternates.values()):
                 if other not in pages or pages[other] != alternates:
                     raise ValueError("Missing reciprocal indexable language page: " + other)
-    ns, xhtml = "http://www.sitemaps.org/schemas/sitemap/0.9", "http://www.w3.org/1999/xhtml"
+    es_urls = [url for url in pages if not urlsplit(url).path.startswith("/en/")]
+    en_urls = [url for url in pages if urlsplit(url).path.startswith("/en/")]
+    if not es_urls or {SITE + _base_path(url) for url in en_urls} != set(es_urls):
+        raise ValueError("Discovery requires matching non-empty Spanish and English URL sets")
+    ns = "http://www.sitemaps.org/schemas/sitemap/0.9"
     ET.register_namespace("", ns)
-    ET.register_namespace("xhtml", xhtml)
-    document = ET.Element("{" + ns + "}urlset")
-    for url, alternates in pages.items():
-        node = ET.SubElement(document, "{" + ns + "}url")
-        ET.SubElement(node, "{" + ns + "}loc").text = url
-        for code, alternate in alternates.items():
-            ET.SubElement(node, "{" + xhtml + "}link", rel="alternate", hreflang=code, href=alternate)
-    ET.indent(document, space="  ")
-    sitemap = ET.tostring(document, encoding="unicode", xml_declaration=True) + "\n"
+    index = ET.Element("{" + ns + "}sitemapindex")
+    children = []
+    for language, filename, urls in (("es-AR", "sitemap-es.xml", es_urls), ("en", "sitemap-en.xml", en_urls)):
+        document = ET.Element("{" + ns + "}urlset")
+        for url in urls:
+            ET.SubElement(ET.SubElement(document, "{" + ns + "}url"), "{" + ns + "}loc").text = url
+        ET.indent(document, space="  ")
+        children.append({"language": language, "filename": filename, "urls": len(urls),
+                         "xml": ET.tostring(document, encoding="unicode", xml_declaration=True) + "\n"})
+        ET.SubElement(ET.SubElement(index, "{" + ns + "}sitemap"), "{" + ns + "}loc").text = SITE + "/" + filename
+    ET.indent(index, space="  ")
+    sitemap = ET.tostring(index, encoding="unicode", xml_declaration=True) + "\n"
     robot_file = root / "robots.txt"
     old_robots = robot_file.read_text(encoding="utf-8") if robot_file.is_file() else "User-agent: *\nAllow: /\n"
     sitemap_line = "Sitemap: " + SITE + "/sitemap.xml"
@@ -473,8 +501,12 @@ def generate_discovery(root):
              if not (line.strip().lower().startswith("sitemap:")
                      and line.split(":", 1)[1].strip().rstrip("/") == SITE + "/sitemap.xml")]
     robots = "\n".join(lines).rstrip() + "\n" + sitemap_line + "\n"
+    for child in children:
+        (root / child["filename"]).write_text(child["xml"], encoding="utf-8")
     (root / "sitemap.xml").write_text(sitemap, encoding="utf-8")
     robot_file.write_text(robots, encoding="utf-8")
-    return {"urls": len(pages), "language_pairs": sum(bool(a) for a in pages.values()) // 2,
+    return {"urls": len(pages), "language_pairs": len(es_urls), "sitemap_index": True,
+            "child_sitemaps": [{k: v for k, v in child.items() if k != "xml"} for child in children],
+            "hreflang_location": "HTML",
             "sitemap": str(root / "sitemap.xml"), "robots": str(robot_file),
             "robots_policy_preserved": True, "lastmod_omitted": True}
