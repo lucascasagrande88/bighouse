@@ -96,7 +96,7 @@
 .footer-base{display:flex;justify-content:space-between;gap:20px;align-items:center;border-top:1px solid #0b0c0b33;padding-block:19px;font-size:9px;color:#0b0c0ba6}
 .floating-contact{position:fixed;right:24px;bottom:24px;z-index:30;display:flex;align-items:center;gap:10px;background:var(--lime);color:var(--ink);box-shadow:0 5px 28px #0003;padding:13px 18px;border:1px solid #0b0c0b40;border-radius:40px;font-size:11px;transform:translateY(100px);opacity:0;transition:transform .6s var(--ease-out),opacity .4s}
 .floating-contact.is-visible{transform:translateY(0);opacity:1}.floating-contact svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.5}.floating-contact:hover{background:var(--paper)}
-.portrait-series{display:grid;grid-template-columns:1.3fr .7fr;gap:18px;align-items:end;margin-top:18px}.portrait-series img{width:100%;aspect-ratio:4/5;object-fit:cover;filter:none;object-position:center}.portrait-series img:last-child{aspect-ratio:3/4}
+.portrait-series{display:grid;grid-template-columns:1.3fr .7fr;gap:18px;align-items:end;margin-top:18px}.portrait-series img{display:block;width:100%;height:auto;aspect-ratio:auto;object-fit:contain;filter:none}
 .portrait-note{font-size:9px!important;line-height:1.7!important;color:var(--muted);margin-top:12px!important}
 .contact-page-head{padding-block:65px 55px}.contact-page-head h1{font-size:clamp(55px,9vw,135px);line-height:.95;letter-spacing:-.065em;margin-top:25px;font-weight:800}.contact-page-head h1 em{font-family:var(--serif);font-weight:400;color:var(--lime)}
 .thanks-page{min-height:70vh;padding-block:120px}.thanks-page h1{font-size:clamp(48px,7vw,100px);line-height:1;letter-spacing:-.06em;margin-block:28px}.thanks-page p:not(.eyebrow){max-width:500px;color:var(--muted)}
@@ -113,3 +113,39 @@
 @media(max-width:700px){.contact-form label{font-size:10px}}
 .case-head h1.long-title{font-size:clamp(30px,6vw,94px);overflow-wrap:anywhere}
 @media(max-width:700px){.contact-page-head h1{font-size:clamp(34px,10.3vw,48px)}}
+
+/* Media keeps its intrinsic proportions; fixed framing is confined to film players. */
+.press-intro>figure{min-width:0;width:100%;margin:0}
+.press-intro>figure>img{display:block;width:100%;height:auto;aspect-ratio:auto;object-fit:contain}
+.download-grid,.download-card,.art-preview>figure,.live-pair>figure,.about-image{min-width:0}
+.reference-strip .ref-logo{max-width:210px}
+.reference-strip .ref-logo img{height:auto;max-height:65px;object-fit:contain}
+.portrait-story{display:grid;grid-template-columns:1.875fr 1fr;align-items:start;gap:28px;padding-bottom:90px}
+.portrait-story figure{min-width:0}
+.portrait-story img{display:block;width:100%;height:auto;object-fit:contain}
+.portrait-story figcaption{font-size:11px;color:var(--muted);margin-top:14px}
+.portrait-story-note{grid-column:1/-1;font-size:10px;color:var(--muted);margin-top:-8px}
+@media(max-width:700px){
+ .art-preview .art-caption strong{font-size:16px;line-height:1.35}
+ .art-preview .art-caption span{font-size:11px;margin-top:5px}
+ .about-image{max-width:none}
+ .press-intro>figure{max-width:450px}
+ .portrait-story{grid-template-columns:1fr;gap:30px;padding-bottom:65px}
+ .portrait-story-note{margin-top:0}
+ .reference-strip{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center}
+ .reference-strip>span:first-child{grid-column:1/-1;font-size:11px}
+ .reference-strip .ref-logo{width:100%;height:55px}
+ .reference-strip>strong{font-size:29px;grid-column:1/-1}
+ .download-card h3{font-size:30px}
+}
+@media(max-width:360px){.form-row{grid-template-columns:1fr}}
+.case-pager{grid-template-columns:repeat(2,minmax(0,1fr))}
+.case-pager a,.case-pager strong,.case-info dd{min-width:0;overflow-wrap:anywhere}
+@media(max-width:700px){.case-pager{grid-template-columns:1fr;gap:24px}.case-pager a:last-child{padding-top:20px;border-top:1px solid var(--rule)}}
+@media(max-width:700px){
+ .case-section h2{font-size:clamp(28px,8.2vw,48px)}
+ .talks>h2{font-size:clamp(36px,9.5vw,52px)}
+ .form-row{grid-template-columns:1fr;gap:28px}
+ .contact-form input:not([type=hidden]),.contact-form textarea,.contact-form select{font-size:16px}
+}
+@media(min-width:701px) and (max-width:900px){.contact-section{grid-template-columns:1fr;gap:45px}.contact-heading>p:not(.eyebrow){max-width:500px}}
