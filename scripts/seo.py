@@ -215,7 +215,17 @@ def _schema(parser, canonical, lang, project, projects, artworks, root, video_me
     base = _base_path(canonical)
     prefix = "/en" if lang == "en" else ""
     person = {"@type": "Person", "@id": SITE + "/#person",
-              "name": "Lucas Casagrande", "url": SITE + "/"}
+              "name": "Lucas Casagrande", "url": SITE + "/",
+              "jobTitle": ("Art director, motion designer and 3D artist" if lang == "en"
+                           else "Director de arte, motion designer y artista 3D"),
+              "homeLocation": {"@type": "Place", "name": "Buenos Aires, Argentina"},
+              "worksFor": {"@id": "https://chimichurridiseno.com/#organization"},
+              "knowsAbout": ["Art direction", "Motion design", "3D", "Animation",
+                             "Creative production", "Artificial intelligence"]}
+    portrait = _image("/assets/portraits/2026/01-brazos-cruzados.webp", parser, root,
+                      "Lucas Casagrande")
+    if portrait:
+        person["image"] = portrait
     profiles = [p for p in _SOCIAL_PROFILES
                 if any(h.rstrip("/") == p.rstrip("/") for h in parser.links)]
     if profiles:
@@ -234,6 +244,15 @@ def _schema(parser, canonical, lang, project, projects, artworks, root, video_me
         page["primaryImageOfPage"] = {"@id": image["@id"]}
     if base == "/":
         page["about"] = {"@id": person["@id"]}
+        page["mainEntity"] = {"@id": person["@id"]}
+        service = {"@type": "Service", "@id": canonical + "#creative-services",
+                   "name": ("Art direction, motion design and 3D" if lang == "en"
+                            else "Dirección de arte, motion design y 3D"),
+                   "url": canonical + "#colaborar", "provider": {"@id": person["@id"]},
+                   "serviceType": ["Art direction", "Motion design", "3D animation",
+                                   "Creative workshops"]}
+        graph.append(service)
+        page["mentions"] = {"@id": service["@id"]}
         reel = next((p for p in projects if p.get("slug") == "reel-2026"), None)
         if reel:
             vid = str(reel.get("vid", ""))
@@ -321,6 +340,23 @@ def _schema(parser, canonical, lang, project, projects, artworks, root, video_me
                           "item": {"@id": art_image["@id"]}})
         if items:
             page["mainEntity"] = {"@type": "ItemList", "numberOfItems": len(items), "itemListElement": items}
+    # Use the actual navigation hierarchy, in the page's own language.
+    sections = {"/work/": "Work" if lang == "en" else "Trabajo",
+                "/artworks/": "Artworks", "/prensa/": "Press" if lang == "en" else "Prensa",
+                "/contacto/": "Contact" if lang == "en" else "Contacto"}
+    if base != "/" and (project or base in sections):
+        trail = [("Home" if lang == "en" else "Inicio", _url(prefix + "/"))]
+        if project:
+            trail.append((sections["/work/"], _url(prefix + "/work/")))
+            trail.append((_clean(project.get("title") or title), canonical))
+        else:
+            trail.append((sections[base], canonical))
+        crumbs = {"@type": "BreadcrumbList", "@id": canonical + "#breadcrumb",
+                  "itemListElement": [{"@type": "ListItem", "position": i,
+                                       "name": name, "item": url}
+                                      for i, (name, url) in enumerate(trail, 1)]}
+        graph.append(crumbs)
+        page["breadcrumb"] = {"@id": crumbs["@id"]}
     return {"@context": "https://schema.org", "@graph": graph}
 
 
