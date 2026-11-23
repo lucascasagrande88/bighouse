@@ -25,3 +25,116 @@ document.querySelectorAll('[data-filter-for]').forEach(bar=>{
  }));
 });
 })();
+
+(() => {
+  'use strict';
+
+  if (location.hostname !== 'lucascasagrande.com' || navigator.globalPrivacyControl === true) return;
+
+  const measurementId = 'G-WSL33HYP5E';
+  const consentKey = 'lc-analytics-consent-v1';
+  const disableKey = 'ga-disable-' + measurementId;
+  const english = document.documentElement.lang.startsWith('en');
+  const footer = document.querySelector('footer');
+  if (!footer) return;
+
+  let loaded = false;
+  let choice;
+  try {
+    choice = localStorage.getItem(consentKey);
+  } catch {
+    // The site still works when the browser denies storage.
+  }
+
+  const controls = document.createElement('aside');
+  controls.id = 'analytics-choice';
+  controls.className = 'analytics-choice';
+  controls.setAttribute('aria-label', english ? 'Analytics preferences' : 'Preferencias de medición');
+  const summary = document.createElement('p');
+  summary.textContent = english
+    ? 'Allow Google Analytics to measure visits and improve this portfolio?'
+    : '¿Permitís que Google Analytics mida las visitas para mejorar este portfolio?';
+  const privacy = document.createElement('a');
+  privacy.href = 'https://policies.google.com/technologies/partner-sites';
+  privacy.textContent = english ? 'How Google uses data' : 'Cómo usa los datos Google';
+  const actions = document.createElement('div');
+  const reject = document.createElement('button');
+  reject.type = 'button';
+  reject.textContent = english ? 'Skip' : 'Omitir';
+  const accept = document.createElement('button');
+  accept.type = 'button';
+  accept.textContent = english ? 'Allow analytics' : 'Permitir medición';
+  actions.append(reject, accept);
+  controls.append(summary, privacy, actions);
+  footer.after(controls);
+
+  const settings = document.createElement('button');
+  settings.type = 'button';
+  settings.className = 'analytics-settings';
+  settings.textContent = english ? 'Analytics preferences' : 'Preferencias de medición';
+  settings.setAttribute('aria-controls', controls.id);
+  settings.setAttribute('aria-expanded', 'false');
+  (footer.querySelector('.footer-base') || footer).append(settings);
+
+  function setVisible(visible) {
+    controls.hidden = !visible;
+    settings.setAttribute('aria-expanded', String(visible));
+  }
+
+  function enableAnalytics() {
+    window[disableKey] = false;
+    if (loaded) return;
+    loaded = true;
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      window.dataLayer.push(arguments);
+    }
+    gtag('consent', 'default', {
+      analytics_storage: 'granted',
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+    });
+    gtag('js', new Date());
+    gtag('config', measurementId, {
+      allow_google_signals: false,
+      allow_ad_personalization_signals: false,
+      page_location: location.origin + location.pathname,
+      page_referrer: document.referrer ? new URL(document.referrer).origin : '',
+    });
+    const tag = document.createElement('script');
+    tag.async = true;
+    tag.src = 'https://www.googletagmanager.com/gtag/js?id=' + measurementId;
+    document.head.append(tag);
+  }
+
+  function saveChoice(value) {
+    try {
+      localStorage.setItem(consentKey, value);
+    } catch {
+      // The choice still applies to this page.
+    }
+    setVisible(false);
+    settings.focus();
+    if (value === 'allow') {
+      enableAnalytics();
+      return;
+    }
+
+    window[disableKey] = true;
+    const cookieNames = ['_ga', '_ga_' + measurementId.slice(2)];
+    for (const name of cookieNames) {
+      document.cookie = name + '=; Max-Age=0; Path=/; Secure; SameSite=Lax';
+      document.cookie = name + '=; Max-Age=0; Path=/; Domain=lucascasagrande.com; Secure; SameSite=Lax';
+    }
+  }
+
+  accept.addEventListener('click', () => saveChoice('allow'));
+  reject.addEventListener('click', () => saveChoice('skip'));
+  settings.addEventListener('click', () => {
+    setVisible(controls.hidden);
+    if (!controls.hidden) reject.focus();
+  });
+  setVisible(choice !== 'allow' && choice !== 'skip');
+  if (choice === 'allow') enableAnalytics();
+})();

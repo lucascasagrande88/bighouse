@@ -11,3 +11,28 @@
 .case-media video,.film-frame video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000}
 .case-source-links a{display:block;color:var(--lime);margin-bottom:8px;font-size:11px;line-height:1.5}
 .frames-grid img{height:auto}.film-grid .film-frame.portrait .video-load img{object-fit:contain}
+
+.analytics-choice {
+  position: fixed;
+  z-index: 51;
+  inset: auto 1rem 1rem auto;
+  width: min(24rem, calc(100vw - 2rem));
+  padding: 1rem;
+  border: 1px solid var(--rule);
+  background: var(--ink);
+  color: var(--paper);
+  font-size: .875rem;
+}
+.analytics-choice[hidden] { display: none; }
+.analytics-choice p { margin: 0 0 .35rem; }
+.analytics-choice a, .analytics-settings { text-decoration: underline; }
+.analytics-choice > div { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .7rem; }
+.analytics-choice button {
+  padding: .35rem .7rem;
+  border: 1px solid var(--muted);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+.analytics-choice button:last-child { background: var(--lime); border-color: var(--lime); color: var(--ink); }
+.analytics-settings { background: none; border: 0; color: inherit; padding: 0; cursor: pointer; }
