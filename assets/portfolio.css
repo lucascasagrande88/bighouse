@@ -55,6 +55,7 @@
 }
 .portfolio-player iframe { display: block; border: 0; width: 100%; height: 100%; }
 .portfolio-credit { margin-top: 10px; }
+.portfolio-show-link { margin-block: 18px clamp(48px, 7vw, 105px); }
 .portfolio-tracks {
   display: grid;
   grid-template-columns: repeat(2, minmax(0,1fr));

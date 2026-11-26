@@ -8,6 +8,10 @@ COPY = {
         "showLabel": "Registro de concierto / Ferro, Buenos Aires",
         "vidTitle": "Miranda! en Ferro 2025 — Puro Talento, registro de UrbanVibes",
         "showCredit": "Registro de UrbanVibes · Ferro 2025",
+        "mirandaRole": "Visuales de concierto · Lucas Casagrande",
+        "catrielLabel": "Animación para visuales de show · Lucas Casagrande",
+        "catrielVideoTitle": "CA7RIEL &amp; Paco Amoroso — El día del amigo en The Tonight Show",
+        "catrielFootage": "El día del amigo en The Tonight Show · Canal oficial de CA7RIEL &amp; Paco Amoroso",
         "songOne": "Puro Talento",
         "songTwo": "Uno los dos",
         "songOneDescription": "Geometría 3D y movimiento caleidoscópico.",
@@ -38,6 +42,10 @@ COPY = {
         "showLabel": "Concert footage / Ferro, Buenos Aires",
         "vidTitle": "Miranda! at Ferro 2025 — Puro Talento, footage by UrbanVibes",
         "showCredit": "Footage by UrbanVibes · Ferro 2025",
+        "mirandaRole": "Concert visuals by Lucas Casagrande",
+        "catrielLabel": "Animation for live visuals by Lucas Casagrande",
+        "catrielVideoTitle": "CA7RIEL &amp; Paco Amoroso — El día del amigo on The Tonight Show",
+        "catrielFootage": "El día del amigo on The Tonight Show · Official CA7RIEL &amp; Paco Amoroso channel",
         "songOne": "Puro Talento",
         "songTwo": "Uno los dos",
         "songOneDescription": "3D geometry and kaleidoscopic movement.",
@@ -69,7 +77,7 @@ ART_SOURCESETS = {
     'art-04': 'srcset="/assets/artworks/art-04-thumb.webp 800w, /assets/artworks/art-04.webp 1280w" sizes="91vw"',
     'art-16': 'srcset="/assets/artworks/art-16-thumb.webp 800w, /assets/artworks/art-16.webp 1800w" sizes="91vw"',
 }
-STYLESHEET = '<link rel="stylesheet" href="/assets/portfolio.css?v=20261125-portfolio">'
+STYLESHEET = '<link rel="stylesheet" href="/assets/portfolio.css?v=20261126-visuales">'
 
 def live_section(t, prefix):
     return f'''<section class="live shell portfolio-live" id="live" aria-labelledby="live-title">
@@ -85,7 +93,7 @@ def live_section(t, prefix):
     <div class="portfolio-player">
       <iframe title="{t['vidTitle']}" src="https://www.youtube-nocookie.com/embed/80ubrLGDoZI?start=3454" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
     </div>
-    <p class="portfolio-credit">{t['showCredit']}</p>
+    <p class="portfolio-credit">{t['mirandaRole']}<br>{t['showCredit']}</p>
     <div class="portfolio-tracks">
       <a href="https://www.youtube.com/watch?v=80ubrLGDoZI&amp;t=3454s" aria-label="{t['watch']} · Puro Talento">
         <div><strong>{t['songOne']}</strong><p>{t['songOneDescription']}</p></div>
@@ -96,6 +104,16 @@ def live_section(t, prefix):
         <span aria-hidden="true">↗</span>
       </a>
     </div>
+  </article>
+  <article class="portfolio-show" aria-labelledby="catriel-paco-title">
+    <div class="portfolio-show-head">
+      <div><p class="portfolio-kicker">{t['catrielLabel']}</p><h3 id="catriel-paco-title">CA7RIEL &amp; Paco Amoroso</h3></div>
+    </div>
+    <div class="portfolio-player">
+      <iframe title="{t['catrielVideoTitle']}" src="https://www.youtube-nocookie.com/embed/3vAiaASGga8" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
+    </div>
+    <p class="portfolio-credit">{t['catrielFootage']}</p>
+    <a class="btn portfolio-show-link" href="https://www.youtube.com/watch?v=3vAiaASGga8">{t['watch']}</a>
   </article>
   <article class="portfolio-companion">
     <a href="{prefix}/work/saint-bodhi/" aria-label="{t['musicLink']} · Saint Bodhi"><img src="/assets/projects/hd/saint-bodhi.webp" alt="" width="1600" height="900" loading="lazy" decoding="async"></a>
