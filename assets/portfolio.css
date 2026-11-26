@@ -14,10 +14,6 @@
 }
 .portfolio-artwork .art-preview > figure:first-child { grid-column: 1 / -1; }
 .portfolio-artwork .art-preview > figure:nth-child(2) { padding-top: 0; }
-.portfolio-artwork .art-preview > figure:first-child img {
-  max-height: 72vh;
-  object-fit: cover;
-}
 .portfolio-artwork .art-caption { display: grid; gap: 3px; }
 .portfolio-artwork .art-caption span { margin: 0; }
 .portfolio-artwork .section-end { justify-content: flex-end; }

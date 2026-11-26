@@ -65,6 +65,10 @@ COPY = {
 }
 FEATURED_ART = ["art-04","art-12","art-07","art-16","art-18","art-21"]
 WIDE_ART = ["art-04","art-16"]
+ART_SOURCESETS = {
+    'art-04': 'srcset="/assets/artworks/art-04-thumb.webp 800w, /assets/artworks/art-04.webp 1280w" sizes="91vw"',
+    'art-16': 'srcset="/assets/artworks/art-16-thumb.webp 800w, /assets/artworks/art-16.webp 1800w" sizes="91vw"',
+}
 STYLESHEET = '<link rel="stylesheet" href="/assets/portfolio.css?v=20261125-portfolio">'
 
 def live_section(t, prefix):
@@ -113,6 +117,11 @@ def gallery_film(t, prefix):
 </section>'''
 
 
+def artwork_resolution(document, slug):
+    source = f'src="/assets/artworks/{slug}-thumb.webp"'
+    return document.replace(source, f'{source} {ART_SOURCESETS[slug]}', 1)
+
+
 def refresh_portfolio(document, route, lang):
     if route not in ('/', '/artworks/'):
         return document
@@ -120,6 +129,7 @@ def refresh_portfolio(document, route, lang):
     t = COPY[lang]
     prefix = '/en' if lang == 'en' else ''
     document = document.replace('</head>', STYLESHEET + '</head>', 1)
+    document = artwork_resolution(document, 'art-04')
     if route == '/':
         document = re.sub(r'<section class="visual-break">.*?</section>', '', document, count=1, flags=re.S)
         document = re.sub(
@@ -138,6 +148,7 @@ def refresh_portfolio(document, route, lang):
             flags=re.S,
         )
 
+    document = artwork_resolution(document, 'art-16')
     document = re.sub(
         r'<header class="gallery-head shell">.*?</header>',
         lambda _: t['galleryHead'],
