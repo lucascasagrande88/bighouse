@@ -9,9 +9,22 @@ COPY = {
         "vidTitle": "Miranda! en Ferro 2025 — Puro Talento, registro de UrbanVibes",
         "showCredit": "Registro de UrbanVibes · Ferro 2025",
         "mirandaRole": "Visuales de concierto · Lucas Casagrande",
-        "catrielLabel": "Animación para visuales de show · Lucas Casagrande",
-        "catrielVideoTitle": "CA7RIEL &amp; Paco Amoroso — El día del amigo en The Tonight Show",
-        "catrielFootage": "El día del amigo en The Tonight Show · Canal oficial de CA7RIEL &amp; Paco Amoroso",
+        "mirandaIntro": "Del Hotel Miranda! en 3D a las pantallas de Ferro. El render muestra uno de los interiores del hotel. En «Mentía», la gráfica rosa ocupa cuatro pantallas verticales a los lados del escenario.",
+        "hotelAlt": "Interior 3D del Hotel Miranda! con puertas de madera, casilleros y elementos de gimnasio.",
+        "hotelCaption": "Hotel Miranda! · Render 3D",
+        "mentiaAlt": "Escenario de Ferro durante Mentía, con cuatro pantallas verticales en rosa alrededor del cartel de Miranda!.",
+        "mentiaCaption": "Mentía · Estadio Ferro · MirandaOficialVEVO",
+        "mentiaDescription": "La gráfica rosa en las pantallas de Ferro.",
+        "catrielLabel": "Baño María / Movistar Arena, Buenos Aires",
+        "catrielRole": "Visuales y animación · Lucas Casagrande",
+        "catrielIntro": "Trabajé en los visuales para el primer Movistar Arena del dúo, el 16 de agosto de 2024. La producción incluyó material grabado con cámaras Oculus.",
+        "catrielVideoTitle": "CA7RIEL &amp; Paco Amoroso — Baño María en vivo en el Movistar Arena",
+        "catrielFootage": "Registro del concierto · Canal oficial de CA7RIEL &amp; Paco Amoroso",
+        "mansionAlt": "Mansión 3D con dos escaleras de barandas doradas y una araña de cristal.",
+        "mansionCaption": "Mansión · Render de producción",
+        "spaceAlt": "Agujero negro rodeado por un disco luminoso azulado.",
+        "spaceCaption": "Espacio · Render de producción",
+        "watchShow": "Ver el registro del show",
         "songOne": "Puro Talento",
         "songTwo": "Uno los dos",
         "songOneDescription": "Geometría 3D y movimiento caleidoscópico.",
@@ -43,9 +56,22 @@ COPY = {
         "vidTitle": "Miranda! at Ferro 2025 — Puro Talento, footage by UrbanVibes",
         "showCredit": "Footage by UrbanVibes · Ferro 2025",
         "mirandaRole": "Concert visuals by Lucas Casagrande",
-        "catrielLabel": "Animation for live visuals by Lucas Casagrande",
-        "catrielVideoTitle": "CA7RIEL &amp; Paco Amoroso — El día del amigo on The Tonight Show",
-        "catrielFootage": "El día del amigo on The Tonight Show · Official CA7RIEL &amp; Paco Amoroso channel",
+        "mirandaIntro": "From the 3D Hotel Miranda! to the screens at Ferro stadium. The render shows one of the hotel interiors. During “Mentía,” pink graphics fill four vertical screens around the stage.",
+        "hotelAlt": "3D Hotel Miranda! interior with wooden doors, lockers and gym equipment.",
+        "hotelCaption": "Hotel Miranda! · 3D render",
+        "mentiaAlt": "The Ferro stadium stage during Mentía, with four pink vertical screens around the Miranda! sign.",
+        "mentiaCaption": "Mentía · Ferro Stadium · MirandaOficialVEVO",
+        "mentiaDescription": "Pink graphics on the screens at Ferro stadium.",
+        "catrielLabel": "Baño María / Movistar Arena, Buenos Aires",
+        "catrielRole": "Live visuals and animation by Lucas Casagrande",
+        "catrielIntro": "I worked on the visuals for the duo’s first show at Movistar Arena, on August 16, 2024. The production included footage captured with Oculus cameras.",
+        "catrielVideoTitle": "CA7RIEL &amp; Paco Amoroso — Baño María live at Movistar Arena",
+        "catrielFootage": "Concert footage · Official CA7RIEL &amp; Paco Amoroso channel",
+        "mansionAlt": "A 3D mansion with two staircases, golden railings and a crystal chandelier.",
+        "mansionCaption": "Mansion · Production render",
+        "spaceAlt": "A black hole with a glowing blue accretion disk.",
+        "spaceCaption": "Space · Production render",
+        "watchShow": "Watch the concert footage",
         "songOne": "Puro Talento",
         "songTwo": "Uno los dos",
         "songOneDescription": "3D geometry and kaleidoscopic movement.",
@@ -77,7 +103,7 @@ ART_SOURCESETS = {
     'art-04': 'srcset="/assets/artworks/art-04-thumb.webp 800w, /assets/artworks/art-04.webp 1280w" sizes="91vw"',
     'art-16': 'srcset="/assets/artworks/art-16-thumb.webp 800w, /assets/artworks/art-16.webp 1800w" sizes="91vw"',
 }
-STYLESHEET = '<link rel="stylesheet" href="/assets/portfolio.css?v=20261126-visuales">'
+STYLESHEET = '<link rel="stylesheet" href="/assets/portfolio.css?v=20261126-archivo-visual">'
 
 def live_section(t, prefix):
     return f'''<section class="live shell portfolio-live" id="live" aria-labelledby="live-title">
@@ -89,6 +115,17 @@ def live_section(t, prefix):
     <div class="portfolio-show-head">
       <div><p class="portfolio-kicker">{t['showLabel']}</p><h3 id="miranda-title">Miranda!</h3></div>
       <span>2025</span>
+    </div>
+    <p class="portfolio-show-intro">{t['mirandaIntro']}</p>
+    <div class="portfolio-stills">
+      <figure>
+        <img src="/assets/visuals/miranda-hotel.webp" width="1280" height="720" alt="{t['hotelAlt']}" loading="lazy" decoding="async">
+        <figcaption>{t['hotelCaption']}</figcaption>
+      </figure>
+      <figure>
+        <img src="/assets/visuals/miranda-mentia-ferro.webp" width="640" height="320" alt="{t['mentiaAlt']}" loading="lazy" decoding="async">
+        <figcaption>{t['mentiaCaption']}</figcaption>
+      </figure>
     </div>
     <div class="portfolio-player">
       <iframe title="{t['vidTitle']}" src="https://www.youtube-nocookie.com/embed/80ubrLGDoZI?start=3454" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
@@ -103,17 +140,34 @@ def live_section(t, prefix):
         <div><strong>{t['songTwo']}</strong><p>{t['songTwoDescription']}</p></div>
         <span aria-hidden="true">↗</span>
       </a>
+      <a href="https://www.youtube.com/watch?v=WJHZDpCiA0E&amp;t=126s" aria-label="{t['watch']} · Mentía">
+        <div><strong>Mentía</strong><p>{t['mentiaDescription']}</p></div>
+        <span aria-hidden="true">↗</span>
+      </a>
     </div>
   </article>
   <article class="portfolio-show" aria-labelledby="catriel-paco-title">
     <div class="portfolio-show-head">
       <div><p class="portfolio-kicker">{t['catrielLabel']}</p><h3 id="catriel-paco-title">CA7RIEL &amp; Paco Amoroso</h3></div>
+      <span>2024</span>
+    </div>
+    <p class="portfolio-show-intro">{t['catrielIntro']}</p>
+    <p class="portfolio-role">{t['catrielRole']}</p>
+    <div class="portfolio-stills">
+      <figure>
+        <img src="/assets/visuals/bano-maria-mansion.webp" width="1280" height="720" alt="{t['mansionAlt']}" loading="lazy" decoding="async">
+        <figcaption>{t['mansionCaption']}</figcaption>
+      </figure>
+      <figure>
+        <img src="/assets/visuals/bano-maria-espacio.webp" width="1280" height="720" alt="{t['spaceAlt']}" loading="lazy" decoding="async">
+        <figcaption>{t['spaceCaption']}</figcaption>
+      </figure>
     </div>
     <div class="portfolio-player">
-      <iframe title="{t['catrielVideoTitle']}" src="https://www.youtube-nocookie.com/embed/3vAiaASGga8" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
+      <iframe title="{t['catrielVideoTitle']}" src="https://www.youtube-nocookie.com/embed/gHmA1PYH5Io" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
     </div>
     <p class="portfolio-credit">{t['catrielFootage']}</p>
-    <a class="btn portfolio-show-link" href="https://www.youtube.com/watch?v=3vAiaASGga8">{t['watch']}</a>
+    <a class="btn portfolio-show-link" href="https://www.youtube.com/watch?v=gHmA1PYH5Io">{t['watchShow']}</a>
   </article>
   <article class="portfolio-companion">
     <a href="{prefix}/work/saint-bodhi/" aria-label="{t['musicLink']} · Saint Bodhi"><img src="/assets/projects/hd/saint-bodhi.webp" alt="" width="1600" height="900" loading="lazy" decoding="async"></a>
