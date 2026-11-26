@@ -1,0 +1,132 @@
+/* Selected work, shared by the Spanish and English portfolio. */
+.portfolio-artwork .section-top h2,
+.portfolio-live .section-top h2,
+.portfolio-gallery-head h1 {
+  font-size: clamp(3.25rem, 9vw, 9rem);
+  font-weight: 750;
+  letter-spacing: -.048em;
+  line-height: .91;
+}
+.portfolio-artwork .art-preview {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: clamp(22px, 3vw, 44px);
+}
+.portfolio-artwork .art-preview > figure:first-child { grid-column: 1 / -1; }
+.portfolio-artwork .art-preview > figure:nth-child(2) { padding-top: 0; }
+.portfolio-artwork .art-caption { display: grid; gap: 3px; }
+.portfolio-artwork .art-caption span { margin: 0; }
+.portfolio-artwork .section-end { justify-content: flex-end; }
+
+.portfolio-live { padding-bottom: clamp(36px, 6vw, 94px); }
+.portfolio-live .section-top > p,
+.portfolio-artwork .section-top > p { font-size: clamp(1rem, 1.35vw, 1.2rem); }
+.portfolio-show,
+.portfolio-companion { border-top: 1px solid var(--rule); }
+.portfolio-show-head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 18px;
+  padding-block: clamp(18px, 3vw, 32px);
+}
+.portfolio-kicker,
+.portfolio-credit,
+.portfolio-show-head > span {
+  color: var(--muted);
+  font-size: .83rem;
+  line-height: 1.35;
+}
+.portfolio-kicker {
+  font-weight: 600;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.portfolio-show h3,
+.portfolio-companion :is(h2,h3) {
+  margin-block: 8px 10px;
+  font-size: clamp(2.3rem, 6vw, 6rem);
+  letter-spacing: -.045em;
+  line-height: 1;
+}
+.portfolio-player {
+  aspect-ratio: 16 / 9;
+  background: #161714;
+}
+.portfolio-player iframe { display: block; border: 0; width: 100%; height: 100%; }
+.portfolio-credit { margin-top: 10px; }
+.portfolio-show-link { margin-block: 18px clamp(48px, 7vw, 105px); }
+.portfolio-tracks {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: clamp(16px, 3vw, 36px);
+  margin-block: 24px clamp(48px, 7vw, 105px);
+}
+.portfolio-tracks a {
+  display: flex;
+  gap: 14px;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-block: 16px;
+  border-top: 1px solid var(--rule);
+}
+.portfolio-tracks a:hover { border-color: var(--lime); }
+.portfolio-tracks strong { font-size: clamp(1.2rem, 2.1vw, 1.8rem); line-height: 1.1; }
+.portfolio-tracks p,
+.portfolio-companion p:not(.portfolio-kicker) { color: var(--muted); margin-top: 5px; }
+.portfolio-tracks a > span { color: var(--lime); font-size: 1.35rem; }
+.portfolio-companion {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  align-items: center;
+  gap: clamp(18px, 5vw, 80px);
+  padding-block: clamp(22px, 4vw, 54px);
+}
+.portfolio-companion img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: #161714;
+}
+.portfolio-companion .btn { margin-top: 18px; }
+.portfolio-companion :is(h2,h3) { font-size: clamp(2rem, 4.4vw, 4.9rem); }
+.portfolio-live-end {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px 32px;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--rule);
+  padding-top: 22px;
+}
+.portfolio-live-end p { color: var(--muted); }
+.portfolio-live-end p span { color: var(--lime); padding-inline: .25em; }
+.portfolio-gallery-head { padding-bottom: clamp(28px, 4vw, 60px); }
+.portfolio-gallery-head h1 { margin-block: 20px; }
+.portfolio-gallery-head > p:not(.eyebrow) { font-size: 1.12rem; }
+.portfolio-gallery-nav { display: flex; flex-wrap: wrap; gap: 6px 28px; margin-top: 20px; }
+.portfolio-gallery-nav a { text-underline-offset: .27em; text-decoration: underline; }
+.portfolio-gallery-nav a:hover { color: var(--lime); }
+.portfolio-archive {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  align-items: start;
+  gap: clamp(28px, 4vw, 68px) clamp(14px, 3vw, 42px);
+}
+.portfolio-archive > [hidden] { display: none; }
+.portfolio-archive > .portfolio-wide { grid-column: 1 / -1; }
+.portfolio-archive .portfolio-wide img {
+  width: 100%;
+  max-height: 76vh;
+  background: #121310;
+  object-fit: contain;
+}
+.portfolio-archive .art-caption { flex-wrap: wrap; gap: 0 16px; }
+.portfolio-archive .art-caption strong { font-size: clamp(1rem, 1.8vw, 1.45rem); }
+.portfolio-archive .art-caption span { font-size: .82rem; }
+.portfolio-films { padding-block: clamp(50px, 8vw, 125px) 0; }
+@media (max-width: 650px) {
+  .portfolio-tracks,.portfolio-companion,.portfolio-archive { grid-template-columns: 1fr; }
+  .portfolio-gallery-head h1 { max-width: 12ch; }
+  .portfolio-artwork .art-caption strong { line-height: 1.2; }
+}

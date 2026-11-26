@@ -11,6 +11,7 @@ from media import normalize_images
 from localization import load_catalog, english_html, decorate, write_localization_report
 from seo import enhance_html, generate_discovery
 from experience import hero, contact, footer as experience_footer
+from portfolio_sections import refresh_portfolio
 R=Path(__file__).resolve().parent.parent
 SITE='https://lucascasagrande.com'
 P=json.loads((R/'data/projects.json').read_text(encoding='utf8')); A=json.loads((R/'data/artworks.json').read_text(encoding='utf8'))
@@ -65,6 +66,7 @@ def write(path,content):
   ('es',content,route,project,P,A),
   ('en',english_html(content.replace(RESOURCE_SECTION_ES, '<!-- learning-resources -->'),CATALOG,EN_PAIRS).replace('<!-- learning-resources -->', RESOURCE_SECTION_EN),'/en'+route,project_en,P_EN,A_EN)]:
   alternate='/en'+route if lang=='es' else route
+  document=refresh_portfolio(document,route,lang)
   document=decorate(document,route_path,lang)
   document=enhance_html(document,path=route_path,lang='es-AR' if lang=='es' else 'en',alternate_path=alternate,project=proj,projects=projects,artworks=artworks,root=R,video_metadata=VM)
   document=normalize_images(document,R)
